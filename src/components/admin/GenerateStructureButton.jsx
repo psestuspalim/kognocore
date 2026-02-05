@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Database, Loader2, Trash2 } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { Database, Loader2 } from 'lucide-react';
+import { client } from '@/api/client';
 import { academicStructure } from './academicData';
 import { toast } from 'sonner';
+import { DoubleConfirmationModal } from '@/components/ui/DoubleConfirmationModal';
 
 export default function GenerateStructureButton() {
     const [loading, setLoading] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     // Helper to clear existing data before generation
     const clearData = async () => {
         try {
             // Fetch all items first - inefficient but works for now with local storage
-            const courses = await base44.entities.Course.list();
-            const folders = await base44.entities.Folder.list();
-            const subjects = await base44.entities.Subject.list();
+            const courses = await client.entities.Course.list();
+            const folders = await client.entities.Folder.list();
+            const subjects = await client.entities.Subject.list();
 
             // Delete in parallel
             await Promise.all([
-                ...courses.map(c => base44.entities.Course.delete(c.id)),
-                ...folders.map(f => base44.entities.Folder.delete(f.id)),
-                ...subjects.map(s => base44.entities.Subject.delete(s.id))
+                ...courses.map(c => client.entities.Course.delete(c.id)),
+                ...folders.map(f => client.entities.Folder.delete(f.id)),
+                ...subjects.map(s => client.entities.Subject.delete(s.id))
             ]);
             return true;
         } catch (e) {
@@ -29,9 +31,7 @@ export default function GenerateStructureButton() {
         }
     };
 
-    const handleGenerate = async () => {
-        if (!confirm('⚠️ ESTO BORRARÁ TODOS LOS DATOS EXISTENTES y regenerará la estructura académica correcta. ¿Estás seguro?')) return;
-
+    const handleConfirmGenerate = async () => {
         setLoading(true);
         try {
             // 1. Clear existing data
@@ -48,7 +48,7 @@ export default function GenerateStructureButton() {
                     color: courseData.color,
                     icon: 'GraduationCap'
                 };
-                const newCourse = await base44.entities.Course.create(coursePayload);
+                const newCourse = await client.entities.Course.create(coursePayload);
                 createdCount++;
 
                 if (courseData.folders) {
@@ -62,7 +62,7 @@ export default function GenerateStructureButton() {
                             color: materiaData.color || '#6366f1',
                             description: `Materia del ${courseData.name}`
                         };
-                        const newSubject = await base44.entities.Subject.create(subjectPayload);
+                        const newSubject = await client.entities.Subject.create(subjectPayload);
                         createdCount++;
 
                         if (materiaData.subjects) { // "subjects" in JSON are "Parciales" -> Folders in App
@@ -75,7 +75,7 @@ export default function GenerateStructureButton() {
                                     color: materiaData.color,
                                     description: 'Evaluación parcial'
                                 };
-                                await base44.entities.Folder.create(folderPayload);
+                                await client.entities.Folder.create(folderPayload);
                                 createdCount++;
                             }
                         }
@@ -96,15 +96,27 @@ export default function GenerateStructureButton() {
     };
 
     return (
-        <Button
-            variant="ghost"
-            size="sm"
-            className="w-full justify-start text-xs font-normal text-red-600 hover:bg-red-50 hover:text-red-700"
-            onClick={handleGenerate}
-            disabled={loading}
-        >
-            {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Database className="w-4 h-4 mr-2" />}
-            Regenerar Estructura (Borrar Todo)
-        </Button>
+        <>
+            <Button
+                variant="ghost"
+                size="sm"
+                className="w-full justify-start text-xs font-normal text-red-600 hover:bg-red-50 hover:text-red-700"
+                onClick={() => setShowModal(true)}
+                disabled={loading}
+            >
+                {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Database className="w-4 h-4 mr-2" />}
+                Regenerar Estructura (Borrar Todo)
+            </Button>
+
+            <DoubleConfirmationModal
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+                onConfirm={handleConfirmGenerate}
+                title="⚠️ ¿Regenerar Estructura Académica?"
+                description="ESTA ACCIÓN ES DESTRUCTIVA. Se eliminarán TODOS los cursos, materias y carpetas existentes y se recrearán desde la plantilla base. Los quizzes no se borrarán pero podrían quedar huérfanos."
+                confirmText="REGENERAR"
+                actionButtonText="Sí, Regenerar Todo"
+            />
+        </>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { FolderTree, Search, Trash2, Eye, EyeOff } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -34,7 +34,7 @@ export default function AdminContent() {
 
   useEffect(() => {
     const loadUser = async () => {
-      const user = await base44.auth.me();
+      const user = await client.auth.me();
       setCurrentUser(user);
     };
     loadUser();
@@ -42,45 +42,45 @@ export default function AdminContent() {
 
   const { data: courses = [] } = useQuery({
     queryKey: ['courses'],
-    queryFn: () => base44.entities.Course.list('order'),
+    queryFn: () => client.entities.Course.list('order'),
     enabled: currentUser?.role === 'admin'
   });
 
   const { data: folders = [] } = useQuery({
     queryKey: ['folders'],
-    queryFn: () => base44.entities.Folder.list('order'),
+    queryFn: () => client.entities.Folder.list('order'),
     enabled: currentUser?.role === 'admin'
   });
 
   const { data: subjects = [] } = useQuery({
     queryKey: ['subjects'],
-    queryFn: () => base44.entities.Subject.list('order'),
+    queryFn: () => client.entities.Subject.list('order'),
     enabled: currentUser?.role === 'admin'
   });
 
   const { data: quizzes = [] } = useQuery({
     queryKey: ['quizzes'],
-    queryFn: () => base44.entities.Quiz.list('-created_date'),
+    queryFn: () => client.entities.Quiz.list('-created_date'),
     enabled: currentUser?.role === 'admin'
   });
 
   const updateCourseMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Course.update(id, data),
+    mutationFn: ({ id, data }) => client.entities.Course.update(id, data),
     onSuccess: () => queryClient.invalidateQueries(['courses'])
   });
 
   const updateFolderMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Folder.update(id, data),
+    mutationFn: ({ id, data }) => client.entities.Folder.update(id, data),
     onSuccess: () => queryClient.invalidateQueries(['folders'])
   });
 
   const updateSubjectMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Subject.update(id, data),
+    mutationFn: ({ id, data }) => client.entities.Subject.update(id, data),
     onSuccess: () => queryClient.invalidateQueries(['subjects'])
   });
 
   const updateQuizMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Quiz.update(id, data),
+    mutationFn: ({ id, data }) => client.entities.Quiz.update(id, data),
     onSuccess: () => queryClient.invalidateQueries(['quizzes'])
   });
 
@@ -120,19 +120,19 @@ export default function AdminContent() {
       const { id, created_date, updated_date, created_by, ...commonData } = originalItem;
 
       if (fromType === 'course') {
-        await base44.entities.Course.delete(itemId);
+        await client.entities.Course.delete(itemId);
       } else if (fromType === 'folder') {
-        await base44.entities.Folder.delete(itemId);
+        await client.entities.Folder.delete(itemId);
       } else if (fromType === 'subject') {
-        await base44.entities.Subject.delete(itemId);
+        await client.entities.Subject.delete(itemId);
       }
 
       if (toType === 'course') {
-        await base44.entities.Course.create(commonData);
+        await client.entities.Course.create(commonData);
       } else if (toType === 'folder') {
-        await base44.entities.Folder.create(commonData);
+        await client.entities.Folder.create(commonData);
       } else if (toType === 'subject') {
-        await base44.entities.Subject.create(commonData);
+        await client.entities.Subject.create(commonData);
       }
 
       queryClient.invalidateQueries(['courses']);
@@ -159,23 +159,23 @@ export default function AdminContent() {
     try {
       for (const item of deleteDialog.items) {
         let itemData = null;
-        
+
         if (item.type === 'course') {
           itemData = courses.find(c => c.id === item.id);
-          await base44.entities.Course.delete(item.id);
+          await client.entities.Course.delete(item.id);
         } else if (item.type === 'folder') {
           itemData = folders.find(f => f.id === item.id);
-          await base44.entities.Folder.delete(item.id);
+          await client.entities.Folder.delete(item.id);
         } else if (item.type === 'subject') {
           itemData = subjects.find(s => s.id === item.id);
-          await base44.entities.Subject.delete(item.id);
+          await client.entities.Subject.delete(item.id);
         } else if (item.type === 'quiz') {
           itemData = quizzes.find(q => q.id === item.id);
-          await base44.entities.Quiz.delete(item.id);
+          await client.entities.Quiz.delete(item.id);
         }
-        
+
         if (itemData) {
-          await base44.entities.DeletedItem.create({
+          await client.entities.DeletedItem.create({
             item_type: item.type,
             item_id: item.id,
             item_data: itemData,
@@ -299,7 +299,7 @@ export default function AdminContent() {
               {selectedItems.size > 0 && (
                 <div className="space-y-3 pt-3 border-t">
                   <Badge className="bg-primary">{selectedItems.size} seleccionados</Badge>
-                  
+
                   <Button
                     variant="destructive"
                     size="sm"

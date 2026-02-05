@@ -3,13 +3,41 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle2, XCircle, Lightbulb, ChevronRight, ChevronLeft, Bookmark, ChevronDown } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { motion, AnimatePresence } from 'framer-motion';
 import MathText from './MathText';
 import ImageQuestionView from './ImageQuestionView';
 import ErrorAnalysis from './ErrorAnalysis';
 
 
+/**
+ * @typedef {Object} QuestionViewProps
+ * @property {any} question
+ * @property {number} questionNumber
+ * @property {number} totalQuestions
+ * @property {number} [correctAnswers]
+ * @property {number} [wrongAnswers]
+ * @property {(isCorrect: boolean, selectedOption: any, question: any) => void} onAnswer
+ * @property {() => void} [onBack]
+ * @property {(question: any, isMarked: boolean) => void} [onMarkForReview]
+ * @property {any[]} [previousAttempts]
+ * @property {string} [quizId]
+ * @property {string} [userEmail]
+ * @property {Object} [settings]
+ * @property {boolean} [settings.show_feedback]
+ * @property {boolean} [settings.show_reflection]
+ * @property {boolean} [settings.show_error_analysis]
+ * @property {boolean} [settings.show_schema]
+ * @property {boolean} [settings.show_notes]
+ * @property {boolean} [settings.show_hint]
+ * @property {string} [quizTitle]
+ * @property {string} [subjectId]
+ * @property {string} [sessionId]
+ */
+
+/**
+ * @param {QuestionViewProps} props
+ */
 export default function QuestionView({
   question,
   questionNumber,
@@ -53,7 +81,7 @@ export default function QuestionView({
     const updateSession = async () => {
       if (sessionId) {
         try {
-          await base44.entities.QuizSession.update(sessionId, {
+          await client.entities.QuizSession.update(sessionId, {
             current_question: questionNumber,
             score: correctAnswers,
             wrong_count: wrongAnswers,
@@ -74,7 +102,7 @@ export default function QuestionView({
   const handleGenerateSchema = async () => {
     setLoadingSchema(true);
     try {
-      const result = await base44.integrations.Core.InvokeLLM({
+      const result = await client.integrations.Core.InvokeLLM({
         prompt: `Genera una representación gráfica esquemática usando emojis y texto del proceso o concepto al que se refiere esta pregunta. Usa flechas (→, ↓), viñetas, y emojis relevantes para crear un diagrama visual de texto que ayude al estudiante a entender el proceso.
 
 Pregunta: "${question.question}"
@@ -271,7 +299,7 @@ Crea un esquema visual claro y educativo en español. Usa saltos de línea para 
                 letterStyle = "bg-green-100 border-green-500 text-green-700";
               } else if (isIncorrectlySelected) {
                 cardStyle = "bg-red-50 border-red-500 ring-1 ring-red-500 shadow-sm";
-                letterStyle = "bg-red-100 border-red-500 text-red-700";
+                letterStyle = "bg-red-50 border-red-500 text-red-700";
               } else {
                 cardStyle = "bg-white border-gray-200 opacity-50";
               }
@@ -286,20 +314,31 @@ Crea un esquema visual claro y educativo en español. Usa saltos de línea para 
                 key={index}
                 initial={false}
                 animate={{
-                  scale: isSelected && !isRevealed ? 1.01 : 1,
-                  borderColor: isRevealed && isCorrect ? '#22c55e' : isRevealed && isIncorrectlySelected ? '#ef4444' : undefined
+                  scale: isSelected && !isRevealed ? 1.02 : 1, // Subtle scale up when selected
+                  backgroundColor: isRevealed
+                    ? (isCorrect ? '#f0fdf4' : (isIncorrectlySelected ? '#fef2f2' : '#ffffff'))
+                    : (isSelected ? '#eef2ff' : '#ffffff'),
+                  borderColor: isRevealed
+                    ? (isCorrect ? '#22c55e' : (isIncorrectlySelected ? '#ef4444' : '#e5e7eb'))
+                    : (isSelected ? '#6366f1' : '#e5e7eb'),
+                  opacity: isRevealed && !isCorrect && !isIncorrectlySelected ? 0.6 : 1
                 }}
                 transition={{
-                  layout: { duration: 0.3, type: "spring", stiffness: 300, damping: 30 }
+                  layout: { type: "spring", stiffness: 300, damping: 30 },
+                  backgroundColor: { duration: 0.3 },
+                  borderColor: { duration: 0.3 },
+                  scale: { duration: 0.2 }
                 }}
                 className={`
                 relative rounded-xl border p-3 cursor-pointer overflow-hidden
-                ${cardStyle}
+                ${isRevealed && (isCorrect || isIncorrectlySelected) ? 'shadow-sm' : isSelected ? 'shadow-md' : 'shadow-sm hover:shadow-md hover:border-gray-300'}
               `}
                 onClick={() => !showFeedback && handleSelectAnswer(index)}
               >
                 <div className="flex items-start gap-3.5">
-                  <div className={`
+                  <motion.div
+                    layout="position"
+                    className={`
                    w-7 h-7 rounded-full border flex items-center justify-center shrink-0 text-xs transition-colors mt-0.5
                    ${letterStyle}
                 `}>
@@ -310,7 +349,7 @@ Crea un esquema visual claro y educativo en español. Usa saltos de línea para 
                     ) : (
                       String.fromCharCode(65 + index)
                     )}
-                  </div>
+                  </motion.div>
 
                   <div className="flex-1 min-w-0">
                     <div className={`text-base ${isRevealed && isCorrect ? 'font-medium text-green-900' : isRevealed && isIncorrectlySelected ? 'text-red-900' : 'text-gray-900'}`}>
@@ -320,11 +359,11 @@ Crea un esquema visual claro y educativo en español. Usa saltos de línea para 
                     <AnimatePresence>
                       {isRevealed && (isCorrect || isIncorrectlySelected) && (
                         <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="mt-2 pt-2 border-t border-black/5 overflow-hidden"
+                          initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                          animate={{ opacity: 1, height: 'auto', marginTop: 8 }}
+                          exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                          transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }} // Smooth easeOutQuart-ish
+                          className="pt-2 border-t border-black/5 overflow-hidden"
                         >
                           <div className="flex items-start gap-2">
                             {isCorrect ? (
@@ -335,7 +374,7 @@ Crea un esquema visual claro y educativo en español. Usa saltos de línea para 
 
                             <div>
                               <p className={`font-bold text-xs ${isCorrect ? 'text-green-800' : 'text-red-800'}`}>
-                                {isCorrect ? 'Respuesta correcta' : 'No exactamente'}
+                                {isCorrect ? 'Respuesta correcta' : 'Respuesta incorrecta'}
                               </p>
 
                               {isCorrect && option.rationale && (

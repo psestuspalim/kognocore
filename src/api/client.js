@@ -1,4 +1,4 @@
-import { createClient } from '@base44/sdk';
+
 import { appParams } from '@/lib/app-params';
 
 const { appId, serverUrl, token, functionsVersion } = appParams;
@@ -21,41 +21,63 @@ import { mockCourses, mockFolders, mockSubjects, mockQuizzes, mockQuizSettings, 
 const initializeStorage = () => {
   if (typeof window === 'undefined') return;
 
-  if (!localStorage.getItem('base44_courses')) {
-    localStorage.setItem('base44_courses', JSON.stringify(mockCourses));
+  if (!localStorage.getItem('app_courses')) {
+    localStorage.setItem('app_courses', JSON.stringify(mockCourses));
   }
-  if (!localStorage.getItem('base44_folders')) {
-    localStorage.setItem('base44_folders', JSON.stringify(mockFolders));
+  if (!localStorage.getItem('app_folders')) {
+    localStorage.setItem('app_folders', JSON.stringify(mockFolders));
   }
-  if (!localStorage.getItem('base44_subjects')) {
-    localStorage.setItem('base44_subjects', JSON.stringify(mockSubjects));
+  if (!localStorage.getItem('app_subjects')) {
+    localStorage.setItem('app_subjects', JSON.stringify(mockSubjects));
   }
-  if (!localStorage.getItem('base44_quizzes')) {
-    localStorage.setItem('base44_quizzes', JSON.stringify(mockQuizzes));
+  if (!localStorage.getItem('app_quizzes')) {
+    localStorage.setItem('app_quizzes', JSON.stringify(mockQuizzes));
   }
-  if (!localStorage.getItem('base44_quiz_settings')) {
-    localStorage.setItem('base44_quiz_settings', JSON.stringify([mockQuizSettings]));
+  if (!localStorage.getItem('app_quiz_settings')) {
+    localStorage.setItem('app_quiz_settings', JSON.stringify([mockQuizSettings]));
   }
-  if (!localStorage.getItem('base44_users')) {
-    localStorage.setItem('base44_users', JSON.stringify([mockUser]));
+  if (!localStorage.getItem('app_users')) {
+    localStorage.setItem('app_users', JSON.stringify([mockUser]));
   }
 };
 
 // Initialize on load
 initializeStorage();
 
+// ... imports
+
+/**
+ * @typedef {Object} Base44Entity
+ * @property {(orderBy?: string) => Promise<any[]>} list
+ * @property {(criteria: Object, orderBy?: string) => Promise<any[]>} filter
+ * @property {(id: string) => Promise<any>} get
+ * @property {(data: Object) => Promise<any>} create
+ * @property {(id: string, data: Object) => Promise<any>} update
+ * @property {(id: string) => Promise<{success: boolean}>} delete
+ * @property {(queryEntity: any) => any} Query
+ */
+
 const getItems = (entityName) => {
   const keyMap = {
-    'Course': 'base44_courses',
-    'Folder': 'base44_folders',
-    'Subject': 'base44_subjects',
-    'Quiz': 'base44_quizzes',
-    'QuizSettings': 'base44_quiz_settings',
-    'User': 'base44_users',
-    'QuizAttempt': 'base44_quiz_attempts',
-    'UserStats': 'base44_user_stats',
-    'DeletedItem': 'base44_deleted_items',
-    'QuizSession': 'base44_quiz_sessions'
+    'Course': 'app_courses',
+    'Folder': 'app_folders',
+    'Subject': 'app_subjects',
+    'Quiz': 'app_quizzes',
+    'QuizSettings': 'app_quiz_settings',
+    'User': 'app_users',
+    'QuizAttempt': 'app_quiz_attempts',
+    'UserStats': 'app_user_stats',
+    'DeletedItem': 'app_deleted_items',
+    'QuizSession': 'app_quiz_sessions',
+    'ExamDate': 'app_exam_dates',
+    'CourseEnrollment': 'app_course_enrollments',
+    'CourseAccessCode': 'app_course_access_codes',
+    'GameRoom': 'app_game_rooms',
+    'Tournament': 'app_tournaments',
+    'Audio': 'app_audios',
+    'FeatureUsage': 'app_feature_usage',
+    'QuizAnswer': 'app_quiz_answers',
+    'Question': 'app_questions'
   };
 
   const key = keyMap[entityName];
@@ -67,16 +89,25 @@ const getItems = (entityName) => {
 
 const saveItems = (entityName, items) => {
   const keyMap = {
-    'Course': 'base44_courses',
-    'Folder': 'base44_folders',
-    'Subject': 'base44_subjects',
-    'Quiz': 'base44_quizzes',
-    'QuizSettings': 'base44_quiz_settings',
-    'User': 'base44_users',
-    'QuizAttempt': 'base44_quiz_attempts',
-    'UserStats': 'base44_user_stats',
-    'DeletedItem': 'base44_deleted_items',
-    'QuizSession': 'base44_quiz_sessions'
+    'Course': 'app_courses',
+    'Folder': 'app_folders',
+    'Subject': 'app_subjects',
+    'Quiz': 'app_quizzes',
+    'QuizSettings': 'app_quiz_settings',
+    'User': 'app_users',
+    'QuizAttempt': 'app_quiz_attempts',
+    'UserStats': 'app_user_stats',
+    'DeletedItem': 'app_deleted_items',
+    'QuizSession': 'app_quiz_sessions',
+    'ExamDate': 'app_exam_dates',
+    'CourseEnrollment': 'app_course_enrollments',
+    'CourseAccessCode': 'app_course_access_codes',
+    'GameRoom': 'app_game_rooms',
+    'Tournament': 'app_tournaments',
+    'Audio': 'app_audios',
+    'FeatureUsage': 'app_feature_usage',
+    'QuizAnswer': 'app_quiz_answers',
+    'Question': 'app_questions'
   };
 
   const key = keyMap[entityName];
@@ -85,26 +116,57 @@ const saveItems = (entityName, items) => {
   }
 };
 
+/**
+ * @type {{
+ *   auth: { me: () => Promise<any>, logout: (redirectUrl?: string) => void, redirectToLogin: (redirectUrl?: string) => void, updateMe: (data: Object) => Promise<any> },
+ *   analytics: { track: () => Promise<void>, identify: () => Promise<void> },
+ *   appLogs: { logUserInApp: () => Promise<void> },
+ *   entities: {
+ *     Course: Base44Entity,
+ *     Folder: Base44Entity,
+ *     Subject: Base44Entity,
+ *     Quiz: Base44Entity,
+ *     QuizSettings: Base44Entity,
+ *     User: Base44Entity,
+ *     QuizAttempt: Base44Entity,
+ *     UserStats: Base44Entity,
+ *     DeletedItem: Base44Entity,
+ *     QuizSession: Base44Entity,
+ *     ExamDate: Base44Entity,
+ *     CourseEnrollment: Base44Entity,
+ *     CourseAccessCode: Base44Entity,
+ *     GameRoom: Base44Entity,
+ *     Tournament: Base44Entity,
+ *     Audio: Base44Entity,
+ *     FeatureUsage: Base44Entity,
+ *     QuizAnswer: Base44Entity,
+ *     Question: Base44Entity
+ *   },
+ *   integrations: any
+ * }}
+ */
 const mockClient = {
+  // ... existing mockClient implementation ...
+
   auth: {
     me: async () => {
-      const localToken = localStorage.getItem('base44_mock_token');
+      const localToken = localStorage.getItem('app_mock_token');
       if (localToken) {
         return JSON.parse(localToken);
       }
       return { ...mockUser, id: 'mock_guest', first_name: 'Guest', username: 'Guest' };
     },
     logout: (redirectUrl) => {
-      localStorage.removeItem('base44_mock_token');
+      localStorage.removeItem('app_mock_token');
       if (redirectUrl) window.location.href = '/login';
     },
     redirectToLogin: (redirectUrl) => {
       window.location.href = '/login';
     },
     updateMe: async (data) => {
-      const currentUser = JSON.parse(localStorage.getItem('base44_mock_token') || JSON.stringify(mockUser));
+      const currentUser = JSON.parse(localStorage.getItem('app_mock_token') || JSON.stringify(mockUser));
       const updatedUser = { ...currentUser, ...data };
-      localStorage.setItem('base44_mock_token', JSON.stringify(updatedUser)); // Update session
+      localStorage.setItem('app_mock_token', JSON.stringify(updatedUser)); // Update session
 
       // Also update in users list if needed
       const users = getItems('User');
@@ -123,9 +185,10 @@ const mockClient = {
   appLogs: {
     logUserInApp: async () => { }
   },
-  entities: new Proxy({}, {
+  entities: /** @type {any} */ (new Proxy({}, {
     get: (target, entityName) => {
       return {
+
         list: async (orderBy) => {
           let items = getItems(entityName);
           // Simple sort if orderBy is provided (very basic implementation)
@@ -208,7 +271,7 @@ const mockClient = {
         })
       };
     }
-  }),
+  })),
   integrations: {
     Core: {
       InvokeLLM: async () => ({ result: 'Mock LLM Response' }),
@@ -221,4 +284,4 @@ const mockClient = {
   }
 };
 
-export const base44 = mockClient;
+export const client = mockClient;

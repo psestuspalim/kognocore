@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Progress } from '@/components/ui/progress';
 import { CheckCircle2, Clock, AlertCircle } from 'lucide-react';
@@ -14,7 +14,7 @@ export default function TaskProgressFloat() {
   useEffect(() => {
     const loadUser = async () => {
       try {
-        const user = await base44.auth.me();
+        const user = await client.auth.me();
         setCurrentUser(user);
       } catch (e) {}
     };
@@ -24,7 +24,7 @@ export default function TaskProgressFloat() {
   const { data: tasks = [] } = useQuery({
     queryKey: ['my-tasks', currentUser?.email],
     queryFn: async () => {
-      const allTasks = await base44.entities.AssignedTask.filter({ 
+      const allTasks = await client.entities.AssignedTask.filter({ 
         user_email: currentUser?.email 
       });
       return allTasks.filter(t => t.status !== 'completed');

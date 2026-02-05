@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Trash2, RotateCcw, AlertTriangle, Search, GraduationCap, Folder, BookOpen, FileQuestion } from 'lucide-react';
+import { Trash2, RotateCcw, AlertTriangle, Search, Book, Folder, BookOpen, FileQuestion } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -32,7 +32,7 @@ export default function AdminTrash() {
 
   useEffect(() => {
     const loadUser = async () => {
-      const user = await base44.auth.me();
+      const user = await client.auth.me();
       setCurrentUser(user);
     };
     loadUser();
@@ -40,25 +40,25 @@ export default function AdminTrash() {
 
   const { data: deletedItems = [], isLoading } = useQuery({
     queryKey: ['deleted-items'],
-    queryFn: () => base44.entities.DeletedItem.list('-deleted_at'),
+    queryFn: () => client.entities.DeletedItem.list('-deleted_at'),
     enabled: currentUser?.role === 'admin'
   });
 
   const restoreMutation = useMutation({
     mutationFn: async (item) => {
       const { item_type, item_data } = item;
-      
+
       if (item_type === 'course') {
-        await base44.entities.Course.create(item_data);
+        await client.entities.Course.create(item_data);
       } else if (item_type === 'folder') {
-        await base44.entities.Folder.create(item_data);
+        await client.entities.Folder.create(item_data);
       } else if (item_type === 'subject') {
-        await base44.entities.Subject.create(item_data);
+        await client.entities.Subject.create(item_data);
       } else if (item_type === 'quiz') {
-        await base44.entities.Quiz.create(item_data);
+        await client.entities.Quiz.create(item_data);
       }
-      
-      await base44.entities.DeletedItem.delete(item.id);
+
+      await client.entities.DeletedItem.delete(item.id);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['deleted-items']);
@@ -71,7 +71,7 @@ export default function AdminTrash() {
   });
 
   const deletePermanentlyMutation = useMutation({
-    mutationFn: (id) => base44.entities.DeletedItem.delete(id),
+    mutationFn: (id) => client.entities.DeletedItem.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries(['deleted-items']);
       toast.success('Eliminado permanentemente');
@@ -87,10 +87,10 @@ export default function AdminTrash() {
   }
 
   const filteredItems = searchTerm
-    ? deletedItems.filter(item => 
-        item.item_data?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.item_data?.title?.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+    ? deletedItems.filter(item =>
+      item.item_data?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.item_data?.title?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
     : deletedItems;
 
   const toggleItem = (id) => {
@@ -141,7 +141,7 @@ export default function AdminTrash() {
 
   const getIcon = (type) => {
     switch (type) {
-      case 'course': return GraduationCap;
+      case 'course': return Book;
       case 'folder': return Folder;
       case 'subject': return BookOpen;
       case 'quiz': return FileQuestion;
@@ -234,13 +234,12 @@ export default function AdminTrash() {
               {filteredItems.map((item) => {
                 const Icon = getIcon(item.item_type);
                 const name = item.item_data?.name || item.item_data?.title || 'Sin nombre';
-                
+
                 return (
                   <div
                     key={item.id}
-                    className={`flex items-center gap-3 p-3 rounded-lg border transition-all ${
-                      selectedItems.has(item.id) ? 'bg-muted border-primary' : 'bg-background hover:border-muted-foreground/20'
-                    }`}
+                    className={`flex items-center gap-3 p-3 rounded-lg border transition-all ${selectedItems.has(item.id) ? 'bg-muted border-primary' : 'bg-background hover:border-muted-foreground/20'
+                      }`}
                   >
                     <Checkbox
                       checked={selectedItems.has(item.id)}
@@ -299,7 +298,7 @@ export default function AdminTrash() {
               Eliminar permanentemente
             </AlertDialogTitle>
             <AlertDialogDescription>
-              ¿Estás seguro de eliminar permanentemente {selectedItems.size} elemento(s)? 
+              ¿Estás seguro de eliminar permanentemente {selectedItems.size} elemento(s)?
               Esta acción no se puede deshacer y los elementos no podrán ser recuperados.
             </AlertDialogDescription>
           </AlertDialogHeader>

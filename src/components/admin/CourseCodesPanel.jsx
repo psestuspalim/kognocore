@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -28,11 +28,11 @@ export default function CourseCodesPanel({ courses }) {
 
   const { data: codes = [] } = useQuery({
     queryKey: ['course-codes'],
-    queryFn: () => base44.entities.CourseAccessCode.list('-created_date')
+    queryFn: () => client.entities.CourseAccessCode.list('-created_date')
   });
 
   const createCodeMutation = useMutation({
-    mutationFn: (data) => base44.entities.CourseAccessCode.create(data),
+    mutationFn: (data) => client.entities.CourseAccessCode.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries(['course-codes']);
       setShowDialog(false);
@@ -42,7 +42,7 @@ export default function CourseCodesPanel({ courses }) {
   });
 
   const deleteCodeMutation = useMutation({
-    mutationFn: (id) => base44.entities.CourseAccessCode.delete(id),
+    mutationFn: (id) => client.entities.CourseAccessCode.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries(['course-codes']);
       toast.success('Código eliminado');
@@ -50,7 +50,7 @@ export default function CourseCodesPanel({ courses }) {
   });
 
   const toggleCodeMutation = useMutation({
-    mutationFn: ({ id, is_active }) => base44.entities.CourseAccessCode.update(id, { is_active }),
+    mutationFn: ({ id, is_active }) => client.entities.CourseAccessCode.update(id, { is_active }),
     onSuccess: () => queryClient.invalidateQueries(['course-codes'])
   });
 

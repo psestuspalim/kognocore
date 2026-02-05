@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { 
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, Legend 
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, Legend
 } from 'recharts';
-import { 
-  TrendingUp, Users, BookOpen, Settings, Clock, MousePointer, AlertTriangle, 
+import {
+  TrendingUp, Users, BookOpen, Settings, Clock, MousePointer, AlertTriangle,
   CheckCircle2, Activity, X, Trash2, Download
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -42,7 +42,7 @@ const FEATURES = [
 export default function FeatureAnalytics({ onClose }) {
   const { data: usageData = [], isLoading } = useQuery({
     queryKey: ['feature-usage'],
-    queryFn: () => base44.entities.FeatureUsage.list('-created_date', 1000)
+    queryFn: () => client.entities.FeatureUsage.list('-created_date', 1000)
   });
 
   const analytics = useMemo(() => {
@@ -67,7 +67,7 @@ export default function FeatureAnalytics({ onClose }) {
       featureStats[usage.feature_name].clicks++;
       featureStats[usage.feature_name].totalTime += usage.session_duration || 0;
       featureStats[usage.feature_name].users.add(usage.user_email);
-      
+
       totalClicks++;
       totalTime += usage.session_duration || 0;
 
@@ -247,7 +247,7 @@ export default function FeatureAnalytics({ onClose }) {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} fontSize={10} />
                         <YAxis fontSize={11} />
-                        <Tooltip 
+                        <Tooltip
                           contentStyle={{ fontSize: '12px' }}
                           formatter={(value, name) => [value, name === 'clicks' ? 'Clics' : 'Porcentaje']}
                         />
@@ -305,22 +305,19 @@ export default function FeatureAnalytics({ onClose }) {
                     return (
                       <div
                         key={feature.name}
-                        className={`flex items-center gap-3 p-3 rounded-lg border ${
-                          feature.clicks === 0 
-                            ? 'bg-red-50 border-red-200' 
-                            : 'bg-white border-gray-200'
-                        }`}
-                      >
-                        <div 
-                          className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                            feature.clicks === 0 ? 'bg-red-100' : 'bg-indigo-100'
+                        className={`flex items-center gap-3 p-3 rounded-lg border ${feature.clicks === 0
+                          ? 'bg-red-50 border-red-200'
+                          : 'bg-white border-gray-200'
                           }`}
+                      >
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center ${feature.clicks === 0 ? 'bg-red-100' : 'bg-indigo-100'
+                            }`}
                         >
-                          <Icon className={`w-4 h-4 ${
-                            feature.clicks === 0 ? 'text-red-600' : 'text-indigo-600'
-                          }`} />
+                          <Icon className={`w-4 h-4 ${feature.clicks === 0 ? 'text-red-600' : 'text-indigo-600'
+                            }`} />
                         </div>
-                        
+
                         <div className="flex-1 min-w-0">
                           <p className="font-medium text-sm text-gray-900">{feature.name}</p>
                           <div className="flex items-center gap-3 text-xs text-gray-500">

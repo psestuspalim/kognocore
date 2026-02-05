@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import {
-  Settings, Users, BarChart3, ClipboardList, Trash2,
-  ChevronDown, Shield, FileQuestion, Cog, Download, Wrench, Activity, Key, TrendingUp, LayoutDashboard
+  ChevronDown, Shield, LayoutDashboard, Key, PenTool
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import FixQuizzesButton from './FixQuizzesButton';
-import RemoveDuplicatesButton from './RemoveDuplicatesButton';
-import RemoveDuplicateQuestionsButton from './RemoveDuplicateQuestionsButton';
-import GenerateStructureButton from './GenerateStructureButton';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,10 +15,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 export default function AdminMenu({
-  onOpenContentManager,
-  onOpenQuizSettings,
-  onOpenQuizExporter,
-  onOpenFeatureAnalytics,
   compact = false
 }) {
   const menuItems = [
@@ -31,7 +22,7 @@ export default function AdminMenu({
       label: 'Dashboard Admin',
       icon: LayoutDashboard,
       href: 'AdminHome',
-      description: 'Panel principal'
+      description: 'Panel principal y herramientas'
     },
     {
       label: 'Gestión de Cursos',
@@ -39,35 +30,11 @@ export default function AdminMenu({
       href: 'CourseManagement',
       description: 'Códigos y solicitudes'
     },
-
-  ];
-
-  /* const actions = [
     {
-      label: 'Analytics de Funcionalidades',
-      icon: TrendingUp,
-      onClick: onOpenFeatureAnalytics,
-      description: 'Ver estadísticas de uso'
-    },
-  ]; */
-  const actions = [];
-
-  const specialActions = [
-    {
-      component: FixQuizzesButton,
-      key: 'fix-quizzes'
-    },
-    {
-      component: RemoveDuplicatesButton,
-      key: 'remove-duplicates'
-    },
-    {
-      component: RemoveDuplicateQuestionsButton,
-      key: 'remove-duplicate-questions'
-    },
-    {
-      component: GenerateStructureButton,
-      key: 'generate-structure'
+      label: 'Gestión de Contenido',
+      icon: PenTool,
+      href: 'AdminContent',
+      description: 'Cursos, materias y quizzes'
     }
   ];
 
@@ -98,30 +65,6 @@ export default function AdminMenu({
               </DropdownMenuItem>
             </Link>
           ))}
-
-          <DropdownMenuSeparator />
-
-          {actions.map((action, idx) => (
-            <DropdownMenuItem
-              key={idx}
-              onClick={action.onClick}
-              className="cursor-pointer"
-            >
-              <action.icon className="w-4 h-4 mr-2 text-gray-500" />
-              <div className="flex-1">
-                <p className="text-sm">{action.label}</p>
-                <p className="text-xs text-gray-400">{action.description}</p>
-              </div>
-            </DropdownMenuItem>
-          ))}
-
-          <DropdownMenuSeparator />
-
-          <div className="px-2 py-1">
-            {specialActions.map((action) => (
-              <action.component key={action.key} />
-            ))}
-          </div>
         </DropdownMenuContent>
       </DropdownMenu>
     );
@@ -136,21 +79,6 @@ export default function AdminMenu({
             <span className="hidden sm:inline">{item.label}</span>
           </Button>
         </Link>
-      ))}
-      {actions.map((action, idx) => (
-        <Button
-          key={idx}
-          variant="outline"
-          size="sm"
-          onClick={action.onClick}
-          className="h-9 text-xs sm:text-sm border-gray-300 hover:bg-gray-50"
-        >
-          <action.icon className="w-4 h-4 sm:mr-2" />
-          <span className="hidden sm:inline">{action.label}</span>
-        </Button>
-      ))}
-      {specialActions.map((action) => (
-        <action.component key={action.key} />
       ))}
     </div>
   );

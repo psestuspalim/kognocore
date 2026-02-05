@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -14,7 +14,7 @@ export default function LiveSessions() {
 
   useEffect(() => {
     const loadUser = async () => {
-      const user = await base44.auth.me();
+      const user = await client.auth.me();
       setCurrentUser(user);
     };
     loadUser();
@@ -24,7 +24,7 @@ export default function LiveSessions() {
     queryKey: ['quiz-sessions'],
     queryFn: async () => {
       try {
-        const allSessions = await base44.entities.QuizSession.filter({ is_active: true }, '-last_activity');
+        const allSessions = await client.entities.QuizSession.filter({ is_active: true }, '-last_activity');
         console.log('📡 Sesiones encontradas:', allSessions);
         // Filtrar sesiones activas en los últimos 10 minutos
         const now = new Date();
@@ -45,7 +45,7 @@ export default function LiveSessions() {
 
   const { data: subjects = [] } = useQuery({
     queryKey: ['subjects'],
-    queryFn: () => base44.entities.Subject.list(),
+    queryFn: () => client.entities.Subject.list(),
     enabled: currentUser?.role === 'admin'
   });
 
@@ -107,7 +107,7 @@ export default function LiveSessions() {
           {sessions.map((session) => {
             const progress = getProgressPercent(session.current_question, session.total_questions);
             const accuracy = getAccuracyPercent(session.score, session.current_question);
-            
+
             return (
               <motion.div
                 key={session.id}

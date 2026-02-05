@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -36,11 +36,11 @@ export default function TournamentLobby() {
     question_count: 10,
     time_per_question: 30
   });
-  
+
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    base44.auth.me()
+    client.auth.me()
       .then(setCurrentUser)
       .catch(console.error)
       .finally(() => setUserLoading(false));
@@ -48,19 +48,19 @@ export default function TournamentLobby() {
 
   const { data: quizzes = [] } = useQuery({
     queryKey: ['quizzes'],
-    queryFn: () => base44.entities.Quiz.list('-created_date'),
+    queryFn: () => client.entities.Quiz.list('-created_date'),
   });
 
   const { data: tournaments = [], refetch } = useQuery({
     queryKey: ['tournaments-waiting'],
-    queryFn: () => base44.entities.Tournament.filter({ status: 'waiting' }, '-created_date'),
+    queryFn: () => client.entities.Tournament.filter({ status: 'waiting' }, '-created_date'),
     refetchInterval: 3000,
   });
 
   const createTournamentMutation = useMutation({
     mutationFn: async (data) => {
       if (!currentUser?.email) throw new Error('Usuario no autenticado');
-      
+
       const quiz = quizzes.find(q => q.id === data.quiz_id);
       if (!quiz) throw new Error('Quiz no encontrado');
       if (!quiz.questions?.length) throw new Error('El quiz no tiene preguntas');
@@ -97,7 +97,7 @@ export default function TournamentLobby() {
       };
 
       console.log('Creating tournament with data:', tournamentData);
-      const result = await base44.entities.Tournament.create(tournamentData);
+      const result = await client.entities.Tournament.create(tournamentData);
       console.log('Tournament created:', result);
       return result;
     },
@@ -114,9 +114,9 @@ export default function TournamentLobby() {
 
   const joinTournamentMutation = useMutation({
     mutationFn: async (code) => {
-      const tournaments = await base44.entities.Tournament.filter({ code: code.toUpperCase() });
+      const tournaments = await client.entities.Tournament.filter({ code: code.toUpperCase() });
       if (tournaments.length === 0) throw new Error('Torneo no encontrado');
-      
+
       const tournament = tournaments[0];
       if (tournament.status !== 'waiting') throw new Error('El torneo ya comenzó');
       if (tournament.players.length >= 3) throw new Error('El torneo está lleno');
@@ -124,7 +124,7 @@ export default function TournamentLobby() {
         return tournament;
       }
 
-      await base44.entities.Tournament.update(tournament.id, {
+      await client.entities.Tournament.update(tournament.id, {
         players: [...tournament.players, {
           email: currentUser.email,
           username: currentUser.username,
@@ -191,7 +191,7 @@ export default function TournamentLobby() {
                 className="uppercase"
                 maxLength={6}
               />
-              <Button 
+              <Button
                 onClick={handleJoin}
                 disabled={!joinCode.trim() || joinTournamentMutation.isPending}
                 className="bg-purple-600 hover:bg-purple-700"
@@ -219,15 +219,15 @@ export default function TournamentLobby() {
                 <Label>Nombre del torneo</Label>
                 <Input
                   value={newTournament.name}
-                  onChange={(e) => setNewTournament({...newTournament, name: e.target.value})}
+                  onChange={(e) => setNewTournament({ ...newTournament, name: e.target.value })}
                   placeholder="Mi torneo épico"
                 />
               </div>
               <div>
                 <Label>Cuestionario</Label>
-                <Select 
-                  value={newTournament.quiz_id} 
-                  onValueChange={(v) => setNewTournament({...newTournament, quiz_id: v})}
+                <Select
+                  value={newTournament.quiz_id}
+                  onValueChange={(v) => setNewTournament({ ...newTournament, quiz_id: v })}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Selecciona un quiz" />
@@ -249,7 +249,7 @@ export default function TournamentLobby() {
                     min={5}
                     max={selectedQuiz?.questions?.length || 20}
                     value={newTournament.question_count}
-                    onChange={(e) => setNewTournament({...newTournament, question_count: parseInt(e.target.value) || 10})}
+                    onChange={(e) => setNewTournament({ ...newTournament, question_count: parseInt(e.target.value) || 10 })}
                   />
                 </div>
                 <div>
@@ -259,7 +259,7 @@ export default function TournamentLobby() {
                     min={10}
                     max={60}
                     value={newTournament.time_per_question}
-                    onChange={(e) => setNewTournament({...newTournament, time_per_question: parseInt(e.target.value) || 30})}
+                    onChange={(e) => setNewTournament({ ...newTournament, time_per_question: parseInt(e.target.value) || 30 })}
                   />
                 </div>
               </div>

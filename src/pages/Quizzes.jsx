@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { Plus, ArrowLeft, BookOpen, Book, FolderPlus, Folder, ChevronRight, Upload, Music, Home, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
+import { Plus, ArrowLeft, BookOpen, Book, FolderPlus, Folder, ChevronRight, Upload, Music, Home, Sparkles, Shield, AlertCircle, LayoutDashboard } from 'lucide-react';
+import { Icon } from '@/components/ui/Icon';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { buildContainers } from '../components/utils/contentTree';
@@ -42,13 +45,14 @@ import QuizListItem from '../components/quiz/QuizListItem';
 import SessionTimer from '../components/ui/SessionTimer';
 import TaskProgressFloat from '../components/tasks/TaskProgressFloat';
 import ContentManager from '../components/admin/ContentManager';
-import AdminMenu from '../components/admin/AdminMenu';
+/* Removed AdminMenu import */
+/* import AdminMenu from '../components/admin/AdminMenu'; */
 import useQuizSettings from '../components/quiz/useQuizSettings';
 import SwipeQuizMode from '../components/quiz/SwipeQuizMode';
 import AIQuizGenerator from '../components/quiz/AIQuizGenerator';
 import FileExplorer from '../components/explorer/FileExplorer';
 import MoveQuizModal from '../components/quiz/MoveQuizModal';
-import QuizExporter from '../components/admin/QuizExporter';
+/* Removed ContentManager/QuizExporter imports */
 import CourseJoinModal from '../components/course/CourseJoinModal';
 import FeatureAnalytics from '../components/admin/FeatureAnalytics';
 import FeatureTracker from '../components/admin/FeatureTracker';
@@ -85,11 +89,9 @@ export default function QuizzesPage() {
   const [showCourseDialog, setShowCourseDialog] = useState(false);
   const [showSubjectDialog, setShowSubjectDialog] = useState(false);
   const [showFolderDialog, setShowFolderDialog] = useState(false);
-  const [showContentManager, setShowContentManager] = useState(false);
   const [showAIGenerator, setShowAIGenerator] = useState(false);
   const [explorerMode, setExplorerMode] = useState(false);
   const [movingQuiz, setMovingQuiz] = useState(null);
-  const [showQuizExporter, setShowQuizExporter] = useState(false);
   const [newItem, setNewItem] = useState({ name: '', description: '', color: '#6366f1' });
   const [selectedQuizzes, setSelectedQuizzes] = useState([]);
   const [showJoinModal, setShowJoinModal] = useState(false);
@@ -108,7 +110,7 @@ export default function QuizzesPage() {
   useEffect(() => {
     const loadUser = async () => {
       try {
-        const user = await base44.auth.me();
+        const user = await client.auth.me();
         setCurrentUser(user);
       } catch (error) {
         console.error('Error loading user:', error);
@@ -120,12 +122,12 @@ export default function QuizzesPage() {
   // Queries
   const { data: courses = [] } = useQuery({
     queryKey: ['courses'],
-    queryFn: () => base44.entities.Course.list('order'),
+    queryFn: () => client.entities.Course.list('order'),
   });
 
   const { data: enrollments = [] } = useQuery({
     queryKey: ['enrollments', currentUser?.email],
-    queryFn: () => base44.entities.CourseEnrollment.filter({
+    queryFn: () => client.entities.CourseEnrollment.filter({
       user_email: currentUser?.email,
       status: 'approved'
     }),
@@ -134,22 +136,22 @@ export default function QuizzesPage() {
 
   const { data: subjects = [] } = useQuery({
     queryKey: ['subjects'],
-    queryFn: () => base44.entities.Subject.list('order'),
+    queryFn: () => client.entities.Subject.list('order'),
   });
 
   const { data: folders = [] } = useQuery({
     queryKey: ['folders'],
-    queryFn: () => base44.entities.Folder.list('order'),
+    queryFn: () => client.entities.Folder.list('order'),
   });
 
   const { data: quizzes = [] } = useQuery({
     queryKey: ['quizzes'],
-    queryFn: () => base44.entities.Quiz.list('-created_date'),
+    queryFn: () => client.entities.Quiz.list('-created_date'),
   });
 
   const { data: attempts = [] } = useQuery({
     queryKey: ['attempts', currentUser?.email],
-    queryFn: () => base44.entities.QuizAttempt.filter({ user_email: currentUser?.email }, '-created_date'),
+    queryFn: () => client.entities.QuizAttempt.filter({ user_email: currentUser?.email }, '-created_date'),
     enabled: !!currentUser?.email,
   });
 
@@ -157,7 +159,7 @@ export default function QuizzesPage() {
 
   const { data: allUsers = [] } = useQuery({
     queryKey: ['all-users'],
-    queryFn: () => base44.entities.User.list(),
+    queryFn: () => client.entities.User.list(),
     enabled: currentUser?.role === 'admin',
   });
 
@@ -169,7 +171,7 @@ export default function QuizzesPage() {
 
   // Mutations
   const createCourseMutation = useMutation({
-    mutationFn: (data) => base44.entities.Course.create(data),
+    mutationFn: (data) => client.entities.Course.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries(['courses']);
       setShowCourseDialog(false);
@@ -178,7 +180,7 @@ export default function QuizzesPage() {
   });
 
   const updateCourseMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Course.update(id, data),
+    mutationFn: ({ id, data }) => client.entities.Course.update(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries(['courses']);
       setEditingCourse(null);
@@ -186,12 +188,12 @@ export default function QuizzesPage() {
   });
 
   const deleteCourseMutation = useMutation({
-    mutationFn: (id) => base44.entities.Course.delete(id),
+    mutationFn: (id) => client.entities.Course.delete(id),
     onSuccess: () => queryClient.invalidateQueries(['courses']),
   });
 
   const createSubjectMutation = useMutation({
-    mutationFn: (data) => base44.entities.Subject.create(data),
+    mutationFn: (data) => client.entities.Subject.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries(['subjects']);
       setShowSubjectDialog(false);
@@ -200,7 +202,7 @@ export default function QuizzesPage() {
   });
 
   const updateSubjectMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Subject.update(id, data),
+    mutationFn: ({ id, data }) => client.entities.Subject.update(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries(['subjects']);
       setEditingSubject(null);
@@ -208,12 +210,12 @@ export default function QuizzesPage() {
   });
 
   const deleteSubjectMutation = useMutation({
-    mutationFn: (id) => base44.entities.Subject.delete(id),
+    mutationFn: (id) => client.entities.Subject.delete(id),
     onSuccess: () => queryClient.invalidateQueries(['subjects']),
   });
 
   const createFolderMutation = useMutation({
-    mutationFn: (data) => base44.entities.Folder.create(data),
+    mutationFn: (data) => client.entities.Folder.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries(['folders']);
       setShowFolderDialog(false);
@@ -222,7 +224,7 @@ export default function QuizzesPage() {
   });
 
   const updateFolderMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Folder.update(id, data),
+    mutationFn: ({ id, data }) => client.entities.Folder.update(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries(['folders']);
       setEditingFolder(null);
@@ -230,12 +232,12 @@ export default function QuizzesPage() {
   });
 
   const deleteFolderMutation = useMutation({
-    mutationFn: (id) => base44.entities.Folder.delete(id),
+    mutationFn: (id) => client.entities.Folder.delete(id),
     onSuccess: () => queryClient.invalidateQueries(['folders']),
   });
 
   const createQuizMutation = useMutation({
-    mutationFn: (data) => base44.entities.Quiz.create(data),
+    mutationFn: (data) => client.entities.Quiz.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries(['quizzes']);
       setShowUploader(false);
@@ -243,7 +245,7 @@ export default function QuizzesPage() {
   });
 
   const updateQuizMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Quiz.update(id, data),
+    mutationFn: ({ id, data }) => client.entities.Quiz.update(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries(['quizzes']);
       setEditingQuiz(null);
@@ -251,44 +253,44 @@ export default function QuizzesPage() {
   });
 
   const deleteQuizMutation = useMutation({
-    mutationFn: (id) => base44.entities.Quiz.delete(id),
+    mutationFn: (id) => client.entities.Quiz.delete(id),
     onSuccess: () => queryClient.invalidateQueries(['quizzes']),
   });
 
   // Bulk delete handlers
   const handleBulkDeleteCourses = async (ids) => {
     for (const id of ids) {
-      await base44.entities.Course.delete(id);
+      await client.entities.Course.delete(id);
     }
     queryClient.invalidateQueries(['courses']);
   };
 
   const handleBulkDeleteFolders = async (ids) => {
     for (const id of ids) {
-      await base44.entities.Folder.delete(id);
+      await client.entities.Folder.delete(id);
     }
     queryClient.invalidateQueries(['folders']);
   };
 
   const handleBulkDeleteSubjects = async (ids) => {
     for (const id of ids) {
-      await base44.entities.Subject.delete(id);
+      await client.entities.Subject.delete(id);
     }
     queryClient.invalidateQueries(['subjects']);
   };
 
   const handleUpdateCourse = async (id, data) => {
-    await base44.entities.Course.update(id, data);
+    await client.entities.Course.update(id, data);
     queryClient.invalidateQueries(['courses']);
   };
 
   const handleUpdateFolder = async (id, data) => {
-    await base44.entities.Folder.update(id, data);
+    await client.entities.Folder.update(id, data);
     queryClient.invalidateQueries(['folders']);
   };
 
   const handleUpdateSubject = async (id, data) => {
-    await base44.entities.Subject.update(id, data);
+    await client.entities.Subject.update(id, data);
     queryClient.invalidateQueries(['subjects']);
   };
 
@@ -368,11 +370,11 @@ export default function QuizzesPage() {
   };
 
   const saveAttemptMutation = useMutation({
-    mutationFn: (data) => base44.entities.QuizAttempt.create(data),
+    mutationFn: (data) => client.entities.QuizAttempt.create(data),
   });
 
   const updateAttemptMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.QuizAttempt.update(id, data),
+    mutationFn: ({ id, data }) => client.entities.QuizAttempt.update(id, data),
   });
 
 
@@ -380,7 +382,7 @@ export default function QuizzesPage() {
 
 
   const updateUsernameMutation = useMutation({
-    mutationFn: (username) => base44.auth.updateMe({ username }),
+    mutationFn: (username) => client.auth.updateMe({ username }),
     onSuccess: (updatedUser) => setCurrentUser(updatedUser),
   });
 
@@ -434,6 +436,53 @@ export default function QuizzesPage() {
     : [];
 
   const [currentAttemptId, setCurrentAttemptId] = useState(null);
+
+  // Admin Quick Access Panel
+  const AdminPanel = () => {
+    if (!isAdmin) return null;
+
+    const pendingRequests = enrollments?.length || 0;
+
+    return (
+      <div className="mb-8">
+        <div className="bg-gradient-to-r from-indigo-900 to-indigo-800 rounded-xl p-6 text-white shadow-lg overflow-hidden relative">
+          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Shield className="w-5 h-5 text-indigo-300" />
+                <h2 className="text-lg font-bold">Panel de Administración</h2>
+              </div>
+              <p className="text-indigo-200 text-sm max-w-xl">
+                Gestiona cursos, usuarios y mantenimiento de la plataforma desde el dashboard central.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3">
+              {pendingRequests > 0 && (
+                <div className="bg-indigo-700/50 border border-indigo-500/30 px-3 py-2 rounded-lg flex items-center gap-2 animate-pulse">
+                  <AlertCircle className="w-4 h-4 text-amber-400" />
+                  <span className="text-sm font-medium text-amber-200">
+                    {pendingRequests} solicitud{pendingRequests !== 1 ? 'es' : ''} pendiente{pendingRequests !== 1 ? 's' : ''}
+                  </span>
+                </div>
+              )}
+
+              <Link to={createPageUrl('AdminHome')}>
+                <Button variant="secondary" className="whitespace-nowrap bg-white text-indigo-900 hover:bg-indigo-50 border-0">
+                  <LayoutDashboard className="w-4 h-4 mr-2" />
+                  Dashboard Admin
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Decorative background elements */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-indigo-500/10 rounded-full blur-2xl translate-y-1/2 -translate-x-1/4"></div>
+        </div>
+      </div>
+    );
+  };
 
   // Quiz handlers
   const handleStartQuiz = async (quiz, questionCount, selectedDeck = 'all', quizAttempts = []) => {
@@ -494,7 +543,7 @@ export default function QuizzesPage() {
 
     // Crear sesión en vivo
     try {
-      const session = await base44.entities.QuizSession.create({
+      const session = await client.entities.QuizSession.create({
         user_email: currentUser.email,
         username: currentUser.username,
         quiz_id: quiz.id,
@@ -576,7 +625,7 @@ export default function QuizzesPage() {
       // Marcar sesión como completa
       if (currentSessionId) {
         try {
-          await base44.entities.QuizSession.update(currentSessionId, { is_active: false });
+          await client.entities.QuizSession.update(currentSessionId, { is_active: false });
         } catch (error) {
           console.error('Error marking session complete:', error);
         }
@@ -661,7 +710,7 @@ export default function QuizzesPage() {
     // Marcar sesión como inactiva
     if (currentSessionId) {
       try {
-        await base44.entities.QuizSession.update(currentSessionId, { is_active: false });
+        await client.entities.QuizSession.update(currentSessionId, { is_active: false });
       } catch (error) {
         console.error('Error marking session inactive:', error);
       }
@@ -946,6 +995,7 @@ export default function QuizzesPage() {
             {/* Home View - Courses + Unassigned Subjects */}
             {view === 'home' && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !explorerMode && (
               <motion.div key="courses" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                <AdminPanel />
 
 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -995,13 +1045,6 @@ export default function QuizzesPage() {
                       </Dialog>
                     )}
 
-                    {isAdmin && (
-                      <AdminMenu
-                        compact
-                        onOpenContentManager={() => setShowContentManager(true)}
-                        onOpenQuizExporter={() => setShowQuizExporter(true)}
-                      />
-                    )}
                   </div>
                 </div>
 
@@ -1127,19 +1170,19 @@ export default function QuizzesPage() {
                       const { id, created_date, updated_date, created_by, ...commonData } = originalItem;
 
                       if (fromType === 'course') {
-                        await base44.entities.Course.delete(itemId);
+                        await client.entities.Course.delete(itemId);
                       } else if (fromType === 'folder') {
-                        await base44.entities.Folder.delete(itemId);
+                        await client.entities.Folder.delete(itemId);
                       } else if (fromType === 'subject') {
-                        await base44.entities.Subject.delete(itemId);
+                        await client.entities.Subject.delete(itemId);
                       }
 
                       if (toType === 'course') {
-                        await base44.entities.Course.create(commonData);
+                        await client.entities.Course.create(commonData);
                       } else if (toType === 'folder') {
-                        await base44.entities.Folder.create(commonData);
+                        await client.entities.Folder.create(commonData);
                       } else if (toType === 'subject') {
-                        await base44.entities.Subject.create(commonData);
+                        await client.entities.Subject.create(commonData);
                       }
 
                       queryClient.invalidateQueries(['courses']);
@@ -1181,7 +1224,7 @@ export default function QuizzesPage() {
                   <div>
                     <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
                       {selectedCourse ? (
-                        <>{selectedCourse.icon} {selectedCourse.name}</>
+                        <><Icon name={selectedCourse.icon} className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: selectedCourse.color || '#6366f1' }} /> {selectedCourse.name}</>
                       ) : currentFolderId ? (
                         <><Folder className="w-6 h-6" /> {folders.find(f => f.id === currentFolderId)?.name}</>
                       ) : null}

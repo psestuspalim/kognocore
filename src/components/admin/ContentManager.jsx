@@ -4,8 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { 
-  Trash2, Search, GraduationCap, Folder, BookOpen, 
+import {
+  Trash2, Search, Book, Folder, BookOpen,
   CheckSquare, Square, Eye, EyeOff, MoreVertical,
   ChevronRight, AlertTriangle, X
 } from 'lucide-react';
@@ -28,10 +28,10 @@ import {
 } from '@/components/ui/alert-dialog';
 import { toast } from 'sonner';
 
-export default function ContentManager({ 
-  courses, 
-  folders, 
-  subjects, 
+export default function ContentManager({
+  courses,
+  folders,
+  subjects,
   quizzes,
   onDeleteCourses,
   onDeleteFolders,
@@ -39,7 +39,7 @@ export default function ContentManager({
   onUpdateCourse,
   onUpdateFolder,
   onUpdateSubject,
-  onClose 
+  onClose
 }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCourses, setSelectedCourses] = useState([]);
@@ -48,32 +48,32 @@ export default function ContentManager({
   const [activeTab, setActiveTab] = useState('all');
   const [deleteDialog, setDeleteDialog] = useState({ open: false, type: null, items: [] });
 
-  const filteredCourses = courses.filter(c => 
+  const filteredCourses = courses.filter(c =>
     c.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const filteredFolders = folders.filter(f => 
+  const filteredFolders = folders.filter(f =>
     f.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const filteredSubjects = subjects.filter(s => 
+  const filteredSubjects = subjects.filter(s =>
     s.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const totalSelected = selectedCourses.length + selectedFolders.length + selectedSubjects.length;
 
   const toggleCourse = (id) => {
-    setSelectedCourses(prev => 
+    setSelectedCourses(prev =>
       prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
     );
   };
 
   const toggleFolder = (id) => {
-    setSelectedFolders(prev => 
+    setSelectedFolders(prev =>
       prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
     );
   };
 
   const toggleSubject = (id) => {
-    setSelectedSubjects(prev => 
+    setSelectedSubjects(prev =>
       prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
     );
   };
@@ -99,13 +99,13 @@ export default function ContentManager({
     if (selectedCourses.length > 0) items.push({ type: 'courses', ids: selectedCourses, count: selectedCourses.length });
     if (selectedFolders.length > 0) items.push({ type: 'folders', ids: selectedFolders, count: selectedFolders.length });
     if (selectedSubjects.length > 0) items.push({ type: 'subjects', ids: selectedSubjects, count: selectedSubjects.length });
-    
+
     setDeleteDialog({ open: true, type: 'bulk', items });
   };
 
   const confirmDelete = async () => {
     const { type, items } = deleteDialog;
-    
+
     try {
       if (type === 'bulk') {
         for (const item of items) {
@@ -118,13 +118,13 @@ export default function ContentManager({
         if (type === 'folder') await onDeleteFolders(items);
         if (type === 'subject') await onDeleteSubjects(items);
       }
-      
+
       clearSelection();
       toast.success('Elementos eliminados correctamente');
     } catch (error) {
       toast.error('Error al eliminar');
     }
-    
+
     setDeleteDialog({ open: false, type: null, items: [] });
   };
 
@@ -141,19 +141,17 @@ export default function ContentManager({
   const getCourseSubjectCount = (courseId) => subjects.filter(s => s.course_id === courseId).length;
 
   const ItemRow = ({ item, type, isSelected, onToggle, onDelete }) => (
-    <div className={`flex items-center gap-3 p-3 rounded-lg border transition-all ${
-      isSelected ? 'bg-indigo-50 border-indigo-300' : 'bg-white border-gray-200 hover:border-gray-300'
-    }`}>
-      <Checkbox 
-        checked={isSelected} 
+    <div className={`flex items-center gap-3 p-3 rounded-lg border transition-all ${isSelected ? 'bg-indigo-50 border-indigo-300' : 'bg-white border-gray-200 hover:border-gray-300'
+      }`}>
+      <Checkbox
+        checked={isSelected}
         onCheckedChange={onToggle}
         className="shrink-0"
       />
-      
-      <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-        type === 'course' ? 'bg-indigo-100' : type === 'folder' ? 'bg-amber-100' : 'bg-emerald-100'
-      }`}>
-        {type === 'course' && <GraduationCap className="w-4 h-4 text-indigo-600" />}
+
+      <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${type === 'course' ? 'bg-indigo-100' : type === 'folder' ? 'bg-amber-100' : 'bg-emerald-100'
+        }`}>
+        {type === 'course' && <Book className="w-4 h-4 text-indigo-600" />}
         {type === 'folder' && <Folder className="w-4 h-4 text-amber-600" />}
         {type === 'subject' && <BookOpen className="w-4 h-4 text-emerald-600" />}
       </div>
@@ -190,7 +188,7 @@ export default function ContentManager({
             )}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem 
+          <DropdownMenuItem
             onClick={() => setDeleteDialog({ open: true, type, items: [item.id] })}
             className="text-red-600"
           >
@@ -211,9 +209,9 @@ export default function ContentManager({
           <Badge className="bg-indigo-100 text-indigo-700 text-xs">{selectedCount} seleccionados</Badge>
         )}
       </div>
-      <Button 
-        variant="ghost" 
-        size="sm" 
+      <Button
+        variant="ghost"
+        size="sm"
         onClick={onSelectAll}
         className="text-xs h-7"
       >
@@ -231,7 +229,7 @@ export default function ContentManager({
             <X className="w-4 h-4" />
           </Button>
         </div>
-        
+
         {/* Search and Actions */}
         <div className="flex flex-col sm:flex-row gap-3 mt-4">
           <div className="relative flex-1">
@@ -243,16 +241,16 @@ export default function ContentManager({
               className="pl-9"
             />
           </div>
-          
+
           {totalSelected > 0 && (
             <div className="flex items-center gap-2">
               <Badge className="bg-indigo-600">{totalSelected} seleccionados</Badge>
               <Button variant="outline" size="sm" onClick={clearSelection}>
                 Limpiar
               </Button>
-              <Button 
-                variant="destructive" 
-                size="sm" 
+              <Button
+                variant="destructive"
+                size="sm"
                 onClick={handleBulkDelete}
               >
                 <Trash2 className="w-4 h-4 mr-1" />
@@ -273,11 +271,10 @@ export default function ContentManager({
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
-                activeTab === tab.id 
-                  ? 'border-indigo-600 text-indigo-600' 
+              className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === tab.id
+                  ? 'border-indigo-600 text-indigo-600'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
-              }`}
+                }`}
             >
               {tab.label}
               {tab.count !== undefined && (
@@ -292,9 +289,9 @@ export default function ContentManager({
         {/* Courses */}
         {(activeTab === 'all' || activeTab === 'courses') && filteredCourses.length > 0 && (
           <div>
-            <SectionHeader 
-              title="Cursos" 
-              icon={GraduationCap}
+            <SectionHeader
+              title="Cursos"
+              icon={Book}
               count={filteredCourses.length}
               selectedCount={selectedCourses.length}
               onSelectAll={() => selectAll('courses')}
@@ -318,8 +315,8 @@ export default function ContentManager({
         {/* Folders */}
         {(activeTab === 'all' || activeTab === 'folders') && filteredFolders.length > 0 && (
           <div>
-            <SectionHeader 
-              title="Carpetas" 
+            <SectionHeader
+              title="Carpetas"
               icon={Folder}
               count={filteredFolders.length}
               selectedCount={selectedFolders.length}
@@ -344,8 +341,8 @@ export default function ContentManager({
         {/* Subjects */}
         {(activeTab === 'all' || activeTab === 'subjects') && filteredSubjects.length > 0 && (
           <div>
-            <SectionHeader 
-              title="Materias" 
+            <SectionHeader
+              title="Materias"
               icon={BookOpen}
               count={filteredSubjects.length}
               selectedCount={selectedSubjects.length}

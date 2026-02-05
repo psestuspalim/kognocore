@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { 
-  Users, Clock, Trophy, Crown, Medal, Award, 
-  Play, Loader2, Copy, ArrowLeft, Zap 
+import {
+  Users, Clock, Trophy, Crown, Medal, Award,
+  Play, Loader2, Copy, ArrowLeft, Zap
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
@@ -24,21 +24,21 @@ export default function GamePlayPage() {
   const [wrongAnswers, setWrongAnswers] = useState([]);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [rankings, setRankings] = useState([]);
-  
+
   const timerRef = useRef(null);
   const pollingRef = useRef(null);
   const queryClient = useQueryClient();
 
   useEffect(() => {
     const loadData = async () => {
-      const user = await base44.auth.me();
+      const user = await client.auth.me();
       setCurrentUser(user);
-      
+
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');
-      
+
       if (code) {
-        const rooms = await base44.entities.GameRoom.filter({ code });
+        const rooms = await client.entities.GameRoom.filter({ code });
         if (rooms.length > 0) {
           setRoom(rooms[0]);
           if (rooms[0].status === 'in_progress') {
@@ -55,15 +55,15 @@ export default function GamePlayPage() {
     if (!room || gameState === 'finished') return;
 
     pollingRef.current = setInterval(async () => {
-      const rooms = await base44.entities.GameRoom.filter({ code: room.code });
+      const rooms = await client.entities.GameRoom.filter({ code: room.code });
       if (rooms.length > 0) {
         const updatedRoom = rooms[0];
         setRoom(updatedRoom);
-        
+
         if (updatedRoom.status === 'in_progress' && gameState === 'lobby') {
           setGameState('countdown');
         }
-        
+
         if (updatedRoom.status === 'completed') {
           calculateRankings(updatedRoom);
           setGameState('finished');
@@ -79,7 +79,7 @@ export default function GamePlayPage() {
   // Countdown
   useEffect(() => {
     if (gameState !== 'countdown') return;
-    
+
     if (countdown > 0) {
       const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
       return () => clearTimeout(timer);
@@ -101,7 +101,7 @@ export default function GamePlayPage() {
 
   const startGameMutation = useMutation({
     mutationFn: async () => {
-      await base44.entities.GameRoom.update(room.id, {
+      await client.entities.GameRoom.update(room.id, {
         status: 'in_progress',
         started_at: new Date().toISOString()
       });
@@ -122,8 +122,8 @@ export default function GamePlayPage() {
 
       // Verificar si todos terminaron
       const allFinished = updatedPlayers.every(p => p.finished);
-      
-      await base44.entities.GameRoom.update(room.id, {
+
+      await client.entities.GameRoom.update(room.id, {
         players: updatedPlayers,
         status: allFinished ? 'completed' : 'in_progress'
       });
@@ -143,7 +143,7 @@ export default function GamePlayPage() {
         return a.time - b.time;
       });
     setRankings(sorted);
-    
+
     if (sorted[0]?.email === currentUser?.email) {
       confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
     }
@@ -151,7 +151,7 @@ export default function GamePlayPage() {
 
   const handleAnswer = async (isCorrect, selectedOption, question) => {
     const newScore = isCorrect ? score + 1 : score;
-    
+
     if (isCorrect) {
       setScore(newScore);
     } else {
@@ -159,7 +159,7 @@ export default function GamePlayPage() {
     }
 
     const isLastQuestion = currentQuestionIndex >= room.questions.length - 1;
-    
+
     if (!isLastQuestion) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
@@ -198,8 +198,8 @@ export default function GamePlayPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
         <div className="max-w-lg mx-auto">
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             className="text-white hover:bg-white/10 mb-4"
             onClick={() => window.location.href = '/GameLobby'}
           >
@@ -238,7 +238,7 @@ export default function GamePlayPage() {
                   </span>
                   <span>{room.players?.length || 0}/{room.max_players}</span>
                 </div>
-                
+
                 <div className="space-y-2">
                   {room.players?.map((player, idx) => (
                     <motion.div
@@ -306,7 +306,7 @@ export default function GamePlayPage() {
   // Resultados
   if (gameState === 'finished') {
     const myRank = rankings.findIndex(p => p.email === currentUser.email);
-    
+
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
         <div className="max-w-lg mx-auto">
@@ -315,7 +315,7 @@ export default function GamePlayPage() {
               <Trophy className="w-16 h-16 mx-auto mb-2 text-white" />
               <h2 className="text-2xl font-bold text-white">Resultados</h2>
             </div>
-            
+
             <CardContent className="p-6">
               <div className="space-y-3 mb-6">
                 {rankings.map((player, idx) => (
@@ -324,11 +324,10 @@ export default function GamePlayPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.1 }}
-                    className={`flex items-center justify-between p-4 rounded-xl ${
-                      player.email === currentUser.email 
-                        ? 'bg-indigo-500/30 ring-2 ring-indigo-400' 
-                        : 'bg-white/10'
-                    }`}
+                    className={`flex items-center justify-between p-4 rounded-xl ${player.email === currentUser.email
+                      ? 'bg-indigo-500/30 ring-2 ring-indigo-400'
+                      : 'bg-white/10'
+                      }`}
                   >
                     <div className="flex items-center gap-3">
                       {getRankIcon(idx)}
@@ -359,7 +358,7 @@ export default function GamePlayPage() {
                 </div>
               </div>
 
-              <Button 
+              <Button
                 onClick={() => window.location.href = '/GameLobby'}
                 className="w-full bg-indigo-600 hover:bg-indigo-700"
               >
@@ -385,18 +384,18 @@ export default function GamePlayPage() {
                 {room.players?.filter(p => !p.finished).length} jugando
               </Badge>
             </div>
-            
+
             <div className="text-lg font-bold text-indigo-600">{score} pts</div>
-            
+
             <div className="flex items-center gap-1 text-sm font-mono bg-gray-100 px-2 py-1 rounded">
               <Clock className="w-3 h-3 text-gray-500" />
               <span>{formatTime(elapsedTime)}</span>
             </div>
           </div>
-          
-          <Progress 
-            value={((currentQuestionIndex + 1) / room.questions.length) * 100} 
-            className="h-1.5 mt-2" 
+
+          <Progress
+            value={((currentQuestionIndex + 1) / room.questions.length) * 100}
+            className="h-1.5 mt-2"
           />
         </div>
       </div>

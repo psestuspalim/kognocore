@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,7 +15,7 @@ export default function LeaderboardPage() {
   useEffect(() => {
     const loadUser = async () => {
       try {
-        const user = await base44.auth.me();
+        const user = await client.auth.me();
         setCurrentUser(user);
       } catch (error) {
         console.error('Error loading user:', error);
@@ -26,22 +26,22 @@ export default function LeaderboardPage() {
 
   const { data: allStats = [] } = useQuery({
     queryKey: ['all-user-stats'],
-    queryFn: () => base44.entities.UserStats.list('-total_points', 100),
+    queryFn: () => client.entities.UserStats.list('-total_points', 100),
   });
 
   const { data: subjects = [] } = useQuery({
     queryKey: ['subjects'],
-    queryFn: () => base44.entities.Subject.list(),
+    queryFn: () => client.entities.Subject.list(),
   });
 
   const { data: quizzes = [] } = useQuery({
     queryKey: ['quizzes'],
-    queryFn: () => base44.entities.Quiz.list(),
+    queryFn: () => client.entities.Quiz.list(),
   });
 
   const { data: attempts = [] } = useQuery({
     queryKey: ['all-attempts'],
-    queryFn: () => base44.entities.QuizAttempt.list('-created_date', 1000),
+    queryFn: () => client.entities.QuizAttempt.list('-created_date', 1000),
   });
 
   // Calcular ranking por materia
@@ -51,7 +51,7 @@ export default function LeaderboardPage() {
 
     attempts.forEach(attempt => {
       if (!subjectQuizIds.includes(attempt.quiz_id)) return;
-      
+
       const key = attempt.user_email;
       if (!userScores.has(key)) {
         userScores.set(key, {
@@ -63,7 +63,7 @@ export default function LeaderboardPage() {
           level: 1
         });
       }
-      
+
       const user = userScores.get(key);
       user.total_correct += attempt.score;
       user.total_questions += attempt.total_questions;
@@ -109,8 +109,8 @@ export default function LeaderboardPage() {
           </TabsList>
 
           <TabsContent value="general">
-            <Leaderboard 
-              users={allStats} 
+            <Leaderboard
+              users={allStats}
               currentUserEmail={currentUser?.email}
               title="Ranking General"
             />
@@ -118,8 +118,8 @@ export default function LeaderboardPage() {
 
           {subjects.map(subject => (
             <TabsContent key={subject.id} value={subject.id}>
-              <Leaderboard 
-                users={getSubjectLeaderboard(subject.id)} 
+              <Leaderboard
+                users={getSubjectLeaderboard(subject.id)}
                 currentUserEmail={currentUser?.email}
                 title={`Ranking - ${subject.name}`}
               />

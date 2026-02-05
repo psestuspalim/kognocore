@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -16,7 +16,7 @@ export default function BadgesPage() {
   useEffect(() => {
     const loadUser = async () => {
       try {
-        const user = await base44.auth.me();
+        const user = await client.auth.me();
         setCurrentUser(user);
       } catch (error) {
         console.error('Error loading user:', error);
@@ -28,7 +28,7 @@ export default function BadgesPage() {
   const { data: userStats } = useQuery({
     queryKey: ['user-stats', currentUser?.email],
     queryFn: async () => {
-      const stats = await base44.entities.UserStats.filter({ user_email: currentUser?.email });
+      const stats = await client.entities.UserStats.filter({ user_email: currentUser?.email });
       return stats[0] || null;
     },
     enabled: !!currentUser?.email,
@@ -59,9 +59,9 @@ export default function BadgesPage() {
         {userStats && (
           <Card className="border-0 shadow-lg mb-8">
             <CardContent className="p-6">
-              <PointsDisplay 
-                points={userStats.total_points || 0} 
-                level={userStats.level || 1} 
+              <PointsDisplay
+                points={userStats.total_points || 0}
+                level={userStats.level || 1}
               />
             </CardContent>
           </Card>

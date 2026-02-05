@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Pencil, Trash2, Book, Users, EyeOff } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Icon } from '@/components/ui/Icon';
 
 export default function CourseCard({ course, subjectCount, isAdmin, onEdit, onDelete, onClick }) {
   return (
@@ -25,13 +26,11 @@ export default function CourseCard({ course, subjectCount, isAdmin, onEdit, onDe
                 className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
                 style={{ backgroundColor: `${course.color}20` || '#6366f120' }}
               >
-                {(() => {
-                  const iconMap = {
-                    Book: <Book className="w-6 h-6" />,
-                    Users: <Users className="w-6 h-6" />
-                  };
-                  return iconMap[course.icon] || <Book className="w-6 h-6" style={{ color: course.color || '#6366f1' }} />;
-                })()}
+                <Icon
+                  name={course.icon}
+                  className="w-6 h-6"
+                  style={{ color: course.color || '#6366f1' }}
+                />
               </div>
               <div className="min-w-0 flex-1">
                 <h3 className="font-semibold text-gray-900 flex items-center gap-2 truncate">

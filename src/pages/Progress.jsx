@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -30,7 +30,7 @@ export default function ProgressPage() {
   React.useEffect(() => {
     const loadUser = async () => {
       try {
-        const user = await base44.auth.me();
+        const user = await client.auth.me();
         setCurrentUser(user);
       } catch (error) {
         console.error('Error loading user:', error);
@@ -43,39 +43,39 @@ export default function ProgressPage() {
 
   const { data: subjects = [] } = useQuery({
     queryKey: ['subjects'],
-    queryFn: () => base44.entities.Subject.list('-created_date'),
+    queryFn: () => client.entities.Subject.list('-created_date'),
   });
 
   const { data: quizzes = [] } = useQuery({
     queryKey: ['quizzes'],
-    queryFn: () => base44.entities.Quiz.list('-created_date'),
+    queryFn: () => client.entities.Quiz.list('-created_date'),
   });
 
   const { data: courses = [] } = useQuery({
     queryKey: ['courses'],
-    queryFn: () => base44.entities.Course.list('order'),
+    queryFn: () => client.entities.Course.list('order'),
     enabled: isAdmin,
   });
 
   const { data: allUsers = [] } = useQuery({
     queryKey: ['all-users'],
-    queryFn: () => base44.entities.User.list('-created_date', 1000),
+    queryFn: () => client.entities.User.list('-created_date', 1000),
     enabled: isAdmin,
   });
 
   const { data: allAttempts = [] } = useQuery({
     queryKey: ['all-attempts'],
-    queryFn: () => base44.entities.QuizAttempt.list('-created_date', 5000),
+    queryFn: () => client.entities.QuizAttempt.list('-created_date', 5000),
     enabled: isAdmin,
   });
 
   // Intentos del usuario actual o del estudiante seleccionado
   const targetEmail = selectedStudent ? selectedStudent.email : currentUser?.email;
-  
+
   const { data: userAttempts = [] } = useQuery({
     queryKey: ['attempts', currentUser?.email],
-    queryFn: () => base44.entities.QuizAttempt.filter(
-      { user_email: currentUser?.email }, 
+    queryFn: () => client.entities.QuizAttempt.filter(
+      { user_email: currentUser?.email },
       '-created_date',
       1000
     ),
@@ -83,10 +83,10 @@ export default function ProgressPage() {
   });
 
   // Usar intentos filtrados según el contexto
-  const attempts = isAdmin 
-    ? (selectedStudent 
-        ? allAttempts.filter(a => a.user_email === selectedStudent.email)
-        : allAttempts.filter(a => a.user_email === currentUser?.email))
+  const attempts = isAdmin
+    ? (selectedStudent
+      ? allAttempts.filter(a => a.user_email === selectedStudent.email)
+      : allAttempts.filter(a => a.user_email === currentUser?.email))
     : userAttempts;
 
   const analytics = useMemo(() => {
@@ -103,11 +103,11 @@ export default function ProgressPage() {
     const subjectStats = subjects.map(subject => {
       const subjectQuizIds = quizzes.filter(q => q.subject_id === subject.id).map(q => q.id);
       const subjectAttempts = attempts.filter(a => subjectQuizIds.includes(a.quiz_id));
-      
+
       const total = subjectAttempts.reduce((sum, a) => sum + a.total_questions, 0);
       const correct = subjectAttempts.reduce((sum, a) => sum + a.score, 0);
       const wrong = total - correct;
-      
+
       return {
         ...subject,
         attempts: subjectAttempts.length,
@@ -157,7 +157,7 @@ export default function ProgressPage() {
       const count = wrongQuestionsMap.get(wq.question) || 0;
       wrongQuestionsMap.set(wq.question, count + 1);
     });
-    
+
     const weakPoints = Array.from(wrongQuestionsMap.entries())
       .map(([question, count]) => ({
         question,
@@ -200,7 +200,7 @@ export default function ProgressPage() {
               Volver a cuestionarios
             </Button>
           </Link>
-          
+
           <div className="text-center py-16">
             <div className="flex justify-center mb-6">
               <div className="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center">
@@ -306,7 +306,7 @@ export default function ProgressPage() {
           </TabsContent>
 
           <TabsContent value="badges" className="space-y-6">
-            <QuizCompletionBadges 
+            <QuizCompletionBadges
               quizzes={quizzes}
               attempts={attempts}
               subjects={subjects}
@@ -314,7 +314,7 @@ export default function ProgressPage() {
           </TabsContent>
 
           <TabsContent value="history" className="space-y-6">
-            <AttemptHistory 
+            <AttemptHistory
               attempts={attempts}
               quizzes={quizzes}
               subjects={subjects}
@@ -326,7 +326,7 @@ export default function ProgressPage() {
               <PerformanceRadarChart subjectStats={analytics.subjectStats} />
               <QuizTimeStats attempts={attempts} quizzes={quizzes} />
             </div>
-            <SubjectProgress 
+            <SubjectProgress
               subjectStats={analytics.subjectStats}
               quizzes={quizzes}
               attempts={attempts}
@@ -342,7 +342,7 @@ export default function ProgressPage() {
           </TabsContent>
 
           <TabsContent value="recommendations" className="space-y-6">
-            <Recommendations 
+            <Recommendations
               analytics={analytics}
               quizzes={quizzes}
               subjects={subjects}

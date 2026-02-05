@@ -6,7 +6,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 
 export default function BulkSectionUploader({ subjects, onSuccess }) {
   const [isDragging, setIsDragging] = useState(false);
@@ -111,7 +111,7 @@ export default function BulkSectionUploader({ subjects, onSuccess }) {
         });
 
         try {
-          await base44.entities.Quiz.create({
+          await client.entities.Quiz.create({
             title: sectionTitle || matchedSubject.name,
             description: `${questions.length} preguntas`,
             subject_id: matchedSubject.id,

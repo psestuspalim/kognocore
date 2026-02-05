@@ -1,7 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { appParams } from '@/lib/app-params';
-import { createAxiosClient } from '@base44/sdk/dist/utils/axios-client';
 
 const AuthContext = createContext();
 
@@ -22,7 +21,7 @@ export const AuthProvider = ({ children }) => {
       setIsLoadingPublicSettings(true);
       setAuthError(null);
 
-      const localToken = localStorage.getItem('base44_mock_token');
+      const localToken = localStorage.getItem('app_mock_token');
       if (localToken) {
         // If we have a local mock token, skip public settings check and go straight to auth
         await checkUserAuth();
@@ -32,22 +31,34 @@ export const AuthProvider = ({ children }) => {
 
       // First, check app public settings (with token if available)
       // This will tell us if auth is required, user not registered, etc.
-      const appClient = createAxiosClient({
-        baseURL: `${appParams.serverUrl}/api/apps/public`,
-        headers: {
-          'X-App-Id': appParams.appId
-        },
-        token: appParams.token, // Include token if available
-        interceptResponses: true
-      });
-
       try {
-        const publicSettings = await appClient.get(`/prod/public-settings/by-id/${appParams.appId}`);
+        const headers = {
+          'Content-Type': 'application/json',
+          'X-App-Id': appParams.appId
+        };
+        if (appParams.token) {
+          headers['Authorization'] = `Bearer ${appParams.token}`;
+        }
+
+        const response = await fetch(`${appParams.serverUrl}/api/apps/public/prod/public-settings/by-id/${appParams.appId}`, {
+          method: 'GET',
+          headers: headers
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          const error = new Error(errorData.message || response.statusText);
+          error.status = response.status;
+          error.data = errorData;
+          throw error;
+        }
+
+        const publicSettings = await response.json();
         setAppPublicSettings(publicSettings);
 
         // If we got the app public settings successfully, check if user is authenticated
         // Check for local mock token first
-        const localToken = localStorage.getItem('base44_mock_token');
+        const localToken = localStorage.getItem('app_mock_token');
         if (appParams.token || localToken) {
           await checkUserAuth();
         } else {
@@ -102,7 +113,7 @@ export const AuthProvider = ({ children }) => {
       // Now check if the user is authenticated
       setIsLoadingAuth(true);
 
-      const localToken = localStorage.getItem('base44_mock_token');
+      const localToken = localStorage.getItem('app_mock_token');
 
       if (localToken) {
         // Mock user based on token
@@ -110,7 +121,7 @@ export const AuthProvider = ({ children }) => {
         setUser(mockUser);
         setIsAuthenticated(true);
       } else {
-        const currentUser = await base44.auth.me();
+        const currentUser = await client.auth.me();
         setUser(currentUser);
         setIsAuthenticated(true);
       }
@@ -137,13 +148,13 @@ export const AuthProvider = ({ children }) => {
     if (email === 'admin' && password === 'admin') {
       const adminUser = {
         id: 'admin_123',
-        email: 'admin@base44.com',
+        email: 'admin@client.com',
         last_name: 'User',
         is_admin: true,
         username: 'admin',
         role: 'admin'
       };
-      localStorage.setItem('base44_mock_token', JSON.stringify(adminUser));
+      localStorage.setItem('app_mock_token', JSON.stringify(adminUser));
       setUser(adminUser);
       setIsAuthenticated(true);
       setAuthError(null);
@@ -152,13 +163,13 @@ export const AuthProvider = ({ children }) => {
     } else if (email === 'student' && password === 'student') {
       const studentUser = {
         id: 'student_123',
-        email: 'student@base44.com',
+        email: 'student@client.com',
         last_name: 'User',
         is_admin: false,
         username: 'student',
         role: 'student'
       };
-      localStorage.setItem('base44_mock_token', JSON.stringify(studentUser));
+      localStorage.setItem('app_mock_token', JSON.stringify(studentUser));
       setUser(studentUser);
       setIsAuthenticated(true);
       setAuthError(null);
@@ -173,16 +184,16 @@ export const AuthProvider = ({ children }) => {
   const logout = (shouldRedirect = true) => {
     setUser(null);
     setIsAuthenticated(false);
-    localStorage.removeItem('base44_mock_token');
+    localStorage.removeItem('app_mock_token');
 
     if (shouldRedirect) {
       // If we are using mock auth, just reload to clear state and show login
       window.location.href = '/login';
       // Use the SDK's logout method which handles token cleanup and redirect
-      // base44.auth.logout(window.location.href);
+      // client.auth.logout(window.location.href);
     } else {
       // Just remove the token without redirect
-      base44.auth.logout();
+      client.auth.logout();
     }
   };
 
@@ -190,7 +201,7 @@ export const AuthProvider = ({ children }) => {
     // Redirect to local login page
     window.location.href = '/login';
     // Use the SDK's redirectToLogin method
-    // base44.auth.redirectToLogin(window.location.href);
+    // client.auth.redirectToLogin(window.location.href);
   };
 
   return (

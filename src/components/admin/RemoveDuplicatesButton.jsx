@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Trash2, Loader2 } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { toast } from 'sonner';
+import { DoubleConfirmationModal } from '@/components/ui/DoubleConfirmationModal';
 
 export default function RemoveDuplicatesButton() {
   const [isRemoving, setIsRemoving] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  const removeDuplicates = async () => {
-    if (!confirm('¿Eliminar quizzes duplicados? Se mantendrá el más reciente de cada grupo.')) {
-      return;
-    }
-
+  const handleConfirmRemove = async () => {
     setIsRemoving(true);
     try {
-      const quizzes = await base44.entities.Quiz.list('-created_date');
-      
+      const quizzes = await client.entities.Quiz.list('-created_date');
+
       // Agrupar por título + subject_id
       const groups = {};
       quizzes.forEach(quiz => {
@@ -33,10 +31,10 @@ export default function RemoveDuplicatesButton() {
         if (group.length > 1) {
           // Ordenar por fecha (más reciente primero)
           group.sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
-          
+
           // Eliminar todos excepto el primero
           for (let i = 1; i < group.length; i++) {
-            await base44.entities.Quiz.delete(group[i].id);
+            await client.entities.Quiz.delete(group[i].id);
             deletedCount++;
           }
         }
@@ -57,19 +55,31 @@ export default function RemoveDuplicatesButton() {
   };
 
   return (
-    <Button
-      onClick={removeDuplicates}
-      disabled={isRemoving}
-      variant="outline"
-      size="sm"
-      className="w-full h-8 text-xs border-red-300 text-red-600 hover:bg-red-50"
-    >
-      {isRemoving ? (
-        <Loader2 className="w-3 h-3 mr-1 animate-spin" />
-      ) : (
-        <Trash2 className="w-3 h-3 mr-1" />
-      )}
-      {isRemoving ? 'Eliminando...' : 'Eliminar duplicados'}
-    </Button>
+    <>
+      <Button
+        onClick={() => setShowModal(true)}
+        disabled={isRemoving}
+        variant="outline"
+        size="sm"
+        className="w-full h-8 text-xs border-red-300 text-red-600 hover:bg-red-50"
+      >
+        {isRemoving ? (
+          <Loader2 className="w-3 h-3 mr-1 animate-spin" />
+        ) : (
+          <Trash2 className="w-3 h-3 mr-1" />
+        )}
+        {isRemoving ? 'Eliminando...' : 'Eliminar duplicados'}
+      </Button>
+
+      <DoubleConfirmationModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={handleConfirmRemove}
+        title="⚠️ ¿Eliminar duplicados?"
+        description="Se analizarán todos los quizzes y se eliminarán aquellos con el mismo título y materia, manteniendo solo la versión más reciente. Esta acción es destructiva."
+        confirmText="ELIMINAR"
+        actionButtonText="Eliminar Duplicados"
+      />
+    </>
   );
 }

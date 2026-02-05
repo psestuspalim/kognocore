@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Upload, Loader2, Music } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import {
   Dialog,
   DialogContent,
@@ -31,9 +31,9 @@ export default function AudioUploader({ subjectId, open, onOpenChange, onSuccess
 
     setIsUploading(true);
     try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      const { file_url } = await client.integrations.Core.UploadFile({ file });
       
-      await base44.entities.Audio.create({
+      await client.entities.Audio.create({
         title: title.trim(),
         file_url,
         subject_id: subjectId

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -13,6 +13,25 @@ import { toast } from 'sonner';
 import { toCompactFormat, fromCompactFormat, isCompactFormat } from '../components/utils/quizFormats';
 import AdminShell from '../components/admin/AdminShell';
 import AdminPageHeader from '../components/admin/AdminPageHeader';
+import { z } from 'zod';
+
+// Define Zod Schema for Quiz Validation
+const questionSchema = z.object({
+  text: z.string({ required_error: "Question text is required" }),
+  type: z.string().optional(),
+  options: z.array(z.string()).optional(),
+  correctAnswer: z.string().optional(),
+  explanation: z.string().optional()
+});
+
+const quizSchema = z.object({
+  title: z.string({ required_error: "Title is required" }),
+  description: z.string().optional(),
+  questions: z.array(questionSchema).min(1, "Must contain at least 1 question"),
+  subject_id: z.string().optional(),
+  is_hidden: z.boolean().optional(),
+  metadata: z.any().optional()
+});
 
 export default function AdminJsonManager() {
   const [jsonInput, setJsonInput] = useState('');
@@ -24,30 +43,50 @@ export default function AdminJsonManager() {
 
   const { data: quizzes = [], isLoading } = useQuery({
     queryKey: ['all-quizzes'],
-    queryFn: () => base44.entities.Quiz.list('-created_date'),
+    queryFn: () => client.entities.Quiz.list('-created_date'),
   });
 
   const { data: subjects = [] } = useQuery({
     queryKey: ['subjects'],
-    queryFn: () => base44.entities.Subject.list(),
+    queryFn: () => client.entities.Subject.list(),
   });
 
   const validateJson = () => {
     try {
       const parsed = JSON.parse(jsonInput);
-      setValidationResult({
-        valid: true,
-        message: 'JSON válido',
-        data: parsed
-      });
-      toast.success('JSON válido');
+
+      // Auto-expand compact format for validation if needed
+      let dataToValidate = parsed;
+      if (isCompactFormat(parsed)) {
+        dataToValidate = fromCompactFormat(parsed);
+      }
+
+      const result = quizSchema.safeParse(dataToValidate);
+
+      if (result.success) {
+        setValidationResult({
+          valid: true,
+          message: 'JSON válido (Schema Correcto)',
+          data: result.data
+        });
+        toast.success('JSON válido');
+      } else {
+        const issues = result.error.issues.map(i => `${i.path.join('.')}: ${i.message}`).join(', ');
+        setValidationResult({
+          valid: false,
+          message: `Errores de Schema: ${issues}`,
+          data: null
+        });
+        toast.error('JSON inválido según schema');
+      }
+
     } catch (error) {
       setValidationResult({
         valid: false,
-        message: error.message,
+        message: `Error de sintaxis: ${error.message}`,
         line: error.message.match(/position (\d+)/)?.[1]
       });
-      toast.error('JSON inválido');
+      toast.error('JSON mal formado');
     }
   };
 
@@ -198,7 +237,7 @@ export default function AdminJsonManager() {
       }
 
       // Create new quiz
-      await base44.entities.Quiz.create({
+      await client.entities.Quiz.create({
         title: quizData.title || `Importado ${new Date().toLocaleDateString()}`,
         description: quizData.description || 'Importado desde JSON',
         subject_id: subjects[0]?.id || 'root', // Default to first available subject

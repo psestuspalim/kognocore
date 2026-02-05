@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { Button } from '@/components/ui/button';
 import { Wrench, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -10,12 +10,12 @@ export default function FixQuizzesButton() {
   const fixQuizzes = async () => {
     setIsFixing(true);
     try {
-      const quizzes = await base44.entities.Quiz.list();
+      const quizzes = await client.entities.Quiz.list();
       let fixed = 0;
 
       for (const quiz of quizzes) {
         // Solo arreglar si tiene answerOptions vacío o no tiene
-        const needsFix = quiz.questions?.some(q => 
+        const needsFix = quiz.questions?.some(q =>
           !q.answerOptions || q.answerOptions.length === 0
         );
 
@@ -29,7 +29,7 @@ export default function FixQuizzesButton() {
 
           // Intentar obtener opciones de q.options o generar desde el hint
           let options = q.options || [];
-          
+
           // Si no hay opciones, necesitamos generarlas con IA
           // Por ahora, retornar la pregunta marcada para revisión manual
           return {
@@ -42,7 +42,7 @@ export default function FixQuizzesButton() {
           };
         });
 
-        await base44.entities.Quiz.update(quiz.id, {
+        await client.entities.Quiz.update(quiz.id, {
           questions: fixedQuestions
         });
         fixed++;

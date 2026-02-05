@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Upload, Plus, Trash2, Circle, ArrowRight, Save, X, ChevronLeft, ChevronRight, Check, Loader2 } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 
 const BLOCK_SIZE = 50;
 const COLORS = ['#ef4444', '#3b82f6', '#22c55e', '#f59e0b', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316', '#6366f1', '#84cc16'];
@@ -19,21 +19,21 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
         const parsed = JSON.parse(saved);
         return parsed.allImages || [];
       }
-    } catch (e) {}
+    } catch (e) { }
     return [];
   });
   const [currentBlock, setCurrentBlock] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) return JSON.parse(saved).currentBlock || 0;
-    } catch (e) {}
+    } catch (e) { }
     return 0;
   });
   const [currentIndex, setCurrentIndex] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) return JSON.parse(saved).currentIndex || 0;
-    } catch (e) {}
+    } catch (e) { }
     return 0;
   });
   const [newOption, setNewOption] = useState('');
@@ -58,10 +58,10 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
     try {
       const parsed = JSON.parse(descriptionsJson);
       if (!Array.isArray(parsed)) return;
-      
+
       const updatedImages = [...allImages];
       let matched = 0;
-      
+
       parsed.forEach(item => {
         const searchName = normalizeString(item.nombre);
         const imgIndex = updatedImages.findIndex(img => {
@@ -69,14 +69,14 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
           const urlName = normalizeString(decodeURIComponent(img.url.split('/').pop() || ''));
           // Comparar con flexibilidad
           return imgName === searchName || urlName === searchName ||
-                 imgName.includes(searchName) || urlName.includes(searchName) ||
-                 searchName.includes(imgName) || searchName.includes(urlName);
+            imgName.includes(searchName) || urlName.includes(searchName) ||
+            searchName.includes(imgName) || searchName.includes(urlName);
         });
-        
+
         if (imgIndex !== -1) {
           matched++;
           const updates = { ...updatedImages[imgIndex] };
-          
+
           if (item.descripcion) {
             updates.description = item.descripcion;
           }
@@ -93,11 +93,11 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
               no => !(updates.options || []).some(o => o.text.toLowerCase() === no.text.toLowerCase())
             )];
           }
-          
+
           updatedImages[imgIndex] = updates;
         }
       });
-      
+
       setAllImages(updatedImages);
       setShowJsonInput(false);
       setDescriptionsJson('');
@@ -115,7 +115,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
         currentBlock,
         currentIndex
       }));
-    } catch (e) {}
+    } catch (e) { }
   }, [allImages, currentBlock, currentIndex]);
 
   const clearDraft = () => {
@@ -134,11 +134,11 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
 
     setIsUploading(true);
     const uploadedImages = [];
-    
+
     for (const file of files) {
       try {
-        const { file_url } = await base44.integrations.Core.UploadFile({ file });
-        
+        const { file_url } = await client.integrations.Core.UploadFile({ file });
+
         const fileName = file.name.replace(/\.[^/.]+$/, '');
         const elements = fileName.split(',').map(el => el.trim()).filter(el => el);
         const newOptions = elements.map(text => ({
@@ -159,7 +159,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
         console.error('Error uploading file:', file.name, error);
       }
     }
-    
+
     if (uploadedImages.length > 0) {
       setAllImages(prev => {
         const newImages = [...prev, ...uploadedImages];
@@ -184,13 +184,13 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
   const addOption = (text = newOption) => {
     if (!currentImage || !text.trim()) return;
     if (currentImage.options.find(o => o.text.toLowerCase() === text.trim().toLowerCase())) return;
-    
-    const newOpt = { 
+
+    const newOpt = {
       id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
-      text: text.trim(), 
-      isCorrect: true 
+      text: text.trim(),
+      isCorrect: true
     };
-    
+
     updateCurrentImage({
       options: [...currentImage.options, newOpt]
     });
@@ -243,7 +243,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
     const globalIdx = blockStart + idx;
     const newImages = allImages.filter((_, i) => i !== globalIdx);
     setAllImages(newImages);
-    
+
     if (currentIndex >= blockImages.length - 1 && currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     }
@@ -253,7 +253,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
   const handleTextSelection = () => {
     const selection = window.getSelection();
     const selectedText = selection.toString().trim();
-    
+
     if (selectedText && selectedText.length > 1) {
       if (selectionMode === 'title') {
         updateCurrentImage({ title: selectedText });
@@ -290,7 +290,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
 
     // Filtrar solo opciones que tienen marcadores
     const questions = allImages.map(img => {
-      const optionsWithMarkers = img.options.filter(o => 
+      const optionsWithMarkers = img.options.filter(o =>
         img.markers.some(m => m.optionId === o.id)
       );
       const title = img.title || optionsWithMarkers.map(o => o.text).join(', ');
@@ -337,11 +337,11 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
   // Renderizar descripción con opciones vinculadas coloreadas
   const renderDescription = () => {
     if (!currentImage || !currentImage.description) return null;
-    
+
     let text = currentImage.description;
     const parts = [];
     let lastIndex = 0;
-    
+
     // Encontrar todas las opciones en el texto
     const matches = [];
     currentImage.options.forEach(opt => {
@@ -351,10 +351,10 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
         matches.push({ start: match.index, end: match.index + match[0].length, option: opt, text: match[0] });
       }
     });
-    
+
     // Ordenar por posición
     matches.sort((a, b) => a.start - b.start);
-    
+
     // Eliminar solapamientos
     const filteredMatches = [];
     matches.forEach(m => {
@@ -362,7 +362,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
         filteredMatches.push(m);
       }
     });
-    
+
     // Construir partes
     filteredMatches.forEach(match => {
       if (match.start > lastIndex) {
@@ -371,11 +371,11 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
       parts.push({ type: 'option', content: match.text, option: match.option });
       lastIndex = match.end;
     });
-    
+
     if (lastIndex < text.length) {
       parts.push({ type: 'text', content: text.slice(lastIndex) });
     }
-    
+
     return parts.map((part, idx) => {
       if (part.type === 'text') {
         return <span key={idx}>{part.content}</span>;
@@ -386,7 +386,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
         <span
           key={idx}
           className="px-1.5 py-0.5 rounded cursor-pointer transition-all duration-200 inline-block mx-0.5"
-          style={{ 
+          style={{
             backgroundColor: isActive ? `${color}50` : `${color}15`,
             borderBottom: `2px solid ${color}`,
             fontWeight: isActive ? '600' : '500',
@@ -468,9 +468,8 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
             {blockImages.map((img, idx) => (
               <div
                 key={idx}
-                className={`relative flex-shrink-0 cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${
-                  idx === currentIndex ? 'border-indigo-600 ring-2 ring-indigo-200 scale-105' : 'border-gray-200 hover:border-gray-400'
-                }`}
+                className={`relative flex-shrink-0 cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${idx === currentIndex ? 'border-indigo-600 ring-2 ring-indigo-200 scale-105' : 'border-gray-200 hover:border-gray-400'
+                  }`}
                 onClick={() => { markCurrentAsComplete(); setCurrentIndex(idx); setSelectedOption(null); setHoveredOption(null); }}
               >
                 <img src={img.url} alt="" className="w-16 h-16 object-cover" />
@@ -511,25 +510,25 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
                   <div
                     key={marker.id}
                     className={`absolute pointer-events-none transition-all duration-200 ${isHighlighted ? 'scale-125 z-10' : 'z-0'}`}
-                    style={{ 
-                      left: `${marker.x}%`, 
+                    style={{
+                      left: `${marker.x}%`,
                       top: `${marker.y}%`,
                       transform: 'translate(-50%, -50%)'
                     }}
                   >
                     {marker.type === 'circle' ? (
-                      <div 
+                      <div
                         className={`w-7 h-7 rounded-full border-[3px] ${isHighlighted ? 'animate-pulse' : ''}`}
-                        style={{ 
+                        style={{
                           borderColor: color,
                           backgroundColor: `${color}30`,
                           boxShadow: isHighlighted ? `0 0 12px ${color}, 0 0 4px ${color}` : `0 2px 4px rgba(0,0,0,0.3)`
                         }}
                       />
                     ) : (
-                      <ArrowRight 
+                      <ArrowRight
                         className={`w-6 h-6 ${isHighlighted ? 'animate-pulse' : ''}`}
-                        style={{ 
+                        style={{
                           color: color,
                           filter: `drop-shadow(0 2px 2px rgba(0,0,0,0.4)) ${isHighlighted ? `drop-shadow(0 0 6px ${color})` : ''}`
                         }}
@@ -622,15 +621,14 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
                     const isSelected = selectedOption === option.id;
                     const isActive = isSelected || hoveredOption === option.id;
                     const color = getOptionColor(option.id);
-                    
+
                     return (
                       <Badge
                         key={option.id}
                         variant="outline"
-                        className={`px-2.5 py-1.5 cursor-pointer transition-all duration-200 text-xs ${
-                          isSelected ? 'ring-2 ring-offset-1' : ''
-                        }`}
-                        style={{ 
+                        className={`px-2.5 py-1.5 cursor-pointer transition-all duration-200 text-xs ${isSelected ? 'ring-2 ring-offset-1' : ''
+                          }`}
+                        style={{
                           borderColor: color,
                           borderWidth: isActive ? '2px' : '1px',
                           backgroundColor: isActive ? `${color}25` : 'white',
@@ -642,8 +640,8 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
                         onMouseEnter={() => setHoveredOption(option.id)}
                         onMouseLeave={() => setHoveredOption(null)}
                       >
-                        <span 
-                          className="w-2.5 h-2.5 rounded-full mr-1.5 inline-block" 
+                        <span
+                          className="w-2.5 h-2.5 rounded-full mr-1.5 inline-block"
                           style={{ backgroundColor: color }}
                         />
                         {hasMarker && <Check className="w-3 h-3 mr-1" style={{ color }} />}
@@ -698,7 +696,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
                     const option = currentImage.options.find(o => o.id === marker.optionId);
                     const color = getOptionColor(marker.optionId);
                     return (
-                      <Badge 
+                      <Badge
                         key={marker.id}
                         variant="outline"
                         className="text-xs py-0.5 cursor-pointer hover:bg-gray-100"
@@ -722,7 +720,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
 
         {/* Botón siguiente imagen */}
         {currentImage && currentIndex < blockImages.length - 1 && (
-          <Button 
+          <Button
             onClick={handleNextImage}
             className="w-full bg-indigo-600 hover:bg-indigo-700 h-12 text-base"
           >
@@ -736,15 +734,15 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
           <Button variant="outline" onClick={handleCancel} size="sm">
             Cancelar
           </Button>
-          <Button 
+          <Button
             variant="outline"
             onClick={() => setShowJsonInput(!showJsonInput)}
             size="sm"
           >
             {showJsonInput ? 'Ocultar' : 'JSON'}
           </Button>
-          <Button 
-            onClick={handleSaveAll} 
+          <Button
+            onClick={handleSaveAll}
             className="flex-1 bg-green-600 hover:bg-green-700"
             disabled={allImages.length === 0 || !allImages.some(img => img.markers.length > 0)}
           >

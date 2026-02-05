@@ -5,7 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Settings, Save, RotateCcw, Loader2 } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { toast } from 'sonner';
 
 const DEFAULT_SETTINGS = {
@@ -41,7 +41,7 @@ export default function QuizSettingsPanel({ entityType, entityId, entityName, on
   const loadSettings = async () => {
     setLoading(true);
     try {
-      const existing = await base44.entities.QuizSettings.filter({
+      const existing = await client.entities.QuizSettings.filter({
         entity_type: entityType,
         entity_id: entityId
       });
@@ -72,9 +72,9 @@ export default function QuizSettingsPanel({ entityType, entityId, entityName, on
     setSaving(true);
     try {
       if (existingId) {
-        await base44.entities.QuizSettings.update(existingId, settings);
+        await client.entities.QuizSettings.update(existingId, settings);
       } else {
-        const created = await base44.entities.QuizSettings.create({
+        const created = await client.entities.QuizSettings.create({
           entity_type: entityType,
           entity_id: entityId,
           ...settings

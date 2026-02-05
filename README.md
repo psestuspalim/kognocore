@@ -1,73 +1,73 @@
-# Base44 App
+# Axayak (Base44 App)
 
-A modern web application built with [React](https://react.dev/), [Vite](https://vitejs.dev/), and [Tailwind CSS](https://tailwindcss.com/). This project features a robust UI component library based on [Shadcn/UI](https://ui.shadcn.com/) and utilizes state-of-the-art libraries for data fetching, visualization, and interactivity.
+Axayak is a modern, pedagogical web application built on the Base44 architecture. It provides a robust platform for managing courses, quizzes, and student enrollments with a focus on user experience and administrative safety.
 
-## 🚀 Features & Tech Stack
+![Demo](https://via.placeholder.com/800x400?text=Axayak+Dashboard+Preview)
 
-- **Core**: React 18, Vite, TypeScript support (via JSDoc/JSConfig).
-- **Styling**: Tailwind CSS, `clsx`, `tailwind-merge`, `tailwindcss-animate`.
-- **UI Components**: Extensive integration of Radix UI primitives (Dialog, Select, Tabs, etc.) via Shadcn/UI patterns.
-- **Icons**: [Lucide React](https://lucide.dev/).
-- **State & Data**: [TanStack Query](https://tanstack.com/query/latest) (React Query) for async state management.
-- **Routing**: [React Router DOM](https://reactrouter.com/) for client-side routing.
-- **Forms**: [React Hook Form](https://react-hook-form.com/) with [Zod](https://zod.dev/) validation.
-- **Visualization**: [Recharts](https://recharts.org/) for charts and `react-leaflet` for maps.
-- **Animations**: [Framer Motion](https://www.framer.com/motion/) for complex animations.
-- **Utilities**: `date-fns`, `lodash`, `jspdf`, `xlsx` (implied by typical export needs or similar if present).
+## 🚀 Features
 
-## 🛠️ Getting Started
+- **Course Management**: Create, edit, and organize courses, subjects, and folders.
+- **Interactive Quizzes**: Multiple-choice, drag-and-drop, and AI-assisted quiz generation.
+- **Admin Dashboard**: Centralized control for maintenance, user management, and analytics.
+- **Student Progress**: Track attempts, scores, and performance history.
+- **Secure Access**: Access code system for enrollment and role-based protection (User/Admin).
 
-Follow these steps to set up the project locally.
+## 🛠️ Tech Stack
 
-### Prerequisites
+- **Core**: [React 18](https://react.dev/), [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/), [Shadcn/UI](https://ui.shadcn.com/)
+- **State Management**: [TanStack Query](https://tanstack.com/query/latest)
+- **Routing**: [React Router DOM](https://reactrouter.com/)
+- **Forms & Validation**: [React Hook Form](https://react-hook-form.com/), [Zod](https://zod.dev/)
+- **Visualizations**: [Recharts](https://recharts.org/), [React Leaflet](https://react-leaflet.js.org/)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-Ensure you have Node.js installed on your machine.
+## 📦 Installation
 
-### Installation
-
-1.  Clone the repository:
+1.  **Clone the repository:**
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/your-org/axayak.git
     cd axayak
     ```
 
-2.  Install dependencies:
+2.  **Install dependencies:**
     ```bash
     npm install
-    # or
-    yarn install
-    # or
-    pnpm install
     ```
 
-### Development server
+3.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
 
-Start the development server with hot module replacement:
-
-```bash
-npm run dev
-```
-
-Visit `http://localhost:5173` (or the port shown in your terminal) to view the app.
+4.  **Open the app:**
+    Visit `http://localhost:5173` in your browser.
 
 ## 📜 Scripts
 
-- `npm run dev`: Starts the development server.
-- `npm run build`: Builds the app for production.
-- `npm run preview`: Locally previews the production build.
-- `npm run lint`: Runs ESLint to check for code quality issues.
-- `npm run lint:fix`: Runs ESLint and automatically fixes fixable issues.
-- `npm run typecheck`: Runs TypeScript type checking based on `jsconfig.json`.
+| Command | Description |
+| :--- | :--- |
+| `npm run dev` | Starts the development server with HMR. |
+| `npm run build` | Builds the app for production. |
+| `npm run preview` | Locally previews the production build. |
+| `npm run lint` | Runs ESLint to check for code quality issues. |
+| `npm run typecheck` | Runs TypeScript type checking via `jsconfig.json`. |
 
-## 📂 Project Structure
+## 🤝 Contributing
 
-- `src/components`: Reusable UI components (buttons, dialogs, charts, etc.).
-- `src/pages`: Application views/routes.
-- `src/lib`: Utility functions and configuration (e.g., `utils.js`).
-- `src/hooks`: Custom React hooks.
-- `src/api`: API integration and services.
-- `src/assets`: Static assets like images and global styles.
+We welcome contributions! Please see our guides below to get started.
+
+1.  **Fork the repository.**
+2.  **Create a feature branch** (`git checkout -b feature/amazing-feature`).
+3.  **Commit your changes** (`git commit -m 'Add some amazing feature'`).
+4.  **Push to the branch** (`git push origin feature/amazing-feature`).
+5.  **Open a Pull Request.**
+
+### Standards
+- Follow the [Code of Conduct](./CODE_OF_CONDUCT.md) (if applicable).
+- Adhere to the `.editorconfig` and Prettier styles.
+- Use the provided Issue and PR templates.
 
 ## 📄 License
 
-[Add License Information Here]
+This project is licensed under the [MIT License](./LICENSE).

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 
 const DEFAULT_SETTINGS = {
   show_options: true,
@@ -23,7 +23,7 @@ export default function useQuizSettings(quizId, subjectId, folderId, courseId) {
     setLoading(true);
     try {
       // Obtener todas las configuraciones relevantes
-      const allSettings = await base44.entities.QuizSettings.list();
+      const allSettings = await client.entities.QuizSettings.list();
       
       // Buscar configuraciones en orden de prioridad (más específico primero)
       const quizSettings = allSettings.find(s => s.entity_type === 'quiz' && s.entity_id === quizId);

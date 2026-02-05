@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,12 +12,12 @@ export default function QuizExporter({ onClose }) {
 
   const { data: quizzes = [], isLoading } = useQuery({
     queryKey: ['all-quizzes'],
-    queryFn: () => base44.entities.Quiz.list('-created_date'),
+    queryFn: () => client.entities.Quiz.list('-created_date'),
   });
 
   const { data: subjects = [] } = useQuery({
     queryKey: ['subjects'],
-    queryFn: () => base44.entities.Subject.list(),
+    queryFn: () => client.entities.Subject.list(),
   });
 
   const downloadJSON = (data, filename) => {
@@ -57,7 +57,7 @@ export default function QuizExporter({ onClose }) {
 
         downloadJSON(exportData, filename);
         setExportedCount(prev => prev + 1);
-        
+
         // Pequeña pausa para no saturar el navegador
         await new Promise(resolve => setTimeout(resolve, 100));
       }

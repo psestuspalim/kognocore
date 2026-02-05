@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -19,7 +19,7 @@ export default function AdminStudents() {
 
   useEffect(() => {
     const loadUser = async () => {
-      const user = await base44.auth.me();
+      const user = await client.auth.me();
       setCurrentUser(user);
     };
     loadUser();
@@ -27,7 +27,7 @@ export default function AdminStudents() {
 
   const { data: allUsers = [] } = useQuery({
     queryKey: ['all-users'],
-    queryFn: () => base44.entities.User.list(),
+    queryFn: () => client.entities.User.list(),
     enabled: currentUser?.role === 'admin'
   });
 
@@ -40,7 +40,7 @@ export default function AdminStudents() {
   }
 
   const students = allUsers.filter(u => u.role === 'user');
-  
+
   const filteredStudents = students.filter(student => {
     const search = searchTerm.toLowerCase();
     return (

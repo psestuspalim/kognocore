@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,9 +10,9 @@ import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Plus, Users, Lock, Globe, Play, Copy, ArrowLeft, 
-  Gamepad2, Trophy, Clock, Loader2, RefreshCw 
+import {
+  Plus, Users, Lock, Globe, Play, Copy, ArrowLeft,
+  Gamepad2, Trophy, Clock, Loader2, RefreshCw
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -36,7 +36,7 @@ export default function GameLobbyPage() {
 
   useEffect(() => {
     const loadUser = async () => {
-      const user = await base44.auth.me();
+      const user = await client.auth.me();
       setCurrentUser(user);
     };
     loadUser();
@@ -44,20 +44,20 @@ export default function GameLobbyPage() {
 
   const { data: subjects = [] } = useQuery({
     queryKey: ['subjects'],
-    queryFn: () => base44.entities.Subject.list()
+    queryFn: () => client.entities.Subject.list()
   });
 
   const { data: quizzes = [] } = useQuery({
     queryKey: ['quizzes'],
-    queryFn: () => base44.entities.Quiz.list()
+    queryFn: () => client.entities.Quiz.list()
   });
 
   const { data: publicRooms = [], refetch: refetchRooms } = useQuery({
     queryKey: ['public-rooms'],
     queryFn: async () => {
-      const rooms = await base44.entities.GameRoom.filter({ 
-        is_public: true, 
-        status: 'waiting' 
+      const rooms = await client.entities.GameRoom.filter({
+        is_public: true,
+        status: 'waiting'
       }, '-created_date');
       return rooms;
     },
@@ -67,7 +67,7 @@ export default function GameLobbyPage() {
   const { data: myRooms = [] } = useQuery({
     queryKey: ['my-rooms', currentUser?.email],
     queryFn: async () => {
-      const asHost = await base44.entities.GameRoom.filter({ 
+      const asHost = await client.entities.GameRoom.filter({
         host_email: currentUser?.email,
         status: 'waiting'
       });
@@ -81,7 +81,7 @@ export default function GameLobbyPage() {
     mutationFn: async (roomData) => {
       const code = Math.random().toString(36).substring(2, 8).toUpperCase();
       const quiz = quizzes.find(q => q.id === roomData.quiz_id);
-      
+
       // Seleccionar preguntas aleatorias
       const shuffledQuestions = [...quiz.questions]
         .sort(() => Math.random() - 0.5)
@@ -91,7 +91,7 @@ export default function GameLobbyPage() {
           answerOptions: [...q.answerOptions].sort(() => Math.random() - 0.5)
         }));
 
-      return base44.entities.GameRoom.create({
+      return client.entities.GameRoom.create({
         ...roomData,
         code,
         host_email: currentUser.email,
@@ -117,9 +117,9 @@ export default function GameLobbyPage() {
 
   const joinRoomMutation = useMutation({
     mutationFn: async (code) => {
-      const rooms = await base44.entities.GameRoom.filter({ code: code.toUpperCase() });
+      const rooms = await client.entities.GameRoom.filter({ code: code.toUpperCase() });
       if (rooms.length === 0) throw new Error('Sala no encontrada');
-      
+
       const room = rooms[0];
       if (room.status !== 'waiting') throw new Error('La partida ya comenzó');
       if (room.players.length >= room.max_players) throw new Error('Sala llena');
@@ -135,7 +135,7 @@ export default function GameLobbyPage() {
         time: 0
       }];
 
-      await base44.entities.GameRoom.update(room.id, { players: updatedPlayers });
+      await client.entities.GameRoom.update(room.id, { players: updatedPlayers });
       return room;
     },
     onSuccess: (room) => {
@@ -195,7 +195,7 @@ export default function GameLobbyPage() {
                 onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
                 className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
               />
-              <Button 
+              <Button
                 onClick={() => handleJoinRoom(joinCode)}
                 disabled={!joinCode || joinRoomMutation.isPending}
                 className="bg-green-600 hover:bg-green-700"
@@ -253,7 +253,7 @@ export default function GameLobbyPage() {
                               </Badge>
                             </div>
                           </div>
-                          <Button 
+                          <Button
                             onClick={() => handleJoinRoom(room.code)}
                             className="bg-indigo-600 hover:bg-indigo-700"
                           >
@@ -299,7 +299,7 @@ export default function GameLobbyPage() {
                         >
                           <Copy className="w-4 h-4" />
                         </Button>
-                        <Button 
+                        <Button
                           onClick={() => window.location.href = `/GamePlay?code=${room.code}`}
                           className="bg-indigo-600 hover:bg-indigo-700"
                         >
@@ -331,7 +331,7 @@ export default function GameLobbyPage() {
                 <Label>Nombre de la sala (opcional)</Label>
                 <Input
                   value={newRoom.name}
-                  onChange={(e) => setNewRoom({...newRoom, name: e.target.value})}
+                  onChange={(e) => setNewRoom({ ...newRoom, name: e.target.value })}
                   placeholder="Mi sala de estudio"
                 />
               </div>
@@ -340,7 +340,7 @@ export default function GameLobbyPage() {
                 <Label>Quiz</Label>
                 <Select
                   value={newRoom.quiz_id}
-                  onValueChange={(value) => setNewRoom({...newRoom, quiz_id: value})}
+                  onValueChange={(value) => setNewRoom({ ...newRoom, quiz_id: value })}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Selecciona un quiz" />
@@ -360,7 +360,7 @@ export default function GameLobbyPage() {
                   <Label>Preguntas</Label>
                   <Select
                     value={newRoom.question_count.toString()}
-                    onValueChange={(value) => setNewRoom({...newRoom, question_count: parseInt(value)})}
+                    onValueChange={(value) => setNewRoom({ ...newRoom, question_count: parseInt(value) })}
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -376,7 +376,7 @@ export default function GameLobbyPage() {
                   <Label>Máx. jugadores</Label>
                   <Select
                     value={newRoom.max_players.toString()}
-                    onValueChange={(value) => setNewRoom({...newRoom, max_players: parseInt(value)})}
+                    onValueChange={(value) => setNewRoom({ ...newRoom, max_players: parseInt(value) })}
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -394,12 +394,12 @@ export default function GameLobbyPage() {
                 <Label>Sala pública</Label>
                 <Switch
                   checked={newRoom.is_public}
-                  onCheckedChange={(checked) => setNewRoom({...newRoom, is_public: checked})}
+                  onCheckedChange={(checked) => setNewRoom({ ...newRoom, is_public: checked })}
                 />
               </div>
 
-              <Button 
-                onClick={handleCreateRoom} 
+              <Button
+                onClick={handleCreateRoom}
                 className="w-full bg-indigo-600 hover:bg-indigo-700"
                 disabled={createRoomMutation.isPending}
               >

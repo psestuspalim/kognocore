@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Loader2, Brain, AlertTriangle, Eye, Shuffle, HelpCircle, Lightbulb } from 'lucide-react';
@@ -14,7 +14,7 @@ const ERROR_TYPES = {
     description: 'Respondiste muy rápido. Tómate más tiempo para leer.'
   },
   CONCEPT_CONFUSION: {
-    id: 'concept_confusion', 
+    id: 'concept_confusion',
     label: 'Confusión de conceptos',
     icon: Shuffle,
     color: 'bg-purple-100 text-purple-700 border-purple-200',
@@ -43,9 +43,9 @@ const ERROR_TYPES = {
   }
 };
 
-export default function ErrorAnalysis({ 
-  question, 
-  selectedAnswer, 
+export default function ErrorAnalysis({
+  question,
+  selectedAnswer,
   correctAnswer,
   responseTime, // en segundos
   userEmail,
@@ -62,19 +62,19 @@ export default function ErrorAnalysis({
 
   const analyzeError = async () => {
     setLoading(true);
-    
+
     try {
       // Buscar si respondió bien esta pregunta antes
-      const previousCorrect = previousAttempts.some(attempt => 
-        attempt.score > 0 && 
+      const previousCorrect = previousAttempts.some(attempt =>
+        attempt.score > 0 &&
         !attempt.wrong_questions?.some(wq => wq.question === question.question)
       );
 
       // Buscar preguntas similares que haya respondido bien
       const allWrongQuestions = previousAttempts.flatMap(a => a.wrong_questions || []);
-      
+
       // Análisis con LLM
-      const result = await base44.integrations.Core.InvokeLLM({
+      const result = await client.integrations.Core.InvokeLLM({
         prompt: `Analiza este error en un quiz médico y determina el tipo de error.
 
 PREGUNTA: "${question.question}"
@@ -99,17 +99,17 @@ Responde en español.`,
         response_json_schema: {
           type: "object",
           properties: {
-            error_type: { 
-              type: "string", 
+            error_type: {
+              type: "string",
               enum: ["RUSHED_READING", "CONCEPT_CONFUSION", "SIMILAR_OPTIONS", "KNOWLEDGE_GAP", "CARELESS_MISTAKE"]
             },
-            explanation: { 
-              type: "string", 
-              description: "Explicación breve y amigable del error (máximo 2 oraciones)" 
+            explanation: {
+              type: "string",
+              description: "Explicación breve y amigable del error (máximo 2 oraciones)"
             },
-            tip: { 
-              type: "string", 
-              description: "Consejo específico para evitar este error en el futuro" 
+            tip: {
+              type: "string",
+              description: "Consejo específico para evitar este error en el futuro"
             },
             confused_concepts: {
               type: "array",
@@ -171,7 +171,7 @@ Responde en español.`,
                 </Badge>
               )}
             </div>
-            
+
             <p className="text-sm text-gray-700 mb-2">
               {analysis.explanation}
             </p>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -26,7 +26,7 @@ export default function CourseJoinModal({ open, onClose, currentUser }) {
     setLoading(true);
     try {
       // Buscar código
-      const codes = await base44.entities.CourseAccessCode.filter({ code: code.toUpperCase() });
+      const codes = await client.entities.CourseAccessCode.filter({ code: code.toUpperCase() });
       
       if (codes.length === 0) {
         toast.error('Código inválido');
@@ -56,7 +56,7 @@ export default function CourseJoinModal({ open, onClose, currentUser }) {
       }
 
       // Verificar si ya solicitó este curso
-      const existing = await base44.entities.CourseEnrollment.filter({
+      const existing = await client.entities.CourseEnrollment.filter({
         user_email: currentUser.email,
         course_id: accessCode.course_id
       });
@@ -75,7 +75,7 @@ export default function CourseJoinModal({ open, onClose, currentUser }) {
       }
 
       // Crear solicitud
-      await base44.entities.CourseEnrollment.create({
+      await client.entities.CourseEnrollment.create({
         user_email: currentUser.email,
         username: currentUser.username,
         course_id: accessCode.course_id,
@@ -85,7 +85,7 @@ export default function CourseJoinModal({ open, onClose, currentUser }) {
       });
 
       // Incrementar uso del código
-      await base44.entities.CourseAccessCode.update(accessCode.id, {
+      await client.entities.CourseAccessCode.update(accessCode.id, {
         current_uses: accessCode.current_uses + 1
       });
 

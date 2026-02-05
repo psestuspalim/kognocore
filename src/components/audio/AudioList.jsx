@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { Button } from '@/components/ui/button';
 import { Music, Plus } from 'lucide-react';
 import AudioPlayer from './AudioPlayer';
@@ -12,17 +12,17 @@ export default function AudioList({ subjectId, isAdmin }) {
 
   const { data: audios = [] } = useQuery({
     queryKey: ['audios', subjectId],
-    queryFn: () => base44.entities.Audio.filter({ subject_id: subjectId }, '-created_date'),
+    queryFn: () => client.entities.Audio.filter({ subject_id: subjectId }, '-created_date'),
     enabled: !!subjectId
   });
 
   const updateAudioMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Audio.update(id, data),
+    mutationFn: ({ id, data }) => client.entities.Audio.update(id, data),
     onSuccess: () => queryClient.invalidateQueries(['audios', subjectId])
   });
 
   const deleteAudioMutation = useMutation({
-    mutationFn: (id) => base44.entities.Audio.delete(id),
+    mutationFn: (id) => client.entities.Audio.delete(id),
     onSuccess: () => queryClient.invalidateQueries(['audios', subjectId])
   });
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -44,7 +44,7 @@ ${additionalContext ? `- Contexto adicional: ${additionalContext}` : ''}
 
 El formato debe seguir esta estructura exacta para cada pregunta.`;
 
-      const result = await base44.integrations.Core.InvokeLLM({
+      const result = await client.integrations.Core.InvokeLLM({
         prompt,
         response_json_schema: {
           type: "object",
@@ -88,7 +88,7 @@ El formato debe seguir esta estructura exacta para cada pregunta.`;
         total_questions: result.questions.length
       };
 
-      const createdQuiz = await base44.entities.Quiz.create(quizData);
+      const createdQuiz = await client.entities.Quiz.create(quizData);
       onQuizGenerated(createdQuiz);
 
     } catch (error) {
@@ -127,7 +127,7 @@ INSTRUCCIONES:
 - Si es texto plano o información, genera preguntas relevantes sobre ese contenido
 - Las preguntas deben ser claras y sin ambigüedades`;
 
-      const result = await base44.integrations.Core.InvokeLLM({
+      const result = await client.integrations.Core.InvokeLLM({
         prompt,
         response_json_schema: {
           type: "object",
@@ -171,7 +171,7 @@ INSTRUCCIONES:
         total_questions: result.questions.length
       };
 
-      const createdQuiz = await base44.entities.Quiz.create(quizData);
+      const createdQuiz = await client.entities.Quiz.create(quizData);
       onQuizGenerated(createdQuiz);
 
     } catch (error) {

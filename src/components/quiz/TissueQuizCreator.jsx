@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Upload, Check, X, ChevronLeft, ChevronRight, Save, Loader2 } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 
 const TISSUE_TYPES = [
   'Tejido adiposo blanco',
@@ -63,7 +63,7 @@ export default function TissueQuizCreator({ onSave, onCancel }) {
 
     for (const file of files) {
       try {
-        const { file_url } = await base44.integrations.Core.UploadFile({ file });
+        const { file_url } = await client.integrations.Core.UploadFile({ file });
         uploaded.push({
           url: file_url,
           originalName: file.name,

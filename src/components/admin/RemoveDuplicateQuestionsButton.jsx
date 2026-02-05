@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Trash2, Loader2 } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { toast } from 'sonner';
 import {
   AlertDialog,
@@ -23,7 +23,7 @@ export default function RemoveDuplicateQuestionsButton() {
   const analyzeDuplicates = async () => {
     setIsRemoving(true);
     try {
-      const quizzes = await base44.entities.Quiz.list();
+      const quizzes = await client.entities.Quiz.list();
       
       // Agrupar por preguntas idénticas
       const questionSignature = (quiz) => {
@@ -79,7 +79,7 @@ export default function RemoveDuplicateQuestionsButton() {
         
         // Eliminar todos excepto el primero (más reciente)
         for (let i = 1; i < sorted.length; i++) {
-          await base44.entities.Quiz.delete(sorted[i].id);
+          await client.entities.Quiz.delete(sorted[i].id);
           totalDeleted++;
         }
       }

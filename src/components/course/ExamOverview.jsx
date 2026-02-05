@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -26,12 +26,12 @@ export default function ExamOverview({ courseId, subjects, currentUser, isAdmin 
 
   const { data: allExams = [] } = useQuery({
     queryKey: ['exam-dates', courseId, currentUser?.email],
-    queryFn: () => base44.entities.ExamDate.filter({ course_id: courseId }),
+    queryFn: () => client.entities.ExamDate.filter({ course_id: courseId }),
     enabled: !!courseId && !!currentUser
   });
 
   const createExamMutation = useMutation({
-    mutationFn: (data) => base44.entities.ExamDate.create(data),
+    mutationFn: (data) => client.entities.ExamDate.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries(['exam-dates']);
       setShowDialog(false);
@@ -40,7 +40,7 @@ export default function ExamOverview({ courseId, subjects, currentUser, isAdmin 
   });
 
   const deleteExamMutation = useMutation({
-    mutationFn: (id) => base44.entities.ExamDate.delete(id),
+    mutationFn: (id) => client.entities.ExamDate.delete(id),
     onSuccess: () => queryClient.invalidateQueries(['exam-dates'])
   });
 

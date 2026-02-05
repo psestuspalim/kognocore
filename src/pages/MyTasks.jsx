@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  ArrowLeft, CheckCircle2, Clock, AlertCircle, 
-  Target, Play, BookOpen, Trophy 
+import {
+  ArrowLeft, CheckCircle2, Clock, AlertCircle,
+  Target, Play, BookOpen, Trophy
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -21,7 +21,7 @@ export default function MyTasksPage() {
 
   useEffect(() => {
     const loadUser = async () => {
-      const user = await base44.auth.me();
+      const user = await client.auth.me();
       setCurrentUser(user);
     };
     loadUser();
@@ -29,7 +29,7 @@ export default function MyTasksPage() {
 
   const { data: tasks = [], isLoading } = useQuery({
     queryKey: ['my-tasks', currentUser?.email],
-    queryFn: () => base44.entities.AssignedTask.filter({ user_email: currentUser?.email }, '-created_date'),
+    queryFn: () => client.entities.AssignedTask.filter({ user_email: currentUser?.email }, '-created_date'),
     enabled: !!currentUser?.email
   });
 
@@ -42,7 +42,7 @@ export default function MyTasksPage() {
 
   const getStatusBadge = (task) => {
     const isOverdue = task.due_date && new Date(task.due_date) < new Date();
-    
+
     if (task.status === 'completed') {
       return <Badge className="bg-green-100 text-green-700"><CheckCircle2 className="w-3 h-3 mr-1" />Completada</Badge>;
     }
@@ -63,8 +63,8 @@ export default function MyTasksPage() {
     return <div className="min-h-screen flex items-center justify-center">Cargando...</div>;
   }
 
-  const overallProgress = tasks.length > 0 
-    ? Math.round((completedTasks.length / tasks.length) * 100) 
+  const overallProgress = tasks.length > 0
+    ? Math.round((completedTasks.length / tasks.length) * 100)
     : 0;
 
   return (
@@ -157,71 +157,70 @@ export default function MyTasksPage() {
                     </h3>
                     <div className="grid gap-3">
                       {subjectTasks.map((task, idx) => (
-                  <motion.div
-                    key={task.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.05 }}
-                  >
-                    <Card className={`${
-                      task.due_date && new Date(task.due_date) < new Date() 
-                        ? 'border-red-300 bg-red-50/50' 
-                        : ''
-                    }`}>
-                      <CardContent className="p-4">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <BookOpen className="w-4 h-4 text-indigo-600" />
-                              <h3 className="font-semibold">{task.quiz_title}</h3>
-                            </div>
-                            <p className="text-sm text-gray-500 mb-2">{task.subject_name}</p>
-                            
-                            <div className="flex flex-wrap gap-2 mb-3">
-                              {getStatusBadge(task)}
-                              <Badge variant="outline">
-                                <Target className="w-3 h-3 mr-1" />
-                                Meta: {task.target_score}%
-                              </Badge>
-                              {task.due_date && (
-                                <Badge variant="outline">
-                                  <Clock className="w-3 h-3 mr-1" />
-                                  {new Date(task.due_date).toLocaleDateString()}
-                                </Badge>
-                              )}
-                            </div>
+                        <motion.div
+                          key={task.id}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: idx * 0.05 }}
+                        >
+                          <Card className={`${task.due_date && new Date(task.due_date) < new Date()
+                            ? 'border-red-300 bg-red-50/50'
+                            : ''
+                            }`}>
+                            <CardContent className="p-4">
+                              <div className="flex items-start justify-between gap-4">
+                                <div className="flex-1">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <BookOpen className="w-4 h-4 text-indigo-600" />
+                                    <h3 className="font-semibold">{task.quiz_title}</h3>
+                                  </div>
+                                  <p className="text-sm text-gray-500 mb-2">{task.subject_name}</p>
 
-                            {task.best_score > 0 && (
-                              <div className="mb-2">
-                                <div className="flex justify-between text-xs text-gray-500 mb-1">
-                                  <span>Mejor puntaje: {task.best_score}%</span>
-                                  <span>{task.attempts} intentos</span>
+                                  <div className="flex flex-wrap gap-2 mb-3">
+                                    {getStatusBadge(task)}
+                                    <Badge variant="outline">
+                                      <Target className="w-3 h-3 mr-1" />
+                                      Meta: {task.target_score}%
+                                    </Badge>
+                                    {task.due_date && (
+                                      <Badge variant="outline">
+                                        <Clock className="w-3 h-3 mr-1" />
+                                        {new Date(task.due_date).toLocaleDateString()}
+                                      </Badge>
+                                    )}
+                                  </div>
+
+                                  {task.best_score > 0 && (
+                                    <div className="mb-2">
+                                      <div className="flex justify-between text-xs text-gray-500 mb-1">
+                                        <span>Mejor puntaje: {task.best_score}%</span>
+                                        <span>{task.attempts} intentos</span>
+                                      </div>
+                                      <Progress
+                                        value={Math.min((task.best_score / task.target_score) * 100, 100)}
+                                        className="h-2"
+                                      />
+                                    </div>
+                                  )}
+
+                                  {task.notes && (
+                                    <p className="text-sm text-gray-600 bg-gray-100 rounded p-2">
+                                      📝 {task.notes}
+                                    </p>
+                                  )}
                                 </div>
-                                <Progress 
-                                  value={Math.min((task.best_score / task.target_score) * 100, 100)} 
-                                  className="h-2" 
-                                />
+
+                                <Button
+                                  onClick={() => handleStartQuiz(task)}
+                                  className="bg-indigo-600 hover:bg-indigo-700"
+                                >
+                                  <Play className="w-4 h-4 mr-2" />
+                                  {task.attempts > 0 ? 'Reintentar' : 'Comenzar'}
+                                </Button>
                               </div>
-                            )}
-
-                            {task.notes && (
-                              <p className="text-sm text-gray-600 bg-gray-100 rounded p-2">
-                                📝 {task.notes}
-                              </p>
-                            )}
-                          </div>
-
-                          <Button 
-                            onClick={() => handleStartQuiz(task)}
-                            className="bg-indigo-600 hover:bg-indigo-700"
-                          >
-                            <Play className="w-4 h-4 mr-2" />
-                            {task.attempts > 0 ? 'Reintentar' : 'Comenzar'}
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
                       ))}
                     </div>
                   </div>

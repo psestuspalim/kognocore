@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -16,14 +16,14 @@ import {
 export default function ChallengeNotifications({ currentUser, onStartChallenge }) {
   const [showResultDialog, setShowResultDialog] = useState(false);
   const [completedChallenge, setCompletedChallenge] = useState(null);
-  
+
   const queryClient = useQueryClient();
 
   // Obtener retos pendientes para este usuario
   const { data: pendingChallenges = [] } = useQuery({
     queryKey: ['pending-challenges', currentUser?.email],
     queryFn: async () => {
-      const challenges = await base44.entities.Challenge.filter({
+      const challenges = await client.entities.Challenge.filter({
         opponent_email: currentUser?.email,
         status: 'pending'
       });
@@ -37,11 +37,11 @@ export default function ChallengeNotifications({ currentUser, onStartChallenge }
   const { data: activeChallenges = [] } = useQuery({
     queryKey: ['active-challenges', currentUser?.email],
     queryFn: async () => {
-      const asChallenger = await base44.entities.Challenge.filter({
+      const asChallenger = await client.entities.Challenge.filter({
         challenger_email: currentUser?.email,
         status: 'accepted'
       });
-      const asOpponent = await base44.entities.Challenge.filter({
+      const asOpponent = await client.entities.Challenge.filter({
         opponent_email: currentUser?.email,
         status: 'accepted'
       });
@@ -55,11 +55,11 @@ export default function ChallengeNotifications({ currentUser, onStartChallenge }
   const { data: recentCompleted = [] } = useQuery({
     queryKey: ['completed-challenges', currentUser?.email],
     queryFn: async () => {
-      const asChallenger = await base44.entities.Challenge.filter({
+      const asChallenger = await client.entities.Challenge.filter({
         challenger_email: currentUser?.email,
         status: 'completed'
       }, '-updated_date', 5);
-      const asOpponent = await base44.entities.Challenge.filter({
+      const asOpponent = await client.entities.Challenge.filter({
         opponent_email: currentUser?.email,
         status: 'completed'
       }, '-updated_date', 5);
@@ -72,7 +72,7 @@ export default function ChallengeNotifications({ currentUser, onStartChallenge }
   });
 
   const updateChallengeMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Challenge.update(id, data),
+    mutationFn: ({ id, data }) => client.entities.Challenge.update(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries(['pending-challenges']);
       queryClient.invalidateQueries(['active-challenges']);
@@ -111,26 +111,26 @@ export default function ChallengeNotifications({ currentUser, onStartChallenge }
   };
 
   const getMyScore = (challenge) => {
-    return challenge.challenger_email === currentUser?.email 
-      ? challenge.challenger_score 
+    return challenge.challenger_email === currentUser?.email
+      ? challenge.challenger_score
       : challenge.opponent_score;
   };
 
   const getOpponentScore = (challenge) => {
-    return challenge.challenger_email === currentUser?.email 
-      ? challenge.opponent_score 
+    return challenge.challenger_email === currentUser?.email
+      ? challenge.opponent_score
       : challenge.challenger_score;
   };
 
   const getOpponentName = (challenge) => {
-    return challenge.challenger_email === currentUser?.email 
-      ? challenge.opponent_username 
+    return challenge.challenger_email === currentUser?.email
+      ? challenge.opponent_username
       : challenge.challenger_username;
   };
 
   const hasFinished = (challenge) => {
-    return challenge.challenger_email === currentUser?.email 
-      ? challenge.challenger_finished 
+    return challenge.challenger_email === currentUser?.email
+      ? challenge.challenger_finished
       : challenge.opponent_finished;
   };
 
@@ -225,8 +225,8 @@ export default function ChallengeNotifications({ currentUser, onStartChallenge }
 
         {/* Resultados recientes */}
         {recentCompleted.slice(0, 1).map((challenge) => (
-          <Card 
-            key={challenge.id} 
+          <Card
+            key={challenge.id}
             className={`cursor-pointer ${isWinner(challenge) ? 'border-green-300 bg-green-50' : isTie(challenge) ? 'border-gray-300 bg-gray-50' : 'border-red-300 bg-red-50'}`}
             onClick={() => showResult(challenge)}
           >
@@ -260,12 +260,10 @@ export default function ChallengeNotifications({ currentUser, onStartChallenge }
           </DialogHeader>
           {completedChallenge && (
             <div className="text-center py-4">
-              <div className={`w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center ${
-                isWinner(completedChallenge) ? 'bg-green-100' : isTie(completedChallenge) ? 'bg-gray-100' : 'bg-red-100'
-              }`}>
-                <Trophy className={`w-8 h-8 ${
-                  isWinner(completedChallenge) ? 'text-green-600' : isTie(completedChallenge) ? 'text-gray-600' : 'text-red-600'
-                }`} />
+              <div className={`w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center ${isWinner(completedChallenge) ? 'bg-green-100' : isTie(completedChallenge) ? 'bg-gray-100' : 'bg-red-100'
+                }`}>
+                <Trophy className={`w-8 h-8 ${isWinner(completedChallenge) ? 'text-green-600' : isTie(completedChallenge) ? 'text-gray-600' : 'text-red-600'
+                  }`} />
               </div>
               <h3 className="text-2xl font-bold mb-2">
                 {isWinner(completedChallenge) ? '¡Victoria!' : isTie(completedChallenge) ? 'Empate' : 'Derrota'}

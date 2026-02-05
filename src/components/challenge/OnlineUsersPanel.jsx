@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -27,7 +27,7 @@ export default function OnlineUsersPanel({ currentUser, quizzes, subjects, onCha
   const [selectedOpponent, setSelectedOpponent] = useState(null);
   const [selectedQuiz, setSelectedQuiz] = useState('');
   const [questionCount, setQuestionCount] = useState(10);
-  
+
   const queryClient = useQueryClient();
 
   // Actualizar presencia cada 30 segundos
@@ -36,14 +36,14 @@ export default function OnlineUsersPanel({ currentUser, quizzes, subjects, onCha
 
     const updatePresence = async () => {
       try {
-        const existing = await base44.entities.OnlineUser.filter({ user_email: currentUser.email });
+        const existing = await client.entities.OnlineUser.filter({ user_email: currentUser.email });
         if (existing.length > 0) {
-          await base44.entities.OnlineUser.update(existing[0].id, {
+          await client.entities.OnlineUser.update(existing[0].id, {
             last_seen: new Date().toISOString(),
             username: currentUser.username
           });
         } else {
-          await base44.entities.OnlineUser.create({
+          await client.entities.OnlineUser.create({
             user_email: currentUser.email,
             username: currentUser.username,
             last_seen: new Date().toISOString()
@@ -56,7 +56,7 @@ export default function OnlineUsersPanel({ currentUser, quizzes, subjects, onCha
 
     updatePresence();
     const interval = setInterval(updatePresence, 30000);
-    
+
     return () => clearInterval(interval);
   }, [currentUser]);
 
@@ -64,10 +64,10 @@ export default function OnlineUsersPanel({ currentUser, quizzes, subjects, onCha
   const { data: onlineUsers = [] } = useQuery({
     queryKey: ['online-users'],
     queryFn: async () => {
-      const users = await base44.entities.OnlineUser.list('-last_seen', 50);
+      const users = await client.entities.OnlineUser.list('-last_seen', 50);
       const twoMinutesAgo = new Date(Date.now() - 2 * 60 * 1000);
-      return users.filter(u => 
-        u.user_email !== currentUser?.email && 
+      return users.filter(u =>
+        u.user_email !== currentUser?.email &&
         new Date(u.last_seen) > twoMinutesAgo
       );
     },
@@ -76,7 +76,7 @@ export default function OnlineUsersPanel({ currentUser, quizzes, subjects, onCha
   });
 
   const createChallengeMutation = useMutation({
-    mutationFn: (data) => base44.entities.Challenge.create(data),
+    mutationFn: (data) => client.entities.Challenge.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries(['challenges']);
       setShowChallengeDialog(false);
@@ -92,7 +92,7 @@ export default function OnlineUsersPanel({ currentUser, quizzes, subjects, onCha
 
   const handleSendChallenge = async () => {
     if (!selectedQuiz || !selectedOpponent) return;
-    
+
     const quiz = quizzes.find(q => q.id === selectedQuiz);
     if (!quiz) return;
 
@@ -139,7 +139,7 @@ export default function OnlineUsersPanel({ currentUser, quizzes, subjects, onCha
             <ScrollArea className="max-h-40">
               <div className="space-y-1">
                 {onlineUsers.map((user) => (
-                  <div 
+                  <div
                     key={user.user_email}
                     className="flex items-center justify-between p-2 rounded-lg bg-white border"
                   >
@@ -190,7 +190,7 @@ export default function OnlineUsersPanel({ currentUser, quizzes, subjects, onCha
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div>
               <Label>Número de preguntas</Label>
               <Input

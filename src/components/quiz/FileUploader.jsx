@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Upload, FileJson, AlertCircle, Loader2 } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -19,12 +19,12 @@ export default function EnrollmentRequests({ currentUser }) {
 
   const { data: requests = [] } = useQuery({
     queryKey: ['enrollment-requests'],
-    queryFn: () => base44.entities.CourseEnrollment.list('-created_date'),
+    queryFn: () => client.entities.CourseEnrollment.list('-created_date'),
     refetchInterval: 5000
   });
 
   const updateRequestMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.CourseEnrollment.update(id, data),
+    mutationFn: ({ id, data }) => client.entities.CourseEnrollment.update(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries(['enrollment-requests']);
       toast.success('Solicitud actualizada');

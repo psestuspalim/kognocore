@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Sparkles, CheckCircle2, AlertCircle, Eye, Pencil } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { Badge } from '@/components/ui/badge';
 import MathText from './MathText';
 
@@ -46,7 +46,7 @@ d) Riñón`;
     setError(null);
 
     try {
-      const result = await base44.integrations.Core.InvokeLLM({
+      const result = await client.integrations.Core.InvokeLLM({
         prompt: `Convierte este texto en preguntas de opción múltiple estructuradas.
 
 REGLAS:

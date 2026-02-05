@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 
 export default function FeatureTracker({ featureName, category, currentUser }) {
   const startTimeRef = useRef(Date.now());
@@ -9,7 +9,7 @@ export default function FeatureTracker({ featureName, category, currentUser }) {
 
     const trackUsage = async () => {
       try {
-        await base44.entities.FeatureUsage.create({
+        await client.entities.FeatureUsage.create({
           feature_name: featureName,
           feature_category: category || 'general',
           user_email: currentUser.email,
@@ -27,14 +27,14 @@ export default function FeatureTracker({ featureName, category, currentUser }) {
     return () => {
       const duration = Math.round((Date.now() - startTimeRef.current) / 1000);
       if (duration > 2) {
-        base44.entities.FeatureUsage.create({
+        client.entities.FeatureUsage.create({
           feature_name: featureName,
           feature_category: category || 'general',
           user_email: currentUser.email,
           user_role: currentUser.role,
           session_duration: duration,
           action_type: 'view'
-        }).catch(() => {});
+        }).catch(() => { });
       }
     };
   }, [featureName, category, currentUser]);

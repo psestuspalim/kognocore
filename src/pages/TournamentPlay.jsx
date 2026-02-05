@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -27,14 +27,14 @@ export default function TournamentPlay() {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    base44.auth.me().then(setCurrentUser).catch(console.error);
+    client.auth.me().then(setCurrentUser).catch(console.error);
   }, []);
 
   // Polling del torneo
   const { data: tournamentData } = useQuery({
     queryKey: ['tournament', code],
     queryFn: async () => {
-      const tournaments = await base44.entities.Tournament.filter({ code });
+      const tournaments = await client.entities.Tournament.filter({ code });
       return tournaments[0] || null;
     },
     refetchInterval: 500,
@@ -44,7 +44,7 @@ export default function TournamentPlay() {
   useEffect(() => {
     if (tournamentData) {
       setTournament(tournamentData);
-      
+
       // Sincronizar estado de respuesta
       if (tournamentData.status === 'in_progress') {
         const myPlayer = tournamentData.players?.find(p => p.email === currentUser?.email);
@@ -56,7 +56,7 @@ export default function TournamentPlay() {
           setHasAnswered(false);
         }
       }
-      
+
       if (tournamentData.status === 'showing_results') {
         setShowingResults(true);
       } else {
@@ -105,9 +105,9 @@ export default function TournamentPlay() {
     mutationFn: async () => {
       const tournamentId = tournament.id;
       const players = [...tournament.players];
-      
+
       // Primero actualizar a countdown
-      await base44.entities.Tournament.update(tournamentId, {
+      await client.entities.Tournament.update(tournamentId, {
         status: 'countdown',
         question_started_at: new Date().toISOString()
       });
@@ -116,16 +116,16 @@ export default function TournamentPlay() {
       return new Promise((resolve) => {
         setTimeout(async () => {
           try {
-            await base44.entities.Tournament.update(tournamentId, {
+            await client.entities.Tournament.update(tournamentId, {
               status: 'in_progress',
               current_question: 0,
               question_started_at: new Date().toISOString(),
-              players: players.map(p => ({ 
+              players: players.map(p => ({
                 email: p.email,
                 username: p.username,
                 score: 0,
-                current_answer: -1, 
-                answer_time: null 
+                current_answer: -1,
+                answer_time: null
               }))
             });
             resolve();
@@ -141,13 +141,13 @@ export default function TournamentPlay() {
   const answerMutation = useMutation({
     mutationFn: async (answerIndex) => {
       const answerTime = Date.now() - new Date(tournament.question_started_at).getTime();
-      const updatedPlayers = tournament.players.map(p => 
-        p.email === currentUser.email 
+      const updatedPlayers = tournament.players.map(p =>
+        p.email === currentUser.email
           ? { ...p, current_answer: answerIndex, answer_time: answerTime }
           : p
       );
 
-      await base44.entities.Tournament.update(tournament.id, {
+      await client.entities.Tournament.update(tournament.id, {
         players: updatedPlayers
       });
     }
@@ -189,7 +189,7 @@ export default function TournamentPlay() {
       }))
     };
 
-    await base44.entities.Tournament.update(tournament.id, {
+    await client.entities.Tournament.update(tournament.id, {
       status: 'showing_results',
       players: updatedPlayers,
       results_per_question: [...(tournament.results_per_question || []), questionResult]
@@ -197,15 +197,15 @@ export default function TournamentPlay() {
 
     // Después de 4 segundos, siguiente pregunta o finalizar
     setTimeout(async () => {
-      const latestTournament = await base44.entities.Tournament.filter({ code });
+      const latestTournament = await client.entities.Tournament.filter({ code });
       const t = latestTournament[0];
-      
+
       if (t.current_question >= t.questions.length - 1) {
-        await base44.entities.Tournament.update(t.id, {
+        await client.entities.Tournament.update(t.id, {
           status: 'completed'
         });
       } else {
-        await base44.entities.Tournament.update(t.id, {
+        await client.entities.Tournament.update(t.id, {
           status: 'in_progress',
           current_question: t.current_question + 1,
           question_started_at: new Date().toISOString(),
@@ -328,19 +328,17 @@ export default function TournamentPlay() {
 
               <div className="space-y-3 mb-8">
                 {sortedPlayers.map((player, idx) => (
-                  <div 
+                  <div
                     key={player.email}
-                    className={`p-4 rounded-xl flex items-center gap-3 ${
-                      idx === 0 ? 'bg-yellow-100 border-2 border-yellow-400' :
+                    className={`p-4 rounded-xl flex items-center gap-3 ${idx === 0 ? 'bg-yellow-100 border-2 border-yellow-400' :
                       idx === 1 ? 'bg-gray-100 border-2 border-gray-300' :
-                      'bg-orange-50 border-2 border-orange-200'
-                    }`}
+                        'bg-orange-50 border-2 border-orange-200'
+                      }`}
                   >
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold ${
-                      idx === 0 ? 'bg-yellow-400 text-yellow-900' :
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold ${idx === 0 ? 'bg-yellow-400 text-yellow-900' :
                       idx === 1 ? 'bg-gray-300 text-gray-700' :
-                      'bg-orange-300 text-orange-800'
-                    }`}>
+                        'bg-orange-300 text-orange-800'
+                      }`}>
                       {idx + 1}
                     </div>
                     <div className="flex-1 text-left">
@@ -376,17 +374,16 @@ export default function TournamentPlay() {
         {/* Header con scores */}
         <div className="flex justify-between items-center mb-4">
           {sortedPlayers.map((player, idx) => (
-            <div 
+            <div
               key={player.email}
-              className={`flex-1 text-center p-2 rounded-lg mx-1 ${
-                player.email === currentUser?.email ? 'bg-purple-600' : 'bg-purple-800/50'
-              }`}
+              className={`flex-1 text-center p-2 rounded-lg mx-1 ${player.email === currentUser?.email ? 'bg-purple-600' : 'bg-purple-800/50'
+                }`}
             >
               <p className="text-white text-xs truncate">{player.username}</p>
               <p className="text-white text-xl font-bold">{player.score || 0}</p>
               {showingResults && player.current_answer !== -1 && (
                 <div className="mt-1">
-                  {player.current_answer === currentQuestion?.answerOptions?.findIndex(o => o.isCorrect) 
+                  {player.current_answer === currentQuestion?.answerOptions?.findIndex(o => o.isCorrect)
                     ? <CheckCircle2 className="w-4 h-4 text-green-400 mx-auto" />
                     : <XCircle className="w-4 h-4 text-red-400 mx-auto" />
                   }
@@ -404,8 +401,8 @@ export default function TournamentPlay() {
               <Clock className="w-4 h-4" /> {timeLeft}s
             </span>
           </div>
-          <Progress 
-            value={(timeLeft / tournament.time_per_question) * 100} 
+          <Progress
+            value={(timeLeft / tournament.time_per_question) * 100}
             className="h-2 bg-purple-800"
           />
         </div>
@@ -432,22 +429,20 @@ export default function TournamentPlay() {
                 whileTap={{ scale: hasAnswered ? 1 : 0.98 }}
                 onClick={() => handleAnswer(idx)}
                 disabled={hasAnswered || timeLeft === 0}
-                className={`p-4 rounded-xl text-left transition-all ${
-                  showResult && isCorrect
-                    ? 'bg-green-500 text-white'
-                    : showResult && isSelected && !isCorrect
+                className={`p-4 rounded-xl text-left transition-all ${showResult && isCorrect
+                  ? 'bg-green-500 text-white'
+                  : showResult && isSelected && !isCorrect
                     ? 'bg-red-500 text-white'
                     : isSelected
-                    ? 'bg-purple-500 text-white'
-                    : 'bg-white hover:bg-purple-50'
-                }`}
+                      ? 'bg-purple-500 text-white'
+                      : 'bg-white hover:bg-purple-50'
+                  }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${
-                    showResult && isCorrect ? 'bg-green-600' :
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${showResult && isCorrect ? 'bg-green-600' :
                     showResult && isSelected && !isCorrect ? 'bg-red-600' :
-                    isSelected ? 'bg-purple-600' : 'bg-gray-200'
-                  } ${isSelected || (showResult && isCorrect) ? 'text-white' : 'text-gray-600'}`}>
+                      isSelected ? 'bg-purple-600' : 'bg-gray-200'
+                    } ${isSelected || (showResult && isCorrect) ? 'text-white' : 'text-gray-600'}`}>
                     {String.fromCharCode(65 + idx)}
                   </div>
                   <span className="flex-1">
@@ -465,9 +460,8 @@ export default function TournamentPlay() {
         <div className="mt-4 flex justify-center gap-4">
           {tournament.players?.map(player => (
             <div key={player.email} className="flex items-center gap-1">
-              <div className={`w-3 h-3 rounded-full ${
-                player.current_answer !== -1 ? 'bg-green-500' : 'bg-gray-400'
-              }`} />
+              <div className={`w-3 h-3 rounded-full ${player.current_answer !== -1 ? 'bg-green-500' : 'bg-gray-400'
+                }`} />
               <span className="text-white text-xs">{player.username}</span>
             </div>
           ))}

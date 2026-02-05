@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -26,16 +26,16 @@ export default function AdminProgress() {
 
   const { data: attempts = [], isLoading: attemptsLoading } = useQuery({
     queryKey: ['quiz-attempts'],
-    queryFn: () => base44.entities.QuizAttempt.list('-created_date', 2000),
+    queryFn: () => client.entities.QuizAttempt.list('-created_date', 2000),
   });
 
   // Filter out incomplete attempts (0 score with 0 answered)
-  const validAttempts = attempts.filter(a => 
+  const validAttempts = attempts.filter(a =>
     a.answered_questions > 0 || a.score > 0 || a.is_completed
   );
 
   const deleteAttemptMutation = useMutation({
-    mutationFn: (id) => base44.entities.QuizAttempt.delete(id),
+    mutationFn: (id) => client.entities.QuizAttempt.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries(['quiz-attempts']);
       toast.success('Intento eliminado');
@@ -45,12 +45,12 @@ export default function AdminProgress() {
   });
 
   const purgeFailedAttempts = async () => {
-    const failedAttempts = attempts.filter(a => 
-      (a.answered_questions === 0 || !a.answered_questions) && 
-      a.score === 0 && 
+    const failedAttempts = attempts.filter(a =>
+      (a.answered_questions === 0 || !a.answered_questions) &&
+      a.score === 0 &&
       !a.is_completed
     );
-    
+
     if (failedAttempts.length === 0) {
       toast.info('No hay intentos fallidos para eliminar');
       return;
@@ -59,7 +59,7 @@ export default function AdminProgress() {
     setIsPurging(true);
     try {
       for (const attempt of failedAttempts) {
-        await base44.entities.QuizAttempt.delete(attempt.id);
+        await client.entities.QuizAttempt.delete(attempt.id);
       }
       queryClient.invalidateQueries(['quiz-attempts']);
       toast.success(`${failedAttempts.length} intentos fallidos eliminados`);
@@ -72,17 +72,17 @@ export default function AdminProgress() {
 
   const { data: quizzes = [] } = useQuery({
     queryKey: ['quizzes'],
-    queryFn: () => base44.entities.Quiz.list(),
+    queryFn: () => client.entities.Quiz.list(),
   });
 
   const { data: subjects = [] } = useQuery({
     queryKey: ['subjects'],
-    queryFn: () => base44.entities.Subject.list(),
+    queryFn: () => client.entities.Subject.list(),
   });
 
   const { data: users = [] } = useQuery({
     queryKey: ['users'],
-    queryFn: () => base44.entities.User.list('-created_date', 1000),
+    queryFn: () => client.entities.User.list('-created_date', 1000),
   });
 
   // Crear objeto con todos los usuarios
@@ -135,7 +135,7 @@ export default function AdminProgress() {
   // Generar PDF por quiz
   const generateQuizPDF = (student, quizStat) => {
     const quizAttempts = quizStat.attempts;
-    
+
     // Recopilar preguntas incorrectas de este quiz
     const wrongQuestionsMap = new Map();
     quizAttempts.forEach(attempt => {
@@ -520,367 +520,364 @@ export default function AdminProgress() {
 
           <TabsContent value="students">{/* Contenido de estudiantes */}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-          {/* Lista de estudiantes */}
-          <div className="lg:col-span-1">
-            <Card>
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-base sm:text-lg">Estudiantes</CardTitle>
-                <div className="relative mt-4">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                  <Input
-                    placeholder="Buscar estudiante..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
-                  />
-                </div>
-              </CardHeader>
-              <CardContent className="max-h-[400px] sm:max-h-[600px] overflow-y-auto space-y-2 p-3 sm:p-6">
-                {students.map((student) => {
-                  const avgScore = student.totalQuestions > 0
-                    ? Math.round((student.totalCorrect / student.totalQuestions) * 100)
-                    : 0;
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+              {/* Lista de estudiantes */}
+              <div className="lg:col-span-1">
+                <Card>
+                  <CardHeader className="p-4 sm:p-6">
+                    <CardTitle className="text-base sm:text-lg">Estudiantes</CardTitle>
+                    <div className="relative mt-4">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                      <Input
+                        placeholder="Buscar estudiante..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="pl-10"
+                      />
+                    </div>
+                  </CardHeader>
+                  <CardContent className="max-h-[400px] sm:max-h-[600px] overflow-y-auto space-y-2 p-3 sm:p-6">
+                    {students.map((student) => {
+                      const avgScore = student.totalQuestions > 0
+                        ? Math.round((student.totalCorrect / student.totalQuestions) * 100)
+                        : 0;
 
-                  return (
-                    <button
-                      key={student.email}
-                      onClick={() => setSelectedStudent(student)}
-                      className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
-                        selectedStudent?.email === student.email
-                          ? 'border-indigo-500 bg-indigo-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
-                    >
-                      <div className="font-semibold text-gray-900">
-                        {student.username || 'Sin nombre'}
-                      </div>
-                      <div className="text-sm text-gray-500 mb-2">
-                        {student.email}
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-gray-600">
-                          {student.totalQuizzes} intentos
-                        </span>
-                        <Badge
-                          className={
-                            avgScore >= 70 ? 'bg-green-100 text-green-800' :
-                            avgScore >= 50 ? 'bg-yellow-100 text-yellow-800' :
-                            'bg-red-100 text-red-800'
-                          }
+                      return (
+                        <button
+                          key={student.email}
+                          onClick={() => setSelectedStudent(student)}
+                          className={`w-full text-left p-4 rounded-lg border-2 transition-all ${selectedStudent?.email === student.email
+                              ? 'border-indigo-500 bg-indigo-50'
+                              : 'border-gray-200 hover:border-gray-300'
+                            }`}
                         >
-                          {avgScore}%
-                        </Badge>
-                      </div>
-                    </button>
-                  );
-                })}
-                {students.length === 0 && (
-                  <div className="text-center py-8 text-gray-500">
-                    No se encontraron estudiantes
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Detalles del estudiante */}
-          <div className="lg:col-span-2">
-            {selectedStudent ? (
-              <div className="space-y-6">
-                {/* Resumen */}
-                <Card>
-                  <CardHeader className="flex flex-row items-start justify-between">
-                    <div>
-                      <CardTitle>
-                        {selectedStudent.username || 'Sin nombre'}
-                      </CardTitle>
-                      <p className="text-sm text-gray-500">{selectedStudent.email}</p>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        onClick={() => generateErrorsPDF(selectedStudent)}
-                        className="text-red-600 border-red-200 hover:bg-red-50"
-                      >
-                        <FileDown className="w-4 h-4 mr-2" />
-                        PDF Errores
-                      </Button>
-                      <Button
-                        onClick={() => setShowProgressModal(true)}
-                        className="bg-indigo-600 hover:bg-indigo-700"
-                      >
-                        <TrendingUp className="w-4 h-4 mr-2" />
-                        Ver análisis
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-4 sm:p-6">
-                    <div className="grid grid-cols-3 gap-2 sm:gap-4">
-                      <div className="text-center">
-                        <div className="text-xl sm:text-3xl font-bold text-indigo-600">
-                          {selectedStudent.totalQuizzes}
-                        </div>
-                        <div className="text-xs sm:text-sm text-gray-500">Intentos</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-xl sm:text-3xl font-bold text-green-600">
-                          {selectedStudent.totalCorrect}
-                        </div>
-                        <div className="text-xs sm:text-sm text-gray-500">Correctas</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-xl sm:text-3xl font-bold text-gray-900">
-                          {Math.round((selectedStudent.totalCorrect / selectedStudent.totalQuestions) * 100)}%
-                        </div>
-                        <div className="text-xs sm:text-sm text-gray-500">Promedio</div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Progreso por Tema */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg">Progreso por Tema</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      {getSubjectStats(selectedStudent).map((subjectStat) => (
-                        <div key={subjectStat.subjectId} className="border rounded-lg p-4">
-                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                            <h4 className="font-semibold text-gray-900 text-sm sm:text-base">{subjectStat.subjectName}</h4>
-                            <Badge className={
-                              subjectStat.avgPercentage >= 70 ? 'bg-green-100 text-green-800' :
-                              subjectStat.avgPercentage >= 50 ? 'bg-yellow-100 text-yellow-800' :
-                              'bg-red-100 text-red-800'
-                            }>
-                              {Math.round(subjectStat.avgPercentage)}%
+                          <div className="font-semibold text-gray-900">
+                            {student.username || 'Sin nombre'}
+                          </div>
+                          <div className="text-sm text-gray-500 mb-2">
+                            {student.email}
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs text-gray-600">
+                              {student.totalQuizzes} intentos
+                            </span>
+                            <Badge
+                              className={
+                                avgScore >= 70 ? 'bg-green-100 text-green-800' :
+                                  avgScore >= 50 ? 'bg-yellow-100 text-yellow-800' :
+                                    'bg-red-100 text-red-800'
+                              }
+                            >
+                              {avgScore}%
                             </Badge>
                           </div>
-                          <div className="text-sm text-gray-600">
-                            {subjectStat.totalCorrect}/{subjectStat.totalQuestions} correctas • {subjectStat.attempts.length} intentos
-                          </div>
-                          <div className="mt-2 h-2 bg-gray-200 rounded-full overflow-hidden">
-                            <div 
-                              className="h-full bg-indigo-600 transition-all"
-                              style={{ width: `${subjectStat.avgPercentage}%` }}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Progreso por Quiz */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg">Progreso por Cuestionario</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      {getQuizStats(selectedStudent).map((quizStat) => (
-                        <div key={quizStat.quizId} className="border rounded-lg p-4">
-                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                            <h4 className="font-medium text-gray-900 text-sm sm:text-base">{quizStat.quizTitle}</h4>
-                            <div className="flex gap-2 flex-wrap">
-                              <Badge variant="outline" className="text-xs">
-                                Mejor: {Math.round(quizStat.bestScore)}%
-                              </Badge>
-                              <Badge className={`text-xs ${
-                              quizStat.avgScore >= 70 ? 'bg-green-100 text-green-800' :
-                              quizStat.avgScore >= 50 ? 'bg-yellow-100 text-yellow-800' :
-                              'bg-red-100 text-red-800'
-                              }`}>
-                              Prom: {Math.round(quizStat.avgScore)}%
-                              </Badge>
-                              </div>
-                              </div>
-                              <div className="flex items-center justify-between">
-                              <div className="text-xs text-gray-500">
-                              {quizStat.totalAttempts} {quizStat.totalAttempts === 1 ? 'intento' : 'intentos'}
-                              </div>
-                              <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => generateQuizPDF(selectedStudent, quizStat)}
-                              className="h-7 text-xs text-indigo-600 hover:bg-indigo-50"
-                              >
-                              <FileDown className="w-3 h-3 mr-1" />
-                              PDF
-                              </Button>
-                              </div>
-                              </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Historial de intentos */}
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between">
-                    <CardTitle className="text-lg">Historial de Intentos ({selectedStudent.attempts.length})</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3 max-h-[500px] sm:max-h-[600px] overflow-y-auto p-3 sm:p-6">
-                    {(selectedStudent.attempts && Array.isArray(selectedStudent.attempts) ? [...selectedStudent.attempts].sort((a, b) => 
-                      new Date(b.completed_at || b.created_date) - new Date(a.completed_at || a.created_date)
-                    ) : []).map((attempt) => {
-                      const percentage = Math.round((attempt.score / attempt.total_questions) * 100);
-                      const isPartial = !attempt.is_completed;
-                      const isExpanded = expandedAttempts[attempt.id];
-                      const quizTitle = getQuizTitle(attempt.quiz_id);
-                      
-                      return (
-                        <div key={attempt.id} className="border rounded-xl overflow-hidden hover:shadow-md transition-shadow">
-                          {/* Header - Always visible */}
-                          <div className="p-4 bg-white">
-                            <div className="flex items-start justify-between gap-3">
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 flex-wrap mb-1">
-                                  <h4 className="font-semibold text-gray-900 text-sm truncate max-w-[200px]" title={quizTitle}>
-                                    {quizTitle}
-                                  </h4>
-                                  {isPartial && (
-                                    <Badge variant="outline" className="text-xs text-orange-600 border-orange-300">
-                                      Parcial
-                                    </Badge>
-                                  )}
-                                </div>
-                                <div className="flex items-center gap-3 text-xs text-gray-500">
-                                  <span className="flex items-center gap-1">
-                                    <Calendar className="w-3 h-3" />
-                                    {format(new Date(attempt.completed_at || attempt.created_date), 'dd/MM/yy HH:mm')}
-                                  </span>
-                                  {attempt.wrong_questions?.length > 0 && (
-                                    <span className="text-red-500">
-                                      {attempt.wrong_questions.length} errores
-                                    </span>
-                                  )}
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <Badge className={`text-xs ${
-                                  percentage >= 70 ? 'bg-green-100 text-green-800' :
-                                  percentage >= 50 ? 'bg-yellow-100 text-yellow-800' :
-                                  'bg-red-100 text-red-800'
-                                }`}>
-                                  {attempt.score}/{attempt.total_questions} ({percentage}%)
-                                </Badge>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => setSelectedAttempt({ attempt, quizTitle })}
-                                  className="h-8 w-8 p-0 text-blue-600 hover:text-blue-700 hover:bg-blue-50"
-                                >
-                                  <Eye className="w-4 h-4" />
-                                </Button>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => deleteAttemptMutation.mutate(attempt.id)}
-                                  className="h-8 w-8 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
-                                >
-                                  <Trash2 className="w-4 h-4" />
-                                </Button>
-                                {attempt.wrong_questions?.length > 0 && (
-                                  <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => toggleAttemptExpand(attempt.id)}
-                                    className="h-8 w-8 p-0"
-                                  >
-                                    {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                                  </Button>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Expanded wrong questions */}
-                          {isExpanded && attempt.wrong_questions?.length > 0 && (
-                            <div className="border-t bg-gray-50 p-4">
-                              <div className="flex items-center gap-2 text-sm font-medium text-red-600 mb-3">
-                                <AlertCircle className="w-4 h-4" />
-                                Preguntas incorrectas
-                              </div>
-                              <div className="space-y-3">
-                                {attempt.wrong_questions.slice(0, 5).map((wq, idx) => (
-                                  <div key={idx} className="bg-white rounded-lg p-3 border text-sm">
-                                    <p className="font-medium text-gray-900 mb-2">
-                                      <MathText text={wq.question} />
-                                    </p>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                      <div className="flex items-start gap-2 text-red-700 bg-red-50 rounded p-2">
-                                        <span className="shrink-0">❌</span>
-                                        <MathText text={wq.selected_answer} />
-                                      </div>
-                                      <div className="flex items-start gap-2 text-green-700 bg-green-50 rounded p-2">
-                                        <span className="shrink-0">✓</span>
-                                        <MathText text={wq.correct_answer} />
-                                      </div>
-                                    </div>
-                                  </div>
-                                ))}
-                                {attempt.wrong_questions.length > 5 && (
-                                  <Button
-                                    variant="link"
-                                    onClick={() => setSelectedAttempt({ attempt, quizTitle })}
-                                    className="text-blue-600 p-0 h-auto"
-                                  >
-                                    Ver todas las {attempt.wrong_questions.length} preguntas incorrectas →
-                                  </Button>
-                                )}
-                              </div>
-                            </div>
-                          )}
-                        </div>
+                        </button>
                       );
                     })}
-
-                    {selectedStudent.attempts.length === 0 && (
+                    {students.length === 0 && (
                       <div className="text-center py-8 text-gray-500">
-                        Este estudiante no tiene intentos registrados
+                        No se encontraron estudiantes
                       </div>
                     )}
                   </CardContent>
                 </Card>
               </div>
-            ) : (
-              <Card className="h-full">
-                <CardContent className="flex items-center justify-center h-full min-h-[400px]">
-                  <div className="text-center text-gray-500">
-                    <TrendingUp className="w-16 h-16 mx-auto mb-4 text-gray-400" />
-                    <p>Selecciona un estudiante para ver sus detalles</p>
+
+              {/* Detalles del estudiante */}
+              <div className="lg:col-span-2">
+                {selectedStudent ? (
+                  <div className="space-y-6">
+                    {/* Resumen */}
+                    <Card>
+                      <CardHeader className="flex flex-row items-start justify-between">
+                        <div>
+                          <CardTitle>
+                            {selectedStudent.username || 'Sin nombre'}
+                          </CardTitle>
+                          <p className="text-sm text-gray-500">{selectedStudent.email}</p>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button
+                            variant="outline"
+                            onClick={() => generateErrorsPDF(selectedStudent)}
+                            className="text-red-600 border-red-200 hover:bg-red-50"
+                          >
+                            <FileDown className="w-4 h-4 mr-2" />
+                            PDF Errores
+                          </Button>
+                          <Button
+                            onClick={() => setShowProgressModal(true)}
+                            className="bg-indigo-600 hover:bg-indigo-700"
+                          >
+                            <TrendingUp className="w-4 h-4 mr-2" />
+                            Ver análisis
+                          </Button>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="p-4 sm:p-6">
+                        <div className="grid grid-cols-3 gap-2 sm:gap-4">
+                          <div className="text-center">
+                            <div className="text-xl sm:text-3xl font-bold text-indigo-600">
+                              {selectedStudent.totalQuizzes}
+                            </div>
+                            <div className="text-xs sm:text-sm text-gray-500">Intentos</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-xl sm:text-3xl font-bold text-green-600">
+                              {selectedStudent.totalCorrect}
+                            </div>
+                            <div className="text-xs sm:text-sm text-gray-500">Correctas</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-xl sm:text-3xl font-bold text-gray-900">
+                              {Math.round((selectedStudent.totalCorrect / selectedStudent.totalQuestions) * 100)}%
+                            </div>
+                            <div className="text-xs sm:text-sm text-gray-500">Promedio</div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    {/* Progreso por Tema */}
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="text-lg">Progreso por Tema</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-3">
+                          {getSubjectStats(selectedStudent).map((subjectStat) => (
+                            <div key={subjectStat.subjectId} className="border rounded-lg p-4">
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                <h4 className="font-semibold text-gray-900 text-sm sm:text-base">{subjectStat.subjectName}</h4>
+                                <Badge className={
+                                  subjectStat.avgPercentage >= 70 ? 'bg-green-100 text-green-800' :
+                                    subjectStat.avgPercentage >= 50 ? 'bg-yellow-100 text-yellow-800' :
+                                      'bg-red-100 text-red-800'
+                                }>
+                                  {Math.round(subjectStat.avgPercentage)}%
+                                </Badge>
+                              </div>
+                              <div className="text-sm text-gray-600">
+                                {subjectStat.totalCorrect}/{subjectStat.totalQuestions} correctas • {subjectStat.attempts.length} intentos
+                              </div>
+                              <div className="mt-2 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-indigo-600 transition-all"
+                                  style={{ width: `${subjectStat.avgPercentage}%` }}
+                                />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    {/* Progreso por Quiz */}
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="text-lg">Progreso por Cuestionario</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-3">
+                          {getQuizStats(selectedStudent).map((quizStat) => (
+                            <div key={quizStat.quizId} className="border rounded-lg p-4">
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                <h4 className="font-medium text-gray-900 text-sm sm:text-base">{quizStat.quizTitle}</h4>
+                                <div className="flex gap-2 flex-wrap">
+                                  <Badge variant="outline" className="text-xs">
+                                    Mejor: {Math.round(quizStat.bestScore)}%
+                                  </Badge>
+                                  <Badge className={`text-xs ${quizStat.avgScore >= 70 ? 'bg-green-100 text-green-800' :
+                                      quizStat.avgScore >= 50 ? 'bg-yellow-100 text-yellow-800' :
+                                        'bg-red-100 text-red-800'
+                                    }`}>
+                                    Prom: {Math.round(quizStat.avgScore)}%
+                                  </Badge>
+                                </div>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <div className="text-xs text-gray-500">
+                                  {quizStat.totalAttempts} {quizStat.totalAttempts === 1 ? 'intento' : 'intentos'}
+                                </div>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => generateQuizPDF(selectedStudent, quizStat)}
+                                  className="h-7 text-xs text-indigo-600 hover:bg-indigo-50"
+                                >
+                                  <FileDown className="w-3 h-3 mr-1" />
+                                  PDF
+                                </Button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    {/* Historial de intentos */}
+                    <Card>
+                      <CardHeader className="flex flex-row items-center justify-between">
+                        <CardTitle className="text-lg">Historial de Intentos ({selectedStudent.attempts.length})</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-3 max-h-[500px] sm:max-h-[600px] overflow-y-auto p-3 sm:p-6">
+                        {(selectedStudent.attempts && Array.isArray(selectedStudent.attempts) ? [...selectedStudent.attempts].sort((a, b) =>
+                          new Date(b.completed_at || b.created_date) - new Date(a.completed_at || a.created_date)
+                        ) : []).map((attempt) => {
+                          const percentage = Math.round((attempt.score / attempt.total_questions) * 100);
+                          const isPartial = !attempt.is_completed;
+                          const isExpanded = expandedAttempts[attempt.id];
+                          const quizTitle = getQuizTitle(attempt.quiz_id);
+
+                          return (
+                            <div key={attempt.id} className="border rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+                              {/* Header - Always visible */}
+                              <div className="p-4 bg-white">
+                                <div className="flex items-start justify-between gap-3">
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-2 flex-wrap mb-1">
+                                      <h4 className="font-semibold text-gray-900 text-sm truncate max-w-[200px]" title={quizTitle}>
+                                        {quizTitle}
+                                      </h4>
+                                      {isPartial && (
+                                        <Badge variant="outline" className="text-xs text-orange-600 border-orange-300">
+                                          Parcial
+                                        </Badge>
+                                      )}
+                                    </div>
+                                    <div className="flex items-center gap-3 text-xs text-gray-500">
+                                      <span className="flex items-center gap-1">
+                                        <Calendar className="w-3 h-3" />
+                                        {format(new Date(attempt.completed_at || attempt.created_date), 'dd/MM/yy HH:mm')}
+                                      </span>
+                                      {attempt.wrong_questions?.length > 0 && (
+                                        <span className="text-red-500">
+                                          {attempt.wrong_questions.length} errores
+                                        </span>
+                                      )}
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <Badge className={`text-xs ${percentage >= 70 ? 'bg-green-100 text-green-800' :
+                                        percentage >= 50 ? 'bg-yellow-100 text-yellow-800' :
+                                          'bg-red-100 text-red-800'
+                                      }`}>
+                                      {attempt.score}/{attempt.total_questions} ({percentage}%)
+                                    </Badge>
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      onClick={() => setSelectedAttempt({ attempt, quizTitle })}
+                                      className="h-8 w-8 p-0 text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                                    >
+                                      <Eye className="w-4 h-4" />
+                                    </Button>
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      onClick={() => deleteAttemptMutation.mutate(attempt.id)}
+                                      className="h-8 w-8 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
+                                    >
+                                      <Trash2 className="w-4 h-4" />
+                                    </Button>
+                                    {attempt.wrong_questions?.length > 0 && (
+                                      <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() => toggleAttemptExpand(attempt.id)}
+                                        className="h-8 w-8 p-0"
+                                      >
+                                        {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                                      </Button>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Expanded wrong questions */}
+                              {isExpanded && attempt.wrong_questions?.length > 0 && (
+                                <div className="border-t bg-gray-50 p-4">
+                                  <div className="flex items-center gap-2 text-sm font-medium text-red-600 mb-3">
+                                    <AlertCircle className="w-4 h-4" />
+                                    Preguntas incorrectas
+                                  </div>
+                                  <div className="space-y-3">
+                                    {attempt.wrong_questions.slice(0, 5).map((wq, idx) => (
+                                      <div key={idx} className="bg-white rounded-lg p-3 border text-sm">
+                                        <p className="font-medium text-gray-900 mb-2">
+                                          <MathText text={wq.question} />
+                                        </p>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                          <div className="flex items-start gap-2 text-red-700 bg-red-50 rounded p-2">
+                                            <span className="shrink-0">❌</span>
+                                            <MathText text={wq.selected_answer} />
+                                          </div>
+                                          <div className="flex items-start gap-2 text-green-700 bg-green-50 rounded p-2">
+                                            <span className="shrink-0">✓</span>
+                                            <MathText text={wq.correct_answer} />
+                                          </div>
+                                        </div>
+                                      </div>
+                                    ))}
+                                    {attempt.wrong_questions.length > 5 && (
+                                      <Button
+                                        variant="link"
+                                        onClick={() => setSelectedAttempt({ attempt, quizTitle })}
+                                        className="text-blue-600 p-0 h-auto"
+                                      >
+                                        Ver todas las {attempt.wrong_questions.length} preguntas incorrectas →
+                                      </Button>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+
+                        {selectedStudent.attempts.length === 0 && (
+                          <div className="text-center py-8 text-gray-500">
+                            Este estudiante no tiene intentos registrados
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
                   </div>
-                </CardContent>
-              </Card>
-            )}
-          </div>
-        </div>
+                ) : (
+                  <Card className="h-full">
+                    <CardContent className="flex items-center justify-center h-full min-h-[400px]">
+                      <div className="text-center text-gray-500">
+                        <TrendingUp className="w-16 h-16 mx-auto mb-4 text-gray-400" />
+                        <p>Selecciona un estudiante para ver sus detalles</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
+            </div>
 
-        {/* Attempt Detail Modal */}
-        <AttemptDetailModal
-          attempt={selectedAttempt?.attempt}
-          quizTitle={selectedAttempt?.quizTitle}
-          open={!!selectedAttempt}
-          onClose={() => setSelectedAttempt(null)}
-          onDelete={(id) => deleteAttemptMutation.mutate(id)}
-        />
+            {/* Attempt Detail Modal */}
+            <AttemptDetailModal
+              attempt={selectedAttempt?.attempt}
+              quizTitle={selectedAttempt?.quizTitle}
+              open={!!selectedAttempt}
+              onClose={() => setSelectedAttempt(null)}
+              onDelete={(id) => deleteAttemptMutation.mutate(id)}
+            />
 
-        {/* Student Progress Modal */}
-        <StudentProgressModal
-          open={showProgressModal}
-          onClose={() => setShowProgressModal(false)}
-          student={selectedStudent}
-          subjects={subjects}
-          quizzes={quizzes}
-        />
-        </TabsContent>
+            {/* Student Progress Modal */}
+            <StudentProgressModal
+              open={showProgressModal}
+              onClose={() => setShowProgressModal(false)}
+              student={selectedStudent}
+              subjects={subjects}
+              quizzes={quizzes}
+            />
+          </TabsContent>
 
-        <TabsContent value="docs">
-          <QuizMasterDocs />
-        </TabsContent>
+          <TabsContent value="docs">
+            <QuizMasterDocs />
+          </TabsContent>
         </Tabs>
       </div>
     </div>
