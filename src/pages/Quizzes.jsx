@@ -1604,7 +1604,7 @@ export default function QuizzesPage() {
           />
 
           {/* Content Manager Modal */}
-          {showContentManager && (
+          {/* {showContentManager && (
             <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
               <div className="w-full max-w-3xl">
                 <ContentManager
@@ -1622,14 +1622,14 @@ export default function QuizzesPage() {
                 />
               </div>
             </div>
-          )}
+          )} */}
 
           {/* Quiz Exporter Modal */}
-          {showQuizExporter && (
+          {/* {showQuizExporter && (
             <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
               <QuizExporter onClose={() => setShowQuizExporter(false)} />
             </div>
-          )}
+          )} */}
 
           {/* Course Join Modal */}
           <CourseJoinModal
