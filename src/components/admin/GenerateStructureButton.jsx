@@ -66,13 +66,17 @@ export default function GenerateStructureButton() {
                         createdCount++;
 
                         if (materiaData.subjects) { // "subjects" in JSON are "Parciales" -> Folders in App
-                            for (const parcialName of materiaData.subjects) {
+                            for (const parcialData of materiaData.subjects) {
+                                // Handle both string format (old) and object format (new with color)
+                                const parcialName = typeof parcialData === 'string' ? parcialData : parcialData.name;
+                                const parcialColor = typeof parcialData === 'object' ? parcialData.color : materiaData.color;
+
                                 // Create Folder (Parcial) linked to Subject
                                 const folderPayload = {
                                     name: parcialName,
                                     course_id: newCourse.id, // Keep reference for easier querying if needed, but hierarchy is parent=Subject
                                     subject_id: newSubject.id,
-                                    color: materiaData.color,
+                                    color: parcialColor,
                                     description: 'Evaluación parcial'
                                 };
                                 await client.entities.Folder.create(folderPayload);

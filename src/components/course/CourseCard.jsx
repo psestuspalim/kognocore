@@ -37,9 +37,6 @@ export default function CourseCard({ course, subjectCount, isAdmin, onEdit, onDe
                   {course.name}
                   {course.is_hidden && <EyeOff className="w-3.5 h-3.5 text-gray-400" />}
                 </h3>
-                {course.description && (
-                  <p className="text-sm text-gray-500 line-clamp-1 mb-1.5">{course.description}</p>
-                )}
                 <div className="flex items-center flex-wrap gap-2">
                   <Badge variant="secondary" className="text-[10px] sm:text-xs font-medium px-2 py-0.5 rounded-md bg-gray-50 text-gray-700 ring-1 ring-inset ring-gray-500/10 hover:bg-gray-100 transition-colors">
                     <Book className="w-3 h-3 mr-1.5 text-gray-500" />

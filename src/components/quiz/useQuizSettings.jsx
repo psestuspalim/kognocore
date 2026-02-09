@@ -3,7 +3,7 @@ import { client } from '@/api/client';
 
 const DEFAULT_SETTINGS = {
   show_options: true,
-  show_feedback: true,
+  show_feedback: true,  // Activado por defecto
   show_reflection: false,
   show_error_analysis: false,
   show_schema: false,
@@ -24,7 +24,7 @@ export default function useQuizSettings(quizId, subjectId, folderId, courseId) {
     try {
       // Obtener todas las configuraciones relevantes
       const allSettings = await client.entities.QuizSettings.list();
-      
+
       // Buscar configuraciones en orden de prioridad (más específico primero)
       const quizSettings = allSettings.find(s => s.entity_type === 'quiz' && s.entity_id === quizId);
       const subjectSettings = allSettings.find(s => s.entity_type === 'subject' && s.entity_id === subjectId);

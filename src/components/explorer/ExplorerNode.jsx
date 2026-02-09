@@ -137,7 +137,7 @@ const ExplorerNode = memo(function ExplorerNode({
 
               {isAdmin && type !== 'quiz' && (
                 <Badge variant="outline" className="text-xs font-mono bg-gray-50 text-gray-600">
-                  ID: {item.id.slice(0, 8)}
+                  ID: ...{item.id.slice(-8)}
                 </Badge>
               )}
             </div>

@@ -63,127 +63,121 @@ export default function FolderEditor({ folder, users = [], onSave, onCancel }) {
               Vista Quiz
             </TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="general" className="space-y-4">
-        <div>
-          <Label>Nombre</Label>
-          <Input
-            value={editedFolder.name}
-            onChange={(e) => setEditedFolder({ ...editedFolder, name: e.target.value })}
-          />
-        </div>
-        
-        <div>
-          <Label>Descripción</Label>
-          <Input
-            value={editedFolder.description}
-            onChange={(e) => setEditedFolder({ ...editedFolder, description: e.target.value })}
-          />
-        </div>
-        
-        <div>
-          <Label>Color</Label>
-          <input
-            type="color"
-            value={editedFolder.color}
-            onChange={(e) => setEditedFolder({ ...editedFolder, color: e.target.value })}
-            className="w-full h-10 rounded-md border cursor-pointer"
-          />
-        </div>
-
-        <div className="flex items-center justify-between">
-          <Label>Ocultar carpeta</Label>
-          <Switch
-            checked={editedFolder.is_hidden}
-            onCheckedChange={(checked) => setEditedFolder({ ...editedFolder, is_hidden: checked })}
-          />
-        </div>
-
-        <div className="space-y-3">
-          <Label>Visibilidad</Label>
-          <RadioGroup
-            value={editedFolder.visibility}
-            onValueChange={(value) => setEditedFolder({ ...editedFolder, visibility: value })}
-          >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="all" id="all" />
-              <Label htmlFor="all" className="font-normal">Todos los usuarios</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="specific" id="specific" />
-              <Label htmlFor="specific" className="font-normal">Usuarios específicos</Label>
-            </div>
-          </RadioGroup>
-        </div>
-
-        {editedFolder.visibility === 'specific' && (
-          <div className="space-y-3 p-3 bg-gray-50 rounded-lg">
-            <Label>Usuarios con acceso</Label>
-            
-            {/* Lista de usuarios permitidos */}
-            <div className="flex flex-wrap gap-2">
-              {editedFolder.allowed_users.map((email) => (
-                <Badge key={email} variant="secondary" className="flex items-center gap-1">
-                  {email}
-                  <button onClick={() => handleRemoveUser(email)}>
-                    <X className="w-3 h-3" />
-                  </button>
-                </Badge>
-              ))}
-              {editedFolder.allowed_users.length === 0 && (
-                <span className="text-sm text-gray-500">No hay usuarios agregados</span>
-              )}
-            </div>
-
-            {/* Agregar por email */}
-            <div className="flex gap-2">
+            <div>
+              <Label>Nombre</Label>
               <Input
-                placeholder="Email del usuario"
-                value={newUserEmail}
-                onChange={(e) => setNewUserEmail(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleAddUser()}
+                value={editedFolder.name}
+                onChange={(e) => setEditedFolder({ ...editedFolder, name: e.target.value })}
               />
-              <Button type="button" variant="outline" onClick={handleAddUser}>
-                <UserPlus className="w-4 h-4" />
-              </Button>
             </div>
 
-            {/* Seleccionar de lista */}
-            {users.length > 0 && (
-              <div>
-                <Label className="text-xs text-gray-500">O seleccionar de usuarios registrados:</Label>
-                <Select onValueChange={handleSelectUser}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Seleccionar usuario" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {users
-                      .filter(u => !editedFolder.allowed_users.includes(u.email))
-                      .map((user) => (
-                        <SelectItem key={user.id} value={user.email}>
-                          {user.full_name || user.email}
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
+
+
+            <div>
+              <Label>Color</Label>
+              <input
+                type="color"
+                value={editedFolder.color}
+                onChange={(e) => setEditedFolder({ ...editedFolder, color: e.target.value })}
+                className="w-full h-10 rounded-md border cursor-pointer"
+              />
+            </div>
+
+            <div className="flex items-center justify-between">
+              <Label>Ocultar carpeta</Label>
+              <Switch
+                checked={editedFolder.is_hidden}
+                onCheckedChange={(checked) => setEditedFolder({ ...editedFolder, is_hidden: checked })}
+              />
+            </div>
+
+            <div className="space-y-3">
+              <Label>Visibilidad</Label>
+              <RadioGroup
+                value={editedFolder.visibility}
+                onValueChange={(value) => setEditedFolder({ ...editedFolder, visibility: value })}
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="all" id="all" />
+                  <Label htmlFor="all" className="font-normal">Todos los usuarios</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="specific" id="specific" />
+                  <Label htmlFor="specific" className="font-normal">Usuarios específicos</Label>
+                </div>
+              </RadioGroup>
+            </div>
+
+            {editedFolder.visibility === 'specific' && (
+              <div className="space-y-3 p-3 bg-gray-50 rounded-lg">
+                <Label>Usuarios con acceso</Label>
+
+                {/* Lista de usuarios permitidos */}
+                <div className="flex flex-wrap gap-2">
+                  {editedFolder.allowed_users.map((email) => (
+                    <Badge key={email} variant="secondary" className="flex items-center gap-1">
+                      {email}
+                      <button onClick={() => handleRemoveUser(email)}>
+                        <X className="w-3 h-3" />
+                      </button>
+                    </Badge>
+                  ))}
+                  {editedFolder.allowed_users.length === 0 && (
+                    <span className="text-sm text-gray-500">No hay usuarios agregados</span>
+                  )}
+                </div>
+
+                {/* Agregar por email */}
+                <div className="flex gap-2">
+                  <Input
+                    placeholder="Email del usuario"
+                    value={newUserEmail}
+                    onChange={(e) => setNewUserEmail(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleAddUser()}
+                  />
+                  <Button type="button" variant="outline" onClick={handleAddUser}>
+                    <UserPlus className="w-4 h-4" />
+                  </Button>
+                </div>
+
+                {/* Seleccionar de lista */}
+                {users.length > 0 && (
+                  <div>
+                    <Label className="text-xs text-gray-500">O seleccionar de usuarios registrados:</Label>
+                    <Select onValueChange={handleSelectUser}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccionar usuario" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {users
+                          .filter(u => !editedFolder.allowed_users.includes(u.email))
+                          .map((user) => (
+                            <SelectItem key={user.id} value={user.email}>
+                              {user.full_name || user.email}
+                            </SelectItem>
+                          ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
               </div>
             )}
-          </div>
-        )}
 
-        <div className="flex gap-3 pt-2">
-          <Button variant="outline" onClick={onCancel} className="flex-1">
-            Cancelar
-          </Button>
-          <Button
-            onClick={() => onSave(editedFolder)}
-            className="flex-1 bg-amber-500 hover:bg-amber-600"
-          >
-            Guardar
-          </Button>
-        </div>
+            <div className="flex gap-3 pt-2">
+              <Button variant="outline" onClick={onCancel} className="flex-1">
+                Cancelar
+              </Button>
+              <Button
+                onClick={() => onSave(editedFolder)}
+                className="flex-1 bg-amber-500 hover:bg-amber-600"
+              >
+                Guardar
+              </Button>
+            </div>
           </TabsContent>
-          
+
           <TabsContent value="quiz-settings">
             {folder?.id && (
               <QuizSettingsPanel

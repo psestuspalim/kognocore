@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { client } from '@/api/client';
+import { getFolderColor } from '@/utils/folderColors';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Plus, ArrowLeft, BookOpen, Book, FolderPlus, Folder, ChevronRight, Upload, Music, Home, Sparkles, Shield, AlertCircle, LayoutDashboard } from 'lucide-react';
+import { Plus, ArrowLeft, BookOpen, Book, FolderPlus, Folder, ChevronRight, Upload, Home, Shield, AlertCircle, LayoutDashboard } from 'lucide-react';
 import { Icon } from '@/components/ui/Icon';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'sonner';
 import { buildContainers } from '../components/utils/contentTree';
 import { moveItemsInBackend } from '../components/utils/moveItems';
 import { fromCompactFormat, isCompactFormat } from '../components/utils/quizFormats';
@@ -52,7 +56,7 @@ import SwipeQuizMode from '../components/quiz/SwipeQuizMode';
 import AIQuizGenerator from '../components/quiz/AIQuizGenerator';
 import FileExplorer from '../components/explorer/FileExplorer';
 import MoveQuizModal from '../components/quiz/MoveQuizModal';
-/* Removed ContentManager/QuizExporter imports */
+import QuizExporter from '../components/admin/QuizExporter';
 import CourseJoinModal from '../components/course/CourseJoinModal';
 import FeatureAnalytics from '../components/admin/FeatureAnalytics';
 import FeatureTracker from '../components/admin/FeatureTracker';
@@ -68,7 +72,24 @@ export default function QuizzesPage() {
   const [deckType, setDeckType] = useState('all');
   const [wrongAnswers, setWrongAnswers] = useState([]);
   const [correctAnswers, setCorrectAnswers] = useState([]);
-  const [markedQuestions, setMarkedQuestions] = useState([]);
+  const [markedQuestions, setMarkedQuestions] = useState(new Set());
+
+  const handleMarkForReview = (question, isMarked) => {
+    setMarkedQuestions(prev => {
+      const newSet = new Set(prev);
+      if (isMarked) {
+        newSet.add(question.id || question.question); // Use question text as fallback ID if needed
+      } else {
+        newSet.delete(question.id || question.question);
+      }
+      return newSet;
+    });
+
+    // Optional: Toast notification
+    if (isMarked) {
+      toast.success("Pregunta marcada para revisar", { duration: 1500 });
+    }
+  };
   const [showUploader, setShowUploader] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -96,6 +117,8 @@ export default function QuizzesPage() {
   const [selectedQuizzes, setSelectedQuizzes] = useState([]);
   const [showJoinModal, setShowJoinModal] = useState(false);
   const [showFeatureAnalytics, setShowFeatureAnalytics] = useState(false);
+  const [showContentManager, setShowContentManager] = useState(false);
+  const [showQuizExporter, setShowQuizExporter] = useState(false);
 
   const queryClient = useQueryClient();
 
@@ -215,11 +238,19 @@ export default function QuizzesPage() {
   });
 
   const createFolderMutation = useMutation({
-    mutationFn: (data) => client.entities.Folder.create(data),
+    mutationFn: (data) => {
+      // Asignar color automáticamente basado en el número de carpetas existentes
+      const folderCount = folders.length;
+      const folderData = {
+        ...data,
+        color: data.color || getFolderColor(folderCount)
+      };
+      return client.entities.Folder.create(folderData);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['folders']);
       setShowFolderDialog(false);
-      setNewItem({ name: '', description: '', color: '#f59e0b' });
+      setNewItem({ name: '', description: '', color: '' });
     },
   });
 
@@ -445,41 +476,48 @@ export default function QuizzesPage() {
 
     return (
       <div className="mb-8">
-        <div className="bg-gradient-to-r from-indigo-900 to-indigo-800 rounded-xl p-6 text-white shadow-lg overflow-hidden relative">
-          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <Shield className="w-5 h-5 text-indigo-300" />
-                <h2 className="text-lg font-bold">Panel de Administración</h2>
-              </div>
-              <p className="text-indigo-200 text-sm max-w-xl">
-                Gestiona cursos, usuarios y mantenimiento de la plataforma desde el dashboard central.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3">
-              {pendingRequests > 0 && (
-                <div className="bg-indigo-700/50 border border-indigo-500/30 px-3 py-2 rounded-lg flex items-center gap-2 animate-pulse">
-                  <AlertCircle className="w-4 h-4 text-amber-400" />
-                  <span className="text-sm font-medium text-amber-200">
-                    {pendingRequests} solicitud{pendingRequests !== 1 ? 'es' : ''} pendiente{pendingRequests !== 1 ? 's' : ''}
-                  </span>
+        <Link to={createPageUrl('AdminHome')} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Card
+            className="cursor-pointer hover:shadow-lg transition-all border-l-4 overflow-hidden bg-white"
+            style={{ borderLeftColor: '#6366f1' }}
+          >
+            <CardContent className="p-4">
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: '#6366f120' }}
+                  >
+                    <Shield
+                      className="w-6 h-6"
+                      style={{ color: '#6366f1' }}
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-semibold text-gray-900 flex items-center gap-2 truncate">
+                      Panel de Administración
+                    </h3>
+                    <p className="text-sm text-gray-500 line-clamp-1 mb-1.5">
+                      Gestiona cursos, usuarios y mantenimiento de la plataforma
+                    </p>
+                    <div className="flex items-center flex-wrap gap-2">
+                      {pendingRequests > 0 && (
+                        <Badge variant="secondary" className="text-[10px] sm:text-xs font-medium px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-500/10 hover:bg-amber-100 transition-colors">
+                          <AlertCircle className="w-3 h-3 mr-1.5 text-amber-500" />
+                          {pendingRequests} solicitud{pendingRequests !== 1 ? 'es' : ''} pendiente{pendingRequests !== 1 ? 's' : ''}
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              )}
 
-              <Link to={createPageUrl('AdminHome')}>
-                <Button variant="secondary" className="whitespace-nowrap bg-white text-indigo-900 hover:bg-indigo-50 border-0">
-                  <LayoutDashboard className="w-4 h-4 mr-2" />
-                  Dashboard Admin
-                </Button>
-              </Link>
-            </div>
-          </div>
-
-          {/* Decorative background elements */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-indigo-500/10 rounded-full blur-2xl translate-y-1/2 -translate-x-1/4"></div>
-        </div>
+                <div className="flex gap-1 flex-shrink-0">
+                  <LayoutDashboard className="w-5 h-5 text-gray-400" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
     );
   };
@@ -569,7 +607,7 @@ export default function QuizzesPage() {
     setScore(0);
     setWrongAnswers([]);
     setCorrectAnswers([]);
-    setMarkedQuestions([]);
+    setMarkedQuestions(new Set());
     setResponseTimes([]);
     setQuestionStartTime(Date.now());
     setDeckType(selectedDeck);
@@ -826,7 +864,7 @@ export default function QuizzesPage() {
     setScore(0);
     setWrongAnswers([]);
     setCorrectAnswers([]);
-    setMarkedQuestions([]);
+    setMarkedQuestions(new Set());
     setResponseTimes([]);
     setQuestionStartTime(Date.now());
     setView('quiz');
@@ -882,14 +920,10 @@ export default function QuizzesPage() {
         {selectedCourse && (
           <>
             <ChevronRight className="w-4 h-4 text-gray-400" />
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => { setSelectedSubject(null); setCurrentFolderId(null); setView('subjects'); }}
-              className={`px-2 ${!selectedSubject && !currentFolderId ? 'font-medium text-gray-900' : 'text-gray-600'}`}
-            >
-              {selectedCourse.icon} {selectedCourse.name}
-            </Button>
+            <button onClick={() => { setView('course'); setSelectedSubject(null); setCurrentFolderId(null); }} className="hover:text-indigo-600 transition-colors flex items-center gap-1.5">
+              <Icon name={selectedCourse.icon} className="w-4 h-4" style={{ color: selectedCourse.color || '#6366f1' }} />
+              {selectedCourse.name}
+            </button>
           </>
         )}
         {folderParentSubject && (
@@ -929,8 +963,8 @@ export default function QuizzesPage() {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-        <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
+      <div className={view === 'quiz' ? "h-screen overflow-hidden" : "min-h-screen bg-gradient-to-br from-gray-50 to-gray-100"}>
+        <div className={view === 'quiz' ? "" : "container mx-auto px-3 sm:px-4 py-4 sm:py-8"}>
           <AnimatePresence mode="wait">
             {/* Course Editor */}
             {editingCourse && (
@@ -1029,10 +1063,7 @@ export default function QuizzesPage() {
                               <Label>Nombre</Label>
                               <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Semestre Selectivo" />
                             </div>
-                            <div>
-                              <Label>Descripción</Label>
-                              <Input value={newItem.description} onChange={(e) => setNewItem({ ...newItem, description: e.target.value })} placeholder="Descripción opcional" />
-                            </div>
+
                             <div>
                               <Label>Color</Label>
                               <input type="color" value={newItem.color} onChange={(e) => setNewItem({ ...newItem, color: e.target.value })} className="w-full h-10 rounded-md border cursor-pointer" />
@@ -1048,12 +1079,9 @@ export default function QuizzesPage() {
                   </div>
                 </div>
 
-                {/* Cursos */}
+                {/* Course Cards */}
                 {visibleCourses.length > 0 && (
                   <div className="mb-8">
-                    <h2 className="text-lg font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                      <Book className="w-5 h-5" /> Cursos
-                    </h2>
                     <DroppableArea droppableId="root-courses" type="COURSE" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       {visibleCourses.map((course, index) => (
                         <DraggableItem key={course.id} id={course.id} index={index} isAdmin={canEdit}>
@@ -1097,20 +1125,22 @@ export default function QuizzesPage() {
                 )} */}
 
                 {visibleCourses.length === 0 && unassignedSubjects.length === 0 && (
-                  <div className="text-center py-16">
-                    <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                  <div className="flex flex-col items-center justify-center py-16 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
+                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm ring-1 ring-gray-100">
+                      <BookOpen className="w-8 h-8 text-gray-400" />
+                    </div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">
                       {isAdmin ? 'No hay contenido' : 'No tienes acceso a ningún curso'}
                     </h3>
-                    <p className="text-gray-500 mb-4">
+                    <p className="text-gray-500 mb-6 text-center max-w-md">
                       {isAdmin
-                        ? 'Comienza creando tu primer curso o materia'
-                        : 'Solicita unirte a un curso usando el botón "Unirse a Curso" o espera a que un administrador apruebe tu solicitud'}
+                        ? 'Comienza creando tu primer curso o materia para organizar el contenido.'
+                        : 'Solicita unirte a un curso usando el botón "Unirse a Curso" o espera a que un administrador apruebe tu solicitud.'}
                     </p>
                     {!isAdmin && (
                       <Button
                         onClick={() => setShowJoinModal(true)}
-                        className="bg-green-600 hover:bg-green-700"
+                        className="bg-green-600 hover:bg-green-700 shadow-sm"
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Unirse a Curso
@@ -1223,20 +1253,25 @@ export default function QuizzesPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                   <div>
                     <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
-                      {selectedCourse ? (
-                        <><Icon name={selectedCourse.icon} className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: selectedCourse.color || '#6366f1' }} /> {selectedCourse.name}</>
-                      ) : currentFolderId ? (
+                      {currentFolderId ? (
                         <><Folder className="w-6 h-6" /> {folders.find(f => f.id === currentFolderId)?.name}</>
+                      ) : selectedSubject ? (
+                        <><BookOpen className="w-6 h-6" /> {selectedSubject.name}</>
+                      ) : selectedCourse ? (
+                        <><Icon name={selectedCourse.icon} className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: selectedCourse.color || '#6366f1' }} /> {selectedCourse.name}</>
                       ) : null}
                     </h1>
-                    <p className="text-gray-600">
-                      {selectedCourse?.description || folders.find(f => f.id === currentFolderId)?.description || 'Contenido'}
-                    </p>
+
                   </div>
                   {isAdmin && (
                     <div className="flex flex-wrap gap-2">
-                      <Button onClick={() => setShowUploader(true)} variant="outline" className="text-xs sm:text-sm h-9">
-                        <Upload className="w-4 h-4 mr-2" /> Subir JSON
+                      <Button
+                        variant="outline"
+                        className="text-xs sm:text-sm h-9"
+                        onClick={() => setShowUploader(true)}
+                      >
+                        <Upload className="w-4 h-4 mr-2" />
+                        Subir JSON
                       </Button>
                       <Dialog open={showFolderDialog} onOpenChange={setShowFolderDialog}>
                         <DialogTrigger asChild>
@@ -1257,33 +1292,32 @@ export default function QuizzesPage() {
                           </div>
                         </DialogContent>
                       </Dialog>
-                      <Dialog open={showSubjectDialog} onOpenChange={setShowSubjectDialog}>
-                        <DialogTrigger asChild>
-                          <Button className="bg-indigo-600 hover:bg-indigo-700 text-xs sm:text-sm h-9">
-                            <Plus className="w-4 h-4 mr-2" /> Nueva materia
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader><DialogTitle>Crear nueva materia</DialogTitle></DialogHeader>
-                          <div className="space-y-4 mt-4">
-                            <div>
-                              <Label>Nombre</Label>
-                              <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Anatomía" />
-                            </div>
-                            <div>
-                              <Label>Descripción</Label>
-                              <Input value={newItem.description} onChange={(e) => setNewItem({ ...newItem, description: e.target.value })} />
-                            </div>
-                            <div>
-                              <Label>Color</Label>
-                              <input type="color" value={newItem.color} onChange={(e) => setNewItem({ ...newItem, color: e.target.value })} className="w-full h-10 rounded-md border cursor-pointer" />
-                            </div>
-                            <Button onClick={() => createSubjectMutation.mutate({ ...newItem, course_id: selectedCourse?.id, folder_id: currentFolderId })} className="w-full bg-indigo-600 hover:bg-indigo-700">
-                              Crear materia
+                      {!currentFolderId && (
+                        <Dialog open={showSubjectDialog} onOpenChange={setShowSubjectDialog}>
+                          <DialogTrigger asChild>
+                            <Button className="bg-indigo-600 hover:bg-indigo-700 text-xs sm:text-sm h-9">
+                              <Plus className="w-4 h-4 mr-2" /> Nueva materia
                             </Button>
-                          </div>
-                        </DialogContent>
-                      </Dialog>
+                          </DialogTrigger>
+                          <DialogContent>
+                            <DialogHeader><DialogTitle>Crear nueva materia</DialogTitle></DialogHeader>
+                            <div className="space-y-4 mt-4">
+                              <div>
+                                <Label>Nombre</Label>
+                                <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Anatomía" />
+                              </div>
+
+                              <div>
+                                <Label>Color</Label>
+                                <input type="color" value={newItem.color} onChange={(e) => setNewItem({ ...newItem, color: e.target.value })} className="w-full h-10 rounded-md border cursor-pointer" />
+                              </div>
+                              <Button onClick={() => createSubjectMutation.mutate({ ...newItem, course_id: selectedCourse?.id, folder_id: currentFolderId })} className="w-full bg-indigo-600 hover:bg-indigo-700">
+                                Crear materia
+                              </Button>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                      )}
                     </div>
                   )}
                 </div>
@@ -1327,24 +1361,21 @@ export default function QuizzesPage() {
                   ))}
                 </DroppableArea>
 
+
                 {/* Tabs de cuestionarios y audios dentro de carpeta */}
                 {currentFolderId && (
-                  <Tabs value={activeSubjectTab} onValueChange={setActiveSubjectTab} className="w-full mt-6">
-                    <TabsList className="mb-4">
-                      <TabsTrigger value="quizzes" className="flex items-center gap-2">
-                        <BookOpen className="w-4 h-4" /> Cuestionarios ({currentFolderQuizzes.length})
-                      </TabsTrigger>
-                      <TabsTrigger value="audios" className="flex items-center gap-2">
-                        <Music className="w-4 h-4" /> Audios
-                      </TabsTrigger>
-                    </TabsList>
-
-                    <TabsContent value="quizzes">
+                  <div className="mt-6">
+                    <div className="space-y-4">
+                      <h2 className="text-lg font-semibold text-gray-700 flex items-center gap-2">
+                        <BookOpen className="w-5 h-5" /> Cuestionarios ({currentFolderQuizzes.length})
+                      </h2>
                       {currentFolderQuizzes.length === 0 ? (
-                        <div className="text-center py-12">
-                          <BookOpen className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2">No hay cuestionarios</h3>
-                          <p className="text-gray-500 mb-4">Comienza cargando tu primer cuestionario</p>
+                        <div className="flex flex-col items-center justify-center py-12 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
+                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm ring-1 ring-gray-100">
+                            <BookOpen className="w-6 h-6 text-gray-400" />
+                          </div>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-1">No hay cuestionarios</h3>
+                          <p className="text-sm text-gray-500">Sube un archivo JSON para agregar contenido.</p>
                         </div>
                       ) : (
                         <div className="space-y-2">
@@ -1363,19 +1394,17 @@ export default function QuizzesPage() {
                           ))}
                         </div>
                       )}
-                    </TabsContent>
-
-                    <TabsContent value="audios">
-                      <AudioList subjectId={null} isAdmin={isAdmin} />
-                    </TabsContent>
-                  </Tabs>
+                    </div>
+                  </div>
                 )}
 
                 {!currentFolderId && currentCourseFolders.length === 0 && currentFolderSubjects.length === 0 && (
-                  <div className="text-center py-16">
-                    <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                  <div className="flex flex-col items-center justify-center py-16 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
+                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm ring-1 ring-gray-100">
+                      <Folder className="w-8 h-8 text-gray-300" />
+                    </div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">Carpeta vacía</h3>
-                    <p className="text-gray-500">Agrega contenido a esta carpeta</p>
+                    <p className="text-gray-500 text-center max-w-sm">No hay carpetas ni materias aquí. Comienza creando una nueva estructura.</p>
                   </div>
                 )}
               </motion.div>
@@ -1410,8 +1439,10 @@ export default function QuizzesPage() {
 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                   <div>
-                    <h1 className="text-xl sm:text-3xl font-bold text-gray-900">{selectedSubject.name}</h1>
-                    <p className="text-gray-600">{selectedSubject.description || 'Cuestionarios de esta materia'}</p>
+                    <h1 className="text-xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
+                      <BookOpen className="w-6 h-6" /> {selectedSubject.name}
+                    </h1>
+
                   </div>
                   {isAdmin && (
                     <div className="flex gap-2">
@@ -1435,9 +1466,6 @@ export default function QuizzesPage() {
                           </div>
                         </DialogContent>
                       </Dialog>
-                      <Button onClick={() => setShowUploader(true)} className="bg-indigo-600 hover:bg-indigo-700 text-xs sm:text-sm h-9">
-                        <Plus className="w-4 h-4 mr-2" /> Subir archivo
-                      </Button>
                     </div>
                   )}
                 </div>
@@ -1473,18 +1501,7 @@ export default function QuizzesPage() {
                   </div>
                 )}
 
-                {subjectQuizzes.filter(q => !q.folder_id).length === 0 ? (
-                  <div className="text-center py-12">
-                    <BookOpen className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">No hay cuestionarios</h3>
-                    <p className="text-gray-500 mb-4">Comienza cargando tu primer cuestionario</p>
-                    {isAdmin && (
-                      <Button onClick={() => setShowUploader(true)} className="bg-indigo-600 hover:bg-indigo-700">
-                        <Plus className="w-4 h-4 mr-2" /> Cargar cuestionario
-                      </Button>
-                    )}
-                  </div>
-                ) : (
+                {subjectQuizzes.filter(q => !q.folder_id).length === 0 ? null : (
                   <DroppableArea droppableId={`subject-${selectedSubject.id}`} type="QUIZ" className="space-y-2">
                     {subjectQuizzes.filter(q => !q.folder_id).map((quiz, index) => (
                       <DraggableItem key={quiz.id} id={quiz.id} index={index} isAdmin={isAdmin}>
@@ -1515,30 +1532,11 @@ export default function QuizzesPage() {
 
 
 
-            {/* Upload View */}
-            {view === 'list' && showUploader && (
-              <motion.div key="upload" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <Button onClick={() => setShowUploader(false)} variant="ghost" className="mb-6">
-                  <ArrowLeft className="w-4 h-4 mr-2" /> Volver
-                </Button>
-                <div className="mb-8 text-center">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Cargar nuevo cuestionario</h2>
-                  <p className="text-gray-600">Sube un archivo JSON con el formato de preguntas</p>
-                </div>
-                <FileUploader onUploadSuccess={(data) => createQuizMutation.mutate({
-                  ...data,
-                  subject_id: selectedSubject.id,
-                  folder_id: currentFolderId || null
-                })} />
-              </motion.div>
-            )}
+
 
             {/* Quiz View */}
             {view === 'quiz' && selectedQuiz && !swipeMode && (
               <motion.div key="quiz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <Button onClick={handleExitQuiz} variant="ghost" className="mb-6">
-                  <ArrowLeft className="w-4 h-4 mr-2" /> Salir del cuestionario
-                </Button>
                 <QuestionView
                   key={currentQuestionIndex}
                   question={selectedQuiz.questions[currentQuestionIndex]}
@@ -1547,6 +1545,7 @@ export default function QuizzesPage() {
                   correctAnswers={score}
                   wrongAnswers={wrongAnswers.length}
                   onAnswer={handleAnswer}
+                  onBack={handleExitQuiz}
                   previousAttempts={attempts.filter(a => a.quiz_id === selectedQuiz.id)}
                   quizId={selectedQuiz.id}
                   userEmail={currentUser?.email}
@@ -1554,6 +1553,8 @@ export default function QuizzesPage() {
                   quizTitle={selectedQuiz.title}
                   subjectId={selectedQuiz.subject_id}
                   sessionId={currentSessionId}
+                  onMarkForReview={handleMarkForReview}
+                  initialIsMarked={markedQuestions.has(selectedQuiz.questions[currentQuestionIndex].id || selectedQuiz.questions[currentQuestionIndex].question)}
                 />
               </motion.div>
             )}
