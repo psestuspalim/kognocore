@@ -1,24 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Download, FileJson, Loader2, CheckCircle2, FolderDown } from 'lucide-react';
+import { Download, FileJson, Loader2, FolderDown, ChevronRight, ChevronDown, Folder, BookOpen } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function QuizExporter({ onClose }) {
   const [exporting, setExporting] = useState(false);
   const [exportedCount, setExportedCount] = useState(0);
+  const [expandedCourses, setExpandedCourses] = useState(new Set());
+  const [expandedSubjects, setExpandedSubjects] = useState(new Set());
 
-  const { data: quizzes = [], isLoading } = useQuery({
+  const { data: quizzes = [], isLoading: loadingQuizzes } = useQuery({
     queryKey: ['all-quizzes'],
     queryFn: () => client.entities.Quiz.list('-created_date'),
   });
 
-  const { data: subjects = [] } = useQuery({
+  const { data: subjects = [], isLoading: loadingSubjects } = useQuery({
     queryKey: ['subjects'],
     queryFn: () => client.entities.Subject.list(),
   });
+
+  const { data: courses = [], isLoading: loadingCourses } = useQuery({
+    queryKey: ['courses'],
+    queryFn: () => client.entities.Course.list(),
+  });
+
+  const { data: folders = [], isLoading: loadingFolders } = useQuery({
+    queryKey: ['folders'],
+    queryFn: () => client.entities.Folder.list(),
+  });
+
+  const isLoading = loadingQuizzes || loadingSubjects || loadingCourses || loadingFolders;
+
+  // Organize quizzes by hierarchy: Course > Subject > Folder
+  const organizedData = useMemo(() => {
+    const structure = {};
+
+    quizzes.forEach(quiz => {
+      const subject = subjects.find(s => s.id === quiz.subject_id);
+      const course = courses.find(c => c.id === subject?.course_id);
+      const folder = folders.find(f => f.id === quiz.folder_id);
+
+      const courseName = course?.name || 'Sin Curso';
+      const subjectName = subject?.name || 'Sin Materia';
+      const folderName = folder?.name || 'Sin Carpeta';
+
+      if (!structure[courseName]) {
+        structure[courseName] = { course, subjects: {} };
+      }
+      if (!structure[courseName].subjects[subjectName]) {
+        structure[courseName].subjects[subjectName] = { subject, folders: {} };
+      }
+      if (!structure[courseName].subjects[subjectName].folders[folderName]) {
+        structure[courseName].subjects[subjectName].folders[folderName] = { folder, quizzes: [] };
+      }
+
+      structure[courseName].subjects[subjectName].folders[folderName].quizzes.push(quiz);
+    });
+
+    return structure;
+  }, [quizzes, subjects, courses, folders]);
 
   const downloadJSON = (data, filename) => {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -32,34 +75,47 @@ export default function QuizExporter({ onClose }) {
     URL.revokeObjectURL(url);
   };
 
+  const sanitizeFilename = (name) => {
+    return name.replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ\s-]/g, '').replace(/\s+/g, '_');
+  };
+
+  const createExportData = (quiz, courseName, subjectName, folderName) => ({
+    title: quiz.title,
+    description: quiz.description,
+    questions: quiz.questions,
+    total_questions: quiz.total_questions,
+    metadata: {
+      course: courseName,
+      subject: subjectName,
+      folder: folderName,
+      created_date: quiz.created_date,
+      file_name: quiz.file_name
+    }
+  });
+
   const handleExportAll = async () => {
     setExporting(true);
     setExportedCount(0);
 
     try {
-      for (const quiz of quizzes) {
-        const subject = subjects.find(s => s.id === quiz.subject_id);
-        const subjectName = subject?.name || 'Sin_Materia';
-        const safeName = quiz.title.replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ\s-]/g, '').replace(/\s+/g, '_');
-        const filename = `${subjectName}_${safeName}.json`;
+      for (const [courseName, courseData] of Object.entries(organizedData)) {
+        for (const [subjectName, subjectData] of Object.entries(courseData.subjects)) {
+          for (const [folderName, folderData] of Object.entries(subjectData.folders)) {
+            for (const quiz of folderData.quizzes) {
+              const safeCourse = sanitizeFilename(courseName);
+              const safeSubject = sanitizeFilename(subjectName);
+              const safeFolder = sanitizeFilename(folderName);
+              const safeQuiz = sanitizeFilename(quiz.title);
+              const filename = `${safeCourse}_${safeSubject}_${safeFolder}_${safeQuiz}.json`;
 
-        const exportData = {
-          title: quiz.title,
-          description: quiz.description,
-          questions: quiz.questions,
-          total_questions: quiz.total_questions,
-          metadata: {
-            subject: subjectName,
-            created_date: quiz.created_date,
-            file_name: quiz.file_name
+              const exportData = createExportData(quiz, courseName, subjectName, folderName);
+              downloadJSON(exportData, filename);
+              setExportedCount(prev => prev + 1);
+
+              await new Promise(resolve => setTimeout(resolve, 100));
+            }
           }
-        };
-
-        downloadJSON(exportData, filename);
-        setExportedCount(prev => prev + 1);
-
-        // Pequeña pausa para no saturar el navegador
-        await new Promise(resolve => setTimeout(resolve, 100));
+        }
       }
 
       toast.success(`${quizzes.length} quizzes exportados exitosamente`);
@@ -71,26 +127,64 @@ export default function QuizExporter({ onClose }) {
     }
   };
 
-  const handleExportSingle = (quiz) => {
-    const subject = subjects.find(s => s.id === quiz.subject_id);
-    const subjectName = subject?.name || 'Sin_Materia';
-    const safeName = quiz.title.replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ\s-]/g, '').replace(/\s+/g, '_');
-    const filename = `${subjectName}_${safeName}.json`;
+  const handleExportFolder = async (courseName, subjectName, folderName, folderQuizzes) => {
+    setExporting(true);
+    setExportedCount(0);
 
-    const exportData = {
-      title: quiz.title,
-      description: quiz.description,
-      questions: quiz.questions,
-      total_questions: quiz.total_questions,
-      metadata: {
-        subject: subjectName,
-        created_date: quiz.created_date,
-        file_name: quiz.file_name
+    try {
+      for (const quiz of folderQuizzes) {
+        const safeCourse = sanitizeFilename(courseName);
+        const safeSubject = sanitizeFilename(subjectName);
+        const safeFolder = sanitizeFilename(folderName);
+        const safeQuiz = sanitizeFilename(quiz.title);
+        const filename = `${safeCourse}_${safeSubject}_${safeFolder}_${safeQuiz}.json`;
+
+        const exportData = createExportData(quiz, courseName, subjectName, folderName);
+        downloadJSON(exportData, filename);
+        setExportedCount(prev => prev + 1);
+
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
-    };
 
+      toast.success(`${folderQuizzes.length} quizzes de "${folderName}" exportados`);
+    } catch (error) {
+      console.error('Error exportando carpeta:', error);
+      toast.error('Error al exportar carpeta');
+    } finally {
+      setExporting(false);
+    }
+  };
+
+  const handleExportSingle = (quiz, courseName, subjectName, folderName) => {
+    const safeCourse = sanitizeFilename(courseName);
+    const safeSubject = sanitizeFilename(subjectName);
+    const safeFolder = sanitizeFilename(folderName);
+    const safeQuiz = sanitizeFilename(quiz.title);
+    const filename = `${safeCourse}_${safeSubject}_${safeFolder}_${safeQuiz}.json`;
+
+    const exportData = createExportData(quiz, courseName, subjectName, folderName);
     downloadJSON(exportData, filename);
     toast.success('Quiz exportado');
+  };
+
+  const toggleCourse = (courseName) => {
+    const newExpanded = new Set(expandedCourses);
+    if (newExpanded.has(courseName)) {
+      newExpanded.delete(courseName);
+    } else {
+      newExpanded.add(courseName);
+    }
+    setExpandedCourses(newExpanded);
+  };
+
+  const toggleSubject = (key) => {
+    const newExpanded = new Set(expandedSubjects);
+    if (newExpanded.has(key)) {
+      newExpanded.delete(key);
+    } else {
+      newExpanded.add(key);
+    }
+    setExpandedSubjects(newExpanded);
   };
 
   if (isLoading) {
@@ -118,7 +212,7 @@ export default function QuizExporter({ onClose }) {
           )}
         </div>
         <p className="text-sm text-gray-600 mt-2">
-          Descarga todos tus quizzes como archivos JSON individuales
+          Descarga quizzes organizados por curso, materia y carpeta
         </p>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -129,7 +223,7 @@ export default function QuizExporter({ onClose }) {
                 {quizzes.length} quizzes disponibles
               </p>
               <p className="text-sm text-indigo-700 mt-1">
-                Cada quiz se descargará como un archivo JSON independiente
+                Organizados por estructura jerárquica
               </p>
             </div>
             <Button
@@ -152,30 +246,96 @@ export default function QuizExporter({ onClose }) {
           </div>
         </div>
 
-        <div className="border rounded-lg divide-y max-h-96 overflow-y-auto">
-          {quizzes.map((quiz) => {
-            const subject = subjects.find(s => s.id === quiz.subject_id);
-            return (
-              <div key={quiz.id} className="flex items-center justify-between p-3 hover:bg-gray-50">
-                <div className="flex-1 min-w-0">
-                  <p className="font-medium text-gray-900 truncate">{quiz.title}</p>
-                  <p className="text-xs text-gray-500">
-                    {subject?.name || 'Sin materia'} • {quiz.total_questions || quiz.questions?.length || 0} preguntas
-                  </p>
+        <div className="border rounded-lg max-h-96 overflow-y-auto">
+          {Object.entries(organizedData).map(([courseName, courseData]) => (
+            <div key={courseName} className="border-b last:border-b-0">
+              <button
+                onClick={() => toggleCourse(courseName)}
+                className="w-full flex items-center gap-2 p-3 hover:bg-gray-50 text-left"
+              >
+                {expandedCourses.has(courseName) ? (
+                  <ChevronDown className="w-4 h-4 text-gray-500" />
+                ) : (
+                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                )}
+                <BookOpen className="w-4 h-4 text-indigo-600" />
+                <span className="font-semibold text-gray-900">{courseName}</span>
+                <span className="text-xs text-gray-500 ml-auto">
+                  {Object.values(courseData.subjects).reduce((acc, s) =>
+                    acc + Object.values(s.folders).reduce((a, f) => a + f.quizzes.length, 0), 0
+                  )} quizzes
+                </span>
+              </button>
+
+              {expandedCourses.has(courseName) && (
+                <div className="pl-6 bg-gray-50">
+                  {Object.entries(courseData.subjects).map(([subjectName, subjectData]) => {
+                    const subjectKey = `${courseName}-${subjectName}`;
+                    return (
+                      <div key={subjectKey} className="border-t">
+                        <button
+                          onClick={() => toggleSubject(subjectKey)}
+                          className="w-full flex items-center gap-2 p-3 hover:bg-gray-100 text-left"
+                        >
+                          {expandedSubjects.has(subjectKey) ? (
+                            <ChevronDown className="w-4 h-4 text-gray-500" />
+                          ) : (
+                            <ChevronRight className="w-4 h-4 text-gray-500" />
+                          )}
+                          <Folder className="w-4 h-4 text-blue-600" />
+                          <span className="font-medium text-gray-800">{subjectName}</span>
+                          <span className="text-xs text-gray-500 ml-auto">
+                            {Object.values(subjectData.folders).reduce((a, f) => a + f.quizzes.length, 0)} quizzes
+                          </span>
+                        </button>
+
+                        {expandedSubjects.has(subjectKey) && (
+                          <div className="pl-6 bg-white">
+                            {Object.entries(subjectData.folders).map(([folderName, folderData]) => (
+                              <div key={folderName} className="border-t p-3">
+                                <div className="flex items-center justify-between mb-2">
+                                  <div className="flex items-center gap-2">
+                                    <Folder className="w-4 h-4 text-amber-600" />
+                                    <span className="text-sm font-medium text-gray-700">{folderName}</span>
+                                    <span className="text-xs text-gray-500">({folderData.quizzes.length})</span>
+                                  </div>
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => handleExportFolder(courseName, subjectName, folderName, folderData.quizzes)}
+                                    disabled={exporting}
+                                  >
+                                    <Download className="w-3 h-3 mr-1" />
+                                    Carpeta
+                                  </Button>
+                                </div>
+                                <div className="space-y-1 ml-6">
+                                  {folderData.quizzes.map(quiz => (
+                                    <div key={quiz.id} className="flex items-center justify-between py-1 text-sm">
+                                      <span className="text-gray-600 truncate">{quiz.title}</span>
+                                      <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() => handleExportSingle(quiz, courseName, subjectName, folderName)}
+                                        disabled={exporting}
+                                        className="ml-2"
+                                      >
+                                        <FileJson className="w-3 h-3" />
+                                      </Button>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => handleExportSingle(quiz)}
-                  disabled={exporting}
-                  className="ml-2"
-                >
-                  <FileJson className="w-4 h-4 mr-1" />
-                  Descargar
-                </Button>
-              </div>
-            );
-          })}
+              )}
+            </div>
+          ))}
         </div>
       </CardContent>
     </Card>

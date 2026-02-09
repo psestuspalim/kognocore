@@ -45,9 +45,16 @@ export default function ExamOverview({ courseId, subjects, currentUser, isAdmin 
   });
 
   const getDaysRemaining = (dateString) => {
-    const examDate = parseISO(dateString);
-    const today = new Date();
-    return differenceInDays(examDate, today);
+    if (!dateString) return null;
+    try {
+      const examDate = parseISO(dateString);
+      if (isNaN(examDate.getTime())) return null;
+      const today = new Date();
+      return differenceInDays(examDate, today);
+    } catch (error) {
+      console.error('Invalid date:', dateString, error);
+      return null;
+    }
   };
 
   const getUrgencyBadge = (days) => {
@@ -63,6 +70,7 @@ export default function ExamOverview({ courseId, subjects, currentUser, isAdmin 
       ...exam,
       daysRemaining: getDaysRemaining(exam.date)
     }))
+    .filter(exam => exam.daysRemaining !== null) // Filter out invalid dates
     .sort((a, b) => a.daysRemaining - b.daysRemaining)
     .slice(0, 5);
 
@@ -77,7 +85,7 @@ export default function ExamOverview({ courseId, subjects, currentUser, isAdmin 
       exam_type: newExam.exam_type,
       date: newExam.date,
       notes: newExam.notes,
-      user_email: (isAdmin && newExam.for_all) ? null : currentUser.email
+      user_email: (isAdmin && newExam.for_all) ? null : (currentUser?.email || null)
     });
   };
 
@@ -105,7 +113,7 @@ export default function ExamOverview({ courseId, subjects, currentUser, isAdmin 
               <div className="space-y-4 mt-4">
                 <div>
                   <Label>Materia</Label>
-                  <Select value={newExam.subject_id} onValueChange={(val) => setNewExam({...newExam, subject_id: val})}>
+                  <Select value={newExam.subject_id} onValueChange={(val) => setNewExam({ ...newExam, subject_id: val })}>
                     <SelectTrigger>
                       <SelectValue placeholder="Selecciona una materia" />
                     </SelectTrigger>
@@ -120,7 +128,7 @@ export default function ExamOverview({ courseId, subjects, currentUser, isAdmin 
                 </div>
                 <div>
                   <Label>Tipo de Examen</Label>
-                  <Select value={newExam.exam_type} onValueChange={(val) => setNewExam({...newExam, exam_type: val})}>
+                  <Select value={newExam.exam_type} onValueChange={(val) => setNewExam({ ...newExam, exam_type: val })}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
@@ -138,14 +146,14 @@ export default function ExamOverview({ courseId, subjects, currentUser, isAdmin 
                   <Input
                     type="date"
                     value={newExam.date}
-                    onChange={(e) => setNewExam({...newExam, date: e.target.value})}
+                    onChange={(e) => setNewExam({ ...newExam, date: e.target.value })}
                   />
                 </div>
                 <div>
                   <Label>Notas (opcional)</Label>
                   <Input
                     value={newExam.notes}
-                    onChange={(e) => setNewExam({...newExam, notes: e.target.value})}
+                    onChange={(e) => setNewExam({ ...newExam, notes: e.target.value })}
                     placeholder="Ej: Temas 1-5"
                   />
                 </div>
@@ -155,7 +163,7 @@ export default function ExamOverview({ courseId, subjects, currentUser, isAdmin 
                       type="checkbox"
                       id="for-all"
                       checked={newExam.for_all}
-                      onChange={(e) => setNewExam({...newExam, for_all: e.target.checked})}
+                      onChange={(e) => setNewExam({ ...newExam, for_all: e.target.checked })}
                       className="rounded"
                     />
                     <Label htmlFor="for-all" className="flex items-center gap-1 cursor-pointer">
@@ -207,7 +215,15 @@ export default function ExamOverview({ courseId, subjects, currentUser, isAdmin 
                         )}
                       </div>
                       <div className="text-xs text-gray-500 mt-1">
-                        {format(parseISO(exam.date), "d 'de' MMMM, yyyy", { locale: es })}
+                        {(() => {
+                          try {
+                            const examDate = parseISO(exam.date);
+                            if (isNaN(examDate.getTime())) return 'Fecha inválida';
+                            return format(examDate, "d 'de' MMMM, yyyy", { locale: es });
+                          } catch (error) {
+                            return 'Fecha inválida';
+                          }
+                        })()}
                         {exam.notes && ` • ${exam.notes}`}
                       </div>
                     </div>

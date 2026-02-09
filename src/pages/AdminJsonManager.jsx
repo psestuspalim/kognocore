@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { client } from '@/api/client';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   FileJson, Upload, CheckCircle2, XCircle,
-  Code, Download, AlertCircle, Sparkles, FolderDown
+  Code, Download, AlertCircle, Sparkles
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { toCompactFormat, fromCompactFormat, isCompactFormat } from '../components/utils/quizFormats';
@@ -34,22 +34,18 @@ const quizSchema = z.object({
 });
 
 export default function AdminJsonManager() {
+  const queryClient = useQueryClient();
   const [jsonInput, setJsonInput] = useState('');
   const [validationResult, setValidationResult] = useState(null);
   const [formattedJson, setFormattedJson] = useState('');
   const [convertedJson, setConvertedJson] = useState('');
-  const [exporting, setExporting] = useState(false);
-  const [exportedCount, setExportedCount] = useState(0);
 
   const { data: quizzes = [], isLoading } = useQuery({
     queryKey: ['all-quizzes'],
     queryFn: () => client.entities.Quiz.list('-created_date'),
   });
 
-  const { data: subjects = [] } = useQuery({
-    queryKey: ['subjects'],
-    queryFn: () => client.entities.Subject.list(),
-  });
+
 
   const validateJson = () => {
     try {
@@ -149,76 +145,74 @@ export default function AdminJsonManager() {
   };
 
   const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
+    const files = Array.from(event.target.files);
+    if (files.length === 0) return;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setJsonInput(e.target.result);
-      toast.success('Archivo cargado');
-    };
-    reader.readAsText(file);
-  };
-
-  const handleExportAll = async () => {
-    setExporting(true);
-    setExportedCount(0);
-
-    try {
-      for (const quiz of quizzes) {
-        const subject = subjects.find(s => s.id === quiz.subject_id);
-        const subjectName = subject?.name || 'Sin_Materia';
-        const safeName = quiz.title.replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ\s-]/g, '').replace(/\s+/g, '_');
-        const filename = `${subjectName}_${safeName}.json`;
-
-        const exportData = {
-          title: quiz.title,
-          description: quiz.description,
-          questions: quiz.questions,
-          total_questions: quiz.total_questions,
-          metadata: {
-            subject: subjectName,
-            created_date: quiz.created_date,
-            file_name: quiz.file_name
-          }
-        };
-
-        downloadJSON(JSON.stringify(exportData, null, 2), filename);
-        setExportedCount(prev => prev + 1);
-
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-
-      toast.success(`${quizzes.length} quizzes exportados`);
-    } catch (error) {
-      console.error('Error exportando:', error);
-      toast.error('Error al exportar');
-    } finally {
-      setExporting(false);
+    if (files.length === 1) {
+      // Single file - load into editor
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setJsonInput(e.target.result);
+        toast.success('Archivo cargado');
+      };
+      reader.readAsText(files[0]);
+    } else {
+      // Multiple files - import directly to DB
+      handleMultipleFileImport(files);
     }
   };
 
-  const handleExportSingle = (quiz) => {
-    const subject = subjects.find(s => s.id === quiz.subject_id);
-    const subjectName = subject?.name || 'Sin_Materia';
-    const safeName = quiz.title.replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ\s-]/g, '').replace(/\s+/g, '_');
-    const filename = `${subjectName}_${safeName}.json`;
+  const handleMultipleFileImport = async (files) => {
+    let successCount = 0;
+    let errorCount = 0;
+    const errors = [];
 
-    const exportData = {
-      title: quiz.title,
-      description: quiz.description,
-      questions: quiz.questions,
-      total_questions: quiz.total_questions,
-      metadata: {
-        subject: subjectName,
-        created_date: quiz.created_date,
-        file_name: quiz.file_name
+    toast.info(`Procesando ${files.length} archivos...`);
+
+    for (const file of files) {
+      try {
+        const text = await file.text();
+        const parsed = JSON.parse(text);
+        let quizData = parsed;
+
+        // Auto-convert compact format
+        if (isCompactFormat(parsed)) {
+          quizData = fromCompactFormat(parsed);
+        }
+
+        // Basic validation
+        if (!quizData.questions || !Array.isArray(quizData.questions)) {
+          throw new Error('El JSON debe contener un array de preguntas');
+        }
+
+        // Create new quiz
+        await client.entities.Quiz.create({
+          title: quizData.title || file.name.replace('.json', ''),
+          description: quizData.description || 'Importado desde JSON',
+          subject_id: 'root',
+          questions: quizData.questions,
+          is_hidden: false,
+        });
+
+        successCount++;
+      } catch (error) {
+        errorCount++;
+        errors.push(`${file.name}: ${error.message}`);
       }
-    };
+    }
 
-    downloadJSON(JSON.stringify(exportData, null, 2), filename);
-    toast.success('Quiz exportado');
+    if (successCount > 0) {
+      toast.success(`${successCount} cuestionario(s) importado(s) exitosamente`);
+      queryClient.invalidateQueries(['quizzes']);
+    }
+
+    if (errorCount > 0) {
+      toast.error(`${errorCount} archivo(s) fallaron. Ver consola para detalles.`);
+      console.error('Errores de importación:', errors);
+    }
   };
+
+
 
   const handleImportToDb = async () => {
     try {
@@ -240,7 +234,7 @@ export default function AdminJsonManager() {
       await client.entities.Quiz.create({
         title: quizData.title || `Importado ${new Date().toLocaleDateString()}`,
         description: quizData.description || 'Importado desde JSON',
-        subject_id: subjects[0]?.id || 'root', // Default to first available subject
+        subject_id: 'root', // Default to root
         questions: quizData.questions,
         total_questions: quizData.questions.length,
         is_hidden: false,
@@ -268,7 +262,7 @@ export default function AdminJsonManager() {
       />
 
       <Tabs defaultValue="import" className="w-full">
-        <TabsList className="grid w-full grid-cols-4 mb-6">
+        <TabsList className="grid w-full grid-cols-3 mb-6">
           <TabsTrigger value="import">
             <Upload className="w-4 h-4 mr-2" />
             Importar
@@ -281,10 +275,6 @@ export default function AdminJsonManager() {
             <Sparkles className="w-4 h-4 mr-2" />
             Convertir
           </TabsTrigger>
-          <TabsTrigger value="export">
-            <FolderDown className="w-4 h-4 mr-2" />
-            Exportar
-          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="import" className="space-y-6">
@@ -293,10 +283,23 @@ export default function AdminJsonManager() {
               <CardTitle className="text-lg font-semibold">Subir Archivo JSON</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                <div className="flex items-start gap-3">
+                  <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-blue-900">Exportación de Quizzes</p>
+                    <p className="text-sm text-blue-700 mt-1">
+                      La funcionalidad de exportación ahora se encuentra en el <strong>Dashboard Admin</strong> con organización jerárquica mejorada (Curso → Materia → Carpeta).
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <div className="border-2 border-dashed border-muted rounded-xl p-8 text-center hover:border-primary/50 transition-colors">
                 <input
                   type="file"
                   accept=".json"
+                  multiple
                   onChange={handleFileUpload}
                   className="hidden"
                   id="json-upload"
@@ -418,66 +421,7 @@ export default function AdminJsonManager() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="export" className="space-y-6">
-          <Card className="rounded-2xl">
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold">Exportar Quizzes</CardTitle>
-              <p className="text-sm text-muted-foreground mt-2">
-                Descarga todos los quizzes como archivos JSON
-              </p>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-muted rounded-xl p-4">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="font-medium">{quizzes.length} quizzes disponibles</p>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Cada quiz se descargará como archivo JSON independiente
-                    </p>
-                  </div>
-                  <Button
-                    onClick={handleExportAll}
-                    disabled={exporting || quizzes.length === 0}
-                  >
-                    {exporting ? (
-                      <>Exportando {exportedCount}/{quizzes.length}</>
-                    ) : (
-                      <>
-                        <Download className="w-4 h-4 mr-2" />
-                        Exportar todos
-                      </>
-                    )}
-                  </Button>
-                </div>
-              </div>
 
-              <div className="border rounded-xl divide-y max-h-96 overflow-y-auto">
-                {quizzes.map((quiz) => {
-                  const subject = subjects.find(s => s.id === quiz.subject_id);
-                  return (
-                    <div key={quiz.id} className="flex items-center justify-between p-3 hover:bg-muted/50">
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium truncate">{quiz.title}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {subject?.name || 'Sin materia'} • {quiz.total_questions || quiz.questions?.length || 0} preguntas
-                        </p>
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleExportSingle(quiz)}
-                        disabled={exporting}
-                      >
-                        <FileJson className="w-4 h-4 mr-1" />
-                        Descargar
-                      </Button>
-                    </div>
-                  );
-                })}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
       </Tabs>
     </AdminShell>
   );

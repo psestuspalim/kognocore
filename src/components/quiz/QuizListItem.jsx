@@ -10,12 +10,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { motion } from 'framer-motion';
 
-export default function QuizListItem({ 
-  quiz, 
-  attempts = [], 
-  isAdmin, 
-  onStart, 
-  onEdit, 
+export default function QuizListItem({
+  quiz,
+  attempts = [],
+  isAdmin,
+  onStart,
+  onEdit,
   onDelete,
   onStartSwipe,
   onMove,
@@ -24,17 +24,17 @@ export default function QuizListItem({
 }) {
   const totalQuestions = quiz.total_questions || quiz.questions?.length || 0;
   const hasAttempts = attempts.length > 0;
-  
+
   // Calcular estadísticas
   const wrongSet = new Set();
   const correctSet = new Set();
   let totalAnswered = 0;
-  
+
   attempts.forEach(attempt => {
     totalAnswered += attempt.answered_questions || attempt.total_questions || 0;
     attempt.wrong_questions?.forEach(wq => wrongSet.add(wq.question));
   });
-  
+
   // Calcular correctas únicas (preguntas que nunca se han fallado)
   const allQuestions = quiz.questions?.map(q => q.question) || [];
   allQuestions.forEach(q => {
@@ -44,16 +44,16 @@ export default function QuizListItem({
       if (wasAnswered) correctSet.add(q);
     }
   });
-  
+
   const uniqueWrong = wrongSet.size;
   const uniqueCorrect = correctSet.size;
-  const avgScore = attempts.length > 0 
+  const avgScore = attempts.length > 0
     ? Math.round(attempts.reduce((sum, a) => sum + ((a.score / a.total_questions) * 100), 0) / attempts.length)
     : 0;
   const bestScore = attempts.length > 0
     ? Math.round(Math.max(...attempts.map(a => (a.score / a.total_questions) * 100)))
     : 0;
-  const progressPercent = totalQuestions > 0 
+  const progressPercent = totalQuestions > 0
     ? Math.min(100, Math.round(((uniqueCorrect + uniqueWrong) / totalQuestions) * 100))
     : 0;
 
@@ -65,8 +65,8 @@ export default function QuizListItem({
 
   const getBorderColor = () => {
     if (!hasAttempts) return 'border-gray-200 hover:border-indigo-300';
-    if (avgScore >= 80) return 'border-green-200 hover:border-green-400 bg-green-50/30';
-    if (avgScore >= 50) return 'border-yellow-200 hover:border-yellow-400 bg-yellow-50/30';
+    if (bestScore >= 80) return 'border-green-200 hover:border-green-400 bg-green-50/30';
+    if (bestScore >= 50) return 'border-yellow-200 hover:border-yellow-400 bg-yellow-50/30';
     return 'border-red-200 hover:border-red-400 bg-red-50/30';
   };
 
@@ -87,7 +87,7 @@ export default function QuizListItem({
           onClick={(e) => e.stopPropagation()}
         />
       )}
-      
+
       {/* Indicador de progreso circular */}
       <div className="relative flex-shrink-0">
         <svg className="w-12 h-12 transform -rotate-90">
@@ -103,15 +103,15 @@ export default function QuizListItem({
             cx="24"
             cy="24"
             r="20"
-            stroke={avgScore >= 80 ? '#22c55e' : avgScore >= 50 ? '#eab308' : avgScore > 0 ? '#ef4444' : '#6366f1'}
+            stroke={bestScore >= 80 ? '#22c55e' : bestScore >= 50 ? '#eab308' : bestScore > 0 ? '#ef4444' : '#6366f1'}
             strokeWidth="4"
             fill="none"
-            strokeDasharray={`${(progressPercent / 100) * 125.6} 125.6`}
+            strokeDasharray={`${(bestScore / 100) * 125.6} 125.6`}
             strokeLinecap="round"
           />
         </svg>
-        <span className={`absolute inset-0 flex items-center justify-center text-xs font-bold ${hasAttempts ? getScoreColor(avgScore) : 'text-gray-400'}`}>
-          {hasAttempts ? `${avgScore}%` : 'Nuevo'}
+        <span className={`absolute inset-0 flex items-center justify-center text-xs font-bold ${hasAttempts ? getScoreColor(bestScore) : 'text-gray-400'}`}>
+          {hasAttempts ? `${bestScore}%` : 'Nuevo'}
         </span>
       </div>
 
@@ -125,14 +125,14 @@ export default function QuizListItem({
             <Badge variant="outline" className="text-xs bg-gray-100">🔒</Badge>
           )}
         </div>
-        
+
         {/* Stats en línea */}
         <div className="flex items-center gap-3 mt-1 text-xs">
           <span className="flex items-center gap-1 text-gray-500">
             <HelpCircle className="w-3 h-3" />
             {totalQuestions}
           </span>
-          
+
           {hasAttempts && (
             <>
               <span className="flex items-center gap-1 text-green-600">
@@ -156,14 +156,13 @@ export default function QuizListItem({
       <div className="hidden sm:flex items-center gap-2">
         {hasAttempts ? (
           <>
-            <Badge 
-              className={`text-xs ${
-                avgScore >= 80 
-                  ? 'bg-green-100 text-green-700 border-green-300' 
-                  : avgScore >= 50 
+            <Badge
+              className={`text-xs ${avgScore >= 80
+                  ? 'bg-green-100 text-green-700 border-green-300'
+                  : avgScore >= 50
                     ? 'bg-yellow-100 text-yellow-700 border-yellow-300'
                     : 'bg-red-100 text-red-700 border-red-300'
-              }`}
+                }`}
             >
               {progressPercent}% completado
             </Badge>
@@ -187,7 +186,7 @@ export default function QuizListItem({
         >
           <Smartphone className="w-4 h-4" />
         </Button>
-        
+
         {isAdmin && (
           <>
             {onMove && (

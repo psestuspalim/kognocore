@@ -6,17 +6,21 @@ import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
-export default function AdminDashboardCard({ 
-  title, 
-  description, 
-  count, 
-  items = [], 
-  primaryActionLabel, 
+export default function AdminDashboardCard({
+  title,
+  description,
+  count,
+  items = [],
+  stats = [], // New: array of {label, value} objects
+  primaryActionLabel,
   primaryActionTo,
   icon: Icon,
   countColor = 'text-primary',
-  iconColor = 'text-primary'
+  iconColor = 'text-primary',
+  variant = 'default' // 'default' or 'stats'
 }) {
+  const isStatsMode = variant === 'stats' || (stats.length > 0 && items.length === 0);
+
   return (
     <Card className="hover:shadow-lg hover:border-primary/30 transition-all rounded-2xl">
       <CardHeader className="pb-4">
@@ -38,7 +42,20 @@ export default function AdminDashboardCard({
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
-        {items.length > 0 && (
+        {/* Stats Mode - Show statistics grid */}
+        {isStatsMode && stats.length > 0 && (
+          <div className="grid grid-cols-2 gap-3">
+            {stats.map((stat, idx) => (
+              <div key={idx} className="bg-muted/50 rounded-lg p-3 text-center">
+                <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+                <p className="text-xs text-muted-foreground mt-1">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Default Mode - Show items list */}
+        {!isStatsMode && items.length > 0 && (
           <div className="space-y-2">
             {items.map((item, idx) => (
               <div key={idx} className="flex items-center justify-between py-2 border-b last:border-0 text-sm">
@@ -58,7 +75,8 @@ export default function AdminDashboardCard({
           </div>
         )}
 
-        {items.length === 0 && (
+        {/* Empty state */}
+        {!isStatsMode && items.length === 0 && stats.length === 0 && (
           <div className="text-center py-8 text-muted-foreground text-sm">
             <div className="w-12 h-12 rounded-xl bg-muted mx-auto mb-3 flex items-center justify-center">
               {Icon && <Icon className="w-6 h-6 text-muted-foreground/50" />}

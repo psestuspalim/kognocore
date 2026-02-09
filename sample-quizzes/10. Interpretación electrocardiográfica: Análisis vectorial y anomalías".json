@@ -1,0 +1,667 @@
+{
+  "metadata": {
+    "title": "Interpretación electrocardiográfica: Análisis vectorial y anomalías",
+    "source": "10.md",
+    "date": "2026-02-01",
+    "total": 50,
+    "sj": "FIS",
+    "tp": "ECG_VECTORIAL",
+    "dist": {
+      "d1": 0.30,
+      "d2": 0.40,
+      "d3": 0.30
+    }
+  },
+  "q": [
+    {
+      "id": "FIS-ECG_VECTORIAL-001",
+      "sb": "conceptos_basicos",
+      "x": "¿Qué propiedad física del potencial eléctrico representa la longitud de un vector en el análisis electrocardiográfico?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "El voltaje del potencial", "c": true, "r": "Correcto. Por convención, la longitud de la flecha es proporcional a la magnitud del voltaje generado.", "et": null },
+        { "l": "B", "t": "La duración del impulso", "c": false, "r": "Incorrecto. La duración se mide en el eje horizontal del papel, no por la longitud espacial del vector.", "et": "conceptual" },
+        { "l": "C", "t": "La resistencia del tejido", "c": false, "r": "Incorrecto. La resistencia afecta al flujo, pero el vector grafica el potencial resultante.", "et": "plausible_distractor" },
+        { "l": "D", "t": "La frecuencia de disparo", "c": false, "r": "Incorrecto. La frecuencia se relaciona con la periodicidad, no con la magnitud instantánea del vector.", "et": "recall" },
+        { "l": "E", "t": "El ángulo de despolarización", "c": false, "r": "Incorrecto. El ángulo está representado por la orientación de la flecha, no por su longitud.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-002",
+      "sb": "derivaciones",
+      "x": "¿Cuál es la dirección angular asignada al eje positivo de la derivación II en el sistema de referencia hexagonal?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "+60 grados", "c": true, "r": "Correcto. Se extiende desde el brazo derecho hacia la pierna izquierda, formando este ángulo respecto a la horizontal.", "et": null },
+        { "l": "B", "t": "0 grados", "c": false, "r": "Incorrecto. Esta dirección corresponde a la Derivación I.", "et": "recall" },
+        { "l": "C", "t": "+90 grados", "c": false, "r": "Incorrecto. Esta dirección vertical corresponde a la derivación aVF.", "et": "recall" },
+        { "l": "D", "t": "+120 grados", "c": false, "r": "Incorrecto. Esta dirección corresponde a la Derivación III.", "et": "recall" },
+        { "l": "E", "t": "-30 grados", "c": false, "r": "Incorrecto. Esta dirección corresponde a la derivación aVL.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-003",
+      "sb": "normal_qrs",
+      "x": "¿Hacia dónde señala el vector medio instantáneo durante la fase principal de la despolarización ventricular normal?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Desde la base hacia la punta", "c": true, "r": "Correcto. La corriente fluye mayoritariamente en esta dirección, generando un vector medio de aproximadamente +59 grados.", "et": null },
+        { "l": "B", "t": "Desde la punta hacia la base", "c": false, "r": "Incorrecto. Esta dirección es característica de la repolarización o de vectores finales, no de la despolarización media.", "et": "conceptual" },
+        { "l": "C", "t": "Desde el endocardio hacia el centro", "c": false, "r": "Incorrecto. La despolarización se aleja del centro hacia el epicardio.", "et": "mechanistic" },
+        { "l": "D", "t": "Horizontalmente hacia la derecha", "c": false, "r": "Incorrecto. Esto indicaría una desviación extrema o dextrocardia; lo normal es hacia la izquierda e inferior.", "et": "spatial" },
+        { "l": "E", "t": "Verticalmente hacia el cuello", "c": false, "r": "Incorrecto. Esto correspondería a un eje de -90 grados, completamente anormal.", "et": "spatial" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-004",
+      "sb": "normal_qrs",
+      "x": "¿Qué evento fisiológico ocurre aproximadamente a los 0,01 segundos del inicio del complejo QRS?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Despolarización de la superficie izquierda del tabique", "c": true, "r": "Correcto. Es el primer evento, generando un vector corto debido a la pequeña masa muscular involucrada.", "et": null },
+        { "l": "B", "t": "Activación total de la masa ventricular", "c": false, "r": "Incorrecto. Esto ocurre más tarde, hacia los 0,06 segundos.", "et": "sequence" },
+        { "l": "C", "t": "Repolarización de la punta cardíaca", "c": false, "r": "Incorrecto. La repolarización es un evento mucho más tardío (onda T).", "et": "conceptual" },
+        { "l": "D", "t": "Despolarización de la base del ventrículo izquierdo", "c": false, "r": "Incorrecto. La base se despolariza al final del complejo QRS, no al inicio.", "et": "sequence" },
+        { "l": "E", "t": "Cierre de las válvulas auriculoventriculares", "c": false, "r": "Incorrecto. Es un evento mecánico, no el evento eléctrico primario de los 0,01 s.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-005",
+      "sb": "repolarizacion",
+      "x": "¿Por qué la onda T es normalmente positiva en las derivaciones bipolares estándar a pesar de representar la repolarización?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "La repolarización ocurre primero en la punta y avanza hacia la base", "c": true, "r": "Correcto. El vector va de zonas repolarizadas (positivas) a despolarizadas (negativas), apuntando hacia la punta.", "et": null },
+        { "l": "B", "t": "El tabique se repolariza antes que las paredes libres", "c": false, "r": "Incorrecto. La secuencia septal no determina el vector principal de la onda T positiva.", "et": "mechanistic" },
+        { "l": "C", "t": "La base del corazón permanece refractaria más tiempo", "c": false, "r": "Incorrecto. Es el endocardio el que tiende a repolarizarse al final, no la base per se como causa primaria.", "et": "conceptual" },
+        { "l": "D", "t": "El vector de repolarización tiene la misma dirección de propagación que el de despolarización", "c": false, "r": "Incorrecto. La propagación es inversa (epicardio a endocardio), lo que mantiene la polaridad del vector.", "et": "conceptual" },
+        { "l": "E", "t": "La presión intraventricular acelera la repolarización endocárdica", "c": false, "r": "Incorrecto. La alta presión retrasa, no acelera, la repolarización endocárdica.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-006",
+      "sb": "eje_electrico",
+      "x": "¿Cuál es el rango angular considerado normal para el eje eléctrico medio de los ventrículos?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Entre +20 y +100 grados", "c": true, "r": "Correcto. Variaciones dentro de este rango se consideran fisiológicas dependiendo de la constitución física.", "et": null },
+        { "l": "B", "t": "Entre -30 y +10 grados", "c": false, "r": "Incorrecto. Esto indica una desviación a la izquierda.", "et": "recall" },
+        { "l": "C", "t": "Entre +100 y +180 grados", "c": false, "r": "Incorrecto. Corresponde a una desviación marcada a la derecha.", "et": "recall" },
+        { "l": "D", "t": "Entre -90 y 0 grados", "c": false, "r": "Incorrecto. Es el cuadrante superior izquierdo, patológico.", "et": "spatial" },
+        { "l": "E", "t": "Exactamente +59 grados sin variación", "c": false, "r": "Incorrecto. +59 es el promedio, pero existe un rango de normalidad.", "et": "absolute" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-007",
+      "sb": "eje_desviacion",
+      "x": "¿Qué condición anatómica provoca una desviación fisiológica del eje eléctrico hacia la izquierda?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Obesidad y compresión diafragmática", "c": true, "r": "Correcto. El contenido abdominal empuja el diafragma y rota el corazón hacia una posición más horizontal.", "et": null },
+        { "l": "B", "t": "Inspiración profunda", "c": false, "r": "Incorrecto. La inspiración desciende el diafragma y verticaliza el corazón, desviando el eje a la derecha.", "et": "conceptual" },
+        { "l": "C", "t": "Constitución asténica o delgada", "c": false, "r": "Incorrecto. En personas delgadas el corazón cuelga verticalmente, desviando el eje a la derecha.", "et": "recall" },
+        { "l": "D", "t": "Hipertrofia ventricular derecha", "c": false, "r": "Incorrecto. Esta patología desvía el eje a la derecha, no a la izquierda.", "et": "pathology" },
+        { "l": "E", "t": "Estenosis de la válvula pulmonar", "c": false, "r": "Incorrecto. Causa hipertrofia derecha y desviación a la derecha.", "et": "pathology" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-008",
+      "sb": "hipertrofia",
+      "x": "¿Qué patología es una causa común de hipertrofia ventricular izquierda y consiguiente desviación del eje a la izquierda?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Hipertensión arterial sistémica", "c": true, "r": "Correcto. El ventrículo debe trabajar contra una poscarga elevada, aumentando su masa muscular.", "et": null },
+        { "l": "B", "t": "Tetralogía de Fallot", "c": false, "r": "Incorrecto. Esta condición congénita causa hipertrofia ventricular derecha.", "et": "recall" },
+        { "l": "C", "t": "Estenosis valvular pulmonar", "c": false, "r": "Incorrecto. Afecta al ventrículo derecho, causando desviación a la derecha.", "et": "recall" },
+        { "l": "D", "t": "Comunicación interventricular", "c": false, "r": "Incorrecto. Generalmente sobrecarga el ventrículo derecho, desviando el eje a la derecha.", "et": "recall" },
+        { "l": "E", "t": "Enfisema pulmonar", "c": false, "r": "Incorrecto. Aunque afecta la posición, no causa hipertrofia izquierda primaria (suele causar cor pulmonale/derecha).", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-009",
+      "sb": "bloqueos",
+      "x": "¿Cómo afecta el bloqueo de la rama izquierda del haz al eje eléctrico medio del corazón?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Desviación intensa hacia la izquierda (aprox. -50 grados)", "c": true, "r": "Correcto. El ventrículo derecho se despolariza primero, y el vector final potente se dirige lento hacia el izquierdo bloqueado.", "et": null },
+        { "l": "B", "t": "Desviación intensa hacia la derecha (aprox. +105 grados)", "c": false, "r": "Incorrecto. Este patrón corresponde al bloqueo de rama derecha.", "et": "recall" },
+        { "l": "C", "t": "Sin cambios significativos en el eje", "c": false, "r": "Incorrecto. Los bloqueos de rama alteran profundamente la secuencia y el eje resultante.", "et": "conceptual" },
+        { "l": "D", "t": "Eje verticalizado a +90 grados", "c": false, "r": "Incorrecto. No es característico del bloqueo de rama izquierda.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Inversión total del vector a -150 grados", "c": false, "r": "Incorrecto. Una desviación tan extrema sugiere toxicidad o error de electrodos, no solo LBBB.", "et": "exaggeration" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-010",
+      "sb": "voltaje",
+      "x": "¿Qué criterio define un ECG de alto voltaje en las derivaciones bipolares estándar?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "La suma de voltajes QRS I, II y III es mayor de 4 mV", "c": true, "r": "Correcto. Es el umbral cuantitativo para considerar alto voltaje, indicativo de hipertrofia.", "et": null },
+        { "l": "B", "t": "Cualquier onda R supera los 1 mV", "c": false, "r": "Incorrecto. Una onda R de 1 mV es normal en muchas derivaciones.", "et": "recall" },
+        { "l": "C", "t": "La suma de voltajes es menor a 0,5 mV", "c": false, "r": "Incorrecto. Esto define un ECG de bajo voltaje.", "et": "opposite" },
+        { "l": "D", "t": "La onda T supera en voltaje al complejo QRS", "c": false, "r": "Incorrecto. Se refiere a la repolarización, no al criterio estándar de alto voltaje QRS.", "et": "conceptual" },
+        { "l": "E", "t": "Presencia de ondas Q profundas en todas las derivaciones", "c": false, "r": "Incorrecto. Las ondas Q patológicas indican necrosis, no alto voltaje por masa.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-011",
+      "sb": "voltaje",
+      "x": "¿Qué mecanismo explica la disminución del voltaje del ECG en pacientes con enfisema pulmonar?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "El aire pulmonar excesivo actúa como aislante eléctrico", "c": true, "r": "Correcto. El aire tiene baja conductividad, impidiendo que los potenciales cardíacos lleguen a la superficie corporal.", "et": null },
+        { "l": "B", "t": "La masa muscular cardíaca se atrofia rápidamente", "c": false, "r": "Incorrecto. El enfisema no causa atrofia miocárdica directa aguda.", "et": "mechanistic" },
+        { "l": "C", "t": "El diafragma elevado cortocircuita los potenciales", "c": false, "r": "Incorrecto. En enfisema el diafragma desciende, no se eleva, y no cortocircuita.", "et": "conceptual" },
+        { "l": "D", "t": "La acumulación de líquido pericárdico neutraliza la carga", "c": false, "r": "Incorrecto. Esto describe el derrame pericárdico, una patología distinta.", "et": "confusion" },
+        { "l": "E", "t": "La destrucción alveolar genera corrientes opuestas", "c": false, "r": "Incorrecto. El daño pulmonar no genera contracorrientes eléctricas medibles en el ECG.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-012",
+      "sb": "qrs_anomalo",
+      "x": "¿Qué duración del complejo QRS se considera definitivamente patológica?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Superior a 0,12 segundos", "c": true, "r": "Correcto. Indica un retraso significativo en la conducción ventricular, como bloqueos de rama o destrucción muscular.", "et": null },
+        { "l": "B", "t": "Entre 0,06 y 0,08 segundos", "c": false, "r": "Incorrecto. Este es el rango de duración normal.", "et": "recall" },
+        { "l": "C", "t": "Exactamente 0,04 segundos", "c": false, "r": "Incorrecto. Demasiado rápido, pero no es el umbral de patología por prolongación.", "et": "recall" },
+        { "l": "D", "t": "Entre 0,09 y 0,10 segundos", "c": false, "r": "Incorrecto. Se considera prolongación anormal pero no necesariamente patológica grave.", "et": "classification" },
+        { "l": "E", "t": "Menor a 0,05 segundos", "c": false, "r": "Incorrecto. Sería una conducción supernormal, no el criterio de bloqueo.", "et": "opposite" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-013",
+      "sb": "corriente_lesion",
+      "x": "¿En qué momento del ciclo cardíaco desaparece momentáneamente la corriente de lesión?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Al final del complejo QRS (punto J)", "c": true, "r": "Correcto. En este punto, todo el ventrículo está despolarizado, igualando el potencial entre zona sana y lesionada.", "et": null },
+        { "l": "B", "t": "Durante el intervalo T-P", "c": false, "r": "Incorrecto. Es precisamente cuando la corriente de lesión fluye, ya que el tejido sano está repolarizado y el lesionado no.", "et": "mechanistic" },
+        { "l": "C", "t": "En el pico de la onda R", "c": false, "r": "Incorrecto. Aún existen diferencias de potencial significativas entre regiones.", "et": "sequence" },
+        { "l": "D", "t": "Al inicio de la onda P", "c": false, "r": "Incorrecto. El ventrículo está en diástole (repolarizado) y la corriente de lesión está activa.", "et": "sequence" },
+        { "l": "E", "t": "Durante el segmento S-T completo", "c": false, "r": "Incorrecto. El segmento ST muestra el desplazamiento causado por la lesión, no la desaparición de la corriente.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-014",
+      "sb": "punto_j",
+      "x": "¿Cuál es la utilidad principal del punto J en el análisis de la isquemia?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Establecer el nivel de referencia de potencial cero", "c": true, "r": "Correcto. Permite medir la desviación del segmento TP o ST para cuantificar el potencial de lesión.", "et": null },
+        { "l": "B", "t": "Determinar la duración de la despolarización auricular", "c": false, "r": "Incorrecto. El punto J es ventricular, posterior al QRS.", "et": "conceptual" },
+        { "l": "C", "t": "Medir la velocidad de conducción del haz de His", "c": false, "r": "Incorrecto. Se mide con el intervalo PR, no con el punto J.", "et": "recall" },
+        { "l": "D", "t": "Identificar el inicio de la repolarización auricular", "c": false, "r": "Incorrecto. La repolarización auricular ocurre dentro del QRS, antes del punto J.", "et": "sequence" },
+        { "l": "E", "t": "Calcular la frecuencia cardíaca máxima", "c": false, "r": "Incorrecto. Irrelevante para el cálculo de frecuencia.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-015",
+      "sb": "onda_t",
+      "x": "¿Qué alteración de la onda T es característica de la toxicidad por digital?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Onda T bifásica o invertida", "c": true, "r": "Correcto. La digital prolonga desproporcionadamente la despolarización, alterando el vector de repolarización.", "et": null },
+        { "l": "B", "t": "Onda T alta y picuda", "c": false, "r": "Incorrecto. Típico de hiperpotasemia, no de digital.", "et": "pathology" },
+        { "l": "C", "t": "Desaparición total de la onda T", "c": false, "r": "Incorrecto. La onda T persiste, aunque deformada.", "et": "exaggeration" },
+        { "l": "D", "t": "Onda T idéntica al complejo QRS", "c": false, "r": "Incorrecto. La digital suele invertir la polaridad respecto a lo normal.", "et": "conceptual" },
+        { "l": "E", "t": "Fusión de la onda T con la P", "c": false, "r": "Incorrecto. Fenómeno de taquicardia, no específico de toxicidad química.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-016",
+      "sb": "vectocardiograma",
+      "x": "¿Qué representa la figura elíptica trazada en un vectocardiograma QRS?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Los cambios de voltaje y dirección del vector durante el ciclo", "c": true, "r": "Correcto. Es el rastro de los extremos positivos de los vectores secuenciales.", "et": null },
+        { "l": "B", "t": "La presión intraventricular frente al volumen", "c": false, "r": "Incorrecto. Eso es un bucle presión-volumen mecánico, no eléctrico.", "et": "conceptual" },
+        { "l": "C", "t": "La velocidad del flujo sanguíneo aórtico", "c": false, "r": "Incorrecto. Medición hemodinámica, no electrofisiológica.", "et": "conceptual" },
+        { "l": "D", "t": "El movimiento mecánico de la pared cardíaca", "c": false, "r": "Incorrecto. Eso se vería en un ecocardiograma, no en un vectocardiograma.", "et": "confusion" },
+        { "l": "E", "t": "La secuencia de apertura valvular", "c": false, "r": "Incorrecto. Evento mecánico no registrado directamente por vectores eléctricos.", "et": "confusion" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-017",
+      "sb": "bloqueos",
+      "x": "¿Por qué se prolonga el complejo QRS en el bloqueo del sistema de Purkinje?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "El impulso debe viajar a través del músculo ventricular lentamente", "c": true, "r": "Correcto. La conducción muscular es mucho más lenta que la del sistema especializado de Purkinje.", "et": null },
+        { "l": "B", "t": "Aumenta la velocidad de conducción nodal AV", "c": false, "r": "Incorrecto. El nodo AV es previo al bloqueo y no afecta la anchura del QRS.", "et": "location" },
+        { "l": "C", "t": "Hay una repolarización prematura del tabique", "c": false, "r": "Incorrecto. La repolarización afecta a la onda T o segmento ST, no a la duración QRS.", "et": "conceptual" },
+        { "l": "D", "t": "El impulso se detiene completamente en el nodo sinusal", "c": false, "r": "Incorrecto. Eso causaría asistolia o ritmo de escape, no QRS ancho.", "et": "pathology" },
+        { "l": "E", "t": "Se activan vías accesorias rápidas", "c": false, "r": "Incorrecto. Las vías accesorias (Wolff-Parkinson-White) suelen acortar el PR y empastar el inicio (onda delta), no es el mecanismo de bloqueo.", "et": "pathology" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-018",
+      "sb": "onda_p",
+      "x": "¿Por qué la onda T auricular raramente se observa en un ECG normal?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Queda oscurecida por el complejo QRS ventricular", "c": true, "r": "Correcto. Ocurre simultáneamente con la despolarización ventricular, cuyo voltaje es mucho mayor.", "et": null },
+        { "l": "B", "t": "Las aurículas no se repolarizan", "c": false, "r": "Incorrecto. Todo tejido excitable debe repolarizarse.", "et": "conceptual" },
+        { "l": "C", "t": "Su voltaje es siempre cero", "c": false, "r": "Incorrecto. Tiene voltaje, pero es bajo y oculto.", "et": "conceptual" },
+        { "l": "D", "t": "Ocurre durante el segmento ST", "c": false, "r": "Incorrecto. Ocurre durante el QRS, antes del ST.", "et": "sequence" },
+        { "l": "E", "t": "Se fusiona con la onda U", "c": false, "r": "Incorrecto. La onda U es un evento ventricular tardío.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-019",
+      "sb": "corriente_lesion",
+      "x": "¿Hacia dónde apunta el extremo negativo del vector de lesión en un infarto de pared anterior?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Hacia el ventrículo izquierdo", "c": false, "r": "Incorrecto. El vector de lesión apunta *desde* la zona sana *hacia* la lesionada (o el vector resultante se aleja). En términos de potencial J, el vector de *corriente de lesión* se define comúnmente apuntando hacia la zona sana, pero el vector *QRS* se aleja de la zona muerta.", "et": "complexity" },
+        { "l": "B", "t": "Hacia la pared anterior del corazón", "c": true, "r": "Correcto (Interpretación del texto). El texto especifica que el extremo negativo se dirige hacia el ventrículo izquierdo en trombosis anterior. *Nota técnica: La corriente fluye de lo despolarizado (lesión) a lo polarizado (sano), generando negatividad en el electrodo que mira la lesión.*", "et": null },
+        { "l": "C", "t": "Hacia la base del corazón", "c": false, "r": "Incorrecto. Dirección típica de infartos basales o posteriores.", "et": "spatial" },
+        { "l": "D", "t": "Hacia el brazo derecho", "c": false, "r": "Incorrecto. Dirección típica de la derivación aVR.", "et": "spatial" },
+        { "l": "E", "t": "Verticalmente hacia abajo", "c": false, "r": "Incorrecto. Dirección de la cara inferior.", "et": "spatial" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-020",
+      "sb": "derivaciones",
+      "x": "¿Cuál es el eje de la derivación aVL?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "-30 grados", "c": true, "r": "Correcto. Apunta hacia el brazo izquierdo, arriba de la horizontal.", "et": null },
+        { "l": "B", "t": "+30 grados", "c": false, "r": "Incorrecto. Dirección entre I y II.", "et": "recall" },
+        { "l": "C", "t": "-150 grados", "c": false, "r": "Incorrecto. Dirección opuesta a +30.", "et": "recall" },
+        { "l": "D", "t": "+210 grados", "c": false, "r": "Incorrecto. Corresponde a aVR.", "et": "recall" },
+        { "l": "E", "t": "+90 grados", "c": false, "r": "Incorrecto. Corresponde a aVF.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-021",
+      "sb": "normal_qrs",
+      "x": "¿Qué ocurre con el vector cardíaco a los 0,06 segundos en un corazón normal?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Se hace cero porque toda la masa está despolarizada", "c": true, "r": "Correcto. No hay diferencias de potencial entre regiones ventriculares en este instante.", "et": null },
+        { "l": "B", "t": "Alcanza su magnitud máxima", "c": false, "r": "Incorrecto. El máximo ocurre alrededor de los 0,02-0,03 s.", "et": "sequence" },
+        { "l": "C", "t": "Apunta directamente a la aurícula derecha", "c": false, "r": "Incorrecto. El vector final suele apuntar a la base izquierda.", "et": "spatial" },
+        { "l": "D", "t": "Comienza a representar la repolarización", "c": false, "r": "Incorrecto. Aún es fase de despolarización (final QRS).", "et": "sequence" },
+        { "l": "E", "t": "Se invierte hacia la punta", "c": false, "r": "Incorrecto. Hacia la punta es el inicio/medio, no el final.", "et": "spatial" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-022",
+      "sb": "repolarizacion",
+      "x": "¿Por qué la repolarización ventricular avanza desde el epicardio hacia el endocardio?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "La alta presión sistólica reduce el flujo coronario subendocárdico", "c": true, "r": "Correcto. Esto retrasa la repolarización en el endocardio, permitiendo que el epicardio se recupere primero.", "et": null },
+        { "l": "B", "t": "El sistema de Purkinje está más concentrado en el epicardio", "c": false, "r": "Incorrecto. Las fibras de Purkinje son subendocárdicas.", "et": "anatomy" },
+        { "l": "C", "t": "La temperatura es mayor en la superficie del corazón", "c": false, "r": "Incorrecto. No hay gradiente térmico significativo que cause este fenómeno.", "et": "plausible_distractor" },
+        { "l": "D", "t": "El pericardio secreta iones que aceleran el proceso", "c": false, "r": "Incorrecto. Fisiología inventada.", "et": "fiction" },
+        { "l": "E", "t": "El epicardio tiene menos canales de potasio", "c": false, "r": "Incorrecto. Si tuviera menos, la repolarización sería más lenta, no más rápida.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-023",
+      "sb": "voltaje",
+      "x": "¿Qué condición puede simular un bajo voltaje generalizado sin que exista patología cardíaca intrínseca?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Derrame pleural masivo", "c": true, "r": "Correcto. El líquido en la pleura conduce la electricidad lejos de los electrodos superficiales («cortocircuito»).", "et": null },
+        { "l": "B", "t": "Hipertrofia ventricular concéntrica", "c": false, "r": "Incorrecto. La hipertrofia causa alto voltaje.", "et": "opposite" },
+        { "l": "C", "t": "Bloqueo de rama derecha", "c": false, "r": "Incorrecto. Altera el eje y duración, no necesariamente baja el voltaje global.", "et": "conceptual" },
+        { "l": "D", "t": "Taquicardia sinusal", "c": false, "r": "Incorrecto. Afecta la frecuencia, no la amplitud del QRS.", "et": "conceptual" },
+        { "l": "E", "t": "Isquemia subendocárdica", "c": false, "r": "Incorrecto. Afecta al segmento ST, no reduce el voltaje total QRS drásticamente.", "et": "pathology" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-024",
+      "sb": "bloqueos",
+      "x": "¿Cuál es el eje eléctrico aproximado en un bloqueo de la rama derecha del haz?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "+105 grados (Desviación a la derecha)", "c": true, "r": "Correcto. El ventrículo izquierdo se despolariza primero y el vector final potente apunta al ventrículo derecho retrasado.", "et": null },
+        { "l": "B", "t": "-50 grados (Desviación a la izquierda)", "c": false, "r": "Incorrecto. Típico de bloqueo de rama izquierda.", "et": "opposite" },
+        { "l": "C", "t": "+60 grados (Normal)", "c": false, "r": "Incorrecto. El bloqueo de rama altera significativamente el eje.", "et": "recall" },
+        { "l": "D", "t": "0 grados (Horizontal)", "c": false, "r": "Incorrecto. Demasiado neutral para un bloqueo derecho importante.", "et": "recall" },
+        { "l": "E", "t": "-90 grados (Extremo)", "c": false, "r": "Incorrecto. Desviación extrema no característica.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-025",
+      "sb": "onda_p",
+      "x": "¿Por qué la onda P es habitualmente positiva en las derivaciones I, II y III?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "La despolarización comienza en el nódulo sinusal y baja hacia la punta", "c": true, "r": "Correcto. El vector auricular general sigue la dirección de los ejes positivos de estas derivaciones.", "et": null },
+        { "l": "B", "t": "La repolarización auricular es positiva", "c": false, "r": "Incorrecto. La repolarización auricular es negativa (aunque oculta).", "et": "conceptual" },
+        { "l": "C", "t": "El nódulo AV dispara antes que el sinusal", "c": false, "r": "Incorrecto. Eso sería un ritmo nodal y la P sería negativa o ausente.", "et": "pathology" },
+        { "l": "D", "t": "Las aurículas están rotadas hacia la izquierda", "c": false, "r": "Incorrecto. No depende de una rotación anormal, sino de la anatomía normal.", "et": "plausible_distractor" },
+        { "l": "E", "t": "El diafragma empuja las aurículas hacia arriba", "c": false, "r": "Incorrecto. Irrelevante para la polaridad normal.", "et": "confusion" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-026",
+      "sb": "hipertrofia",
+      "x": "¿Qué efecto tiene la hipertrofia ventricular sobre la duración del complejo QRS?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Lo prolonga (0,09 a 0,12 s)", "c": true, "r": "Correcto. La mayor masa muscular y el trayecto más largo incrementan el tiempo de despolarización.", "et": null },
+        { "l": "B", "t": "Lo acorta (< 0,06 s)", "c": false, "r": "Incorrecto. La hipertrofia no acelera la conducción.", "et": "opposite" },
+        { "l": "C", "t": "No tiene efecto sobre la duración", "c": false, "r": "Incorrecto. Sí lo tiene, además de cambiar el eje y voltaje.", "et": "conceptual" },
+        { "l": "D", "t": "Lo hace desaparecer", "c": false, "r": "Incorrecto. Imposible si hay latido.", "et": "absurd" },
+        { "l": "E", "t": "Lo prolonga severamente (> 0,14 s)", "c": false, "r": "Incorrecto. Prolongaciones tan extremas sugieren bloqueo de Purkinje, no solo hipertrofia.", "et": "degree" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-027",
+      "sb": "corriente_lesion",
+      "x": "¿Cuál es la causa más frecuente de una corriente de lesión?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Isquemia local", "c": true, "r": "Correcto. La falta de nutrientes evita la repolarización normal de las membranas.", "et": null },
+        { "l": "B", "t": "Traumatismo mecánico", "c": false, "r": "Incorrecto. Es una causa posible, pero mucho menos frecuente que la isquemia.", "et": "frequency" },
+        { "l": "C", "t": "Infección bacteriana", "c": false, "r": "Incorrecto. Causa posible (absceso), pero rara comparada con isquemia coronaria.", "et": "frequency" },
+        { "l": "D", "t": "Hipertrofia concéntrica", "c": false, "r": "Incorrecto. La hipertrofia per se no causa corriente de lesión a menos que haya isquemia asociada.", "et": "conceptual" },
+        { "l": "E", "t": "Bloqueo de rama", "c": false, "r": "Incorrecto. Altera la secuencia, no genera corriente de lesión por daño de membrana.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-028",
+      "sb": "onda_t",
+      "x": "¿Cómo se manifiesta la onda T cuando existe una isquemia leve que acorta la despolarización?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Se vuelve negativa (invertida)", "c": true, "r": "Correcto. Si la base se repolariza antes que la punta (debido al acortamiento apical), el vector se invierte.", "et": null },
+        { "l": "B", "t": "Se vuelve extremadamente alta", "c": false, "r": "Incorrecto. No hay un aumento de voltaje, sino un cambio de secuencia.", "et": "recall" },
+        { "l": "C", "t": "Se prolonga en el tiempo", "c": false, "r": "Incorrecto. El acortamiento del potencial de acción acorta el segmento, no alarga la T.", "et": "mechanistic" },
+        { "l": "D", "t": "Desaparece el segmento ST", "c": false, "r": "Incorrecto. El segmento ST puede desplazarse, pero no desaparece.", "et": "conceptual" },
+        { "l": "E", "t": "Se fusiona con el QRS", "c": false, "r": "Incorrecto. Fenómeno no descrito para isquemia leve.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-029",
+      "sb": "conceptos_basicos",
+      "x": "¿Qué indica el eje de una derivación bipolar?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "La dirección desde el electrodo negativo al positivo", "c": true, "r": "Correcto. Define la orientación espacial de registro de esa derivación.", "et": null },
+        { "l": "B", "t": "La distancia entre los electrodos", "c": false, "r": "Incorrecto. El eje es angular, no métrico.", "et": "conceptual" },
+        { "l": "C", "t": "El flujo de sangre a través de la arteria", "c": false, "r": "Incorrecto. El ECG registra electricidad, no flujo sanguíneo.", "et": "confusion" },
+        { "l": "D", "t": "La resistencia de la piel", "c": false, "r": "Incorrecto. Factor técnico, no definición de eje.", "et": "conceptual" },
+        { "l": "E", "t": "El tiempo de conducción nerviosa", "c": false, "r": "Incorrecto. El eje es espacial, no temporal.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-030",
+      "sb": "eje_desviacion",
+      "x": "¿Qué alteración respiratoria puede causar una desviación del eje a la derecha?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Inspiración profunda", "c": true, "r": "Correcto. El diafragma baja, el corazón se verticaliza y el eje gira a la derecha.", "et": null },
+        { "l": "B", "t": "Espiración forzada", "c": false, "r": "Incorrecto. Eleva el diafragma y desvía el eje a la izquierda.", "et": "opposite" },
+        { "l": "C", "t": "Apnea prolongada", "c": false, "r": "Incorrecto. No causa cambio mecánico inmediato en el eje.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Neumotórax izquierdo", "c": false, "r": "Incorrecto. Empujaría el corazón a la derecha, pero el mecanismo respiratorio clásico es la inspiración.", "et": "confusion" },
+        { "l": "E", "t": "Obesidad abdominal", "c": false, "r": "Incorrecto. Causa desviación a la izquierda por elevación diafragmática.", "et": "opposite" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-031",
+      "sb": "conceptos_basicos",
+      "x": "¿Qué voltaje se registra si el vector cardíaco es perpendicular al eje de la derivación?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Un voltaje muy bajo o nulo", "c": true, "r": "Correcto. La proyección del vector sobre una perpendicular es cero.", "et": null },
+        { "l": "B", "t": "El voltaje máximo posible", "c": false, "r": "Incorrecto. Ocurre cuando el vector es paralelo al eje.", "et": "opposite" },
+        { "l": "C", "t": "La mitad del voltaje real", "c": false, "r": "Incorrecto. Sería a 60 grados (cos 60 = 0.5), no a 90.", "et": "math" },
+        { "l": "D", "t": "Un voltaje negativo máximo", "c": false, "r": "Incorrecto. Ocurre cuando es paralelo pero en sentido opuesto.", "et": "opposite" },
+        { "l": "E", "t": "Voltaje oscilante", "c": false, "r": "Incorrecto. La proyección es estática en un instante dado.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-032",
+      "sb": "hipertrofia",
+      "x": "¿Hacia qué ángulo puede desplazarse el eje en una hipertrofia ventricular derecha severa?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "+170 grados", "c": true, "r": "Correcto. Desviación extrema a la derecha debido a la masa predominante del VD.", "et": null },
+        { "l": "B", "t": "-30 grados", "c": false, "r": "Incorrecto. Típico de hipertrofia izquierda.", "et": "opposite" },
+        { "l": "C", "t": "0 grados", "c": false, "r": "Incorrecto. Eje normal o límite izquierdo.", "et": "recall" },
+        { "l": "D", "t": "+60 grados", "c": false, "r": "Incorrecto. Eje normal promedio.", "et": "recall" },
+        { "l": "E", "t": "-90 grados", "c": false, "r": "Incorrecto. Eje indeterminado o extremo.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-033",
+      "sb": "voltaje",
+      "x": "¿Qué condición reduce el voltaje del ECG debido a la pérdida de masa muscular funcional?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Infarto de miocardio antiguo", "c": true, "r": "Correcto. El tejido cicatricial no genera potenciales, reduciendo la masa activa total.", "et": null },
+        { "l": "B", "t": "Hipertrofia ventricular", "c": false, "r": "Incorrecto. Aumenta el voltaje por exceso de masa.", "et": "opposite" },
+        { "l": "C", "t": "Taquicardia", "c": false, "r": "Incorrecto. No afecta la masa muscular.", "et": "conceptual" },
+        { "l": "D", "t": "Bloqueo de rama", "c": false, "r": "Incorrecto. Cambia la secuencia y eje, no reduce necesariamente el voltaje por falta de masa.", "et": "conceptual" },
+        { "l": "E", "t": "Estenosis aórtica", "c": false, "r": "Incorrecto. Causa hipertrofia y alto voltaje.", "et": "pathology" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-034",
+      "sb": "corriente_lesion",
+      "x": "¿Cómo se calcula el potencial de lesión en el ECG?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "La diferencia entre el voltaje del intervalo T-P y el punto J", "c": true, "r": "Correcto. El punto J es la referencia cero verdadera; el desplazamiento del TP indica la magnitud de la lesión.", "et": null },
+        { "l": "B", "t": "La altura máxima de la onda R", "c": false, "r": "Incorrecto. Medida de voltaje de despolarización.", "et": "conceptual" },
+        { "l": "C", "t": "La anchura del complejo QRS", "c": false, "r": "Incorrecto. Medida de tiempo de conducción.", "et": "conceptual" },
+        { "l": "D", "t": "La profundidad de la onda Q", "c": false, "r": "Incorrecto. Signo de necrosis, no medida de corriente de lesión activa.", "et": "pathology" },
+        { "l": "E", "t": "El voltaje de la onda P", "c": false, "r": "Incorrecto. Actividad auricular.", "et": "anatomy" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-035",
+      "sb": "anomalias_especificas",
+      "x": "¿Qué enfermedad congénita suele producir una intensa desviación del eje a la derecha?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Tetralogía de Fallot", "c": true, "r": "Correcto. Incluye hipertrofia ventricular derecha severa.", "et": null },
+        { "l": "B", "t": "Estenosis aórtica", "c": false, "r": "Incorrecto. Causa hipertrofia izquierda y desviación izquierda.", "et": "pathology" },
+        { "l": "C", "t": "Insuficiencia mitral", "c": false, "r": "Incorrecto. Sobrecarga el ventrículo izquierdo.", "et": "pathology" },
+        { "l": "D", "t": "Coartación de aorta", "c": false, "r": "Incorrecto. Sobrecarga el ventrículo izquierdo.", "et": "pathology" },
+        { "l": "E", "t": "Prolapso valvular", "c": false, "r": "Incorrecto. No suele desviar el eje significativamente.", "et": "pathology" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-036",
+      "sb": "conceptos_basicos",
+      "x": "¿Qué representa la onda Q patológica en un complejo QRS?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Deflexión negativa inicial significativa", "c": true, "r": "Correcto. Suele indicar necrosis o ausencia de fuerzas eléctricas en la zona opuesta.", "et": null },
+        { "l": "B", "t": "Deflexión positiva inicial", "c": false, "r": "Incorrecto. Una deflexión positiva inicial es una onda R.", "et": "definition" },
+        { "l": "C", "t": "Deflexión negativa final", "c": false, "r": "Incorrecto. Una deflexión negativa final es una onda S.", "et": "definition" },
+        { "l": "D", "t": "Onda de repolarización auricular", "c": false, "r": "Incorrecto. No es parte del QRS.", "et": "conceptual" },
+        { "l": "E", "t": "Potencial del haz de His", "c": false, "r": "Incorrecto. No se ve en el ECG de superficie.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-037",
+      "sb": "normal_qrs",
+      "x": "¿Por qué el voltaje en la derivación II suele ser mayor que en I o III en un corazón normal?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "El vector medio (+59) es casi paralelo al eje de II (+60)", "c": true, "r": "Correcto. La proyección es máxima cuando los vectores son paralelos.", "et": null },
+        { "l": "B", "t": "La derivación II está más cerca del corazón", "c": false, "r": "Incorrecto. La distancia de los electrodos es similar (triángulo de Einthoven).", "et": "conceptual" },
+        { "l": "C", "t": "La derivación II mide el ventrículo derecho exclusivamente", "c": false, "r": "Incorrecto. Todas las derivaciones son globales.", "et": "conceptual" },
+        { "l": "D", "t": "La resistencia en la pierna izquierda es menor", "c": false, "r": "Incorrecto. No es un factor determinante del voltaje vectorial.", "et": "plausible_distractor" },
+        { "l": "E", "t": "La derivación I es perpendicular al vector", "c": false, "r": "Incorrecto. La derivación I (0 grados) no es perpendicular a 59 grados; proyecta voltaje, pero menos que la II.", "et": "math" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-038",
+      "sb": "onda_t",
+      "x": "¿Qué ocurre con la onda T en el bloqueo de rama?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Tiene polaridad inversa al complejo QRS", "c": true, "r": "Correcto. La alteración en la secuencia de despolarización altera la de repolarización, invirtiendo el vector T.", "et": null },
+        { "l": "B", "t": "Sigue siendo concordante con el QRS", "c": false, "r": "Incorrecto. Eso es lo normal; en bloqueo hay discordancia.", "et": "opposite" },
+        { "l": "C", "t": "Desaparece por completo", "c": false, "r": "Incorrecto. La repolarización ocurre, y es visible.", "et": "exaggeration" },
+        { "l": "D", "t": "Se vuelve positiva en aVR", "c": false, "r": "Incorrecto. No es una regla fija, depende del bloqueo específico.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Se acorta en duración", "c": false, "r": "Incorrecto. Suele ensancharse o deformarse.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-039",
+      "sb": "voltaje",
+      "x": "¿Qué patología infiltrante puede causar bajo voltaje electrocardiográfico?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Amiloidosis cardíaca", "c": true, "r": "Correcto. El depósito de amiloide reemplaza tejido muscular conductor por material inerte.", "et": null },
+        { "l": "B", "t": "Miocardiopatía hipertrófica", "c": false, "r": "Incorrecto. Causa alto voltaje.", "et": "opposite" },
+        { "l": "C", "t": "Pericarditis seca", "c": false, "r": "Incorrecto. Sin derrame, no baja el voltaje (puede elevar ST).", "et": "pathology" },
+        { "l": "D", "t": "Valvulopatía reumática", "c": false, "r": "Incorrecto. Suele causar hipertrofia y voltajes normales o altos.", "et": "pathology" },
+        { "l": "E", "t": "Angina estable", "c": false, "r": "Incorrecto. No altera el voltaje QRS basal.", "et": "pathology" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-040",
+      "sb": "corriente_lesion",
+      "x": "¿Por qué fluye corriente de lesión durante el intervalo T-P?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "El músculo sano está polarizado y el lesionado despolarizado", "c": true, "r": "Correcto. Esta diferencia de potencial genera un flujo continuo de corriente entre latidos.", "et": null },
+        { "l": "B", "t": "Todo el corazón está despolarizado", "c": false, "r": "Incorrecto. Eso ocurre en el segmento ST (o punto J), donde no debería haber diferencia.", "et": "sequence" },
+        { "l": "C", "t": "El músculo lesionado se repolariza más rápido", "c": false, "r": "Incorrecto. El músculo lesionado no se repolariza bien, permanece negativo.", "et": "mechanistic" },
+        { "l": "D", "t": "Las aurículas generan interferencia", "c": false, "r": "Incorrecto. No es un fenómeno auricular.", "et": "plausible_distractor" },
+        { "l": "E", "t": "El nodo sinusal deja de disparar", "c": false, "r": "Incorrecto. El ritmo sinusal suele mantenerse.", "et": "pathology" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-041",
+      "sb": "conceptos_basicos",
+      "x": "¿Cuál es la dirección del eje de la derivación aVR?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "+210 grados", "c": true, "r": "Correcto. Apunta hacia el brazo derecho (o -150 grados), lejos de la masa ventricular principal.", "et": null },
+        { "l": "B", "t": "+30 grados", "c": false, "r": "Incorrecto. Eje intermedio entre I y II.", "et": "recall" },
+        { "l": "C", "t": "+120 grados", "c": false, "r": "Incorrecto. Eje de DIII.", "et": "recall" },
+        { "l": "D", "t": "0 grados", "c": false, "r": "Incorrecto. Eje de DI.", "et": "recall" },
+        { "l": "E", "t": "+90 grados", "c": false, "r": "Incorrecto. Eje de aVF.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-042",
+      "sb": "hipertrofia",
+      "x": "¿Qué valvulopatía produce típicamente hipertrofia ventricular izquierda?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Estenosis aórtica", "c": true, "r": "Correcto. La obstrucción de salida obliga al VI a generar más presión, causando hipertrofia.", "et": null },
+        { "l": "B", "t": "Estenosis pulmonar", "c": false, "r": "Incorrecto. Causa hipertrofia derecha.", "et": "pathology" },
+        { "l": "C", "t": "Estenosis tricuspídea", "c": false, "r": "Incorrecto. Afecta a la aurícula derecha, no hipertrofia el ventrículo izquierdo.", "et": "pathology" },
+        { "l": "D", "t": "Insuficiencia pulmonar", "c": false, "r": "Incorrecto. Sobrecarga el ventrículo derecho.", "et": "pathology" },
+        { "l": "E", "t": "Estenosis mitral", "c": false, "r": "Incorrecto. Sobrecarga la aurícula izquierda y luego el ventrículo derecho (hipertensión pulmonar), no el VI.", "et": "pathology" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-043",
+      "sb": "qrs_anomalo",
+      "x": "¿Qué significa una onda R positiva en aVR (eje invertido)?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Desviación extrema del eje o mala colocación de electrodos", "c": true, "r": "Correcto. El vector normal se aleja de aVR; si es positivo, el corazón está muy rotado o los cables invertidos.", "et": null },
+        { "l": "B", "t": "Corazón normal", "c": false, "r": "Incorrecto. En aVR el complejo QRS debe ser negativo.", "et": "normalcy" },
+        { "l": "C", "t": "Hipertrofia ventricular izquierda leve", "c": false, "r": "Incorrecto. La HVI acentúa la negatividad en aVR.", "et": "conceptual" },
+        { "l": "D", "t": "Bloqueo de rama izquierda", "c": false, "r": "Incorrecto. Mantiene QRS negativo en aVR (desviación izquierda).", "et": "conceptual" },
+        { "l": "E", "t": "Repolarización precoz", "c": false, "r": "Incorrecto. No invierte el eje principal.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-044",
+      "sb": "normal_qrs",
+      "x": "¿Cuál es la dirección del vector cardíaco a los 0,05 segundos (fase tardía)?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Hacia la base del ventrículo izquierdo", "c": true, "r": "Correcto. Son las últimas zonas en despolarizarse, dirigiendo el vector hacia arriba y a la izquierda.", "et": null },
+        { "l": "B", "t": "Hacia la punta del corazón", "c": false, "r": "Incorrecto. Dirección de la fase media (0,02 s).", "et": "sequence" },
+        { "l": "C", "t": "Hacia el ventrículo derecho", "c": false, "r": "Incorrecto. El VI domina la fase tardía por su masa.", "et": "anatomy" },
+        { "l": "D", "t": "Hacia las aurículas", "c": false, "r": "Incorrecto. El vector no retrocede a las aurículas, va a la base ventricular.", "et": "anatomy" },
+        { "l": "E", "t": "Hacia el tabique interventricular", "c": false, "r": "Incorrecto. El tabique es lo primero en despolarizarse (0,01 s).", "et": "sequence" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-045",
+      "sb": "derivaciones",
+      "x": "¿Qué electrodos componen la Derivación III?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Brazo izquierdo y pierna izquierda", "c": true, "r": "Correcto. Registra la diferencia de potencial entre estas dos extremidades.", "et": null },
+        { "l": "B", "t": "Brazo derecho y brazo izquierdo", "c": false, "r": "Incorrecto. Corresponde a Derivación I.", "et": "recall" },
+        { "l": "C", "t": "Brazo derecho y pierna izquierda", "c": false, "r": "Incorrecto. Corresponde a Derivación II.", "et": "recall" },
+        { "l": "D", "t": "Central terminal y brazo izquierdo", "c": false, "r": "Incorrecto. Corresponde a aVL (unipolar).", "et": "recall" },
+        { "l": "E", "t": "Central terminal y pierna izquierda", "c": false, "r": "Incorrecto. Corresponde a aVF (unipolar).", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-046",
+      "sb": "corriente_lesion",
+      "x": "¿Qué es el 'potencial de referencia cero' en la práctica electrocardiográfica clínica?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "El nivel de la onda al pasar por el punto J", "c": true, "r": "Correcto. Se asume que no hay corrientes de lesión activas en ese instante de despolarización total.", "et": null },
+        { "l": "B", "t": "La línea isoeléctrica T-P", "c": false, "r": "Incorrecto. En caso de lesión, esta línea está desviada por la corriente de lesión.", "et": "conceptual" },
+        { "l": "C", "t": "El pico de la onda R", "c": false, "r": "Incorrecto. Es un punto de máximo voltaje, no de referencia.", "et": "conceptual" },
+        { "l": "D", "t": "El segmento P-R", "c": false, "r": "Incorrecto. La repolarización auricular puede alterar este segmento.", "et": "conceptual" },
+        { "l": "E", "t": "El voltaje de la red eléctrica", "c": false, "r": "Incorrecto. Irrelevante biológicamente.", "et": "absurd" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-047",
+      "sb": "normal_qrs",
+      "x": "¿Cómo se comporta el vector ventricular a los 0,035 segundos?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Se acorta y desvía a la izquierda", "c": true, "r": "Correcto. El exterior de la punta se vuelve electronegativo, neutralizando parte del vector y desviándolo por la masa del VI.", "et": null },
+        { "l": "B", "t": "Se alarga y desvía a la derecha", "c": false, "r": "Incorrecto. Comportamiento opuesto al fisiológico.", "et": "opposite" },
+        { "l": "C", "t": "Permanece estático en +59 grados", "c": false, "r": "Incorrecto. El vector cambia dinámicamente milisegundo a milisegundo.", "et": "static" },
+        { "l": "D", "t": "Se hace cero", "c": false, "r": "Incorrecto. Eso ocurre a los 0,06 s.", "et": "sequence" },
+        { "l": "E", "t": "Apunta al hombro derecho", "c": false, "r": "Incorrecto. Dirección anómala.", "et": "spatial" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-048",
+      "sb": "voltaje",
+      "x": "¿Qué efecto tiene el derrame pericárdico sobre la señal eléctrica registrada?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Disminuye el voltaje (cortocircuito)", "c": true, "r": "Correcto. El líquido conductor dispersa las corrientes antes de llegar a la piel.", "et": null },
+        { "l": "B", "t": "Aumenta el voltaje (amplificación)", "c": false, "r": "Incorrecto. El líquido no amplifica.", "et": "opposite" },
+        { "l": "C", "t": "Genera ondas delta", "c": false, "r": "Incorrecto. Signo de preexcitación (WPW), no de derrame.", "et": "pathology" },
+        { "l": "D", "t": "Invierte la onda P", "c": false, "r": "Incorrecto. No altera el origen sinusal necesariamente.", "et": "pathology" },
+        { "l": "E", "t": "Prolonga el intervalo QT solamente", "c": false, "r": "Incorrecto. El efecto principal es la baja amplitud (y a veces alternancia eléctrica).", "et": "partial" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-049",
+      "sb": "bloqueos",
+      "x": "¿Por qué el ventrículo derecho se despolariza rápidamente en el bloqueo de rama izquierda?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Porque la rama derecha está intacta", "c": true, "r": "Correcto. La conducción por el sistema Purkinje derecho es normal y veloz.", "et": null },
+        { "l": "B", "t": "Porque recibe el impulso del músculo izquierdo", "c": false, "r": "Incorrecto. El músculo izquierdo está bloqueado o retrasado; el derecho va primero.", "et": "sequence" },
+        { "l": "C", "t": "Porque el nodo AV dispara doble", "c": false, "r": "Incorrecto. Mecanismo inexistente.", "et": "mechanistic" },
+        { "l": "D", "t": "Porque hay hipertrofia derecha compensadora", "c": false, "r": "Incorrecto. El bloqueo es eléctrico, no implica hipertrofia inmediata.", "et": "confusion" },
+        { "l": "E", "t": "Porque el tabique no conduce", "c": false, "r": "Incorrecto. El tabique conduce, pero desde el lado derecho.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-ECG_VECTORIAL-050",
+      "sb": "onda_t",
+      "x": "¿Qué significa una onda T bifásica en un paciente tratado con fármacos cardíacos?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Posible toxicidad digitálica", "c": true, "r": "Correcto. La digital altera la curva de repolarización, creando formas de onda características.", "et": null },
+        { "l": "B", "t": "Efecto normal de los betabloqueantes", "c": false, "r": "Incorrecto. Los betabloqueantes suelen bajar la frecuencia, no invertir la T bifásicamente.", "et": "pathology" },
+        { "l": "C", "t": "Mejoría de la isquemia", "c": false, "r": "Incorrecto. La normalización sería una T positiva, no bifásica.", "et": "conceptual" },
+        { "l": "D", "t": "Exceso de atropina", "c": false, "r": "Incorrecto. La atropina causa taquicardia.", "et": "pathology" },
+        { "l": "E", "t": "Déficit de aspirina", "c": false, "r": "Incorrecto. No tiene correlación eléctrica directa.", "et": "absurd" }
+      ]
+    }
+  ]
+}

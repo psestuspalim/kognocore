@@ -62,13 +62,7 @@ export default function SubjectEditor({ subject, users = [], onSave, onCancel })
               />
             </div>
 
-            <div>
-              <Label>Descripción</Label>
-              <Input
-                value={edited.description || ''}
-                onChange={(e) => setEdited({ ...edited, description: e.target.value })}
-              />
-            </div>
+
 
             <div>
               <Label>Color</Label>

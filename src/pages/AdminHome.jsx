@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { BookOpen, Users, FileJson, Activity, LayoutDashboard, Wrench, FileDown, Layers } from 'lucide-react';
+import { BookOpen, Users, FileJson, Wrench, FileDown, Settings, LayoutDashboard, Activity } from 'lucide-react';
 import AdminShell from '../components/admin/AdminShell';
 import AdminPageHeader from '../components/admin/AdminPageHeader';
 import AdminKpiCard from '../components/admin/AdminKpiCard';
 import AdminDashboardCard from '../components/admin/AdminDashboardCard';
 import { motion } from 'framer-motion';
-import FixQuizzesButton from '../components/admin/FixQuizzesButton';
-import RemoveDuplicatesButton from '../components/admin/RemoveDuplicatesButton';
-import RemoveDuplicateQuestionsButton from '../components/admin/RemoveDuplicateQuestionsButton';
-import GenerateStructureButton from '../components/admin/GenerateStructureButton';
-import ContentManager from '../components/admin/ContentManager';
 import QuizExporter from '../components/admin/QuizExporter';
+import MaintenanceToolsModal from '../components/admin/MaintenanceToolsModal';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 export default function AdminHome() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [showContentManager, setShowContentManager] = useState(false);
   const [showQuizExporter, setShowQuizExporter] = useState(false);
+  const [showMaintenanceTools, setShowMaintenanceTools] = useState(false);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -73,37 +69,6 @@ export default function AdminHome() {
     refetchInterval: 5000
   });
 
-  // Mutations for ContentManager
-  const deleteCourseMutation = useMutation({
-    mutationFn: (ids) => Promise.all(ids.map(id => client.entities.Course.delete(id))),
-    onSuccess: () => queryClient.invalidateQueries(['courses'])
-  });
-
-  const deleteFolderMutation = useMutation({
-    mutationFn: (ids) => Promise.all(ids.map(id => client.entities.Folder.delete(id))),
-    onSuccess: () => queryClient.invalidateQueries(['all-folders'])
-  });
-
-  const deleteSubjectMutation = useMutation({
-    mutationFn: (ids) => Promise.all(ids.map(id => client.entities.Subject.delete(id))),
-    onSuccess: () => queryClient.invalidateQueries(['subjects'])
-  });
-
-  const updateCourseMutation = useMutation({
-    mutationFn: ({ id, data }) => client.entities.Course.update(id, data),
-    onSuccess: () => queryClient.invalidateQueries(['courses'])
-  });
-
-  const updateFolderMutation = useMutation({
-    mutationFn: ({ id, data }) => client.entities.Folder.update(id, data),
-    onSuccess: () => queryClient.invalidateQueries(['all-folders'])
-  });
-
-  const updateSubjectMutation = useMutation({
-    mutationFn: ({ id, data }) => client.entities.Subject.update(id, data),
-    onSuccess: () => queryClient.invalidateQueries(['subjects'])
-  });
-
   if (!currentUser || currentUser.role !== 'admin') {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -112,26 +77,27 @@ export default function AdminHome() {
     );
   }
 
-  const recentCourses = courses.slice(0, 5).map(c => ({
-    primary: c.name,
-    secondary: c.description,
-    badge: `${c.icon || '📚'}`
-  }));
+  // Calculate stats for dashboard cards
+  const contentStats = [
+    { label: 'Cursos', value: courses.length },
+    { label: 'Materias', value: subjects.length },
+    { label: 'Carpetas', value: folders.length },
+    { label: 'Quizzes', value: quizzes.length }
+  ];
 
-  const recentStudents = allUsers
-    .filter(u => u.role === 'user')
-    .slice(0, 5)
-    .map(u => ({
-      primary: u.username || u.full_name || u.email,
-      secondary: u.email,
-      badge: u.role
-    }));
+  const studentStats = [
+    { label: 'Total', value: allUsers.filter(u => u.role === 'user').length },
+    { label: 'Admins', value: allUsers.filter(u => u.role === 'admin').length },
+    { label: 'Solicitudes', value: enrollments.length },
+    { label: 'Activos', value: sessions.length }
+  ];
 
-  const jsonStats = quizzes.slice(0, 5).map(q => ({
-    primary: q.title,
-    secondary: `${q.total_questions || q.questions?.length || 0} preguntas`,
-    badge: q.subject_id ? '📚' : '📄'
-  }));
+  const quizStats = [
+    { label: 'Total Quizzes', value: quizzes.length },
+    { label: 'Preguntas', value: quizzes.reduce((acc, q) => acc + (q.total_questions || q.questions?.length || 0), 0) },
+    { label: 'Visibles', value: quizzes.filter(q => !q.is_hidden).length },
+    { label: 'Ocultos', value: quizzes.filter(q => q.is_hidden).length }
+  ];
 
   return (
     <AdminShell>
@@ -174,10 +140,11 @@ export default function AdminHome() {
         >
           <AdminDashboardCard
             title="Contenido"
-            description="Gestiona cursos, materias y quizzes"
-            count={courses.length + subjects.length}
-            items={recentCourses}
-            primaryActionLabel="Gestionar contenido"
+            description="Cursos, materias, carpetas y quizzes"
+            count={courses.length + subjects.length + folders.length + quizzes.length}
+            stats={contentStats}
+            variant="stats"
+            primaryActionLabel="Gestionar"
             primaryActionTo="AdminContent"
             icon={BookOpen}
             iconColor="text-blue-600"
@@ -192,9 +159,10 @@ export default function AdminHome() {
         >
           <AdminDashboardCard
             title="Estudiantes"
-            description="Ver perfil y progreso"
+            description="Usuarios, solicitudes y actividad"
             count={allUsers.filter(u => u.role === 'user').length}
-            items={recentStudents}
+            stats={studentStats}
+            variant="stats"
             primaryActionLabel="Ver estudiantes"
             primaryActionTo="AdminStudents"
             icon={Users}
@@ -210,9 +178,10 @@ export default function AdminHome() {
         >
           <AdminDashboardCard
             title="JSON Manager"
-            description="Gestionar archivos JSON"
+            description="Importar, validar y convertir JSON"
             count={quizzes.length}
-            items={jsonStats}
+            stats={quizStats}
+            variant="stats"
             primaryActionLabel="Administrar JSON"
             primaryActionTo="AdminJsonManager"
             icon={FileJson}
@@ -229,59 +198,36 @@ export default function AdminHome() {
           Herramientas de Mantenimiento y Gestión
         </h2>
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            <Button variant="outline" className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition-all" onClick={() => setShowContentManager(true)}>
-              <Layers className="w-6 h-6" />
-              <span className="font-semibold">Gestor de Contenido</span>
-              <span className="text-xs text-gray-500 font-normal">Organizar estructura</span>
-            </Button>
-
-            <Button variant="outline" className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-700 transition-all" onClick={() => setShowQuizExporter(true)}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Button
+              variant="outline"
+              className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-700 transition-all"
+              onClick={() => setShowQuizExporter(true)}
+            >
               <FileDown className="w-6 h-6" />
               <span className="font-semibold">Exportar Quizzes</span>
-              <span className="text-xs text-gray-500 font-normal">Descargar JSON</span>
+              <span className="text-xs text-gray-500 font-normal">Descargar JSON organizados</span>
+            </Button>
+
+            <Button
+              variant="outline"
+              className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-orange-50 hover:border-orange-200 hover:text-orange-700 transition-all"
+              onClick={() => setShowMaintenanceTools(true)}
+            >
+              <Settings className="w-6 h-6" />
+              <span className="font-semibold">Herramientas de Reparación</span>
+              <span className="text-xs text-gray-500 font-normal">Limpieza y mantenimiento</span>
             </Button>
           </div>
 
-          <div className="border-t pt-4">
-            <h3 className="text-sm font-medium text-gray-500 mb-3 uppercase tracking-wider">Acciones Destructivas / Reparación</h3>
-            <div className="flex flex-wrap gap-4">
-              <GenerateStructureButton />
-              <RemoveDuplicatesButton />
-              <RemoveDuplicateQuestionsButton />
-              <FixQuizzesButton />
-            </div>
-          </div>
-
-          <p className="text-sm text-gray-500 mt-4 bg-yellow-50 p-3 rounded-lg border border-yellow-100 flex items-start gap-2">
-            <Wrench className="w-4 h-4 text-yellow-600 mt-0.5" />
-            <span>Utiliza las herramientas de reparación con precaución. Algunas acciones son irreversibles y afectarán a la estructura de la base de datos.</span>
+          <p className="text-sm text-gray-500 mt-4 bg-blue-50 p-3 rounded-lg border border-blue-100 flex items-start gap-2">
+            <Wrench className="w-4 h-4 text-blue-600 mt-0.5" />
+            <span>Las herramientas de reparación están protegidas con confirmaciones adicionales para prevenir cambios accidentales.</span>
           </p>
         </div>
       </div>
 
-      {/* Modals */}
-      <Dialog open={showContentManager} onOpenChange={setShowContentManager}>
-        <DialogContent className="max-w-4xl h-[80vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>Gestor de Contenido</DialogTitle>
-          </DialogHeader>
-          <ContentManager
-            courses={courses}
-            folders={folders}
-            subjects={subjects}
-            quizzes={quizzes}
-            onDeleteCourses={(ids) => deleteCourseMutation.mutateAsync(ids)}
-            onDeleteFolders={(ids) => deleteFolderMutation.mutateAsync(ids)}
-            onDeleteSubjects={(ids) => deleteSubjectMutation.mutateAsync(ids)}
-            onUpdateCourse={(id, data) => updateCourseMutation.mutateAsync({ id, data })}
-            onUpdateFolder={(id, data) => updateFolderMutation.mutateAsync({ id, data })}
-            onUpdateSubject={(id, data) => updateSubjectMutation.mutateAsync({ id, data })}
-            onClose={() => setShowContentManager(false)}
-          />
-        </DialogContent>
-      </Dialog>
-
+      {/* Quiz Exporter Modal */}
       <Dialog open={showQuizExporter} onOpenChange={setShowQuizExporter}>
         <DialogContent className="max-w-4xl h-[80vh] overflow-y-auto">
           <DialogHeader>
@@ -290,6 +236,12 @@ export default function AdminHome() {
           <QuizExporter onClose={() => setShowQuizExporter(false)} />
         </DialogContent>
       </Dialog>
+
+      {/* Maintenance Tools Modal */}
+      <MaintenanceToolsModal
+        open={showMaintenanceTools}
+        onOpenChange={setShowMaintenanceTools}
+      />
     </AdminShell>
   );
 }

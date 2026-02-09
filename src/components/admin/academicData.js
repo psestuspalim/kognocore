@@ -8,22 +8,46 @@ export const academicStructure = [
             {
                 name: "Anatomía I",
                 color: "#ef4444",
-                subjects: ["Primer Parcial", "Segundo Parcial", "Tercer Parcial", "Cuarto Parcial", "Final"]
+                subjects: [
+                    { name: "Primer Parcial", color: "#ef4444" },
+                    { name: "Segundo Parcial", color: "#f97316" },
+                    { name: "Tercer Parcial", color: "#f59e0b" },
+                    { name: "Cuarto Parcial", color: "#84cc16" },
+                    { name: "Final", color: "#6366f1" }
+                ]
             },
             {
                 name: "Biofísica",
                 color: "#3b82f6",
-                subjects: ["Primer Parcial", "Segundo Parcial", "Tercer Parcial", "Cuarto Parcial", "Final"]
+                subjects: [
+                    { name: "Primer Parcial", color: "#3b82f6" },
+                    { name: "Segundo Parcial", color: "#06b6d4" },
+                    { name: "Tercer Parcial", color: "#14b8a6" },
+                    { name: "Cuarto Parcial", color: "#10b981" },
+                    { name: "Final", color: "#8b5cf6" }
+                ]
             },
             {
                 name: "Bioquímica",
                 color: "#10b981",
-                subjects: ["Primer Parcial", "Segundo Parcial", "Tercer Parcial", "Cuarto Parcial", "Final"]
+                subjects: [
+                    { name: "Primer Parcial", color: "#10b981" },
+                    { name: "Segundo Parcial", color: "#84cc16" },
+                    { name: "Tercer Parcial", color: "#f59e0b" },
+                    { name: "Cuarto Parcial", color: "#f97316" },
+                    { name: "Final", color: "#ec4899" }
+                ]
             },
             {
                 name: "Histología I",
                 color: "#f59e0b",
-                subjects: ["Primer Parcial", "Segundo Parcial", "Tercer Parcial", "Cuarto Parcial", "Final"]
+                subjects: [
+                    { name: "Primer Parcial", color: "#f59e0b" },
+                    { name: "Segundo Parcial", color: "#ec4899" },
+                    { name: "Tercer Parcial", color: "#a855f7" },
+                    { name: "Cuarto Parcial", color: "#8b5cf6" },
+                    { name: "Final", color: "#6366f1" }
+                ]
             }
         ]
     },

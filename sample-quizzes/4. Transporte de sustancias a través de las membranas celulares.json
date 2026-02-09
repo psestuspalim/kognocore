@@ -1,0 +1,667 @@
+{
+  "metadata": {
+    "title": "Transporte de sustancias a través de las membranas celulares",
+    "source": "4.md",
+    "date": "2026-01-31",
+    "total": 50,
+    "sj": "FIS",
+    "tp": "MEMB",
+    "dist": {
+      "d1": 0.40,
+      "d2": 0.35,
+      "d3": 0.25
+    }
+  },
+  "q": [
+    {
+      "id": "FIS-MEMB-001",
+      "sb": "Bicapa lipídica",
+      "x": "¿Qué característica de la bicapa lipídica impide el paso libre de moléculas de agua e iones?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "La presencia de proteínas integrales cargadas", "c": false, "r": "Incorrecto. Las proteínas integrales suelen facilitar el transporte, no actúan como la barrera primaria.", "et": "conceptual" },
+        { "l": "B", "t": "Su inmiscibilidad con el líquido extracelular e intracelular", "c": true, "r": "Correcto. Al ser una barrera lipídica, repele el agua y las sustancias hidrosolubles, actuando como aislante entre compartimientos.", "et": null },
+        { "l": "C", "t": "El grosor excesivo de la membrana celular", "c": false, "r": "Incorrecto. La membrana es delgada; la barrera es química (solubilidad), no física por grosor.", "et": "misinterpretation" },
+        { "l": "D", "t": "La alta concentración de colesterol", "c": false, "r": "Incorrecto. Aunque afecta la fluidez, la inmiscibilidad básica es propiedad de la bicapa en sí.", "et": "plausible_distractor" },
+        { "l": "E", "t": "La tensión superficial elevada", "c": false, "r": "Incorrecto. No es el mecanismo descrito para la impermeabilidad.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-002",
+      "sb": "Proteínas de transporte",
+      "x": "¿Qué distingue funcionalmente a una proteína transportadora de una proteína de canal?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Permite el paso libre de agua sin selectividad", "c": false, "r": "Incorrecto. Tanto canales (acuaporinas) como transportadores pueden ser selectivos.", "et": "conceptual" },
+        { "l": "B", "t": "Sufre cambios conformacionales para desplazar la sustancia", "c": true, "r": "Correcto. Las transportadoras se unen a la molécula y cambian su forma para moverla, a diferencia de los canales que son espacios tubulares.", "et": null },
+        { "l": "C", "t": "Siempre requiere energía en forma de ATP", "c": false, "r": "Incorrecto. Las transportadoras también actúan en difusión facilitada (pasiva).", "et": "mechanistic" },
+        { "l": "D", "t": "Solo transporta iones cargados positivamente", "c": false, "r": "Incorrecto. Pueden transportar moléculas neutras como glucosa.", "et": "recall" },
+        { "l": "E", "t": "Están compuestas exclusivamente por lípidos", "c": false, "r": "Incorrecto. Son estructuras proteicas.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-003",
+      "sb": "Difusión vs Transporte Activo",
+      "x": "¿Cuál es la fuente de energía que impulsa la difusión simple?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "La hidrólisis directa de ATP", "c": false, "r": "Incorrecto. Esto define al transporte activo primario.", "et": "recall" },
+        { "l": "B", "t": "El gradiente electroquímico de sodio", "c": false, "r": "Incorrecto. Esto impulsa el transporte activo secundario.", "et": "conceptual" },
+        { "l": "C", "t": "La energía del movimiento cinético normal de la materia", "c": true, "r": "Correcto. El movimiento térmico aleatorio (calor) hace que las moléculas reboten y se dispersen.", "et": null },
+        { "l": "D", "t": "La presión hidrostática generada por el corazón", "c": false, "r": "Incorrecto. Aunque la presión influye, la energía intrínseca es cinética molecular.", "et": "plausible_distractor" },
+        { "l": "E", "t": "La repulsión nuclear entre átomos", "c": false, "r": "Incorrecto. Las fuerzas electrostáticas transfieren energía, pero la fuente es el movimiento cinético.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-004",
+      "sb": "Difusión simple",
+      "x": "¿Qué factor determina principalmente la velocidad de difusión de una sustancia a través de la bicapa lipídica sin canales?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "El tamaño de la molécula exclusivamente", "c": false, "r": "Incorrecto. El tamaño importa, pero la solubilidad es el determinante crítico en la bicapa.", "et": "conceptual" },
+        { "l": "B", "t": "La liposolubilidad de la sustancia", "c": true, "r": "Correcto. Sustancias muy liposolubles como el oxígeno difunden directamente proporcional a esta propiedad.", "et": null },
+        { "l": "C", "t": "La carga eléctrica neta positiva", "c": false, "r": "Incorrecto. Las sustancias cargadas no atraviesan bien la bicapa lipídica.", "et": "recall" },
+        { "l": "D", "t": "La disponibilidad de proteínas GLUT", "c": false, "r": "Incorrecto. Eso aplica a la difusión facilitada, no a la simple por bicapa.", "et": "misinterpretation" },
+        { "l": "E", "t": "La hidratación de la molécula", "c": false, "r": "Incorrecto. La hidratación dificulta el paso por la bicapa hidrófoba.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-005",
+      "sb": "Canales proteicos",
+      "x": "¿Cómo logran las acuaporinas impedir el paso de iones hidratados a pesar de permitir el paso rápido de agua?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Mediante compuertas activadas por voltaje", "c": false, "r": "Incorrecto. Las acuaporinas son poros siempre abiertos, no dependientes de voltaje para selectividad básica.", "et": "mechanistic" },
+        { "l": "B", "t": "Por tener un poro demasiado estrecho", "c": true, "r": "Correcto. El diámetro permite el paso de agua en fila india pero excluye iones hidratados más grandes.", "et": null },
+        { "l": "C", "t": "Utilizando un filtro de selectividad con cargas positivas", "c": false, "r": "Incorrecto. El mecanismo descrito se basa en el tamaño del poro.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Mediante unión química con el hidrógeno", "c": false, "r": "Incorrecto. No hay enlace químico permanente, es difusión simple.", "et": "conceptual" },
+        { "l": "E", "t": "Hidrolizando ATP para rechazar solutos", "c": false, "r": "Incorrecto. Es un proceso pasivo.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-006",
+      "sb": "Permeabilidad selectiva",
+      "x": "¿Qué estructura del canal de potasio permite deshidratar selectivamente a los iones K+?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Residuos de aminoácidos con carga positiva", "c": false, "r": "Incorrecto. Las cargas positivas repelerían al catión K+.", "et": "conceptual" },
+        { "l": "B", "t": "Oxígenos de carbonilo en el filtro de selectividad", "c": true, "r": "Correcto. Estos interactúan con el K+ sustituyendo las moléculas de agua, permitiendo su paso.", "et": null },
+        { "l": "C", "t": "Un poro de diámetro superior a 0,5 nm", "c": false, "r": "Incorrecto. El filtro es estrecho y específico.", "et": "recall" },
+        { "l": "D", "t": "Compuertas de activación mecánica", "c": false, "r": "Incorrecto. Mecanismo de apertura, no de selectividad iónica.", "et": "misinterpretation" },
+        { "l": "E", "t": "Una capa lipídica interna", "c": false, "r": "Incorrecto. El canal es proteico.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-007",
+      "sb": "Canales iónicos",
+      "x": "¿Por qué los iones sodio no pueden atravesar fácilmente los canales de potasio?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Son demasiado grandes para entrar en el poro", "c": false, "r": "Incorrecto. Los iones sodio son más pequeños que los de potasio.", "et": "recall" },
+        { "l": "B", "t": "Son demasiado pequeños para interactuar con los oxígenos de carbonilo", "c": true, "r": "Correcto. Al no interactuar estrechamente, no pueden separarse de sus moléculas de agua y quedan demasiado grandes (hidratados) para pasar.", "et": null },
+        { "l": "C", "t": "Tienen una carga opuesta a la del potasio", "c": false, "r": "Incorrecto. Ambos son cationes monovalentes.", "et": "conceptual" },
+        { "l": "D", "t": "El canal de potasio tiene carga interna positiva", "c": false, "r": "Incorrecto. La selectividad es geométrica/química, no solo por repulsión de carga global.", "et": "misinterpretation" },
+        { "l": "E", "t": "Se unen irreversiblemente a la entrada del canal", "c": false, "r": "Incorrecto. Simplemente son excluidos.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-008",
+      "sb": "Activación de canales",
+      "x": "¿Qué mecanismo controla la apertura de los canales responsables de generar potenciales de acción nerviosos?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Activación por ligando (química)", "c": false, "r": "Incorrecto. Típico de sinapsis (acetilcolina), no de la propagación del potencial en el axón.", "et": "conceptual" },
+        { "l": "B", "t": "Activación por voltaje", "c": true, "r": "Correcto. Responden a cambios en el potencial eléctrico de la membrana (pérdida de negatividad interna).", "et": null },
+        { "l": "C", "t": "Activación mecánica", "c": false, "r": "Incorrecto. Típico de receptores sensitivos.", "et": "recall" },
+        { "l": "D", "t": "Activación por temperatura", "c": false, "r": "Incorrecto. No es el mecanismo principal descrito.", "et": "recall" },
+        { "l": "E", "t": "Difusión pasiva continua", "c": false, "r": "Incorrecto. Requiere compuertas activas.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-009",
+      "sb": "Activación química",
+      "x": "¿Cómo actúa la acetilcolina sobre su receptor en la membrana postsináptica?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Crea un poro permanente en la bicapa", "c": false, "r": "Incorrecto. Abre un canal proteico temporalmente.", "et": "mechanistic" },
+        { "l": "B", "t": "Abre la compuerta de un canal por unión directa (ligando)", "c": true, "r": "Correcto. Produce un cambio conformacional que abre un poro de carga negativa.", "et": null },
+        { "l": "C", "t": "Transporta activamente sodio hacia el interior", "c": false, "r": "Incorrecto. Es un canal pasivo, no una bomba.", "et": "conceptual" },
+        { "l": "D", "t": "Bloquea los canales de potasio", "c": false, "r": "Incorrecto. Abre canales catiónicos inespecíficos.", "et": "recall" },
+        { "l": "E", "t": "Genera ATP para abrir el canal", "c": false, "r": "Incorrecto. No requiere ATP.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-010",
+      "sb": "Registro de canales",
+      "x": "¿Qué característica del flujo de corriente revela el método de patch-clamp en un canal único?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "El flujo es continuo y gradual", "c": false, "r": "Incorrecto. El registro muestra aperturas súbitas.", "et": "conceptual" },
+        { "l": "B", "t": "Opera bajo un mecanismo de 'todo o nada'", "c": true, "r": "Correcto. El canal se abre y cierra súbitamente; no se queda 'medio abierto'.", "et": null },
+        { "l": "C", "t": "La corriente fluye solo en una dirección", "c": false, "r": "Incorrecto. Depende del gradiente electroquímico establecido.", "et": "mechanistic" },
+        { "l": "D", "t": "La duración de apertura es constante (1 segundo)", "c": false, "r": "Incorrecto. Dura fracciones de milisegundo y es variable.", "et": "recall" },
+        { "l": "E", "t": "El voltaje se genera por el propio canal", "c": false, "r": "Incorrecto. El canal permite el flujo de corriente impulsado por voltajes externos.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-011",
+      "sb": "Difusión facilitada",
+      "x": "¿Cuál es la diferencia cinética fundamental entre la difusión simple y la difusión facilitada?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "La difusión simple es más lenta a bajas concentraciones", "c": false, "r": "Incorrecto. La distinción clave es a altas concentraciones.", "et": "conceptual" },
+        { "l": "B", "t": "La difusión facilitada alcanza una velocidad máxima (Vmax)", "c": true, "r": "Correcto. Se satura debido a la cantidad limitada de proteínas transportadoras y su tiempo de cambio conformacional.", "et": null },
+        { "l": "C", "t": "La difusión simple requiere unión a proteínas", "c": false, "r": "Incorrecto. Es la facilitada la que requiere unión.", "et": "recall" },
+        { "l": "D", "t": "La difusión facilitada consume ATP", "c": false, "r": "Incorrecto. Es un transporte pasivo, no activo.", "et": "conceptual" },
+        { "l": "E", "t": "La difusión simple satura los canales iónicos", "c": false, "r": "Incorrecto. La difusión simple suele aumentar proporcionalmente a la concentración en rangos fisiológicos.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-012",
+      "sb": "Mecanismo facilitado",
+      "x": "¿Qué limita la velocidad máxima (Vmax) en la difusión facilitada?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "La velocidad del cambio conformacional de la proteína transportadora", "c": true, "r": "Correcto. La molécula debe unirse, la proteína cambiar de forma y liberar la molécula, lo que toma un tiempo finito.", "et": null },
+        { "l": "B", "t": "La disponibilidad de ATP en el citoplasma", "c": false, "r": "Incorrecto. No usa ATP.", "et": "mechanistic" },
+        { "l": "C", "t": "El gradiente de concentración de la sustancia", "c": false, "r": "Incorrecto. El gradiente impulsa el movimiento, pero la Vmax es el límite estructural.", "et": "conceptual" },
+        { "l": "D", "t": "La solubilidad lipídica de la sustancia", "c": false, "r": "Incorrecto. Se transporta por proteínas, no por la bicapa.", "et": "misinterpretation" },
+        { "l": "E", "t": "La temperatura corporal", "c": false, "r": "Incorrecto. Influye, pero el limitante cinético primario es el mecanismo proteico.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-013",
+      "sb": "Transportadores GLUT",
+      "x": "¿Cómo aumenta la insulina la captación de glucosa en los tejidos sensibles a ella?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Fosforilando la glucosa extracelular", "c": false, "r": "Incorrecto. Acción metabólica intracelular, no de transporte.", "et": "mechanistic" },
+        { "l": "B", "t": "Aumentando la actividad del transportador GLUT4", "c": true, "r": "Correcto. Moviliza transportadores GLUT4 a la membrana, aumentando la Vmax del sistema.", "et": null },
+        { "l": "C", "t": "Abriendo canales de sodio para cotransporte", "c": false, "r": "Incorrecto. En tejidos sensibles a insulina es difusión facilitada, no cotransporte.", "et": "conceptual" },
+        { "l": "D", "t": "Haciendo la membrana permeable a lípidos", "c": false, "r": "Incorrecto. Irrelevante para glucosa.", "et": "misinterpretation" },
+        { "l": "E", "t": "Creando poros acuosos permanentes", "c": false, "r": "Incorrecto. Usa transportadores específicos, no poros.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-014",
+      "sb": "Factores de difusión",
+      "x": "¿Qué establece la Ecuación de Nernst en el contexto de la difusión iónica?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "La velocidad de difusión en función de la liposolubilidad", "c": false, "r": "Incorrecto. Ley de Fick o similar.", "et": "recall" },
+        { "l": "B", "t": "El potencial eléctrico que equilibra una diferencia de concentración dada", "c": true, "r": "Correcto. Calcula la FEM necesaria para detener la difusión neta de un ion debido a su gradiente químico.", "et": null },
+        { "l": "C", "t": "La presión osmótica generada por iones", "c": false, "r": "Incorrecto. Ecuación de van't Hoff.", "et": "conceptual" },
+        { "l": "D", "t": "La cantidad de ATP necesaria para el bombeo", "c": false, "r": "Incorrecto. Se refiere a energética de transporte activo.", "et": "misinterpretation" },
+        { "l": "E", "t": "El tiempo necesario para alcanzar el equilibrio", "c": false, "r": "Incorrecto. Calcula el estado de equilibrio, no la cinética temporal.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-015",
+      "sb": "Presión y difusión",
+      "x": "¿Por qué un aumento de presión en un lado de la membrana incrementa la difusión hacia el otro lado?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Aumenta la energía cinética de cada molécula individual", "c": false, "r": "Incorrecto. La temperatura hace eso; la presión es suma de fuerzas.", "et": "conceptual" },
+        { "l": "B", "t": "Incrementa el número de colisiones moleculares contra la membrana", "c": true, "r": "Correcto. Mayor presión implica más moléculas golpeando los poros por unidad de tiempo y área.", "et": null },
+        { "l": "C", "t": "Dilata los poros de la membrana", "c": false, "r": "Incorrecto. No se describe deformación mecánica de poros.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Reduce la viscosidad del fluido", "c": false, "r": "Incorrecto. Irrelevante.", "et": "recall" },
+        { "l": "E", "t": "Activa bombas de transporte activo", "c": false, "r": "Incorrecto. La presión afecta la difusión física pasiva.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-016",
+      "sb": "Ósmosis",
+      "x": "¿Qué condición es necesaria para que ocurra ósmosis a través de una membrana celular?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Permeabilidad igual al agua y al soluto", "c": false, "r": "Incorrecto. Si el soluto difunde igual, no hay presión osmótica sostenida.", "et": "conceptual" },
+        { "l": "B", "t": "Permeabilidad selectiva al agua (semipermeabilidad)", "c": true, "r": "Correcto. La membrana debe ser permeable al solvente pero restrictiva al soluto.", "et": null },
+        { "l": "C", "t": "Presencia de proteínas transportadoras de ATP", "c": false, "r": "Incorrecto. La ósmosis es pasiva.", "et": "mechanistic" },
+        { "l": "D", "t": "Igual concentración de solutos a ambos lados", "c": false, "r": "Incorrecto. Eso es equilibrio, no ósmosis neta.", "et": "conceptual" },
+        { "l": "E", "t": "Temperatura superior a 37 grados", "c": false, "r": "Incorrecto. Ocurre a cualquier temperatura con movimiento molecular.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-017",
+      "sb": "Presión osmótica",
+      "x": "¿Qué factor determina la presión osmótica de una solución?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "La masa molecular de las partículas de soluto", "c": false, "r": "Incorrecto. La masa no importa, solo el número.", "et": "conceptual" },
+        { "l": "B", "t": "El número de partículas por unidad de volumen", "c": true, "r": "Correcto. Es una propiedad coligativa; depende de la concentración molar de partículas.", "et": null },
+        { "l": "C", "t": "La carga eléctrica de las partículas", "c": false, "r": "Incorrecto. Influye en Nernst, no directamente en la presión osmótica básica (salvo efecto Donnan).", "et": "plausible_distractor" },
+        { "l": "D", "t": "El tamaño de los poros de la membrana", "c": false, "r": "Incorrecto. Determina si ocurre ósmosis, no la magnitud de la presión potencial.", "et": "mechanistic" },
+        { "l": "E", "t": "La velocidad del soluto", "c": false, "r": "Incorrecto. En promedio la energía cinética ($k=mv^2/2$) es igual para todas las partículas.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-018",
+      "sb": "Osmolalidad",
+      "x": "¿Cuántos osmoles aporta un mol de cloruro de sodio (NaCl) totalmente disociado?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "1 osmol", "c": false, "r": "Incorrecto. Eso sería si no se disociara.", "et": "conceptual" },
+        { "l": "B", "t": "2 osmoles", "c": true, "r": "Correcto. Se disocia en Na+ y Cl-, dando dos partículas osmóticamente activas.", "et": null },
+        { "l": "C", "t": "58,5 osmoles", "c": false, "r": "Incorrecto. Confusión con el peso molecular.", "et": "misinterpretation" },
+        { "l": "D", "t": "0,5 osmoles", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "E", "t": "300 osmoles", "c": false, "r": "Incorrecto. Confusión con la osmolalidad plasmática.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-019",
+      "sb": "Transporte Activo",
+      "x": "¿Qué define fundamentalmente al transporte activo?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "El movimiento a favor de un gradiente de concentración", "c": false, "r": "Incorrecto. Eso es difusión.", "et": "definition" },
+        { "l": "B", "t": "El movimiento contra un gradiente de energía (concentración/eléctrico)", "c": true, "r": "Correcto. Requiere aporte externo de energía para vencer la tendencia natural.", "et": null },
+        { "l": "C", "t": "El uso exclusivo de canales iónicos", "c": false, "r": "Incorrecto. Usa proteínas transportadoras (bombas).", "et": "mechanistic" },
+        { "l": "D", "t": "La ausencia de proteínas de membrana", "c": false, "r": "Incorrecto. Es dependiente de proteínas.", "et": "recall" },
+        { "l": "E", "t": "El transporte de agua exclusivamente", "c": false, "r": "Incorrecto. El agua se mueve pasivamente (ósmosis).", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-020",
+      "sb": "Bomba Na-K",
+      "x": "¿Cuál es la estequiometría de transporte de la bomba Na+-K+ ATPasa?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "3 Na+ hacia dentro, 2 K+ hacia fuera", "c": false, "r": "Incorrecto. Dirección inversa.", "et": "mechanistic" },
+        { "l": "B", "t": "3 Na+ hacia fuera, 2 K+ hacia dentro", "c": true, "r": "Correcto. Saca más cationes de los que mete, generando electronegatividad interna.", "et": null },
+        { "l": "C", "t": "2 Na+ hacia fuera, 3 K+ hacia dentro", "c": false, "r": "Incorrecto. Números invertidos.", "et": "recall" },
+        { "l": "D", "t": "1 Na+ hacia fuera, 1 K+ hacia dentro", "c": false, "r": "Incorrecto. No es 1:1.", "et": "recall" },
+        { "l": "E", "t": "Solo transporta Na+ hacia fuera", "c": false, "r": "Incorrecto. Es una bomba de intercambio acoplado.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-021",
+      "sb": "Funciones Bomba Na-K",
+      "x": "¿Qué ocurriría con el volumen celular si la bomba Na+-K+ dejara de funcionar?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "La célula se contraería por pérdida de agua", "c": false, "r": "Incorrecto. El agua entraría, no saldría.", "et": "conceptual" },
+        { "l": "B", "t": "La célula se hincharía hasta explotar", "c": true, "r": "Correcto. Las proteínas intracelulares (negativas) atraen iones; sin la bomba sacando Na+, la carga osmótica intracelular aumentaría, arrastrando agua.", "et": null },
+        { "l": "C", "t": "El volumen permanecería constante", "c": false, "r": "Incorrecto. La bomba es crítica para el equilibrio osmótico.", "et": "conceptual" },
+        { "l": "D", "t": "La membrana se volvería impermeable al agua", "c": false, "r": "Incorrecto. La permeabilidad al agua no depende directamente de la bomba.", "et": "mechanistic" },
+        { "l": "E", "t": "El potasio se acumularía hasta niveles tóxicos", "c": false, "r": "Incorrecto. El potasio saldría por difusión (fuga) sin ser recuperado.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-022",
+      "sb": "Electrogénesis",
+      "x": "¿Por qué se dice que la bomba Na+-K+ es electrógena?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Porque consume electricidad para funcionar", "c": false, "r": "Incorrecto. Consume ATP (energía química).", "et": "conceptual" },
+        { "l": "B", "t": "Porque genera una diferencia de carga neta (negatividad interior)", "c": true, "r": "Correcto. Al bombear 3 cargas positivas fuera y solo 2 dentro, crea un déficit de carga positiva interna.", "et": null },
+        { "l": "C", "t": "Porque transporta electrones a través de la membrana", "c": false, "r": "Incorrecto. Transporta iones, no electrones libres.", "et": "misinterpretation" },
+        { "l": "D", "t": "Porque funciona solo en células nerviosas", "c": false, "r": "Incorrecto. Funciona en todas las células.", "et": "recall" },
+        { "l": "E", "t": "Porque neutraliza el potencial de membrana", "c": false, "r": "Incorrecto. Contribuye a crearlo, no a neutralizarlo.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-023",
+      "sb": "Bomba de Calcio",
+      "x": "¿Cuál es la función principal de la bomba de calcio de transporte activo primario?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Mantener una alta concentración de Ca++ en el citosol", "c": false, "r": "Incorrecto. El Ca++ intracelular se mantiene muy bajo.", "et": "conceptual" },
+        { "l": "B", "t": "Bombear Ca++ hacia el exterior celular o hacia orgánulos", "c": true, "r": "Correcto. Mantiene el calcio citosólico bajo (10,000 veces menos que fuera) enviándolo fuera o al retículo/mitocondrias.", "et": null },
+        { "l": "C", "t": "Generar ATP a partir de gradientes de calcio", "c": false, "r": "Incorrecto. Consume ATP.", "et": "mechanistic" },
+        { "l": "D", "t": "Cotransportar sodio junto con calcio", "c": false, "r": "Incorrecto. Describe el intercambiador Na-Ca (secundario), no la bomba (primario).", "et": "plausible_distractor" },
+        { "l": "E", "t": "Acidificar el contenido gástrico", "c": false, "r": "Incorrecto. Función de la bomba de protones.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-024",
+      "sb": "Energética transporte",
+      "x": "¿Cómo se relaciona la energía necesaria para el transporte activo con la concentración de la sustancia?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Es linealmente proporcional a la diferencia de concentración", "c": false, "r": "Incorrecto. Es logarítmica.", "et": "conceptual" },
+        { "l": "B", "t": "Es proporcional al logaritmo del grado en que se concentra", "c": true, "r": "Correcto. Concentrar 100 veces cuesta el doble (log 100 = 2) que concentrar 10 veces (log 10 = 1).", "et": null },
+        { "l": "C", "t": "Es independiente del gradiente de concentración", "c": false, "r": "Incorrecto. A mayor gradiente contra corriente, más energía.", "et": "conceptual" },
+        { "l": "D", "t": "Depende del cuadrado de la concentración final", "c": false, "r": "Incorrecto.", "et": "mechanistic" },
+        { "l": "E", "t": "Disminuye conforme aumenta la concentración", "c": false, "r": "Incorrecto. Aumenta.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-025",
+      "sb": "Transporte secundario",
+      "x": "¿Cuál es la fuente inmediata de energía para el transporte activo secundario de glucosa?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "La hidrólisis de ATP en el transportador de glucosa", "c": false, "r": "Incorrecto. Eso sería primario.", "et": "conceptual" },
+        { "l": "B", "t": "El gradiente de concentración de sodio", "c": true, "r": "Correcto. La energía de difusión del sodio (creada previamente por la bomba Na-K) arrastra a la glucosa.", "et": null },
+        { "l": "C", "t": "El gradiente de potasio hacia el exterior", "c": false, "r": "Incorrecto. El motor es el sodio entrando.", "et": "mechanistic" },
+        { "l": "D", "t": "La presión osmótica intracelular", "c": false, "r": "Incorrecto. No impulsa este transporte específico.", "et": "recall" },
+        { "l": "E", "t": "La unión directa de insulina", "c": false, "r": "Incorrecto. Insulina regula GLUT4 (difusión facilitada), no el cotransporte Na-Glucosa.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-026",
+      "sb": "Cotransporte",
+      "x": "¿Qué cambio conformacional permite el cotransporte sodio-glucosa hacia el interior?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "La unión del sodio sola activa el transporte", "c": false, "r": "Incorrecto. Requiere ambos.", "et": "mechanistic" },
+        { "l": "B", "t": "La unión simultánea de sodio y glucosa al transportador", "c": true, "r": "Correcto. El mecanismo de acoplamiento no se activa hasta que ambos solutos están unidos.", "et": null },
+        { "l": "C", "t": "La fosforilación de la proteína transportadora", "c": false, "r": "Incorrecto. No requiere fosforilación directa (ATP) en el ciclo de transporte.", "et": "conceptual" },
+        { "l": "D", "t": "La salida de potasio del sitio de unión", "c": false, "r": "Incorrecto. Confusión con bomba Na-K.", "et": "plausible_distractor" },
+        { "l": "E", "t": "La unión de glucosa en el lado intracelular", "c": false, "r": "Incorrecto. La unión es extracelular para importar.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-027",
+      "sb": "Contratransporte",
+      "x": "¿Qué caracteriza al contratransporte sodio-hidrógeno en los túbulos renales?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "El sodio y el hidrógeno se mueven en la misma dirección", "c": false, "r": "Incorrecto. Eso es cotransporte.", "et": "definition" },
+        { "l": "B", "t": "El sodio entra a la célula y el hidrógeno sale hacia la luz", "c": true, "r": "Correcto. Utiliza la entrada de Na+ para expulsar H+ (secreción).", "et": null },
+        { "l": "C", "t": "Concentra hidrógeno 1 millón de veces", "c": false, "r": "Incorrecto. El contratransporte es menos eficaz que el transporte primario (que sí concentra tanto).", "et": "recall" },
+        { "l": "D", "t": "Requiere ATP directamente", "c": false, "r": "Incorrecto. Es secundario.", "et": "conceptual" },
+        { "l": "E", "t": "Ocurre principalmente en el túbulo distal", "c": false, "r": "Incorrecto. El ejemplo clásico citado es el túbulo proximal.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-028",
+      "sb": "Capas celulares",
+      "x": "¿Cuál es el mecanismo básico de transporte a través de un epitelio (ej. intestinal)?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Difusión simple en ambas caras de la célula", "c": false, "r": "Incorrecto. No permitiría absorción neta contra gradiente.", "et": "conceptual" },
+        { "l": "B", "t": "Transporte activo en un polo y difusión en el opuesto", "c": true, "r": "Correcto. Ej: Entrada pasiva/facilitada luminal y bombeo activo basolateral.", "et": null },
+        { "l": "C", "t": "Pinocitosis masiva a través de la célula", "c": false, "r": "Incorrecto. Importante para proteínas, pero no el mecanismo principal de iones/glucosa.", "et": "recall" },
+        { "l": "D", "t": "Paso exclusivo a través de las uniones intercelulares", "c": false, "r": "Incorrecto. El transporte transcelular es clave.", "et": "misinterpretation" },
+        { "l": "E", "t": "Transporte activo primario en el borde en cepillo (luminal)", "c": false, "r": "Incorrecto. El transporte activo de Na+ suele ser basolateral.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-029",
+      "sb": "Líquidos corporales",
+      "x": "¿Qué catión predomina en el líquido intracelular?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Sodio", "c": false, "r": "Incorrecto. Predomina fuera.", "et": "recall" },
+        { "l": "B", "t": "Calcio", "c": false, "r": "Incorrecto. Niveles muy bajos dentro.", "et": "recall" },
+        { "l": "C", "t": "Potasio", "c": true, "r": "Correcto. Mantenido alto por la bomba Na-K.", "et": null },
+        { "l": "D", "t": "Magnesio", "c": false, "r": "Incorrecto. Importante, pero K+ es el principal osmóticamente.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Cloruro", "c": false, "r": "Incorrecto. Es un anión y predomina fuera.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-030",
+      "sb": "Difusión de gases",
+      "x": "¿Por qué el oxígeno difunde tan rápidamente a través de la membrana celular?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Es una molécula muy pequeña e hidrosoluble", "c": false, "r": "Incorrecto. Su alta difusión se debe a su liposolubilidad.", "et": "conceptual" },
+        { "l": "B", "t": "Tiene una alta liposolubilidad", "c": true, "r": "Correcto. Se disuelve directamente en la bicapa.", "et": null },
+        { "l": "C", "t": "Utiliza transporte activo primario", "c": false, "r": "Incorrecto. Es difusión simple.", "et": "misinterpretation" },
+        { "l": "D", "t": "Es transportado por la bomba de sodio", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "E", "t": "Pasa a través de canales de aquaporina", "c": false, "r": "Incorrecto. Pasa por la matriz lipídica.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-031",
+      "sb": "Difusión de urea",
+      "x": "¿Por qué la urea difunde mucho más lento que el agua a través de los poros?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Es liposoluble", "c": false, "r": "Incorrecto. Es hidrosoluble pero atraviesa poros.", "et": "recall" },
+        { "l": "B", "t": "Es un 20% mayor que el agua", "c": true, "r": "Correcto. El ligero aumento de tamaño reduce su penetración 1000 veces en poros estrechos.", "et": null },
+        { "l": "C", "t": "Tiene carga positiva", "c": false, "r": "Incorrecto. Es neutra.", "et": "conceptual" },
+        { "l": "D", "t": "Requiere transportador GLUT", "c": false, "r": "Incorrecto. Difunde (aunque existen transportadores de urea, el texto compara difusión por poros).", "et": "plausible_distractor" },
+        { "l": "E", "t": "Es repelida por los oxígenos de carbonilo", "c": false, "r": "Incorrecto. Mecanismo de canales de K+, no general de poros para urea.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-032",
+      "sb": "Estado de canales",
+      "x": "¿Qué significa que un canal funcione 'todo o nada'?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Que deja pasar todos los iones o ninguno", "c": false, "r": "Incorrecto. Se refiere al estado de apertura, no a la selectividad de tipos.", "et": "misinterpretation" },
+        { "l": "B", "t": "Que la compuerta se abre y cierra súbitamente", "c": true, "r": "Correcto. No hay estados intermedios de apertura parcial.", "et": null },
+        { "l": "C", "t": "Que requiere toda la energía de la célula", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "D", "t": "Que transporta hasta saturarse", "c": false, "r": "Incorrecto. Propiedad de transportadores, no de la compuerta del canal.", "et": "conceptual" },
+        { "l": "E", "t": "Que nunca se cierra una vez abierto", "c": false, "r": "Incorrecto. Oscila entre abierto y cerrado.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-033",
+      "sb": "Estructura de la bomba",
+      "x": "¿Qué subunidad de la bomba Na-K tiene actividad ATPasa?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Subunidad beta (pequeña)", "c": false, "r": "Incorrecto. Su función es de anclaje/desconocida.", "et": "recall" },
+        { "l": "B", "t": "Subunidad alfa (grande)", "c": true, "r": "Correcto. Contiene los sitios de unión y la actividad enzimática.", "et": null },
+        { "l": "C", "t": "Ambas subunidades", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "D", "t": "La porción lipídica", "c": false, "r": "Incorrecto. Es una proteína.", "et": "misinterpretation" },
+        { "l": "E", "t": "El sitio de unión a potasio externo", "c": false, "r": "Incorrecto. La actividad ATPasa es intracelular.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-034",
+      "sb": "Osmolalidad vs Osmolaridad",
+      "x": "¿Cuál es la diferencia técnica entre osmolalidad y osmolaridad?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Osmolalidad es por litro; Osmolaridad es por kilogramo", "c": false, "r": "Incorrecto. Al revés.", "et": "definition" },
+        { "l": "B", "t": "Osmolalidad es por kilogramo de agua; Osmolaridad es por litro de solución", "c": true, "r": "Correcto. OsmolaLidad (masa), OsmolaRidad (volumen).", "et": null },
+        { "l": "C", "t": "Osmolalidad se usa para gases; Osmolaridad para líquidos", "c": false, "r": "Incorrecto.", "et": "misinterpretation" },
+        { "l": "D", "t": "Son términos idénticos sin diferencia", "c": false, "r": "Incorrecto. Tienen definiciones distintas aunque valores similares en biología.", "et": "conceptual" },
+        { "l": "E", "t": "La osmolaridad mide presión; la osmolalidad mide temperatura", "c": false, "r": "Incorrecto.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-035",
+      "sb": "Bomba Na-K inversa",
+      "x": "¿En qué condición puede la bomba Na-K sintetizar ATP en lugar de consumirlo?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Cuando falta oxígeno en la célula", "c": false, "r": "Incorrecto. Eso detiene la bomba por falta de ATP.", "et": "conceptual" },
+        { "l": "B", "t": "Si los gradientes electroquímicos son mayores que la energía de hidrólisis del ATP", "c": true, "r": "Correcto. Si se fuerza el gradiente experimentalmente, la enzima funciona al revés.", "et": null },
+        { "l": "C", "t": "Cuando hay exceso de potasio intracelular", "c": false, "r": "Incorrecto. Eso favorecería el funcionamiento normal (sacar Na, meter K).", "et": "mechanistic" },
+        { "l": "D", "t": "En presencia de ouabaína", "c": false, "r": "Incorrecto. La ouabaína inhibe la bomba.", "et": "recall" },
+        { "l": "E", "t": "Nunca, es una enzima irreversible", "c": false, "r": "Incorrecto. El texto indica que puede funcionar a la inversa.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-036",
+      "sb": "Transporte de Hidrógeno",
+      "x": "¿Dónde se encuentra el mecanismo de transporte activo primario de hidrógeno más potente del cuerpo?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Células parietales de glándulas gástricas", "c": true, "r": "Correcto. Concentran H+ hasta 1 millón de veces para formar HCl.", "et": null },
+        { "l": "B", "t": "Túbulos proximales del riñón", "c": false, "r": "Incorrecto. Usan contratransporte (secundario), menos potente.", "et": "distinction" },
+        { "l": "C", "t": "Mitocondrias cardíacas", "c": false, "r": "Incorrecto. Usan gradiente H+ para ATP, no para secreción ácida digestiva.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Alvéolos pulmonares", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "E", "t": "Células musculares esqueléticas", "c": false, "r": "Incorrecto.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-037",
+      "sb": "Concentración iones",
+      "x": "¿Qué ion tiene una alta concentración intracelular pero baja extracelular?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Sodio", "c": false, "r": "Incorrecto. Alto fuera.", "et": "recall" },
+        { "l": "B", "t": "Cloruro", "c": false, "r": "Incorrecto. Alto fuera.", "et": "recall" },
+        { "l": "C", "t": "Fosfatos", "c": true, "r": "Correcto. Junto con proteínas y K+, predominan dentro.", "et": null },
+        { "l": "D", "t": "Bicarbonato", "c": false, "r": "Incorrecto. Moderado, pero no el principal anión intracelular comparado con fosfatos/proteínas.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Calcio", "c": false, "r": "Incorrecto. Bajo en ambos, pero extremadamente bajo dentro.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-038",
+      "sb": "Puntos de unión Bomba Na-K",
+      "x": "¿Dónde se localizan los sitios de unión para el potasio en la bomba Na-K?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "En el exterior de la proteína (extracelular)", "c": true, "r": "Correcto. Captura K+ del medio externo para meterlo.", "et": null },
+        { "l": "B", "t": "En el interior de la proteína (intracelular)", "c": false, "r": "Incorrecto. Allí se une el Na+.", "et": "recall" },
+        { "l": "C", "t": "En la subunidad beta", "c": false, "r": "Incorrecto. Están en la alfa.", "et": "recall" },
+        { "l": "D", "t": "En la bicapa lipídica adyacente", "c": false, "r": "Incorrecto.", "et": "misinterpretation" },
+        { "l": "E", "t": "En el sitio ATPasa", "c": false, "r": "Incorrecto. El sitio ATPasa es intracelular.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-039",
+      "sb": "Acuaporinas",
+      "x": "¿Cuántos tipos de aquaporinas se mencionan aproximadamente en el texto?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Al menos 13", "c": true, "r": "Correcto. Dato específico del texto.", "et": null },
+        { "l": "B", "t": "Solo 1 universal", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "C", "t": "Más de 100", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "D", "t": "5 tipos básicos", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "E", "t": "Ninguna, el agua pasa por difusión simple lipídica", "c": false, "r": "Incorrecto. Existen las acuaporinas.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-040",
+      "sb": "Patch Clamp",
+      "x": "¿Qué permite la técnica de 'parche de membrana separado' (excised patch)?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Observar la célula entera intacta", "c": false, "r": "Incorrecto. Eso es 'cell-attached' o 'whole-cell'.", "et": "recall" },
+        { "l": "B", "t": "Alterar las concentraciones iónicas a ambos lados de la membrana", "c": true, "r": "Correcto. Al separar el parche, se tiene acceso al lado citosólico y extracelular.", "et": null },
+        { "l": "C", "t": "Medir la presión osmótica global", "c": false, "r": "Incorrecto. Mide corrientes eléctricas.", "et": "misinterpretation" },
+        { "l": "D", "t": "Visualizar la estructura 3D de la proteína", "c": false, "r": "Incorrecto. Es una técnica funcional eléctrica, no de imagen (cristalografía).", "et": "conceptual" },
+        { "l": "E", "t": "Impedir el cierre de los canales", "c": false, "r": "Incorrecto. Estudia la apertura/cierre natural.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-041",
+      "sb": "Ecuación de Energía",
+      "x": "¿Cuántas calorías se necesitan aproximadamente para concentrar 10 veces 1 osmol de sustancia?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "14.000 calorías", "c": false, "r": "Incorrecto.", "et": "calculation_error" },
+        { "l": "B", "t": "1.400 calorías", "c": true, "r": "Correcto. Fórmula: 1400 * log(10) = 1400 * 1.", "et": null },
+        { "l": "C", "t": "2.800 calorías", "c": false, "r": "Incorrecto. Eso es para concentrar 100 veces (log 100 = 2).", "et": "calculation_error" },
+        { "l": "D", "t": "140 calorías", "c": false, "r": "Incorrecto.", "et": "calculation_error" },
+        { "l": "E", "t": "No requiere energía si es lento", "c": false, "r": "Incorrecto. Concentrar requiere energía termodinámica siempre.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-042",
+      "sb": "Aminoácidos",
+      "x": "¿Cuál es el mecanismo principal de absorción de aminoácidos en el intestino?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Difusión simple lipídica", "c": false, "r": "Incorrecto. Son moléculas polares/cargadas.", "et": "conceptual" },
+        { "l": "B", "t": "Cotransporte con sodio", "c": true, "r": "Correcto. Similar a la glucosa, usan el gradiente de Na+.", "et": null },
+        { "l": "C", "t": "Difusión facilitada independiente de iones", "c": false, "r": "Incorrecto. Aunque ocurre en la membrana basolateral, la captación apical es activa secundaria.", "et": "distinction" },
+        { "l": "D", "t": "Pinocitosis", "c": false, "r": "Incorrecto. Solo para proteínas enteras en neonatos, no aminoácidos.", "et": "recall" },
+        { "l": "E", "t": "Transporte activo primario (ATPasa de AA)", "c": false, "r": "Incorrecto. Es secundario.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-043",
+      "sb": "Transporte vectorial",
+      "x": "¿Qué papel juega el borde en cepillo en el transporte epitelial de sodio?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Es el sitio de bombeo activo de sodio", "c": false, "r": "Incorrecto. El bombeo es basolateral.", "et": "mechanistic" },
+        { "l": "B", "t": "Permite la difusión (entrada) de sodio y agua desde la luz", "c": true, "r": "Correcto. El Na+ entra a favor de gradiente (creado por la bomba basolateral) por el borde luminal.", "et": null },
+        { "l": "C", "t": "Es impermeable al agua", "c": false, "r": "Incorrecto. Es permeable.", "et": "recall" },
+        { "l": "D", "t": "Secreta potasio activamente", "c": false, "r": "Incorrecto. No es su función descrita en el modelo básico de absorción de Na+.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Contiene la bomba Na-K ATPasa", "c": false, "r": "Incorrecto. La bomba está en la membrana basolateral.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-044",
+      "sb": "Osmosis inversa",
+      "x": "¿Qué ocurre si se aplica una presión superior a la presión osmótica en el lado de la solución?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "La ósmosis se detiene (equilibrio)", "c": false, "r": "Incorrecto. Eso ocurre si la presión IGUALA la osmótica.", "et": "conceptual" },
+        { "l": "B", "t": "La ósmosis se invierte (sale agua de la solución)", "c": true, "r": "Correcto. La presión hidrostática vence a la osmótica y fuerza el agua a salir.", "et": null },
+        { "l": "C", "t": "El soluto comienza a difundir", "c": false, "r": "Incorrecto. La permeabilidad de membrana no cambia.", "et": "mechanistic" },
+        { "l": "D", "t": "La membrana se rompe inmediatamente", "c": false, "r": "Incorrecto. No necesariamente.", "et": "plausible_distractor" },
+        { "l": "E", "t": "No tiene efecto", "c": false, "r": "Incorrecto.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-045",
+      "sb": "Presión Osmótica Real",
+      "x": "¿Por qué la presión osmótica real de los líquidos corporales es 0,93 veces el valor teórico?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Atracción interiónica entre partículas", "c": true, "r": "Correcto. Los iones (Na+, Cl-) se atraen y no actúan como partículas totalmente independientes, reduciendo el efecto osmótico real.", "et": null },
+        { "l": "B", "t": "Pérdida de agua por evaporación", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "C", "t": "Unión de iones a proteínas plasmáticas", "c": false, "r": "Incorrecto. Efecto menor comparado con la interacción iónica general.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Error de medición instrumental", "c": false, "r": "Incorrecto. Es un fenómeno físico real.", "et": "recall" },
+        { "l": "E", "t": "La temperatura corporal reduce el movimiento", "c": false, "r": "Incorrecto. A 37°C la cinética es alta.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-046",
+      "sb": "Definición difusión",
+      "x": "¿Qué término describe el movimiento continuo y aleatorio de moléculas en líquidos o gases?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Transporte activo", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "B", "t": "Difusión", "c": true, "r": "Correcto. Definición básica del movimiento cinético molecular.", "et": null },
+        { "l": "C", "t": "Ósmosis", "c": false, "r": "Incorrecto. Específico del agua a través de membrana.", "et": "distinction" },
+        { "l": "D", "t": "Filtración", "c": false, "r": "Incorrecto. Movimiento por presión a través de poros.", "et": "distinction" },
+        { "l": "E", "t": "Pinocitosis", "c": false, "r": "Incorrecto. Vesicular.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-047",
+      "sb": "Canales de Sodio",
+      "x": "¿Qué carga tienen los residuos de aminoácidos en el filtro de selectividad del canal de sodio?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Positiva intensa", "c": false, "r": "Incorrecto. Repelería al sodio (+).", "et": "conceptual" },
+        { "l": "B", "t": "Negativa intensa", "c": true, "r": "Correcto. Atrae a los iones sodio (+) y ayuda a deshidratarlos/pasarlos.", "et": null },
+        { "l": "C", "t": "Neutra", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "D", "t": "Variable según el voltaje", "c": false, "r": "Incorrecto. La carga del aminoácido es estructural.", "et": "misinterpretation" },
+        { "l": "E", "t": "Hidrófoba", "c": false, "r": "Incorrecto.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-048",
+      "sb": "Contratransporte Na-Ca",
+      "x": "¿Dónde se produce el contratransporte sodio-calcio?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Solo en células musculares", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "B", "t": "En todas o casi todas las membranas celulares", "c": true, "r": "Correcto. Es un mecanismo universal de extrusión de calcio.", "et": null },
+        { "l": "C", "t": "Solo en el riñón", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "D", "t": "Exclusivamente en las mitocondrias", "c": false, "r": "Incorrecto. Está en la membrana celular.", "et": "mechanistic" },
+        { "l": "E", "t": "En los glóbulos rojos solamente", "c": false, "r": "Incorrecto.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-049",
+      "sb": "Transporte Activo Renal",
+      "x": "¿Cuánto de la energía de una célula tubular renal se puede gastar en transporte activo?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Hasta el 90%", "c": true, "r": "Correcto. Debido a la gran carga de reabsorción contra gradiente.", "et": null },
+        { "l": "B", "t": "Menos del 10%", "c": false, "r": "Incorrecto.", "et": "recall" },
+        { "l": "C", "t": "Aproximadamente el 50%", "c": false, "r": "Incorrecto. Valor citado para neuronas (60-70%), riñón es más alto.", "et": "distinction" },
+        { "l": "D", "t": "0% (es pasivo)", "c": false, "r": "Incorrecto.", "et": "conceptual" },
+        { "l": "E", "t": "Todo se gasta en síntesis de proteínas", "c": false, "r": "Incorrecto.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MEMB-050",
+      "sb": "Difusión neta",
+      "x": "¿A qué es proporcional la difusión neta según la fórmula simplificada?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "A la suma de concentraciones (Ce + Ci)", "c": false, "r": "Incorrecto.", "et": "formula_error" },
+        { "l": "B", "t": "A la diferencia de concentraciones (Ce - Ci)", "c": true, "r": "Correcto. El gradiente impulsa el flujo neto.", "et": null },
+        { "l": "C", "t": "Al producto de concentraciones (Ce * Ci)", "c": false, "r": "Incorrecto.", "et": "formula_error" },
+        { "l": "D", "t": "Al logaritmo de la concentración", "c": false, "r": "Incorrecto. Eso aplica a Nernst o Energía, no difusión simple lineal.", "et": "formula_error" },
+        { "l": "E", "t": "A la temperatura inversa", "c": false, "r": "Incorrecto.", "et": "conceptual" }
+      ]
+    }
+  ]
+}

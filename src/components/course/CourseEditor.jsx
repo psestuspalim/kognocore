@@ -75,14 +75,7 @@ export default function CourseEditor({ course, users = [], onSave, onCancel }) {
                   placeholder="Ej: Semestre Selectivo"
                 />
               </div>
-              <div className="sm:col-span-2">
-                <Label>Descripción</Label>
-                <Input
-                  value={editedCourse.description}
-                  onChange={(e) => setEditedCourse({ ...editedCourse, description: e.target.value })}
-                  placeholder="Descripción opcional"
-                />
-              </div>
+
               <div>
                 <Label>Color</Label>
                 <ColorPopover

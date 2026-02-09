@@ -1,0 +1,2167 @@
+{
+  "metadata": {
+    "title": "Fisiología del Músculo Cardíaco y Ciclo Cardíaco",
+    "source": "9.md",
+    "date": "2026-01-31",
+    "total": 50,
+    "sj": "FIS",
+    "tp": "CARDIO",
+    "dist": {
+      "d1": 0.4,
+      "d2": 0.36,
+      "d3": 0.24
+    }
+  },
+  "q": [
+    {
+      "id": "FIS-CARDIO-001",
+      "sb": "Fisiología del Músculo",
+      "x": "¿Qué estructura permite la transmisión rápida de potenciales de acción entre las células musculares cardíacas?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Uniones comunicantes",
+          "c": true,
+          "r": "Correcto. Estas uniones en los discos intercalados permiten la difusión libre de iones. Facilitan la propagación del potencial de acción de una célula a otra.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Túbulos transversos",
+          "c": false,
+          "r": "Incorrecto. Estas estructuras conducen el potencial al interior de la fibra, no entre células vecinas.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Retículo sarcoplásmico",
+          "c": false,
+          "r": "Incorrecto. Su función principal es el almacenamiento y liberación de calcio intracelular.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "Miofibrillas de actina",
+          "c": false,
+          "r": "Incorrecto. Son elementos contráctiles estructurales, no canales de comunicación intercelular.",
+          "et": "recall"
+        },
+        {
+          "l": "E",
+          "t": "Válvulas auriculoventriculares",
+          "c": false,
+          "r": "Incorrecto. Son estructuras macroscópicas que regulan el flujo sanguíneo, no la conducción eléctrica celular.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-002",
+      "sb": "Potenciales de Acción",
+      "x": "¿Cuál es el valor aproximado del potencial de membrana en reposo en la fibra muscular ventricular?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "-85 milivoltios",
+          "c": true,
+          "r": "Correcto. Este valor negativo se mantiene entre latidos antes de la fase de despolarización rápida.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "-55 milivoltios",
+          "c": false,
+          "r": "Incorrecto. Este valor suele corresponder al umbral de excitación en otros tejidos excitables.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "C",
+          "t": "0 milivoltios",
+          "c": false,
+          "r": "Incorrecto. Representa un estado de neutralidad eléctrica transitoria durante la despolarización.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "+20 milivoltios",
+          "c": false,
+          "r": "Incorrecto. Este es el valor aproximado del pico de sobreexcitación durante el potencial de acción.",
+          "et": "misinterpretation"
+        },
+        {
+          "l": "E",
+          "t": "-40 milivoltios",
+          "c": false,
+          "r": "Incorrecto. Corresponde más cercanamente al potencial de reposo inestable del nódulo sinusal.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-003",
+      "sb": "Potenciales de Acción",
+      "x": "¿Qué evento iónico es el principal responsable de la fase de meseta en el potencial de acción cardíaco?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Apertura de canales lentos de calcio",
+          "c": true,
+          "r": "Correcto. La entrada prolongada de calcio y sodio a través de estos canales mantiene la despolarización. Esto contrarresta la salida inicial de potasio.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Apertura de canales rápidos de sodio",
+          "c": false,
+          "r": "Incorrecto. Estos canales son responsables de la fase 0 de despolarización rápida, no de la meseta.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "Apertura de canales de cloruro",
+          "c": false,
+          "r": "Incorrecto. El cloruro no juega un papel primario en la generación de la meseta ventricular descrita.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "Cierre de canales de calcio",
+          "c": false,
+          "r": "Incorrecto. El cierre de estos canales marca el final de la meseta y el inicio de la repolarización.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Salida masiva de potasio",
+          "c": false,
+          "r": "Incorrecto. Una salida masiva de potasio causaría una repolarización rápida, eliminando la meseta.",
+          "et": "mechanistic"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-004",
+      "sb": "Acoplamiento Excitación-Contracción",
+      "x": "¿Qué característica distingue a los túbulos T del músculo cardíaco respecto a los del músculo esquelético?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Tienen un diámetro cinco veces mayor",
+          "c": true,
+          "r": "Correcto. Este mayor tamaño permite un acceso crucial al calcio del líquido extracelular. Compensa el retículo sarcoplásmico menos desarrollado.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Carecen de permeabilidad al calcio",
+          "c": false,
+          "r": "Incorrecto. El calcio fluye activamente desde los túbulos T hacia el sarcoplasma durante el potencial.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Son mucho más numerosos y pequeños",
+          "c": false,
+          "r": "Incorrecto. Son menos numerosos en densidad total pero significativamente más grandes en volumen individual.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "No se comunican con el exterior",
+          "c": false,
+          "r": "Incorrecto. Son invaginaciones de la membrana celular que contienen líquido extracelular.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Almacenan neurotransmisores adrenérgicos",
+          "c": false,
+          "r": "Incorrecto. Su función es la conducción de potenciales y transporte de iones, no el almacenamiento vesicular.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-005",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué evento define el comienzo del primer tono cardíaco (S1)?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Cierre de válvulas auriculoventriculares",
+          "c": true,
+          "r": "Correcto. Ocurre al inicio de la sístole ventricular cuando la presión ventricular supera a la auricular. La vibración resultante genera el sonido.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Cierre de válvulas semilunares",
+          "c": false,
+          "r": "Incorrecto. Este evento genera el segundo tono cardíaco (S2) al final de la sístole.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Apertura de la válvula aórtica",
+          "c": false,
+          "r": "Incorrecto. La apertura de válvulas es generalmente un proceso silencioso en condiciones fisiológicas normales.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Contracción de las aurículas",
+          "c": false,
+          "r": "Incorrecto. La contracción auricular puede generar un cuarto tono (S4) patológico o inaudible, no el S1.",
+          "et": "misinterpretation"
+        },
+        {
+          "l": "E",
+          "t": "Flujo rápido de llenado",
+          "c": false,
+          "r": "Incorrecto. El flujo turbulento de llenado puede asociarse con un tercer tono (S3), no con el primero.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-006",
+      "sb": "Regulación del Bombeo",
+      "x": "¿Cuál es el efecto principal de la estimulación parasimpática (vagal) sobre la membrana cardíaca?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Aumenta la permeabilidad al potasio",
+          "c": true,
+          "r": "Correcto. Esto hiperpolariza la membrana haciéndola más negativa. Reduce la frecuencia cardíaca y la excitabilidad del tejido.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Aumenta la permeabilidad al sodio",
+          "c": false,
+          "r": "Incorrecto. Esto facilitaría la despolarización y aumentaría la frecuencia, efecto típico del simpático.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Aumenta la entrada de calcio",
+          "c": false,
+          "r": "Incorrecto. El aumento de calcio incrementa la fuerza contráctil, asociado a la estimulación simpática.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "D",
+          "t": "Disminuye el umbral de excitación",
+          "c": false,
+          "r": "Incorrecto. Bajar el umbral haría al corazón más excitable, contrario al efecto inhibidor vagal.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Bloquea los canales de cloruro",
+          "c": false,
+          "r": "Incorrecto. No es el mecanismo primario descrito para la acción vagal en el ritmo cardíaco.",
+          "et": "recall"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-007",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué porcentaje aproximado del llenado ventricular es aportado por la contracción auricular en reposo?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "20 por ciento",
+          "c": true,
+          "r": "Correcto. El 80% del flujo ocurre pasivamente antes de la sístole auricular. La aurícula funciona principalmente como bomba de cebado.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "5 por ciento",
+          "c": false,
+          "r": "Incorrecto. Es una subestimación de la contribución auricular al volumen telediastólico final.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "C",
+          "t": "50 por ciento",
+          "c": false,
+          "r": "Incorrecto. Exageraría la dependencia ventricular de la aurícula en condiciones de reposo.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "D",
+          "t": "80 por ciento",
+          "c": false,
+          "r": "Incorrecto. Este es el porcentaje de sangre que fluye directamente antes de que la aurícula se contraiga.",
+          "et": "misinterpretation"
+        },
+        {
+          "l": "E",
+          "t": "100 por ciento",
+          "c": false,
+          "r": "Incorrecto. Los ventrículos se llenan mayoritariamente por diferencia de presión pasiva durante la diástole.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-008",
+      "sb": "Fisiología del Músculo",
+      "x": "¿Cómo se denominan las estructuras que separan las células musculares cardíacas individuales?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Discos intercalados",
+          "c": true,
+          "r": "Correcto. Son las membranas celulares que forman límites entre células individuales. Contienen las uniones comunicantes para la continuidad eléctrica.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Bandas Z",
+          "c": false,
+          "r": "Incorrecto. Las bandas Z delimitan los sarcómeros dentro de una miofibrilla, no las células completas.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Sincitios ventriculares",
+          "c": false,
+          "r": "Incorrecto. El sincitio es el conjunto funcional de células interconectadas, no la estructura divisoria.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Fibras de Purkinje",
+          "c": false,
+          "r": "Incorrecto. Son células especializadas de conducción, no estructuras de unión celular.",
+          "et": "recall"
+        },
+        {
+          "l": "E",
+          "t": "Miofilamentos de miosina",
+          "c": false,
+          "r": "Incorrecto. Son proteínas contráctiles intracelulares, no límites celulares.",
+          "et": "recall"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-009",
+      "sb": "Potenciales de Acción",
+      "x": "¿Qué ocurre durante la Fase 3 del potencial de acción del músculo cardíaco?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Repolarización rápida",
+          "c": true,
+          "r": "Correcto. Se cierran los canales de calcio y se abren los canales lentos de potasio. Esto devuelve el potencial de membrana al reposo.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Despolarización inicial",
+          "c": false,
+          "r": "Incorrecto. Esto corresponde a la Fase 0, mediada por canales rápidos de sodio.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Meseta sostenida",
+          "c": false,
+          "r": "Incorrecto. Esto corresponde a la Fase 2, mantenida por el equilibrio calcio/potasio.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "Repolarización inicial breve",
+          "c": false,
+          "r": "Incorrecto. Esto es la Fase 1, causada por la salida transitoria de potasio antes de la meseta.",
+          "et": "recall"
+        },
+        {
+          "l": "E",
+          "t": "Entrada masiva de sodio",
+          "c": false,
+          "r": "Incorrecto. El sodio entra masivamente solo en la Fase 0.",
+          "et": "mechanistic"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-010",
+      "sb": "Trabajo Cardíaco",
+      "x": "¿Cuál es la fuente de energía química preferente para el metabolismo cardíaco?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Ácidos grasos",
+          "c": true,
+          "r": "Correcto. Representan entre el 70% y el 90% del sustrato oxidativo del corazón. La glucosa y el lactato son fuentes secundarias.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Glucosa anaeróbica",
+          "c": false,
+          "r": "Incorrecto. El corazón depende casi exclusivamente del metabolismo oxidativo aeróbico.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Lactato exclusivamente",
+          "c": false,
+          "r": "Incorrecto. Aunque el corazón puede consumir lactato, no es la fuente primaria en condiciones normales.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "Aminoácidos ramificados",
+          "c": false,
+          "r": "Incorrecto. Su contribución energética al músculo cardíaco es mínima comparada con los lípidos.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Cuerpos cetónicos",
+          "c": false,
+          "r": "Incorrecto. Se utilizan principalmente en situaciones de ayuno prolongado, no como base preferente.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-011",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué representa la onda P en el electrocardiograma?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Despolarización auricular",
+          "c": true,
+          "r": "Correcto. Es la señal eléctrica que precede inmediatamente a la contracción de las aurículas. Inicia el ciclo en el trazado ECG.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Despolarización ventricular",
+          "c": false,
+          "r": "Incorrecto. Este evento eléctrico está representado por el complejo QRS.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Repolarización ventricular",
+          "c": false,
+          "r": "Incorrecto. La recuperación eléctrica de los ventrículos corresponde a la onda T.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "Repolarización auricular",
+          "c": false,
+          "r": "Incorrecto. Generalmente queda oculta por el complejo QRS y no forma una onda visible distinta.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Contracción isovolumétrica",
+          "c": false,
+          "r": "Incorrecto. Es un evento mecánico, no una señal eléctrica primaria en el ECG.",
+          "et": "misinterpretation"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-012",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué ocurre durante el período de contracción isovolumétrica?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Aumenta la presión ventricular sin cambio de volumen",
+          "c": true,
+          "r": "Correcto. Todas las válvulas están cerradas y el músculo se tensa. La presión sube hasta superar la de la aorta/pulmonar.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Las válvulas aórticas se abren inmediatamente",
+          "c": false,
+          "r": "Incorrecto. Las válvulas solo se abren al final de este período, iniciando la eyección.",
+          "et": "sequencing"
+        },
+        {
+          "l": "C",
+          "t": "El volumen ventricular disminuye rápidamente",
+          "c": false,
+          "r": "Incorrecto. Por definición ('isovolumétrica'), el volumen de sangre no cambia.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "La sangre fluye de la aurícula al ventrículo",
+          "c": false,
+          "r": "Incorrecto. Las válvulas AV están cerradas para prevenir el reflujo durante la sístole.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "E",
+          "t": "La presión ventricular cae a cero",
+          "c": false,
+          "r": "Incorrecto. La presión aumenta drásticamente en preparación para la expulsión.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-013",
+      "sb": "Regulación del Bombeo",
+      "x": "¿Qué enuncia el mecanismo de Frank-Starling?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "A mayor distensión del músculo, mayor fuerza de contracción",
+          "c": true,
+          "r": "Correcto. Es la capacidad intrínseca del corazón de adaptarse a volúmenes crecientes de flujo sanguíneo. Garantiza que el retorno venoso sea bombeado.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "El corazón se contrae con fuerza constante independientemente del llenado",
+          "c": false,
+          "r": "Incorrecto. La fuerza es variable y dependiente de la longitud inicial de la fibra.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "El aumento de temperatura disminuye la frecuencia cardíaca",
+          "c": false,
+          "r": "Incorrecto. Esto se refiere a efectos térmicos, no a la relación longitud-tensión mecánica.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "La estimulación simpática reduce el gasto cardíaco",
+          "c": false,
+          "r": "Incorrecto. El simpático aumenta el gasto; además, esto es regulación extrínseca, no intrínseca.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "E",
+          "t": "El exceso de potasio aumenta la contractilidad",
+          "c": false,
+          "r": "Incorrecto. El exceso de potasio debilita la contracción al reducir el potencial de membrana.",
+          "et": "recall"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-014",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿A qué volumen corresponde el volumen telediastólico normal en un ventrículo?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "110 a 120 mililitros",
+          "c": true,
+          "r": "Correcto. Es la cantidad de sangre en el ventrículo justo antes de la contracción. Incluye el llenado pasivo y la contribución auricular.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "40 a 50 mililitros",
+          "c": false,
+          "r": "Incorrecto. Este rango corresponde al volumen telesistólico (remanente).",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "70 mililitros",
+          "c": false,
+          "r": "Incorrecto. Este es el valor típico del volumen sistólico (cantidad eyectada).",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "150 a 170 mililitros",
+          "c": false,
+          "r": "Incorrecto. Este volumen elevado solo se alcanza con un llenado máximo o patológico.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "E",
+          "t": "10 a 20 mililitros",
+          "c": false,
+          "r": "Incorrecto. Es un volumen incompatible con un gasto cardíaco funcional en un adulto.",
+          "et": "numeric_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-015",
+      "sb": "Acoplamiento Excitación-Contracción",
+      "x": "¿Qué bomba es responsable de transportar iones calcio de regreso al retículo sarcoplásmico?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Bomba SERCA2",
+          "c": true,
+          "r": "Correcto. Esta calcio-ATPasa reduce la concentración citosólica de calcio. Es esencial para permitir la relajación muscular.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Intercambiador sodio-calcio",
+          "c": false,
+          "r": "Incorrecto. Este mecanismo expulsa calcio fuera de la célula, no hacia el retículo.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "Bomba sodio-potasio ATPasa",
+          "c": false,
+          "r": "Incorrecto. Regula los gradientes de Na+ y K+, no el secuestro de calcio en el retículo.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Canales de rianodina",
+          "c": false,
+          "r": "Incorrecto. Estos canales liberan calcio del retículo, no lo bombean hacia adentro.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Canales de calcio tipo L",
+          "c": false,
+          "r": "Incorrecto. Permiten la entrada de calcio desde el exterior para iniciar la contracción.",
+          "et": "recall"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-016",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué onda de presión auricular es causada por la protrusión de las válvulas AV hacia las aurículas?",
+      "dif": 3,
+      "o": [
+        {
+          "l": "A",
+          "t": "Onda c",
+          "c": true,
+          "r": "Correcto. Ocurre al inicio de la contracción ventricular. El aumento de presión ventricular empuja las válvulas cerradas hacia atrás.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Onda a",
+          "c": false,
+          "r": "Incorrecto. La onda 'a' es producida por la contracción activa de la aurícula.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Onda v",
+          "c": false,
+          "r": "Incorrecto. La onda 'v' se debe al llenado venoso lento con las válvulas AV cerradas.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "Onda T",
+          "c": false,
+          "r": "Incorrecto. Es una onda eléctrica del ECG, no una onda de presión mecánica auricular.",
+          "et": "category_error"
+        },
+        {
+          "l": "E",
+          "t": "Onda P",
+          "c": false,
+          "r": "Incorrecto. Representa la despolarización eléctrica auricular, no un cambio de presión mecánica por protrusión.",
+          "et": "category_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-017",
+      "sb": "Análisis Gráfico",
+      "x": "¿Qué término describe la presión arterial contra la que debe contraerse el ventrículo?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Poscarga",
+          "c": true,
+          "r": "Correcto. Es la resistencia o presión en la aorta que el ventrículo debe superar para eyectar sangre. Corresponde a la fase de eyección.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Precarga",
+          "c": false,
+          "r": "Incorrecto. La precarga se refiere a la tensión o volumen telediastólico antes de la contracción.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Contractilidad",
+          "c": false,
+          "r": "Incorrecto. Es la capacidad intrínseca del músculo para generar fuerza, no la carga externa.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Retorno venoso",
+          "c": false,
+          "r": "Incorrecto. Es el flujo de sangre que entra al corazón, determinante principal de la precarga.",
+          "et": "recall"
+        },
+        {
+          "l": "E",
+          "t": "Fracción de eyección",
+          "c": false,
+          "r": "Incorrecto. Es un índice de eficiencia de bombeo (volumen), no una medida de presión de oposición.",
+          "et": "recall"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-018",
+      "sb": "Potenciales de Acción",
+      "x": "¿Cuál es la velocidad de conducción aproximada en las fibras de Purkinje?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "4 metros por segundo",
+          "c": true,
+          "r": "Correcto. Esta alta velocidad permite una activación casi simultánea de los ventrículos. Es mucho más rápida que en el músculo ordinario.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "0,3 metros por segundo",
+          "c": false,
+          "r": "Incorrecto. Esta velocidad baja corresponde a las fibras musculares auriculares o ventriculares típicas.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "C",
+          "t": "0,05 metros por segundo",
+          "c": false,
+          "r": "Incorrecto. Velocidades tan bajas se observan en el nodo AV para retrasar el impulso.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "D",
+          "t": "100 metros por segundo",
+          "c": false,
+          "r": "Incorrecto. Esta velocidad es propia de fibras nerviosas mielínicas grandes, no de tejido cardíaco.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "1 metro por segundo",
+          "c": false,
+          "r": "Incorrecto. Es una velocidad intermedia no característica del sistema especializado de alta velocidad.",
+          "et": "numeric_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-019",
+      "sb": "Regulación del Bombeo",
+      "x": "¿Qué efecto tienen los iones potasio en exceso sobre la función cardíaca?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Debilitan la contracción y reducen la frecuencia",
+          "c": true,
+          "r": "Correcto. La despolarización parcial reduce la amplitud del potencial de acción. Puede llevar a bloqueo o paro en diástole.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Provocan contracción espástica sostenida",
+          "c": false,
+          "r": "Incorrecto. La espasticidad es un efecto característico del exceso de iones calcio.",
+          "et": "misinterpretation"
+        },
+        {
+          "l": "C",
+          "t": "Aumentan dramáticamente la fuerza de bombeo",
+          "c": false,
+          "r": "Incorrecto. El potasio alto hace al corazón flácido y débil, no fuerte.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Hiperpolarizan la membrana en reposo",
+          "c": false,
+          "r": "Incorrecto. El exceso extracelular reduce el gradiente, haciendo el potencial *menos* negativo (despolarización parcial).",
+          "et": "mechanistic"
+        },
+        {
+          "l": "E",
+          "t": "Prolongan indefinidamente la meseta",
+          "c": false,
+          "r": "Incorrecto. Afectan principalmente el potencial de reposo y la excitabilidad general.",
+          "et": "recall"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-020",
+      "sb": "Fisiología del Músculo",
+      "x": "¿Qué movimiento del ventrículo izquierdo facilita la eyección durante la sístole?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Movimiento de torsión o giro",
+          "c": true,
+          "r": "Correcto. La orientación espiral de las fibras subepicárdicas y subendocárdicas crea este efecto. Tira de la base hacia la punta.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Expansión radial pura",
+          "c": false,
+          "r": "Incorrecto. El movimiento es complejo y rotacional, no una simple expansión.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Contracción peristáltica lineal",
+          "c": false,
+          "r": "Incorrecto. El corazón no funciona como un tubo peristáltico simple tipo intestino.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Relajación pasiva de la base",
+          "c": false,
+          "r": "Incorrecto. La base se mueve activamente hacia abajo durante la contracción.",
+          "et": "misinterpretation"
+        },
+        {
+          "l": "E",
+          "t": "Separación de las paredes septales",
+          "c": false,
+          "r": "Incorrecto. Las paredes tienden a engrosarse y acercarse para expulsar la sangre.",
+          "et": "mechanistic"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-021",
+      "sb": "Potenciales de Acción",
+      "x": "¿Cuál es la duración promedio del período refractario absoluto ventricular?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "0,25 a 0,30 segundos",
+          "c": true,
+          "r": "Correcto. Durante este tiempo es imposible generar un nuevo potencial de acción. Coincide aproximadamente con la duración del potencial.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "0,05 a 0,10 segundos",
+          "c": false,
+          "r": "Incorrecto. Este intervalo es demasiado corto y permitiría frecuencias peligrosamente altas (tetanización).",
+          "et": "numeric_error"
+        },
+        {
+          "l": "C",
+          "t": "0,15 segundos",
+          "c": false,
+          "r": "Incorrecto. Este valor corresponde aproximadamente al período refractario del músculo auricular.",
+          "et": "misinterpretation"
+        },
+        {
+          "l": "D",
+          "t": "0,80 segundos",
+          "c": false,
+          "r": "Incorrecto. Esto sería la duración total de un ciclo cardíaco a frecuencia normal.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "E",
+          "t": "1,0 segundos",
+          "c": false,
+          "r": "Incorrecto. Un período refractario tan largo haría imposible una frecuencia cardíaca fisiológica.",
+          "et": "numeric_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-022",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué sucede con la duración del ciclo cardíaco cuando aumenta la frecuencia cardíaca?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Disminuye a expensas principalmente de la diástole",
+          "c": true,
+          "r": "Correcto. El tiempo de relajación se acorta significativamente. Esto puede comprometer el llenado ventricular a frecuencias muy altas.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Aumenta proporcionalmente en ambas fases",
+          "c": false,
+          "r": "Incorrecto. Una mayor frecuencia implica ciclos más cortos, no más largos.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Permanece constante reduciendo el volumen",
+          "c": false,
+          "r": "Incorrecto. Matemáticamente, Frecuencia = 1/Duración; si una sube, la otra debe bajar.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Disminuye solo la fase de sístole",
+          "c": false,
+          "r": "Incorrecto. La sístole se acorta, pero la reducción de la diástole es proporcionalmente mucho mayor.",
+          "et": "misinterpretation"
+        },
+        {
+          "l": "E",
+          "t": "Se duplica la duración de la sístole",
+          "c": false,
+          "r": "Incorrecto. Al contrario, la duración total del ciclo se comprime.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-023",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué fracción de eyección se considera habitual en un corazón sano?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "60 por ciento",
+          "c": true,
+          "r": "Correcto. Significa que se expulsa aproximadamente el 60% del volumen telediastólico (unos 70 ml de 110-120 ml).",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "20 por ciento",
+          "c": false,
+          "r": "Incorrecto. Este valor indicaría una insuficiencia cardíaca severa.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "C",
+          "t": "90 por ciento",
+          "c": false,
+          "r": "Incorrecto. El corazón nunca se vacía casi por completo en condiciones de reposo normales.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "D",
+          "t": "40 por ciento",
+          "c": false,
+          "r": "Incorrecto. Este es el porcentaje aproximado de sangre que *queda* (volumen telesistólico).",
+          "et": "misinterpretation"
+        },
+        {
+          "l": "E",
+          "t": "10 por ciento",
+          "c": false,
+          "r": "Incorrecto. Sería incompatible con el mantenimiento de la presión arterial sistémica.",
+          "et": "numeric_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-024",
+      "sb": "Trabajo Cardíaco",
+      "x": "¿Qué ley física relaciona la tensión de la pared ventricular con la presión y el radio?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Ley de Laplace",
+          "c": true,
+          "r": "Correcto. Establece que Tensión = Presión x Radio. Explica por qué un corazón dilatado requiere más energía.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Ley de Ohm",
+          "c": false,
+          "r": "Incorrecto. Relaciona flujo, presión y resistencia, no tensión de pared.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "C",
+          "t": "Mecanismo de Frank-Starling",
+          "c": false,
+          "r": "Incorrecto. Relaciona volumen y contractilidad, no la física de la tensión de pared.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Ley de Poiseuille",
+          "c": false,
+          "r": "Incorrecto. Describe el flujo laminar en tubos, no la tensión mecánica del tejido.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Ecuación de Nernst",
+          "c": false,
+          "r": "Incorrecto. Calcula potenciales de equilibrio iónico, no fuerzas mecánicas.",
+          "et": "category_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-025",
+      "sb": "Regulación del Bombeo",
+      "x": "¿Hasta qué nivel de presión arterial media se mantiene normalmente el gasto cardíaco sin disminuir?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "160 milímetros de mercurio",
+          "c": true,
+          "r": "Correcto. Por debajo de este límite, el corazón se adapta a la poscarga. Por encima, el trabajo es excesivo y el gasto cae.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "100 milímetros de mercurio",
+          "c": false,
+          "r": "Incorrecto. Esta es una presión arterial normal; el corazón puede manejar presiones mucho mayores.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "C",
+          "t": "80 milímetros de mercurio",
+          "c": false,
+          "r": "Incorrecto. Es la presión diastólica normal, muy por debajo del límite de compensación.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "D",
+          "t": "250 milímetros de mercurio",
+          "c": false,
+          "r": "Incorrecto. A esta presión extrema el ventrículo ya habría fallado en mantener el gasto.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "E",
+          "t": "120 milímetros de mercurio",
+          "c": false,
+          "r": "Incorrecto. Es la presión sistólica normal, el corazón tiene un rango de reserva mayor.",
+          "et": "numeric_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-026",
+      "sb": "Potenciales de Acción",
+      "x": "¿Qué ocurre durante la Fase 1 del potencial de acción cardíaco?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Cierre de canales de sodio y salida de potasio",
+          "c": true,
+          "r": "Correcto. Provoca una repolarización inicial breve antes de la meseta. Reduce el potencial desde el pico positivo.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Apertura masiva de canales de calcio",
+          "c": false,
+          "r": "Incorrecto. Esto caracteriza el inicio de la Fase 2 (meseta).",
+          "et": "sequencing"
+        },
+        {
+          "l": "C",
+          "t": "Entrada rápida de sodio",
+          "c": false,
+          "r": "Incorrecto. Es el evento definitorio de la Fase 0 (despolarización).",
+          "et": "sequencing"
+        },
+        {
+          "l": "D",
+          "t": "Restablecimiento del potencial de reposo",
+          "c": false,
+          "r": "Incorrecto. La repolarización completa ocurre en la Fase 3.",
+          "et": "sequencing"
+        },
+        {
+          "l": "E",
+          "t": "Bombeo activo de calcio al retículo",
+          "c": false,
+          "r": "Incorrecto. Este proceso es predominante durante la relajación, no al inicio del potencial.",
+          "et": "mechanistic"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-027",
+      "sb": "Fisiología del Músculo",
+      "x": "¿Por qué el músculo cardíaco se considera un sincitio funcional?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Las células están interconectadas eléctricamente",
+          "c": true,
+          "r": "Correcto. Si una célula se excita, el potencial se propaga a todas las demás. Funciona como una unidad integrada.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "No existen membranas celulares entre núcleos",
+          "c": false,
+          "r": "Incorrecto. A diferencia del músculo esquelético, las células cardíacas sí tienen límites (discos intercalados).",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Depende de un solo nervio motor",
+          "c": false,
+          "r": "Incorrecto. El corazón tiene automatismo propio y no requiere inervación motora para latir.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Las aurículas y ventrículos están fusionados",
+          "c": false,
+          "r": "Incorrecto. Están separados por tejido fibroso aislante, formando dos sincitios distintos.",
+          "et": "anatomy_error"
+        },
+        {
+          "l": "E",
+          "t": "Carece de miofibrillas estriadas",
+          "c": false,
+          "r": "Incorrecto. El músculo cardíaco es estriado y contiene miofibrillas.",
+          "et": "recall"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-028",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué provoca la apertura de las válvulas semilunares (aórtica y pulmonar)?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Presión ventricular supera la presión arterial",
+          "c": true,
+          "r": "Correcto. Ocurre típicamente a 80 mmHg en el ventrículo izquierdo. Marca el fin de la contracción isovolumétrica.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Contracción de los músculos papilares",
+          "c": false,
+          "r": "Incorrecto. Los músculos papilares actúan sobre las válvulas AV para evitar su prolapso, no abren las semilunares.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "Inicio de la relajación ventricular",
+          "c": false,
+          "r": "Incorrecto. La relajación provoca el cierre de estas válvulas por el retroceso de la sangre.",
+          "et": "sequencing"
+        },
+        {
+          "l": "D",
+          "t": "Llenado rápido de las aurículas",
+          "c": false,
+          "r": "Incorrecto. Evento diastólico que no afecta directamente la apertura de salida ventricular.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Señal eléctrica del complejo QRS",
+          "c": false,
+          "r": "Incorrecto. La señal eléctrica precede a la mecánica, pero es la presión la que abre la válvula.",
+          "et": "mechanistic"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-029",
+      "sb": "Regulación del Bombeo",
+      "x": "¿Qué efecto tiene el aumento de temperatura corporal (fiebre) en el corazón?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Aumenta la frecuencia cardíaca",
+          "c": true,
+          "r": "Correcto. El calor aumenta la permeabilidad iónica y acelera el ritmo del marcapasos. Es una respuesta fisiológica común.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Disminuye la fuerza de contracción",
+          "c": false,
+          "r": "Incorrecto. Un aumento moderado suele aumentar temporalmente el metabolismo y la frecuencia.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Provoca paro cardíaco inmediato",
+          "c": false,
+          "r": "Incorrecto. Solo en hipotermia o hipertermia extrema se llega al paro.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Reduce el consumo de oxígeno",
+          "c": false,
+          "r": "Incorrecto. La fiebre aumenta el metabolismo y la demanda de oxígeno.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Cierra los canales de calcio",
+          "c": false,
+          "r": "Incorrecto. No hay un mecanismo directo de cierre de canales por fiebre moderada.",
+          "et": "mechanistic"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-030",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué indica el 'volumen telesistólico'?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Volumen de sangre restante tras la eyección",
+          "c": true,
+          "r": "Correcto. Es la cantidad que queda en el ventrículo al finalizar la sístole. Suele ser de 40 a 50 ml.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Volumen total antes de la contracción",
+          "c": false,
+          "r": "Incorrecto. Eso define el volumen telediastólico.",
+          "et": "definition_error"
+        },
+        {
+          "l": "C",
+          "t": "Volumen expulsado en un latido",
+          "c": false,
+          "r": "Incorrecto. Eso corresponde al volumen sistólico.",
+          "et": "definition_error"
+        },
+        {
+          "l": "D",
+          "t": "Volumen que regresa por las venas",
+          "c": false,
+          "r": "Incorrecto. Eso es el retorno venoso.",
+          "et": "definition_error"
+        },
+        {
+          "l": "E",
+          "t": "Volumen máximo que el corazón puede contener",
+          "c": false,
+          "r": "Incorrecto. No representa la capacidad máxima, sino el remanente funcional.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-031",
+      "sb": "Potenciales de Acción",
+      "x": "¿Qué función cumple el retardo en la conducción entre aurículas y ventrículos?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Permite que las aurículas se contraigan antes",
+          "c": true,
+          "r": "Correcto. Asegura el llenado ventricular completo (bombeo de cebado) antes de la sístole ventricular. Optimiza la eficacia del bombeo.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Evita la entrada de calcio al ventrículo",
+          "c": false,
+          "r": "Incorrecto. No bloquea iones, solo retrasa la señal eléctrica.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "Aumenta la velocidad de repolarización",
+          "c": false,
+          "r": "Incorrecto. Afecta al inicio de la despolarización ventricular, no a su recuperación.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Sincroniza la contracción de las cuatro cámaras",
+          "c": false,
+          "r": "Incorrecto. Precisamente *desincroniza* aurículas y ventrículos para un bombeo secuencial.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Previene la fatiga del nódulo sinusal",
+          "c": false,
+          "r": "Incorrecto. El retardo ocurre en el nodo AV/haz AV, no protege al nodo sinusal.",
+          "et": "anatomy_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-032",
+      "sb": "Acoplamiento Excitación-Contracción",
+      "x": "¿De dónde proviene el calcio que inicia la liberación de más calcio del retículo sarcoplásmico?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Líquido extracelular en túbulos T",
+          "c": true,
+          "r": "Correcto. Entra durante el potencial de acción y activa los receptores de rianodina. Sin este calcio 'gatillo', la contracción fallaría.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Mitocondrias intracelulares",
+          "c": false,
+          "r": "Incorrecto. Las mitocondrias no funcionan como fuente de disparo rápido de calcio para la contracción.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "Núcleo celular",
+          "c": false,
+          "r": "Incorrecto. El núcleo no almacena calcio para el ciclo contráctil.",
+          "et": "anatomy_error"
+        },
+        {
+          "l": "D",
+          "t": "Bombas SERCA2",
+          "c": false,
+          "r": "Incorrecto. SERCA2 retira calcio hacia el retículo, no lo aporta para iniciar el disparo.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Citoplasma en reposo",
+          "c": false,
+          "r": "Incorrecto. La concentración citosólica en reposo es demasiado baja para activar el canal.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-033",
+      "sb": "Trabajo Cardíaco",
+      "x": "¿Qué componente constituye la mayor parte del trabajo cardíaco en condiciones normales?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Trabajo volumen-presión",
+          "c": true,
+          "r": "Correcto. Es el trabajo externo necesario para mover la sangre contra la presión arterial. La energía cinética es una fracción menor.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Generación de energía cinética",
+          "c": false,
+          "r": "Incorrecto. Solo representa una pequeña parte del gasto energético total (aceleración de sangre).",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Mantenimiento del potencial de reposo",
+          "c": false,
+          "r": "Incorrecto. Aunque consume energía, el trabajo mecánico de eyección es el output principal medido.",
+          "et": "category_error"
+        },
+        {
+          "l": "D",
+          "t": "Apertura de válvulas",
+          "c": false,
+          "r": "Incorrecto. Las válvulas se mueven pasivamente por gradientes de presión; no consumen trabajo activo significativo.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "E",
+          "t": "Síntesis de proteínas contráctiles",
+          "c": false,
+          "r": "Incorrecto. Es un proceso metabólico basal, no parte del trabajo latido a latido.",
+          "et": "category_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-034",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué evento se asocia con el segundo tono cardíaco (S2)?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Cierre de válvulas aórtica y pulmonar",
+          "c": true,
+          "r": "Correcto. Ocurre al final de la sístole cuando la presión ventricular cae. Evita el reflujo desde las arterias.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Apertura de válvulas AV",
+          "c": false,
+          "r": "Incorrecto. La apertura valvular es silenciosa; el S2 es un cierre.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Inicio de la contracción auricular",
+          "c": false,
+          "r": "Incorrecto. Esto precede al ciclo ventricular y no genera el tono S2 agudo.",
+          "et": "sequencing"
+        },
+        {
+          "l": "D",
+          "t": "Pico de la presión ventricular",
+          "c": false,
+          "r": "Incorrecto. El tono ocurre cuando la presión cae, no en su pico.",
+          "et": "sequencing"
+        },
+        {
+          "l": "E",
+          "t": "Flujo de sangre a las coronarias",
+          "c": false,
+          "r": "Incorrecto. Aunque ocurre en diástole, el flujo no produce el tono 'dub'.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-035",
+      "sb": "Regulación del Bombeo",
+      "x": "¿Qué efecto tiene la estimulación simpática intensa sobre el gasto cardíaco?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Puede aumentarlo hasta dos o tres veces",
+          "c": true,
+          "r": "Correcto. Combina el aumento de frecuencia (cronotropismo) con el aumento de fuerza (inotropismo).",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Lo reduce a la mitad",
+          "c": false,
+          "r": "Incorrecto. La reducción del gasto es efecto parasimpático o de fallo cardíaco.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "No tiene efecto sobre el volumen, solo frecuencia",
+          "c": false,
+          "r": "Incorrecto. Aumenta significativamente la fuerza de contracción y el volumen sistólico.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "D",
+          "t": "Disminuye la presión de eyección",
+          "c": false,
+          "r": "Incorrecto. La presión generada aumenta debido a la mayor contractilidad.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Mantiene el gasto constante pero ahorra energía",
+          "c": false,
+          "r": "Incorrecto. El estado simpático consume mucha más energía y oxígeno.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-036",
+      "sb": "Análisis Gráfico",
+      "x": "¿Qué fase del diagrama volumen-presión corresponde al llenado ventricular?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Fase I",
+          "c": true,
+          "r": "Correcto. El volumen aumenta (de 50 a 120 ml) con poco cambio de presión. Corresponde a la diástole.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Fase II",
+          "c": false,
+          "r": "Incorrecto. Es la contracción isovolumétrica (sube presión, igual volumen).",
+          "et": "sequencing"
+        },
+        {
+          "l": "C",
+          "t": "Fase III",
+          "c": false,
+          "r": "Incorrecto. Es la eyección (baja volumen, sube presión).",
+          "et": "sequencing"
+        },
+        {
+          "l": "D",
+          "t": "Fase IV",
+          "c": false,
+          "r": "Incorrecto. Es la relajación isovolumétrica (baja presión, igual volumen).",
+          "et": "sequencing"
+        },
+        {
+          "l": "E",
+          "t": "Área total del bucle",
+          "c": false,
+          "r": "Incorrecto. El área representa el trabajo externo realizado, no una fase.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-037",
+      "sb": "Fisiología del Músculo",
+      "x": "¿Cómo responde el músculo cardíaco al final de la sístole debido a su estructura en espiral?",
+      "dif": 3,
+      "o": [
+        {
+          "l": "A",
+          "t": "Retrocede o se desenrosca rápidamente",
+          "c": true,
+          "r": "Correcto. Funciona como un muelle cargado que se libera. Esto facilita la entrada rápida de sangre (succión diastólica).",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Colapsa completamente sus paredes",
+          "c": false,
+          "r": "Incorrecto. Siempre queda un volumen residual (telesistólico) que evita el colapso.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Mantiene la torsión hasta el siguiente latido",
+          "c": false,
+          "r": "Incorrecto. Debe relajarse y desenroscarse para permitir el llenado diastólico.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "D",
+          "t": "Se endurece sin cambio de forma",
+          "c": false,
+          "r": "Incorrecto. Hay cambios geométricos dinámicos de acortamiento y rotación.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Invierte la dirección del flujo aórtico",
+          "c": false,
+          "r": "Incorrecto. El cierre valvular impide la inversión del flujo.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-038",
+      "sb": "Regulación del Bombeo",
+      "x": "¿Qué reflejo se activa por la distensión de la aurícula derecha?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Reflejo de Bainbridge",
+          "c": true,
+          "r": "Correcto. Aumenta la frecuencia cardíaca un 10-20% adicional. Ayuda a procesar el exceso de retorno venoso.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Reflejo barorreceptor aórtico",
+          "c": false,
+          "r": "Incorrecto. Este responde a la presión arterial sistémica, no al llenado auricular.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Reflejo de Cushing",
+          "c": false,
+          "r": "Incorrecto. Es una respuesta a la presión intracraneal elevada.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Mecanismo de Frank-Starling",
+          "c": false,
+          "r": "Incorrecto. Starling es una propiedad intrínseca muscular, no un reflejo nervioso.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Reflejo quimiorreceptor",
+          "c": false,
+          "r": "Incorrecto. Responde a cambios químicos (O2, CO2, pH), no mecánicos auriculares.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-039",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué representa el complejo QRS?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Despolarización ventricular",
+          "c": true,
+          "r": "Correcto. Es la propagación eléctrica rápida que desencadena la sístole ventricular.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Repolarización auricular",
+          "c": false,
+          "r": "Incorrecto. Aunque ocurre simultáneamente, el QRS representa el evento ventricular dominante.",
+          "et": "technicality"
+        },
+        {
+          "l": "C",
+          "t": "Contracción auricular mecánica",
+          "c": false,
+          "r": "Incorrecto. El QRS es una señal eléctrica, la contracción mecánica sigue a la señal.",
+          "et": "category_error"
+        },
+        {
+          "l": "D",
+          "t": "Relajación ventricular",
+          "c": false,
+          "r": "Incorrecto. La relajación eléctrica corresponde a la onda T.",
+          "et": "recall"
+        },
+        {
+          "l": "E",
+          "t": "Cierre de válvulas AV",
+          "c": false,
+          "r": "Incorrecto. El cierre es un evento mecánico (S1) que ocurre poco después del inicio del QRS.",
+          "et": "category_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-040",
+      "sb": "Trabajo Cardíaco",
+      "x": "¿Qué significa una eficiencia cardíaca del 25%?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Solo el 25% de la energía química se convierte en trabajo",
+          "c": true,
+          "r": "Correcto. El resto se disipa principalmente como calor. Es el límite superior de eficiencia en un corazón normal.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "El corazón bombea el 25% de la sangre que recibe",
+          "c": false,
+          "r": "Incorrecto. Esto se referiría a la fracción de eyección, que es normalmente del 60%.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "El 75% de la energía proviene de la glucosa",
+          "c": false,
+          "r": "Incorrecto. Se refiere a la conversión de energía, no a la fuente de combustible.",
+          "et": "misinterpretation"
+        },
+        {
+          "l": "D",
+          "t": "El ventrículo usa el 25% del oxígeno corporal",
+          "c": false,
+          "r": "Incorrecto. Se refiere a la eficiencia termodinámica local, no al consumo sistémico global.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "El corazón descansa el 25% del tiempo",
+          "c": false,
+          "r": "Incorrecto. La diástole ocupa más del 50% del ciclo a frecuencias normales.",
+          "et": "numeric_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-041",
+      "sb": "Análisis Gráfico",
+      "x": "¿Qué representa la Fase III del diagrama volumen-presión?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Período de eyección",
+          "c": true,
+          "r": "Correcto. La presión sistólica aumenta y el volumen disminuye a medida que la sangre sale a la aorta.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Período de llenado",
+          "c": false,
+          "r": "Incorrecto. Es la Fase I, donde aumenta el volumen.",
+          "et": "sequencing"
+        },
+        {
+          "l": "C",
+          "t": "Relajación isovolumétrica",
+          "c": false,
+          "r": "Incorrecto. Es la Fase IV, donde cae la presión.",
+          "et": "sequencing"
+        },
+        {
+          "l": "D",
+          "t": "Contracción isovolumétrica",
+          "c": false,
+          "r": "Incorrecto. Es la Fase II, donde sube la presión sin cambio de volumen.",
+          "et": "sequencing"
+        },
+        {
+          "l": "E",
+          "t": "Diástole completa",
+          "c": false,
+          "r": "Incorrecto. La eyección es el evento central de la sístole.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-042",
+      "sb": "Potenciales de Acción",
+      "x": "¿Qué ocurre inmediatamente después de la espiga inicial del potencial de acción ventricular?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "La membrana permanece despolarizada en una meseta",
+          "c": true,
+          "r": "Correcto. Dura aproximadamente 0,2 segundos. Es la característica distintiva del potencial cardíaco frente al esquelético.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "La membrana se repolariza instantáneamente",
+          "c": false,
+          "r": "Incorrecto. Eso ocurre en el músculo esquelético o nervios, no en el ventrículo.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "El potencial cae a -90 mV inmediatamente",
+          "c": false,
+          "r": "Incorrecto. La caída rápida se retrasa por la entrada de calcio.",
+          "et": "sequencing"
+        },
+        {
+          "l": "D",
+          "t": "Se abren los canales de cloruro",
+          "c": false,
+          "r": "Incorrecto. No es el evento principal post-espiga.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "E",
+          "t": "Comienza el período de llenado ventricular",
+          "c": false,
+          "r": "Incorrecto. El llenado es un evento mecánico diastólico, no eléctrico sistólico.",
+          "et": "category_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-043",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué fracción de la sangre es expulsada durante el período de eyección rápida?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Aproximadamente el 70% del volumen sistólico",
+          "c": true,
+          "r": "Correcto. La mayor parte de la sangre sale en el primer tercio de la eyección. El 30% restante sale en los dos tercios siguientes.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "El 10% del volumen sistólico",
+          "c": false,
+          "r": "Incorrecto. La eyección es vigorosa al principio, no al final.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "C",
+          "t": "Todo el volumen telediastólico",
+          "c": false,
+          "r": "Incorrecto. Siempre queda un remanente; además, se pregunta por la fase rápida.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Exactamente el 50%",
+          "c": false,
+          "r": "Incorrecto. La distribución no es uniforme; es mayor al inicio.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "E",
+          "t": "Solo la sangre auricular",
+          "c": false,
+          "r": "Incorrecto. Se expulsa sangre ventricular mezclada.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-044",
+      "sb": "Regulación del Bombeo",
+      "x": "¿Cuál es la causa primaria de la debilidad cardíaca en la deficiencia de calcio?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Falta de calcio para iniciar la contracción",
+          "c": true,
+          "r": "Correcto. La fuerza contráctil depende directamente de la concentración de calcio extracelular debido a los túbulos T.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Cierre permanente de canales de sodio",
+          "c": false,
+          "r": "Incorrecto. El sodio no depende directamente de los niveles de calcio para su activación inicial.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "Exceso de potasio intracelular",
+          "c": false,
+          "r": "Incorrecto. No hay una relación directa inmediata descrita en este contexto.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "D",
+          "t": "Destrucción de filamentos de actina",
+          "c": false,
+          "r": "Incorrecto. Es un problema funcional de acoplamiento, no estructural lítico.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Inhibición de la bomba SERCA2",
+          "c": false,
+          "r": "Incorrecto. SERCA2 retira calcio; su inhibición aumentaría el calcio citosólico (tetania), no debilidad.",
+          "et": "mechanistic"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-045",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué onda de presión auricular se produce por el flujo lento de sangre desde las venas mientras las válvulas AV están cerradas?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Onda v",
+          "c": true,
+          "r": "Correcto. Ocurre hacia el final de la sístole ventricular. La acumulación de sangre eleva la presión auricular.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Onda a",
+          "c": false,
+          "r": "Incorrecto. Es contracción activa auricular.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Onda c",
+          "c": false,
+          "r": "Incorrecto. Es protrusión valvular al inicio de la sístole.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "Onda x",
+          "c": false,
+          "r": "Incorrecto. Es un descenso de presión, no la onda de llenado venoso.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Onda u",
+          "c": false,
+          "r": "Incorrecto. Es una onda eléctrica del ECG (repolarización papilar), no de presión.",
+          "et": "category_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-046",
+      "sb": "Potenciales de Acción",
+      "x": "¿Qué canales se cierran al final de la meseta (Fase 2) contribuyendo a la repolarización?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Canales de calcio-sodio",
+          "c": true,
+          "r": "Correcto. El cese de la entrada de cargas positivas permite que la salida de potasio repolarice la célula.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Canales rápidos de sodio",
+          "c": false,
+          "r": "Incorrecto. Estos se cierran mucho antes, al final de la Fase 0/inicio de Fase 1.",
+          "et": "sequencing"
+        },
+        {
+          "l": "C",
+          "t": "Canales de potasio",
+          "c": false,
+          "r": "Incorrecto. Los canales de potasio se abren (aumenta permeabilidad) en esta etapa, no se cierran.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "D",
+          "t": "Canales de cloruro",
+          "c": false,
+          "r": "Incorrecto. No juegan el papel determinante en el fin de la meseta.",
+          "et": "recall"
+        },
+        {
+          "l": "E",
+          "t": "Bombas ATPasa",
+          "c": false,
+          "r": "Incorrecto. Las bombas funcionan continuamente para restaurar gradientes, no se cierran fásicamente.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-047",
+      "sb": "Fisiología del Músculo",
+      "x": "¿Por qué el sincitio auricular no conduce potenciales directamente al sincitio ventricular?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Están separados por tejido fibroso aislante",
+          "c": true,
+          "r": "Correcto. El tejido rodea las válvulas AV e impide el paso directo. Obliga a la señal a usar el haz AV.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Las células ventriculares carecen de uniones gap",
+          "c": false,
+          "r": "Incorrecto. El ventrículo es también un sincitio con uniones gap.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "El potencial auricular es demasiado débil",
+          "c": false,
+          "r": "Incorrecto. El potencial es suficiente para excitar, pero está bloqueado anatómicamente.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Las válvulas absorben la electricidad",
+          "c": false,
+          "r": "Incorrecto. Las válvulas no tienen propiedades de absorción eléctrica.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "El nodo sinusal inhibe al ventrículo",
+          "c": false,
+          "r": "Incorrecto. El nodo sinusal estimula, no inhibe.",
+          "et": "mechanistic"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-048",
+      "sb": "Trabajo Cardíaco",
+      "x": "¿Cómo afecta la dilatación ventricular (insuficiencia cardíaca) al gasto energético según la Ley de Laplace?",
+      "dif": 3,
+      "o": [
+        {
+          "l": "A",
+          "t": "Requiere más energía para la misma presión",
+          "c": true,
+          "r": "Correcto. Al aumentar el radio (dilatación), la tensión de pared necesaria aumenta (T=Pxr). Mayor tensión implica mayor consumo de O2.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Disminuye el consumo de oxígeno",
+          "c": false,
+          "r": "Incorrecto. El corazón dilatado es ineficiente y gasta más, no menos.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "La tensión de pared disminuye",
+          "c": false,
+          "r": "Incorrecto. La tensión aumenta proporcionalmente al radio.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "La eficiencia aumenta al 50%",
+          "c": false,
+          "r": "Incorrecto. La eficiencia cae drásticamente en el corazón dilatado.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "E",
+          "t": "Se independiza del metabolismo de ácidos grasos",
+          "c": false,
+          "r": "Incorrecto. Sigue dependiendo del metabolismo oxidativo, pero la demanda supera la oferta.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-049",
+      "sb": "Acoplamiento Excitación-Contracción",
+      "x": "¿Cuánto dura la contracción del músculo ventricular aproximadamente?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "0,3 segundos",
+          "c": true,
+          "r": "Correcto. Corresponde cercanamente a la duración del potencial de acción y la meseta. Es mayor que en la aurícula (0,2 s).",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "0,05 segundos",
+          "c": false,
+          "r": "Incorrecto. Demasiado breve para eyectar la sangre eficazmente.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "C",
+          "t": "1,0 segundos",
+          "c": false,
+          "r": "Incorrecto. Ocuparía todo el ciclo, impidiendo la diástole.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "D",
+          "t": "0,1 segundos",
+          "c": false,
+          "r": "Incorrecto. Es más propio de la contracción muscular esquelética rápida.",
+          "et": "numeric_error"
+        },
+        {
+          "l": "E",
+          "t": "10 milisegundos",
+          "c": false,
+          "r": "Incorrecto. Extremadamente rápido, fisiológicamente imposible para el corazón.",
+          "et": "numeric_error"
+        }
+      ]
+    },
+    {
+      "id": "FIS-CARDIO-050",
+      "sb": "Ciclo Cardíaco",
+      "x": "¿Qué ocurre con la presión ventricular durante el período de llenado rápido?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Se mantiene baja, cerca de 0 mmHg",
+          "c": true,
+          "r": "Correcto. El ventrículo está relajado y distensible. Permite la entrada de sangre desde la aurícula sin oponer resistencia.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Aumenta drásticamente hasta 80 mmHg",
+          "c": false,
+          "r": "Incorrecto. Eso ocurre en la contracción isovolumétrica, no en el llenado.",
+          "et": "sequencing"
+        },
+        {
+          "l": "C",
+          "t": "Supera la presión aórtica",
+          "c": false,
+          "r": "Incorrecto. Si superara la aórtica, estaría eyectando, no llenándose.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Es negativa (vacío)",
+          "c": false,
+          "r": "Incorrecto. No hay presión negativa de succión significativa en el ventrículo normal en reposo.",
+          "et": "misinterpretation"
+        },
+        {
+          "l": "E",
+          "t": "Fluctúa violentamente",
+          "c": false,
+          "r": "Incorrecto. La presión es estable y baja para facilitar el flujo pasivo.",
+          "et": "plausible_distractor"
+        }
+      ]
+    }
+  ]
+}

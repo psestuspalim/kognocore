@@ -40,10 +40,6 @@ export default function SubjectCard({ subject, quizCount, stats, onClick, onDele
                   {subject.visibility === 'specific' && <Users className="w-3.5 h-3.5 text-blue-500" />}
                 </h3>
 
-                {subject.description && (
-                  <p className="text-sm text-gray-500 line-clamp-1 mb-1.5">{subject.description}</p>
-                )}
-
                 <div className="flex items-center flex-wrap gap-2">
                   <Badge variant="secondary" className="text-[10px] sm:text-xs font-medium px-2 py-0.5 rounded-md bg-gray-50 text-gray-700 ring-1 ring-inset ring-gray-500/10 hover:bg-gray-100 transition-colors">
                     {quizCount} {quizCount === 1 ? 'cuestionario' : 'cuestionarios'}
