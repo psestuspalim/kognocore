@@ -69,6 +69,7 @@ import Quizzes from './pages/Quizzes';
 import TournamentLobby from './pages/TournamentLobby';
 import TournamentPlay from './pages/TournamentPlay';
 import index from './pages/index';
+import Layout from './components/layout/Layout';
 
 
 export const PAGES = {
@@ -99,4 +100,5 @@ export const PAGES = {
 export const pagesConfig = {
     mainPage: "Quizzes",
     Pages: PAGES,
+    Layout: Layout,
 };
