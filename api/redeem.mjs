@@ -1,127 +1,71 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js'
+import crypto from 'crypto'
 
-// Helper to use Web Crypto API for SHA-256 hashing
-async function hashText(text) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(text);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+)
+
+function sha256(s) {
+    return crypto.createHash('sha256').update(s).digest('hex')
 }
 
-export async function POST(request) {
+function hmac(s) {
+    return crypto.createHmac('sha256', process.env.TOKEN_SIGNING_SECRET).update(s).digest('hex')
+}
+
+export async function POST(req) {
     try {
-        const { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, CODE_PEPPER } = process.env;
-
-        if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !CODE_PEPPER) {
-            console.error('Missing required environment variables');
-            return new Response(JSON.stringify({ error: "Configuración del servidor incompleta" }), {
-                status: 500,
-                headers: { "Content-Type": "application/json" }
-            });
+        const { code } = await req.json()
+        if (!code || typeof code !== 'string' || code.length < 8) {
+            return new Response(JSON.stringify({ error: 'Código inválido' }), { status: 400 })
         }
 
-        // Parse JSON body
-        const body = await request.json();
-        const { code } = body;
+        const codeHash = sha256(`${code.trim()}|${process.env.CODE_PEPPER}`)
 
-        if (!code) {
-            return new Response(JSON.stringify({ error: "El código es requerido" }), {
-                status: 400,
-                headers: { "Content-Type": "application/json" }
-            });
-        }
-
-        const upperCode = code.toUpperCase();
-
-        // 1. Hash the incoming code with the pepper
-        const codeHash = await hashText(`${upperCode}${CODE_PEPPER}`);
-
-        // 2. Initialize Supabase Admin Client
-        const supabaseContext = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
-            auth: { persistSession: false }
-        });
-
-        // 3. Look up the code in the 'invites' table
-        const { data: invite, error: inviteError } = await supabaseContext
+        // Busca invite válido
+        const now = new Date().toISOString()
+        const { data: invite, error } = await supabase
             .from('invites')
-            .select('*')
+            .select('id, course_id, expires_at, used_at, max_uses, uses')
             .eq('code_hash', codeHash)
-            .single();
+            .maybeSingle()
 
-        if (inviteError || !invite) {
-            return new Response(JSON.stringify({ error: "Código inválido" }), {
-                status: 404,
-                headers: { "Content-Type": "application/json" }
-            });
-        }
+        if (error || !invite) return new Response(JSON.stringify({ error: 'Código no encontrado' }), { status: 401 })
+        if (invite.expires_at && invite.expires_at <= now) return new Response(JSON.stringify({ error: 'Código expirado' }), { status: 401 })
 
-        // Check expiration and usage limits
-        const now = new Date();
-        if (invite.expires_at && new Date(invite.expires_at) < now) {
-            return new Response(JSON.stringify({ error: "Este código ha expirado" }), {
-                status: 403,
-                headers: { "Content-Type": "application/json" }
-            });
-        }
+        const uses = invite.uses ?? 0
+        const maxUses = invite.max_uses ?? 1
+        if (uses >= maxUses) return new Response(JSON.stringify({ error: 'Código ya usado' }), { status: 401 })
 
-        // Since we handle usage via 'sessions' count or simple update, let's verify uses
-        const { count: currentUses } = await supabaseContext
-            .from('sessions')
-            .select('*', { count: 'exact', head: true })
-            .eq('course_id', invite.course_id); // Simplified check, assumes one invite per course logic or tracked differently
+        // Emite token opaco (random) + firma (HMAC) para detectar manipulación
+        const raw = crypto.randomBytes(32).toString('hex')
+        const sig = hmac(raw)
+        const token = `${raw}.${sig}`
 
-        if (currentUses >= invite.max_uses) {
-            return new Response(JSON.stringify({ error: "Este código ha alcanzado su límite de usos" }), {
-                status: 403,
-                headers: { "Content-Type": "application/json" }
-            });
-        }
+        const tokenHash = sha256(`${token}|${process.env.CODE_PEPPER}`)
+        const expiresAt = new Date(Date.now() + 7 * 24 * 3600 * 1000).toISOString() // 7 días
 
-        // 4. Generate a session token
-        const rawToken = crypto.randomUUID();
-        const tokenHash = await hashText(`${rawToken}${process.env.TOKEN_SIGNING_SECRET}`);
+        // Guarda sesión y consume uso
+        const { error: sErr } = await supabase.from('sessions').insert({
+            token_hash: tokenHash,
+            course_id: invite.course_id,
+            expires_at: expiresAt
+        })
+        if (sErr) return new Response(JSON.stringify({ error: 'No se pudo crear sesión' }), { status: 500 })
 
-        const expiresAt = new Date();
-        expiresAt.setHours(expiresAt.getHours() + 24); // 24 hours session
+        const { error: uErr } = await supabase.from('invites')
+            .update({ uses: uses + 1, used_at: uses + 1 >= maxUses ? now : invite.used_at })
+            .eq('id', invite.id)
 
-        // 5. Store the hashed session token
-        const { error: sessionError } = await supabaseContext
-            .from('sessions')
-            .insert({
-                token_hash: tokenHash,
-                course_id: invite.course_id,
-                expires_at: expiresAt.toISOString()
-            });
-
-        if (sessionError) {
-            console.error(sessionError);
-            throw new Error("Error creando la sesión");
-        }
-
-        // Update invite last used timestamp
-        await supabaseContext
-            .from('invites')
-            .update({ used_at: new Date().toISOString() })
-            .eq('id', invite.id);
+        if (uErr) return new Response(JSON.stringify({ error: 'No se pudo consumir código' }), { status: 500 })
 
         return new Response(JSON.stringify({
-            success: true,
-            message: "Código canjeado con éxito",
-            token: rawToken, // Give raw token to client
-            courseDetails: {
-                id: invite.course_id
-            }
-        }), {
-            status: 200,
-            headers: { "Content-Type": "application/json" }
-        });
-
-    } catch (error) {
-        console.error(error);
-        return new Response(JSON.stringify({ error: "Error interno del servidor" }), {
-            status: 500,
-            headers: { "Content-Type": "application/json" }
-        });
+            token,
+            courseId: invite.course_id,
+            expiresAt
+        }), { status: 200 })
+    } catch (e) {
+        return new Response(JSON.stringify({ error: 'Bad request' }), { status: 400 })
     }
 }

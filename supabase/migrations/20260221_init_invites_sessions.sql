@@ -4,6 +4,7 @@ CREATE TABLE invites (
     code_hash TEXT NOT NULL UNIQUE,
     course_id TEXT NOT NULL,
     max_uses INT NOT NULL DEFAULT 1,
+    uses INT NOT NULL DEFAULT 0,
     used_at TIMESTAMP WITH TIME ZONE,
     expires_at TIMESTAMP WITH TIME ZONE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()

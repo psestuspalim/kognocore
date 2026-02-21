@@ -22,8 +22,10 @@ export const AuthProvider = ({ children }) => {
       setAuthError(null);
 
       const localToken = localStorage.getItem('app_mock_token');
-      if (localToken) {
-        // If we have a local mock token, skip public settings check and go straight to auth
+      const kcToken = localStorage.getItem('kc_token');
+
+      if (localToken || kcToken) {
+        // If we have a local mock token or Vercel token, skip public settings check and go straight to auth
         await checkUserAuth();
         setIsLoadingPublicSettings(false);
         return;
@@ -57,9 +59,10 @@ export const AuthProvider = ({ children }) => {
         setAppPublicSettings(publicSettings);
 
         // If we got the app public settings successfully, check if user is authenticated
-        // Check for local mock token first
+        // Check for local mock token or Vercel token first
         const localToken = localStorage.getItem('app_mock_token');
-        if (appParams.token || localToken) {
+        const kcToken = localStorage.getItem('kc_token');
+        if (appParams.token || localToken || kcToken) {
           await checkUserAuth();
         } else {
           setIsLoadingAuth(false);
@@ -114,6 +117,33 @@ export const AuthProvider = ({ children }) => {
       setIsLoadingAuth(true);
 
       const localToken = localStorage.getItem('app_mock_token');
+      const kcToken = localStorage.getItem('kc_token');
+
+      if (kcToken) {
+        // Validation using Vercel backend
+        const response = await fetch('/api/me', {
+          headers: { Authorization: `Bearer ${kcToken}` }
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setUser({
+            id: 'student_' + data.courseId,
+            email: 'estudiante@kognocore.com',
+            last_name: 'Estudiante',
+            username: 'Estudiante Invitado',
+            is_admin: false,
+            role: 'student',
+            courseId: data.courseId
+          });
+          setIsAuthenticated(true);
+          setIsLoadingAuth(false);
+          return;
+        } else {
+          // Invalid token, remove it
+          localStorage.removeItem('kc_token');
+        }
+      }
 
       if (localToken) {
         // Mock user based on token
@@ -185,6 +215,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setIsAuthenticated(false);
     localStorage.removeItem('app_mock_token');
+    localStorage.removeItem('kc_token');
 
     if (shouldRedirect) {
       // If we are using mock auth, just reload to clear state and show login
