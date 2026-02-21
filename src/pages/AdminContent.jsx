@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { FolderTree, Search, Trash2, Eye, EyeOff } from 'lucide-react';
+import { FolderTree, Search, Trash2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
 import AdminShell from '../components/admin/AdminShell';
 import AdminPageHeader from '../components/admin/AdminPageHeader';

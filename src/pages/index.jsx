@@ -1,5 +1,5 @@
 
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 
 // ✅ Lazy load de todas las páginas para reducir el bundle inicial

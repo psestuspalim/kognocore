@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { client } from '@/api/client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Swords, Clock, Zap, Trophy, Target, User, Loader2, Crown, Medal } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, Swords, Clock, User, Loader2, Crown, Medal } from 'lucide-react';
+import { motion } from 'framer-motion';
 import QuestionView from '../components/quiz/QuestionView';
 import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import confetti from 'canvas-confetti';
 

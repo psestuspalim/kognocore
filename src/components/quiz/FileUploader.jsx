@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { Upload, FileJson, AlertCircle, Loader2 } from 'lucide-react';
-import { client } from '@/api/client';
+import { useState } from 'react';
+import { AlertCircle, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Textarea } from '@/components/ui/textarea';
-import { toCompactFormat, fromCompactFormat } from '../utils/quizFormats';
+import { fromCompactFormat } from '../utils/quizFormats';
 
 export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
   const [isProcessing, setIsProcessing] = useState(false);

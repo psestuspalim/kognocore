@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Progress } from '@/components/ui/progress';
-import { CheckCircle2, Clock, AlertCircle } from 'lucide-react';
+import { Clock, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';

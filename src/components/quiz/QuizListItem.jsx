@@ -1,13 +1,8 @@
-import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Pencil, Trash2, Play, ChevronRight, CheckCircle2, XCircle, HelpCircle, BarChart3, Smartphone, FolderInput } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { Pencil, Trash2, ChevronRight, CheckCircle2, XCircle, HelpCircle, BarChart3, Smartphone, FolderInput } from 'lucide-react';
+
+
 import { motion } from 'framer-motion';
 
 export default function QuizListItem({
@@ -25,37 +20,51 @@ export default function QuizListItem({
   const totalQuestions = quiz.total_questions || quiz.questions?.length || 0;
   const hasAttempts = attempts.length > 0;
 
-  // Calcular estadísticas
-  const wrongSet = new Set();
-  const correctSet = new Set();
-  let totalAnswered = 0;
+  // Calculate best and progress stats based on the smartest attempt
+  let bestAttempt = null;
+  let maxScore = -1;
+  let maxAnswered = -1;
+  let latestAttempt = null;
 
-  attempts.forEach(attempt => {
-    totalAnswered += attempt.answered_questions || attempt.total_questions || 0;
-    attempt.wrong_questions?.forEach(wq => wrongSet.add(wq.question));
-  });
+  if (attempts.length > 0) {
+    // Ordenar intentos por fecha si es posible para tener el `latestAttempt`, pero la API
+    // usualmente los envía ya ordenados por -created_date.
+    latestAttempt = attempts[0];
 
-  // Calcular correctas únicas (preguntas que nunca se han fallado)
-  const allQuestions = quiz.questions?.map(q => q.question) || [];
-  allQuestions.forEach(q => {
-    if (!wrongSet.has(q)) {
-      // Verificar si fue contestada en algún intento
-      const wasAnswered = attempts.some(a => a.answered_questions > 0);
-      if (wasAnswered) correctSet.add(q);
-    }
-  });
+    attempts.forEach(attempt => {
+      const currentScore = attempt.total_questions > 0 ? (attempt.score / attempt.total_questions) * 100 : 0;
+      if (currentScore > maxScore) {
+        maxScore = currentScore;
+        bestAttempt = attempt;
+      }
+      if ((attempt.answered_questions || 0) > maxAnswered) {
+        maxAnswered = attempt.answered_questions || 0;
+      }
+    });
 
-  const uniqueWrong = wrongSet.size;
-  const uniqueCorrect = correctSet.size;
+    // Handle edge case where scores are 0 but progress exists
+    if (!bestAttempt) bestAttempt = latestAttempt;
+  }
+
+  // Calculate stats to display
+  const uniqueCorrect = bestAttempt ? bestAttempt.score : 0;
+  const uniqueWrong = bestAttempt ? (bestAttempt.wrong_questions?.length || (bestAttempt.answered_questions - bestAttempt.score)) : 0;
+
   const avgScore = attempts.length > 0
-    ? Math.round(attempts.reduce((sum, a) => sum + ((a.score / a.total_questions) * 100), 0) / attempts.length)
+    ? Math.round(attempts.reduce((sum, a) => sum + (a.total_questions > 0 ? (a.score / a.total_questions) * 100 : 0), 0) / attempts.length)
     : 0;
-  const bestScore = attempts.length > 0
-    ? Math.round(Math.max(...attempts.map(a => (a.score / a.total_questions) * 100)))
-    : 0;
-  const progressPercent = totalQuestions > 0
-    ? Math.min(100, Math.round(((uniqueCorrect + uniqueWrong) / totalQuestions) * 100))
-    : 0;
+
+  const bestScore = Math.max(0, Math.round(maxScore));
+
+  // Progress is computed on the attempt that went the furthest
+  let progressPercent = 0;
+  if (totalQuestions > 0 && maxAnswered > -1) {
+    progressPercent = Math.min(100, Math.round((maxAnswered / totalQuestions) * 100));
+  }
+  // Si algún intento fue marcado como completado, fuerza el 100%
+  if (attempts.some(a => a.is_completed)) {
+    progressPercent = 100;
+  }
 
   const getScoreColor = (score) => {
     if (score >= 80) return 'text-green-600';
@@ -158,10 +167,10 @@ export default function QuizListItem({
           <>
             <Badge
               className={`text-xs ${avgScore >= 80
-                  ? 'bg-green-100 text-green-700 border-green-300'
-                  : avgScore >= 50
-                    ? 'bg-yellow-100 text-yellow-700 border-yellow-300'
-                    : 'bg-red-100 text-red-700 border-red-300'
+                ? 'bg-green-100 text-green-700 border-green-300'
+                : avgScore >= 50
+                  ? 'bg-yellow-100 text-yellow-700 border-yellow-300'
+                  : 'bg-red-100 text-red-700 border-red-300'
                 }`}
             >
               {progressPercent}% completado

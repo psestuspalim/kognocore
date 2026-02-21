@@ -15,23 +15,29 @@ const realClient = null;
 
 // Mock client implementation
 // Mock client implementation with LocalStorage persistence
-import { mockCourses, mockFolders, mockSubjects, mockQuizzes, mockQuizSettings, mockUser } from '@/lib/mock-data';
+import { mockCourses, mockFolders, mockSubjects, mockQuizzes, mockQuizSettings, mockUser, mockResources } from '@/lib/mock-data';
 
 // Helper to initialize storage
+// Courses, subjects, and folders are ALWAYS seeded from mock-data to keep the
+// medicine curriculum up to date. Other entities only initialize if absent.
+const SEED_VERSION = 'v5_medicina'; // bump this to force a re-seed
+
 const initializeStorage = () => {
   if (typeof window === 'undefined') return;
 
-  if (!localStorage.getItem('app_courses')) {
+  // Always overwrite structural data so the curriculum stays in sync
+  if (localStorage.getItem('app_seed_version') !== SEED_VERSION) {
     localStorage.setItem('app_courses', JSON.stringify(mockCourses));
-  }
-  if (!localStorage.getItem('app_folders')) {
-    localStorage.setItem('app_folders', JSON.stringify(mockFolders));
-  }
-  if (!localStorage.getItem('app_subjects')) {
     localStorage.setItem('app_subjects', JSON.stringify(mockSubjects));
+    localStorage.setItem('app_folders', JSON.stringify(mockFolders));
+    localStorage.setItem('app_seed_version', SEED_VERSION);
   }
+
   if (!localStorage.getItem('app_quizzes')) {
     localStorage.setItem('app_quizzes', JSON.stringify(mockQuizzes));
+  }
+  if (!localStorage.getItem('app_resources')) {
+    localStorage.setItem('app_resources', JSON.stringify(mockResources));
   }
   if (!localStorage.getItem('app_quiz_settings')) {
     localStorage.setItem('app_quiz_settings', JSON.stringify([mockQuizSettings]));
@@ -77,7 +83,8 @@ const getItems = (entityName) => {
     'Audio': 'app_audios',
     'FeatureUsage': 'app_feature_usage',
     'QuizAnswer': 'app_quiz_answers',
-    'Question': 'app_questions'
+    'Question': 'app_questions',
+    'Resource': 'app_resources'
   };
 
   const key = keyMap[entityName];
@@ -107,7 +114,8 @@ const saveItems = (entityName, items) => {
     'Audio': 'app_audios',
     'FeatureUsage': 'app_feature_usage',
     'QuizAnswer': 'app_quiz_answers',
-    'Question': 'app_questions'
+    'Question': 'app_questions',
+    'Resource': 'app_resources'
   };
 
   const key = keyMap[entityName];
@@ -140,7 +148,8 @@ const saveItems = (entityName, items) => {
  *     Audio: Base44Entity,
  *     FeatureUsage: Base44Entity,
  *     QuizAnswer: Base44Entity,
- *     Question: Base44Entity
+    Question: Base44Entity,
+    Resource: Base44Entity
  *   },
  *   integrations: any
  * }}

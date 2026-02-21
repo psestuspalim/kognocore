@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { client } from '@/api/client';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { BookOpen, Users, FileJson, Wrench, FileDown, Settings, LayoutDashboard, Activity } from 'lucide-react';
 import AdminShell from '../components/admin/AdminShell';
 import AdminPageHeader from '../components/admin/AdminPageHeader';
@@ -9,6 +9,7 @@ import AdminDashboardCard from '../components/admin/AdminDashboardCard';
 import { motion } from 'framer-motion';
 import QuizExporter from '../components/admin/QuizExporter';
 import MaintenanceToolsModal from '../components/admin/MaintenanceToolsModal';
+import GlobalSettingsModal from '../components/admin/GlobalSettingsModal';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
@@ -16,6 +17,7 @@ export default function AdminHome() {
   const [currentUser, setCurrentUser] = useState(null);
   const [showQuizExporter, setShowQuizExporter] = useState(false);
   const [showMaintenanceTools, setShowMaintenanceTools] = useState(false);
+  const [showGlobalSettings, setShowGlobalSettings] = useState(false);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -198,7 +200,7 @@ export default function AdminHome() {
           Herramientas de Mantenimiento y Gestión
         </h2>
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Button
               variant="outline"
               className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-700 transition-all"
@@ -217,6 +219,16 @@ export default function AdminHome() {
               <Settings className="w-6 h-6" />
               <span className="font-semibold">Herramientas de Reparación</span>
               <span className="text-xs text-gray-500 font-normal">Limpieza y mantenimiento</span>
+            </Button>
+
+            <Button
+              variant="outline"
+              className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition-all"
+              onClick={() => setShowGlobalSettings(true)}
+            >
+              <Wrench className="w-6 h-6" />
+              <span className="font-semibold">Configuración Global</span>
+              <span className="text-xs text-gray-500 font-normal">Vars. del Sistema (Tutor IA)</span>
             </Button>
           </div>
 
@@ -241,6 +253,12 @@ export default function AdminHome() {
       <MaintenanceToolsModal
         open={showMaintenanceTools}
         onOpenChange={setShowMaintenanceTools}
+      />
+
+      {/* Global Settings Modal */}
+      <GlobalSettingsModal
+        open={showGlobalSettings}
+        onOpenChange={setShowGlobalSettings}
       />
     </AdminShell>
   );

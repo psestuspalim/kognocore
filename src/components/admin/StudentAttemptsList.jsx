@@ -1,9 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { CheckCircle2, XCircle, ChevronDown, ChevronUp, Calendar, Clock, Filter } from 'lucide-react';
+import { CheckCircle2, XCircle, ChevronDown, ChevronUp, Calendar, Filter } from 'lucide-react';
 import { format } from 'date-fns';
 import MathText from '../quiz/MathText';
 

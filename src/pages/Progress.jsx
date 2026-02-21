@@ -2,15 +2,13 @@ import React, { useState, useMemo } from 'react';
 import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { TrendingUp, Target, AlertCircle, BookOpen, Award, ArrowLeft, History, Trophy, Clock, Zap, LayoutDashboard, Brain, PieChart } from 'lucide-react';
+import { TrendingUp, Target, AlertCircle, BookOpen, Award, ArrowLeft, History, Trophy, Zap, LayoutDashboard, Brain, PieChart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
 import OverviewStats from '../components/progress/OverviewStats';
 import SubjectProgress from '../components/progress/SubjectProgress';
-import TrendAnalysis from '../components/progress/TrendAnalysis';
 import WeakPoints from '../components/progress/WeakPoints';
 import Recommendations from '../components/progress/Recommendations';
 import AttemptHistory from '../components/progress/AttemptHistory';

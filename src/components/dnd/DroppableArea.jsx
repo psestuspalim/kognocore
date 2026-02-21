@@ -1,4 +1,3 @@
-import React from 'react';
 import { Droppable } from '@hello-pangea/dnd';
 
 export default function DroppableArea({ droppableId, type, children, className = '' }) {

@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Upload, Plus, Trash2, Circle, ArrowRight, Save, X, ChevronLeft, ChevronRight, Check, Loader2 } from 'lucide-react';
+import { Upload, Plus, Circle, ArrowRight, Save, X, ChevronLeft, ChevronRight, Check, Loader2 } from 'lucide-react';
 import { client } from '@/api/client';
 
 const BLOCK_SIZE = 50;

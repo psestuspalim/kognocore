@@ -8,7 +8,8 @@ const DEFAULT_SETTINGS = {
   show_error_analysis: false,
   show_schema: false,
   show_notes: false,
-  show_hint: false
+  show_hint: false,
+  enable_tutor: false // Desactivado por defecto
 };
 
 export default function useQuizSettings(quizId, subjectId, folderId, courseId) {
@@ -37,6 +38,9 @@ export default function useQuizSettings(quizId, subjectId, folderId, courseId) {
         ...(courseSettings && extractSettings(courseSettings)),
         ...(folderSettings && extractSettings(folderSettings)),
         ...(subjectSettings && extractSettings(subjectSettings)),
+        ...(subjectSettings && extractSettings(subjectSettings)),
+        // Global settings override (if implemented as a special quiz settings type)
+        // For now, we'll let it flow through the same hierarchy or just default
         ...(quizSettings && extractSettings(quizSettings))
       };
 
@@ -60,6 +64,7 @@ function extractSettings(settingsObj) {
     show_error_analysis: settingsObj.show_error_analysis,
     show_schema: settingsObj.show_schema,
     show_notes: settingsObj.show_notes,
-    show_hint: settingsObj.show_hint
+    show_hint: settingsObj.show_hint,
+    enable_tutor: settingsObj.enable_tutor
   };
 }

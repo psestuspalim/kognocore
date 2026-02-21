@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, XCircle, ArrowLeft, ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
+import { CheckCircle2, XCircle, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import MathText from './MathText';
 
 export default function SwipeQuizMode({ 

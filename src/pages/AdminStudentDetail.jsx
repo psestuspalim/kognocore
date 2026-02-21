@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Badge } from '@/components/ui/badge';

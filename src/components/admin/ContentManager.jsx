@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import {
-  Trash2, Search, Book, Folder, BookOpen,
-  CheckSquare, Square, Eye, EyeOff, MoreVertical,
-  ChevronRight, AlertTriangle, X
+  Trash2, Search, Book, Folder, BookOpen, Eye, EyeOff, MoreVertical, AlertTriangle, X
 } from 'lucide-react';
 import {
   DropdownMenu,

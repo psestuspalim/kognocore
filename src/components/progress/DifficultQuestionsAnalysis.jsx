@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { AlertTriangle, Brain, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { AlertTriangle, Brain } from 'lucide-react';
 import MathText from '../quiz/MathText';
 
 export default function DifficultQuestionsAnalysis({ attempts = [] }) {

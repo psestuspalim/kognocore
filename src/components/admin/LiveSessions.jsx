@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Activity, User, BookOpen, Clock, CheckCircle2, XCircle, TrendingUp, Eye } from 'lucide-react';
+import { Activity, User, BookOpen, Clock, CheckCircle2, XCircle, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { formatDistanceToNow, differenceInMinutes, differenceInSeconds } from 'date-fns';
 import { es } from 'date-fns/locale';

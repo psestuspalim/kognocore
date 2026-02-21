@@ -7,6 +7,8 @@ import { client } from '@/api/client';
 import { motion, AnimatePresence } from 'framer-motion';
 import MathText from './MathText';
 import ImageQuestionView from './ImageQuestionView';
+import AIErrorFeedback from './AIErrorFeedback';
+import { diagnoseError } from '@/services/mockAIService';
 
 /**
  * @typedef {Object} QuestionViewProps
@@ -24,6 +26,7 @@ import ImageQuestionView from './ImageQuestionView';
  * @property {Object} [settings]
  * @property {boolean} [settings.show_feedback]
  * @property {boolean} [settings.show_hint]
+ * @property {boolean} [settings.enable_tutor]
  * @property {string} [quizTitle]
  * @property {string} [subjectId]
  * @property {string} [sessionId]
@@ -55,6 +58,8 @@ export default function QuestionView({
   const [showHint, setShowHint] = useState(false);
   const [isMarked, setIsMarked] = useState(initialIsMarked);
   const [answerStartTime, setAnswerStartTime] = useState(Date.now());
+  const [aiAnalysis, setAiAnalysis] = useState(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   // Actualizar sesión cuando cambia la pregunta
   useEffect(() => {
@@ -90,10 +95,32 @@ export default function QuestionView({
     );
   }
 
-  const handleSelectAnswer = (index) => {
+
+  const handleSelectAnswer = async (index) => {
     if (showFeedback) return;
+
+    const selected = options[index];
     setSelectedAnswer(index);
     setShowFeedback(true);
+
+    if (!selected.isCorrect) {
+      // Only run AI analysis if enabled in settings
+      if (settings.enable_tutor) {
+        setIsAnalyzing(true);
+        try {
+          const analysis = await diagnoseError(
+            question.question,
+            question.answerOptions?.find(o => o.isCorrect)?.rationale || "N/A",
+            selected.text
+          );
+          setAiAnalysis(analysis);
+        } catch (error) {
+          console.error("Error analyzing answer:", error);
+        } finally {
+          setIsAnalyzing(false);
+        }
+      }
+    }
   };
 
   const selectedOption = selectedAnswer !== null ? options[selectedAnswer] : null;
@@ -114,43 +141,53 @@ export default function QuestionView({
     const isIncorrectlySelected = isRevealed && isSelected && !isCorrect;
     const isMissedCorrect = isRevealed && !isSelected && isCorrect;
 
-    const baseStyle = "relative p-3.5 rounded-lg border-2 transition-all duration-200 flex items-center gap-3 w-full text-left group shadow-sm hover:shadow-md";
+    const baseStyle = "relative p-4 rounded-xl border transition-all duration-200 flex flex-col w-full text-left group";
+
+    // Contenedor interno para la flexbox de layout
+    const contentInner = "flex items-start gap-4 w-full";
 
     if (isCorrectlySelected) {
-      return `${baseStyle} border-emerald-500 bg-emerald-50 text-emerald-900 shadow-emerald-200/50`;
+      return `${baseStyle} border-emerald-200 bg-[#e6f4ea]`; // Pastel green from screenshot
     }
     if (isIncorrectlySelected) {
-      return `${baseStyle} border-red-500 bg-red-50 text-red-900 shadow-red-200/50`;
+      return `${baseStyle} border-rose-100 bg-[#fff0f0]`; // Pastel red from screenshot
     }
     if (isMissedCorrect) {
-      return `${baseStyle} border-emerald-500/50 bg-emerald-50/30 text-emerald-900`;
+      return `${baseStyle} border-emerald-200 bg-[#e6f4ea]`; // Highlight missed correct answer too
     }
     if (isSelected && !isRevealed) {
-      return `${baseStyle} border-sky-600 bg-sky-50 shadow-md ring-1 ring-sky-200`;
+      return `${baseStyle} border-indigo-200 bg-indigo-50 shadow-sm`;
     }
 
-    return `${baseStyle} border-gray-100 bg-white hover:border-gray-200 hover:bg-gray-50 text-gray-700`;
+    return `${baseStyle} border-gray-100 bg-[#f8f9fa] hover:border-gray-200 hover:bg-gray-100 text-gray-700`;
   };
 
-  const getRadioIcon = (index) => {
+  const getLetterPrefix = (index) => {
+    const letters = ['A.', 'B.', 'C.', 'D.', 'E.', 'F.'];
+    return letters[index] || '';
+  };
+
+  const getLetterIcon = (index) => {
     const isSelected = selectedAnswer === index;
     const option = options[index];
     const isCorrect = option.isCorrect;
     const isRevealed = showFeedback;
 
+    let textColor = "text-gray-500 group-hover:text-gray-700";
+
     if (isRevealed) {
       if (option.isCorrect) {
-        return <CheckCircle2 className="w-5 h-5 text-emerald-500 fill-emerald-100" />;
+        textColor = "text-emerald-700";
+      } else if (isSelected && !isCorrect) {
+        textColor = "text-rose-700";
       }
-      if (isSelected && !isCorrect) {
-        return <XCircle className="w-5 h-5 text-red-500 fill-red-100" />;
-      }
+    } else if (isSelected) {
+      textColor = "text-indigo-700";
     }
 
     return (
-      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${isSelected ? 'border-sky-600' : 'border-gray-300 group-hover:border-gray-400'
-        }`}>
-        {isSelected && <div className="w-2.5 h-2.5 rounded-full bg-sky-600" />}
+      <div className={`text-base font-medium mt-0.5 ${textColor}`}>
+        {getLetterPrefix(index)}
       </div>
     );
   };
@@ -260,25 +297,26 @@ export default function QuestionView({
               {/* Hints */}
               {question.hint && !showFeedback && showHintSetting && (
                 <div className="mb-6">
-                  <Button
-                    variant="ghost"
-                    size="sm"
+                  <button
                     onClick={() => setShowHint(!showHint)}
-                    className="text-amber-600 hover:bg-amber-50 hover:text-amber-700 gap-2 pl-0 h-auto py-1"
+                    className="flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-gray-900 transition-colors"
                   >
-                    <Lightbulb className="w-4 h-4" />
-                    {showHint ? 'Ocultar Pista' : 'Ver Pista'}
-                  </Button>
+                    Mostrar pista
+                    <ChevronRight className={`w-4 h-4 transition-transform duration-200 ${showHint ? 'rotate-[-90deg]' : 'rotate-90'}`} />
+                  </button>
                   <AnimatePresence>
                     {showHint && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="mt-3 p-3 bg-amber-50/50 border border-amber-100 rounded-lg shadow-sm"
+                        className="mt-4 p-4 bg-[#f8f9fa] border border-gray-100 rounded-xl"
                       >
-                        <div className="text-amber-800 text-sm leading-relaxed">
-                          <MathText text={question.hint} />
+                        <div className="flex gap-3">
+                          <Lightbulb className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />
+                          <div className="text-gray-600 text-[15px] leading-relaxed">
+                            <MathText text={question.hint} />
+                          </div>
                         </div>
                       </motion.div>
                     )}
@@ -286,37 +324,10 @@ export default function QuestionView({
                 </div>
               )}
 
-              {/* FEEDBACK */}
+              {/* AI Analysis Feedback Only */}
               <AnimatePresence>
-                {showFeedback && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-8 pt-6 border-t border-gray-100 space-y-4"
-                  >
-                    {/* Correct Answer Explanation Block */}
-                    <div className="bg-emerald-50/80 rounded-lg p-4 border border-emerald-200/70 shadow-md">
-                      <h3 className="font-bold text-emerald-800 mb-2 flex items-center gap-2 text-sm">
-                        <CheckCircle2 className="w-4 h-4" /> Respuesta Correcta
-                      </h3>
-                      <div className="text-emerald-900/90 leading-relaxed text-sm">
-                        <MathText text={question.answerOptions?.find(o => o.isCorrect)?.rationale || question.feedback || "Explicación correcta."} />
-                      </div>
-                    </div>
-
-                    {/* If user was wrong, clarify their selection */}
-                    {selectedOption && !selectedOption.isCorrect && (
-                      <div className="bg-red-50/80 rounded-lg p-4 border border-red-200/70 shadow-md">
-                        <h3 className="font-bold text-red-800 mb-2 flex items-center gap-2 text-sm">
-                          <XCircle className="w-4 h-4" /> Tu Selección
-                        </h3>
-                        <div className="text-red-900/90 leading-relaxed text-sm">
-                          <MathText text={selectedOption.rationale || "Esta opción no es la más adecuada."} />
-                        </div>
-                      </div>
-                    )}
-                  </motion.div>
-                )}
+                {/* AI Analysis Feedback */}
+                <AIErrorFeedback isLoading={isAnalyzing} analysis={aiAnalysis} />
               </AnimatePresence>
             </div>
           </div>
@@ -331,25 +342,59 @@ export default function QuestionView({
                   <span className="text-[10px] font-bold tracking-widest text-gray-500 uppercase">Opciones</span>
                 </div>
 
-                <div className="space-y-3">
-                  {options.map((option, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleSelectAnswer(index)}
-                      disabled={showFeedback}
-                      className={getOptionStyle(index)}
-                    >
-                      {/* Radio Icon */}
-                      <div className="flex-shrink-0 pt-0.5">
-                        {getRadioIcon(index)}
-                      </div>
+                <div className="space-y-4">
+                  {options.map((option, index) => {
+                    const isSelected = selectedAnswer === index;
+                    const isRevealed = showFeedback;
+                    const isCorrect = option.isCorrect;
 
-                      {/* Text */}
-                      <div className="flex-1 font-medium text-base text-left">
-                        <MathText text={option.text} />
-                      </div>
-                    </button>
-                  ))}
+                    const isCorrectRevealed = isRevealed && isCorrect;
+                    const isIncorrectSelected = isRevealed && isSelected && !isCorrect;
+
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => handleSelectAnswer(index)}
+                        disabled={showFeedback}
+                        className={getOptionStyle(index)}
+                      >
+                        <div className="flex items-start gap-4 w-full">
+                          {/* Letter Prefix instead of Radio */}
+                          <div className="flex-shrink-0 pt-0.5 w-[24px]">
+                            {getLetterIcon(index)}
+                          </div>
+
+                          {/* Text Header */}
+                          <div className="flex-1 font-medium text-[15px] text-gray-800 mt-[3px]">
+                            <MathText text={option.text} />
+
+                            {/* Inline Feedback Rendering (matches screenshot) */}
+                            {isRevealed && (isCorrectRevealed || isIncorrectSelected) && (
+                              <div className="mt-4 flex flex-col items-start min-w-0 pointer-events-none">
+                                <div className="flex items-center gap-2 mb-2 w-full">
+                                  {isCorrectRevealed ? (
+                                    <>
+                                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                                      <span className="font-bold text-[13px] text-emerald-800 tracking-wide uppercase">Respuesta correcta</span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <XCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                                      <span className="font-bold text-[13px] text-rose-800 tracking-wide uppercase">No exactamente</span>
+                                    </>
+                                  )}
+                                </div>
+
+                                <div className={`text-[15px] ${isCorrectRevealed ? 'text-emerald-900' : 'text-rose-900'} leading-relaxed font-normal`}>
+                                  <MathText text={option.rationale || (isCorrectRevealed ? (question.feedback || "Explicación correcta.") : "Esta opción no es la más adecuada.")} />
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
 
                 {/* Add Spacer for mobile scroll to avoid hitting bottom directly */}
@@ -389,6 +434,6 @@ export default function QuestionView({
         </div>
       </div>
 
-    </div>
+    </div >
   );
 }

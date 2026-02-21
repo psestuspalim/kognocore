@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Trophy, Star, Target, Zap, Award, BookOpen, CheckCircle2, Flame, Crown, Medal } from 'lucide-react';
 import { format } from 'date-fns';

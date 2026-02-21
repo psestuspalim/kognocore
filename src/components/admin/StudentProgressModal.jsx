@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -9,9 +9,6 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { X } from 'lucide-react';
 
-import OverviewStats from '../progress/OverviewStats';
-import SubjectProgress from '../progress/SubjectProgress';
-import WeakPoints from '../progress/WeakPoints';
 import SpeedAnalysis from '../progress/SpeedAnalysis';
 import StudentTrendChart from './StudentTrendChart';
 import StudentWeakPointsList from './StudentWeakPointsList';

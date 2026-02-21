@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { client } from '@/api/client';
 import { getFolderColor } from '@/utils/folderColors';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Plus, ArrowLeft, BookOpen, Book, FolderPlus, Folder, ChevronRight, Upload, Home, Shield, AlertCircle, LayoutDashboard } from 'lucide-react';
+import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, ChevronRight, Upload, Home, Shield, AlertCircle, LayoutDashboard } from 'lucide-react';
 import { Icon } from '@/components/ui/Icon';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,8 +27,6 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import FileUploader from '../components/quiz/FileUploader';
 
@@ -40,10 +38,12 @@ import SubjectEditor from '../components/quiz/SubjectEditor';
 import UsernamePrompt from '../components/quiz/UsernamePrompt';
 import FolderCard from '../components/quiz/FolderCard';
 import FolderEditor from '../components/quiz/FolderEditor';
-import AudioList from '../components/audio/AudioList';
 import CourseCard from '../components/course/CourseCard';
 import CourseEditor from '../components/course/CourseEditor';
 import QuizListItem from '../components/quiz/QuizListItem';
+import ResourceCard from '../components/resources/ResourceCard';
+import ResourceEditor from '../components/resources/ResourceEditor';
+import ResourceViewer from '../components/resources/ResourceViewer';
 
 
 import SessionTimer from '../components/ui/SessionTimer';
@@ -53,7 +53,6 @@ import ContentManager from '../components/admin/ContentManager';
 /* import AdminMenu from '../components/admin/AdminMenu'; */
 import useQuizSettings from '../components/quiz/useQuizSettings';
 import SwipeQuizMode from '../components/quiz/SwipeQuizMode';
-import AIQuizGenerator from '../components/quiz/AIQuizGenerator';
 import FileExplorer from '../components/explorer/FileExplorer';
 import MoveQuizModal from '../components/quiz/MoveQuizModal';
 import QuizExporter from '../components/admin/QuizExporter';
@@ -120,6 +119,12 @@ export default function QuizzesPage() {
   const [showContentManager, setShowContentManager] = useState(false);
   const [showQuizExporter, setShowQuizExporter] = useState(false);
 
+  // Resource states
+  const [showResourceEditor, setShowResourceEditor] = useState(false);
+  const [editingResource, setEditingResource] = useState(null);
+  const [viewingResource, setViewingResource] = useState(null);
+  const [activeTab, setActiveTab] = useState('quizzes'); // 'quizzes' or 'resources'
+
   const queryClient = useQueryClient();
 
   // Quiz settings hook
@@ -172,6 +177,11 @@ export default function QuizzesPage() {
     queryFn: () => client.entities.Quiz.list('-created_date'),
   });
 
+  const { data: resources = [] } = useQuery({
+    queryKey: ['resources'],
+    queryFn: () => client.entities.Resource.list('-created_date'),
+  });
+
   const { data: attempts = [] } = useQuery({
     queryKey: ['attempts', currentUser?.email],
     queryFn: () => client.entities.QuizAttempt.filter({ user_email: currentUser?.email }, '-created_date'),
@@ -196,7 +206,7 @@ export default function QuizzesPage() {
   const createCourseMutation = useMutation({
     mutationFn: (data) => client.entities.Course.create(data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['courses']);
+      queryClient.invalidateQueries({ queryKey: ['courses'] });
       setShowCourseDialog(false);
       setNewItem({ name: '', description: '', color: '#6366f1' });
     },
@@ -205,20 +215,20 @@ export default function QuizzesPage() {
   const updateCourseMutation = useMutation({
     mutationFn: ({ id, data }) => client.entities.Course.update(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['courses']);
+      queryClient.invalidateQueries({ queryKey: ['courses'] });
       setEditingCourse(null);
     },
   });
 
   const deleteCourseMutation = useMutation({
     mutationFn: (id) => client.entities.Course.delete(id),
-    onSuccess: () => queryClient.invalidateQueries(['courses']),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['courses'] }),
   });
 
   const createSubjectMutation = useMutation({
     mutationFn: (data) => client.entities.Subject.create(data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['subjects']);
+      queryClient.invalidateQueries({ queryKey: ['subjects'] });
       setShowSubjectDialog(false);
       setNewItem({ name: '', description: '', color: '#6366f1' });
     },
@@ -227,14 +237,14 @@ export default function QuizzesPage() {
   const updateSubjectMutation = useMutation({
     mutationFn: ({ id, data }) => client.entities.Subject.update(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['subjects']);
+      queryClient.invalidateQueries({ queryKey: ['subjects'] });
       setEditingSubject(null);
     },
   });
 
   const deleteSubjectMutation = useMutation({
     mutationFn: (id) => client.entities.Subject.delete(id),
-    onSuccess: () => queryClient.invalidateQueries(['subjects']),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['subjects'] }),
   });
 
   const createFolderMutation = useMutation({
@@ -248,7 +258,7 @@ export default function QuizzesPage() {
       return client.entities.Folder.create(folderData);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['folders']);
+      queryClient.invalidateQueries({ queryKey: ['folders'] });
       setShowFolderDialog(false);
       setNewItem({ name: '', description: '', color: '' });
     },
@@ -257,20 +267,20 @@ export default function QuizzesPage() {
   const updateFolderMutation = useMutation({
     mutationFn: ({ id, data }) => client.entities.Folder.update(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['folders']);
+      queryClient.invalidateQueries({ queryKey: ['folders'] });
       setEditingFolder(null);
     },
   });
 
   const deleteFolderMutation = useMutation({
     mutationFn: (id) => client.entities.Folder.delete(id),
-    onSuccess: () => queryClient.invalidateQueries(['folders']),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['folders'] }),
   });
 
   const createQuizMutation = useMutation({
     mutationFn: (data) => client.entities.Quiz.create(data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['quizzes']);
+      queryClient.invalidateQueries({ queryKey: ['quizzes'] });
       setShowUploader(false);
     },
   });
@@ -278,14 +288,37 @@ export default function QuizzesPage() {
   const updateQuizMutation = useMutation({
     mutationFn: ({ id, data }) => client.entities.Quiz.update(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['quizzes']);
+      queryClient.invalidateQueries({ queryKey: ['quizzes'] });
       setEditingQuiz(null);
     },
   });
 
   const deleteQuizMutation = useMutation({
     mutationFn: (id) => client.entities.Quiz.delete(id),
-    onSuccess: () => queryClient.invalidateQueries(['quizzes']),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['quizzes'] }),
+  });
+
+  const createResourceMutation = useMutation({
+    mutationFn: (data) => client.entities.Resource.create(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['resources'] });
+      setShowResourceEditor(false);
+      setEditingResource(null);
+    },
+  });
+
+  const updateResourceMutation = useMutation({
+    mutationFn: ({ id, data }) => client.entities.Resource.update(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['resources'] });
+      setShowResourceEditor(false);
+      setEditingResource(null);
+    },
+  });
+
+  const deleteResourceMutation = useMutation({
+    mutationFn: (id) => client.entities.Resource.delete(id),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['resources'] }),
   });
 
   // Bulk delete handlers
@@ -293,36 +326,36 @@ export default function QuizzesPage() {
     for (const id of ids) {
       await client.entities.Course.delete(id);
     }
-    queryClient.invalidateQueries(['courses']);
+    queryClient.invalidateQueries({ queryKey: ['courses'] });
   };
 
   const handleBulkDeleteFolders = async (ids) => {
     for (const id of ids) {
       await client.entities.Folder.delete(id);
     }
-    queryClient.invalidateQueries(['folders']);
+    queryClient.invalidateQueries({ queryKey: ['folders'] });
   };
 
   const handleBulkDeleteSubjects = async (ids) => {
     for (const id of ids) {
       await client.entities.Subject.delete(id);
     }
-    queryClient.invalidateQueries(['subjects']);
+    queryClient.invalidateQueries({ queryKey: ['subjects'] });
   };
 
   const handleUpdateCourse = async (id, data) => {
     await client.entities.Course.update(id, data);
-    queryClient.invalidateQueries(['courses']);
+    queryClient.invalidateQueries({ queryKey: ['courses'] });
   };
 
   const handleUpdateFolder = async (id, data) => {
     await client.entities.Folder.update(id, data);
-    queryClient.invalidateQueries(['folders']);
+    queryClient.invalidateQueries({ queryKey: ['folders'] });
   };
 
   const handleUpdateSubject = async (id, data) => {
     await client.entities.Subject.update(id, data);
-    queryClient.invalidateQueries(['subjects']);
+    queryClient.invalidateQueries({ queryKey: ['subjects'] });
   };
 
   // Drag and drop handler
@@ -394,10 +427,10 @@ export default function QuizzesPage() {
       }
     }
 
-    queryClient.invalidateQueries(['courses']);
-    queryClient.invalidateQueries(['folders']);
-    queryClient.invalidateQueries(['subjects']);
-    queryClient.invalidateQueries(['quizzes']);
+    queryClient.invalidateQueries({ queryKey: ['courses'] });
+    queryClient.invalidateQueries({ queryKey: ['folders'] });
+    queryClient.invalidateQueries({ queryKey: ['subjects'] });
+    queryClient.invalidateQueries({ queryKey: ['quizzes'] });
   };
 
   const saveAttemptMutation = useMutation({
@@ -465,6 +498,14 @@ export default function QuizzesPage() {
   const subjectQuizzes = selectedSubject
     ? quizzes.filter(q => q && q.id && q.subject_id === selectedSubject.id && (isAdmin || !q.is_hidden))
     : [];
+
+  const currentLevelQuizzes = currentFolderId ? currentFolderQuizzes : subjectQuizzes;
+
+  const currentLevelResources = selectedSubject
+    ? resources.filter(r => r.subject_id === selectedSubject.id && (isAdmin || !r.is_hidden))
+    : currentFolderId
+      ? resources.filter(r => r.folder_id === currentFolderId && (isAdmin || !r.is_hidden))
+      : [];
 
   const [currentAttemptId, setCurrentAttemptId] = useState(null);
 
@@ -668,7 +709,7 @@ export default function QuizzesPage() {
           console.error('Error marking session complete:', error);
         }
       }
-      queryClient.invalidateQueries(['attempts']);
+      queryClient.invalidateQueries({ queryKey: ['attempts'] });
       setView('results');
     }
   };
@@ -743,7 +784,7 @@ export default function QuizzesPage() {
         id: currentAttemptId,
         data: { is_completed: false }
       });
-      queryClient.invalidateQueries(['attempts']);
+      queryClient.invalidateQueries({ queryKey: ['attempts'] });
     }
     // Marcar sesión como inactiva
     if (currentSessionId) {
@@ -793,7 +834,7 @@ export default function QuizzesPage() {
       })),
       completed_at: new Date().toISOString()
     });
-    queryClient.invalidateQueries(['attempts']);
+    queryClient.invalidateQueries({ queryKey: ['attempts'] });
     setSwipeMode(false);
     setSelectedQuiz(null);
     setView('list');
@@ -962,145 +1003,152 @@ export default function QuizzesPage() {
   };
 
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <div className={view === 'quiz' ? "h-screen overflow-hidden" : "min-h-screen bg-gradient-to-br from-gray-50 to-gray-100"}>
-        <div className={view === 'quiz' ? "" : "container mx-auto px-3 sm:px-4 py-4 sm:py-8"}>
-          <AnimatePresence mode="wait">
-            {/* Course Editor */}
-            {editingCourse && (
-              <motion.div key="course-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <Button onClick={() => setEditingCourse(null)} variant="ghost" className="mb-6">
-                  <ArrowLeft className="w-4 h-4 mr-2" /> Volver
-                </Button>
-                <CourseEditor
-                  course={editingCourse}
-                  users={allUsers}
-                  onSave={(data) => updateCourseMutation.mutate({ id: editingCourse.id, data })}
-                  onCancel={() => setEditingCourse(null)}
-                />
-              </motion.div>
-            )}
-
-            {/* Subject Editor */}
-            {editingSubject && !editingCourse && (
-              <motion.div key="subject-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <Button onClick={() => setEditingSubject(null)} variant="ghost" className="mb-6">
-                  <ArrowLeft className="w-4 h-4 mr-2" /> Volver
-                </Button>
-                <SubjectEditor
-                  subject={editingSubject}
-                  users={allUsers}
-                  onSave={(data) => updateSubjectMutation.mutate({ id: editingSubject.id, data })}
-                  onCancel={() => setEditingSubject(null)}
-                />
-              </motion.div>
-            )}
-
-            {/* Folder Editor */}
-            {editingFolder && !editingSubject && !editingCourse && (
-              <motion.div key="folder-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <Button onClick={() => setEditingFolder(null)} variant="ghost" className="mb-6">
-                  <ArrowLeft className="w-4 h-4 mr-2" /> Volver
-                </Button>
-                <FolderEditor
-                  folder={editingFolder}
-                  users={allUsers}
-                  onSave={(data) => updateFolderMutation.mutate({ id: editingFolder.id, data })}
-                  onCancel={() => setEditingFolder(null)}
-                />
-              </motion.div>
-            )}
-
-            {/* Quiz Editor */}
-            {editingQuiz && !editingFolder && !editingSubject && !editingCourse && (
-              <motion.div key="quiz-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <Button onClick={() => setEditingQuiz(null)} variant="ghost" className="mb-6">
-                  <ArrowLeft className="w-4 h-4 mr-2" /> Volver
-                </Button>
-                <QuizEditor
-                  quiz={editingQuiz}
-                  subjects={subjects}
-                  onSave={(data) => updateQuizMutation.mutate({ id: editingQuiz.id, data })}
-                  onCancel={() => setEditingQuiz(null)}
-                />
-              </motion.div>
-            )}
-
-            {/* Home View - Courses + Unassigned Subjects */}
-            {view === 'home' && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !explorerMode && (
-              <motion.div key="courses" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-                <AdminPanel />
+    <div className="min-h-screen bg-gray-50/50">
 
 
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-                  <div>
-                    <h1 className="text-2xl sm:text-4xl font-bold text-gray-900">Mis Cursos</h1>
-                    <p className="text-gray-600">Selecciona un curso para ver sus materias</p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {!canEdit && (
-                      <Button
-                        onClick={() => setShowJoinModal(true)}
-                        variant="outline"
-                        className="text-xs sm:text-sm h-9 border-green-300 text-green-600 hover:bg-green-50"
-                      >
-                        <BookOpen className="w-4 h-4 mr-2" />
-                        Unirse a Curso
-                      </Button>
-                    )}
 
-                    {canEdit && (
-                      <Dialog open={showCourseDialog} onOpenChange={setShowCourseDialog}>
-                        <DialogTrigger asChild>
-                          <Button className="bg-indigo-600 hover:bg-indigo-700 text-xs sm:text-sm h-9">
-                            <Plus className="w-4 h-4 sm:mr-2" /><span className="hidden sm:inline">Nuevo curso</span>
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader><DialogTitle>Crear nuevo curso</DialogTitle></DialogHeader>
-                          <div className="space-y-4 mt-4">
-                            <div>
-                              <Label>Nombre</Label>
-                              <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Semestre Selectivo" />
-                            </div>
 
-                            <div>
-                              <Label>Color</Label>
-                              <input type="color" value={newItem.color} onChange={(e) => setNewItem({ ...newItem, color: e.target.value })} className="w-full h-10 rounded-md border cursor-pointer" />
-                            </div>
-                            <Button onClick={() => createCourseMutation.mutate(newItem)} className="w-full bg-indigo-600 hover:bg-indigo-700">
-                              Crear curso
-                            </Button>
-                          </div>
-                        </DialogContent>
-                      </Dialog>
-                    )}
-
-                  </div>
-                </div>
-
-                {/* Course Cards */}
-                {visibleCourses.length > 0 && (
-                  <div className="mb-8">
-                    <DroppableArea droppableId="root-courses" type="COURSE" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {visibleCourses.map((course, index) => (
-                        <DraggableItem key={course.id} id={course.id} index={index} isAdmin={canEdit}>
-                          <CourseCard
-                            course={course}
-                            subjectCount={subjects.filter(s => s.course_id === course.id).length}
-                            isAdmin={canEdit}
-                            onEdit={setEditingCourse}
-                            onDelete={(id) => deleteCourseMutation.mutate(id)}
-                            onClick={() => { setSelectedCourse(course); setView('subjects'); }}
-                          />
-                        </DraggableItem>
-                      ))}
-                    </DroppableArea>
-                  </div>
+      {/* Quizzes List */}
+      <div>
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <div className={view === 'quiz' ? "h-screen overflow-hidden" : "min-h-screen bg-gradient-to-br from-gray-50 to-gray-100"}>
+            <div className={view === 'quiz' ? "" : "container mx-auto px-3 sm:px-4 py-4 sm:py-8"}>
+              <AnimatePresence mode="wait">
+                {/* Course Editor */}
+                {editingCourse && (
+                  <motion.div key="course-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <Button onClick={() => setEditingCourse(null)} variant="ghost" className="mb-6">
+                      <ArrowLeft className="w-4 h-4 mr-2" /> Volver
+                    </Button>
+                    <CourseEditor
+                      course={editingCourse}
+                      users={allUsers}
+                      onSave={(data) => updateCourseMutation.mutate({ id: editingCourse.id, data })}
+                      onCancel={() => setEditingCourse(null)}
+                    />
+                  </motion.div>
                 )}
 
-                {/* Materias sin curso (Oculto por requerimiento) */}
-                {/* {unassignedSubjects.length > 0 && (
+                {/* Subject Editor */}
+                {editingSubject && !editingCourse && (
+                  <motion.div key="subject-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <Button onClick={() => setEditingSubject(null)} variant="ghost" className="mb-6">
+                      <ArrowLeft className="w-4 h-4 mr-2" /> Volver
+                    </Button>
+                    <SubjectEditor
+                      subject={editingSubject}
+                      users={allUsers}
+                      onSave={(data) => updateSubjectMutation.mutate({ id: editingSubject.id, data })}
+                      onCancel={() => setEditingSubject(null)}
+                    />
+                  </motion.div>
+                )}
+
+                {/* Folder Editor */}
+                {editingFolder && !editingSubject && !editingCourse && (
+                  <motion.div key="folder-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <Button onClick={() => setEditingFolder(null)} variant="ghost" className="mb-6">
+                      <ArrowLeft className="w-4 h-4 mr-2" /> Volver
+                    </Button>
+                    <FolderEditor
+                      folder={editingFolder}
+                      users={allUsers}
+                      onSave={(data) => updateFolderMutation.mutate({ id: editingFolder.id, data })}
+                      onCancel={() => setEditingFolder(null)}
+                    />
+                  </motion.div>
+                )}
+
+                {/* Quiz Editor */}
+                {editingQuiz && !editingFolder && !editingSubject && !editingCourse && (
+                  <motion.div key="quiz-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <Button onClick={() => setEditingQuiz(null)} variant="ghost" className="mb-6">
+                      <ArrowLeft className="w-4 h-4 mr-2" /> Volver
+                    </Button>
+                    <QuizEditor
+                      quiz={editingQuiz}
+                      subjects={subjects}
+                      onSave={(data) => updateQuizMutation.mutate({ id: editingQuiz.id, data })}
+                      onCancel={() => setEditingQuiz(null)}
+                    />
+                  </motion.div>
+                )}
+
+                {/* Home View - Courses + Unassigned Subjects */}
+                {view === 'home' && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !explorerMode && (
+                  <motion.div key="courses" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                    <AdminPanel />
+
+
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                      <div>
+                        <h1 className="text-2xl sm:text-4xl font-bold text-gray-900">Mis Cursos</h1>
+                        <p className="text-gray-600">Selecciona un curso para ver sus materias</p>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {!canEdit && (
+                          <Button
+                            onClick={() => setShowJoinModal(true)}
+                            variant="outline"
+                            className="text-xs sm:text-sm h-9 border-green-300 text-green-600 hover:bg-green-50"
+                          >
+                            <BookOpen className="w-4 h-4 mr-2" />
+                            Unirse a Curso
+                          </Button>
+                        )}
+
+                        {canEdit && (
+                          <Dialog open={showCourseDialog} onOpenChange={setShowCourseDialog}>
+                            <DialogTrigger asChild>
+                              <Button className="bg-indigo-600 hover:bg-indigo-700 text-xs sm:text-sm h-9">
+                                <Plus className="w-4 h-4 sm:mr-2" /><span className="hidden sm:inline">Nuevo curso</span>
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader><DialogTitle>Crear nuevo curso</DialogTitle></DialogHeader>
+                              <div className="space-y-4 mt-4">
+                                <div>
+                                  <Label>Nombre</Label>
+                                  <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Semestre Selectivo" />
+                                </div>
+
+                                <div>
+                                  <Label>Color</Label>
+                                  <input type="color" value={newItem.color} onChange={(e) => setNewItem({ ...newItem, color: e.target.value })} className="w-full h-10 rounded-md border cursor-pointer" />
+                                </div>
+                                <Button onClick={() => createCourseMutation.mutate(newItem)} className="w-full bg-indigo-600 hover:bg-indigo-700">
+                                  Crear curso
+                                </Button>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+                        )}
+
+                      </div>
+                    </div>
+
+                    {/* Course Cards */}
+                    {visibleCourses.length > 0 && (
+                      <div className="mb-8">
+                        <DroppableArea droppableId="root-courses" type="COURSE" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                          {visibleCourses.map((course, index) => (
+                            <DraggableItem key={course.id} id={course.id} index={index} isAdmin={canEdit}>
+                              <CourseCard
+                                course={course}
+                                subjectCount={subjects.filter(s => s.course_id === course.id).length}
+                                isAdmin={canEdit}
+                                onEdit={setEditingCourse}
+                                onDelete={(id) => deleteCourseMutation.mutate(id)}
+                                onClick={() => { setSelectedCourse(course); setView('subjects'); }}
+                              />
+                            </DraggableItem>
+                          ))}
+                        </DroppableArea>
+                      </div>
+                    )}
+
+                    {/* Materias sin curso (Oculto por requerimiento) */}
+                    {/* {unassignedSubjects.length > 0 && (
                   <div className="mb-8">
                     <h2 className="text-lg font-semibold text-gray-700 mb-3 flex items-center gap-2">
                       <BookOpen className="w-5 h-5" /> Materias
@@ -1124,534 +1172,708 @@ export default function QuizzesPage() {
                   </div>
                 )} */}
 
-                {visibleCourses.length === 0 && unassignedSubjects.length === 0 && (
-                  <div className="flex flex-col items-center justify-center py-16 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
-                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm ring-1 ring-gray-100">
-                      <BookOpen className="w-8 h-8 text-gray-400" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                      {isAdmin ? 'No hay contenido' : 'No tienes acceso a ningún curso'}
-                    </h3>
-                    <p className="text-gray-500 mb-6 text-center max-w-md">
-                      {isAdmin
-                        ? 'Comienza creando tu primer curso o materia para organizar el contenido.'
-                        : 'Solicita unirte a un curso usando el botón "Unirse a Curso" o espera a que un administrador apruebe tu solicitud.'}
-                    </p>
-                    {!isAdmin && (
-                      <Button
-                        onClick={() => setShowJoinModal(true)}
-                        className="bg-green-600 hover:bg-green-700 shadow-sm"
-                      >
-                        <Plus className="w-4 h-4 mr-2" />
-                        Unirse a Curso
-                      </Button>
+                    {visibleCourses.length === 0 && unassignedSubjects.length === 0 && (
+                      <div className="flex flex-col items-center justify-center py-16 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
+                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm ring-1 ring-gray-100">
+                          <BookOpen className="w-8 h-8 text-gray-400" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                          {isAdmin ? 'No hay contenido' : 'No tienes acceso a ningún curso'}
+                        </h3>
+                        <p className="text-gray-500 mb-6 text-center max-w-md">
+                          {isAdmin
+                            ? 'Comienza creando tu primer curso o materia para organizar el contenido.'
+                            : 'Solicita unirte a un curso usando el botón "Unirse a Curso" o espera a que un administrador apruebe tu solicitud.'}
+                        </p>
+                        {!isAdmin && (
+                          <Button
+                            onClick={() => setShowJoinModal(true)}
+                            className="bg-green-600 hover:bg-green-700 shadow-sm"
+                          >
+                            <Plus className="w-4 h-4 mr-2" />
+                            Unirse a Curso
+                          </Button>
+                        )}
+                      </div>
                     )}
-                  </div>
-                )}
-              </motion.div>
-            )}
-
-            {/* Explorer Mode - Unified */}
-            {explorerMode && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && (
-              <motion.div key="explorer-unified" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">🗂️ Explorador General</h1>
-                    <p className="text-gray-600">Arrastra elementos para organizarlos, expande contenedores y cambia tipos</p>
-                  </div>
-                  <Button
-                    onClick={() => setExplorerMode(false)}
-                    variant="outline"
-                    className="text-xs sm:text-sm h-9"
-                  >
-                    Salir
-                  </Button>
-                </div>
-
-                <FileExplorer
-                  containers={buildContainers(courses, folders, subjects)}
-                  quizzes={quizzes}
-                  isAdmin={isAdmin}
-                  currentContainerId={null}
-                  onMoveItems={async (items, targetId, targetType) => {
-                    await moveItemsInBackend(items, targetId, targetType, {
-                      updateFolder: (params) => updateFolderMutation.mutateAsync(params),
-                      updateSubject: (params) => updateSubjectMutation.mutateAsync(params),
-                      updateQuiz: (params) => updateQuizMutation.mutateAsync(params)
-                    });
-                    queryClient.invalidateQueries(['quizzes']);
-                    queryClient.invalidateQueries(['subjects']);
-                    queryClient.invalidateQueries(['folders']);
-                    queryClient.invalidateQueries(['courses']);
-                  }}
-                  onChangeType={async (itemId, fromType, toType) => {
-                    try {
-                      let originalItem;
-                      if (fromType === 'course') {
-                        originalItem = courses.find(c => c.id === itemId);
-                      } else if (fromType === 'folder') {
-                        originalItem = folders.find(f => f.id === itemId);
-                      } else if (fromType === 'subject') {
-                        originalItem = subjects.find(s => s.id === itemId);
-                      }
-
-                      if (!originalItem) return;
-
-                      const { id, created_date, updated_date, created_by, ...commonData } = originalItem;
-
-                      if (fromType === 'course') {
-                        await client.entities.Course.delete(itemId);
-                      } else if (fromType === 'folder') {
-                        await client.entities.Folder.delete(itemId);
-                      } else if (fromType === 'subject') {
-                        await client.entities.Subject.delete(itemId);
-                      }
-
-                      if (toType === 'course') {
-                        await client.entities.Course.create(commonData);
-                      } else if (toType === 'folder') {
-                        await client.entities.Folder.create(commonData);
-                      } else if (toType === 'subject') {
-                        await client.entities.Subject.create(commonData);
-                      }
-
-                      queryClient.invalidateQueries(['courses']);
-                      queryClient.invalidateQueries(['folders']);
-                      queryClient.invalidateQueries(['subjects']);
-                    } catch (error) {
-                      console.error('Error cambiando tipo:', error);
-                    }
-                  }}
-                  onItemClick={(type, item) => {
-                    if (type === 'quiz') {
-                      const quiz = quizzes.find(q => q.id === item.id);
-                      if (quiz) {
-                        setExplorerMode(false);
-                        handleStartQuiz(quiz, quiz.total_questions, 'all', attempts.filter(a => a.quiz_id === quiz.id));
-                      }
-                    }
-                  }}
-                />
-              </motion.div>
-            )}
-
-            {/* Subjects View (inside a course or folder) */}
-            {view === 'subjects' && (selectedCourse || currentFolderId) && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !showBulkUploader && !showAIGenerator && !showUploader && !explorerMode && (
-              <motion.div key="subjects" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-                <Breadcrumb />
-
-                {/* Exam Overview - Solo en cursos, no en carpetas */}
-                {selectedCourse && !currentFolderId && (
-                  <ExamOverview
-                    courseId={selectedCourse.id}
-                    subjects={currentCourseSubjects}
-                    currentUser={currentUser}
-                    isAdmin={isAdmin}
-                  />
+                  </motion.div>
                 )}
 
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-                  <div>
-                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
-                      {currentFolderId ? (
-                        <><Folder className="w-6 h-6" /> {folders.find(f => f.id === currentFolderId)?.name}</>
-                      ) : selectedSubject ? (
-                        <><BookOpen className="w-6 h-6" /> {selectedSubject.name}</>
-                      ) : selectedCourse ? (
-                        <><Icon name={selectedCourse.icon} className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: selectedCourse.color || '#6366f1' }} /> {selectedCourse.name}</>
-                      ) : null}
-                    </h1>
-
-                  </div>
-                  {isAdmin && (
-                    <div className="flex flex-wrap gap-2">
+                {/* Explorer Mode - Unified */}
+                {explorerMode && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && (
+                  <motion.div key="explorer-unified" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">🗂️ Explorador General</h1>
+                        <p className="text-gray-600">Arrastra elementos para organizarlos, expande contenedores y cambia tipos</p>
+                      </div>
                       <Button
+                        onClick={() => setExplorerMode(false)}
                         variant="outline"
                         className="text-xs sm:text-sm h-9"
-                        onClick={() => setShowUploader(true)}
                       >
-                        <Upload className="w-4 h-4 mr-2" />
-                        Subir JSON
+                        Salir
                       </Button>
-                      <Dialog open={showFolderDialog} onOpenChange={setShowFolderDialog}>
-                        <DialogTrigger asChild>
-                          <Button variant="outline" className="text-xs sm:text-sm h-9">
-                            <Folder className="w-4 h-4 mr-2" /> Nueva carpeta
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader><DialogTitle>Crear carpeta (parcial)</DialogTitle></DialogHeader>
-                          <div className="space-y-4 mt-4">
-                            <div>
-                              <Label>Nombre</Label>
-                              <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Parcial 1" />
-                            </div>
-                            <Button onClick={() => createFolderMutation.mutate({ ...newItem, course_id: selectedCourse?.id, parent_id: currentFolderId })} className="w-full bg-amber-500 hover:bg-amber-600">
-                              Crear carpeta
-                            </Button>
-                          </div>
-                        </DialogContent>
-                      </Dialog>
-                      {!currentFolderId && (
-                        <Dialog open={showSubjectDialog} onOpenChange={setShowSubjectDialog}>
-                          <DialogTrigger asChild>
-                            <Button className="bg-indigo-600 hover:bg-indigo-700 text-xs sm:text-sm h-9">
-                              <Plus className="w-4 h-4 mr-2" /> Nueva materia
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent>
-                            <DialogHeader><DialogTitle>Crear nueva materia</DialogTitle></DialogHeader>
-                            <div className="space-y-4 mt-4">
-                              <div>
-                                <Label>Nombre</Label>
-                                <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Anatomía" />
-                              </div>
+                    </div>
 
-                              <div>
-                                <Label>Color</Label>
-                                <input type="color" value={newItem.color} onChange={(e) => setNewItem({ ...newItem, color: e.target.value })} className="w-full h-10 rounded-md border cursor-pointer" />
-                              </div>
-                              <Button onClick={() => createSubjectMutation.mutate({ ...newItem, course_id: selectedCourse?.id, folder_id: currentFolderId })} className="w-full bg-indigo-600 hover:bg-indigo-700">
-                                Crear materia
+                    <FileExplorer
+                      containers={buildContainers(courses, folders, subjects)}
+                      quizzes={quizzes}
+                      isAdmin={isAdmin}
+                      currentContainerId={null}
+                      onMoveItems={async (items, targetId, targetType) => {
+                        await moveItemsInBackend(items, targetId, targetType, {
+                          updateFolder: (params) => updateFolderMutation.mutateAsync(params),
+                          updateSubject: (params) => updateSubjectMutation.mutateAsync(params),
+                          updateQuiz: (params) => updateQuizMutation.mutateAsync(params)
+                        });
+                        queryClient.invalidateQueries({ queryKey: ['quizzes'] });
+                        queryClient.invalidateQueries({ queryKey: ['subjects'] });
+                        queryClient.invalidateQueries({ queryKey: ['folders'] });
+                        queryClient.invalidateQueries({ queryKey: ['courses'] });
+                      }}
+                      onChangeType={async (itemId, fromType, toType) => {
+                        try {
+                          let originalItem;
+                          if (fromType === 'course') {
+                            originalItem = courses.find(c => c.id === itemId);
+                          } else if (fromType === 'folder') {
+                            originalItem = folders.find(f => f.id === itemId);
+                          } else if (fromType === 'subject') {
+                            originalItem = subjects.find(s => s.id === itemId);
+                          }
+
+                          if (!originalItem) return;
+
+                          const { id, created_date, updated_date, created_by, ...commonData } = originalItem;
+
+                          if (fromType === 'course') {
+                            await client.entities.Course.delete(itemId);
+                          } else if (fromType === 'folder') {
+                            await client.entities.Folder.delete(itemId);
+                          } else if (fromType === 'subject') {
+                            await client.entities.Subject.delete(itemId);
+                          }
+
+                          if (toType === 'course') {
+                            await client.entities.Course.create(commonData);
+                          } else if (toType === 'folder') {
+                            await client.entities.Folder.create(commonData);
+                          } else if (toType === 'subject') {
+                            await client.entities.Subject.create(commonData);
+                          }
+
+                          queryClient.invalidateQueries({ queryKey: ['courses'] });
+                          queryClient.invalidateQueries({ queryKey: ['folders'] });
+                          queryClient.invalidateQueries({ queryKey: ['subjects'] });
+                        } catch (error) {
+                          console.error('Error cambiando tipo:', error);
+                        }
+                      }}
+                      onItemClick={(type, item) => {
+                        if (type === 'quiz') {
+                          const quiz = quizzes.find(q => q.id === item.id);
+                          if (quiz) {
+                            setExplorerMode(false);
+                            handleStartQuiz(quiz, quiz.total_questions, 'all', attempts.filter(a => a.quiz_id === quiz.id));
+                          }
+                        }
+                      }}
+                    />
+                  </motion.div>
+                )}
+
+                {/* Subjects View (inside a course or folder) */}
+                {view === 'subjects' && (selectedCourse || currentFolderId) && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !showBulkUploader && !showAIGenerator && !showUploader && !explorerMode && (
+                  <motion.div key="subjects" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                    <Breadcrumb />
+
+                    {/* Exam Overview - Solo en cursos, no en carpetas */}
+                    {selectedCourse && !currentFolderId && (
+                      <ExamOverview
+                        courseId={selectedCourse.id}
+                        subjects={currentCourseSubjects}
+                        currentUser={currentUser}
+                        isAdmin={isAdmin}
+                      />
+                    )}
+
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                      <div>
+                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
+                          {currentFolderId ? (
+                            <><Folder className="w-6 h-6" /> {folders.find(f => f.id === currentFolderId)?.name}</>
+                          ) : selectedSubject ? (
+                            <><BookOpen className="w-6 h-6" /> {selectedSubject.name}</>
+                          ) : selectedCourse ? (
+                            <><Icon name={selectedCourse.icon} className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: selectedCourse.color || '#6366f1' }} /> {selectedCourse.name}</>
+                          ) : null}
+                        </h1>
+
+                      </div>
+                      {isAdmin && (
+                        <div className="flex flex-wrap gap-2">
+                          <Button
+                            variant="outline"
+                            className="text-xs sm:text-sm h-9"
+                            onClick={() => setShowUploader(true)}
+                          >
+                            <Upload className="w-4 h-4 mr-2" />
+                            Subir JSON
+                          </Button>
+                          <Dialog open={showFolderDialog} onOpenChange={setShowFolderDialog}>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" className="text-xs sm:text-sm h-9">
+                                <Folder className="w-4 h-4 mr-2" /> Nueva carpeta
                               </Button>
-                            </div>
-                          </DialogContent>
-                        </Dialog>
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader><DialogTitle>Crear carpeta (parcial)</DialogTitle></DialogHeader>
+                              <div className="space-y-4 mt-4">
+                                <div>
+                                  <Label>Nombre</Label>
+                                  <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Parcial 1" />
+                                </div>
+                                <Button onClick={() => createFolderMutation.mutate({ ...newItem, course_id: selectedCourse?.id, parent_id: currentFolderId })} className="w-full bg-amber-500 hover:bg-amber-600">
+                                  Crear carpeta
+                                </Button>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+                          {!currentFolderId && (
+                            <Dialog open={showSubjectDialog} onOpenChange={setShowSubjectDialog}>
+                              <DialogTrigger asChild>
+                                <Button className="bg-indigo-600 hover:bg-indigo-700 text-xs sm:text-sm h-9">
+                                  <Plus className="w-4 h-4 mr-2" /> Nueva materia
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent>
+                                <DialogHeader><DialogTitle>Crear nueva materia</DialogTitle></DialogHeader>
+                                <div className="space-y-4 mt-4">
+                                  <div>
+                                    <Label>Nombre</Label>
+                                    <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Anatomía" />
+                                  </div>
+
+                                  <div>
+                                    <Label>Color</Label>
+                                    <input type="color" value={newItem.color} onChange={(e) => setNewItem({ ...newItem, color: e.target.value })} className="w-full h-10 rounded-md border cursor-pointer" />
+                                  </div>
+                                  <Button onClick={() => createSubjectMutation.mutate({ ...newItem, course_id: selectedCourse?.id, folder_id: currentFolderId })} className="w-full bg-indigo-600 hover:bg-indigo-700">
+                                    Crear materia
+                                  </Button>
+                                </div>
+                              </DialogContent>
+                            </Dialog>
+                          )}
+                        </div>
                       )}
                     </div>
-                  )}
-                </div>
 
-                <DroppableArea
-                  droppableId={currentFolderId ? `folder-${currentFolderId}` : `course-${selectedCourse?.id}`}
-                  type="FOLDER"
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4"
-                >
-                  {currentCourseFolders.map((folder, index) => (
-                    <DraggableItem key={folder.id} id={folder.id} index={index} isAdmin={canEdit}>
-                      <FolderCard
-                        folder={folder}
-                        itemCount={subjects.filter(s => s.folder_id === folder.id).length}
-                        isAdmin={canEdit}
-                        onDelete={(id) => deleteFolderMutation.mutate(id)}
-                        onEdit={setEditingFolder}
-                        onClick={() => setCurrentFolderId(folder.id)}
-                      />
-                    </DraggableItem>
-                  ))}
-                </DroppableArea>
-                <DroppableArea
-                  droppableId={currentFolderId ? `folder-${currentFolderId}` : `course-${selectedCourse?.id}`}
-                  type="SUBJECT"
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                >
-                  {currentFolderSubjects.map((subject, index) => (
-                    <DraggableItem key={subject.id} id={subject.id} index={index} isAdmin={canEdit}>
-                      <SubjectCard
-                        subject={subject}
-                        quizCount={getRecursiveQuizCount(subject.id)}
-                        stats={getSubjectStats(subject.id)}
-                        isAdmin={canEdit}
-                        onDelete={(id) => deleteSubjectMutation.mutate(id)}
-                        onEdit={setEditingSubject}
-                        onClick={() => { setSelectedSubject(subject); setView('list'); }}
-                        onReviewWrong={handleReviewWrongBySubject}
-                      />
-                    </DraggableItem>
-                  ))}
-                </DroppableArea>
+                    {/* Tabs for Quizzes/Resources - Folder Level */}
+                    <div className="flex gap-4 mb-6 border-b">
+                      <button
+                        className={`pb-2 px-1 ${activeTab === 'quizzes' ? 'border-b-2 border-indigo-600 font-semibold text-indigo-600' : 'text-gray-500'}`}
+                        onClick={() => setActiveTab('quizzes')}
+                      >
+                        Cuestionarios ({currentLevelQuizzes.length})
+                      </button>
+                      <button
+                        className={`pb-2 px-1 ${activeTab === 'resources' ? 'border-b-2 border-indigo-600 font-semibold text-indigo-600' : 'text-gray-500'}`}
+                        onClick={() => setActiveTab('resources')}
+                      >
+                        Recursos ({currentLevelResources.length})
+                      </button>
+                    </div>
 
-
-                {/* Tabs de cuestionarios y audios dentro de carpeta */}
-                {currentFolderId && (
-                  <div className="mt-6">
-                    <div className="space-y-4">
-                      <h2 className="text-lg font-semibold text-gray-700 flex items-center gap-2">
-                        <BookOpen className="w-5 h-5" /> Cuestionarios ({currentFolderQuizzes.length})
-                      </h2>
-                      {currentFolderQuizzes.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center py-12 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
-                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm ring-1 ring-gray-100">
-                            <BookOpen className="w-6 h-6 text-gray-400" />
+                    {/* Resources Grid - Folder Level */}
+                    {activeTab === 'resources' && (
+                      <div className="mb-8">
+                        {canEdit && (
+                          <div className="flex justify-end mb-4">
+                            <Button
+                              size="sm"
+                              onClick={() => {
+                                setEditingResource(null);
+                                setShowResourceEditor(true);
+                              }}
+                              className="bg-indigo-600 hover:bg-indigo-700"
+                            >
+                              <Upload className="w-4 h-4 mr-2" /> Subir Recurso
+                            </Button>
                           </div>
-                          <h3 className="text-lg font-semibold text-gray-900 mb-1">No hay cuestionarios</h3>
-                          <p className="text-sm text-gray-500">Sube un archivo JSON para agregar contenido.</p>
+                        )}
+                        {currentLevelResources.length > 0 ? (
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                            {currentLevelResources.map(resource => (
+                              <ResourceCard
+                                key={resource.id}
+                                resource={resource}
+                                canEdit={canEdit}
+                                onClick={(r) => setViewingResource(r)}
+                                onEdit={(r) => {
+                                  setEditingResource(r);
+                                  setShowResourceEditor(true);
+                                }}
+                                onDelete={(id) => {
+                                  if (confirm('¿Estás seguro de eliminar este recurso?')) {
+                                    deleteResourceMutation.mutate(id);
+                                  }
+                                }}
+                              />
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="text-center py-12 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                            <p className="text-gray-500 mb-2">No hay recursos disponibles aún.</p>
+                            {canEdit && (
+                              <Button variant="outline" onClick={() => { setEditingResource(null); setShowResourceEditor(true); }}>
+                                Subir el primer recurso
+                              </Button>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Content: Folders, Subjects, Quizzes */}
+                    {/* Content: Folders, Subjects, Quizzes */}
+
+                    <DroppableArea
+                      droppableId={currentFolderId ? `folder-${currentFolderId}` : `course-${selectedCourse?.id}`}
+                      type="FOLDER"
+                      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4"
+                    >
+                      {currentCourseFolders.map((folder, index) => (
+                        <DraggableItem key={folder.id} id={folder.id} index={index} isAdmin={canEdit}>
+                          <FolderCard
+                            folder={folder}
+                            itemCount={subjects.filter(s => s.folder_id === folder.id).length}
+                            isAdmin={canEdit}
+                            onDelete={(id) => deleteFolderMutation.mutate(id)}
+                            onEdit={setEditingFolder}
+                            onClick={() => setCurrentFolderId(folder.id)}
+                          />
+                        </DraggableItem>
+                      ))}
+                    </DroppableArea>
+                    <DroppableArea
+                      droppableId={currentFolderId ? `folder-${currentFolderId}` : `course-${selectedCourse?.id}`}
+                      type="SUBJECT"
+                      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                    >
+                      {currentFolderSubjects.map((subject, index) => (
+                        <DraggableItem key={subject.id} id={subject.id} index={index} isAdmin={canEdit}>
+                          <SubjectCard
+                            subject={subject}
+                            quizCount={getRecursiveQuizCount(subject.id)}
+                            stats={getSubjectStats(subject.id)}
+                            isAdmin={canEdit}
+                            onDelete={(id) => deleteSubjectMutation.mutate(id)}
+                            onEdit={setEditingSubject}
+                            onClick={() => { setSelectedSubject(subject); setView('list'); }}
+                            onReviewWrong={handleReviewWrongBySubject}
+                          />
+                        </DraggableItem>
+                      ))}
+                    </DroppableArea>
+
+
+                    {/* Tabs de cuestionarios y audios dentro de carpeta */}
+                    {currentFolderId && (
+                      <div className="mt-6">
+                        <div className="space-y-4">
+                          <h2 className="text-lg font-semibold text-gray-700 flex items-center gap-2">
+                            <BookOpen className="w-5 h-5" /> Cuestionarios ({currentFolderQuizzes.length})
+                          </h2>
+                          {currentFolderQuizzes.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center py-12 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
+                              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm ring-1 ring-gray-100">
+                                <BookOpen className="w-6 h-6 text-gray-400" />
+                              </div>
+                              <h3 className="text-lg font-semibold text-gray-900 mb-1">No hay cuestionarios</h3>
+                              <p className="text-sm text-gray-500">Sube un archivo JSON para agregar contenido.</p>
+                            </div>
+                          ) : (
+                            <div className="space-y-2">
+                              {currentFolderQuizzes.map((quiz) => (
+                                <QuizListItem
+                                  key={quiz.id}
+                                  quiz={quiz}
+                                  attempts={attempts.filter(a => a.quiz_id === quiz.id)}
+                                  isAdmin={canEdit}
+                                  onStart={handleStartQuiz}
+                                  onEdit={setEditingQuiz}
+                                  onDelete={(id) => deleteQuizMutation.mutate(id)}
+                                  onStartSwipe={handleStartSwipeMode}
+                                  onMove={setMovingQuiz}
+                                />
+                              ))}
+                            </div>
+                          )}
                         </div>
-                      ) : (
-                        <div className="space-y-2">
-                          {currentFolderQuizzes.map((quiz) => (
-                            <QuizListItem
-                              key={quiz.id}
-                              quiz={quiz}
-                              attempts={attempts.filter(a => a.quiz_id === quiz.id)}
-                              isAdmin={canEdit}
-                              onStart={handleStartQuiz}
-                              onEdit={setEditingQuiz}
-                              onDelete={(id) => deleteQuizMutation.mutate(id)}
-                              onStartSwipe={handleStartSwipeMode}
-                              onMove={setMovingQuiz}
-                            />
+                      </div>
+                    )}
+
+                    {!currentFolderId && currentCourseFolders.length === 0 && currentFolderSubjects.length === 0 && (
+                      <div className="flex flex-col items-center justify-center py-16 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
+                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm ring-1 ring-gray-100">
+                          <Folder className="w-8 h-8 text-gray-300" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-gray-900 mb-2">Carpeta vacía</h3>
+                        <p className="text-gray-500 text-center max-w-sm">No hay carpetas ni materias aquí. Comienza creando una nueva estructura.</p>
+                      </div>
+                    )}
+                  </motion.div>
+                )}
+
+
+
+                {/* File Uploader - Folder Level */}
+                {view === 'subjects' && (selectedCourse || currentFolderId) && showUploader && (
+                  <motion.div key="uploader-folder" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <Button onClick={() => setShowUploader(false)} variant="ghost" className="mb-6">
+                      <ArrowLeft className="w-4 h-4 mr-2" /> Volver
+                    </Button>
+                    <FileUploader
+                      onUploadSuccess={async (data) => {
+                        await createQuizMutation.mutateAsync({
+                          ...data,
+                          folder_id: currentFolderId || null
+                        });
+                        setShowUploader(false);
+                        queryClient.invalidateQueries({ queryKey: ['quizzes'] });
+                      }}
+                      jsonOnly={true}
+                    />
+                  </motion.div>
+                )}
+
+                {/* Quiz List View */}
+                {view === 'list' && selectedSubject && !showUploader && !editingQuiz && !showAIGenerator && !explorerMode && (
+                  <div>
+                    <motion.div key="list" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                      <Breadcrumb />
+
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                        <div>
+                          <h1 className="text-xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
+                            <BookOpen className="w-6 h-6" /> {selectedSubject.name}
+                          </h1>
+
+                        </div>
+                        {isAdmin && (
+                          <div className="flex gap-2">
+
+                            <Dialog open={showFolderDialog} onOpenChange={setShowFolderDialog}>
+                              <DialogTrigger asChild>
+                                <Button variant="outline" className="text-xs sm:text-sm h-9">
+                                  <FolderPlus className="w-4 h-4 mr-2" /> Nueva carpeta
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent>
+                                <DialogHeader><DialogTitle>Crear carpeta en {selectedSubject.name}</DialogTitle></DialogHeader>
+                                <div className="space-y-4 mt-4">
+                                  <div>
+                                    <Label>Nombre</Label>
+                                    <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Parcial 1" />
+                                  </div>
+                                  <Button onClick={() => createFolderMutation.mutate({ ...newItem, subject_id: selectedSubject.id })} className="w-full bg-amber-500 hover:bg-amber-600">
+                                    Crear carpeta
+                                  </Button>
+                                </div>
+                              </DialogContent>
+                            </Dialog>
+                          </div>
+                        )}
+                      </div>
+
+
+                      <div className="flex gap-4 mb-6 border-b">
+                        <button
+                          className={`pb-2 px-1 ${activeTab === 'quizzes' ? 'border-b-2 border-indigo-600 font-semibold text-indigo-600' : 'text-gray-500'}`}
+                          onClick={() => setActiveTab('quizzes')}
+                        >
+                          Cuestionarios ({currentLevelQuizzes.length})
+                        </button>
+                        <button
+                          className={`pb-2 px-1 ${activeTab === 'resources' ? 'border-b-2 border-indigo-600 font-semibold text-indigo-600' : 'text-gray-500'}`}
+                          onClick={() => setActiveTab('resources')}
+                        >
+                          Recursos ({currentLevelResources.length})
+                        </button>
+                      </div>
+
+                      {/* Resources Grid - Subject Level */}
+                      {activeTab === 'resources' && (
+                        <div className="mb-8">
+                          {canEdit && (
+                            <div className="flex justify-end mb-4">
+                              <Button
+                                size="sm"
+                                onClick={() => {
+                                  setEditingResource(null);
+                                  setShowResourceEditor(true);
+                                }}
+                                className="bg-indigo-600 hover:bg-indigo-700"
+                              >
+                                <Upload className="w-4 h-4 mr-2" /> Subir Recurso
+                              </Button>
+                            </div>
+                          )}
+                          {currentLevelResources.length > 0 ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                              {currentLevelResources.map(resource => (
+                                <ResourceCard
+                                  key={resource.id}
+                                  resource={resource}
+                                  canEdit={canEdit}
+                                  onClick={(r) => setViewingResource(r)}
+                                  onEdit={(r) => {
+                                    setEditingResource(r);
+                                    setShowResourceEditor(true);
+                                  }}
+                                  onDelete={(id) => {
+                                    if (confirm('¿Estás seguro de eliminar este recurso?')) {
+                                      deleteResourceMutation.mutate(id);
+                                    }
+                                  }}
+                                />
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="text-center py-12 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                              <p className="text-gray-500 mb-2">No hay recursos disponibles aún.</p>
+                              {canEdit && (
+                                <Button variant="outline" onClick={() => { setEditingResource(null); setShowResourceEditor(true); }}>
+                                  Subir el primer recurso
+                                </Button>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+
+                      {/* Carpetas dentro de la materia con droppable */}
+                      {folders.filter(f => f.subject_id === selectedSubject.id && !f.parent_id).length > 0 && (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                          {folders.filter(f => f.subject_id === selectedSubject.id && !f.parent_id).map((folder) => (
+                            <DroppableArea key={folder.id} droppableId={`folder-${folder.id}`} type="QUIZ" className="h-full">
+                              <FolderCard
+                                folder={folder}
+                                itemCount={quizzes.filter(q => q.folder_id === folder.id).length}
+                                isAdmin={isAdmin}
+                                onDelete={(id) => deleteFolderMutation.mutate(id)}
+                                onEdit={setEditingFolder}
+                                onClick={() => { setCurrentFolderId(folder.id); setView('subjects'); }}
+                              />
+                            </DroppableArea>
                           ))}
                         </div>
                       )}
-                    </div>
-                  </div>
-                )}
 
-                {!currentFolderId && currentCourseFolders.length === 0 && currentFolderSubjects.length === 0 && (
-                  <div className="flex flex-col items-center justify-center py-16 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
-                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm ring-1 ring-gray-100">
-                      <Folder className="w-8 h-8 text-gray-300" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Carpeta vacía</h3>
-                    <p className="text-gray-500 text-center max-w-sm">No hay carpetas ni materias aquí. Comienza creando una nueva estructura.</p>
-                  </div>
-                )}
-              </motion.div>
-            )}
-
-
-
-            {/* File Uploader - Folder Level */}
-            {view === 'subjects' && (selectedCourse || currentFolderId) && showUploader && (
-              <motion.div key="uploader-folder" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <Button onClick={() => setShowUploader(false)} variant="ghost" className="mb-6">
-                  <ArrowLeft className="w-4 h-4 mr-2" /> Volver
-                </Button>
-                <FileUploader
-                  onUploadSuccess={async (data) => {
-                    await createQuizMutation.mutateAsync({
-                      ...data,
-                      folder_id: currentFolderId || null
-                    });
-                    setShowUploader(false);
-                    queryClient.invalidateQueries(['quizzes']);
-                  }}
-                  jsonOnly={true}
-                />
-              </motion.div>
-            )}
-
-            {/* Quiz List View */}
-            {view === 'list' && selectedSubject && !showUploader && !editingQuiz && !showAIGenerator && !explorerMode && (
-              <motion.div key="list" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-                <Breadcrumb />
-
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-                  <div>
-                    <h1 className="text-xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
-                      <BookOpen className="w-6 h-6" /> {selectedSubject.name}
-                    </h1>
-
-                  </div>
-                  {isAdmin && (
-                    <div className="flex gap-2">
-
-                      <Dialog open={showFolderDialog} onOpenChange={setShowFolderDialog}>
-                        <DialogTrigger asChild>
-                          <Button variant="outline" className="text-xs sm:text-sm h-9">
-                            <FolderPlus className="w-4 h-4 mr-2" /> Nueva carpeta
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader><DialogTitle>Crear carpeta en {selectedSubject.name}</DialogTitle></DialogHeader>
-                          <div className="space-y-4 mt-4">
-                            <div>
-                              <Label>Nombre</Label>
-                              <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Parcial 1" />
-                            </div>
-                            <Button onClick={() => createFolderMutation.mutate({ ...newItem, subject_id: selectedSubject.id })} className="w-full bg-amber-500 hover:bg-amber-600">
-                              Crear carpeta
+                      {selectedQuizzes.length > 0 && isAdmin && (
+                        <div className="mb-4 p-3 bg-indigo-50 border border-indigo-200 rounded-lg flex items-center justify-between">
+                          <span className="text-sm font-medium text-indigo-900">
+                            {selectedQuizzes.length} cuestionario{selectedQuizzes.length > 1 ? 's' : ''} seleccionado{selectedQuizzes.length > 1 ? 's' : ''}
+                          </span>
+                          <div className="flex gap-2">
+                            <Button size="sm" variant="outline" onClick={() => setSelectedQuizzes([])}>
+                              Cancelar
                             </Button>
                           </div>
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                  )}
+                        </div>
+                      )}
+
+                      {subjectQuizzes.filter(q => !q.folder_id).length === 0 ? null : (
+                        <DroppableArea droppableId={`subject-${selectedSubject.id}`} type="QUIZ" className="space-y-2">
+                          {subjectQuizzes.filter(q => !q.folder_id).map((quiz, index) => (
+                            <DraggableItem key={quiz.id} id={quiz.id} index={index} isAdmin={isAdmin}>
+                              <QuizListItem
+                                quiz={quiz}
+                                attempts={attempts.filter(a => a.quiz_id === quiz.id)}
+                                isAdmin={isAdmin}
+                                onStart={handleStartQuiz}
+                                onEdit={setEditingQuiz}
+                                onDelete={(id) => deleteQuizMutation.mutate(id)}
+                                onStartSwipe={handleStartSwipeMode}
+                                onMove={setMovingQuiz}
+                                isSelected={selectedQuizzes.includes(quiz.id)}
+                                onSelect={(id) => {
+                                  if (selectedQuizzes.includes(id)) {
+                                    setSelectedQuizzes(selectedQuizzes.filter(qId => qId !== id));
+                                  } else {
+                                    setSelectedQuizzes([...selectedQuizzes, id]);
+                                  }
+                                }}
+                              />
+                            </DraggableItem>
+                          ))}
+                        </DroppableArea>
+                      )}
+                    </motion.div>
+                  </div>
+                )}
+
+
+
+
+
+                {/* Quiz View */}
+                {view === 'quiz' && selectedQuiz && !swipeMode && (
+                  <motion.div key="quiz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <QuestionView
+                      key={currentQuestionIndex}
+                      question={selectedQuiz.questions[currentQuestionIndex]}
+                      questionNumber={currentQuestionIndex + 1}
+                      totalQuestions={selectedQuiz.questions.length}
+                      correctAnswers={score}
+                      wrongAnswers={wrongAnswers.length}
+                      onAnswer={handleAnswer}
+                      onBack={handleExitQuiz}
+                      previousAttempts={attempts.filter(a => a.quiz_id === selectedQuiz.id)}
+                      quizId={selectedQuiz.id}
+                      userEmail={currentUser?.email}
+                      settings={quizSettings}
+                      quizTitle={selectedQuiz.title}
+                      subjectId={selectedQuiz.subject_id}
+                      sessionId={currentSessionId}
+                      onMarkForReview={handleMarkForReview}
+                      initialIsMarked={markedQuestions.has(selectedQuiz.questions[currentQuestionIndex].id || selectedQuiz.questions[currentQuestionIndex].question)}
+                    />
+                  </motion.div>
+                )}
+
+                {/* Swipe Quiz Mode */}
+                {view === 'quiz' && selectedQuiz && swipeMode && (
+                  <motion.div key="swipe-quiz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <SwipeQuizMode
+                      questions={selectedQuiz.questions}
+                      onComplete={handleSwipeComplete}
+                      onExit={handleExitQuiz}
+                    />
+                  </motion.div>
+                )}
+
+                {/* Results View */}
+                {view === 'results' && selectedQuiz && (
+                  <motion.div key="results" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}>
+                    <ResultsView
+                      score={score}
+                      totalQuestions={selectedQuiz.questions.length}
+                      wrongAnswers={wrongAnswers}
+                      correctAnswers={correctAnswers}
+                      answeredQuestions={score + wrongAnswers.length}
+                      isPartial={score + wrongAnswers.length < selectedQuiz.questions.length}
+                      onRetry={handleRetry}
+                      onRetryWrong={handleRetryWrongQuestions}
+                      onHome={() => { setSelectedQuiz(null); setView('list'); }}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+
+              <SessionTimer />
+              <TaskProgressFloat />
+
+              {/* Move Quiz Modal */}
+              <MoveQuizModal
+                open={!!movingQuiz}
+                onClose={() => setMovingQuiz(null)}
+                quiz={movingQuiz}
+                containers={subjects}
+                onMove={async (quizId, newSubjectId) => {
+                  await updateQuizMutation.mutateAsync({ id: quizId, data: { subject_id: newSubjectId } });
+                  setMovingQuiz(null);
+                }}
+              />
+
+              {/* Content Manager Modal */}
+              {showContentManager && (
+                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+                  <div className="w-full max-w-3xl">
+                    <ContentManager
+                      courses={courses}
+                      folders={folders}
+                      subjects={subjects}
+                      quizzes={quizzes}
+                      onDeleteCourses={handleBulkDeleteCourses}
+                      onDeleteFolders={handleBulkDeleteFolders}
+                      onDeleteSubjects={handleBulkDeleteSubjects}
+                      onUpdateCourse={handleUpdateCourse}
+                      onUpdateFolder={handleUpdateFolder}
+                      onUpdateSubject={handleUpdateSubject}
+                      onClose={() => setShowContentManager(false)}
+                    />
+                  </div>
                 </div>
+              )}
 
-                {/* Carpetas dentro de la materia con droppable */}
-                {folders.filter(f => f.subject_id === selectedSubject.id && !f.parent_id).length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                    {folders.filter(f => f.subject_id === selectedSubject.id && !f.parent_id).map((folder) => (
-                      <DroppableArea key={folder.id} droppableId={`folder-${folder.id}`} type="QUIZ" className="h-full">
-                        <FolderCard
-                          folder={folder}
-                          itemCount={quizzes.filter(q => q.folder_id === folder.id).length}
-                          isAdmin={isAdmin}
-                          onDelete={(id) => deleteFolderMutation.mutate(id)}
-                          onEdit={setEditingFolder}
-                          onClick={() => { setCurrentFolderId(folder.id); setView('subjects'); }}
-                        />
-                      </DroppableArea>
-                    ))}
-                  </div>
-                )}
+              {/* Quiz Exporter Modal */}
+              {showQuizExporter && (
+                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+                  <QuizExporter onClose={() => setShowQuizExporter(false)} />
+                </div>
+              )}
 
-                {selectedQuizzes.length > 0 && isAdmin && (
-                  <div className="mb-4 p-3 bg-indigo-50 border border-indigo-200 rounded-lg flex items-center justify-between">
-                    <span className="text-sm font-medium text-indigo-900">
-                      {selectedQuizzes.length} cuestionario{selectedQuizzes.length > 1 ? 's' : ''} seleccionado{selectedQuizzes.length > 1 ? 's' : ''}
-                    </span>
-                    <div className="flex gap-2">
-                      <Button size="sm" variant="outline" onClick={() => setSelectedQuizzes([])}>
-                        Cancelar
-                      </Button>
-                    </div>
-                  </div>
-                )}
+              {/* Course Join Modal */}
+              <CourseJoinModal
+                open={showJoinModal}
+                onClose={() => setShowJoinModal(false)}
+                currentUser={currentUser}
+              />
 
-                {subjectQuizzes.filter(q => !q.folder_id).length === 0 ? null : (
-                  <DroppableArea droppableId={`subject-${selectedSubject.id}`} type="QUIZ" className="space-y-2">
-                    {subjectQuizzes.filter(q => !q.folder_id).map((quiz, index) => (
-                      <DraggableItem key={quiz.id} id={quiz.id} index={index} isAdmin={isAdmin}>
-                        <QuizListItem
-                          quiz={quiz}
-                          attempts={attempts.filter(a => a.quiz_id === quiz.id)}
-                          isAdmin={isAdmin}
-                          onStart={handleStartQuiz}
-                          onEdit={setEditingQuiz}
-                          onDelete={(id) => deleteQuizMutation.mutate(id)}
-                          onStartSwipe={handleStartSwipeMode}
-                          onMove={setMovingQuiz}
-                          isSelected={selectedQuizzes.includes(quiz.id)}
-                          onSelect={(id) => {
-                            if (selectedQuizzes.includes(id)) {
-                              setSelectedQuizzes(selectedQuizzes.filter(qId => qId !== id));
-                            } else {
-                              setSelectedQuizzes([...selectedQuizzes, id]);
-                            }
-                          }}
-                        />
-                      </DraggableItem>
-                    ))}
-                  </DroppableArea>
-                )}
-              </motion.div>
-            )}
+              {/* Feature Analytics Modal */}
+              {showFeatureAnalytics && (
+                <FeatureAnalytics onClose={() => setShowFeatureAnalytics(false)} />
+              )}
 
-
-
-
-
-            {/* Quiz View */}
-            {view === 'quiz' && selectedQuiz && !swipeMode && (
-              <motion.div key="quiz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <QuestionView
-                  key={currentQuestionIndex}
-                  question={selectedQuiz.questions[currentQuestionIndex]}
-                  questionNumber={currentQuestionIndex + 1}
-                  totalQuestions={selectedQuiz.questions.length}
-                  correctAnswers={score}
-                  wrongAnswers={wrongAnswers.length}
-                  onAnswer={handleAnswer}
-                  onBack={handleExitQuiz}
-                  previousAttempts={attempts.filter(a => a.quiz_id === selectedQuiz.id)}
-                  quizId={selectedQuiz.id}
-                  userEmail={currentUser?.email}
-                  settings={quizSettings}
-                  quizTitle={selectedQuiz.title}
-                  subjectId={selectedQuiz.subject_id}
-                  sessionId={currentSessionId}
-                  onMarkForReview={handleMarkForReview}
-                  initialIsMarked={markedQuestions.has(selectedQuiz.questions[currentQuestionIndex].id || selectedQuiz.questions[currentQuestionIndex].question)}
-                />
-              </motion.div>
-            )}
-
-            {/* Swipe Quiz Mode */}
-            {view === 'quiz' && selectedQuiz && swipeMode && (
-              <motion.div key="swipe-quiz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <SwipeQuizMode
-                  questions={selectedQuiz.questions}
-                  onComplete={handleSwipeComplete}
-                  onExit={handleExitQuiz}
-                />
-              </motion.div>
-            )}
-
-            {/* Results View */}
-            {view === 'results' && selectedQuiz && (
-              <motion.div key="results" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}>
-                <ResultsView
-                  score={score}
-                  totalQuestions={selectedQuiz.questions.length}
-                  wrongAnswers={wrongAnswers}
-                  correctAnswers={correctAnswers}
-                  answeredQuestions={score + wrongAnswers.length}
-                  isPartial={score + wrongAnswers.length < selectedQuiz.questions.length}
-                  onRetry={handleRetry}
-                  onRetryWrong={handleRetryWrongQuestions}
-                  onHome={() => { setSelectedQuiz(null); setView('list'); }}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-
-          <SessionTimer />
-          <TaskProgressFloat />
-
-          {/* Move Quiz Modal */}
-          <MoveQuizModal
-            open={!!movingQuiz}
-            onClose={() => setMovingQuiz(null)}
-            quiz={movingQuiz}
-            containers={subjects}
-            onMove={async (quizId, newSubjectId) => {
-              await updateQuizMutation.mutateAsync({ id: quizId, data: { subject_id: newSubjectId } });
-              setMovingQuiz(null);
-            }}
-          />
-
-          {/* Content Manager Modal */}
-          {showContentManager && (
-            <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-              <div className="w-full max-w-3xl">
-                <ContentManager
-                  courses={courses}
-                  folders={folders}
-                  subjects={subjects}
-                  quizzes={quizzes}
-                  onDeleteCourses={handleBulkDeleteCourses}
-                  onDeleteFolders={handleBulkDeleteFolders}
-                  onDeleteSubjects={handleBulkDeleteSubjects}
-                  onUpdateCourse={handleUpdateCourse}
-                  onUpdateFolder={handleUpdateFolder}
-                  onUpdateSubject={handleUpdateSubject}
-                  onClose={() => setShowContentManager(false)}
-                />
-              </div>
+              {/* Track page view */}
+              <FeatureTracker
+                featureName="Página Principal Quizzes"
+                category="general"
+                currentUser={currentUser}
+              />
             </div>
-          )}
+          </div>
+        </DragDropContext >
 
-          {/* Quiz Exporter Modal */}
-          {showQuizExporter && (
-            <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-              <QuizExporter onClose={() => setShowQuizExporter(false)} />
-            </div>
-          )}
+        {/* Resource Editor Modal */}
+        {
+          showResourceEditor && (
+            <ResourceEditor
+              open={showResourceEditor}
+              onOpenChange={setShowResourceEditor}
+              resource={editingResource}
+              parentContext={{
+                course_id: selectedCourse?.id,
+                subject_id: selectedSubject?.id,
+                folder_id: currentFolderId
+              }}
+              onSave={async (data) => {
+                if (editingResource) {
+                  await updateResourceMutation.mutateAsync({ id: editingResource.id, data });
+                } else {
+                  await createResourceMutation.mutateAsync(data);
+                }
+              }}
+            />
+          )
+        }
 
-          {/* Course Join Modal */}
-          <CourseJoinModal
-            open={showJoinModal}
-            onClose={() => setShowJoinModal(false)}
-            currentUser={currentUser}
-          />
-
-          {/* Feature Analytics Modal */}
-          {showFeatureAnalytics && (
-            <FeatureAnalytics onClose={() => setShowFeatureAnalytics(false)} />
-          )}
-
-          {/* Track page view */}
-          <FeatureTracker
-            featureName="Página Principal Quizzes"
-            category="general"
-            currentUser={currentUser}
-          />
-        </div>
-      </div>
-    </DragDropContext>
+        {/* Resource Viewer Modal */}
+        {
+          viewingResource && (
+            <ResourceViewer
+              open={!!viewingResource}
+              onOpenChange={(open) => !open && setViewingResource(null)}
+              resource={viewingResource}
+            />
+          )
+        }
+      </div >
+    </div >
   );
 }

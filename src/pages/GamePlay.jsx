@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { client } from '@/api/client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
@@ -9,7 +9,7 @@ import {
   Users, Clock, Trophy, Crown, Medal, Award,
   Play, Loader2, Copy, ArrowLeft, Zap
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 import confetti from 'canvas-confetti';
 import QuestionView from '../components/quiz/QuestionView';

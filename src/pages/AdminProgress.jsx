@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { client } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Search, TrendingUp, AlertCircle, Calendar, Trash2, Eye, RefreshCw, Loader2, ChevronDown, ChevronUp, FileDown, BookOpen } from 'lucide-react';
+import { Search, TrendingUp, AlertCircle, Calendar, Trash2, Eye, Loader2, ChevronDown, ChevronUp, FileDown, BookOpen } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 import MathText from '../components/quiz/MathText';

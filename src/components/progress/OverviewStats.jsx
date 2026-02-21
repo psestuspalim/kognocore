@@ -1,6 +1,5 @@
-import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle2, XCircle, BookOpen, Award, TrendingUp, Target } from 'lucide-react';
+import { CheckCircle2, BookOpen, Award, TrendingUp, Target } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 
 export default function OverviewStats({ analytics }) {

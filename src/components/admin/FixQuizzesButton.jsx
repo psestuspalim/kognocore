@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { client } from '@/api/client';
 import { Button } from '@/components/ui/button';
 import { Wrench, Loader2 } from 'lucide-react';

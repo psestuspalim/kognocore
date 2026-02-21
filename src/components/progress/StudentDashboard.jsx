@@ -1,9 +1,8 @@
-import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { 
-  Trophy, Target, Clock, TrendingUp, BookOpen, 
+  Trophy, Target, BookOpen, 
   CheckCircle2, XCircle, Flame, Award, Calendar
 } from 'lucide-react';
 import { format } from 'date-fns';
