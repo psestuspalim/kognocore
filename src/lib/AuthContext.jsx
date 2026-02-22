@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { client } from '@/api/client';
 import { appParams } from '@/lib/app-params';
+import { getOrCreateLearnerId } from '@/lib/learner-id';
 
 const AuthContext = createContext();
 
@@ -15,6 +16,32 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     checkAppState();
   }, []);
+
+  const syncUserRecord = async (userData) => {
+    try {
+      if (!userData?.email) return;
+      const allUsers = await client.entities.User.list();
+      const existing = allUsers.find(
+        (u) => u.email === userData.email || (userData.learner_id && u.learner_id === userData.learner_id)
+      );
+
+      const payload = {
+        email: userData.email,
+        username: userData.username || userData.full_name || 'Usuario',
+        full_name: userData.full_name || userData.username || 'Usuario',
+        role: userData.role || 'user',
+        learner_id: userData.learner_id || null
+      };
+
+      if (!existing) {
+        await client.entities.User.create(payload);
+      } else {
+        await client.entities.User.update(existing.id, payload);
+      }
+    } catch (_err) {
+      // keep auth flow resilient
+    }
+  };
 
   const checkAppState = async () => {
     const safeJson = async (response) => {
@@ -136,15 +163,21 @@ export const AuthProvider = ({ children }) => {
 
         if (response.ok) {
           const data = await response.json();
-          setUser({
+          const learnerId = getOrCreateLearnerId();
+          const displayName = localStorage.getItem('kc_display_name') || 'Estudiante';
+          const resolvedUser = {
             id: 'student_' + data.courseId,
-            email: 'estudiante@kognocore.com',
-            last_name: 'Estudiante',
-            username: 'Estudiante Invitado',
+            email: `learner+${learnerId}@kognocore.local`,
+            last_name: 'Usuario',
+            username: displayName,
+            full_name: displayName,
             is_admin: false,
-            role: 'student',
-            courseId: data.courseId
-          });
+            role: 'user',
+            courseId: data.courseId,
+            learner_id: learnerId
+          };
+          setUser(resolvedUser);
+          await syncUserRecord(resolvedUser);
           setIsAuthenticated(true);
           setIsLoadingAuth(false);
           return;
@@ -156,12 +189,21 @@ export const AuthProvider = ({ children }) => {
 
       if (localToken) {
         // Mock user based on token
-        const mockUser = JSON.parse(localToken);
+        const parsed = JSON.parse(localToken);
+        const learnerId = parsed.learner_id || getOrCreateLearnerId();
+        const mockUser = {
+          ...parsed,
+          learner_id: learnerId,
+          role: parsed.role === 'admin' ? 'admin' : 'user'
+        };
+        localStorage.setItem('app_mock_token', JSON.stringify(mockUser));
         setUser(mockUser);
+        await syncUserRecord(mockUser);
         setIsAuthenticated(true);
       } else {
         const currentUser = await client.auth.me();
         setUser(currentUser);
+        await syncUserRecord(currentUser);
         setIsAuthenticated(true);
       }
       setIsLoadingAuth(false);
@@ -200,16 +242,19 @@ export const AuthProvider = ({ children }) => {
       setIsLoadingAuth(false);
       return true;
     } else if (email === 'student' && password === 'student') {
+      const learnerId = getOrCreateLearnerId();
       const studentUser = {
-        id: 'student_123',
-        email: 'student@client.com',
+        id: `student_${learnerId.slice(0, 8)}`,
+        email: `learner+${learnerId}@kognocore.local`,
         last_name: 'User',
         is_admin: false,
         username: 'student',
-        role: 'student'
+        role: 'user',
+        learner_id: learnerId
       };
       localStorage.setItem('app_mock_token', JSON.stringify(studentUser));
       setUser(studentUser);
+      syncUserRecord(studentUser);
       setIsAuthenticated(true);
       setAuthError(null);
       setIsLoadingAuth(false);

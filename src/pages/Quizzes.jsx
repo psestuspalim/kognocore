@@ -190,9 +190,14 @@ export default function QuizzesPage() {
   });
 
   const { data: attempts = [] } = useQuery({
-    queryKey: ['attempts', currentUser?.email],
-    queryFn: () => client.entities.QuizAttempt.filter({ user_email: currentUser?.email }, '-created_date'),
-    enabled: !!currentUser?.email,
+    queryKey: ['attempts', currentUser?.learner_id || currentUser?.email],
+    queryFn: () => {
+      if (currentUser?.learner_id) {
+        return client.entities.QuizAttempt.filter({ learner_id: currentUser.learner_id }, '-created_date');
+      }
+      return client.entities.QuizAttempt.filter({ user_email: currentUser?.email }, '-created_date');
+    },
+    enabled: !!(currentUser?.learner_id || currentUser?.email),
   });
 
 
@@ -209,8 +214,9 @@ export default function QuizzesPage() {
   const isProfessor = currentUser?.role === 'professor';
   const canEdit = isAdmin || isProfessor;
   const hasKcToken = typeof window !== 'undefined' && !!window.localStorage.getItem('kc_token');
-  const isServerCodeSession = currentUser?.role === 'student' && hasKcToken && !!currentUser?.courseId;
-  const isDirectCodeSession = currentUser?.role === 'student' && currentUser?.loginMode === 'direct-code';
+  const isLearnerRole = currentUser?.role === 'student' || currentUser?.role === 'user';
+  const isServerCodeSession = isLearnerRole && hasKcToken && !!currentUser?.courseId;
+  const isDirectCodeSession = isLearnerRole && currentUser?.loginMode === 'direct-code';
   const hasApprovedEnrollments = enrollments.length > 0;
   const hasCourseIdMatch = !!(currentUser?.courseId && courses.some(c => c?.id === currentUser.courseId));
   const fallbackCourseId = hasCourseIdMatch ? currentUser.courseId : null;
@@ -657,8 +663,7 @@ export default function QuizzesPage() {
     const attempt = await saveAttemptMutation.mutateAsync({
       quiz_id: quiz.id,
       subject_id: quiz.subject_id || expandedQuiz.subject_id,
-      user_email: currentUser.email,
-      username: currentUser.username,
+      ...buildAttemptIdentity(),
       score: 0,
       total_questions: shuffledQuestions.length,
       answered_questions: 0,
@@ -772,8 +777,7 @@ export default function QuizzesPage() {
     const attempt = await saveAttemptMutation.mutateAsync({
       quiz_id: selectedQuiz.id,
       subject_id: selectedQuiz.subject_id,
-      user_email: currentUser.email,
-      username: currentUser.username,
+      ...buildAttemptIdentity(),
       score: 0,
       total_questions: selectedQuiz.questions.length,
       answered_questions: 0,
@@ -806,8 +810,7 @@ export default function QuizzesPage() {
     const attempt = await saveAttemptMutation.mutateAsync({
       quiz_id: selectedQuiz.id,
       subject_id: selectedQuiz.subject_id,
-      user_email: currentUser.email,
-      username: currentUser.username,
+      ...buildAttemptIdentity(),
       score: 0,
       total_questions: wrongQuestionsQuiz.questions.length,
       answered_questions: 0,
@@ -867,8 +870,7 @@ export default function QuizzesPage() {
     await saveAttemptMutation.mutateAsync({
       quiz_id: selectedQuiz.id,
       subject_id: selectedQuiz.subject_id,
-      user_email: currentUser.email,
-      username: currentUser.username,
+      ...buildAttemptIdentity(),
       score: score,
       total_questions: total,
       answered_questions: total,
@@ -936,8 +938,7 @@ export default function QuizzesPage() {
     const attempt = await saveAttemptMutation.mutateAsync({
       quiz_id: reviewQuiz.id,
       subject_id: subjectId,
-      user_email: currentUser.email,
-      username: currentUser.username,
+      ...buildAttemptIdentity(),
       score: 0,
       total_questions: reviewQuiz.questions.length,
       answered_questions: 0,
@@ -1923,3 +1924,8 @@ export default function QuizzesPage() {
     </div >
   );
 }
+  const buildAttemptIdentity = () => ({
+    user_email: currentUser.email,
+    username: currentUser.username,
+    learner_id: currentUser.learner_id || null
+  });

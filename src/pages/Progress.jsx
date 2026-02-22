@@ -67,17 +67,23 @@ export default function ProgressPage() {
     enabled: isAdmin,
   });
 
-  // Intentos del usuario actual o del estudiante seleccionado
-  const targetEmail = selectedStudent ? selectedStudent.email : currentUser?.email;
-
   const { data: userAttempts = [] } = useQuery({
-    queryKey: ['attempts', currentUser?.email],
-    queryFn: () => client.entities.QuizAttempt.filter(
-      { user_email: currentUser?.email },
-      '-created_date',
-      1000
-    ),
-    enabled: !!currentUser?.email && !isAdmin,
+    queryKey: ['attempts', currentUser?.learner_id || currentUser?.email],
+    queryFn: () => {
+      if (currentUser?.learner_id) {
+        return client.entities.QuizAttempt.filter(
+          { learner_id: currentUser.learner_id },
+          '-created_date',
+          1000
+        );
+      }
+      return client.entities.QuizAttempt.filter(
+        { user_email: currentUser?.email },
+        '-created_date',
+        1000
+      );
+    },
+    enabled: !!(currentUser?.learner_id || currentUser?.email) && !isAdmin,
   });
 
   // Usar intentos filtrados según el contexto

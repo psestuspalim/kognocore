@@ -8,11 +8,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useNavigate } from 'react-router-dom';
 import { KeyRound, ShieldCheck, Sparkles } from 'lucide-react';
 import { client } from '@/api/client';
+import { getOrCreateLearnerId } from '@/lib/learner-id';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [code, setCode] = useState('');
+    const [displayName, setDisplayName] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [activeTab, setActiveTab] = useState('code');
@@ -68,8 +70,10 @@ const Login = () => {
         return { courseId: null, courseName: null, token: null, source: 'none', serverError };
     };
 
-    const createLocalStudentSession = async (inputCode) => {
+    const createLocalStudentSession = async (inputCode, inputName) => {
         const normalized = (inputCode || '').trim().toUpperCase();
+        const normalizedName = (inputName || '').trim();
+        const learnerId = getOrCreateLearnerId();
 
         const resolved = await resolveCourseByCode(normalized);
         const targetCourseId = resolved.courseId;
@@ -85,21 +89,24 @@ const Login = () => {
         // If we have a server token, use canonical auth path (courseId comes from /api/me)
         if (resolved.token) {
             localStorage.setItem('kc_token', resolved.token);
+            localStorage.setItem('kc_display_name', normalizedName || 'Estudiante');
             localStorage.removeItem('app_mock_token');
             await checkAppState();
             return;
         }
 
         const mockStudent = {
-            id: `student_${normalized.slice(-6) || 'local'}`,
-            email: `estudiante+${normalized.toLowerCase() || 'local'}@kognocore.local`,
+            id: `student_${learnerId.slice(0, 8)}`,
+            email: `learner+${learnerId}@kognocore.local`,
             last_name: 'Invitado',
-            username: `Estudiante ${normalized || 'Local'}`,
+            username: normalizedName || 'Estudiante',
+            full_name: normalizedName || 'Estudiante',
             is_admin: false,
-            role: 'student',
+            role: 'user',
             courseId: targetCourseId || null,
             accessCode: normalized,
-            loginMode: 'direct-code'
+            loginMode: 'direct-code',
+            learner_id: learnerId
         };
 
         localStorage.setItem('app_mock_token', JSON.stringify(mockStudent));
@@ -159,15 +166,21 @@ const Login = () => {
         setError('');
 
         const normalizedCode = code.trim().toUpperCase();
+        const normalizedName = displayName.trim();
         if (normalizedCode.length < 8) {
             setError('El código debe tener al menos 8 caracteres');
+            setIsLoading(false);
+            return;
+        }
+        if (normalizedName.length < 2) {
+            setError('Ingresa tu nombre (mínimo 2 caracteres)');
             setIsLoading(false);
             return;
         }
 
         try {
             // Direct access by code: no remote approval/validation required.
-            await createLocalStudentSession(normalizedCode);
+            await createLocalStudentSession(normalizedCode, normalizedName);
             navigate('/');
         } catch (err) {
             if (String(err?.message || '').startsWith('SERVER_CONFIG:')) {
@@ -256,6 +269,18 @@ const Login = () => {
                             <TabsContent value="code">
                                 <form onSubmit={handleCodeLogin} className="space-y-4">
                                     <div className="space-y-2">
+                                        <Label htmlFor="displayName" className="text-base font-semibold text-slate-800">Tu nombre</Label>
+                                        <Input
+                                            id="displayName"
+                                            type="text"
+                                            placeholder="Ej: Ana Martínez"
+                                            value={displayName}
+                                            onChange={(e) => setDisplayName(e.target.value)}
+                                            required
+                                            className="h-12 rounded-xl border-slate-300 text-base"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
                                         <Label htmlFor="code" className="text-base font-semibold text-slate-800">Código de Acceso</Label>
                                         <Input
                                             id="code"
@@ -272,7 +297,7 @@ const Login = () => {
                                             {error}
                                         </div>
                                     )}
-                                    <Button type="submit" size="lg" className="h-14 w-full rounded-2xl bg-slate-900 text-lg font-semibold hover:bg-slate-800" disabled={isLoading || !code}>
+                                    <Button type="submit" size="lg" className="h-14 w-full rounded-2xl bg-slate-900 text-lg font-semibold hover:bg-slate-800" disabled={isLoading || !code || !displayName.trim()}>
                                         {isLoading ? 'Verificando...' : 'Ingresar al Curso'}
                                     </Button>
                                 </form>
