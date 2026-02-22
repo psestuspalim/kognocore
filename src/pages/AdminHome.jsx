@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { client } from '@/api/client';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { BookOpen, Users, FileJson, Wrench, FileDown, Settings, LayoutDashboard, Activity } from 'lucide-react';
 import AdminShell from '../components/admin/AdminShell';
 import AdminPageHeader from '../components/admin/AdminPageHeader';
@@ -27,7 +27,6 @@ export default function AdminHome() {
     loadUser();
   }, []);
 
-  const queryClient = useQueryClient();
   const { data: courses = [] } = useQuery({
     queryKey: ['courses'],
     queryFn: () => client.entities.Course.list('order')
@@ -195,44 +194,44 @@ export default function AdminHome() {
 
       {/* Maintenance Tools Section */}
       <div className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
-          <Wrench className="w-5 h-5 text-gray-500" />
+        <h2 className="font-display text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+          <Wrench className="w-5 h-5 text-slate-500" />
           Herramientas de Mantenimiento y Gestión
         </h2>
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <div className="surface-panel p-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Button
               variant="outline"
-              className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-700 transition-all"
+              className="h-24 flex flex-col items-center justify-center gap-2 border-white/80 bg-white/75 hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-700 transition-all"
               onClick={() => setShowQuizExporter(true)}
             >
               <FileDown className="w-6 h-6" />
               <span className="font-semibold">Exportar Quizzes</span>
-              <span className="text-xs text-gray-500 font-normal">Descargar JSON organizados</span>
+              <span className="text-xs text-slate-500 font-normal">Descargar JSON organizados</span>
             </Button>
 
             <Button
               variant="outline"
-              className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-orange-50 hover:border-orange-200 hover:text-orange-700 transition-all"
+              className="h-24 flex flex-col items-center justify-center gap-2 border-white/80 bg-white/75 hover:bg-orange-50 hover:border-orange-200 hover:text-orange-700 transition-all"
               onClick={() => setShowMaintenanceTools(true)}
             >
               <Settings className="w-6 h-6" />
               <span className="font-semibold">Herramientas de Reparación</span>
-              <span className="text-xs text-gray-500 font-normal">Limpieza y mantenimiento</span>
+              <span className="text-xs text-slate-500 font-normal">Limpieza y mantenimiento</span>
             </Button>
 
             <Button
               variant="outline"
-              className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition-all"
+              className="h-24 flex flex-col items-center justify-center gap-2 border-white/80 bg-white/75 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition-all"
               onClick={() => setShowGlobalSettings(true)}
             >
               <Wrench className="w-6 h-6" />
               <span className="font-semibold">Configuración Global</span>
-              <span className="text-xs text-gray-500 font-normal">Vars. del Sistema (Tutor IA)</span>
+              <span className="text-xs text-slate-500 font-normal">Vars. del Sistema (Tutor IA)</span>
             </Button>
           </div>
 
-          <p className="text-sm text-gray-500 mt-4 bg-blue-50 p-3 rounded-lg border border-blue-100 flex items-start gap-2">
+          <p className="text-sm text-slate-600 mt-4 bg-cyan-50/80 p-3 rounded-lg border border-cyan-100 flex items-start gap-2">
             <Wrench className="w-4 h-4 text-blue-600 mt-0.5" />
             <span>Las herramientas de reparación están protegidas con confirmaciones adicionales para prevenir cambios accidentales.</span>
           </p>

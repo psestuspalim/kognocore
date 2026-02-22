@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { useAuth } from '@/lib/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useNavigate } from 'react-router-dom';
+import { KeyRound, ShieldCheck, Sparkles } from 'lucide-react';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,6 +14,7 @@ const Login = () => {
     const [code, setCode] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [activeTab, setActiveTab] = useState('code');
     const { login, checkAppState } = useAuth();
     const navigate = useNavigate();
 
@@ -28,7 +30,7 @@ const Login = () => {
             } else {
                 setError('Invalid credentials');
             }
-        } catch (err) {
+        } catch (_err) {
             setError('An error occurred during login');
         } finally {
             setIsLoading(false);
@@ -56,7 +58,7 @@ const Login = () => {
             localStorage.setItem('kc_token', data.token);
             await checkAppState(); // Reload auth context
             navigate(`/course/${data.courseId}`);
-        } catch (err) {
+        } catch (_err) {
             setError('Error de conexión o validación');
         } finally {
             setIsLoading(false);
@@ -64,80 +66,126 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-slate-50">
-            <Card className="w-full max-w-md">
-                <CardHeader>
-                    <CardTitle className="text-2xl text-center">Acceso a la Plataforma</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <Tabs defaultValue="code" className="w-full">
-                        <TabsList className="grid w-full grid-cols-2 mb-4">
-                            <TabsTrigger value="code">Código Estudiante</TabsTrigger>
-                            <TabsTrigger value="admin">Administrador</TabsTrigger>
-                        </TabsList>
+        <div className="relative min-h-screen overflow-hidden px-4 py-8 sm:px-6 lg:px-10">
+            <div className="pointer-events-none absolute -left-28 top-20 h-72 w-72 rounded-full bg-orange-300/35 blur-3xl animate-float-slow" />
+            <div className="pointer-events-none absolute right-[-6rem] top-[-2rem] h-80 w-80 rounded-full bg-cyan-300/30 blur-3xl animate-float-slow" />
+            <div className="pointer-events-none absolute bottom-[-5rem] left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-amber-200/35 blur-3xl" />
 
-                        <TabsContent value="code">
-                            <form onSubmit={handleCodeLogin} className="space-y-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="code">Código de Acceso</Label>
-                                    <Input
-                                        id="code"
-                                        type="text"
-                                        placeholder="Ingrese su código ej. X7VBN9"
-                                        value={code}
-                                        onChange={(e) => setCode(e.target.value.toUpperCase())}
-                                        required
-                                        className="uppercase text-center font-mono text-xl tracking-widest"
-                                    />
-                                </div>
-                                {error && (
-                                    <div className="text-sm text-red-500 text-center">
-                                        {error}
-                                    </div>
-                                )}
-                                <Button type="submit" className="w-full" disabled={isLoading || !code}>
-                                    {isLoading ? 'Verificando...' : 'Ingresar al Curso'}
-                                </Button>
-                            </form>
-                        </TabsContent>
+            <div className="relative mx-auto grid min-h-[calc(100vh-4rem)] w-full max-w-6xl items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+                <section className="animate-fade-up rounded-3xl border border-white/40 bg-white/40 p-8 backdrop-blur-md lg:p-10">
+                    <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/65 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary/80">
+                        <Sparkles className="h-3.5 w-3.5" />
+                        Plataforma de aprendizaje
+                    </div>
+                    <h1 className="font-display text-4xl font-bold leading-tight text-slate-900 sm:text-5xl">
+                        Aprende más rápido con una experiencia visual moderna.
+                    </h1>
+                    <p className="mt-5 max-w-xl text-base text-slate-700 sm:text-lg">
+                        Inicia sesión con tu código o como administrador para gestionar contenido, evaluar progreso y coordinar sesiones.
+                    </p>
+                    <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                        <div className="surface-panel p-4">
+                            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Cursos</p>
+                            <p className="mt-1 text-2xl font-bold text-slate-900">Dinámicos</p>
+                        </div>
+                        <div className="surface-panel p-4">
+                            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Seguimiento</p>
+                            <p className="mt-1 text-2xl font-bold text-slate-900">En tiempo real</p>
+                        </div>
+                    </div>
+                </section>
 
-                        <TabsContent value="admin">
-                            <form onSubmit={handleLogin} className="space-y-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="email">Usuario o Email</Label>
-                                    <Input
-                                        id="email"
-                                        type="text"
-                                        placeholder="admin"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="password">Contraseña</Label>
-                                    <Input
-                                        id="password"
-                                        type="password"
-                                        placeholder="••••••••"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        required
-                                    />
-                                </div>
-                                {error && (
-                                    <div className="text-sm text-red-500 text-center">
-                                        {error}
+                <Card className="hero-glow animate-fade-up w-full max-w-xl justify-self-center border-none bg-white/88">
+                    <CardHeader className="space-y-2">
+                        <CardTitle className="font-display text-2xl text-center text-slate-900">Acceso a la Plataforma</CardTitle>
+                        <CardDescription className="text-center text-slate-600">
+                            Selecciona el método de ingreso que necesites.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <Tabs
+                            defaultValue="code"
+                            value={activeTab}
+                            onValueChange={(value) => {
+                                setActiveTab(value);
+                                setError('');
+                            }}
+                            className="w-full"
+                        >
+                            <TabsList className="mb-5 grid w-full grid-cols-2">
+                                <TabsTrigger value="code" className="gap-2">
+                                    <KeyRound className="h-4 w-4" />
+                                    Código
+                                </TabsTrigger>
+                                <TabsTrigger value="admin" className="gap-2">
+                                    <ShieldCheck className="h-4 w-4" />
+                                    Admin
+                                </TabsTrigger>
+                            </TabsList>
+
+                            <TabsContent value="code">
+                                <form onSubmit={handleCodeLogin} className="space-y-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="code">Código de Acceso</Label>
+                                        <Input
+                                            id="code"
+                                            type="text"
+                                            placeholder="Ingrese su código, ej. X7VBN9"
+                                            value={code}
+                                            onChange={(e) => setCode(e.target.value.toUpperCase())}
+                                            required
+                                            className="h-12 uppercase text-center font-mono text-lg tracking-[0.25em]"
+                                        />
                                     </div>
-                                )}
-                                <Button type="submit" className="w-full" disabled={isLoading}>
-                                    {isLoading ? 'Entrando...' : 'Entrar (Admin)'}
-                                </Button>
-                            </form>
-                        </TabsContent>
-                    </Tabs>
-                </CardContent>
-            </Card>
+                                    {error && (
+                                        <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                                            {error}
+                                        </div>
+                                    )}
+                                    <Button type="submit" size="lg" className="w-full" disabled={isLoading || !code}>
+                                        {isLoading ? 'Verificando...' : 'Ingresar al Curso'}
+                                    </Button>
+                                </form>
+                            </TabsContent>
+
+                            <TabsContent value="admin">
+                                <form onSubmit={handleLogin} className="space-y-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="email">Usuario o Email</Label>
+                                        <Input
+                                            id="email"
+                                            type="text"
+                                            placeholder="admin"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="password">Contraseña</Label>
+                                        <Input
+                                            id="password"
+                                            type="password"
+                                            placeholder="••••••••"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    {error && (
+                                        <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                                            {error}
+                                        </div>
+                                    )}
+                                    <Button type="submit" size="lg" className="w-full" disabled={isLoading}>
+                                        {isLoading ? 'Entrando...' : 'Entrar (Admin)'}
+                                    </Button>
+                                </form>
+                            </TabsContent>
+                        </Tabs>
+                    </CardContent>
+                </Card>
+            </div>
         </div>
     );
 };

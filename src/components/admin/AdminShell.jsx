@@ -27,7 +27,7 @@ const sidebarItems = [
   }
 ];
 
-export default function AdminShell({ children, title, subtitle }) {
+export default function AdminShell({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
 
@@ -37,12 +37,15 @@ export default function AdminShell({ children, title, subtitle }) {
   };
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-transparent">
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_12%_8%,rgba(255,176,99,0.18)_0%,transparent_34%),radial-gradient(circle_at_88%_2%,rgba(54,158,168,0.16)_0%,transparent_35%),linear-gradient(180deg,rgba(255,253,248,0.92)_0%,rgba(248,245,238,0.92)_100%)]" />
       {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-background border-b z-50 flex items-center justify-between px-4">
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 border-b border-white/70 bg-white/85 backdrop-blur-md z-50 flex items-center justify-between px-4">
         <div className="flex items-center gap-2">
-          <Shield className="w-6 h-6 text-primary" />
-          <span className="font-semibold">Admin</span>
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10">
+            <Shield className="w-5 h-5 text-primary" />
+          </div>
+          <span className="font-display text-sm font-semibold tracking-tight text-slate-800">Admin</span>
         </div>
         <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(!sidebarOpen)}>
           {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -50,22 +53,27 @@ export default function AdminShell({ children, title, subtitle }) {
       </div>
 
       {/* Sidebar - Desktop */}
-      <aside className="hidden lg:block fixed left-0 top-0 h-screen w-64 bg-background border-r">
+      <aside className="hidden lg:block fixed left-0 top-0 h-screen w-72 border-r border-white/70 bg-white/80 backdrop-blur-md">
         <div className="flex flex-col h-full">
           {/* Logo/Brand */}
-          <div className="h-16 flex items-center px-6 border-b">
-            <Shield className="w-6 h-6 text-primary mr-2" />
-            <span className="font-semibold text-lg">Admin Panel</span>
+          <div className="h-20 flex items-center px-6 border-b border-white/70">
+            <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10">
+              <Shield className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <p className="font-display text-lg font-semibold text-slate-900">Admin Panel</p>
+              <p className="text-xs text-slate-500">Control y operaciones</p>
+            </div>
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 overflow-y-auto py-4">
+          <nav className="flex-1 overflow-y-auto py-5">
             {sidebarItems.map((section, idx) => (
               <div key={idx} className="mb-6">
-                <h3 className="px-6 mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <h3 className="px-6 mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">
                   {section.section}
                 </h3>
-                <div className="space-y-1 px-3">
+                <div className="space-y-1.5 px-3">
                   {section.items.map((item) => {
                     const Icon = item.icon;
                     const active = isActive(item.href);
@@ -73,15 +81,12 @@ export default function AdminShell({ children, title, subtitle }) {
                       <Link key={item.href} to={createPageUrl(item.href)}>
                         <div
                           className={cn(
-                            "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all relative",
+                            "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all relative",
                             active
-                              ? "bg-primary/10 text-primary font-medium"
-                              : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                              ? "bg-primary text-primary-foreground font-semibold shadow-lg shadow-primary/30"
+                              : "text-slate-600 hover:bg-white hover:text-slate-900 hover:shadow-sm"
                           )}
                         >
-                          {active && (
-                            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary rounded-r" />
-                          )}
                           <Icon className="w-[18px] h-[18px]" />
                           <span>{item.label}</span>
                         </div>
@@ -94,9 +99,9 @@ export default function AdminShell({ children, title, subtitle }) {
           </nav>
 
           {/* Bottom Actions */}
-          <div className="border-t p-4">
+          <div className="border-t border-white/70 p-4">
             <Link to={createPageUrl('Quizzes')}>
-              <Button variant="outline" size="sm" className="w-full justify-start">
+              <Button variant="outline" size="sm" className="w-full justify-start bg-white/70">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Volver a la app
               </Button>
@@ -112,14 +117,14 @@ export default function AdminShell({ children, title, subtitle }) {
             className="lg:hidden fixed inset-0 bg-black/50 z-40"
             onClick={() => setSidebarOpen(false)}
           />
-          <aside className="lg:hidden fixed left-0 top-16 bottom-0 w-64 bg-background border-r z-40 overflow-y-auto">
+          <aside className="lg:hidden fixed left-0 top-16 bottom-0 w-72 border-r border-white/70 bg-white/90 backdrop-blur-md z-40 overflow-y-auto">
             <nav className="py-4">
               {sidebarItems.map((section, idx) => (
                 <div key={idx} className="mb-6">
-                  <h3 className="px-6 mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <h3 className="px-6 mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">
                     {section.section}
                   </h3>
-                  <div className="space-y-1 px-3">
+                  <div className="space-y-1.5 px-3">
                     {section.items.map((item) => {
                       const Icon = item.icon;
                       const active = isActive(item.href);
@@ -131,15 +136,12 @@ export default function AdminShell({ children, title, subtitle }) {
                         >
                           <div
                             className={cn(
-                              "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all relative",
+                              "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all relative",
                               active
-                                ? "bg-primary/10 text-primary font-medium"
-                                : "text-muted-foreground hover:bg-muted"
+                                ? "bg-primary text-primary-foreground font-semibold shadow-lg shadow-primary/30"
+                                : "text-slate-600 hover:bg-white hover:text-slate-900 hover:shadow-sm"
                             )}
                           >
-                            {active && (
-                              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary rounded-r" />
-                            )}
                             <Icon className="w-[18px] h-[18px]" />
                             <span>{item.label}</span>
                           </div>
@@ -155,7 +157,7 @@ export default function AdminShell({ children, title, subtitle }) {
       )}
 
       {/* Main Content */}
-      <main className="lg:ml-64 pt-16 lg:pt-0">
+      <main className="lg:ml-72 pt-16 lg:pt-0">
         <div className="max-w-[1400px] mx-auto p-6 lg:p-8">
           {children}
         </div>

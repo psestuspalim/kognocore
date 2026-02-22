@@ -21,23 +21,23 @@ export default function AdminDashboardCard({
   const isStatsMode = variant === 'stats' || (stats.length > 0 && items.length === 0);
 
   return (
-    <Card className="hover:shadow-lg hover:border-primary/30 transition-all rounded-2xl">
+    <Card className="group border-white/70 bg-white/80 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-slate-900/10 transition-all rounded-2xl">
       <CardHeader className="pb-4">
         <div className="flex items-start justify-between mb-3">
           {Icon && (
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-accent/20 border border-white/80 flex items-center justify-center">
               <Icon className={`w-6 h-6 ${iconColor}`} />
             </div>
           )}
           {count !== undefined && (
-            <Badge variant="secondary" className="text-lg font-semibold px-3 py-1">
+            <Badge variant="secondary" className={`text-lg font-semibold px-3 py-1 bg-white/80 border border-white/70 ${countColor}`}>
               {count}
             </Badge>
           )}
         </div>
         <div>
-          <CardTitle className="text-lg font-semibold mb-1">{title}</CardTitle>
-          <p className="text-sm text-muted-foreground">{description}</p>
+          <CardTitle className="font-display text-lg font-semibold mb-1 text-slate-900">{title}</CardTitle>
+          <p className="text-sm text-slate-600">{description}</p>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -45,9 +45,9 @@ export default function AdminDashboardCard({
         {isStatsMode && stats.length > 0 && (
           <div className="grid grid-cols-2 gap-3">
             {stats.map((stat, idx) => (
-              <div key={idx} className="bg-muted/50 rounded-lg p-3 text-center">
-                <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-                <p className="text-xs text-muted-foreground mt-1">{stat.label}</p>
+              <div key={idx} className="rounded-xl border border-white/70 bg-white/70 p-3 text-center">
+                <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
+                <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-slate-500 mt-1">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -76,9 +76,9 @@ export default function AdminDashboardCard({
 
         {/* Empty state */}
         {!isStatsMode && items.length === 0 && stats.length === 0 && (
-          <div className="text-center py-8 text-muted-foreground text-sm">
-            <div className="w-12 h-12 rounded-xl bg-muted mx-auto mb-3 flex items-center justify-center">
-              {Icon && <Icon className="w-6 h-6 text-muted-foreground/50" />}
+          <div className="text-center py-8 text-slate-500 text-sm">
+            <div className="w-12 h-12 rounded-xl border border-white/70 bg-white/70 mx-auto mb-3 flex items-center justify-center">
+              {Icon && <Icon className="w-6 h-6 text-slate-400" />}
             </div>
             <p>No hay datos disponibles</p>
           </div>

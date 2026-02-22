@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, XCircle, Lightbulb, ChevronRight, ChevronLeft, Bookmark, Clock } from 'lucide-react';
+import { CheckCircle2, XCircle, Lightbulb, ChevronRight, ChevronLeft } from 'lucide-react';
 import { client } from '@/api/client';
 import { motion, AnimatePresence } from 'framer-motion';
 import MathText from './MathText';
