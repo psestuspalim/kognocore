@@ -17,6 +17,15 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const checkAppState = async () => {
+    const safeJson = async (response) => {
+      const text = await response.text();
+      try {
+        return text ? JSON.parse(text) : {};
+      } catch (_e) {
+        return { raw: text };
+      }
+    };
+
     try {
       setIsLoadingPublicSettings(true);
       setAuthError(null);
@@ -48,14 +57,14 @@ export const AuthProvider = ({ children }) => {
         });
 
         if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}));
+          const errorData = await safeJson(response);
           const error = new Error(errorData.message || response.statusText);
           error.status = response.status;
           error.data = errorData;
           throw error;
         }
 
-        const publicSettings = await response.json();
+        const publicSettings = await safeJson(response);
         setAppPublicSettings(publicSettings);
 
         // If we got the app public settings successfully, check if user is authenticated

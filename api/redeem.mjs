@@ -14,6 +14,21 @@ function hmac(s) {
     return crypto.createHmac('sha256', process.env.TOKEN_SIGNING_SECRET).update(s).digest('hex')
 }
 
+function toBase64Url(input) {
+    return Buffer.from(input)
+        .toString('base64')
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/g, '')
+}
+
+function issueStatelessToken(courseId, expiresAtIso) {
+    const payload = JSON.stringify({ courseId, exp: expiresAtIso })
+    const payloadB64 = toBase64Url(payload)
+    const signature = hmac(payloadB64)
+    return `v2.${payloadB64}.${signature}`
+}
+
 export async function POST(req) {
     try {
         const { code } = await req.json()
@@ -38,27 +53,34 @@ export async function POST(req) {
         const maxUses = invite.max_uses ?? 1
         if (uses >= maxUses) return new Response(JSON.stringify({ error: 'Código ya usado' }), { status: 401 })
 
+        // Expiración token de acceso
+        const expiresAt = new Date(Date.now() + 7 * 24 * 3600 * 1000).toISOString() // 7 días
+
         // Emite token opaco (random) + firma (HMAC) para detectar manipulación
         const raw = crypto.randomBytes(32).toString('hex')
         const sig = hmac(raw)
-        const token = `${raw}.${sig}`
+        let token = `${raw}.${sig}`
 
         const tokenHash = sha256(`${token}|${process.env.CODE_PEPPER}`)
-        const expiresAt = new Date(Date.now() + 7 * 24 * 3600 * 1000).toISOString() // 7 días
 
-        // Guarda sesión y consume uso
+        // Guarda sesión (best effort). Si falla, cae a token stateless para no bloquear acceso.
         const { error: sErr } = await supabase.from('sessions').insert({
             token_hash: tokenHash,
             course_id: invite.course_id,
             expires_at: expiresAt
         })
-        if (sErr) return new Response(JSON.stringify({ error: 'No se pudo crear sesión' }), { status: 500 })
+        if (sErr) {
+            token = issueStatelessToken(invite.course_id, expiresAt)
+        }
 
+        // Consume uso (best effort, no bloquea acceso)
         const { error: uErr } = await supabase.from('invites')
             .update({ uses: uses + 1, used_at: uses + 1 >= maxUses ? now : invite.used_at })
             .eq('id', invite.id)
 
-        if (uErr) return new Response(JSON.stringify({ error: 'No se pudo consumir código' }), { status: 500 })
+        if (uErr) {
+            console.error('redeem warning: failed to update invite usage', uErr.message)
+        }
 
         return new Response(JSON.stringify({
             token,
