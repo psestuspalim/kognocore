@@ -17,27 +17,6 @@ const Login = () => {
     const [activeTab, setActiveTab] = useState('code');
     const { login, checkAppState } = useAuth();
     const navigate = useNavigate();
-    const isLocalRuntime = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-    const shouldUseFallback = (status, backendError) => {
-        // Keep strict validation for known functional errors (invalid/expired/used code)
-        const knownValidationErrors = [
-            'Código no encontrado',
-            'Código expirado',
-            'Código ya usado',
-            'Código inválido'
-        ];
-        if (knownValidationErrors.includes(backendError || '')) return false;
-
-        // Allow fallback in local/dev and when backend is technically failing
-        return (
-            import.meta.env.DEV ||
-            isLocalRuntime ||
-            status >= 500 ||
-            !backendError ||
-            backendError === 'Bad request' ||
-            backendError === 'No se pudo crear sesión'
-        );
-    };
 
     const createLocalStudentSession = async (inputCode) => {
         const normalized = (inputCode || '').trim().toUpperCase();
@@ -88,55 +67,11 @@ const Login = () => {
         }
 
         try {
-            const res = await fetch('/api/redeem', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ code: normalizedCode })
-            });
-
-            let data = {};
-            try {
-                data = await res.json();
-            } catch (_parseError) {
-                data = {};
-            }
-
-            if (!res.ok) {
-                if (shouldUseFallback(res.status, data?.error)) {
-                    await createLocalStudentSession(normalizedCode);
-                    navigate('/');
-                    return;
-                }
-                setError(data.error || 'Error al canjear el código');
-                return;
-            }
-
-            if (!data.token) {
-                if (shouldUseFallback(res.status, data?.error)) {
-                    await createLocalStudentSession(normalizedCode);
-                    navigate('/');
-                    return;
-                }
-                setError('Respuesta inválida del servidor');
-                return;
-            }
-
-            localStorage.setItem('kc_token', data.token);
-            localStorage.removeItem('app_mock_token');
-            await checkAppState(); // Reload auth context
+            // Direct access by code: no remote approval/validation required.
+            await createLocalStudentSession(normalizedCode);
             navigate('/');
         } catch (_err) {
-            if (shouldUseFallback(503, null)) {
-                try {
-                    await createLocalStudentSession(normalizedCode);
-                    navigate('/');
-                    return;
-                } catch (_fallbackErr) {
-                    setError('Error al crear sesión local');
-                    return;
-                }
-            }
-            setError('Error de conexión o validación');
+            setError('Error al crear sesión local');
         } finally {
             setIsLoading(false);
         }
