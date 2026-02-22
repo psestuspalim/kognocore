@@ -1,10 +1,12 @@
 import { createClient } from '@supabase/supabase-js'
 import crypto from 'crypto'
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-)
+function getSupabaseAdmin() {
+  const url = process.env.SUPABASE_URL
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
+  if (!url || !key) return null
+  return createClient(url, key)
+}
 
 function sha256(s) {
   return crypto.createHash('sha256').update(s).digest('hex')
@@ -12,6 +14,11 @@ function sha256(s) {
 
 export async function POST(req) {
   try {
+    const supabase = getSupabaseAdmin()
+    if (!supabase || !process.env.CODE_PEPPER) {
+      return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
+    }
+
     const body = await req.json()
     const code = (body?.code || '').trim().toUpperCase()
     const courseId = body?.course_id || null
@@ -41,4 +48,3 @@ export async function POST(req) {
     return new Response(JSON.stringify({ error: 'Bad request' }), { status: 400 })
   }
 }
-

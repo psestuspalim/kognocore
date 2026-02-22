@@ -20,6 +20,8 @@ const Login = () => {
     const navigate = useNavigate();
 
     const resolveCourseByCode = async (normalized) => {
+        let serverError = null;
+
         // 1) Preferred source on deployed env: Vercel API (returns token + courseId)
         try {
             const response = await fetch('/api/redeem', {
@@ -37,6 +39,11 @@ const Login = () => {
                         token: data.token,
                         source: 'server'
                     };
+                }
+            } else {
+                const data = await response.json().catch(() => ({}));
+                if (response.status === 503) {
+                    serverError = data?.error || 'Server auth not configured';
                 }
             }
         } catch (_err) {
@@ -58,7 +65,7 @@ const Login = () => {
             // ignore
         }
 
-        return { courseId: null, courseName: null, token: null, source: 'none' };
+        return { courseId: null, courseName: null, token: null, source: 'none', serverError };
     };
 
     const createLocalStudentSession = async (inputCode) => {
@@ -69,6 +76,9 @@ const Login = () => {
         const targetCourseName = resolved.courseName;
 
         if (!targetCourseId) {
+            if (resolved.serverError) {
+                throw new Error(`SERVER_CONFIG:${resolved.serverError}`);
+            }
             throw new Error('INVALID_CODE');
         }
 
@@ -159,8 +169,12 @@ const Login = () => {
             // Direct access by code: no remote approval/validation required.
             await createLocalStudentSession(normalizedCode);
             navigate('/');
-        } catch (_err) {
-            setError('Código inválido o no encontrado');
+        } catch (err) {
+            if (String(err?.message || '').startsWith('SERVER_CONFIG:')) {
+                setError('Servidor de códigos no configurado en Vercel');
+            } else {
+                setError('Código inválido o no encontrado');
+            }
         } finally {
             setIsLoading(false);
         }

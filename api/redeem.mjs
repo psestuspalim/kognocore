@@ -1,17 +1,21 @@
 import { createClient } from '@supabase/supabase-js'
 import crypto from 'crypto'
 
-const supabase = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY
-)
+function getSupabaseAdmin() {
+    const url = process.env.SUPABASE_URL
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY
+    if (!url || !key) return null
+    return createClient(url, key)
+}
 
 function sha256(s) {
     return crypto.createHash('sha256').update(s).digest('hex')
 }
 
 function hmac(s) {
-    return crypto.createHmac('sha256', process.env.TOKEN_SIGNING_SECRET).update(s).digest('hex')
+    const secret = process.env.TOKEN_SIGNING_SECRET
+    if (!secret) throw new Error('TOKEN_SIGNING_SECRET_MISSING')
+    return crypto.createHmac('sha256', secret).update(s).digest('hex')
 }
 
 function toBase64Url(input) {
@@ -31,6 +35,11 @@ function issueStatelessToken(courseId, expiresAtIso) {
 
 export async function POST(req) {
     try {
+        const supabase = getSupabaseAdmin()
+        if (!supabase || !process.env.CODE_PEPPER || !process.env.TOKEN_SIGNING_SECRET) {
+            return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
+        }
+
         const { code } = await req.json()
         if (!code || typeof code !== 'string' || code.length < 8) {
             return new Response(JSON.stringify({ error: 'Código inválido' }), { status: 400 })
