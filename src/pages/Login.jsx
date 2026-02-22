@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useNavigate } from 'react-router-dom';
 import { KeyRound, ShieldCheck, Sparkles } from 'lucide-react';
+import { client } from '@/api/client';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -20,6 +21,32 @@ const Login = () => {
 
     const createLocalStudentSession = async (inputCode) => {
         const normalized = (inputCode || '').trim().toUpperCase();
+
+        let targetCourseId = null;
+        let targetCourseName = null;
+
+        try {
+            const accessCodes = await client.entities.CourseAccessCode.filter({ code: normalized });
+            if (accessCodes.length > 0) {
+                targetCourseId = accessCodes[0].course_id || null;
+                targetCourseName = accessCodes[0].course_name || null;
+            }
+        } catch (_err) {
+            // ignore and fallback below
+        }
+
+        if (!targetCourseId) {
+            try {
+                const courses = await client.entities.Course.list('order');
+                if (courses.length > 0) {
+                    targetCourseId = courses[0].id;
+                    targetCourseName = courses[0].name;
+                }
+            } catch (_err) {
+                // ignore
+            }
+        }
+
         const mockStudent = {
             id: `student_${normalized.slice(-6) || 'local'}`,
             email: `estudiante+${normalized.toLowerCase() || 'local'}@kognocore.local`,
@@ -27,11 +54,38 @@ const Login = () => {
             username: `Estudiante ${normalized || 'Local'}`,
             is_admin: false,
             role: 'student',
-            courseId: normalized || 'LOCAL'
+            courseId: targetCourseId || normalized || 'LOCAL'
         };
 
         localStorage.setItem('app_mock_token', JSON.stringify(mockStudent));
         localStorage.removeItem('kc_token');
+
+        if (targetCourseId) {
+            try {
+                const existing = await client.entities.CourseEnrollment.filter({
+                    user_email: mockStudent.email,
+                    course_id: targetCourseId
+                });
+
+                if (existing.length === 0) {
+                    await client.entities.CourseEnrollment.create({
+                        user_email: mockStudent.email,
+                        username: mockStudent.username,
+                        course_id: targetCourseId,
+                        course_name: targetCourseName || 'Curso',
+                        access_code: normalized,
+                        status: 'approved'
+                    });
+                } else if (existing[0].status !== 'approved') {
+                    await client.entities.CourseEnrollment.update(existing[0].id, {
+                        status: 'approved'
+                    });
+                }
+            } catch (_err) {
+                // keep login successful even if enrollment persistence fails
+            }
+        }
+
         await checkAppState();
     };
 
