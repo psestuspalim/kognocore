@@ -198,9 +198,9 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[1.02] tracking-tight text-slate-950 pb-1">
+                    <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[1.08] tracking-tight text-slate-950">
                         Bienvenido a
-                        <span className="block bg-[linear-gradient(110deg,#0f2d47,#1d4f7f,#0b7aa4)] bg-clip-text text-transparent">
+                        <span className="mt-1 block pb-2 leading-[1.08] bg-[linear-gradient(110deg,#0f2d47,#1d4f7f,#0b7aa4)] bg-clip-text text-transparent">
                             Kognocore.
                         </span>
                     </h1>

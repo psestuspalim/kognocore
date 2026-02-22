@@ -200,69 +200,46 @@ export default function QuestionView({
     );
   };
 
-  // Calculate progress percentages
-  const correctPercent = (correctAnswers / totalQuestions) * 100;
-  const wrongPercent = (wrongAnswers / totalQuestions) * 100;
+  const answeredCount = correctAnswers + wrongAnswers;
+  const progressPercent = totalQuestions > 0 ? Math.round((answeredCount / totalQuestions) * 100) : 0;
 
   return (
-    <div className="h-[100dvh] bg-[linear-gradient(160deg,#edf2ff_0%,#f8fafc_45%,#e2e8f0_100%)] flex flex-col overflow-hidden font-sans">
-      {/* Compact Centered Header */}
-      <header className="bg-transparent flex-none z-20 py-2 px-3 md:px-4">
-        <div className="px-3 py-2.5 relative rounded-xl border border-white/70 bg-white/80 backdrop-blur-sm shadow-sm">
-          {/* Back Button - Vertically centered relative to entire header */}
+    <div className="h-[100dvh] bg-[linear-gradient(165deg,#f4f7fb_0%,#eef3f9_52%,#e8eef6_100%)] flex flex-col overflow-hidden font-sans">
+      <header className="flex-none z-20 px-3 pt-3 md:px-4">
+        <div className="relative rounded-2xl border border-slate-200/80 bg-white/90 px-3 py-3 shadow-sm backdrop-blur-sm">
           <button
             onClick={onBack}
-            className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg z-10"
+            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-700"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
 
-          {/* Top Row: Title */}
-          <div className="flex items-center justify-center mb-2">
-            {/* Quiz Title - Center */}
-            <div className="text-center px-10">
-              <h1 className="text-[clamp(20px,1.7vw,32px)] font-bold text-slate-900 leading-tight">
+          <div className="mx-auto flex max-w-4xl flex-col gap-2 px-10">
+            <div className="text-center">
+              <h1 className="text-[clamp(20px,1.6vw,30px)] font-bold leading-tight text-slate-900">
                 {quizTitle || 'Quiz'}
               </h1>
               {subjectId && (
-                <p className="text-xs text-slate-500 mt-0.5">{subjectId}</p>
+                <p className="mt-0.5 text-xs text-slate-500">{subjectId}</p>
               )}
             </div>
-          </div>
 
-          {/* Progress Bar Row - Divergent from Center */}
-          <div className="flex items-center justify-center gap-3 max-w-lg mx-auto">
-            {/* Wrong Count (Left) */}
-            <span className="text-sm font-bold text-rose-700 w-6 text-right">
-              {wrongAnswers}
-            </span>
-
-            {/* The Bar Container */}
-            <div className="flex-1 h-3 rounded-full overflow-hidden flex bg-slate-200 relative">
-              {/* Middle Marker (Optional, subtle) */}
-              <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white z-10" />
-
-              {/* Left Side (Red/Wrong) - Flex End so it grows from right to left (visual center) */}
-              <div className="flex-1 flex justify-end bg-slate-200">
+            <div className="flex items-center gap-3">
+              <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-200">
                 <div
-                  className="bg-rose-600 h-full rounded-l-full shadow-[0_0_16px_rgba(225,29,72,0.35)]"
-                  style={{ width: `${wrongPercent}%` }}
+                  className="h-full rounded-full bg-slate-900 transition-all duration-300"
+                  style={{ width: `${progressPercent}%` }}
                 />
               </div>
-
-              {/* Right Side (Green/Correct) */}
-              <div className="flex-1 flex justify-start bg-slate-200">
-                <div
-                  className="bg-emerald-600 h-full rounded-r-full shadow-[0_0_16px_rgba(5,150,105,0.35)]"
-                  style={{ width: `${correctPercent}%` }}
-                />
+              <span className="text-xs font-semibold text-slate-600">{progressPercent}%</span>
+            </div>
+            <div className="flex items-center justify-between text-xs text-slate-600">
+              <span>Pregunta {questionNumber} de {totalQuestions}</span>
+              <div className="flex items-center gap-3">
+                <span className="font-semibold text-emerald-700">Aciertos: {correctAnswers}</span>
+                <span className="font-semibold text-rose-700">Errores: {wrongAnswers}</span>
               </div>
             </div>
-
-            {/* Correct Count (Right) */}
-            <span className="text-sm font-bold text-emerald-700 w-6 text-left">
-              {correctAnswers}
-            </span>
           </div>
         </div>
       </header>
@@ -270,13 +247,13 @@ export default function QuestionView({
       {/* Main Content Area - Flexible Scroll Container */}
       {/* Mobile: overflow-y-auto (global scroll) */}
       {/* Desktop: overflow-hidden (panels scroll individually) */}
-      <div className="flex-1 w-full min-h-0 overflow-hidden relative z-10 p-3 md:p-4">
-        <div className="h-full lg:grid lg:grid-cols-[1fr_1.08fr] gap-3">
+      <div className="relative z-10 flex-1 min-h-0 w-full overflow-hidden p-3 md:p-4">
+        <div className="h-full gap-3 lg:grid lg:grid-cols-[1fr_1.06fr]">
 
           {/* LEFT COLUMN: Question Content & Analysis */}
           {/* Mobile: Block flow. Desktop: Scrollable Panel */}
           <div className="p-0 lg:h-full overflow-hidden flex flex-col">
-            <div className="max-w-2xl mx-auto w-full h-full rounded-2xl border border-white/70 bg-white/90 shadow-sm p-5 md:p-6">
+            <div className="mx-auto h-full w-full max-w-2xl rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm md:p-6">
 
               {/* Question Number Badge */}
               <div className="mb-4">
@@ -286,7 +263,7 @@ export default function QuestionView({
               </div>
 
               {/* Question Text */}
-              <h2 className="text-[clamp(24px,2.2vw,40px)] font-semibold text-slate-900 leading-[1.15] mb-4">
+              <h2 className="mb-4 text-[clamp(23px,2vw,34px)] font-semibold leading-[1.2] text-slate-900">
                 <MathText text={question.question} />
               </h2>
 
@@ -333,7 +310,7 @@ export default function QuestionView({
           {/* Mobile: Block flow (below left col). Desktop: Scrollable Panel (Right side) */}
           <div className="flex flex-col lg:h-full overflow-hidden">
             <div className="h-full flex flex-col min-h-0">
-              <div className="max-w-2xl mx-auto w-full h-full rounded-2xl border border-white/70 bg-slate-100/80 backdrop-blur-sm shadow-sm p-4 md:p-5">
+              <div className="mx-auto h-full w-full max-w-2xl rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm md:p-5">
 
                 <div className="mb-4 flex items-center justify-between">
                   <span className="text-[11px] font-bold tracking-[0.12em] text-slate-600 uppercase">Opciones</span>
@@ -355,7 +332,7 @@ export default function QuestionView({
                           </div>
 
                           {/* Text Header */}
-                          <div className="flex-1 font-medium text-[clamp(17px,1.15vw,24px)] text-slate-800 leading-tight mt-[1px]">
+                          <div className="mt-[1px] flex-1 text-[clamp(16px,1.05vw,20px)] font-medium leading-snug text-slate-800">
                             <MathText text={option.text} />
                           </div>
                         </div>
@@ -403,8 +380,8 @@ export default function QuestionView({
       </div>
 
       {/* Footer Navigation - Global Sticky/Fixed at Bottom */}
-      <div className="flex-none bg-transparent relative z-[80] w-full pointer-events-auto px-3 md:px-4 pb-3">
-        <div className="p-3 md:px-6 lg:px-8 rounded-xl border border-white/70 bg-white/85 backdrop-blur-sm shadow-sm">
+      <div className="relative z-[80] w-full flex-none bg-transparent px-3 pb-3 pointer-events-auto md:px-4">
+        <div className="rounded-xl border border-slate-200/80 bg-white p-3 shadow-sm md:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
             <Button
               variant="ghost"
