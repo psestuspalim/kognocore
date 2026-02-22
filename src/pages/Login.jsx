@@ -18,6 +18,26 @@ const Login = () => {
     const { login, checkAppState } = useAuth();
     const navigate = useNavigate();
     const isLocalRuntime = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+    const shouldUseFallback = (status, backendError) => {
+        // Keep strict validation for known functional errors (invalid/expired/used code)
+        const knownValidationErrors = [
+            'Código no encontrado',
+            'Código expirado',
+            'Código ya usado',
+            'Código inválido'
+        ];
+        if (knownValidationErrors.includes(backendError || '')) return false;
+
+        // Allow fallback in local/dev and when backend is technically failing
+        return (
+            import.meta.env.DEV ||
+            isLocalRuntime ||
+            status >= 500 ||
+            !backendError ||
+            backendError === 'Bad request' ||
+            backendError === 'No se pudo crear sesión'
+        );
+    };
 
     const createLocalStudentSession = async (inputCode) => {
         const normalized = (inputCode || '').trim().toUpperCase();
@@ -82,8 +102,7 @@ const Login = () => {
             }
 
             if (!res.ok) {
-                // In local environments the /api backend may be unavailable.
-                if (import.meta.env.DEV || isLocalRuntime) {
+                if (shouldUseFallback(res.status, data?.error)) {
                     await createLocalStudentSession(normalizedCode);
                     navigate('/');
                     return;
@@ -93,7 +112,7 @@ const Login = () => {
             }
 
             if (!data.token) {
-                if (import.meta.env.DEV || isLocalRuntime) {
+                if (shouldUseFallback(res.status, data?.error)) {
                     await createLocalStudentSession(normalizedCode);
                     navigate('/');
                     return;
@@ -107,7 +126,7 @@ const Login = () => {
             await checkAppState(); // Reload auth context
             navigate('/');
         } catch (_err) {
-            if (import.meta.env.DEV || isLocalRuntime) {
+            if (shouldUseFallback(503, null)) {
                 try {
                     await createLocalStudentSession(normalizedCode);
                     navigate('/');
@@ -200,7 +219,7 @@ const Login = () => {
                                             {error}
                                         </div>
                                     )}
-                                    {(import.meta.env.DEV || isLocalRuntime) && error && (
+                                    {error && (
                                         <Button
                                             type="button"
                                             variant="outline"
