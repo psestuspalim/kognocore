@@ -181,40 +181,55 @@ const Login = () => {
     };
 
     return (
-        <div className="relative min-h-screen overflow-hidden px-4 py-8 sm:px-6 lg:px-10">
-            <div className="pointer-events-none absolute -left-28 top-20 h-72 w-72 rounded-full bg-orange-300/35 blur-3xl animate-float-slow" />
-            <div className="pointer-events-none absolute right-[-6rem] top-[-2rem] h-80 w-80 rounded-full bg-cyan-300/30 blur-3xl animate-float-slow" />
-            <div className="pointer-events-none absolute bottom-[-5rem] left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-amber-200/35 blur-3xl" />
+        <div className="relative min-h-screen overflow-hidden bg-[linear-gradient(150deg,#f8f6ee_0%,#eef5f7_42%,#f8f0d9_100%)] px-4 py-8 sm:px-6 lg:px-10">
+            <div className="pointer-events-none absolute -left-24 top-20 h-72 w-72 rounded-full bg-amber-300/35 blur-3xl animate-float-slow" />
+            <div className="pointer-events-none absolute right-[-8rem] top-[-4rem] h-96 w-96 rounded-full bg-cyan-300/30 blur-3xl animate-float-slow" />
+            <div className="pointer-events-none absolute bottom-[-6rem] left-1/3 h-96 w-96 rounded-full bg-blue-200/25 blur-3xl" />
 
-            <div className="relative mx-auto grid min-h-[calc(100vh-4rem)] w-full max-w-6xl items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-                <section className="animate-fade-up rounded-3xl border border-white/40 bg-white/40 p-8 backdrop-blur-md lg:p-10">
-                    <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/65 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary/80">
-                        <Sparkles className="h-3.5 w-3.5" />
-                        Plataforma de aprendizaje
-                    </div>
-                    <h1 className="font-display text-4xl font-bold leading-tight text-slate-900 sm:text-5xl">
-                        Aprende más rápido con una experiencia visual moderna.
-                    </h1>
-                    <p className="mt-5 max-w-xl text-base text-slate-700 sm:text-lg">
-                        Inicia sesión con tu código o como administrador para gestionar contenido, evaluar progreso y coordinar sesiones.
-                    </p>
-                    <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                        <div className="surface-panel p-4">
-                            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Cursos</p>
-                            <p className="mt-1 text-2xl font-bold text-slate-900">Dinámicos</p>
+            <div className="relative mx-auto grid min-h-[calc(100vh-4rem)] w-full max-w-7xl items-center gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+                <section className="animate-fade-up rounded-[2rem] border border-white/60 bg-white/55 p-7 shadow-[0_25px_80px_rgba(15,23,42,0.12)] backdrop-blur-md sm:p-10">
+                    <div className="mb-6 flex items-center justify-between gap-4">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700">
+                            <Sparkles className="h-3.5 w-3.5 text-cyan-700" />
+                            Kognocore
                         </div>
-                        <div className="surface-panel p-4">
-                            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Seguimiento</p>
-                            <p className="mt-1 text-2xl font-bold text-slate-900">En tiempo real</p>
+                        <div className="hidden rounded-full bg-slate-900 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white sm:block">
+                            Plataforma Académica
+                        </div>
+                    </div>
+
+                    <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[0.95] tracking-tight text-slate-950">
+                        Bienvenido a
+                        <span className="block bg-[linear-gradient(110deg,#0f2d47,#1d4f7f,#0b7aa4)] bg-clip-text text-transparent">
+                            Kognocore.
+                        </span>
+                    </h1>
+
+                    <p className="mt-6 max-w-2xl text-[clamp(1rem,1.6vw,1.5rem)] leading-relaxed text-slate-700">
+                        Ingresa con tu código para abrir tu curso al instante o accede como administrador para gestionar contenido, monitorear progreso y coordinar evaluaciones.
+                    </p>
+
+                    <div className="mt-9 grid gap-3 sm:grid-cols-3">
+                        <div className="rounded-2xl border border-white/70 bg-white p-4 shadow-[0_10px_35px_rgba(15,23,42,0.08)]">
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">Marca</p>
+                            <p className="mt-1 text-2xl font-bold text-slate-900">Kognocore</p>
+                        </div>
+                        <div className="rounded-2xl border border-white/70 bg-white p-4 shadow-[0_10px_35px_rgba(15,23,42,0.08)]">
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">Cursos</p>
+                            <p className="mt-1 text-2xl font-bold text-slate-900">Modulares</p>
+                        </div>
+                        <div className="rounded-2xl border border-white/70 bg-white p-4 shadow-[0_10px_35px_rgba(15,23,42,0.08)]">
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">Seguimiento</p>
+                            <p className="mt-1 text-2xl font-bold text-slate-900">En vivo</p>
                         </div>
                     </div>
                 </section>
 
-                <Card className="hero-glow animate-fade-up w-full max-w-xl justify-self-center border-none bg-white/88">
-                    <CardHeader className="space-y-2">
-                        <CardTitle className="font-display text-2xl text-center text-slate-900">Acceso a la Plataforma</CardTitle>
-                        <CardDescription className="text-center text-slate-600">
-                            Selecciona el método de ingreso que necesites.
+                <Card className="hero-glow animate-fade-up w-full max-w-xl justify-self-center rounded-[2rem] border border-white/65 bg-white/90 shadow-[0_25px_80px_rgba(15,23,42,0.16)]">
+                    <CardHeader className="space-y-2 pb-3">
+                        <CardTitle className="font-display text-3xl text-center text-slate-950">Acceso Kognocore</CardTitle>
+                        <CardDescription className="text-center text-base text-slate-600">
+                            Selecciona el método de ingreso.
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -227,12 +242,12 @@ const Login = () => {
                             }}
                             className="w-full"
                         >
-                            <TabsList className="mb-5 grid w-full grid-cols-2">
-                                <TabsTrigger value="code" className="gap-2">
+                            <TabsList className="mb-6 grid h-14 w-full grid-cols-2 rounded-2xl bg-slate-100 p-1">
+                                <TabsTrigger value="code" className="gap-2 rounded-xl text-base font-semibold data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-lg">
                                     <KeyRound className="h-4 w-4" />
                                     Código
                                 </TabsTrigger>
-                                <TabsTrigger value="admin" className="gap-2">
+                                <TabsTrigger value="admin" className="gap-2 rounded-xl text-base font-semibold data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-lg">
                                     <ShieldCheck className="h-4 w-4" />
                                     Admin
                                 </TabsTrigger>
@@ -241,23 +256,23 @@ const Login = () => {
                             <TabsContent value="code">
                                 <form onSubmit={handleCodeLogin} className="space-y-4">
                                     <div className="space-y-2">
-                                        <Label htmlFor="code">Código de Acceso</Label>
+                                        <Label htmlFor="code" className="text-base font-semibold text-slate-800">Código de Acceso</Label>
                                         <Input
                                             id="code"
                                             type="text"
-                                            placeholder="Ingrese su código, ej. X7VBN9"
+                                            placeholder="Ej: X7VBN9Q2"
                                             value={code}
                                             onChange={(e) => setCode(e.target.value.toUpperCase())}
                                             required
-                                            className="h-12 uppercase text-center font-mono text-lg tracking-[0.25em]"
+                                            className="h-14 rounded-2xl border-slate-300 uppercase text-center font-mono text-2xl tracking-[0.35em] shadow-inner focus-visible:ring-2 focus-visible:ring-cyan-500"
                                         />
                                     </div>
                                     {error && (
-                                        <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                                        <div className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
                                             {error}
                                         </div>
                                     )}
-                                    <Button type="submit" size="lg" className="w-full" disabled={isLoading || !code}>
+                                    <Button type="submit" size="lg" className="h-14 w-full rounded-2xl bg-slate-900 text-lg font-semibold hover:bg-slate-800" disabled={isLoading || !code}>
                                         {isLoading ? 'Verificando...' : 'Ingresar al Curso'}
                                     </Button>
                                 </form>
@@ -274,6 +289,7 @@ const Login = () => {
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             required
+                                            className="h-12 rounded-xl"
                                         />
                                     </div>
                                     <div className="space-y-2">
@@ -285,14 +301,15 @@ const Login = () => {
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
                                             required
+                                            className="h-12 rounded-xl"
                                         />
                                     </div>
                                     {error && (
-                                        <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                                        <div className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
                                             {error}
                                         </div>
                                     )}
-                                    <Button type="submit" size="lg" className="w-full" disabled={isLoading}>
+                                    <Button type="submit" size="lg" className="h-12 w-full rounded-xl bg-slate-900 hover:bg-slate-800" disabled={isLoading}>
                                         {isLoading ? 'Entrando...' : 'Entrar (Admin)'}
                                     </Button>
                                 </form>
