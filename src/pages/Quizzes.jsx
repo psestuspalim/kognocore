@@ -468,6 +468,20 @@ export default function QuizzesPage() {
     if (isAdmin) return true;
     if (item.is_hidden) return false;
 
+    // Server code session must be scoped strictly to one course, but without
+    // being blocked by per-user visibility lists.
+    if (isServerCodeSession && currentUser?.courseId) {
+      const inScopedCourse =
+        item.id === currentUser.courseId ||
+        item.course_id === currentUser.courseId ||
+        parentItem?.id === currentUser.courseId ||
+        parentItem?.course_id === currentUser.courseId;
+
+      if (inScopedCourse) {
+        return true;
+      }
+    }
+
     // Si es un curso y el usuario tiene enrollment aprobado, tiene acceso
     if (
       !parentItem &&
