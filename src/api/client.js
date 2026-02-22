@@ -53,7 +53,7 @@ initializeStorage();
 // ... imports
 
 /**
- * @typedef {Object} Base44Entity
+ * @typedef {Object} KognocoreEntity
  * @property {(orderBy?: string) => Promise<any[]>} list
  * @property {(criteria: Object, orderBy?: string) => Promise<any[]>} filter
  * @property {(id: string) => Promise<any>} get
@@ -130,26 +130,26 @@ const saveItems = (entityName, items) => {
  *   analytics: { track: () => Promise<void>, identify: () => Promise<void> },
  *   appLogs: { logUserInApp: () => Promise<void> },
  *   entities: {
- *     Course: Base44Entity,
- *     Folder: Base44Entity,
- *     Subject: Base44Entity,
- *     Quiz: Base44Entity,
- *     QuizSettings: Base44Entity,
- *     User: Base44Entity,
- *     QuizAttempt: Base44Entity,
- *     UserStats: Base44Entity,
- *     DeletedItem: Base44Entity,
- *     QuizSession: Base44Entity,
- *     ExamDate: Base44Entity,
- *     CourseEnrollment: Base44Entity,
- *     CourseAccessCode: Base44Entity,
- *     GameRoom: Base44Entity,
- *     Tournament: Base44Entity,
- *     Audio: Base44Entity,
- *     FeatureUsage: Base44Entity,
- *     QuizAnswer: Base44Entity,
-    Question: Base44Entity,
-    Resource: Base44Entity
+ *     Course: KognocoreEntity,
+ *     Folder: KognocoreEntity,
+ *     Subject: KognocoreEntity,
+ *     Quiz: KognocoreEntity,
+ *     QuizSettings: KognocoreEntity,
+ *     User: KognocoreEntity,
+ *     QuizAttempt: KognocoreEntity,
+ *     UserStats: KognocoreEntity,
+ *     DeletedItem: KognocoreEntity,
+ *     QuizSession: KognocoreEntity,
+ *     ExamDate: KognocoreEntity,
+ *     CourseEnrollment: KognocoreEntity,
+ *     CourseAccessCode: KognocoreEntity,
+ *     GameRoom: KognocoreEntity,
+ *     Tournament: KognocoreEntity,
+ *     Audio: KognocoreEntity,
+ *     FeatureUsage: KognocoreEntity,
+ *     QuizAnswer: KognocoreEntity,
+    Question: KognocoreEntity,
+    Resource: KognocoreEntity
  *   },
  *   integrations: any
  * }}

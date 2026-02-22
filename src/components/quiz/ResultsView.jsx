@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Trophy, Home, RotateCcw, TrendingUp, CheckCircle2, XCircle, AlertCircle } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import MathText from './MathText';
 
 export default function ResultsView({ 
@@ -61,14 +60,10 @@ export default function ResultsView({
 
   return (
     <div className="max-w-2xl mx-auto">
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Card className="border-0 shadow-2xl overflow-hidden">
+      <div>
+        <Card className="border border-white/70 shadow-xl overflow-hidden rounded-2xl bg-white/95">
           {/* Header with gradient */}
-          <div className={`bg-gradient-to-br ${isPartial ? 'from-orange-500 to-orange-700' : 'from-indigo-500 to-indigo-700'} p-8 text-white`}>
+          <div className={`bg-gradient-to-br ${isPartial ? 'from-amber-600 to-orange-700' : 'from-indigo-700 to-blue-700'} p-8 text-white`}>
             <div className="flex justify-center mb-4">
               <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
                 {isPartial ? <AlertCircle className="w-10 h-10" /> : <Trophy className="w-10 h-10" />}
@@ -77,7 +72,7 @@ export default function ResultsView({
             <h2 className="text-3xl font-bold text-center mb-2">
               {isPartial ? 'Cuestionario parcial' : 'Cuestionario completado'}
             </h2>
-            <p className="text-center text-indigo-100">
+            <p className="text-center text-indigo-100/90">
               {isPartial ? `Respondiste ${answeredCount} de ${totalQuestions} preguntas` : 'Has terminado todas las preguntas'}
             </p>
           </div>
@@ -95,7 +90,7 @@ export default function ResultsView({
                     strokeWidth="12"
                     fill="none"
                   />
-                  <motion.circle
+                  <circle
                     cx="96"
                     cy="96"
                     r="88"
@@ -103,9 +98,7 @@ export default function ResultsView({
                     strokeWidth="12"
                     fill="none"
                     strokeLinecap="round"
-                    initial={{ strokeDasharray: '0 552' }}
-                    animate={{ strokeDasharray: `${(percentage / 100) * 552} 552` }}
-                    transition={{ duration: 1.5, ease: 'easeOut' }}
+                    strokeDasharray={`${(percentage / 100) * 552} 552`}
                   />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
@@ -121,7 +114,7 @@ export default function ResultsView({
 
             {/* Grade Badge */}
             <div className="flex justify-center mb-8">
-              <div className={`${grade.bg} px-6 py-3 rounded-full`}>
+              <div className={`${grade.bg} px-6 py-3 rounded-full border border-white/70`}>
                 <span className={`${grade.color} font-semibold text-lg`}>
                   {grade.text}
                 </span>
@@ -133,7 +126,7 @@ export default function ResultsView({
               <Button
                 variant="outline"
                 onClick={() => setShowCorrect(!showCorrect)}
-                className="h-auto flex-col p-4 hover:bg-green-50"
+                className="h-auto flex-col p-4 hover:bg-emerald-50 border-emerald-200/70"
               >
                 <div className="text-2xl font-bold text-green-600">{score}</div>
                 <div className="text-xs text-gray-500 mt-1">Correctas</div>
@@ -142,7 +135,7 @@ export default function ResultsView({
               <Button
                 variant="outline"
                 onClick={() => setShowWrong(!showWrong)}
-                className="h-auto flex-col p-4 hover:bg-red-50"
+                className="h-auto flex-col p-4 hover:bg-rose-50 border-rose-200/70"
               >
                 <div className="text-2xl font-bold text-red-600">
                   {wrongAnswers.length}
@@ -161,7 +154,7 @@ export default function ResultsView({
                 </Card>
               )}
               
-              <Card className="bg-gray-50 border-0">
+              <Card className="bg-slate-50 border border-slate-200/70">
                 <CardContent className="p-4 text-center">
                   <div className="text-2xl font-bold text-indigo-600">
                     {totalQuestions}
@@ -172,15 +165,9 @@ export default function ResultsView({
             </div>
 
             {/* Correct Answers Expandable */}
-            <AnimatePresence>
-              {showCorrect && correctAnswers.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="mb-6 max-h-96 overflow-y-auto"
-                >
-                  <Card className="bg-green-50 border-green-200">
+            {showCorrect && correctAnswers.length > 0 && (
+                <div className="mb-6 max-h-96 overflow-y-auto">
+                  <Card className="bg-emerald-50 border-emerald-200/80">
                     <CardHeader className="pb-3">
                       <CardTitle className="text-sm text-green-800 flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4" />
@@ -200,20 +187,13 @@ export default function ResultsView({
                       ))}
                     </CardContent>
                   </Card>
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
 
             {/* Wrong Answers Expandable */}
-            <AnimatePresence>
-              {showWrong && wrongAnswers.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="mb-6 max-h-96 overflow-y-auto"
-                >
-                  <Card className="bg-red-50 border-red-200">
+            {showWrong && wrongAnswers.length > 0 && (
+                <div className="mb-6 max-h-96 overflow-y-auto">
+                  <Card className="bg-rose-50 border-rose-200/80">
                     <CardHeader className="pb-3">
                       <CardTitle className="text-sm text-red-800 flex items-center gap-2">
                         <XCircle className="w-4 h-4" />
@@ -238,9 +218,8 @@ export default function ResultsView({
                       ))}
                     </CardContent>
                   </Card>
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
 
             {/* Difficulty Stats */}
             {(difficultyStats.fácil.total > 0 || difficultyStats.moderado.total > 0 || difficultyStats.difícil.total > 0) && (
@@ -253,13 +232,8 @@ export default function ResultsView({
                   📊 {showDifficulty ? 'Ocultar' : 'Ver'} estadísticas por dificultad
                 </Button>
                 
-                <AnimatePresence>
-                  {showDifficulty && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                    >
+                {showDifficulty && (
+                    <div>
                       <Card className="bg-purple-50 border-purple-200">
                         <CardHeader className="pb-3">
                           <CardTitle className="text-sm text-purple-800">
@@ -322,9 +296,8 @@ export default function ResultsView({
                           )}
                         </CardContent>
                       </Card>
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             )}
 
@@ -359,7 +332,7 @@ export default function ResultsView({
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </div>
     </div>
   );
 }

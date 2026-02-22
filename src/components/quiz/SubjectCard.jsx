@@ -2,7 +2,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { BookOpen, Trash2, Pencil, EyeOff, Users, RotateCcw, CheckCircle2, FlaskConical } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { buildPalette } from '@/utils/theme';
 
 // Materias → Paleta Esmeralda / Teal (ciencias de la salud, conocimiento, vida)
@@ -13,20 +12,15 @@ export default function SubjectCard({ subject, quizCount, stats, onClick, onDele
   const p = buildPalette(subject.color || '#10b981');
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.025, y: -2 }}
-      transition={{ duration: 0.2 }}
-    >
+    <div>
       <Card
         onClick={onClick}
-        className="cursor-pointer transition-all overflow-hidden relative group bg-white"
+        className="cursor-pointer transition-all duration-150 overflow-hidden relative group bg-white/95 rounded-2xl border shadow-sm hover:-translate-y-[1px] hover:shadow-md"
         style={{
           background: p.cardBg,
-          border: `1px solid ${p.border}`,
+          border: `1px solid ${p.borderHover}`,
           boxShadow: p.shadow,
-          borderLeft: `4px solid ${subject.color || '#10b981'}`,
+          borderLeft: `5px solid ${subject.color || '#10b981'}`,
           backdropFilter: 'blur(8px)',
         }}
       >
@@ -38,7 +32,7 @@ export default function SubjectCard({ subject, quizCount, stats, onClick, onDele
 
         {/* Top label chip */}
         <div className="px-4 pt-3 pb-0">
-          <span className="inline-flex items-center gap-1 text-[10px] font-semibold tracking-widest uppercase rounded-full px-2.5 py-0.5 border"
+          <span className="inline-flex items-center gap-1 text-[10px] font-semibold tracking-[0.1em] uppercase rounded-full px-2.5 py-0.5 border"
             style={{ color: p.chipText, background: p.chipBg, borderColor: p.chipBorder }}
           >
             <FlaskConical className="w-3 h-3" />
@@ -59,7 +53,7 @@ export default function SubjectCard({ subject, quizCount, stats, onClick, onDele
 
               {/* Name + badges */}
               <div className="min-w-0 flex-1">
-                <h3 className="font-bold text-gray-800 text-base flex items-center gap-2 truncate">
+                <h3 className="font-bold text-slate-900 text-base flex items-center gap-2 truncate">
                   {subject.name}
                   {subject.is_hidden && <EyeOff className="w-3.5 h-3.5 text-gray-400" />}
                   {subject.visibility === 'specific' && <Users className="w-3.5 h-3.5" style={{ color: p.iconColor }} />}
@@ -78,9 +72,9 @@ export default function SubjectCard({ subject, quizCount, stats, onClick, onDele
                   </Badge>
                   {totalAnswered > 0 && (
                     <Badge
-                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border flex items-center gap-1 ${correctPercentage >= 70
+                    className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border flex items-center gap-1 ${correctPercentage >= 70
                         ? 'bg-emerald-100 text-emerald-700 border-emerald-300'
-                        : 'bg-amber-50 text-amber-700 border-amber-200'
+                        : 'bg-amber-100 text-amber-800 border-amber-300'
                         }`}
                     >
                       <CheckCircle2 className="w-3 h-3" />
@@ -97,14 +91,14 @@ export default function SubjectCard({ subject, quizCount, stats, onClick, onDele
                 {onEdit && (
                   <Button variant="ghost" size="icon"
                     onClick={(e) => { e.stopPropagation(); onEdit(subject); }}
-                    className="h-8 w-8 text-gray-400 hover:text-gray-700 hover:bg-white/60">
+                    className="h-8 w-8 text-slate-400 hover:text-slate-700 hover:bg-white/60 rounded-lg">
                     <Pencil className="w-4 h-4" />
                   </Button>
                 )}
                 {onDelete && (
                   <Button variant="ghost" size="icon"
                     onClick={(e) => { e.stopPropagation(); onDelete(subject.id); }}
-                    className="h-8 w-8 text-gray-400 hover:text-red-500 hover:bg-red-50/70">
+                    className="h-8 w-8 text-slate-400 hover:text-red-500 hover:bg-red-50/70 rounded-lg">
                     <Trash2 className="w-4 h-4" />
                   </Button>
                 )}
@@ -118,7 +112,7 @@ export default function SubjectCard({ subject, quizCount, stats, onClick, onDele
               <Button
                 variant="ghost"
                 size="sm"
-                className="w-full text-xs h-7 text-red-600 hover:bg-red-50 hover:text-red-700 p-0 justify-start px-2"
+                className="w-full text-xs h-8 text-red-700 hover:bg-red-50 hover:text-red-800 p-0 justify-start px-2 rounded-md"
                 onClick={(e) => { e.stopPropagation(); onReviewWrong(subject.id); }}
               >
                 <RotateCcw className="w-3 h-3 mr-1.5" />
@@ -128,6 +122,6 @@ export default function SubjectCard({ subject, quizCount, stats, onClick, onDele
           )}
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   );
 }

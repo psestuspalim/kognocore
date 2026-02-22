@@ -18,6 +18,23 @@ const Login = () => {
     const { login, checkAppState } = useAuth();
     const navigate = useNavigate();
 
+    const createLocalStudentSession = async (inputCode) => {
+        const normalized = (inputCode || '').trim().toUpperCase();
+        const mockStudent = {
+            id: `student_${normalized.slice(-6) || 'local'}`,
+            email: `estudiante+${normalized.toLowerCase() || 'local'}@kognocore.local`,
+            last_name: 'Invitado',
+            username: `Estudiante ${normalized || 'Local'}`,
+            is_admin: false,
+            role: 'student',
+            courseId: normalized || 'LOCAL'
+        };
+
+        localStorage.setItem('app_mock_token', JSON.stringify(mockStudent));
+        localStorage.removeItem('kc_token');
+        await checkAppState();
+    };
+
     const handleLogin = async (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -42,23 +59,63 @@ const Login = () => {
         setIsLoading(true);
         setError('');
 
+        const normalizedCode = code.trim().toUpperCase();
+        if (normalizedCode.length < 8) {
+            setError('El código debe tener al menos 8 caracteres');
+            setIsLoading(false);
+            return;
+        }
+
         try {
             const res = await fetch('/api/redeem', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ code })
+                body: JSON.stringify({ code: normalizedCode })
             });
-            const data = await res.json();
+
+            let data = {};
+            try {
+                data = await res.json();
+            } catch (_parseError) {
+                data = {};
+            }
 
             if (!res.ok) {
+                // In local dev the /api backend may be unavailable. Use a local session fallback.
+                if (import.meta.env.DEV) {
+                    await createLocalStudentSession(normalizedCode);
+                    navigate('/');
+                    return;
+                }
                 setError(data.error || 'Error al canjear el código');
                 return;
             }
 
+            if (!data.token) {
+                if (import.meta.env.DEV) {
+                    await createLocalStudentSession(normalizedCode);
+                    navigate('/');
+                    return;
+                }
+                setError('Respuesta inválida del servidor');
+                return;
+            }
+
             localStorage.setItem('kc_token', data.token);
+            localStorage.removeItem('app_mock_token');
             await checkAppState(); // Reload auth context
-            navigate(`/course/${data.courseId}`);
+            navigate('/');
         } catch (_err) {
+            if (import.meta.env.DEV) {
+                try {
+                    await createLocalStudentSession(normalizedCode);
+                    navigate('/');
+                    return;
+                } catch (_fallbackErr) {
+                    setError('Error al crear sesión local');
+                    return;
+                }
+            }
             setError('Error de conexión o validación');
         } finally {
             setIsLoading(false);

@@ -1,6 +1,6 @@
-# Axayak (Base44 App)
+# Kognocore
 
-Axayak is a modern, pedagogical web application built on the Base44 architecture. It provides a robust platform for managing courses, quizzes, and student enrollments with a focus on user experience and administrative safety.
+Kognocore is a modern pedagogical web application for managing courses, quizzes, and student enrollments with a focus on user experience and administrative safety.
 
 ![Demo](https://via.placeholder.com/800x400?text=Axayak+Dashboard+Preview)
 
