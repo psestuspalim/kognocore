@@ -17,6 +17,7 @@ const Login = () => {
     const [activeTab, setActiveTab] = useState('code');
     const { login, checkAppState } = useAuth();
     const navigate = useNavigate();
+    const isLocalRuntime = ['localhost', '127.0.0.1'].includes(window.location.hostname);
 
     const createLocalStudentSession = async (inputCode) => {
         const normalized = (inputCode || '').trim().toUpperCase();
@@ -81,8 +82,8 @@ const Login = () => {
             }
 
             if (!res.ok) {
-                // In local dev the /api backend may be unavailable. Use a local session fallback.
-                if (import.meta.env.DEV) {
+                // In local environments the /api backend may be unavailable.
+                if (import.meta.env.DEV || isLocalRuntime) {
                     await createLocalStudentSession(normalizedCode);
                     navigate('/');
                     return;
@@ -92,7 +93,7 @@ const Login = () => {
             }
 
             if (!data.token) {
-                if (import.meta.env.DEV) {
+                if (import.meta.env.DEV || isLocalRuntime) {
                     await createLocalStudentSession(normalizedCode);
                     navigate('/');
                     return;
@@ -106,7 +107,7 @@ const Login = () => {
             await checkAppState(); // Reload auth context
             navigate('/');
         } catch (_err) {
-            if (import.meta.env.DEV) {
+            if (import.meta.env.DEV || isLocalRuntime) {
                 try {
                     await createLocalStudentSession(normalizedCode);
                     navigate('/');
@@ -198,6 +199,25 @@ const Login = () => {
                                         <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
                                             {error}
                                         </div>
+                                    )}
+                                    {(import.meta.env.DEV || isLocalRuntime) && error && (
+                                        <Button
+                                            type="button"
+                                            variant="outline"
+                                            className="w-full"
+                                            onClick={async () => {
+                                                setIsLoading(true);
+                                                try {
+                                                    await createLocalStudentSession(code);
+                                                    navigate('/');
+                                                } finally {
+                                                    setIsLoading(false);
+                                                }
+                                            }}
+                                            disabled={isLoading || !code}
+                                        >
+                                            Continuar en modo local
+                                        </Button>
                                     )}
                                     <Button type="submit" size="lg" className="w-full" disabled={isLoading || !code}>
                                         {isLoading ? 'Verificando...' : 'Ingresar al Curso'}
