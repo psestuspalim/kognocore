@@ -124,6 +124,31 @@ const saveItems = (entityName, items) => {
   }
 };
 
+const sortByField = (items, orderBy) => {
+  if (!orderBy) return items;
+  const desc = orderBy.startsWith('-');
+  const field = desc ? orderBy.slice(1) : orderBy;
+  return [...items].sort((a, b) => {
+    if (a[field] < b[field]) return desc ? 1 : -1;
+    if (a[field] > b[field]) return desc ? -1 : 1;
+    return 0;
+  });
+};
+
+const mergeById = (primary, secondary) => {
+  const map = new Map();
+  secondary.forEach((item) => map.set(item.id, item));
+  primary.forEach((item) => map.set(item.id, item));
+  return Array.from(map.values());
+};
+
+const fetchRemoteQuizzes = async () => {
+  const response = await fetch('/api/quizzes');
+  if (!response.ok) throw new Error('REMOTE_QUIZ_LIST_FAILED');
+  const data = await response.json().catch(() => ({}));
+  return Array.isArray(data?.quizzes) ? data.quizzes : [];
+};
+
 /**
  * @type {{
  *   auth: { me: () => Promise<any>, logout: (redirectUrl?: string) => void, redirectToLogin: (redirectUrl?: string) => void, updateMe: (data: Object) => Promise<any> },
@@ -199,20 +224,45 @@ const mockClient = {
       return {
 
         list: async (orderBy) => {
+          if (entityName === 'Quiz') {
+            const local = getItems('Quiz');
+            try {
+              const remote = await fetchRemoteQuizzes();
+              const merged = mergeById(remote, local);
+              saveItems('Quiz', merged);
+              return sortByField(merged, orderBy);
+            } catch (_err) {
+              return sortByField(local, orderBy);
+            }
+          }
+
           let items = getItems(entityName);
           // Simple sort if orderBy is provided (very basic implementation)
-          if (orderBy) {
-            const desc = orderBy.startsWith('-');
-            const field = desc ? orderBy.slice(1) : orderBy;
-            items.sort((a, b) => {
-              if (a[field] < b[field]) return desc ? 1 : -1;
-              if (a[field] > b[field]) return desc ? -1 : 1;
-              return 0;
-            });
-          }
-          return items;
+          return sortByField(items, orderBy);
         },
         filter: async (criteria, orderBy) => {
+          if (entityName === 'Quiz') {
+            const all = await (async () => {
+              try {
+                const remote = await fetchRemoteQuizzes();
+                const local = getItems('Quiz');
+                const merged = mergeById(remote, local);
+                saveItems('Quiz', merged);
+                return merged;
+              } catch (_err) {
+                return getItems('Quiz');
+              }
+            })();
+
+            let filtered = all.filter(item => {
+              for (const key in criteria) {
+                if (item[key] !== criteria[key]) return false;
+              }
+              return true;
+            });
+            return sortByField(filtered, orderBy);
+          }
+
           let items = getItems(entityName);
           items = items.filter(item => {
             for (const key in criteria) {
@@ -220,18 +270,26 @@ const mockClient = {
             }
             return true;
           });
-          if (orderBy) {
-            const desc = orderBy.startsWith('-');
-            const field = desc ? orderBy.slice(1) : orderBy;
-            items.sort((a, b) => {
-              if (a[field] < b[field]) return desc ? 1 : -1;
-              if (a[field] > b[field]) return desc ? -1 : 1;
-              return 0;
-            });
-          }
-          return items;
+          return sortByField(items, orderBy);
         },
         get: async (id) => {
+          if (entityName === 'Quiz') {
+            const local = getItems('Quiz');
+            const localItem = local.find(item => item.id === id);
+            try {
+              const remote = await fetchRemoteQuizzes();
+              const remoteItem = remote.find(item => item.id === id);
+              if (remoteItem) {
+                const merged = mergeById(remote, local);
+                saveItems('Quiz', merged);
+                return remoteItem;
+              }
+            } catch (_err) {
+              // ignore
+            }
+            return localItem;
+          }
+
           const items = getItems(entityName);
           return items.find(item => item.id === id);
         },
@@ -245,6 +303,19 @@ const mockClient = {
           };
           items.push(newItem);
           saveItems(entityName, items);
+
+          if (entityName === 'Quiz') {
+            try {
+              await fetch('/api/quizzes', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ quiz: newItem })
+              });
+            } catch (_err) {
+              // keep local create working
+            }
+          }
+
           return newItem;
         },
         update: async (id, data) => {
@@ -253,6 +324,19 @@ const mockClient = {
           if (index !== -1) {
             items[index] = { ...items[index], ...data, updated_date: new Date().toISOString() };
             saveItems(entityName, items);
+
+            if (entityName === 'Quiz') {
+              try {
+                await fetch('/api/quizzes', {
+                  method: 'PATCH',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ id, data })
+                });
+              } catch (_err) {
+                // keep local update working
+              }
+            }
+
             return items[index];
           }
           throw new Error('Item not found');
@@ -263,6 +347,15 @@ const mockClient = {
           items = items.filter(item => item.id !== id);
           if (items.length !== initialLength) {
             saveItems(entityName, items);
+
+            if (entityName === 'Quiz') {
+              try {
+                await fetch(`/api/quizzes?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+              } catch (_err) {
+                // keep local delete working
+              }
+            }
+
             return { success: true };
           }
           throw new Error('Item not found');
