@@ -31,6 +31,22 @@ export default function CourseCodesPanel({ courses }) {
     queryFn: () => client.entities.CourseAccessCode.list('-created_date')
   });
 
+  const { data: usageByCode = {} } = useQuery({
+    queryKey: ['course-codes-usage', codes.map(c => c.code).join('|')],
+    queryFn: async () => {
+      if (codes.length === 0) return {};
+      const response = await fetch('/api/invites-usage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ codes: codes.map(c => c.code) })
+      });
+      if (!response.ok) return {};
+      const data = await response.json().catch(() => ({}));
+      return data?.usage || {};
+    },
+    enabled: codes.length > 0
+  });
+
   const createCodeMutation = useMutation({
     mutationFn: (data) => client.entities.CourseAccessCode.create(data),
     onSuccess: () => {
@@ -176,8 +192,12 @@ export default function CourseCodesPanel({ courses }) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {codes.map((code) => {
-          const isExpired = code.expires_at && new Date(code.expires_at) < new Date();
-          const isMaxed = code.max_uses && code.current_uses >= code.max_uses;
+          const usage = usageByCode[code.code] || null;
+          const currentUses = usage?.uses ?? code.current_uses ?? 0;
+          const maxUses = usage?.max_uses ?? code.max_uses ?? null;
+          const expiresAt = usage?.expires_at ?? code.expires_at ?? null;
+          const isExpired = expiresAt && new Date(expiresAt) < new Date();
+          const isMaxed = maxUses && currentUses >= maxUses;
           const isUsable = code.is_active && !isExpired && !isMaxed;
 
           return (
@@ -229,20 +249,20 @@ export default function CourseCodesPanel({ courses }) {
                   <Badge variant={isUsable ? 'default' : 'secondary'} className={isUsable ? 'bg-green-100 text-green-700' : ''}>
                     {isUsable ? 'Activo' : isExpired ? 'Expirado' : isMaxed ? 'Agotado' : 'Inactivo'}
                   </Badge>
-                  {code.max_uses && (
+                  {maxUses && (
                     <span className="text-gray-600">
-                      {code.current_uses} / {code.max_uses} usos
+                      {currentUses} / {maxUses} usos
                     </span>
                   )}
-                  {!code.max_uses && (
+                  {!maxUses && (
                     <span className="text-gray-600">
-                      {code.current_uses} usos
+                      {currentUses} usos
                     </span>
                   )}
                 </div>
-                {code.expires_at && (
+                {expiresAt && (
                   <p className="text-xs text-gray-500">
-                    Expira: {new Date(code.expires_at).toLocaleDateString()}
+                    Expira: {new Date(expiresAt).toLocaleDateString()}
                   </p>
                 )}
               </CardContent>

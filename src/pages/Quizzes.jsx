@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import { useAuth } from '@/lib/AuthContext';
 import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, ChevronRight, Upload, Home, Shield, AlertCircle, LayoutDashboard } from 'lucide-react';
 import { Icon } from '@/components/ui/Icon';
 
@@ -62,6 +63,7 @@ import FeatureTracker from '../components/admin/FeatureTracker';
 import ExamOverview from '../components/course/ExamOverview';
 
 export default function QuizzesPage() {
+  const { user: authUser } = useAuth();
   const [view, setView] = useState('home');
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [selectedSubject, setSelectedSubject] = useState(null);
@@ -136,6 +138,11 @@ export default function QuizzesPage() {
   );
 
   useEffect(() => {
+    if (authUser) {
+      setCurrentUser(authUser);
+      return;
+    }
+
     const loadUser = async () => {
       try {
         const user = await client.auth.me();
@@ -145,7 +152,7 @@ export default function QuizzesPage() {
       }
     };
     loadUser();
-  }, []);
+  }, [authUser]);
 
   // Queries
   const { data: courses = [] } = useQuery({
