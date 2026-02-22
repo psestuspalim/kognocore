@@ -121,6 +121,20 @@ export default function QuestionView({
   };
 
   const selectedOption = selectedAnswer !== null ? options[selectedAnswer] : null;
+  const correctOption = options.find(o => o.isCorrect) || null;
+  const incorrectOption = selectedOption && !selectedOption.isCorrect
+    ? selectedOption
+    : (options.find(o => !o.isCorrect) || null);
+
+  const getCorrectFeedback = () => {
+    if (!correctOption) return question.feedback || "Explicación correcta.";
+    return correctOption.rationale || question.feedback || "Explicación correcta.";
+  };
+
+  const getIncorrectFeedback = () => {
+    if (!incorrectOption) return null;
+    return incorrectOption.rationale || "Esta opción no es la más adecuada.";
+  };
 
   const handleNext = () => {
     const isCorrect = selectedOption?.isCorrect;
@@ -353,23 +367,30 @@ export default function QuestionView({
                 {/* Unified feedback panel (keeps option cards compact and visible) */}
                 <div className="mt-3 min-h-[112px]">
                   {showFeedback && selectedOption && (
-                    <div className={`rounded-xl border p-3 ${selectedOption.isCorrect ? 'border-emerald-600 bg-emerald-100' : 'border-rose-600 bg-rose-100'}`}>
-                      <div className="flex items-center gap-2 mb-1.5 w-full">
-                        {selectedOption.isCorrect ? (
-                          <>
-                            <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
-                            <span className="font-bold text-[12px] text-emerald-900 tracking-wide uppercase">Respuesta correcta</span>
-                          </>
-                        ) : (
-                          <>
+                    <div className="space-y-2">
+                      <div className="rounded-xl border border-emerald-600 bg-emerald-100 p-3">
+                        <div className="flex items-center gap-2 mb-1.5 w-full">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
+                          <span className="font-bold text-[12px] text-emerald-900 tracking-wide uppercase">Respuesta correcta</span>
+                        </div>
+                        <div className="text-[14px] leading-snug text-emerald-950">
+                          <MathText text={getCorrectFeedback()} />
+                        </div>
+                      </div>
+
+                      {getIncorrectFeedback() && (
+                        <div className="rounded-xl border border-rose-600 bg-rose-100 p-3">
+                          <div className="flex items-center gap-2 mb-1.5 w-full">
                             <XCircle className="w-4 h-4 text-rose-700 shrink-0" />
-                            <span className="font-bold text-[12px] text-rose-900 tracking-wide uppercase">No exactamente</span>
-                          </>
-                        )}
-                      </div>
-                      <div className={`text-[14px] leading-snug ${selectedOption.isCorrect ? 'text-emerald-950' : 'text-rose-950'}`}>
-                        <MathText text={selectedOption.rationale || (selectedOption.isCorrect ? (question.feedback || "Explicación correcta.") : "Esta opción no es la más adecuada.")} />
-                      </div>
+                            <span className="font-bold text-[12px] text-rose-900 tracking-wide uppercase">
+                              {selectedOption.isCorrect ? 'Distractor a evitar' : 'Tu opción incorrecta'}
+                            </span>
+                          </div>
+                          <div className="text-[14px] leading-snug text-rose-950">
+                            <MathText text={getIncorrectFeedback()} />
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>

@@ -204,7 +204,7 @@ export default function QuizzesPage() {
   const isDirectCodeSession = currentUser?.role === 'student' && currentUser?.loginMode === 'direct-code';
   const hasApprovedEnrollments = enrollments.length > 0;
   const hasCourseIdMatch = !!(currentUser?.courseId && courses.some(c => c?.id === currentUser.courseId));
-  const fallbackCourseId = hasCourseIdMatch ? currentUser.courseId : (courses[0]?.id || null);
+  const fallbackCourseId = hasCourseIdMatch ? currentUser.courseId : null;
 
   // Mutations
   const createCourseMutation = useMutation({

@@ -19,32 +19,65 @@ const Login = () => {
     const { login, checkAppState } = useAuth();
     const navigate = useNavigate();
 
-    const createLocalStudentSession = async (inputCode) => {
-        const normalized = (inputCode || '').trim().toUpperCase();
+    const resolveCourseByCode = async (normalized) => {
+        // 1) Preferred source on deployed env: Vercel API (returns token + courseId)
+        try {
+            const response = await fetch('/api/redeem', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ code: normalized })
+            });
 
-        let targetCourseId = null;
-        let targetCourseName = null;
+            if (response.ok) {
+                const data = await response.json();
+                if (data?.courseId && data?.token) {
+                    return {
+                        courseId: data.courseId,
+                        courseName: null,
+                        token: data.token,
+                        source: 'server'
+                    };
+                }
+            }
+        } catch (_err) {
+            // ignore and continue with local fallback
+        }
 
+        // 2) Local fallback: CourseAccessCode in local storage
         try {
             const accessCodes = await client.entities.CourseAccessCode.filter({ code: normalized });
             if (accessCodes.length > 0) {
-                targetCourseId = accessCodes[0].course_id || null;
-                targetCourseName = accessCodes[0].course_name || null;
+                return {
+                    courseId: accessCodes[0].course_id || null,
+                    courseName: accessCodes[0].course_name || null,
+                    token: null,
+                    source: 'local-code'
+                };
             }
         } catch (_err) {
-            // ignore and fallback below
+            // ignore
         }
 
+        return { courseId: null, courseName: null, token: null, source: 'none' };
+    };
+
+    const createLocalStudentSession = async (inputCode) => {
+        const normalized = (inputCode || '').trim().toUpperCase();
+
+        const resolved = await resolveCourseByCode(normalized);
+        const targetCourseId = resolved.courseId;
+        const targetCourseName = resolved.courseName;
+
         if (!targetCourseId) {
-            try {
-                const courses = await client.entities.Course.list('order');
-                if (courses.length > 0) {
-                    targetCourseId = courses[0].id;
-                    targetCourseName = courses[0].name;
-                }
-            } catch (_err) {
-                // ignore
-            }
+            throw new Error('INVALID_CODE');
+        }
+
+        // If we have a server token, use canonical auth path (courseId comes from /api/me)
+        if (resolved.token) {
+            localStorage.setItem('kc_token', resolved.token);
+            localStorage.removeItem('app_mock_token');
+            await checkAppState();
+            return;
         }
 
         const mockStudent = {
@@ -127,7 +160,7 @@ const Login = () => {
             await createLocalStudentSession(normalizedCode);
             navigate('/');
         } catch (_err) {
-            setError('Error al crear sesión local');
+            setError('Código inválido o no encontrado');
         } finally {
             setIsLoading(false);
         }
@@ -209,25 +242,6 @@ const Login = () => {
                                         <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
                                             {error}
                                         </div>
-                                    )}
-                                    {error && (
-                                        <Button
-                                            type="button"
-                                            variant="outline"
-                                            className="w-full"
-                                            onClick={async () => {
-                                                setIsLoading(true);
-                                                try {
-                                                    await createLocalStudentSession(code);
-                                                    navigate('/');
-                                                } finally {
-                                                    setIsLoading(false);
-                                                }
-                                            }}
-                                            disabled={isLoading || !code}
-                                        >
-                                            Continuar en modo local
-                                        </Button>
                                     )}
                                     <Button type="submit" size="lg" className="w-full" disabled={isLoading || !code}>
                                         {isLoading ? 'Verificando...' : 'Ingresar al Curso'}
