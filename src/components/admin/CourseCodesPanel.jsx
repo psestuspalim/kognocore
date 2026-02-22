@@ -87,7 +87,7 @@ export default function CourseCodesPanel({ courses }) {
             body: JSON.stringify({
               code: payload.code,
               course_id: payload.course_id,
-              max_uses: payload.max_uses || 1,
+              max_uses: payload.max_uses,
               expires_at: payload.expires_at
             })
           });

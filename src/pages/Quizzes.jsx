@@ -201,6 +201,8 @@ export default function QuizzesPage() {
   const isAdmin = currentUser?.role === 'admin';
   const isProfessor = currentUser?.role === 'professor';
   const canEdit = isAdmin || isProfessor;
+  const hasKcToken = typeof window !== 'undefined' && !!window.localStorage.getItem('kc_token');
+  const isServerCodeSession = currentUser?.role === 'student' && hasKcToken && !!currentUser?.courseId;
   const isDirectCodeSession = currentUser?.role === 'student' && currentUser?.loginMode === 'direct-code';
   const hasApprovedEnrollments = enrollments.length > 0;
   const hasCourseIdMatch = !!(currentUser?.courseId && courses.some(c => c?.id === currentUser.courseId));
@@ -463,6 +465,7 @@ export default function QuizzesPage() {
     if (
       !parentItem &&
       (
+        (isServerCodeSession && currentUser?.courseId === item.id) ||
         enrollments.some(e => e.course_id === item.id) ||
         (currentUser?.courseId && currentUser.courseId === item.id) ||
         (isDirectCodeSession && !hasApprovedEnrollments && fallbackCourseId === item.id)
@@ -483,16 +486,18 @@ export default function QuizzesPage() {
   };
   const visibleCourses = isAdmin
     ? courses.filter(c => c && c.id && canUserAccess(c))
-    : courses.filter(c =>
-      c &&
-      c.id &&
-      canUserAccess(c) &&
-      (
-        enrollments.some(e => e.course_id === c.id) ||
-        (currentUser?.courseId && currentUser.courseId === c.id) ||
-        (isDirectCodeSession && !hasApprovedEnrollments && fallbackCourseId === c.id)
-      )
-    );
+    : isServerCodeSession
+      ? courses.filter(c => c && c.id === currentUser.courseId && canUserAccess(c))
+      : courses.filter(c =>
+        c &&
+        c.id &&
+        canUserAccess(c) &&
+        (
+          enrollments.some(e => e.course_id === c.id) ||
+          (currentUser?.courseId && currentUser.courseId === c.id) ||
+          (isDirectCodeSession && !hasApprovedEnrollments && fallbackCourseId === c.id)
+        )
+      );
 
 
   // Filtered data

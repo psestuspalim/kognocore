@@ -22,7 +22,9 @@ export async function POST(req) {
     const body = await req.json()
     const code = (body?.code || '').trim().toUpperCase()
     const courseId = body?.course_id || null
-    const maxUses = Number.isFinite(Number(body?.max_uses)) ? Number(body.max_uses) : 1
+    const rawMaxUses = body?.max_uses
+    const hasMaxUses = rawMaxUses !== undefined && rawMaxUses !== null && String(rawMaxUses).trim() !== ''
+    const maxUses = hasMaxUses ? Number(rawMaxUses) : null
     const expiresAt = body?.expires_at ? new Date(body.expires_at).toISOString() : null
 
     if (!code || code.length < 8 || !courseId) {
@@ -34,7 +36,7 @@ export async function POST(req) {
     const { error } = await supabase.from('invites').insert({
       code_hash: codeHash,
       course_id: courseId,
-      max_uses: maxUses > 0 ? maxUses : 1,
+      max_uses: hasMaxUses ? (maxUses > 0 ? maxUses : 1) : null,
       uses: 0,
       expires_at: expiresAt
     })

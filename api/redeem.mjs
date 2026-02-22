@@ -59,8 +59,10 @@ export async function POST(req) {
         if (invite.expires_at && invite.expires_at <= now) return new Response(JSON.stringify({ error: 'Código expirado' }), { status: 401 })
 
         const uses = invite.uses ?? 0
-        const maxUses = invite.max_uses ?? 1
-        if (uses >= maxUses) return new Response(JSON.stringify({ error: 'Código ya usado' }), { status: 401 })
+        const maxUses = invite.max_uses
+        if (maxUses && uses >= maxUses) {
+            return new Response(JSON.stringify({ error: 'Código ya usado' }), { status: 401 })
+        }
 
         // Expiración token de acceso
         const expiresAt = new Date(Date.now() + 7 * 24 * 3600 * 1000).toISOString() // 7 días
@@ -84,7 +86,7 @@ export async function POST(req) {
 
         // Consume uso (best effort, no bloquea acceso)
         const { error: uErr } = await supabase.from('invites')
-            .update({ uses: uses + 1, used_at: uses + 1 >= maxUses ? now : invite.used_at })
+            .update({ uses: uses + 1, used_at: maxUses && uses + 1 >= maxUses ? now : invite.used_at })
             .eq('id', invite.id)
 
         if (uErr) {
