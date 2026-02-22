@@ -68,14 +68,40 @@ export default function CourseCodesPanel({ courses }) {
     if (!course) return;
 
     const code = generateRandomCode();
-    createCodeMutation.mutate({
+    const payload = {
       code,
       course_id: course.id,
       course_name: course.name,
       is_active: true,
-      max_uses: newCode.max_uses ? parseInt(newCode.max_uses) : null,
+      max_uses: newCode.max_uses ? parseInt(newCode.max_uses, 10) : null,
       current_uses: 0,
       expires_at: newCode.expires_at || null
+    };
+
+    createCodeMutation.mutate(payload, {
+      onSuccess: async () => {
+        try {
+          const response = await fetch('/api/invites-create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              code: payload.code,
+              course_id: payload.course_id,
+              max_uses: payload.max_uses || 1,
+              expires_at: payload.expires_at
+            })
+          });
+
+          if (!response.ok) {
+            const data = await response.json().catch(() => ({}));
+            toast.warning(`Código creado solo localmente. Backend: ${data.error || 'error'}`);
+          } else {
+            toast.success('Código sincronizado con backend');
+          }
+        } catch (_err) {
+          toast.warning('Código creado solo localmente (sin conexión al backend)');
+        }
+      }
     });
   };
 
