@@ -54,7 +54,9 @@ const Login = () => {
             username: `Estudiante ${normalized || 'Local'}`,
             is_admin: false,
             role: 'student',
-            courseId: targetCourseId || normalized || 'LOCAL'
+            courseId: targetCourseId || null,
+            accessCode: normalized,
+            loginMode: 'direct-code'
         };
 
         localStorage.setItem('app_mock_token', JSON.stringify(mockStudent));

@@ -201,6 +201,10 @@ export default function QuizzesPage() {
   const isAdmin = currentUser?.role === 'admin';
   const isProfessor = currentUser?.role === 'professor';
   const canEdit = isAdmin || isProfessor;
+  const isDirectCodeSession = currentUser?.role === 'student' && currentUser?.loginMode === 'direct-code';
+  const hasApprovedEnrollments = enrollments.length > 0;
+  const hasCourseIdMatch = !!(currentUser?.courseId && courses.some(c => c?.id === currentUser.courseId));
+  const fallbackCourseId = hasCourseIdMatch ? currentUser.courseId : (courses[0]?.id || null);
 
   // Mutations
   const createCourseMutation = useMutation({
@@ -456,7 +460,14 @@ export default function QuizzesPage() {
     if (item.is_hidden) return false;
 
     // Si es un curso y el usuario tiene enrollment aprobado, tiene acceso
-    if (!parentItem && enrollments.some(e => e.course_id === item.id)) {
+    if (
+      !parentItem &&
+      (
+        enrollments.some(e => e.course_id === item.id) ||
+        (currentUser?.courseId && currentUser.courseId === item.id) ||
+        (isDirectCodeSession && !hasApprovedEnrollments && fallbackCourseId === item.id)
+      )
+    ) {
       return true;
     }
 
@@ -472,7 +483,16 @@ export default function QuizzesPage() {
   };
   const visibleCourses = isAdmin
     ? courses.filter(c => c && c.id && canUserAccess(c))
-    : courses.filter(c => c && c.id && canUserAccess(c) && enrollments.some(e => e.course_id === c.id));
+    : courses.filter(c =>
+      c &&
+      c.id &&
+      canUserAccess(c) &&
+      (
+        enrollments.some(e => e.course_id === c.id) ||
+        (currentUser?.courseId && currentUser.courseId === c.id) ||
+        (isDirectCodeSession && !hasApprovedEnrollments && fallbackCourseId === c.id)
+      )
+    );
 
 
   // Filtered data
