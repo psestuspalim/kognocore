@@ -50,8 +50,7 @@ import ResourceViewer from '../components/resources/ResourceViewer';
 import SessionTimer from '../components/ui/SessionTimer';
 import TaskProgressFloat from '../components/tasks/TaskProgressFloat';
 import ContentManager from '../components/admin/ContentManager';
-/* Removed AdminMenu import */
-/* import AdminMenu from '../components/admin/AdminMenu'; */
+import AdminMenu from '../components/admin/AdminMenu';
 import useQuizSettings from '../components/quiz/useQuizSettings';
 import SwipeQuizMode from '../components/quiz/SwipeQuizMode';
 import FileExplorer from '../components/explorer/FileExplorer';
@@ -712,6 +711,64 @@ export default function QuizzesPage() {
 
   const [currentAttemptId, setCurrentAttemptId] = useState(null);
 
+  const currentFolder = currentFolderId ? folders.find(f => sameId(f.id, currentFolderId)) : null;
+  const currentSubject = selectedSubject || (currentFolder?.subject_id ? subjects.find(s => sameId(s.id, currentFolder.subject_id)) : null);
+  const currentCourse =
+    selectedCourse ||
+    (currentSubject?.course_id ? courses.find(c => sameId(c.id, currentSubject.course_id)) : null) ||
+    (currentFolder?.course_id ? courses.find(c => sameId(c.id, currentFolder.course_id)) : null);
+
+  const getSessionLabel = () => {
+    if (isAdmin) return 'Administrador';
+    if (isServerCodeSession) return 'Ingreso por código (servidor)';
+    if (isDirectCodeSession) return 'Ingreso por código (directo)';
+    if (hasApprovedEnrollments) return 'Inscripción aprobada';
+    return 'Acceso limitado';
+  };
+
+  const getViewLabel = () => {
+    if (view === 'home') return 'Inicio';
+    if (view === 'subjects') return 'Estructura del curso';
+    if (view === 'list') return 'Listado de cuestionarios';
+    if (view === 'quiz') return 'Resolviendo cuestionario';
+    if (view === 'results') return 'Resultados';
+    return 'Navegación';
+  };
+
+  const FlowStatusBar = () => (
+    <Card className="mb-5 border-white/70 bg-white/85 shadow-md">
+      <CardContent className="py-3">
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge className="bg-slate-900 text-white">{isAdmin ? 'Admin' : 'Alumno'}</Badge>
+              <Badge variant="outline">{getSessionLabel()}</Badge>
+              <Badge variant="secondary">Vista: {getViewLabel()}</Badge>
+              {currentUser?.username && (
+                <Badge variant="secondary">{currentUser.username}</Badge>
+              )}
+            </div>
+            {isAdmin && <AdminMenu compact />}
+          </div>
+          <div className="flex flex-col gap-2 text-sm text-slate-600 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <span className="font-semibold text-slate-800">Ruta activa:</span>{' '}
+              <span>Inicio</span>
+              {currentCourse && <span> / {currentCourse.name}</span>}
+              {currentSubject && <span> / {currentSubject.name}</span>}
+              {currentFolder && <span> / {currentFolder.name}</span>}
+            </div>
+            <div className="flex items-center gap-3 text-xs font-medium text-slate-600">
+              <span>Cursos: {visibleCourses.length}</span>
+              <span>Materias: {subjects.length}</span>
+              <span>Quizzes: {quizzes.length}</span>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+
   // Admin Quick Access Panel
   const AdminPanel = () => {
     if (!isAdmin) return null;
@@ -1309,6 +1366,7 @@ export default function QuizzesPage() {
                 {view === 'home' && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !explorerMode && (
                   <motion.div key="courses" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                     <AdminPanel />
+                    <FlowStatusBar />
 
 
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -1518,6 +1576,7 @@ export default function QuizzesPage() {
                 {view === 'subjects' && (selectedCourse || currentFolderId) && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !showBulkUploader && !showAIGenerator && !showUploader && !explorerMode && (
                   <motion.div key="subjects" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                     <Breadcrumb />
+                    <FlowStatusBar />
 
                     {/* Exam Overview - Solo en cursos, no en carpetas */}
                     {selectedCourse && !currentFolderId && (
@@ -1785,6 +1844,7 @@ export default function QuizzesPage() {
                   <div>
                     <motion.div key="list" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                       <Breadcrumb />
+                      <FlowStatusBar />
 
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                         <div>

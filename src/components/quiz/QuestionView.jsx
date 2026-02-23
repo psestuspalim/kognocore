@@ -204,7 +204,7 @@ export default function QuestionView({
   const progressPercent = totalQuestions > 0 ? Math.round((answeredCount / totalQuestions) * 100) : 0;
 
   return (
-    <div className="h-[100dvh] bg-[linear-gradient(165deg,#f4f7fb_0%,#eef3f9_52%,#e8eef6_100%)] flex flex-col overflow-hidden font-sans">
+    <div className="h-[100dvh] bg-[linear-gradient(165deg,#f3f7fb_0%,#edf3fb_52%,#e7eef8_100%)] flex flex-col overflow-hidden font-sans">
       <header className="flex-none z-20 px-3 pt-3 md:px-4">
         <div className="relative rounded-2xl border border-slate-200/80 bg-white/90 px-3 py-3 shadow-sm backdrop-blur-sm">
           <button
@@ -247,13 +247,13 @@ export default function QuestionView({
       {/* Main Content Area - Flexible Scroll Container */}
       {/* Mobile: overflow-y-auto (global scroll) */}
       {/* Desktop: overflow-hidden (panels scroll individually) */}
-      <div className="relative z-10 flex-1 min-h-0 w-full overflow-hidden p-3 md:p-4">
-        <div className="h-full gap-3 lg:grid lg:grid-cols-[1fr_1.06fr]">
+      <div className="relative z-10 flex-1 min-h-0 w-full overflow-y-auto p-3 md:p-4">
+        <div className="mx-auto h-full w-full max-w-6xl gap-3 lg:grid lg:grid-cols-[0.88fr_1.12fr]">
 
           {/* LEFT COLUMN: Question Content & Analysis */}
           {/* Mobile: Block flow. Desktop: Scrollable Panel */}
           <div className="p-0 lg:h-full overflow-hidden flex flex-col">
-            <div className="mx-auto h-full w-full max-w-2xl rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm md:p-6">
+            <div className="mx-auto h-full w-full rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm md:p-6 lg:overflow-y-auto">
 
               {/* Question Number Badge */}
               <div className="mb-4">
@@ -301,6 +301,11 @@ export default function QuestionView({
                 </div>
               )}
 
+              <div className="mb-5 rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-sm text-slate-700">
+                <p className="font-semibold text-slate-900">Cómo responder</p>
+                <p className="mt-1">Selecciona una opción y revisa feedback correcto/incorrecto antes de avanzar.</p>
+              </div>
+
               {/* AI Analysis Feedback Only */}
               <AIErrorFeedback isLoading={isAnalyzing} analysis={aiAnalysis} />
             </div>
@@ -310,10 +315,11 @@ export default function QuestionView({
           {/* Mobile: Block flow (below left col). Desktop: Scrollable Panel (Right side) */}
           <div className="flex flex-col lg:h-full overflow-hidden">
             <div className="h-full flex flex-col min-h-0">
-              <div className="mx-auto h-full w-full max-w-2xl rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm md:p-5 flex flex-col min-h-0">
+              <div className="mx-auto h-full w-full rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm md:p-5 flex flex-col min-h-0">
 
                 <div className="mb-4 flex items-center justify-between">
                   <span className="text-[11px] font-bold tracking-[0.12em] text-slate-600 uppercase">Opciones</span>
+                  <span className="rounded-full bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-700">{options.length} respuestas</span>
                 </div>
 
                 <div className="flex-1 min-h-0 overflow-y-auto pr-1 space-y-2">

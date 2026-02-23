@@ -11,7 +11,10 @@ import QuizExporter from '../components/admin/QuizExporter';
 import MaintenanceToolsModal from '../components/admin/MaintenanceToolsModal';
 import GlobalSettingsModal from '../components/admin/GlobalSettingsModal';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 
 export default function AdminHome() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -148,6 +151,31 @@ export default function AdminHome() {
           value={sessions.length}
         />
       </div>
+
+      <Card className="mb-8 border-white/70 bg-white/80">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-lg font-semibold text-slate-900">Ruta rápida de operación</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-3 md:grid-cols-3">
+            <Link to={createPageUrl('AdminProgress')} className="rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-4 hover:shadow-md transition-shadow">
+              <p className="text-xs uppercase tracking-[0.12em] text-slate-500">Seguimiento</p>
+              <p className="mt-1 text-base font-semibold text-slate-900">Progreso y reportes PDF</p>
+            </Link>
+            <Link to={createPageUrl('AdminStudents')} className="rounded-xl border border-sky-200 bg-gradient-to-br from-sky-50 to-white p-4 hover:shadow-md transition-shadow">
+              <p className="text-xs uppercase tracking-[0.12em] text-slate-500">Usuarios</p>
+              <p className="mt-1 text-base font-semibold text-slate-900">Ver estudiantes e intentos</p>
+            </Link>
+            <Link to={createPageUrl('AdminContent')} className="rounded-xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-white p-4 hover:shadow-md transition-shadow">
+              <p className="text-xs uppercase tracking-[0.12em] text-slate-500">Contenido</p>
+              <p className="mt-1 text-base font-semibold text-slate-900">Gestionar cursos y estructura</p>
+            </Link>
+          </div>
+          <div className="mt-3 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700">
+            Flujo recomendado: estructura el contenido en <strong>Cursos → Materias → Carpetas → Quizzes</strong>, luego revisa actividad en <strong>Progreso</strong>.
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Main Feature Blocks */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">

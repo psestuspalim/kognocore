@@ -194,13 +194,13 @@ const Login = () => {
     };
 
     return (
-        <div className="relative min-h-screen overflow-hidden bg-[linear-gradient(150deg,#f8f6ee_0%,#eef5f7_42%,#f8f0d9_100%)] px-4 py-8 sm:px-6 lg:px-10">
+        <div className="relative min-h-screen overflow-x-hidden bg-[linear-gradient(150deg,#f8f6ee_0%,#eef5f7_42%,#f8f0d9_100%)] px-4 py-6 sm:px-6 lg:px-10 lg:py-8">
             <div className="pointer-events-none absolute -left-24 top-20 h-72 w-72 rounded-full bg-amber-300/35 blur-3xl animate-float-slow" />
             <div className="pointer-events-none absolute right-[-8rem] top-[-4rem] h-96 w-96 rounded-full bg-cyan-300/30 blur-3xl animate-float-slow" />
             <div className="pointer-events-none absolute bottom-[-6rem] left-1/3 h-96 w-96 rounded-full bg-blue-200/25 blur-3xl" />
 
-            <div className="relative mx-auto grid min-h-[calc(100vh-4rem)] w-full max-w-7xl items-center gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-                <section className="animate-fade-up rounded-[2rem] border border-white/60 bg-white/55 p-7 shadow-[0_25px_80px_rgba(15,23,42,0.12)] backdrop-blur-md sm:p-10">
+            <div className="relative mx-auto grid min-h-[calc(100vh-3rem)] w-full max-w-7xl items-start gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+                <section className="animate-fade-up rounded-[2rem] border border-white/60 bg-white/55 p-6 shadow-[0_25px_80px_rgba(15,23,42,0.12)] backdrop-blur-md sm:p-8 lg:p-9">
                     <div className="mb-6 flex items-center justify-between gap-4">
                         <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700">
                             <Sparkles className="h-3.5 w-3.5 text-cyan-700" />
@@ -211,18 +211,18 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[1.08] tracking-tight text-slate-950">
+                    <h1 className="font-display text-[clamp(2.1rem,5.4vw,4.5rem)] font-bold leading-[1.08] tracking-tight text-slate-950">
                         Bienvenido a
                         <span className="mt-1 block pb-2 leading-[1.08] bg-[linear-gradient(110deg,#0f2d47,#1d4f7f,#0b7aa4)] bg-clip-text text-transparent">
                             Kognocore.
                         </span>
                     </h1>
 
-                    <p className="mt-6 max-w-2xl text-[clamp(1rem,1.6vw,1.5rem)] leading-relaxed text-slate-700">
+                    <p className="mt-5 max-w-2xl text-[clamp(1rem,1.5vw,1.35rem)] leading-relaxed text-slate-700">
                         Ingresa con tu código para abrir tu curso al instante o accede como administrador para gestionar contenido, monitorear progreso y coordinar evaluaciones.
                     </p>
 
-                    <div className="mt-9 grid gap-3 sm:grid-cols-3">
+                    <div className="mt-7 grid gap-3 sm:grid-cols-3">
                         <div className="rounded-2xl border border-white/70 bg-white p-4 shadow-[0_10px_35px_rgba(15,23,42,0.08)]">
                             <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">Marca</p>
                             <p className="mt-1 text-2xl font-bold text-slate-900">Kognocore</p>
@@ -235,6 +235,10 @@ const Login = () => {
                             <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">Seguimiento</p>
                             <p className="mt-1 text-2xl font-bold text-slate-900">En vivo</p>
                         </div>
+                    </div>
+
+                    <div className="mt-5 rounded-2xl border border-white/70 bg-white/85 p-4 text-sm text-slate-700">
+                        Flujo: <strong>1)</strong> escribe tu nombre, <strong>2)</strong> ingresa código, <strong>3)</strong> abre tu curso y responde quizzes.
                     </div>
                 </section>
 
