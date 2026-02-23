@@ -180,17 +180,95 @@ export default function AdminProgress() {
     return [];
   };
 
+  const normalizeOptionText = (opt) => {
+    if (typeof opt === 'string') return opt;
+    if (!opt || typeof opt !== 'object') return '';
+    return String(opt.text ?? opt.value ?? opt.label ?? '').trim();
+  };
+
+  const normalizeAnswerOptions = (options = []) =>
+    (Array.isArray(options) ? options : [])
+      .map((opt, idx) => {
+        const text = normalizeOptionText(opt);
+        if (!text) return null;
+        return {
+          id: String(opt?.id ?? idx),
+          text,
+          isCorrect: Boolean(opt?.isCorrect ?? opt?.c)
+        };
+      })
+      .filter(Boolean);
+
+  const sameAnswerText = (left, right) =>
+    String(left || '').trim().toLowerCase() === String(right || '').trim().toLowerCase();
+
+  const escapeHtml = (value) =>
+    String(value ?? '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;');
+
+  const buildOptionsHtml = (row) => {
+    const options = normalizeAnswerOptions(row.answerOptions || []);
+    if (options.length === 0) return '<div class="muted">Opciones no disponibles.</div>';
+
+    return `
+      <div class="opts">
+        ${options
+          .map((opt, idx) => {
+            const isSelected = sameAnswerText(opt.text, row.selected_answer);
+            const isCorrect = opt.isCorrect || sameAnswerText(opt.text, row.correct_answer);
+            const cls = isSelected && isCorrect
+              ? 'opt selected-correct'
+              : isSelected
+                ? 'opt selected'
+                : isCorrect
+                  ? 'opt correct'
+                  : 'opt';
+
+            const badges = [
+              isSelected ? '<span class="tag tag-selected">Seleccionada</span>' : '',
+              isCorrect ? '<span class="tag tag-correct">Correcta</span>' : ''
+            ].join('');
+
+            return `
+              <div class="${cls}">
+                <span class="opt-letter">${String.fromCharCode(65 + idx)}.</span>
+                <span class="opt-text">${escapeHtml(opt.text)}</span>
+                <span class="opt-tags">${badges}</span>
+              </div>
+            `;
+          })
+          .join('')}
+      </div>
+    `;
+  };
+
   const getAttemptQuestionRows = (attempt) => {
+    const quizQuestions = getExpandedQuizQuestions(attempt.quiz_id);
+    const quizQuestionMap = new Map((quizQuestions || []).map((q) => [q.question, q]));
+
     if (Array.isArray(attempt.answer_log) && attempt.answer_log.length > 0) {
-      return attempt.answer_log.map((entry, idx) => ({
-        id: `${attempt.id}-${idx}`,
-        question: entry.question || 'Pregunta sin texto',
-        selected_answer: entry.selected_answer || '',
-        correct_answer: entry.correct_answer || '',
-        answerOptions: entry.answerOptions || [],
-        hint: entry.hint || '',
-        is_correct: entry.is_correct === true
-      }));
+      return attempt.answer_log.map((entry, idx) => {
+        const questionText = entry.question || 'Pregunta sin texto';
+        const quizQuestion = quizQuestionMap.get(questionText);
+        const rowOptions = normalizeAnswerOptions(
+          entry.answerOptions?.length ? entry.answerOptions : (quizQuestion?.answerOptions || quizQuestion?.options || [])
+        );
+        const derivedCorrect = rowOptions.find((o) => o.isCorrect)?.text || '';
+
+        return {
+          id: `${attempt.id}-${idx}`,
+          question: questionText,
+          selected_answer: entry.selected_answer || '',
+          correct_answer: entry.correct_answer || derivedCorrect,
+          answerOptions: rowOptions,
+          hint: entry.hint || quizQuestion?.hint || '',
+          is_correct: entry.is_correct === true
+        };
+      });
     }
 
     const wrongMap = new Map();
@@ -199,7 +277,9 @@ export default function AdminProgress() {
         question: wq.question || 'Pregunta sin texto',
         selected_answer: wq.selected_answer || '',
         correct_answer: wq.correct_answer || '',
-        answerOptions: wq.answerOptions || [],
+        answerOptions: normalizeAnswerOptions(
+          wq.answerOptions?.length ? wq.answerOptions : (quizQuestionMap.get(wq.question)?.answerOptions || quizQuestionMap.get(wq.question)?.options || [])
+        ),
         hint: wq.hint || '',
         is_correct: false
       });
@@ -210,9 +290,9 @@ export default function AdminProgress() {
       .slice(0, attempt.score || 0)
       .map((q) => ({
         question: q.question || 'Pregunta sin texto',
-        selected_answer: q.answerOptions?.find((o) => o.isCorrect)?.text || '',
-        correct_answer: q.answerOptions?.find((o) => o.isCorrect)?.text || '',
-        answerOptions: q.answerOptions || [],
+        selected_answer: (q.answerOptions || q.options || []).find((o) => (o.isCorrect ?? o.c))?.text || '',
+        correct_answer: (q.answerOptions || q.options || []).find((o) => (o.isCorrect ?? o.c))?.text || '',
+        answerOptions: normalizeAnswerOptions(q.answerOptions || q.options || []),
         hint: q.hint || '',
         is_correct: true
       }));
@@ -240,6 +320,17 @@ export default function AdminProgress() {
           .ko { border-left: 4px solid #dc2626; background: #fef2f2; }
           .qa { margin-top: 8px; font-size: 14px; color: #334155; }
           .muted { color: #64748b; font-size: 12px; }
+          .opts { margin-top: 8px; display: grid; gap: 6px; }
+          .opt { display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; align-items: start; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 10px; background: #ffffff; }
+          .opt.correct { border-color: #86efac; background: #f0fdf4; }
+          .opt.selected { border-color: #fca5a5; background: #fef2f2; }
+          .opt.selected-correct { border-color: #34d399; background: #ecfdf5; }
+          .opt-letter { color: #475569; font-weight: 700; }
+          .opt-text { color: #0f172a; }
+          .opt-tags { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+          .tag { border-radius: 999px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+          .tag-selected { background: #fee2e2; color: #991b1b; }
+          .tag-correct { background: #dcfce7; color: #166534; }
           .footer { margin-top: 26px; color: #94a3b8; font-size: 12px; text-align: center; }
           @media print { body { padding: 12px; } }
         </style>
@@ -281,17 +372,20 @@ export default function AdminProgress() {
       <h2>Preguntas Correctas</h2>
       ${correctRows.length === 0 ? '<p class="muted">Sin respuestas correctas registradas.</p>' : correctRows.map((row, idx) => `
         <div class="card ok">
-          <strong>${idx + 1}. ${row.question}</strong>
-          <div class="qa"><strong>Respuesta:</strong> ${row.selected_answer || row.correct_answer || 'N/A'}</div>
+          <strong>${idx + 1}. ${escapeHtml(row.question)}</strong>
+          <div class="qa"><strong>Respondió:</strong> ${escapeHtml(row.selected_answer || row.correct_answer || 'N/A')}</div>
+          <div class="qa"><strong>Correcta:</strong> ${escapeHtml(row.correct_answer || 'N/A')}</div>
+          ${buildOptionsHtml(row)}
           <div class="muted">${format(new Date(row.attemptDate), 'dd/MM/yyyy HH:mm')}</div>
         </div>
       `).join('')}
       <h2>Preguntas Incorrectas</h2>
       ${wrongRows.length === 0 ? '<p class="muted">Sin respuestas incorrectas registradas.</p>' : wrongRows.map((row, idx) => `
         <div class="card ko">
-          <strong>${idx + 1}. ${row.question}</strong>
-          <div class="qa"><strong>Respondió:</strong> ${row.selected_answer || 'N/A'}</div>
-          <div class="qa"><strong>Correcta:</strong> ${row.correct_answer || 'N/A'}</div>
+          <strong>${idx + 1}. ${escapeHtml(row.question)}</strong>
+          <div class="qa"><strong>Respondió:</strong> ${escapeHtml(row.selected_answer || 'N/A')}</div>
+          <div class="qa"><strong>Correcta:</strong> ${escapeHtml(row.correct_answer || 'N/A')}</div>
+          ${buildOptionsHtml(row)}
           <div class="muted">${format(new Date(row.attemptDate), 'dd/MM/yyyy HH:mm')}</div>
         </div>
       `).join('')}
@@ -330,19 +424,22 @@ export default function AdminProgress() {
       <h2>Preguntas Correctas</h2>
       ${correctRows.length === 0 ? '<p class="muted">No hay respuestas correctas registradas.</p>' : correctRows.map((row, idx) => `
         <div class="card ok">
-          <strong>${idx + 1}. ${row.question}</strong>
-          <div class="qa"><strong>Quiz:</strong> ${row.quizTitle}</div>
-          <div class="qa"><strong>Respuesta:</strong> ${row.selected_answer || row.correct_answer || 'N/A'}</div>
+          <strong>${idx + 1}. ${escapeHtml(row.question)}</strong>
+          <div class="qa"><strong>Quiz:</strong> ${escapeHtml(row.quizTitle)}</div>
+          <div class="qa"><strong>Respondió:</strong> ${escapeHtml(row.selected_answer || row.correct_answer || 'N/A')}</div>
+          <div class="qa"><strong>Correcta:</strong> ${escapeHtml(row.correct_answer || 'N/A')}</div>
+          ${buildOptionsHtml(row)}
           <div class="muted">${format(new Date(row.attemptDate), 'dd/MM/yyyy HH:mm')}</div>
         </div>
       `).join('')}
       <h2>Preguntas Incorrectas</h2>
       ${wrongRows.length === 0 ? '<p class="muted">No hay respuestas incorrectas registradas.</p>' : wrongRows.map((row, idx) => `
         <div class="card ko">
-          <strong>${idx + 1}. ${row.question}</strong>
-          <div class="qa"><strong>Quiz:</strong> ${row.quizTitle}</div>
-          <div class="qa"><strong>Respondió:</strong> ${row.selected_answer || 'N/A'}</div>
-          <div class="qa"><strong>Correcta:</strong> ${row.correct_answer || 'N/A'}</div>
+          <strong>${idx + 1}. ${escapeHtml(row.question)}</strong>
+          <div class="qa"><strong>Quiz:</strong> ${escapeHtml(row.quizTitle)}</div>
+          <div class="qa"><strong>Respondió:</strong> ${escapeHtml(row.selected_answer || 'N/A')}</div>
+          <div class="qa"><strong>Correcta:</strong> ${escapeHtml(row.correct_answer || 'N/A')}</div>
+          ${buildOptionsHtml(row)}
           <div class="muted">${format(new Date(row.attemptDate), 'dd/MM/yyyy HH:mm')}</div>
         </div>
       `).join('')}
