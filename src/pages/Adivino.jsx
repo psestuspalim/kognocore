@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Calculator, Plus, Save, Trash2 } from 'lucide-react';
+import { ArrowLeft, Plus, Save, Trash2 } from 'lucide-react';
 
 const COMPONENTS = [
   { key: 'ponderacion_maestro', label: 'Ponderación maestro' },
@@ -89,14 +89,12 @@ export default function AdivinoPage() {
   const { user } = useAuth();
   const [subjects, setSubjects] = useState(() => loadSubjects(user));
   const [selectedId, setSelectedId] = useState(subjects[0]?.id || null);
-  const [scenario, setScenario] = useState({});
   const [selectedCatalogSubjectId, setSelectedCatalogSubjectId] = useState('');
 
   useEffect(() => {
     const loaded = loadSubjects(user);
     setSubjects(loaded);
     setSelectedId(loaded[0]?.id || null);
-    setScenario({});
   }, [user?.learner_id, user?.email]);
 
   const { data: enrolledSubjects = [] } = useQuery({
@@ -135,7 +133,6 @@ export default function AdivinoPage() {
     const updated = [created, ...subjects];
     setSubjects(updated);
     setSelectedId(created.id);
-    setScenario({});
     saveSubjects(user, updated);
   };
 
@@ -160,7 +157,6 @@ export default function AdivinoPage() {
     const updated = [created, ...subjects];
     setSubjects(updated);
     setSelectedId(created.id);
-    setScenario({});
     saveSubjects(user, updated);
   };
 
@@ -169,7 +165,6 @@ export default function AdivinoPage() {
     setSubjects(updated);
     if (selectedId === id) {
       setSelectedId(updated[0]?.id || null);
-      setScenario({});
     }
     saveSubjects(user, updated);
   };
@@ -181,7 +176,6 @@ export default function AdivinoPage() {
         evaluatedPct: 0,
         pendingPct: 0,
         requiredAverage: 0,
-        projectedGrade: 0,
       };
     }
 
@@ -200,18 +194,8 @@ export default function AdivinoPage() {
         ? ((selectedSubject.minimum_passing_grade - currentGrade) * 100) / pendingPct
         : 0;
 
-    const projectedGrade = rows.reduce((sum, row, index) => {
-      const pct = parseNum(row.percentage);
-      const key = COMPONENTS[index].key;
-      const baseGrade = row.grade === '' ? null : parseNum(row.grade);
-      const scenarioGrade = scenario[key] === '' || scenario[key] === undefined ? null : parseNum(scenario[key]);
-      const finalGrade = baseGrade ?? scenarioGrade;
-      if (finalGrade === null) return sum;
-      return sum + (finalGrade * pct) / 100;
-    }, 0);
-
-    return { currentGrade, evaluatedPct, pendingPct, requiredAverage, projectedGrade };
-  }, [selectedSubject, scenario]);
+    return { currentGrade, evaluatedPct, pendingPct, requiredAverage };
+  }, [selectedSubject]);
 
   const risk = useMemo(() => {
     if (!selectedSubject) return { label: 'Sin datos', tone: 'bg-slate-100 text-slate-700' };
@@ -297,7 +281,6 @@ export default function AdivinoPage() {
                   key={subject.id}
                   onClick={() => {
                     setSelectedId(subject.id);
-                    setScenario({});
                   }}
                   className={`w-full rounded-xl border p-3 text-left transition ${
                     selectedId === subject.id
@@ -375,17 +358,16 @@ export default function AdivinoPage() {
                   </div>
 
                   <div className="rounded-xl border border-slate-200">
-                    <div className="grid grid-cols-[1.4fr_0.7fr_0.7fr_0.7fr] gap-2 border-b bg-slate-50 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-slate-600">
+                    <div className="grid grid-cols-[1.4fr_0.8fr_0.8fr] gap-2 border-b bg-slate-50 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-slate-600">
                       <span>Componente</span>
                       <span>%</span>
                       <span>Nota</span>
-                      <span>Escenario</span>
                     </div>
                     <div className="divide-y">
                       {COMPONENTS.map((component) => {
                         const row = selectedSubject.components?.[component.key] || { percentage: 0, grade: '' };
                         return (
-                          <div key={component.key} className="grid grid-cols-[1.4fr_0.7fr_0.7fr_0.7fr] gap-2 px-3 py-2">
+                          <div key={component.key} className="grid grid-cols-[1.4fr_0.8fr_0.8fr] gap-2 px-3 py-2">
                             <div className="text-sm text-slate-800">{component.label}</div>
                             <Input
                               type="text"
@@ -454,29 +436,13 @@ export default function AdivinoPage() {
                               }}
                               placeholder="-"
                             />
-                            <Input
-                              type="text"
-                              inputMode="decimal"
-                              value={scenario[component.key] || ''}
-                              onFocus={handleSelectAll}
-                              onChange={(e) => {
-                                const next = sanitizeDecimalInput(e.target.value, { min: 0, max: 10, decimals: 2, allowEmpty: true });
-                                if (next === null) return;
-                                setScenario((prev) => ({ ...prev, [component.key]: next }));
-                              }}
-                              onBlur={(e) => {
-                                const fixed = normalizeBlurNumber(e.target.value, { min: 0, max: 10, decimals: 2, allowEmpty: true });
-                                setScenario((prev) => ({ ...prev, [component.key]: fixed }));
-                              }}
-                              placeholder="-"
-                            />
                           </div>
                         );
                       })}
                     </div>
                   </div>
 
-                  <div className="grid gap-3 md:grid-cols-5">
+                  <div className="grid gap-3 md:grid-cols-4">
                     <Card className="bg-slate-50">
                       <CardContent className="p-3">
                         <p className="text-xs text-slate-500">Calificación actual</p>
@@ -501,35 +467,12 @@ export default function AdivinoPage() {
                         <p className="text-xl font-bold text-slate-900">{stats.requiredAverage.toFixed(2)}</p>
                       </CardContent>
                     </Card>
-                    <Card className="bg-slate-900 text-white">
-                      <CardContent className="p-3">
-                        <p className="text-xs text-slate-300">Proyección (escenario)</p>
-                        <p className="text-xl font-bold">{stats.projectedGrade.toFixed(2)}</p>
-                      </CardContent>
-                    </Card>
                   </div>
 
                   <div className="flex flex-wrap justify-end gap-2">
-                    <Button variant="outline" onClick={() => setScenario({})}>
-                      Limpiar escenario
-                    </Button>
                     <Button className="gap-2 bg-cyan-700 hover:bg-cyan-800" onClick={persistCurrent}>
                       <Save className="h-4 w-4" />
                       Guardar
-                    </Button>
-                    <Button
-                      className="gap-2 bg-slate-900 hover:bg-slate-800"
-                      onClick={() => {
-                        const pass = stats.projectedGrade >= selectedSubject.minimum_passing_grade;
-                        window.alert(
-                          pass
-                            ? `Escenario aprobatorio: ${stats.projectedGrade.toFixed(2)}`
-                            : `Escenario no aprobatorio: ${stats.projectedGrade.toFixed(2)}`
-                        );
-                      }}
-                    >
-                      <Calculator className="h-4 w-4" />
-                      Evaluar escenario
                     </Button>
                   </div>
                 </CardContent>

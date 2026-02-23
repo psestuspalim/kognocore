@@ -87,7 +87,8 @@ const getItems = (entityName) => {
     'Resource': 'app_resources',
     'MetacogQuestion': 'app_metacog_questions',
     'MetacogSession': 'app_metacog_sessions',
-    'MetacogAnalysis': 'app_metacog_analyses'
+    'MetacogAnalysis': 'app_metacog_analyses',
+    'MetacogAssignment': 'app_metacog_assignments'
   };
 
   const key = keyMap[entityName];
@@ -121,7 +122,8 @@ const saveItems = (entityName, items) => {
     'Resource': 'app_resources',
     'MetacogQuestion': 'app_metacog_questions',
     'MetacogSession': 'app_metacog_sessions',
-    'MetacogAnalysis': 'app_metacog_analyses'
+    'MetacogAnalysis': 'app_metacog_analyses',
+    'MetacogAssignment': 'app_metacog_assignments'
   };
 
   const key = keyMap[entityName];
@@ -163,7 +165,10 @@ const fetchRemoteAttempts = async () => {
 };
 
 const isMetacogEntity = (entityName) =>
-  entityName === 'MetacogQuestion' || entityName === 'MetacogSession' || entityName === 'MetacogAnalysis';
+  entityName === 'MetacogQuestion' ||
+  entityName === 'MetacogSession' ||
+  entityName === 'MetacogAnalysis' ||
+  entityName === 'MetacogAssignment';
 
 const fetchRemoteMetacog = async (entityName, criteria = null) => {
   const params = new URLSearchParams({ entity: entityName });

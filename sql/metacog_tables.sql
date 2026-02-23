@@ -22,11 +22,22 @@ create table if not exists public.metacog_analyses (
   updated_date timestamptz default now()
 );
 
+create table if not exists public.metacog_assignments (
+  id text primary key,
+  payload jsonb not null,
+  created_date timestamptz default now(),
+  updated_date timestamptz default now()
+);
+
 create index if not exists idx_metacog_questions_created on public.metacog_questions (created_date desc);
 create index if not exists idx_metacog_sessions_created on public.metacog_sessions (created_date desc);
 create index if not exists idx_metacog_analyses_created on public.metacog_analyses (created_date desc);
+create index if not exists idx_metacog_assignments_created on public.metacog_assignments (created_date desc);
 
 create index if not exists idx_metacog_analyses_learner on public.metacog_analyses ((payload->>'learner_id'));
 create index if not exists idx_metacog_analyses_email on public.metacog_analyses ((payload->>'user_email'));
 create index if not exists idx_metacog_analyses_session on public.metacog_analyses ((payload->>'session_id'));
 create index if not exists idx_metacog_analyses_quiz on public.metacog_analyses ((payload->>'source_quiz_id'));
+create index if not exists idx_metacog_assignments_learner on public.metacog_assignments ((payload->>'assigned_to_learner_id'));
+create index if not exists idx_metacog_assignments_email on public.metacog_assignments ((payload->>'assigned_to_email'));
+create index if not exists idx_metacog_assignments_status on public.metacog_assignments ((payload->>'status'));

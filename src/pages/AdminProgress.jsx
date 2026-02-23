@@ -93,6 +93,11 @@ export default function AdminProgress() {
     queryFn: () => client.entities.MetacogAnalysis.list('-created_date'),
   });
 
+  const { data: metacogAssignments = [] } = useQuery({
+    queryKey: ['metacog-assignments-admin'],
+    queryFn: () => client.entities.MetacogAssignment.list('-created_date'),
+  });
+
   const buildStudentKey = (payload) => payload?.learner_id || payload?.email || payload?.user_email || payload?.id;
 
   // Crear índice de estudiantes usando usuarios y también intentos (si aún no existe el User).
@@ -944,6 +949,44 @@ export default function AdminProgress() {
                 </p>
               </CardHeader>
               <CardContent>
+                <div className="mb-4 grid gap-2 md:grid-cols-3">
+                  <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm">
+                    <div className="text-slate-500">Asignaciones</div>
+                    <div className="text-xl font-bold text-slate-900">{metacogAssignments.length}</div>
+                  </div>
+                  <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm">
+                    <div className="text-amber-700">Pendientes / progreso</div>
+                    <div className="text-xl font-bold text-amber-800">
+                      {metacogAssignments.filter((a) => a.status === 'pending' || a.status === 'in_progress').length}
+                    </div>
+                  </div>
+                  <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm">
+                    <div className="text-emerald-700">Completadas</div>
+                    <div className="text-xl font-bold text-emerald-800">
+                      {metacogAssignments.filter((a) => a.status === 'completed').length}
+                    </div>
+                  </div>
+                </div>
+
+                {metacogAssignments.length > 0 && (
+                  <div className="mb-5 space-y-2 rounded-xl border border-slate-200 bg-white p-3">
+                    <p className="text-sm font-semibold text-slate-800">Asignaciones recientes</p>
+                    <div className="max-h-44 space-y-2 overflow-y-auto">
+                      {metacogAssignments.slice(0, 8).map((a) => (
+                        <div key={a.id} className="rounded-lg border border-slate-200 p-2">
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm font-medium text-slate-900">{a.session_name || a.session_code || 'Sesión'}</span>
+                            <Badge variant="outline">{a.status || 'pending'}</Badge>
+                          </div>
+                          <div className="text-xs text-slate-500">
+                            {a.assigned_to_name || a.assigned_to_email || a.assigned_to_learner_id || 'Sin estudiante'}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {metacogAnalyses.length === 0 ? (
                   <p className="text-sm text-gray-500">Aún no hay registros de Metacog Lab.</p>
                 ) : (

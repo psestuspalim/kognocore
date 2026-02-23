@@ -22,6 +22,7 @@ import DroppableArea from '../components/dnd/DroppableArea';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -244,6 +245,28 @@ export default function QuizzesPage() {
       return client.entities.QuizAttempt.filter({ user_email: currentUser?.email }, '-created_date');
     },
     enabled: !!(currentUser?.learner_id || currentUser?.email),
+  });
+
+  const { data: pendingMetacogAssignments = [] } = useQuery({
+    queryKey: ['pending-metacog-assignments', currentUser?.learner_id, currentUser?.email, currentUser?.role],
+    queryFn: async () => {
+      if (!currentUser) return [];
+      if (currentUser?.role === 'admin') return [];
+      if (currentUser?.learner_id) {
+        return client.entities.MetacogAssignment.filter(
+          { assigned_to_learner_id: currentUser.learner_id, status: 'pending' },
+          '-created_date'
+        );
+      }
+      if (currentUser?.email) {
+        return client.entities.MetacogAssignment.filter(
+          { assigned_to_email: currentUser.email, status: 'pending' },
+          '-created_date'
+        );
+      }
+      return [];
+    },
+    enabled: !!currentUser && currentUser?.role !== 'admin',
   });
 
 
@@ -1278,21 +1301,6 @@ export default function QuizzesPage() {
                   </motion.div>
                 )}
 
-                {/* Folder Editor */}
-                {editingFolder && !editingSubject && !editingCourse && (
-                  <motion.div key="folder-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                    <Button onClick={() => setEditingFolder(null)} variant="ghost" className="mb-6">
-                      <ArrowLeft className="w-4 h-4 mr-2" /> Volver
-                    </Button>
-                    <FolderEditor
-                      folder={editingFolder}
-                      users={allUsers}
-                      onSave={(data) => updateFolderMutation.mutate({ id: editingFolder.id, data })}
-                      onCancel={() => setEditingFolder(null)}
-                    />
-                  </motion.div>
-                )}
-
                 {/* Quiz Editor */}
                 {editingQuiz && !editingFolder && !editingSubject && !editingCourse && (
                   <motion.div key="quiz-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -1309,7 +1317,7 @@ export default function QuizzesPage() {
                 )}
 
                 {/* Home View - Courses + Unassigned Subjects */}
-                {view === 'home' && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !explorerMode && (
+                {view === 'home' && !editingCourse && !editingSubject && !editingQuiz && !explorerMode && (
                   <motion.div key="courses" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                     <FlowStatusBar />
 
@@ -1332,10 +1340,15 @@ export default function QuizzesPage() {
                         <Link to={createPageUrl('MetacogLab')}>
                           <Button
                             variant="outline"
-                            className="text-xs sm:text-sm h-9 border-indigo-300 text-indigo-700 hover:bg-indigo-50"
+                            className="text-xs sm:text-sm h-9 border-indigo-300 text-indigo-700 hover:bg-indigo-50 gap-2"
                           >
                             <Brain className="w-4 h-4 mr-2" />
                             Metacog Lab
+                            {pendingMetacogAssignments.length > 0 && (
+                              <Badge className="h-5 bg-amber-100 text-amber-700 border border-amber-200">
+                                {pendingMetacogAssignments.length}
+                              </Badge>
+                            )}
                           </Button>
                         </Link>
                         {!canEdit && (
@@ -1452,7 +1465,7 @@ export default function QuizzesPage() {
                 )}
 
                 {/* Explorer Mode - Unified */}
-                {explorerMode && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && (
+                {explorerMode && !editingCourse && !editingSubject && !editingQuiz && (
                   <motion.div key="explorer-unified" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                     <div className="flex items-center justify-between mb-6">
                       <div>
@@ -1536,7 +1549,7 @@ export default function QuizzesPage() {
                 )}
 
                 {/* Subjects View (inside a course or folder) */}
-                {view === 'subjects' && (selectedCourse || currentFolderId) && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !showBulkUploader && !showAIGenerator && !showUploader && !explorerMode && (
+                {view === 'subjects' && (selectedCourse || currentFolderId) && !editingCourse && !editingSubject && !editingQuiz && !showBulkUploader && !showAIGenerator && !showUploader && !explorerMode && (
                   <motion.div key="subjects" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                     <Breadcrumb />
                     <FlowStatusBar />
@@ -2027,6 +2040,26 @@ export default function QuizzesPage() {
                   </motion.div>
                 )}
               </AnimatePresence>
+
+              <Dialog open={Boolean(editingFolder)} onOpenChange={(open) => { if (!open) setEditingFolder(null); }}>
+                <DialogContent className="max-w-2xl">
+                  <DialogHeader>
+                    <DialogTitle>Editar carpeta</DialogTitle>
+                    <DialogDescription>
+                      El editor se abre sobre tu espacio actual para mantener el contexto.
+                    </DialogDescription>
+                  </DialogHeader>
+                  {editingFolder && (
+                    <FolderEditor
+                      folder={editingFolder}
+                      users={allUsers}
+                      embedded
+                      onSave={(data) => updateFolderMutation.mutate({ id: editingFolder.id, data })}
+                      onCancel={() => setEditingFolder(null)}
+                    />
+                  )}
+                </DialogContent>
+              </Dialog>
 
 
               <SessionTimer />

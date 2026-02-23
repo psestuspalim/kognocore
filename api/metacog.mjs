@@ -10,7 +10,8 @@ function getSupabaseAdmin() {
 const TABLE_BY_ENTITY = {
   MetacogQuestion: 'metacog_questions',
   MetacogSession: 'metacog_sessions',
-  MetacogAnalysis: 'metacog_analyses'
+  MetacogAnalysis: 'metacog_analyses',
+  MetacogAssignment: 'metacog_assignments'
 }
 
 const resolveTable = (entity) => TABLE_BY_ENTITY[entity] || null

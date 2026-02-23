@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import QuizSettingsPanel from '../admin/QuizSettingsPanel';
 
-export default function FolderEditor({ folder, users = [], onSave, onCancel }) {
+export default function FolderEditor({ folder, users = [], onSave, onCancel, embedded = false }) {
   const [editedFolder, setEditedFolder] = useState({
     name: folder.name || '',
     description: folder.description || '',
@@ -49,12 +49,8 @@ export default function FolderEditor({ folder, users = [], onSave, onCancel }) {
     }
   };
 
-  return (
-    <Card className="max-w-lg mx-auto">
-      <CardHeader>
-        <CardTitle>Editar carpeta</CardTitle>
-      </CardHeader>
-      <CardContent>
+  const editorBody = (
+    <div className={embedded ? 'p-1' : ''}>
         <Tabs defaultValue="general" className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-4">
             <TabsTrigger value="general">General</TabsTrigger>
@@ -188,7 +184,17 @@ export default function FolderEditor({ folder, users = [], onSave, onCancel }) {
             )}
           </TabsContent>
         </Tabs>
-      </CardContent>
+    </div>
+  );
+
+  if (embedded) return editorBody;
+
+  return (
+    <Card className="max-w-lg mx-auto">
+      <CardHeader>
+        <CardTitle>Editar carpeta</CardTitle>
+      </CardHeader>
+      <CardContent>{editorBody}</CardContent>
     </Card>
   );
 }
