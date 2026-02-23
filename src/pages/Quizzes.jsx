@@ -219,7 +219,14 @@ export default function QuizzesPage() {
   const isServerCodeSession = isLearnerRole && hasKcToken && !!currentUser?.courseId;
   const isDirectCodeSession = isLearnerRole && currentUser?.loginMode === 'direct-code';
   const hasApprovedEnrollments = enrollments.length > 0;
-  const hasCourseIdMatch = !!(currentUser?.courseId && courses.some(c => c?.id === currentUser.courseId));
+  const normalizeId = (value) => (value === null || value === undefined ? null : String(value).trim());
+  const sameId = (left, right) => {
+    const l = normalizeId(left);
+    const r = normalizeId(right);
+    return !!l && !!r && l === r;
+  };
+  const userCourseId = normalizeId(currentUser?.courseId);
+  const hasCourseIdMatch = !!(userCourseId && courses.some(c => c?.id && sameId(c.id, userCourseId)));
   const fallbackCourseId = hasCourseIdMatch ? currentUser.courseId : null;
 
   // Mutations
@@ -479,10 +486,10 @@ export default function QuizzesPage() {
     // being blocked by per-user visibility lists.
     if (isServerCodeSession && currentUser?.courseId) {
       const inScopedCourse =
-        item.id === currentUser.courseId ||
-        item.course_id === currentUser.courseId ||
-        parentItem?.id === currentUser.courseId ||
-        parentItem?.course_id === currentUser.courseId;
+        sameId(item.id, userCourseId) ||
+        sameId(item.course_id, userCourseId) ||
+        sameId(parentItem?.id, userCourseId) ||
+        sameId(parentItem?.course_id, userCourseId);
 
       if (inScopedCourse) {
         return true;
@@ -493,10 +500,10 @@ export default function QuizzesPage() {
     if (
       !parentItem &&
       (
-        (isServerCodeSession && currentUser?.courseId === item.id) ||
-        enrollments.some(e => e.course_id === item.id) ||
-        (currentUser?.courseId && currentUser.courseId === item.id) ||
-        (isDirectCodeSession && !hasApprovedEnrollments && fallbackCourseId === item.id)
+        (isServerCodeSession && sameId(userCourseId, item.id)) ||
+        enrollments.some(e => sameId(e.course_id, item.id)) ||
+        (userCourseId && sameId(userCourseId, item.id)) ||
+        (isDirectCodeSession && !hasApprovedEnrollments && sameId(fallbackCourseId, item.id))
       )
     ) {
       return true;
@@ -515,15 +522,15 @@ export default function QuizzesPage() {
   const visibleCourses = isAdmin
     ? courses.filter(c => c && c.id && canUserAccess(c))
     : isServerCodeSession
-      ? courses.filter(c => c && c.id === currentUser.courseId && canUserAccess(c))
+      ? courses.filter(c => c && c.id && sameId(c.id, userCourseId) && canUserAccess(c))
       : courses.filter(c =>
         c &&
         c.id &&
         canUserAccess(c) &&
         (
-          enrollments.some(e => e.course_id === c.id) ||
-          (currentUser?.courseId && currentUser.courseId === c.id) ||
-          (isDirectCodeSession && !hasApprovedEnrollments && fallbackCourseId === c.id)
+          enrollments.some(e => sameId(e.course_id, c.id)) ||
+          (userCourseId && sameId(userCourseId, c.id)) ||
+          (isDirectCodeSession && !hasApprovedEnrollments && sameId(fallbackCourseId, c.id))
         )
       );
 
