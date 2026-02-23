@@ -149,6 +149,13 @@ const fetchRemoteQuizzes = async () => {
   return Array.isArray(data?.quizzes) ? data.quizzes : [];
 };
 
+const fetchRemoteAttempts = async () => {
+  const response = await fetch('/api/attempts');
+  if (!response.ok) throw new Error('REMOTE_ATTEMPT_LIST_FAILED');
+  const data = await response.json().catch(() => ({}));
+  return Array.isArray(data?.attempts) ? data.attempts : [];
+};
+
 /**
  * @type {{
  *   auth: { me: () => Promise<any>, logout: (redirectUrl?: string) => void, redirectToLogin: (redirectUrl?: string) => void, updateMe: (data: Object) => Promise<any> },
@@ -236,6 +243,18 @@ const mockClient = {
             }
           }
 
+          if (entityName === 'QuizAttempt') {
+            const local = getItems('QuizAttempt');
+            try {
+              const remote = await fetchRemoteAttempts();
+              const merged = mergeById(remote, local);
+              saveItems('QuizAttempt', merged);
+              return sortByField(merged, orderBy);
+            } catch (_err) {
+              return sortByField(local, orderBy);
+            }
+          }
+
           let items = getItems(entityName);
           // Simple sort if orderBy is provided (very basic implementation)
           return sortByField(items, orderBy);
@@ -255,6 +274,28 @@ const mockClient = {
             })();
 
             let filtered = all.filter(item => {
+              for (const key in criteria) {
+                if (item[key] !== criteria[key]) return false;
+              }
+              return true;
+            });
+            return sortByField(filtered, orderBy);
+          }
+
+          if (entityName === 'QuizAttempt') {
+            const all = await (async () => {
+              try {
+                const remote = await fetchRemoteAttempts();
+                const local = getItems('QuizAttempt');
+                const merged = mergeById(remote, local);
+                saveItems('QuizAttempt', merged);
+                return merged;
+              } catch (_err) {
+                return getItems('QuizAttempt');
+              }
+            })();
+
+            const filtered = all.filter(item => {
               for (const key in criteria) {
                 if (item[key] !== criteria[key]) return false;
               }
@@ -290,6 +331,23 @@ const mockClient = {
             return localItem;
           }
 
+          if (entityName === 'QuizAttempt') {
+            const local = getItems('QuizAttempt');
+            const localItem = local.find(item => item.id === id);
+            try {
+              const remote = await fetchRemoteAttempts();
+              const remoteItem = remote.find(item => item.id === id);
+              if (remoteItem) {
+                const merged = mergeById(remote, local);
+                saveItems('QuizAttempt', merged);
+                return remoteItem;
+              }
+            } catch (_err) {
+              // ignore
+            }
+            return localItem;
+          }
+
           const items = getItems(entityName);
           return items.find(item => item.id === id);
         },
@@ -310,6 +368,18 @@ const mockClient = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ quiz: newItem })
+              });
+            } catch (_err) {
+              // keep local create working
+            }
+          }
+
+          if (entityName === 'QuizAttempt') {
+            try {
+              await fetch('/api/attempts', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ attempt: newItem })
               });
             } catch (_err) {
               // keep local create working
@@ -337,6 +407,18 @@ const mockClient = {
               }
             }
 
+            if (entityName === 'QuizAttempt') {
+              try {
+                await fetch('/api/attempts', {
+                  method: 'PATCH',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ id, data })
+                });
+              } catch (_err) {
+                // keep local update working
+              }
+            }
+
             return items[index];
           }
           throw new Error('Item not found');
@@ -351,6 +433,14 @@ const mockClient = {
             if (entityName === 'Quiz') {
               try {
                 await fetch(`/api/quizzes?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+              } catch (_err) {
+                // keep local delete working
+              }
+            }
+
+            if (entityName === 'QuizAttempt') {
+              try {
+                await fetch(`/api/attempts?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
               } catch (_err) {
                 // keep local delete working
               }

@@ -73,6 +73,7 @@ export default function QuizzesPage() {
   const [deckType, setDeckType] = useState('all');
   const [wrongAnswers, setWrongAnswers] = useState([]);
   const [correctAnswers, setCorrectAnswers] = useState([]);
+  const [answerLog, setAnswerLog] = useState([]);
   const [markedQuestions, setMarkedQuestions] = useState(new Set());
 
   const handleMarkForReview = (question, isMarked) => {
@@ -668,7 +669,8 @@ export default function QuizzesPage() {
       total_questions: shuffledQuestions.length,
       answered_questions: 0,
       is_completed: false,
-      wrong_questions: []
+      wrong_questions: [],
+      answer_log: []
     });
 
     // Crear sesión en vivo
@@ -699,6 +701,7 @@ export default function QuizzesPage() {
     setScore(0);
     setWrongAnswers([]);
     setCorrectAnswers([]);
+    setAnswerLog([]);
     setMarkedQuestions(new Set());
     setResponseTimes([]);
     setQuestionStartTime(Date.now());
@@ -712,15 +715,27 @@ export default function QuizzesPage() {
     setResponseTimes(newResponseTimes);
 
     const newScore = isCorrect ? score + 1 : score;
+    const correctOption = question.answerOptions.find(opt => opt.isCorrect);
     const newWrongAnswers = !isCorrect ? [...wrongAnswers, {
       question: question.question,
       selected_answer: selectedOption.text,
-      correct_answer: question.answerOptions.find(opt => opt.isCorrect)?.text,
+      correct_answer: correctOption?.text,
       response_time: responseTime,
       answerOptions: question.answerOptions,
       hint: question.hint,
       difficulty: question.difficulty
     }] : wrongAnswers;
+    const answerEntry = {
+      question: question.question,
+      selected_answer: selectedOption.text,
+      correct_answer: correctOption?.text,
+      is_correct: isCorrect,
+      response_time: responseTime,
+      answerOptions: question.answerOptions,
+      hint: question.hint,
+      difficulty: question.difficulty
+    };
+    const newAnswerLog = [...answerLog, answerEntry];
 
     if (isCorrect) {
       setScore(newScore);
@@ -732,6 +747,7 @@ export default function QuizzesPage() {
     } else {
       setWrongAnswers(newWrongAnswers);
     }
+    setAnswerLog(newAnswerLog);
 
     const isLastQuestion = currentQuestionIndex >= selectedQuiz.questions.length - 1;
     const answeredCount = currentQuestionIndex + 1;
@@ -742,6 +758,7 @@ export default function QuizzesPage() {
         score: newScore,
         answered_questions: answeredCount,
         wrong_questions: newWrongAnswers,
+        answer_log: newAnswerLog,
         response_times: newResponseTimes,
         is_completed: isLastQuestion,
         completed_at: isLastQuestion ? new Date().toISOString() : undefined
@@ -782,7 +799,8 @@ export default function QuizzesPage() {
       total_questions: selectedQuiz.questions.length,
       answered_questions: 0,
       is_completed: false,
-      wrong_questions: []
+      wrong_questions: [],
+      answer_log: []
     });
 
     setCurrentAttemptId(attempt.id);
@@ -791,6 +809,7 @@ export default function QuizzesPage() {
     setScore(0);
     setWrongAnswers([]);
     setCorrectAnswers([]);
+    setAnswerLog([]);
     setView('quiz');
   };
 
@@ -815,7 +834,8 @@ export default function QuizzesPage() {
       total_questions: wrongQuestionsQuiz.questions.length,
       answered_questions: 0,
       is_completed: false,
-      wrong_questions: []
+      wrong_questions: [],
+      answer_log: []
     });
 
     setCurrentAttemptId(attempt.id);
@@ -824,6 +844,7 @@ export default function QuizzesPage() {
     setScore(0);
     setWrongAnswers([]);
     setCorrectAnswers([]);
+    setAnswerLog([]);
     setView('quiz');
   };
 
@@ -879,6 +900,12 @@ export default function QuizzesPage() {
         question: w.statement,
         selected_answer: w.userAnswer,
         correct_answer: w.correctAnswer
+      })),
+      answer_log: wrongAnswers.map(w => ({
+        question: w.statement,
+        selected_answer: w.userAnswer,
+        correct_answer: w.correctAnswer,
+        is_correct: false
       })),
       completed_at: new Date().toISOString()
     });
@@ -943,7 +970,8 @@ export default function QuizzesPage() {
       total_questions: reviewQuiz.questions.length,
       answered_questions: 0,
       is_completed: false,
-      wrong_questions: []
+      wrong_questions: [],
+      answer_log: []
     });
 
     setCurrentAttemptId(attempt.id);
@@ -952,6 +980,7 @@ export default function QuizzesPage() {
     setScore(0);
     setWrongAnswers([]);
     setCorrectAnswers([]);
+    setAnswerLog([]);
     setMarkedQuestions(new Set());
     setResponseTimes([]);
     setQuestionStartTime(Date.now());

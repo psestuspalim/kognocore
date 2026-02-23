@@ -10,6 +10,7 @@ import { Search, TrendingUp, AlertCircle, Calendar, Trash2, Eye, Loader2, Chevro
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 import MathText from '../components/quiz/MathText';
+import { fromCompactFormat, isCompactFormat } from '../components/utils/quizFormats';
 import AttemptDetailModal from '../components/admin/AttemptDetailModal';
 import StudentProgressModal from '../components/admin/StudentProgressModal';
 import QuizMasterDocs from '../components/admin/QuizMasterDocs';
@@ -24,7 +25,7 @@ export default function AdminProgress() {
 
   const queryClient = useQueryClient();
 
-  const { data: attempts = [], isLoading: attemptsLoading } = useQuery({
+  const { data: attempts = [] } = useQuery({
     queryKey: ['quiz-attempts'],
     queryFn: () => client.entities.QuizAttempt.list('-created_date', 2000),
   });
@@ -85,26 +86,51 @@ export default function AdminProgress() {
     queryFn: () => client.entities.User.list('-created_date', 1000),
   });
 
-  // Crear objeto con todos los usuarios
-  const studentStats = users.reduce((acc, user) => {
-    acc[user.email] = {
-      email: user.email,
-      username: user.username || user.full_name || 'Sin nombre',
-      attempts: [],
-      totalQuizzes: 0,
-      totalCorrect: 0,
-      totalQuestions: 0,
-    };
-    return acc;
-  }, {});
+  const buildStudentKey = (payload) => payload?.learner_id || payload?.email || payload?.user_email || payload?.id;
 
-  // Agregar intentos válidos a los usuarios
-  validAttempts.forEach(attempt => {
-    if (studentStats[attempt.user_email]) {
-      studentStats[attempt.user_email].attempts.push(attempt);
-      studentStats[attempt.user_email].totalQuizzes += 1;
-      studentStats[attempt.user_email].totalCorrect += attempt.score;
-      studentStats[attempt.user_email].totalQuestions += attempt.total_questions;
+  // Crear índice de estudiantes usando usuarios y también intentos (si aún no existe el User).
+  const studentStats = {};
+  users
+    .filter((u) => u?.role !== 'admin')
+    .forEach((user) => {
+      const key = buildStudentKey(user);
+      if (!key) return;
+      studentStats[key] = {
+        key,
+        learner_id: user.learner_id || null,
+        email: user.email || null,
+        username: user.username || user.full_name || 'Sin nombre',
+        attempts: [],
+        totalQuizzes: 0,
+        totalCorrect: 0,
+        totalQuestions: 0
+      };
+    });
+
+  validAttempts.forEach((attempt) => {
+    const key = buildStudentKey({ learner_id: attempt.learner_id, user_email: attempt.user_email });
+    if (!key) return;
+
+    if (!studentStats[key]) {
+      studentStats[key] = {
+        key,
+        learner_id: attempt.learner_id || null,
+        email: attempt.user_email || null,
+        username: attempt.username || 'Sin nombre',
+        attempts: [],
+        totalQuizzes: 0,
+        totalCorrect: 0,
+        totalQuestions: 0
+      };
+    }
+
+    studentStats[key].attempts.push(attempt);
+    studentStats[key].totalQuizzes += 1;
+    studentStats[key].totalCorrect += attempt.score || 0;
+    studentStats[key].totalQuestions += attempt.total_questions || 0;
+    if (!studentStats[key].email && attempt.user_email) studentStats[key].email = attempt.user_email;
+    if ((!studentStats[key].username || studentStats[key].username === 'Sin nombre') && attempt.username) {
+      studentStats[key].username = attempt.username;
     }
   });
 
@@ -117,10 +143,14 @@ export default function AdminProgress() {
     }));
   };
 
-  const students = Object.values(studentStats).filter(student =>
-    student.username?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    student.email.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const students = Object.values(studentStats).filter((student) => {
+    const search = searchTerm.toLowerCase();
+    return (
+      (student.username || '').toLowerCase().includes(search) ||
+      (student.email || '').toLowerCase().includes(search) ||
+      (student.learner_id || '').toLowerCase().includes(search)
+    );
+  });
 
   const getQuizTitle = (quizId) => {
     const quiz = quizzes.find(q => q.id === quizId);
@@ -132,290 +162,193 @@ export default function AdminProgress() {
     return subject?.name || 'Sin materia';
   };
 
-  // Generar PDF por quiz
-  const generateQuizPDF = (student, quizStat) => {
-    const quizAttempts = quizStat.attempts;
+  const getExpandedQuizQuestions = (quizId) => {
+    const quiz = quizzes.find((q) => q.id === quizId);
+    if (!quiz) return [];
+    if (Array.isArray(quiz.questions) && quiz.questions.length > 0) return quiz.questions;
+    if (isCompactFormat(quiz)) {
+      const expanded = fromCompactFormat(quiz);
+      return expanded?.questions || [];
+    }
+    if (quiz?.q && Array.isArray(quiz.q) && quiz.q.length > 0) {
+      const parsedQ = quiz.q.map((item) => (typeof item === 'string' ? JSON.parse(item) : item));
+      const expanded = quiz.t
+        ? fromCompactFormat({ t: quiz.t, q: parsedQ })
+        : fromCompactFormat({ m: quiz.m || { t: quiz.title }, q: parsedQ });
+      return expanded?.questions || [];
+    }
+    return [];
+  };
 
-    // Recopilar preguntas incorrectas de este quiz
-    const wrongQuestionsMap = new Map();
-    quizAttempts.forEach(attempt => {
-      attempt.wrong_questions?.forEach(wq => {
-        const key = wq.question;
-        if (!wrongQuestionsMap.has(key)) {
-          wrongQuestionsMap.set(key, {
-            question: wq.question,
-            selectedAnswer: wq.selected_answer,
-            correctAnswer: wq.correct_answer,
-            answerOptions: wq.answerOptions || [],
-            hint: wq.hint,
-            count: 1
-          });
-        } else {
-          wrongQuestionsMap.get(key).count++;
-        }
+  const getAttemptQuestionRows = (attempt) => {
+    if (Array.isArray(attempt.answer_log) && attempt.answer_log.length > 0) {
+      return attempt.answer_log.map((entry, idx) => ({
+        id: `${attempt.id}-${idx}`,
+        question: entry.question || 'Pregunta sin texto',
+        selected_answer: entry.selected_answer || '',
+        correct_answer: entry.correct_answer || '',
+        answerOptions: entry.answerOptions || [],
+        hint: entry.hint || '',
+        is_correct: entry.is_correct === true
+      }));
+    }
+
+    const wrongMap = new Map();
+    (attempt.wrong_questions || []).forEach((wq) => {
+      wrongMap.set(wq.question, {
+        question: wq.question || 'Pregunta sin texto',
+        selected_answer: wq.selected_answer || '',
+        correct_answer: wq.correct_answer || '',
+        answerOptions: wq.answerOptions || [],
+        hint: wq.hint || '',
+        is_correct: false
       });
     });
 
-    const wrongQuestions = Array.from(wrongQuestionsMap.values()).sort((a, b) => b.count - a.count);
+    const recoveredCorrect = getExpandedQuizQuestions(attempt.quiz_id)
+      .filter((q) => !wrongMap.has(q.question))
+      .slice(0, attempt.score || 0)
+      .map((q) => ({
+        question: q.question || 'Pregunta sin texto',
+        selected_answer: q.answerOptions?.find((o) => o.isCorrect)?.text || '',
+        correct_answer: q.answerOptions?.find((o) => o.isCorrect)?.text || '',
+        answerOptions: q.answerOptions || [],
+        hint: q.hint || '',
+        is_correct: true
+      }));
 
+    return [...recoveredCorrect, ...Array.from(wrongMap.values())];
+  };
+
+  const openPrintWindow = (title, bodyHtml) => {
     const htmlContent = `
       <!DOCTYPE html>
       <html>
       <head>
         <meta charset="utf-8">
-        <title>Reporte ${quizStat.quizTitle} - ${student.username}</title>
+        <title>${title}</title>
         <style>
-          body { font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; }
-          h1 { color: #1f2937; border-bottom: 2px solid #6366f1; padding-bottom: 10px; }
-          h2 { color: #374151; margin-top: 30px; }
-          .header-info { background: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-          .header-info p { margin: 5px 0; color: #4b5563; }
-          .stats { display: flex; gap: 20px; margin-top: 10px; }
-          .stat { text-align: center; }
-          .stat-value { font-size: 24px; font-weight: bold; color: #6366f1; }
-          .stat-label { font-size: 12px; color: #6b7280; }
-          .attempts-section { margin-top: 20px; border: 1px solid #e5e7eb; border-radius: 8px; padding: 15px; }
-          .attempt-item { border-bottom: 1px solid #e5e7eb; padding: 10px 0; }
-          .attempt-item:last-child { border-bottom: none; }
-          .question-card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 15px; margin-bottom: 15px; page-break-inside: avoid; }
-          .question-title { font-weight: bold; color: #1f2937; margin-bottom: 10px; }
-          .options-list { margin-top: 12px; }
-          .option { display: flex; align-items: flex-start; gap: 8px; padding: 8px 12px; margin: 4px 0; border-radius: 6px; background: #f9fafb; border: 1px solid #e5e7eb; }
-          .option-correct { background: #f0fdf4; border-color: #86efac; }
-          .option-selected:not(.option-correct) { background: #fef2f2; border-color: #fecaca; }
-          .option-letter { font-weight: bold; color: #6b7280; min-width: 20px; }
-          .option-text { flex: 1; }
-          .check { color: #16a34a; font-weight: bold; }
-          .cross { color: #dc2626; font-weight: bold; }
-          .rationale { margin-top: 10px; padding: 10px; background: #eff6ff; border-radius: 6px; font-size: 13px; color: #1e40af; }
-          .hint { margin-top: 8px; padding: 8px; background: #fdf4ff; border-radius: 6px; font-size: 12px; color: #86198f; }
-          .count-badge { display: inline-block; background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 12px; font-size: 12px; margin-left: 10px; }
-          @media print { body { padding: 20px; } }
+          body { font-family: Arial, sans-serif; padding: 30px; max-width: 920px; margin: 0 auto; color: #111827; }
+          h1 { color: #0f172a; margin-bottom: 8px; }
+          h2 { color: #1e293b; margin-top: 24px; margin-bottom: 8px; }
+          .meta { color: #475569; margin-bottom: 20px; }
+          .summary { display: flex; gap: 16px; margin-bottom: 20px; }
+          .kpi { border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px 14px; min-width: 140px; }
+          .kpi strong { font-size: 20px; color: #0f172a; display: block; }
+          .card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; margin-bottom: 10px; page-break-inside: avoid; }
+          .ok { border-left: 4px solid #16a34a; background: #f0fdf4; }
+          .ko { border-left: 4px solid #dc2626; background: #fef2f2; }
+          .qa { margin-top: 8px; font-size: 14px; color: #334155; }
+          .muted { color: #64748b; font-size: 12px; }
+          .footer { margin-top: 26px; color: #94a3b8; font-size: 12px; text-align: center; }
+          @media print { body { padding: 12px; } }
         </style>
       </head>
-      <body>
-        <h1>📊 ${quizStat.quizTitle}</h1>
-        <div class="header-info">
-          <p><strong>Estudiante:</strong> ${student.username || 'Sin nombre'}</p>
-          <p><strong>Email:</strong> ${student.email}</p>
-          <p><strong>Fecha:</strong> ${format(new Date(), 'dd/MM/yyyy HH:mm')}</p>
-          <div class="stats">
-            <div class="stat">
-              <div class="stat-value">${quizStat.totalAttempts}</div>
-              <div class="stat-label">Intentos</div>
-            </div>
-            <div class="stat">
-              <div class="stat-value">${Math.round(quizStat.bestScore)}%</div>
-              <div class="stat-label">Mejor</div>
-            </div>
-            <div class="stat">
-              <div class="stat-value">${Math.round(quizStat.avgScore)}%</div>
-              <div class="stat-label">Promedio</div>
-            </div>
-          </div>
-        </div>
-
-        <h2>Historial de Intentos</h2>
-        <div class="attempts-section">
-          ${quizAttempts.map((att, idx) => `
-            <div class="attempt-item">
-              <strong>Intento ${idx + 1}</strong> - 
-              ${format(new Date(att.completed_at || att.created_date), 'dd/MM/yyyy HH:mm')} - 
-              <span style="color: ${(att.score / att.total_questions) * 100 >= 70 ? '#16a34a' : '#dc2626'}">
-                ${att.score}/${att.total_questions} (${Math.round((att.score / att.total_questions) * 100)}%)
-              </span>
-            </div>
-          `).join('')}
-        </div>
-
-        ${wrongQuestions.length > 0 ? `
-          <h2>Preguntas Incorrectas (${wrongQuestions.length})</h2>
-          ${wrongQuestions.map((wq, idx) => `
-            <div class="question-card">
-              <div class="question-title">
-                ${idx + 1}. ${wq.question}
-                ${wq.count > 1 ? `<span class="count-badge">Fallada ${wq.count}x</span>` : ''}
-              </div>
-              ${wq.answerOptions && wq.answerOptions.length > 0 ? `
-                <div class="options-list">
-                  ${wq.answerOptions.map((opt, i) => `
-                    <div class="option ${opt.isCorrect ? 'option-correct' : ''} ${opt.text === wq.selectedAnswer ? 'option-selected' : ''}">
-                      <span class="option-letter">${String.fromCharCode(65 + i)}</span>
-                      <span class="option-text">${opt.text}</span>
-                      ${opt.isCorrect ? '<span class="check">✓</span>' : ''}
-                      ${opt.text === wq.selectedAnswer && !opt.isCorrect ? '<span class="cross">✗</span>' : ''}
-                    </div>
-                  `).join('')}
-                </div>
-                ${wq.answerOptions.find(o => o.isCorrect)?.rationale ? `
-                  <div class="rationale">
-                    <strong>💡 Explicación:</strong> ${wq.answerOptions.find(o => o.isCorrect).rationale}
-                  </div>
-                ` : ''}
-              ` : ''}
-              ${wq.hint ? `<div class="hint">🎬 <em>${wq.hint}</em></div>` : ''}
-            </div>
-          `).join('')}
-        ` : '<p style="text-align: center; color: #16a34a; padding: 20px;">✓ Sin errores registrados</p>'}
-
-        <div style="margin-top: 40px; text-align: center; color: #9ca3af; font-size: 12px;">
-          Generado automáticamente • ${format(new Date(), 'dd/MM/yyyy')}
-        </div>
-      </body>
+      <body>${bodyHtml}</body>
       </html>
     `;
 
     const printWindow = window.open('', '_blank');
+    if (!printWindow) {
+      toast.error('No se pudo abrir la ventana de impresión');
+      return;
+    }
     printWindow.document.write(htmlContent);
     printWindow.document.close();
-    printWindow.onload = () => {
-      printWindow.print();
-    };
+    printWindow.onload = () => printWindow.print();
   };
 
-  // Generar PDF de errores
-  const generateErrorsPDF = (student) => {
-    // Recopilar todas las preguntas incorrectas únicas con todas las opciones
-    const wrongQuestionsMap = new Map();
-    student.attempts.forEach(attempt => {
-      attempt.wrong_questions?.forEach(wq => {
-        const key = wq.question;
-        if (!wrongQuestionsMap.has(key)) {
-          wrongQuestionsMap.set(key, {
-            question: wq.question,
-            selectedAnswer: wq.selected_answer,
-            correctAnswer: wq.correct_answer,
-            answerOptions: wq.answerOptions || [],
-            hint: wq.hint,
-            quizTitle: getQuizTitle(attempt.quiz_id),
-            count: 1
-          });
-        } else {
-          wrongQuestionsMap.get(key).count++;
-        }
-      });
-    });
+  const generateQuizPDF = (student, quizStat) => {
+    const rows = quizStat.attempts.flatMap((attempt) =>
+      getAttemptQuestionRows(attempt).map((row) => ({
+        ...row,
+        attemptDate: attempt.completed_at || attempt.created_date
+      }))
+    );
+    const correctRows = rows.filter((r) => r.is_correct);
+    const wrongRows = rows.filter((r) => !r.is_correct);
 
-    const wrongQuestions = Array.from(wrongQuestionsMap.values())
-      .sort((a, b) => b.count - a.count);
+    openPrintWindow(
+      `Reporte ${quizStat.quizTitle}`,
+      `
+      <h1>Reporte por Quiz</h1>
+      <p class="meta"><strong>Estudiante:</strong> ${student.username || 'Sin nombre'} · <strong>Email:</strong> ${student.email || 'N/A'} · <strong>Quiz:</strong> ${quizStat.quizTitle}</p>
+      <div class="summary">
+        <div class="kpi"><span>Total respuestas</span><strong>${rows.length}</strong></div>
+        <div class="kpi"><span>Correctas</span><strong>${correctRows.length}</strong></div>
+        <div class="kpi"><span>Incorrectas</span><strong>${wrongRows.length}</strong></div>
+      </div>
+      <h2>Preguntas Correctas</h2>
+      ${correctRows.length === 0 ? '<p class="muted">Sin respuestas correctas registradas.</p>' : correctRows.map((row, idx) => `
+        <div class="card ok">
+          <strong>${idx + 1}. ${row.question}</strong>
+          <div class="qa"><strong>Respuesta:</strong> ${row.selected_answer || row.correct_answer || 'N/A'}</div>
+          <div class="muted">${format(new Date(row.attemptDate), 'dd/MM/yyyy HH:mm')}</div>
+        </div>
+      `).join('')}
+      <h2>Preguntas Incorrectas</h2>
+      ${wrongRows.length === 0 ? '<p class="muted">Sin respuestas incorrectas registradas.</p>' : wrongRows.map((row, idx) => `
+        <div class="card ko">
+          <strong>${idx + 1}. ${row.question}</strong>
+          <div class="qa"><strong>Respondió:</strong> ${row.selected_answer || 'N/A'}</div>
+          <div class="qa"><strong>Correcta:</strong> ${row.correct_answer || 'N/A'}</div>
+          <div class="muted">${format(new Date(row.attemptDate), 'dd/MM/yyyy HH:mm')}</div>
+        </div>
+      `).join('')}
+      <div class="footer">Generado automáticamente · ${format(new Date(), 'dd/MM/yyyy HH:mm')}</div>
+    `
+    );
+  };
 
-    if (wrongQuestions.length === 0) {
-      toast.info('Este estudiante no tiene preguntas incorrectas');
+  const generatePerformancePDF = (student) => {
+    const rows = student.attempts.flatMap((attempt) =>
+      getAttemptQuestionRows(attempt).map((row) => ({
+        ...row,
+        quizTitle: getQuizTitle(attempt.quiz_id),
+        attemptDate: attempt.completed_at || attempt.created_date
+      }))
+    );
+
+    if (rows.length === 0) {
+      toast.info('Este estudiante no tiene respuestas registradas');
       return;
     }
 
-    // Crear contenido HTML para el PDF
-    const htmlContent = `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="utf-8">
-        <title>Reporte de Errores - ${student.username}</title>
-        <style>
-          body { font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; }
-          h1 { color: #1f2937; border-bottom: 2px solid #6366f1; padding-bottom: 10px; }
-          h2 { color: #374151; margin-top: 30px; }
-          .header-info { background: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-          .header-info p { margin: 5px 0; color: #4b5563; }
-          .question-card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 15px; margin-bottom: 15px; page-break-inside: avoid; }
-          .question-title { font-weight: bold; color: #1f2937; margin-bottom: 10px; }
-          .quiz-source { font-size: 12px; color: #6b7280; margin-bottom: 8px; }
-          .answer-row { display: flex; gap: 10px; margin-top: 10px; }
-          .answer-box { flex: 1; padding: 10px; border-radius: 6px; font-size: 14px; }
-          .wrong { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
-          .correct { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
-          .count-badge { display: inline-block; background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 12px; font-size: 12px; margin-left: 10px; }
-          .options-list { margin-top: 12px; }
-          .option { display: flex; align-items: flex-start; gap: 8px; padding: 8px 12px; margin: 4px 0; border-radius: 6px; background: #f9fafb; border: 1px solid #e5e7eb; }
-          .option-correct { background: #f0fdf4; border-color: #86efac; }
-          .option-selected:not(.option-correct) { background: #fef2f2; border-color: #fecaca; }
-          .option-letter { font-weight: bold; color: #6b7280; min-width: 20px; }
-          .option-text { flex: 1; }
-          .check { color: #16a34a; font-weight: bold; }
-          .cross { color: #dc2626; font-weight: bold; }
-          .rationale { margin-top: 10px; padding: 10px; background: #eff6ff; border-radius: 6px; font-size: 13px; color: #1e40af; }
-          .hint { margin-top: 8px; padding: 8px; background: #fdf4ff; border-radius: 6px; font-size: 12px; color: #86198f; }
-          .stats { display: flex; gap: 20px; margin-top: 10px; }
-          .stat { text-align: center; }
-          .stat-value { font-size: 24px; font-weight: bold; color: #6366f1; }
-          .stat-label { font-size: 12px; color: #6b7280; }
-          @media print { body { padding: 20px; } }
-        </style>
-      </head>
-      <body>
-        <h1>📋 Reporte de Preguntas Incorrectas</h1>
-        <div class="header-info">
-          <p><strong>Estudiante:</strong> ${student.username || 'Sin nombre'}</p>
-          <p><strong>Email:</strong> ${student.email}</p>
-          <p><strong>Fecha:</strong> ${format(new Date(), 'dd/MM/yyyy HH:mm')}</p>
-          <div class="stats">
-            <div class="stat">
-              <div class="stat-value">${student.totalQuizzes}</div>
-              <div class="stat-label">Intentos</div>
-            </div>
-            <div class="stat">
-              <div class="stat-value">${wrongQuestions.length}</div>
-              <div class="stat-label">Errores únicos</div>
-            </div>
-            <div class="stat">
-              <div class="stat-value">${student.totalQuestions > 0 ? Math.round((student.totalCorrect / student.totalQuestions) * 100) : 0}%</div>
-              <div class="stat-label">Promedio</div>
-            </div>
-          </div>
+    const correctRows = rows.filter((r) => r.is_correct);
+    const wrongRows = rows.filter((r) => !r.is_correct);
+
+    openPrintWindow(
+      `Reporte de rendimiento ${student.username || student.email || student.learner_id}`,
+      `
+      <h1>Reporte de Rendimiento del Estudiante</h1>
+      <p class="meta"><strong>Estudiante:</strong> ${student.username || 'Sin nombre'} · <strong>Email:</strong> ${student.email || 'N/A'} · <strong>Learner ID:</strong> ${student.learner_id || 'N/A'}</p>
+      <div class="summary">
+        <div class="kpi"><span>Intentos</span><strong>${student.totalQuizzes}</strong></div>
+        <div class="kpi"><span>Correctas</span><strong>${correctRows.length}</strong></div>
+        <div class="kpi"><span>Incorrectas</span><strong>${wrongRows.length}</strong></div>
+      </div>
+      <h2>Preguntas Correctas</h2>
+      ${correctRows.length === 0 ? '<p class="muted">No hay respuestas correctas registradas.</p>' : correctRows.map((row, idx) => `
+        <div class="card ok">
+          <strong>${idx + 1}. ${row.question}</strong>
+          <div class="qa"><strong>Quiz:</strong> ${row.quizTitle}</div>
+          <div class="qa"><strong>Respuesta:</strong> ${row.selected_answer || row.correct_answer || 'N/A'}</div>
+          <div class="muted">${format(new Date(row.attemptDate), 'dd/MM/yyyy HH:mm')}</div>
         </div>
-
-        <h2>Preguntas a Repasar (${wrongQuestions.length})</h2>
-        ${wrongQuestions.map((wq, idx) => `
-          <div class="question-card">
-            <div class="quiz-source">📚 ${wq.quizTitle}</div>
-            <div class="question-title">
-              ${idx + 1}. ${wq.question}
-              ${wq.count > 1 ? `<span class="count-badge">Fallada ${wq.count}x</span>` : ''}
-            </div>
-            ${wq.answerOptions && wq.answerOptions.length > 0 ? `
-              <div class="options-list">
-                ${wq.answerOptions.map((opt, i) => `
-                  <div class="option ${opt.isCorrect ? 'option-correct' : ''} ${opt.text === wq.selectedAnswer ? 'option-selected' : ''}">
-                    <span class="option-letter">${String.fromCharCode(65 + i)}</span>
-                    <span class="option-text">${opt.text}</span>
-                    ${opt.isCorrect ? '<span class="check">✓</span>' : ''}
-                    ${opt.text === wq.selectedAnswer && !opt.isCorrect ? '<span class="cross">✗</span>' : ''}
-                  </div>
-                `).join('')}
-              </div>
-              ${wq.answerOptions.find(o => o.isCorrect)?.rationale ? `
-                <div class="rationale">
-                  <strong>💡 Explicación:</strong> ${wq.answerOptions.find(o => o.isCorrect).rationale}
-                </div>
-              ` : ''}
-            ` : `
-              <div class="answer-row">
-                <div class="answer-box wrong">
-                  <strong>❌ Respondió:</strong><br>${wq.selectedAnswer}
-                </div>
-                <div class="answer-box correct">
-                  <strong>✓ Correcta:</strong><br>${wq.correctAnswer}
-                </div>
-              </div>
-            `}
-            ${wq.hint ? `<div class="hint">🎬 <em>${wq.hint}</em></div>` : ''}
-          </div>
-        `).join('')}
-
-        <div style="margin-top: 40px; text-align: center; color: #9ca3af; font-size: 12px;">
-          Generado automáticamente • ${format(new Date(), 'dd/MM/yyyy')}
+      `).join('')}
+      <h2>Preguntas Incorrectas</h2>
+      ${wrongRows.length === 0 ? '<p class="muted">No hay respuestas incorrectas registradas.</p>' : wrongRows.map((row, idx) => `
+        <div class="card ko">
+          <strong>${idx + 1}. ${row.question}</strong>
+          <div class="qa"><strong>Quiz:</strong> ${row.quizTitle}</div>
+          <div class="qa"><strong>Respondió:</strong> ${row.selected_answer || 'N/A'}</div>
+          <div class="qa"><strong>Correcta:</strong> ${row.correct_answer || 'N/A'}</div>
+          <div class="muted">${format(new Date(row.attemptDate), 'dd/MM/yyyy HH:mm')}</div>
         </div>
-      </body>
-      </html>
-    `;
-
-    // Abrir ventana para imprimir/guardar como PDF
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(htmlContent);
-    printWindow.document.close();
-    printWindow.onload = () => {
-      printWindow.print();
-    };
+      `).join('')}
+      <div class="footer">Generado automáticamente · ${format(new Date(), 'dd/MM/yyyy HH:mm')}</div>
+    `
+    );
   };
 
   // Calcular estadísticas por quiz para el estudiante seleccionado
@@ -433,7 +366,7 @@ export default function AdminProgress() {
           totalAttempts: 0
         };
       }
-      const percentage = (attempt.score / attempt.total_questions) * 100;
+      const percentage = attempt.total_questions > 0 ? (attempt.score / attempt.total_questions) * 100 : 0;
       quizStats[attempt.quiz_id].attempts.push(attempt);
       quizStats[attempt.quiz_id].bestScore = Math.max(quizStats[attempt.quiz_id].bestScore, percentage);
       quizStats[attempt.quiz_id].totalAttempts += 1;
@@ -441,7 +374,10 @@ export default function AdminProgress() {
 
     // Calcular promedio por quiz
     Object.values(quizStats).forEach(stat => {
-      const total = stat.attempts.reduce((sum, att) => sum + (att.score / att.total_questions) * 100, 0);
+      const total = stat.attempts.reduce((sum, att) => {
+        const percentage = att.total_questions > 0 ? (att.score / att.total_questions) * 100 : 0;
+        return sum + percentage;
+      }, 0);
       stat.avgScore = total / stat.attempts.length;
     });
 
@@ -544,9 +480,9 @@ export default function AdminProgress() {
 
                       return (
                         <button
-                          key={student.email}
+                          key={student.key}
                           onClick={() => setSelectedStudent(student)}
-                          className={`w-full text-left p-4 rounded-lg border-2 transition-all ${selectedStudent?.email === student.email
+                          className={`w-full text-left p-4 rounded-lg border-2 transition-all ${selectedStudent?.key === student.key
                               ? 'border-indigo-500 bg-indigo-50'
                               : 'border-gray-200 hover:border-gray-300'
                             }`}
@@ -555,7 +491,7 @@ export default function AdminProgress() {
                             {student.username || 'Sin nombre'}
                           </div>
                           <div className="text-sm text-gray-500 mb-2">
-                            {student.email}
+                            {student.email || student.learner_id || 'Sin email'}
                           </div>
                           <div className="flex items-center justify-between">
                             <span className="text-xs text-gray-600">
@@ -594,16 +530,16 @@ export default function AdminProgress() {
                           <CardTitle>
                             {selectedStudent.username || 'Sin nombre'}
                           </CardTitle>
-                          <p className="text-sm text-gray-500">{selectedStudent.email}</p>
+                          <p className="text-sm text-gray-500">{selectedStudent.email || selectedStudent.learner_id || 'Sin email'}</p>
                         </div>
                         <div className="flex gap-2">
                           <Button
                             variant="outline"
-                            onClick={() => generateErrorsPDF(selectedStudent)}
+                            onClick={() => generatePerformancePDF(selectedStudent)}
                             className="text-red-600 border-red-200 hover:bg-red-50"
                           >
                             <FileDown className="w-4 h-4 mr-2" />
-                            PDF Errores
+                            PDF Rendimiento
                           </Button>
                           <Button
                             onClick={() => setShowProgressModal(true)}
@@ -630,7 +566,9 @@ export default function AdminProgress() {
                           </div>
                           <div className="text-center">
                             <div className="text-xl sm:text-3xl font-bold text-gray-900">
-                              {Math.round((selectedStudent.totalCorrect / selectedStudent.totalQuestions) * 100)}%
+                              {selectedStudent.totalQuestions > 0
+                                ? Math.round((selectedStudent.totalCorrect / selectedStudent.totalQuestions) * 100)
+                                : 0}%
                             </div>
                             <div className="text-xs sm:text-sm text-gray-500">Promedio</div>
                           </div>
@@ -724,7 +662,7 @@ export default function AdminProgress() {
                         {(selectedStudent.attempts && Array.isArray(selectedStudent.attempts) ? [...selectedStudent.attempts].sort((a, b) =>
                           new Date(b.completed_at || b.created_date) - new Date(a.completed_at || a.created_date)
                         ) : []).map((attempt) => {
-                          const percentage = Math.round((attempt.score / attempt.total_questions) * 100);
+                          const percentage = Math.round(attempt.total_questions > 0 ? (attempt.score / attempt.total_questions) * 100 : 0);
                           const isPartial = !attempt.is_completed;
                           const isExpanded = expandedAttempts[attempt.id];
                           const quizTitle = getQuizTitle(attempt.quiz_id);
