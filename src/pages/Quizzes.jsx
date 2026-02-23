@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { useAuth } from '@/lib/AuthContext';
-import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, ChevronRight, Upload, Home, Shield, AlertCircle, LayoutDashboard, Calculator } from 'lucide-react';
+import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, ChevronRight, Upload, Home, Calculator } from 'lucide-react';
 import { Icon } from '@/components/ui/Icon';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -769,60 +769,6 @@ export default function QuizzesPage() {
     </Card>
   );
 
-  // Admin Quick Access Panel
-  const AdminPanel = () => {
-    if (!isAdmin) return null;
-
-    const pendingRequests = enrollments?.length || 0;
-
-    return (
-      <div className="mb-8">
-        <Link to={createPageUrl('AdminHome')} style={{ textDecoration: 'none', color: 'inherit' }}>
-          <Card
-            className="cursor-pointer hover:shadow-lg transition-all border-l-4 overflow-hidden bg-white"
-            style={{ borderLeftColor: '#6366f1' }}
-          >
-            <CardContent className="p-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: '#6366f120' }}
-                  >
-                    <Shield
-                      className="w-6 h-6"
-                      style={{ color: '#6366f1' }}
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-semibold text-gray-900 flex items-center gap-2 truncate">
-                      Panel de Administración
-                    </h3>
-                    <p className="text-sm text-gray-500 line-clamp-1 mb-1.5">
-                      Gestiona cursos, usuarios y mantenimiento de la plataforma
-                    </p>
-                    <div className="flex items-center flex-wrap gap-2">
-                      {pendingRequests > 0 && (
-                        <Badge variant="secondary" className="text-[10px] sm:text-xs font-medium px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-500/10 hover:bg-amber-100 transition-colors">
-                          <AlertCircle className="w-3 h-3 mr-1.5 text-amber-500" />
-                          {pendingRequests} solicitud{pendingRequests !== 1 ? 'es' : ''} pendiente{pendingRequests !== 1 ? 's' : ''}
-                        </Badge>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex gap-1 flex-shrink-0">
-                  <LayoutDashboard className="w-5 h-5 text-gray-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </Link>
-      </div>
-    );
-  };
-
   // Quiz handlers
   const handleStartQuiz = async (quiz, questionCount, selectedDeck = 'all', quizAttempts = []) => {
     // Expandir desde formato compacto solo si existe q Y tiene contenido
@@ -1365,7 +1311,6 @@ export default function QuizzesPage() {
                 {/* Home View - Courses + Unassigned Subjects */}
                 {view === 'home' && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !explorerMode && (
                   <motion.div key="courses" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-                    <AdminPanel />
                     <FlowStatusBar />
 
 

@@ -1,7 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { useAuth } from '@/lib/AuthContext';
+import { useQuery } from '@tanstack/react-query';
+import { client } from '@/api/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -29,6 +31,8 @@ const emptySubject = () => ({
   id: `sub_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
   name: '',
   grupo: '',
+  source_subject_id: null,
+  course_id: null,
   minimum_passing_grade: 7,
   components: baseComponents(),
 });
@@ -62,6 +66,33 @@ export default function AdivinoPage() {
   const [subjects, setSubjects] = useState(() => loadSubjects(user));
   const [selectedId, setSelectedId] = useState(subjects[0]?.id || null);
   const [scenario, setScenario] = useState({});
+  const [selectedCatalogSubjectId, setSelectedCatalogSubjectId] = useState('');
+
+  useEffect(() => {
+    const loaded = loadSubjects(user);
+    setSubjects(loaded);
+    setSelectedId(loaded[0]?.id || null);
+    setScenario({});
+  }, [user?.learner_id, user?.email]);
+
+  const { data: enrolledSubjects = [] } = useQuery({
+    queryKey: ['adivino-enrolled-subjects', user?.role, user?.email, user?.courseId],
+    queryFn: async () => {
+      const allSubjects = await client.entities.Subject.list('order');
+      if (user?.role === 'admin') return allSubjects;
+
+      const enrollments = await client.entities.CourseEnrollment.filter({
+        user_email: user?.email,
+        status: 'approved'
+      });
+
+      const allowedCourseIds = new Set((enrollments || []).map((e) => String(e.course_id)));
+      if (user?.courseId) allowedCourseIds.add(String(user.courseId));
+
+      return allSubjects.filter((s) => s?.course_id && allowedCourseIds.has(String(s.course_id)));
+    },
+    enabled: !!user
+  });
 
   const selectedSubject = useMemo(
     () => subjects.find((s) => s.id === selectedId) || null,
@@ -77,6 +108,31 @@ export default function AdivinoPage() {
 
   const addSubject = () => {
     const created = emptySubject();
+    const updated = [created, ...subjects];
+    setSubjects(updated);
+    setSelectedId(created.id);
+    setScenario({});
+    saveSubjects(user, updated);
+  };
+
+  const addSubjectFromEnrollment = () => {
+    if (!selectedCatalogSubjectId) return;
+    const selectedCatalog = enrolledSubjects.find((s) => String(s.id) === String(selectedCatalogSubjectId));
+    if (!selectedCatalog) return;
+
+    const existing = subjects.find((s) => String(s.source_subject_id) === String(selectedCatalog.id));
+    if (existing) {
+      setSelectedId(existing.id);
+      return;
+    }
+
+    const created = {
+      ...emptySubject(),
+      name: selectedCatalog.name || '',
+      source_subject_id: selectedCatalog.id,
+      course_id: selectedCatalog.course_id || null
+    };
+
     const updated = [created, ...subjects];
     setSubjects(updated);
     setSelectedId(created.id);
@@ -166,6 +222,36 @@ export default function AdivinoPage() {
             </Button>
           </div>
         </div>
+
+        <Card className="border-white/70 bg-white/85">
+          <CardContent className="p-4">
+            <div className="grid gap-3 md:grid-cols-[1fr_auto] md:items-end">
+              <div className="space-y-1.5">
+                <Label>Agregar materia desde tus inscripciones</Label>
+                <select
+                  value={selectedCatalogSubjectId}
+                  onChange={(e) => setSelectedCatalogSubjectId(e.target.value)}
+                  className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-900"
+                >
+                  <option value="">Selecciona una materia inscrita</option>
+                  {enrolledSubjects.map((subject) => (
+                    <option key={subject.id} value={subject.id}>
+                      {subject.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <Button
+                onClick={addSubjectFromEnrollment}
+                disabled={!selectedCatalogSubjectId}
+                className="gap-2 bg-cyan-700 hover:bg-cyan-800"
+              >
+                <Plus className="h-4 w-4" />
+                Agregar desde inscripción
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
           <Card className="border-white/70 bg-white/85">
