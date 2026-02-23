@@ -84,7 +84,10 @@ const getItems = (entityName) => {
     'FeatureUsage': 'app_feature_usage',
     'QuizAnswer': 'app_quiz_answers',
     'Question': 'app_questions',
-    'Resource': 'app_resources'
+    'Resource': 'app_resources',
+    'MetacogQuestion': 'app_metacog_questions',
+    'MetacogSession': 'app_metacog_sessions',
+    'MetacogAnalysis': 'app_metacog_analyses'
   };
 
   const key = keyMap[entityName];
@@ -115,7 +118,10 @@ const saveItems = (entityName, items) => {
     'FeatureUsage': 'app_feature_usage',
     'QuizAnswer': 'app_quiz_answers',
     'Question': 'app_questions',
-    'Resource': 'app_resources'
+    'Resource': 'app_resources',
+    'MetacogQuestion': 'app_metacog_questions',
+    'MetacogSession': 'app_metacog_sessions',
+    'MetacogAnalysis': 'app_metacog_analyses'
   };
 
   const key = keyMap[entityName];
@@ -154,6 +160,22 @@ const fetchRemoteAttempts = async () => {
   if (!response.ok) throw new Error('REMOTE_ATTEMPT_LIST_FAILED');
   const data = await response.json().catch(() => ({}));
   return Array.isArray(data?.attempts) ? data.attempts : [];
+};
+
+const isMetacogEntity = (entityName) =>
+  entityName === 'MetacogQuestion' || entityName === 'MetacogSession' || entityName === 'MetacogAnalysis';
+
+const fetchRemoteMetacog = async (entityName, criteria = null) => {
+  const params = new URLSearchParams({ entity: entityName });
+  if (criteria && typeof criteria === 'object') {
+    Object.entries(criteria).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== '') params.set(key, value);
+    });
+  }
+  const response = await fetch(`/api/metacog?${params.toString()}`);
+  if (!response.ok) throw new Error('REMOTE_METACOG_LIST_FAILED');
+  const data = await response.json().catch(() => ({}));
+  return Array.isArray(data?.records) ? data.records : [];
 };
 
 /**
@@ -255,6 +277,18 @@ const mockClient = {
             }
           }
 
+          if (isMetacogEntity(entityName)) {
+            const local = getItems(entityName);
+            try {
+              const remote = await fetchRemoteMetacog(entityName);
+              const merged = mergeById(remote, local);
+              saveItems(entityName, merged);
+              return sortByField(merged, orderBy);
+            } catch (_err) {
+              return sortByField(local, orderBy);
+            }
+          }
+
           let items = getItems(entityName);
           // Simple sort if orderBy is provided (very basic implementation)
           return sortByField(items, orderBy);
@@ -292,6 +326,28 @@ const mockClient = {
                 return merged;
               } catch (_err) {
                 return getItems('QuizAttempt');
+              }
+            })();
+
+            const filtered = all.filter(item => {
+              for (const key in criteria) {
+                if (item[key] !== criteria[key]) return false;
+              }
+              return true;
+            });
+            return sortByField(filtered, orderBy);
+          }
+
+          if (isMetacogEntity(entityName)) {
+            const all = await (async () => {
+              try {
+                const remote = await fetchRemoteMetacog(entityName, criteria);
+                const local = getItems(entityName);
+                const merged = mergeById(remote, local);
+                saveItems(entityName, merged);
+                return merged;
+              } catch (_err) {
+                return getItems(entityName);
               }
             })();
 
@@ -348,6 +404,23 @@ const mockClient = {
             return localItem;
           }
 
+          if (isMetacogEntity(entityName)) {
+            const local = getItems(entityName);
+            const localItem = local.find(item => item.id === id);
+            try {
+              const remote = await fetchRemoteMetacog(entityName);
+              const remoteItem = remote.find(item => item.id === id);
+              if (remoteItem) {
+                const merged = mergeById(remote, local);
+                saveItems(entityName, merged);
+                return remoteItem;
+              }
+            } catch (_err) {
+              // ignore
+            }
+            return localItem;
+          }
+
           const items = getItems(entityName);
           return items.find(item => item.id === id);
         },
@@ -380,6 +453,18 @@ const mockClient = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ attempt: newItem })
+              });
+            } catch (_err) {
+              // keep local create working
+            }
+          }
+
+          if (isMetacogEntity(entityName)) {
+            try {
+              await fetch('/api/metacog', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ entity: entityName, record: newItem })
               });
             } catch (_err) {
               // keep local create working
@@ -419,6 +504,18 @@ const mockClient = {
               }
             }
 
+            if (isMetacogEntity(entityName)) {
+              try {
+                await fetch('/api/metacog', {
+                  method: 'PATCH',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ entity: entityName, id, data })
+                });
+              } catch (_err) {
+                // keep local update working
+              }
+            }
+
             return items[index];
           }
           throw new Error('Item not found');
@@ -441,6 +538,14 @@ const mockClient = {
             if (entityName === 'QuizAttempt') {
               try {
                 await fetch(`/api/attempts?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+              } catch (_err) {
+                // keep local delete working
+              }
+            }
+
+            if (isMetacogEntity(entityName)) {
+              try {
+                await fetch(`/api/metacog?entity=${encodeURIComponent(entityName)}&id=${encodeURIComponent(id)}`, { method: 'DELETE' });
               } catch (_err) {
                 // keep local delete working
               }

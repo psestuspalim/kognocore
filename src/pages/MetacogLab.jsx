@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useEffect, useMemo, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { useAuth } from '@/lib/AuthContext';
@@ -13,6 +13,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Brain, FileUp, Database, PlayCircle, Save, Plus, Trash2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 const parseQuizQuestions = (quiz) => {
   try {
@@ -60,22 +61,9 @@ const normalizeQuestion = (q, fallbackId) => {
   };
 };
 
-const bankKey = (user) => `kognocore_metacog_bank_${user?.learner_id || user?.email || 'guest'}`;
-const sessionsKey = (user) => `kognocore_metacog_sessions_${user?.learner_id || user?.email || 'guest'}`;
-
-const loadJson = (key, fallback = []) => {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(key) || 'null');
-    return Array.isArray(parsed) ? parsed : fallback;
-  } catch (_e) {
-    return fallback;
-  }
-};
-
 export default function MetacogLabPage() {
   const { user } = useAuth();
-  const [bank, setBank] = useState(() => loadJson(bankKey(user), []));
-  const [sessions, setSessions] = useState(() => loadJson(sessionsKey(user), []));
+  const queryClient = useQueryClient();
   const [selectedQuizIds, setSelectedQuizIds] = useState([]);
   const [selectedQuestionIds, setSelectedQuestionIds] = useState([]);
   const [sessionName, setSessionName] = useState('');
@@ -84,22 +72,74 @@ export default function MetacogLabPage() {
   const [qIndex, setQIndex] = useState(0);
   const [analysis, setAnalysis] = useState({});
 
-  const persistBank = (next) => {
-    setBank(next);
-    localStorage.setItem(bankKey(user), JSON.stringify(next));
-  };
-
-  const persistSessions = (next) => {
-    setSessions(next);
-    localStorage.setItem(sessionsKey(user), JSON.stringify(next));
-  };
-
   const { data: quizzes = [] } = useQuery({
     queryKey: ['metacog-lab-quizzes'],
     queryFn: () => client.entities.Quiz.list('-created_date')
   });
 
-  const addSelectedQuizzesToBank = () => {
+  const { data: bank = [] } = useQuery({
+    queryKey: ['metacog-bank', user?.learner_id, user?.email, user?.role],
+    queryFn: async () => {
+      if (!user) return [];
+      if (user.role === 'admin') return client.entities.MetacogQuestion.list('-created_date');
+      const byLearner = user.learner_id
+        ? await client.entities.MetacogQuestion.filter({ learner_id: user.learner_id }, '-created_date')
+        : [];
+      if (byLearner.length > 0) return byLearner;
+      if (user.email) return client.entities.MetacogQuestion.filter({ user_email: user.email }, '-created_date');
+      return [];
+    },
+    enabled: !!user
+  });
+
+  const { data: sessions = [] } = useQuery({
+    queryKey: ['metacog-sessions', user?.learner_id, user?.email, user?.role],
+    queryFn: async () => {
+      if (!user) return [];
+      if (user.role === 'admin') return client.entities.MetacogSession.list('-created_date');
+      const byLearner = user.learner_id
+        ? await client.entities.MetacogSession.filter({ learner_id: user.learner_id }, '-created_date')
+        : [];
+      if (byLearner.length > 0) return byLearner;
+      if (user.email) return client.entities.MetacogSession.filter({ user_email: user.email }, '-created_date');
+      return [];
+    },
+    enabled: !!user
+  });
+
+  const saveQuestionMutation = useMutation({
+    mutationFn: (payload) => client.entities.MetacogQuestion.create(payload),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['metacog-bank'] })
+  });
+
+  const deleteSessionMutation = useMutation({
+    mutationFn: (id) => client.entities.MetacogSession.delete(id),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['metacog-sessions'] })
+  });
+
+  const createSessionMutation = useMutation({
+    mutationFn: (payload) => client.entities.MetacogSession.create(payload),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['metacog-sessions'] })
+  });
+
+  const saveAnalysisMutation = useMutation({
+    mutationFn: async (payload) => {
+      const criteria = {
+        session_id: payload.session_id,
+        question_id: payload.question_id,
+        learner_id: payload.learner_id || null,
+        user_email: payload.user_email || null
+      };
+      if (payload.quiz_attempt_id) criteria.quiz_attempt_id = payload.quiz_attempt_id;
+      const existing = await client.entities.MetacogAnalysis.filter(criteria);
+      if (existing.length > 0) {
+        return client.entities.MetacogAnalysis.update(existing[0].id, payload);
+      }
+      return client.entities.MetacogAnalysis.create(payload);
+    }
+  });
+
+  const addSelectedQuizzesToBank = async () => {
     const selected = quizzes.filter((q) => selectedQuizIds.includes(q.id));
     const incoming = [];
     selected.forEach((quiz) => {
@@ -118,12 +158,28 @@ export default function MetacogLabPage() {
 
     const existing = new Set(bank.map((q) => `${q.text}::${q.sourceQuizId || 'manual'}`));
     const unique = incoming.filter((q) => !existing.has(`${q.text}::${q.sourceQuizId || 'manual'}`));
-    persistBank([...bank, ...unique]);
+    if (unique.length === 0) {
+      toast.info('No hay preguntas nuevas para agregar');
+      return;
+    }
+    await Promise.all(
+      unique.map((q) =>
+        saveQuestionMutation.mutateAsync({
+          ...q,
+          source_quiz_id: q.sourceQuizId || null,
+          source_quiz_title: q.sourceQuizTitle || null,
+          source_question_id: q.id,
+          user_email: user?.email || null,
+          learner_id: user?.learner_id || null
+        })
+      )
+    );
+    toast.success(`Se agregaron ${unique.length} preguntas al banco metacog`);
   };
 
   const onUploadJson = (file) => {
     const reader = new FileReader();
-    reader.onload = (evt) => {
+    reader.onload = async (evt) => {
       try {
         const raw = JSON.parse(String(evt.target?.result || '{}'));
         const sourceQuestions = Array.isArray(raw?.quiz)
@@ -141,7 +197,23 @@ export default function MetacogLabPage() {
 
         const existing = new Set(bank.map((q) => `${q.text}::${q.sourceQuizId || 'manual'}`));
         const unique = mapped.filter((q) => !existing.has(`${q.text}::${q.sourceQuizId || 'manual'}`));
-        persistBank([...bank, ...unique]);
+        if (unique.length === 0) {
+          toast.info('El JSON no contiene preguntas nuevas');
+          return;
+        }
+        await Promise.all(
+          unique.map((q) =>
+            saveQuestionMutation.mutateAsync({
+              ...q,
+              source_quiz_id: 'upload',
+              source_quiz_title: 'Archivo JSON',
+              source_question_id: q.id,
+              user_email: user?.email || null,
+              learner_id: user?.learner_id || null
+            })
+          )
+        );
+        toast.success(`Se cargaron ${unique.length} preguntas desde JSON`);
       } catch (_e) {
         window.alert('JSON inválido o no compatible');
       }
@@ -149,22 +221,20 @@ export default function MetacogLabPage() {
     reader.readAsText(file);
   };
 
-  const createSession = () => {
+  const createSession = async () => {
     if (!sessionName.trim() || !sessionCode.trim() || selectedQuestionIds.length === 0) return;
-    const next = [
-      ...sessions,
-      {
-        id: `sess_${Date.now()}`,
-        name: sessionName.trim(),
-        code: sessionCode.trim().toUpperCase(),
-        questionIds: selectedQuestionIds,
-        createdAt: Date.now()
-      }
-    ];
-    persistSessions(next);
+    await createSessionMutation.mutateAsync({
+      name: sessionName.trim(),
+      code: sessionCode.trim().toUpperCase(),
+      questionIds: selectedQuestionIds,
+      user_email: user?.email || null,
+      learner_id: user?.learner_id || null,
+      createdAt: Date.now()
+    });
     setSessionName('');
     setSessionCode('');
     setSelectedQuestionIds([]);
+    toast.success('Sesión metacognitiva creada');
   };
 
   const activeSession = sessions.find((s) => s.id === activeSessionId) || null;
@@ -174,13 +244,46 @@ export default function MetacogLabPage() {
   );
   const currentQuestion = activeQuestions[qIndex] || null;
 
+  const { data: sessionAnalyses = [] } = useQuery({
+    queryKey: ['metacog-analyses', activeSessionId, user?.learner_id, user?.email],
+    queryFn: async () => {
+      if (!activeSessionId) return [];
+      const criteria = { session_id: activeSessionId };
+      if (user?.learner_id) {
+        return client.entities.MetacogAnalysis.filter({ ...criteria, learner_id: user.learner_id }, '-created_date');
+      }
+      if (user?.email) {
+        return client.entities.MetacogAnalysis.filter({ ...criteria, user_email: user.email }, '-created_date');
+      }
+      return client.entities.MetacogAnalysis.filter(criteria, '-created_date');
+    },
+    enabled: !!activeSessionId
+  });
+
+  useEffect(() => {
+    const map = {};
+    (sessionAnalyses || []).forEach((row) => {
+      map[row.question_id] = {
+        reformulation: row.reformulation || '',
+        pivots: row.pivots || '',
+        anticipatedErrors: row.anticipatedErrors || '',
+        predictedAnswer: row.predictedAnswer || '',
+        selectedOption: row.selectedOption || '',
+        justification: row.justification || '',
+        quizAttemptId: row.quiz_attempt_id || row.quizAttemptId || ''
+      };
+    });
+    setAnalysis(map);
+  }, [activeSessionId, sessionAnalyses]);
+
   const currentAnalysis = currentQuestion ? (analysis[currentQuestion.id] || {
     reformulation: '',
     pivots: '',
     anticipatedErrors: '',
     predictedAnswer: '',
     selectedOption: '',
-    justification: ''
+    justification: '',
+    quizAttemptId: ''
   }) : null;
 
   const updateCurrentAnalysis = (field, value) => {
@@ -323,7 +426,7 @@ export default function MetacogLabPage() {
                           <p className="text-xs text-slate-500">{session.code} · {session.questionIds.length} preguntas</p>
                         </button>
                         <button
-                          onClick={() => persistSessions(sessions.filter((s) => s.id !== session.id))}
+                          onClick={() => deleteSessionMutation.mutate(session.id)}
                           className="rounded p-1 text-slate-400 hover:bg-rose-50 hover:text-rose-600"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -391,13 +494,38 @@ export default function MetacogLabPage() {
                           <Input value={currentAnalysis?.selectedOption || ''} onChange={(e) => updateCurrentAnalysis('selectedOption', e.target.value.toUpperCase())} />
                         </div>
                         <div className="space-y-1">
+                          <Label>ID de intento (opcional)</Label>
+                          <Input value={currentAnalysis?.quizAttemptId || ''} onChange={(e) => updateCurrentAnalysis('quizAttemptId', e.target.value)} />
+                        </div>
+                        <div className="space-y-1">
                           <Label>Justificación</Label>
                           <Textarea value={currentAnalysis?.justification || ''} onChange={(e) => updateCurrentAnalysis('justification', e.target.value)} />
                         </div>
                       </div>
 
                       <Button
-                        onClick={() => localStorage.setItem(`kognocore_metacog_analysis_${user?.learner_id || user?.email || 'guest'}`, JSON.stringify(analysis))}
+                        onClick={async () => {
+                          if (!activeSession || !currentQuestion || !currentAnalysis) return;
+                          await saveAnalysisMutation.mutateAsync({
+                            session_id: activeSession.id,
+                            session_code: activeSession.code,
+                            session_name: activeSession.name,
+                            question_id: currentQuestion.id,
+                            question_text: currentQuestion.text,
+                            source_quiz_id: currentQuestion.sourceQuizId || currentQuestion.source_quiz_id || null,
+                            source_quiz_title: currentQuestion.sourceQuizTitle || currentQuestion.source_quiz_title || null,
+                            reformulation: currentAnalysis.reformulation || '',
+                            pivots: currentAnalysis.pivots || '',
+                            anticipatedErrors: currentAnalysis.anticipatedErrors || '',
+                            predictedAnswer: currentAnalysis.predictedAnswer || '',
+                            selectedOption: currentAnalysis.selectedOption || '',
+                            justification: currentAnalysis.justification || '',
+                            quiz_attempt_id: currentAnalysis.quizAttemptId?.trim() || null,
+                            user_email: user?.email || null,
+                            learner_id: user?.learner_id || null
+                          });
+                          toast.success('Análisis guardado y asociado al estudiante');
+                        }}
                         className="gap-2 bg-indigo-700 hover:bg-indigo-800"
                       >
                         <PlayCircle className="h-4 w-4" />

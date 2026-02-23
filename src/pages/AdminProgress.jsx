@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Search, TrendingUp, AlertCircle, Calendar, Trash2, Eye, Loader2, ChevronDown, ChevronUp, FileDown, BookOpen, ArrowLeft, LayoutDashboard } from 'lucide-react';
+import { Search, TrendingUp, AlertCircle, Calendar, Trash2, Eye, Loader2, ChevronDown, ChevronUp, FileDown, BookOpen, ArrowLeft, LayoutDashboard, Brain } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
@@ -86,6 +86,11 @@ export default function AdminProgress() {
   const { data: users = [] } = useQuery({
     queryKey: ['users'],
     queryFn: () => client.entities.User.list('-created_date', 1000),
+  });
+
+  const { data: metacogAnalyses = [] } = useQuery({
+    queryKey: ['metacog-analyses-admin'],
+    queryFn: () => client.entities.MetacogAnalysis.list('-created_date'),
   });
 
   const buildStudentKey = (payload) => payload?.learner_id || payload?.email || payload?.user_email || payload?.id;
@@ -561,6 +566,10 @@ export default function AdminProgress() {
         <Tabs defaultValue="students" className="mb-6">
           <TabsList>
             <TabsTrigger value="students">Estudiantes</TabsTrigger>
+            <TabsTrigger value="metacog">
+              <Brain className="w-4 h-4 mr-2" />
+              Metacog
+            </TabsTrigger>
             <TabsTrigger value="docs">
               <BookOpen className="w-4 h-4 mr-2" />
               Documentación
@@ -924,6 +933,48 @@ export default function AdminProgress() {
               subjects={subjects}
               quizzes={quizzes}
             />
+          </TabsContent>
+
+          <TabsContent value="metacog">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Registros Metacognitivos</CardTitle>
+                <p className="text-sm text-gray-500">
+                  Análisis guardados por estudiante, sesión y pregunta.
+                </p>
+              </CardHeader>
+              <CardContent>
+                {metacogAnalyses.length === 0 ? (
+                  <p className="text-sm text-gray-500">Aún no hay registros de Metacog Lab.</p>
+                ) : (
+                  <div className="space-y-3 max-h-[650px] overflow-y-auto">
+                    {metacogAnalyses.map((row) => (
+                      <div key={row.id} className="rounded-xl border border-slate-200 bg-white p-4">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <div>
+                            <p className="font-semibold text-slate-900">{row.session_name || row.session_code || 'Sesión'}</p>
+                            <p className="text-xs text-slate-500">
+                              {row.user_email || row.learner_id || 'Sin usuario'} · {format(new Date(row.created_date || Date.now()), 'dd/MM/yyyy HH:mm')}
+                            </p>
+                          </div>
+                          <Badge variant="outline">{row.source_quiz_title || row.source_quiz_id || 'Quiz'}</Badge>
+                        </div>
+                        <p className="mt-3 text-sm font-medium text-slate-900">{row.question_text || 'Pregunta sin texto'}</p>
+                        <div className="mt-2 grid gap-2 text-xs text-slate-700 md:grid-cols-2">
+                          <div><strong>Reformulación:</strong> {row.reformulation || '—'}</div>
+                          <div><strong>Pivotes:</strong> {row.pivots || '—'}</div>
+                          <div><strong>Errores anticipados:</strong> {row.anticipatedErrors || '—'}</div>
+                          <div><strong>Predicción:</strong> {row.predictedAnswer || '—'}</div>
+                          <div><strong>Opción elegida:</strong> {row.selectedOption || '—'}</div>
+                          <div><strong>Justificación:</strong> {row.justification || '—'}</div>
+                          <div><strong>ID intento:</strong> {row.quiz_attempt_id || row.quizAttemptId || '—'}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="docs">
