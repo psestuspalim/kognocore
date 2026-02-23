@@ -310,13 +310,13 @@ export default function QuestionView({
           {/* Mobile: Block flow (below left col). Desktop: Scrollable Panel (Right side) */}
           <div className="flex flex-col lg:h-full overflow-hidden">
             <div className="h-full flex flex-col min-h-0">
-              <div className="mx-auto h-full w-full max-w-2xl rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm md:p-5">
+              <div className="mx-auto h-full w-full max-w-2xl rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm md:p-5 flex flex-col min-h-0">
 
                 <div className="mb-4 flex items-center justify-between">
                   <span className="text-[11px] font-bold tracking-[0.12em] text-slate-600 uppercase">Opciones</span>
                 </div>
 
-                <div className="space-y-2">
+                <div className="flex-1 min-h-0 overflow-y-auto pr-1 space-y-2">
                   {options.map((option, index) => {
                     return (
                       <button
