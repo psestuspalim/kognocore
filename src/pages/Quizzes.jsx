@@ -468,6 +468,12 @@ export default function QuizzesPage() {
     mutationFn: ({ id, data }) => client.entities.QuizAttempt.update(id, data),
   });
 
+  const buildAttemptIdentity = () => ({
+    user_email: currentUser?.email || '',
+    username: currentUser?.username || 'Estudiante',
+    learner_id: currentUser?.learner_id || null
+  });
+
 
 
 
@@ -1960,8 +1966,3 @@ export default function QuizzesPage() {
     </div >
   );
 }
-  const buildAttemptIdentity = () => ({
-    user_email: currentUser.email,
-    username: currentUser.username,
-    learner_id: currentUser.learner_id || null
-  });
