@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { useAuth } from '@/lib/AuthContext';
-import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, ChevronRight, Upload, Home, Shield, AlertCircle, LayoutDashboard } from 'lucide-react';
+import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, ChevronRight, Upload, Home, Shield, AlertCircle, LayoutDashboard, Calculator } from 'lucide-react';
 import { Icon } from '@/components/ui/Icon';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -1375,6 +1375,15 @@ export default function QuizzesPage() {
                         <p className="text-gray-600">Selecciona un curso para ver sus materias</p>
                       </div>
                       <div className="flex flex-wrap gap-2">
+                        <Link to={createPageUrl('Adivino')}>
+                          <Button
+                            variant="outline"
+                            className="text-xs sm:text-sm h-9 border-slate-300 text-slate-700 hover:bg-slate-50"
+                          >
+                            <Calculator className="w-4 h-4 mr-2" />
+                            Adivino
+                          </Button>
+                        </Link>
                         {!canEdit && (
                           <Button
                             onClick={() => setShowJoinModal(true)}

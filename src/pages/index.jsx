@@ -15,6 +15,7 @@ const MyTasks = lazy(() => import("./MyTasks"));
 const AdminTasks = lazy(() => import("./AdminTasks"));
 const TournamentLobby = lazy(() => import("./TournamentLobby"));
 const TournamentPlay = lazy(() => import("./TournamentPlay"));
+const Adivino = lazy(() => import("./Adivino"));
 
 // Spinner simple para las cargas iniciales
 function FullPageFallback() {
@@ -47,6 +48,8 @@ export function Pages() {
         <Route path="/AdminTasks" element={<AdminTasks />} />
         <Route path="/TournamentLobby" element={<TournamentLobby />} />
         <Route path="/TournamentPlay" element={<TournamentPlay />} />
+        <Route path="/Adivino" element={<Adivino />} />
+        <Route path="/adivino" element={<Adivino />} />
       </Routes>
     </Suspense>
   );

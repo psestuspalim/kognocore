@@ -55,6 +55,7 @@ import AdminStudentDetail from './pages/AdminStudentDetail';
 import AdminStudents from './pages/AdminStudents';
 import AdminTasks from './pages/AdminTasks';
 import AdminTrash from './pages/AdminTrash';
+import Adivino from './pages/Adivino';
 import Badges from './pages/Badges';
 import ChallengePlay from './pages/ChallengePlay';
 import CourseManagement from './pages/CourseManagement';
@@ -80,6 +81,7 @@ export const PAGES = {
     "AdminStudents": AdminStudents,
     "AdminTasks": AdminTasks,
     "AdminTrash": AdminTrash,
+    "Adivino": Adivino,
     "Badges": Badges,
     "ChallengePlay": ChallengePlay,
     "CourseManagement": CourseManagement,
