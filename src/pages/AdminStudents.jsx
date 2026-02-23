@@ -31,6 +31,12 @@ export default function AdminStudents() {
     enabled: currentUser?.role === 'admin'
   });
 
+  const { data: attempts = [] } = useQuery({
+    queryKey: ['admin-students-attempts'],
+    queryFn: () => client.entities.QuizAttempt.list('-created_date', 5000),
+    enabled: currentUser?.role === 'admin'
+  });
+
   if (!currentUser || currentUser.role !== 'admin') {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -39,7 +45,37 @@ export default function AdminStudents() {
     );
   }
 
-  const students = allUsers.filter(u => u.role === 'user');
+  const usersByKey = new Map();
+  allUsers
+    .filter((u) => u.role === 'user')
+    .forEach((u) => {
+      const key = u.learner_id ? `lid:${u.learner_id}` : `email:${u.email}`;
+      usersByKey.set(key, {
+        ...u,
+        key,
+        learner_id: u.learner_id || null,
+        email: u.email || null
+      });
+    });
+
+  attempts.forEach((a) => {
+    const key = a.learner_id ? `lid:${a.learner_id}` : (a.user_email ? `email:${a.user_email}` : null);
+    if (!key) return;
+    if (!usersByKey.has(key)) {
+      usersByKey.set(key, {
+        id: `virtual:${key}`,
+        key,
+        role: 'user',
+        learner_id: a.learner_id || null,
+        email: a.user_email || null,
+        username: a.username || 'Estudiante',
+        full_name: a.username || 'Estudiante',
+        created_date: a.created_date
+      });
+    }
+  });
+
+  const students = Array.from(usersByKey.values());
 
   const filteredStudents = students.filter(student => {
     const search = searchTerm.toLowerCase();
@@ -95,7 +131,11 @@ export default function AdminStudents() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: Math.min(idx * 0.03, 0.3) }}
             >
-              <Link to={createPageUrl(`AdminStudentDetail?id=${student.id}`)}>
+              <Link
+                to={createPageUrl(
+                  `AdminStudentDetail?id=${encodeURIComponent(student.id)}&learner_id=${encodeURIComponent(student.learner_id || '')}&email=${encodeURIComponent(student.email || '')}`
+                )}
+              >
                 <Card className="hover:shadow-md hover:border-primary/30 transition-all cursor-pointer rounded-xl">
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between">

@@ -17,6 +17,8 @@ export default function AdminStudentDetail() {
   const [currentUser, setCurrentUser] = useState(null);
   const urlParams = new URLSearchParams(window.location.search);
   const studentId = urlParams.get('id');
+  const learnerIdParam = urlParams.get('learner_id');
+  const emailParam = urlParams.get('email');
 
   useEffect(() => {
     const loadUser = async () => {
@@ -27,12 +29,36 @@ export default function AdminStudentDetail() {
   }, []);
 
   const { data: student } = useQuery({
-    queryKey: ['student', studentId],
+    queryKey: ['student', studentId, learnerIdParam, emailParam],
     queryFn: async () => {
       const users = await client.entities.User.list();
-      return users.find(u => u.id === studentId);
+      const attempts = await client.entities.QuizAttempt.list('-created_date', 5000);
+      const fromUsers = users.find((u) =>
+        u.id === studentId ||
+        (learnerIdParam && u.learner_id === learnerIdParam) ||
+        (emailParam && u.email === emailParam)
+      );
+
+      if (fromUsers) return fromUsers;
+
+      const fromAttempts = attempts.find((a) =>
+        (learnerIdParam && a.learner_id === learnerIdParam) ||
+        (emailParam && a.user_email === emailParam)
+      );
+
+      if (!fromAttempts) return null;
+
+      return {
+        id: studentId || `virtual:${fromAttempts.learner_id || fromAttempts.user_email}`,
+        role: 'user',
+        learner_id: fromAttempts.learner_id || learnerIdParam || null,
+        email: fromAttempts.user_email || emailParam || null,
+        username: fromAttempts.username || 'Estudiante',
+        full_name: fromAttempts.username || 'Estudiante',
+        created_date: fromAttempts.created_date
+      };
     },
-    enabled: !!studentId && currentUser?.role === 'admin'
+    enabled: (!!studentId || !!learnerIdParam || !!emailParam) && currentUser?.role === 'admin'
   });
 
   const { data: enrollments = [] } = useQuery({
@@ -41,14 +67,17 @@ export default function AdminStudentDetail() {
       user_email: student.email,
       status: 'approved'
     }),
-    enabled: !!student
+    enabled: !!student?.email
   });
 
   const { data: attempts = [] } = useQuery({
-    queryKey: ['student-attempts', student?.email],
-    queryFn: () => client.entities.QuizAttempt.filter({
-      user_email: student.email
-    }, '-created_date'),
+    queryKey: ['student-attempts', student?.learner_id || student?.email],
+    queryFn: () => {
+      if (student?.learner_id) {
+        return client.entities.QuizAttempt.filter({ learner_id: student.learner_id }, '-created_date');
+      }
+      return client.entities.QuizAttempt.filter({ user_email: student?.email }, '-created_date');
+    },
     enabled: !!student
   });
 
@@ -60,7 +89,7 @@ export default function AdminStudentDetail() {
       });
       return stats[0] || null;
     },
-    enabled: !!student
+    enabled: !!student?.email
   });
 
   if (!currentUser || currentUser.role !== 'admin') {

@@ -54,6 +54,12 @@ export default function AdminHome() {
     enabled: currentUser?.role === 'admin'
   });
 
+  const { data: attempts = [] } = useQuery({
+    queryKey: ['admin-home-attempts'],
+    queryFn: () => client.entities.QuizAttempt.list('-created_date', 5000),
+    enabled: currentUser?.role === 'admin'
+  });
+
   const { data: enrollments = [] } = useQuery({
     queryKey: ['all-enrollments'],
     queryFn: () => client.entities.CourseEnrollment.filter({ status: 'pending' }),
@@ -86,8 +92,19 @@ export default function AdminHome() {
     { label: 'Quizzes', value: quizzes.length }
   ];
 
+  const uniqueStudentKeys = new Set();
+  allUsers.filter((u) => u.role === 'user').forEach((u) => {
+    if (u.learner_id) uniqueStudentKeys.add(`lid:${u.learner_id}`);
+    else if (u.email) uniqueStudentKeys.add(`email:${u.email}`);
+  });
+  attempts.forEach((a) => {
+    if (a.learner_id) uniqueStudentKeys.add(`lid:${a.learner_id}`);
+    else if (a.user_email) uniqueStudentKeys.add(`email:${a.user_email}`);
+  });
+  const totalStudents = uniqueStudentKeys.size;
+
   const studentStats = [
-    { label: 'Total', value: allUsers.filter(u => u.role === 'user').length },
+    { label: 'Total', value: totalStudents },
     { label: 'Admins', value: allUsers.filter(u => u.role === 'admin').length },
     { label: 'Solicitudes', value: enrollments.length },
     { label: 'Activos', value: sessions.length }
@@ -118,7 +135,7 @@ export default function AdminHome() {
         <AdminKpiCard
           icon={Users}
           label="Estudiantes"
-          value={allUsers.filter(u => u.role === 'user').length}
+          value={totalStudents}
         />
         <AdminKpiCard
           icon={FileJson}
@@ -161,7 +178,7 @@ export default function AdminHome() {
           <AdminDashboardCard
             title="Estudiantes"
             description="Usuarios, solicitudes y actividad"
-            count={allUsers.filter(u => u.role === 'user').length}
+            count={totalStudents}
             stats={studentStats}
             variant="stats"
             primaryActionLabel="Ver estudiantes"
