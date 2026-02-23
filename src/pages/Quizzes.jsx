@@ -275,6 +275,91 @@ export default function QuizzesPage() {
   const hasCourseIdMatch = !!(userCourseId && courses.some(c => c?.id && sameId(c.id, userCourseId)));
   const fallbackCourseId = hasCourseIdMatch ? currentUser.courseId : null;
 
+  const getFolderHierarchyContext = (folderId) => {
+    if (!folderId) return { course_id: null, subject_id: null };
+
+    let cursor = folders.find((f) => sameId(f.id, folderId));
+    let safety = 0;
+    let courseId = null;
+    let subjectId = null;
+
+    while (cursor && safety < 30) {
+      if (!courseId && cursor.course_id) courseId = cursor.course_id;
+      if (!subjectId && cursor.subject_id) subjectId = cursor.subject_id;
+      if (!cursor.parent_id) break;
+      cursor = folders.find((f) => sameId(f.id, cursor.parent_id));
+      safety += 1;
+    }
+
+    if (!courseId && subjectId) {
+      const subj = subjects.find((s) => sameId(s.id, subjectId));
+      if (subj?.course_id) courseId = subj.course_id;
+    }
+
+    return { course_id: courseId || null, subject_id: subjectId || null };
+  };
+
+  const buildSubjectPayload = (data) => {
+    const payload = { ...data };
+
+    if (currentFolderId) {
+      const ctx = getFolderHierarchyContext(currentFolderId);
+      payload.folder_id = currentFolderId;
+      payload.subject_id = null;
+      payload.course_id = ctx.course_id || selectedCourse?.id || payload.course_id || null;
+      return payload;
+    }
+
+    payload.folder_id = null;
+    payload.course_id = selectedCourse?.id || payload.course_id || null;
+    payload.subject_id = null;
+    return payload;
+  };
+
+  const buildFolderPayload = (data) => {
+    const payload = { ...data };
+    const parentId = payload.parent_id || currentFolderId || null;
+
+    if (parentId) {
+      const ctx = getFolderHierarchyContext(parentId);
+      payload.parent_id = parentId;
+      payload.course_id = ctx.course_id || selectedCourse?.id || payload.course_id || null;
+      payload.subject_id = payload.subject_id || ctx.subject_id || selectedSubject?.id || null;
+      return payload;
+    }
+
+    if (payload.subject_id) {
+      const subject = subjects.find((s) => sameId(s.id, payload.subject_id));
+      payload.course_id = subject?.course_id || selectedCourse?.id || payload.course_id || null;
+      payload.parent_id = null;
+      return payload;
+    }
+
+    payload.parent_id = null;
+    payload.subject_id = null;
+    payload.course_id = selectedCourse?.id || payload.course_id || null;
+    return payload;
+  };
+
+  const buildQuizPayload = (data) => {
+    const payload = { ...data };
+
+    if (currentFolderId) {
+      const ctx = getFolderHierarchyContext(currentFolderId);
+      payload.folder_id = currentFolderId;
+      payload.subject_id = payload.subject_id || ctx.subject_id || null;
+      return payload;
+    }
+
+    if (selectedSubject?.id) {
+      payload.subject_id = selectedSubject.id;
+      payload.folder_id = null;
+      return payload;
+    }
+
+    return payload;
+  };
+
   // Mutations
   const createCourseMutation = useMutation({
     mutationFn: (data) => client.entities.Course.create(data),
@@ -299,7 +384,7 @@ export default function QuizzesPage() {
   });
 
   const createSubjectMutation = useMutation({
-    mutationFn: (data) => client.entities.Subject.create(data),
+    mutationFn: (data) => client.entities.Subject.create(buildSubjectPayload(data)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['subjects'] });
       setShowSubjectDialog(false);
@@ -325,7 +410,7 @@ export default function QuizzesPage() {
       // Asignar color automáticamente basado en el número de carpetas existentes
       const folderCount = folders.length;
       const folderData = {
-        ...data,
+        ...buildFolderPayload(data),
         color: data.color || getFolderColor(folderCount)
       };
       return client.entities.Folder.create(folderData);
@@ -351,7 +436,7 @@ export default function QuizzesPage() {
   });
 
   const createQuizMutation = useMutation({
-    mutationFn: (data) => client.entities.Quiz.create(data),
+    mutationFn: (data) => client.entities.Quiz.create(buildQuizPayload(data)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['quizzes'] });
       setShowUploader(false);
@@ -592,31 +677,37 @@ export default function QuizzesPage() {
   const unassignedSubjects = subjects.filter(s => s && s.id && !s.course_id && canUserAccess(s));
   const unassignedFolders = folders.filter(f => f && f.id && !f.course_id && !f.parent_id && canUserAccess(f));
   const currentCourseSubjects = selectedCourse
-    ? subjects.filter(s => s && s.id && s.course_id === selectedCourse.id && canUserAccess(s, selectedCourse))
+    ? subjects.filter(s => s && s.id && sameId(s.course_id, selectedCourse.id) && canUserAccess(s, selectedCourse))
     : [];
   const currentCourseFolders = selectedCourse
-    ? folders.filter(f => f && f.id && f.course_id === selectedCourse.id && f.parent_id === currentFolderId && canUserAccess(f, selectedCourse))
+    ? folders.filter(f =>
+      f &&
+      f.id &&
+      sameId(f.course_id, selectedCourse.id) &&
+      (currentFolderId ? sameId(f.parent_id, currentFolderId) : !f.parent_id) &&
+      canUserAccess(f, selectedCourse)
+    )
     : currentFolderId
-      ? folders.filter(f => f && f.id && f.parent_id === currentFolderId && canUserAccess(f))
+      ? folders.filter(f => f && f.id && sameId(f.parent_id, currentFolderId) && canUserAccess(f))
       : [];
 
   const currentFolderQuizzes = currentFolderId
-    ? quizzes.filter(q => q && q.id && q.folder_id === currentFolderId && (isAdmin || !q.is_hidden))
+    ? quizzes.filter(q => q && q.id && sameId(q.folder_id, currentFolderId) && (isAdmin || !q.is_hidden))
     : [];
   const currentFolderSubjects = currentFolderId
-    ? subjects.filter(s => s && s.id && s.folder_id === currentFolderId && canUserAccess(s))
+    ? subjects.filter(s => s && s.id && sameId(s.folder_id, currentFolderId) && canUserAccess(s))
     : currentCourseSubjects.filter(s => s && s.id && !s.folder_id);
 
   const subjectQuizzes = selectedSubject
-    ? quizzes.filter(q => q && q.id && q.subject_id === selectedSubject.id && (isAdmin || !q.is_hidden))
+    ? quizzes.filter(q => q && q.id && sameId(q.subject_id, selectedSubject.id) && (isAdmin || !q.is_hidden))
     : [];
 
   const currentLevelQuizzes = currentFolderId ? currentFolderQuizzes : subjectQuizzes;
 
   const currentLevelResources = selectedSubject
-    ? resources.filter(r => r.subject_id === selectedSubject.id && (isAdmin || !r.is_hidden))
+    ? resources.filter(r => sameId(r.subject_id, selectedSubject.id) && (isAdmin || !r.is_hidden))
     : currentFolderId
-      ? resources.filter(r => r.folder_id === currentFolderId && (isAdmin || !r.is_hidden))
+      ? resources.filter(r => sameId(r.folder_id, currentFolderId) && (isAdmin || !r.is_hidden))
       : [];
 
   const [currentAttemptId, setCurrentAttemptId] = useState(null);
@@ -990,7 +1081,7 @@ export default function QuizzesPage() {
 
   const handleReviewWrongBySubject = async (subjectId) => {
     // Obtener todos los quizzes de la materia
-    const subjectQuizIds = quizzes.filter(q => q.subject_id === subjectId).map(q => q.id);
+    const subjectQuizIds = quizzes.filter(q => sameId(q.subject_id, subjectId)).map(q => q.id);
 
     // Obtener todas las preguntas incorrectas de esa materia
     const wrongQuestionsMap = new Map();
@@ -1052,7 +1143,7 @@ export default function QuizzesPage() {
   };
 
   const getSubjectStats = (subjectId) => {
-    const subjectQuizzes = quizzes.filter(q => q.subject_id === subjectId);
+    const subjectQuizzes = quizzes.filter(q => sameId(q.subject_id, subjectId));
     const subjectQuizIds = subjectQuizzes.map(q => q.id);
     const subjectAttempts = attempts.filter(a => subjectQuizIds.includes(a.quiz_id));
 
@@ -1072,10 +1163,10 @@ export default function QuizzesPage() {
 
   const getRecursiveQuizCount = (subjectId) => {
     // 1. Direct quizzes
-    const directCount = quizzes.filter(q => q.subject_id === subjectId).length;
+    const directCount = quizzes.filter(q => sameId(q.subject_id, subjectId)).length;
 
     // 2. Quizzes in folders belonging to this subject
-    const subjectFolders = folders.filter(f => f.subject_id === subjectId);
+    const subjectFolders = folders.filter(f => sameId(f.subject_id, subjectId));
     const folderIds = subjectFolders.map(f => f.id);
     const folderCount = quizzes.filter(q => folderIds.includes(q.folder_id)).length;
 
@@ -1089,7 +1180,7 @@ export default function QuizzesPage() {
 
   // Breadcrumb
   const Breadcrumb = () => {
-    const currentFolder = currentFolderId ? folders.find(f => f.id === currentFolderId) : null;
+    const currentFolder = currentFolderId ? folders.find(f => sameId(f.id, currentFolderId)) : null;
     const folderParentSubject = currentFolder?.subject_id ? subjects.find(s => s.id === currentFolder.subject_id) : null;
 
     return (
@@ -1275,7 +1366,7 @@ export default function QuizzesPage() {
                             <DraggableItem key={course.id} id={course.id} index={index} isAdmin={canEdit}>
                               <CourseCard
                                 course={course}
-                                subjectCount={subjects.filter(s => s.course_id === course.id).length}
+                                subjectCount={subjects.filter(s => sameId(s.course_id, course.id)).length}
                                 isAdmin={canEdit}
                                 onEdit={setEditingCourse}
                                 onDelete={(id) => deleteCourseMutation.mutate(id)}
@@ -1298,7 +1389,7 @@ export default function QuizzesPage() {
                         <DraggableItem key={subject.id} id={subject.id} index={index} isAdmin={canEdit}>
                           <SubjectCard
                             subject={subject}
-                            quizCount={quizzes.filter(q => q.subject_id === subject.id).length}
+                            quizCount={quizzes.filter(q => sameId(q.subject_id, subject.id)).length}
                             stats={getSubjectStats(subject.id)}
                             isAdmin={canEdit}
                             onDelete={(id) => deleteSubjectMutation.mutate(id)}
@@ -1442,7 +1533,7 @@ export default function QuizzesPage() {
                       <div>
                         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
                           {currentFolderId ? (
-                            <><Folder className="w-6 h-6" /> {folders.find(f => f.id === currentFolderId)?.name}</>
+                            <><Folder className="w-6 h-6" /> {folders.find(f => sameId(f.id, currentFolderId))?.name}</>
                           ) : selectedSubject ? (
                             <><BookOpen className="w-6 h-6" /> {selectedSubject.name}</>
                           ) : selectedCourse ? (
@@ -1588,7 +1679,7 @@ export default function QuizzesPage() {
                         <DraggableItem key={folder.id} id={folder.id} index={index} isAdmin={canEdit}>
                           <FolderCard
                             folder={folder}
-                            itemCount={subjects.filter(s => s.folder_id === folder.id).length}
+                            itemCount={subjects.filter(s => sameId(s.folder_id, folder.id)).length}
                             isAdmin={canEdit}
                             onDelete={(id) => deleteFolderMutation.mutate(id)}
                             onEdit={setEditingFolder}
@@ -1796,13 +1887,13 @@ export default function QuizzesPage() {
 
 
                       {/* Carpetas dentro de la materia con droppable */}
-                      {folders.filter(f => f.subject_id === selectedSubject.id && !f.parent_id).length > 0 && (
+                      {folders.filter(f => sameId(f.subject_id, selectedSubject.id) && !f.parent_id).length > 0 && (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                          {folders.filter(f => f.subject_id === selectedSubject.id && !f.parent_id).map((folder) => (
+                          {folders.filter(f => sameId(f.subject_id, selectedSubject.id) && !f.parent_id).map((folder) => (
                             <DroppableArea key={folder.id} droppableId={`folder-${folder.id}`} type="QUIZ" className="h-full">
                               <FolderCard
                                 folder={folder}
-                                itemCount={quizzes.filter(q => q.folder_id === folder.id).length}
+                                itemCount={quizzes.filter(q => sameId(q.folder_id, folder.id)).length}
                                 isAdmin={isAdmin}
                                 onDelete={(id) => deleteFolderMutation.mutate(id)}
                                 onEdit={setEditingFolder}
