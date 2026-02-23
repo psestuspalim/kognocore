@@ -61,6 +61,30 @@ const parseNum = (value) => {
   return Number.isFinite(num) ? num : 0;
 };
 
+const sanitizeDecimalInput = (raw, { min, max, decimals = 2, allowEmpty = true }) => {
+  const value = String(raw ?? '').replace(',', '.').trim();
+  if (allowEmpty && value === '') return '';
+  if (!/^\d*(\.\d*)?$/.test(value)) return null;
+  if (value === '.') return '0.';
+
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return null;
+  if (parsed < min || parsed > max) return null;
+
+  const parts = value.split('.');
+  if (parts[1] && parts[1].length > decimals) return null;
+  return value;
+};
+
+const normalizeBlurNumber = (raw, { min, max, decimals = 2, allowEmpty = true }) => {
+  const value = String(raw ?? '').trim();
+  if (allowEmpty && value === '') return '';
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return allowEmpty ? '' : min.toFixed(decimals);
+  const clamped = Math.max(min, Math.min(max, parsed));
+  return clamped.toFixed(decimals);
+};
+
 export default function AdivinoPage() {
   const { user } = useAuth();
   const [subjects, setSubjects] = useState(() => loadSubjects(user));
@@ -201,6 +225,10 @@ export default function AdivinoPage() {
     saveSubjects(user, subjects);
   };
 
+  const handleSelectAll = (e) => {
+    e.target.select();
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-cyan-50/40 p-4 md:p-6">
       <div className="mx-auto max-w-7xl space-y-4">
@@ -329,17 +357,19 @@ export default function AdivinoPage() {
                     <div className="space-y-1.5">
                       <Label>Mínima aprobatoria</Label>
                       <Input
-                        type="number"
-                        min={0}
-                        max={10}
-                        step={0.1}
+                        type="text"
+                        inputMode="decimal"
                         value={selectedSubject.minimum_passing_grade}
-                        onChange={(e) =>
-                          updateSubject((s) => ({
-                            ...s,
-                            minimum_passing_grade: Math.max(0, Math.min(10, parseNum(e.target.value))),
-                          }))
-                        }
+                        onFocus={handleSelectAll}
+                        onChange={(e) => {
+                          const next = sanitizeDecimalInput(e.target.value, { min: 0, max: 10, decimals: 2, allowEmpty: false });
+                          if (next === null) return;
+                          updateSubject((s) => ({ ...s, minimum_passing_grade: next }));
+                        }}
+                        onBlur={(e) => {
+                          const fixed = normalizeBlurNumber(e.target.value, { min: 0, max: 10, decimals: 2, allowEmpty: false });
+                          updateSubject((s) => ({ ...s, minimum_passing_grade: fixed }));
+                        }}
                       />
                     </div>
                   </div>
@@ -358,50 +388,86 @@ export default function AdivinoPage() {
                           <div key={component.key} className="grid grid-cols-[1.4fr_0.7fr_0.7fr_0.7fr] gap-2 px-3 py-2">
                             <div className="text-sm text-slate-800">{component.label}</div>
                             <Input
-                              type="number"
-                              min={0}
-                              max={100}
+                              type="text"
+                              inputMode="decimal"
                               value={row.percentage}
-                              onChange={(e) =>
+                              onFocus={handleSelectAll}
+                              onChange={(e) => {
+                                const next = sanitizeDecimalInput(e.target.value, { min: 0, max: 100, decimals: 2, allowEmpty: false });
+                                if (next === null) return;
                                 updateSubject((s) => ({
                                   ...s,
                                   components: {
                                     ...s.components,
                                     [component.key]: {
                                       ...s.components[component.key],
-                                      percentage: Math.max(0, Math.min(100, parseNum(e.target.value))),
+                                      percentage: next,
                                     },
                                   },
-                                }))
-                              }
+                                }));
+                              }}
+                              onBlur={(e) => {
+                                const fixed = normalizeBlurNumber(e.target.value, { min: 0, max: 100, decimals: 2, allowEmpty: false });
+                                updateSubject((s) => ({
+                                  ...s,
+                                  components: {
+                                    ...s.components,
+                                    [component.key]: {
+                                      ...s.components[component.key],
+                                      percentage: fixed,
+                                    },
+                                  },
+                                }));
+                              }}
                             />
                             <Input
-                              type="number"
-                              min={0}
-                              max={10}
-                              step={0.1}
+                              type="text"
+                              inputMode="decimal"
                               value={row.grade}
-                              onChange={(e) =>
+                              onFocus={handleSelectAll}
+                              onChange={(e) => {
+                                const next = sanitizeDecimalInput(e.target.value, { min: 0, max: 10, decimals: 2, allowEmpty: true });
+                                if (next === null) return;
                                 updateSubject((s) => ({
                                   ...s,
                                   components: {
                                     ...s.components,
                                     [component.key]: {
                                       ...s.components[component.key],
-                                      grade: e.target.value,
+                                      grade: next,
                                     },
                                   },
-                                }))
-                              }
+                                }));
+                              }}
+                              onBlur={(e) => {
+                                const fixed = normalizeBlurNumber(e.target.value, { min: 0, max: 10, decimals: 2, allowEmpty: true });
+                                updateSubject((s) => ({
+                                  ...s,
+                                  components: {
+                                    ...s.components,
+                                    [component.key]: {
+                                      ...s.components[component.key],
+                                      grade: fixed,
+                                    },
+                                  },
+                                }));
+                              }}
                               placeholder="-"
                             />
                             <Input
-                              type="number"
-                              min={0}
-                              max={10}
-                              step={0.1}
+                              type="text"
+                              inputMode="decimal"
                               value={scenario[component.key] || ''}
-                              onChange={(e) => setScenario((prev) => ({ ...prev, [component.key]: e.target.value }))}
+                              onFocus={handleSelectAll}
+                              onChange={(e) => {
+                                const next = sanitizeDecimalInput(e.target.value, { min: 0, max: 10, decimals: 2, allowEmpty: true });
+                                if (next === null) return;
+                                setScenario((prev) => ({ ...prev, [component.key]: next }));
+                              }}
+                              onBlur={(e) => {
+                                const fixed = normalizeBlurNumber(e.target.value, { min: 0, max: 10, decimals: 2, allowEmpty: true });
+                                setScenario((prev) => ({ ...prev, [component.key]: fixed }));
+                              }}
                               placeholder="-"
                             />
                           </div>
