@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { useAuth } from '@/lib/AuthContext';
-import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, ChevronRight, Upload, Home, Calculator } from 'lucide-react';
+import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, ChevronRight, Upload, Home, Calculator, Brain } from 'lucide-react';
 import { Icon } from '@/components/ui/Icon';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -1327,6 +1327,15 @@ export default function QuizzesPage() {
                           >
                             <Calculator className="w-4 h-4 mr-2" />
                             Adivino
+                          </Button>
+                        </Link>
+                        <Link to={createPageUrl('MetacogLab')}>
+                          <Button
+                            variant="outline"
+                            className="text-xs sm:text-sm h-9 border-indigo-300 text-indigo-700 hover:bg-indigo-50"
+                          >
+                            <Brain className="w-4 h-4 mr-2" />
+                            Metacog Lab
                           </Button>
                         </Link>
                         {!canEdit && (

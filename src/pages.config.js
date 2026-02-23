@@ -64,6 +64,7 @@ import GamePlay from './pages/GamePlay';
 import Home from './pages/Home';
 import Leaderboard from './pages/Leaderboard';
 import LiveSessions from './pages/LiveSessions';
+import MetacogLab from './pages/MetacogLab';
 import MyTasks from './pages/MyTasks';
 import Progress from './pages/Progress';
 import Quizzes from './pages/Quizzes';
@@ -90,6 +91,7 @@ export const PAGES = {
     "Home": Home,
     "Leaderboard": Leaderboard,
     "LiveSessions": LiveSessions,
+    "MetacogLab": MetacogLab,
     "MyTasks": MyTasks,
     "Progress": Progress,
     "Quizzes": Quizzes,
