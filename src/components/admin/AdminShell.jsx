@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import {
-  LayoutDashboard, BookOpen, Users, FileJson, Menu, X, ArrowLeft, Shield, FolderTree, Trash2
+  LayoutDashboard, BookOpen, Users, FileJson, Menu, X, ArrowLeft, Shield, FolderTree, Trash2, TrendingUp
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -13,6 +13,7 @@ const sidebarItems = [
     items: [
       { label: 'Dashboard', icon: LayoutDashboard, href: 'AdminHome' },
       { label: 'Contenido', icon: FolderTree, href: 'AdminContent' },
+      { label: 'Progreso', icon: TrendingUp, href: 'AdminProgress' },
       { label: 'Papelera', icon: Trash2, href: 'AdminTrash' },
       { label: 'Estudiantes', icon: Users, href: 'AdminStudents' },
       { label: 'JSON Manager', icon: FileJson, href: 'AdminJsonManager' }
