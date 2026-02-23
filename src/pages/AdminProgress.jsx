@@ -6,9 +6,11 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Search, TrendingUp, AlertCircle, Calendar, Trash2, Eye, Loader2, ChevronDown, ChevronUp, FileDown, BookOpen } from 'lucide-react';
+import { Search, TrendingUp, AlertCircle, Calendar, Trash2, Eye, Loader2, ChevronDown, ChevronUp, FileDown, BookOpen, ArrowLeft, LayoutDashboard } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 import MathText from '../components/quiz/MathText';
 import { fromCompactFormat, isCompactFormat } from '../components/utils/quizFormats';
 import AttemptDetailModal from '../components/admin/AttemptDetailModal';
@@ -510,6 +512,20 @@ export default function AdminProgress() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-3 sm:p-6">
       <div className="max-w-7xl mx-auto">
         <div className="mb-6 sm:mb-8">
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <Link to={createPageUrl('AdminHome')}>
+              <Button variant="outline" size="sm" className="gap-2">
+                <LayoutDashboard className="w-4 h-4" />
+                Dashboard admin
+              </Button>
+            </Link>
+            <Link to={createPageUrl('Quizzes')}>
+              <Button variant="outline" size="sm" className="gap-2">
+                <ArrowLeft className="w-4 h-4" />
+                Salir de esta sección
+              </Button>
+            </Link>
+          </div>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2">
