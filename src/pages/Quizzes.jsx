@@ -130,6 +130,52 @@ export default function QuizzesPage() {
 
   const queryClient = useQueryClient();
 
+  const normalizeOptionText = (option) => {
+    if (typeof option === 'string') return option.trim();
+    if (!option || typeof option !== 'object') return '';
+    return String(
+      option.text ??
+      option.answerText ??
+      option.value ??
+      option.v ??
+      option.t ??
+      option.label ??
+      ''
+    ).trim();
+  };
+
+  const normalizeQuestionOptions = (question) => {
+    let rawOptions = [];
+
+    if (Array.isArray(question?.answerOptions)) rawOptions = question.answerOptions;
+    else if (Array.isArray(question?.options)) rawOptions = question.options;
+    else if (question?.options && typeof question.options === 'object') {
+      rawOptions = Object.entries(question.options).map(([key, value]) => ({
+        label: key,
+        text: value
+      }));
+    }
+
+    const answerOptions = rawOptions
+      .map((opt, idx) => {
+        const text = normalizeOptionText(opt);
+        if (!text) return null;
+        return {
+          id: String(opt?.id ?? idx),
+          text,
+          isCorrect: Boolean(opt?.isCorrect ?? opt?.c),
+          rationale: opt?.rationale ?? opt?.r ?? '',
+          errorType: opt?.errorType ?? opt?.et ?? ''
+        };
+      })
+      .filter(Boolean);
+
+    return {
+      ...question,
+      answerOptions
+    };
+  };
+
   // Quiz settings hook
   const { settings: quizSettings } = useQuizSettings(
     selectedQuiz?.id,
@@ -667,6 +713,7 @@ export default function QuizzesPage() {
     }
 
     const shuffledQuestions = [...filteredQuestions]
+      .map(normalizeQuestionOptions)
       .sort(() => Math.random() - 0.5)
       .slice(0, Math.min(questionCount, filteredQuestions.length))
       .map(q => ({
@@ -728,13 +775,14 @@ export default function QuizzesPage() {
     setResponseTimes(newResponseTimes);
 
     const newScore = isCorrect ? score + 1 : score;
-    const correctOption = question.answerOptions.find(opt => opt.isCorrect);
+    const options = question.answerOptions || question.options || [];
+    const correctOption = options.find(opt => opt.isCorrect || opt.c);
     const newWrongAnswers = !isCorrect ? [...wrongAnswers, {
       question: question.question,
       selected_answer: selectedOption.text,
       correct_answer: correctOption?.text,
       response_time: responseTime,
-      answerOptions: question.answerOptions,
+      answerOptions: options,
       hint: question.hint,
       difficulty: question.difficulty
     }] : wrongAnswers;
@@ -744,7 +792,7 @@ export default function QuizzesPage() {
       correct_answer: correctOption?.text,
       is_correct: isCorrect,
       response_time: responseTime,
-      answerOptions: question.answerOptions,
+      answerOptions: options,
       hint: question.hint,
       difficulty: question.difficulty
     };
@@ -799,8 +847,8 @@ export default function QuizzesPage() {
     const shuffledQuiz = {
       ...selectedQuiz,
       questions: selectedQuiz.questions.map(q => ({
-        ...q,
-        answerOptions: [...q.answerOptions].sort(() => Math.random() - 0.5)
+        ...normalizeQuestionOptions(q),
+        answerOptions: [...normalizeQuestionOptions(q).answerOptions].sort(() => Math.random() - 0.5)
       }))
     };
 
@@ -834,7 +882,10 @@ export default function QuizzesPage() {
       title: `Repaso: ${selectedQuiz.title}`,
       questions: wrongAnswers.map(wa => ({
         question: wa.question,
-        answerOptions: [...wa.answerOptions].sort(() => Math.random() - 0.5),
+        answerOptions: [...(wa.answerOptions || [])].map((opt) => ({
+          ...opt,
+          text: normalizeOptionText(opt)
+        })).filter((opt) => !!opt.text).sort(() => Math.random() - 0.5),
         hint: wa.hint
       }))
     };
@@ -970,8 +1021,8 @@ export default function QuizzesPage() {
       title: `Repaso: ${subjects.find(s => s.id === subjectId)?.name || 'Materia'}`,
       subject_id: subjectId,
       questions: wrongQuestions.map(q => ({
-        ...q,
-        answerOptions: [...(q.answerOptions || [])].sort(() => Math.random() - 0.5)
+        ...normalizeQuestionOptions(q),
+        answerOptions: [...normalizeQuestionOptions(q).answerOptions].sort(() => Math.random() - 0.5)
       }))
     };
 

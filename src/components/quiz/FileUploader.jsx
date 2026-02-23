@@ -53,13 +53,8 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
     else if (Array.isArray(data)) {
       questions = data.map(q => ({
         question: q.question,
-        options: q.answerOptions.map((opt, idx) => ({
-          id: String(idx),
-          text: opt.text || opt.answerText,
-          isCorrect: opt.isCorrect,
-          rationale: opt.rationale
-        })),
-        correctAnswer: q.answerOptions.findIndex(o => o.isCorrect),
+        answerOptions: normalizeAnswerOptions(q.answerOptions || q.options),
+        correctAnswer: normalizeAnswerOptions(q.answerOptions || q.options).findIndex(o => o.isCorrect),
         type: 'multiple-choice',
         difficulty: 'moderado',
         bloomLevel: 'Comprender',
@@ -81,12 +76,7 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
         bloomLevel: 'Comprender', // Default
         tags: [data.metadata.sj, data.metadata.tp, q.sb].filter(Boolean),
         hint: '',
-        answerOptions: q.o.map((opt, idx) => ({
-          id: String(idx),
-          text: opt.t,
-          isCorrect: opt.c,
-          rationale: opt.r
-        })).filter(o => o.text), // Ensure we have text
+        answerOptions: normalizeAnswerOptions(q.o),
         correctAnswer: q.o.findIndex(o => o.c)
       }));
     }
@@ -95,13 +85,8 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
       title = data.title || title;
       questions = data.quiz.map(q => ({
         question: q.question,
-        options: q.answerOptions.map((opt, idx) => ({
-          id: String(idx),
-          text: opt.text || opt.answerText,
-          isCorrect: opt.isCorrect,
-          rationale: opt.rationale
-        })),
-        correctAnswer: q.answerOptions.findIndex(o => o.isCorrect),
+        answerOptions: normalizeAnswerOptions(q.answerOptions || q.options),
+        correctAnswer: normalizeAnswerOptions(q.answerOptions || q.options).findIndex(o => o.isCorrect),
         type: 'multiple-choice',
         difficulty: 'moderado',
         bloomLevel: 'Comprender',
@@ -301,3 +286,29 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
     </div>
   );
 }
+    const normalizeOptionText = (opt) => {
+      if (typeof opt === 'string') return opt.trim();
+      if (!opt || typeof opt !== 'object') return '';
+      return String(opt.text ?? opt.answerText ?? opt.value ?? opt.v ?? opt.t ?? opt.label ?? '').trim();
+    };
+
+    const normalizeAnswerOptions = (input) => {
+      let raw = [];
+      if (Array.isArray(input)) raw = input;
+      else if (input && typeof input === 'object') {
+        raw = Object.entries(input).map(([label, text]) => ({ label, text }));
+      }
+
+      return raw
+        .map((opt, idx) => {
+          const text = normalizeOptionText(opt);
+          if (!text) return null;
+          return {
+            id: String(opt?.id ?? idx),
+            text,
+            isCorrect: Boolean(opt?.isCorrect ?? opt?.c),
+            rationale: opt?.rationale ?? opt?.r ?? ''
+          };
+        })
+        .filter(Boolean);
+    };
