@@ -55,13 +55,13 @@ export async function POST(req) {
             .eq('code_hash', codeHash)
             .maybeSingle()
 
-        if (error || !invite) return new Response(JSON.stringify({ error: 'Código no encontrado' }), { status: 401 })
-        if (invite.expires_at && invite.expires_at <= now) return new Response(JSON.stringify({ error: 'Código expirado' }), { status: 401 })
+        if (error || !invite) return new Response(JSON.stringify({ error: 'Código inválido' }), { status: 401 })
+        if (invite.expires_at && invite.expires_at <= now) return new Response(JSON.stringify({ error: 'Código inválido' }), { status: 401 })
 
         const uses = invite.uses ?? 0
         const maxUses = invite.max_uses
         if (maxUses && uses >= maxUses) {
-            return new Response(JSON.stringify({ error: 'Código ya usado' }), { status: 401 })
+            return new Response(JSON.stringify({ error: 'Código inválido' }), { status: 401 })
         }
 
         // Expiración token de acceso

@@ -1,11 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
-
-function getSupabaseAdmin() {
-  const url = process.env.SUPABASE_URL
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!url || !key) return null
-  return createClient(url, key)
-}
+import { getSupabaseAdmin, unauthorizedResponse, verifyRequestAuth } from './_auth.mjs'
 
 const TABLE_BY_ENTITY = {
   MetacogQuestion: 'metacog_questions',
@@ -18,6 +11,9 @@ const resolveTable = (entity) => TABLE_BY_ENTITY[entity] || null
 
 export async function GET(req) {
   try {
+    const auth = await verifyRequestAuth(req)
+    if (!auth.ok) return unauthorizedResponse(auth)
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -60,6 +56,9 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
+    const auth = await verifyRequestAuth(req)
+    if (!auth.ok) return unauthorizedResponse(auth)
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -72,6 +71,9 @@ export async function POST(req) {
 
     if (!table || !record || !record.id) {
       return new Response(JSON.stringify({ error: 'Payload inválido' }), { status: 400 })
+    }
+    if (auth.role !== 'admin' && entity !== 'MetacogAnalysis') {
+      return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403 })
     }
 
     const now = new Date().toISOString()
@@ -95,6 +97,9 @@ export async function POST(req) {
 
 export async function PATCH(req) {
   try {
+    const auth = await verifyRequestAuth(req)
+    if (!auth.ok) return unauthorizedResponse(auth)
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -108,6 +113,9 @@ export async function PATCH(req) {
 
     if (!table || !id) {
       return new Response(JSON.stringify({ error: 'Payload inválido' }), { status: 400 })
+    }
+    if (auth.role !== 'admin' && entity !== 'MetacogAnalysis') {
+      return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403 })
     }
 
     const { data: current, error: getErr } = await supabase
@@ -147,6 +155,9 @@ export async function PATCH(req) {
 
 export async function DELETE(req) {
   try {
+    const auth = await verifyRequestAuth(req)
+    if (!auth.ok) return unauthorizedResponse(auth)
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -158,6 +169,9 @@ export async function DELETE(req) {
     const id = url.searchParams.get('id')
     if (!table || !id) {
       return new Response(JSON.stringify({ error: 'Payload inválido' }), { status: 400 })
+    }
+    if (auth.role !== 'admin' && entity !== 'MetacogAnalysis') {
+      return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403 })
     }
 
     const { error } = await supabase.from(table).delete().eq('id', id)

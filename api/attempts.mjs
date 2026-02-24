@@ -1,14 +1,11 @@
-import { createClient } from '@supabase/supabase-js'
-
-function getSupabaseAdmin() {
-  const url = process.env.SUPABASE_URL
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!url || !key) return null
-  return createClient(url, key)
-}
+import { getSupabaseAdmin, unauthorizedResponse, verifyRequestAuth } from './_auth.mjs'
 
 export async function GET(req) {
   try {
+    const auth = await verifyRequestAuth(req)
+    if (!auth.ok) return unauthorizedResponse(auth)
+    if (auth.role !== 'admin') return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403 })
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -46,6 +43,10 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
+    const auth = await verifyRequestAuth(req)
+    if (!auth.ok) return unauthorizedResponse(auth)
+    if (auth.role !== 'admin') return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403 })
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -78,6 +79,10 @@ export async function POST(req) {
 
 export async function PATCH(req) {
   try {
+    const auth = await verifyRequestAuth(req)
+    if (!auth.ok) return unauthorizedResponse(auth)
+    if (auth.role !== 'admin') return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403 })
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -127,6 +132,10 @@ export async function PATCH(req) {
 
 export async function DELETE(req) {
   try {
+    const auth = await verifyRequestAuth(req)
+    if (!auth.ok) return unauthorizedResponse(auth)
+    if (auth.role !== 'admin') return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403 })
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })

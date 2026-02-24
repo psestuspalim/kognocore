@@ -7,8 +7,6 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useNavigate } from 'react-router-dom';
 import { KeyRound, ShieldCheck, Sparkles } from 'lucide-react';
-import { client } from '@/api/client';
-import { getOrCreateLearnerId } from '@/lib/learner-id';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -52,33 +50,15 @@ const Login = () => {
             // ignore and continue with local fallback
         }
 
-        // 2) Local fallback: CourseAccessCode in local storage
-        try {
-            const accessCodes = await client.entities.CourseAccessCode.filter({ code: normalized });
-            if (accessCodes.length > 0) {
-                return {
-                    courseId: accessCodes[0].course_id || null,
-                    courseName: accessCodes[0].course_name || null,
-                    token: null,
-                    source: 'local-code'
-                };
-            }
-        } catch (_err) {
-            // ignore
-        }
-
         return { courseId: null, courseName: null, token: null, source: 'none', serverError };
     };
 
     const createLocalStudentSession = async (inputCode, inputName) => {
         const normalized = (inputCode || '').trim().toUpperCase();
         const normalizedName = (inputName || '').trim();
-        const learnerId = getOrCreateLearnerId();
 
         const resolved = await resolveCourseByCode(normalized);
         const targetCourseId = resolved.courseId;
-        const targetCourseName = resolved.courseName;
-
         if (!targetCourseId) {
             if (resolved.serverError) {
                 throw new Error(`SERVER_CONFIG:${resolved.serverError}`);
@@ -86,58 +66,13 @@ const Login = () => {
             throw new Error('INVALID_CODE');
         }
 
-        // If we have a server token, use canonical auth path (courseId comes from /api/me)
-        if (resolved.token) {
-            localStorage.setItem('kc_token', resolved.token);
-            localStorage.setItem('kc_display_name', normalizedName || 'Estudiante');
-            localStorage.removeItem('app_mock_token');
-            await checkAppState();
-            return;
+        if (!resolved.token) {
+            throw new Error('SERVER_TOKEN_REQUIRED');
         }
-
-        const mockStudent = {
-            id: `student_${learnerId.slice(0, 8)}`,
-            email: `learner+${learnerId}@kognocore.local`,
-            last_name: 'Invitado',
-            username: normalizedName || 'Estudiante',
-            full_name: normalizedName || 'Estudiante',
-            is_admin: false,
-            role: 'user',
-            courseId: targetCourseId || null,
-            accessCode: normalized,
-            loginMode: 'direct-code',
-            learner_id: learnerId
-        };
-
-        localStorage.setItem('app_mock_token', JSON.stringify(mockStudent));
-        localStorage.removeItem('kc_token');
-
-        if (targetCourseId) {
-            try {
-                const existing = await client.entities.CourseEnrollment.filter({
-                    user_email: mockStudent.email,
-                    course_id: targetCourseId
-                });
-
-                if (existing.length === 0) {
-                    await client.entities.CourseEnrollment.create({
-                        user_email: mockStudent.email,
-                        username: mockStudent.username,
-                        course_id: targetCourseId,
-                        course_name: targetCourseName || 'Curso',
-                        access_code: normalized,
-                        status: 'approved'
-                    });
-                } else if (existing[0].status !== 'approved') {
-                    await client.entities.CourseEnrollment.update(existing[0].id, {
-                        status: 'approved'
-                    });
-                }
-            } catch (_err) {
-                // keep login successful even if enrollment persistence fails
-            }
-        }
-
+        // Canonical auth path (courseId comes from /api/me)
+        localStorage.setItem('kc_token', resolved.token);
+        localStorage.setItem('kc_display_name', normalizedName || 'Estudiante');
+        localStorage.removeItem('app_mock_token');
         await checkAppState();
     };
 
@@ -185,6 +120,8 @@ const Login = () => {
         } catch (err) {
             if (String(err?.message || '').startsWith('SERVER_CONFIG:')) {
                 setError('Servidor de códigos no configurado en Vercel');
+            } else if (String(err?.message || '') === 'SERVER_TOKEN_REQUIRED') {
+                setError('Servidor de acceso no disponible');
             } else {
                 setError('Código inválido o no encontrado');
             }

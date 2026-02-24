@@ -57,11 +57,10 @@ export const AuthProvider = ({ children }) => {
       setIsLoadingPublicSettings(true);
       setAuthError(null);
 
-      const localToken = localStorage.getItem('app_mock_token');
       const kcToken = localStorage.getItem('kc_token');
 
-      if (localToken || kcToken) {
-        // If we have a local mock token or Vercel token, skip public settings check and go straight to auth
+      if (kcToken) {
+        // If we have backend token, skip public settings check and go straight to auth
         await checkUserAuth();
         setIsLoadingPublicSettings(false);
         return;
@@ -95,10 +94,7 @@ export const AuthProvider = ({ children }) => {
         setAppPublicSettings(publicSettings);
 
         // If we got the app public settings successfully, check if user is authenticated
-        // Check for local mock token or Vercel token first
-        const localToken = localStorage.getItem('app_mock_token');
-        const kcToken = localStorage.getItem('kc_token');
-        if (appParams.token || localToken || kcToken) {
+        if (appParams.token || kcToken) {
           await checkUserAuth();
         } else {
           setIsLoadingAuth(false);
@@ -152,8 +148,14 @@ export const AuthProvider = ({ children }) => {
       // Now check if the user is authenticated
       setIsLoadingAuth(true);
 
-      const localToken = localStorage.getItem('app_mock_token');
       const kcToken = localStorage.getItem('kc_token');
+
+      if (!kcToken) {
+        setUser(null);
+        setIsAuthenticated(false);
+        setIsLoadingAuth(false);
+        return;
+      }
 
       if (kcToken) {
         // Validation using Vercel backend
@@ -163,6 +165,22 @@ export const AuthProvider = ({ children }) => {
 
         if (response.ok) {
           const data = await response.json();
+          if (data?.role === 'admin') {
+            const adminUser = {
+              id: 'admin_server',
+              email: 'admin@kognocore.local',
+              last_name: 'Admin',
+              username: data.username || 'Axayakl',
+              full_name: data.username || 'Axayakl',
+              is_admin: true,
+              role: 'admin'
+            };
+            setUser(adminUser);
+            await syncUserRecord(adminUser);
+            setIsAuthenticated(true);
+            setIsLoadingAuth(false);
+            return;
+          }
           const learnerId = getOrCreateLearnerId();
           const displayName = localStorage.getItem('kc_display_name') || 'Estudiante';
           const resolvedUser = {
@@ -187,25 +205,10 @@ export const AuthProvider = ({ children }) => {
         }
       }
 
-      if (localToken) {
-        // Mock user based on token
-        const parsed = JSON.parse(localToken);
-        const learnerId = parsed.learner_id || getOrCreateLearnerId();
-        const mockUser = {
-          ...parsed,
-          learner_id: learnerId,
-          role: parsed.role === 'admin' ? 'admin' : 'user'
-        };
-        localStorage.setItem('app_mock_token', JSON.stringify(mockUser));
-        setUser(mockUser);
-        await syncUserRecord(mockUser);
-        setIsAuthenticated(true);
-      } else {
-        const currentUser = await client.auth.me();
-        setUser(currentUser);
-        await syncUserRecord(currentUser);
-        setIsAuthenticated(true);
-      }
+      const currentUser = await client.auth.me();
+      setUser(currentUser);
+      await syncUserRecord(currentUser);
+      setIsAuthenticated(true);
       setIsLoadingAuth(false);
     } catch (error) {
       console.error('User auth check failed:', error);
@@ -223,52 +226,37 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    console.log('Login Attempt:', { email, password });
     setIsLoadingAuth(true);
-    // Hardcoded credentials for development
-    if (email === 'admin' && password === 'admin') {
-      const adminUser = {
-        id: 'admin_123',
-        email: 'admin@client.com',
-        last_name: 'User',
-        is_admin: true,
-        username: 'admin',
-        role: 'admin'
-      };
-      localStorage.setItem('app_mock_token', JSON.stringify(adminUser));
-      setUser(adminUser);
-      setIsAuthenticated(true);
+    try {
+      const response = await fetch('/api/admin-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: email, password })
+      });
+      if (!response.ok) {
+        setIsLoadingAuth(false);
+        return false;
+      }
+      const data = await response.json().catch(() => ({}));
+      if (!data?.token) {
+        setIsLoadingAuth(false);
+        return false;
+      }
+      localStorage.setItem('kc_token', data.token);
+      localStorage.removeItem('app_mock_token');
+      await checkUserAuth();
       setAuthError(null);
       setIsLoadingAuth(false);
       return true;
-    } else if (email === 'student' && password === 'student') {
-      const learnerId = getOrCreateLearnerId();
-      const studentUser = {
-        id: `student_${learnerId.slice(0, 8)}`,
-        email: `learner+${learnerId}@kognocore.local`,
-        last_name: 'User',
-        is_admin: false,
-        username: 'student',
-        role: 'user',
-        learner_id: learnerId
-      };
-      localStorage.setItem('app_mock_token', JSON.stringify(studentUser));
-      setUser(studentUser);
-      syncUserRecord(studentUser);
-      setIsAuthenticated(true);
-      setAuthError(null);
+    } catch (_e) {
       setIsLoadingAuth(false);
-      return true;
+      return false;
     }
-
-    setIsLoadingAuth(false);
-    return false;
   };
 
   const logout = (shouldRedirect = true) => {
     setUser(null);
     setIsAuthenticated(false);
-    localStorage.removeItem('app_mock_token');
     localStorage.removeItem('kc_token');
 
     if (shouldRedirect) {

@@ -16,6 +16,7 @@ const realClient = null;
 // Mock client implementation
 // Mock client implementation with LocalStorage persistence
 import { mockCourses, mockFolders, mockSubjects, mockQuizzes, mockQuizSettings, mockUser, mockResources } from '@/lib/mock-data';
+import { getOrCreateLearnerId } from '@/lib/learner-id';
 
 // Helper to initialize storage
 // Courses, subjects, and folders are ALWAYS seeded from mock-data to keep the
@@ -150,15 +151,20 @@ const mergeById = (primary, secondary) => {
   return Array.from(map.values());
 };
 
+const getAuthHeaders = () => {
+  const token = typeof window !== 'undefined' ? localStorage.getItem('kc_token') : null;
+  return token ? { Authorization: `Bearer ${token}` } : {};
+};
+
 const fetchRemoteQuizzes = async () => {
-  const response = await fetch('/api/quizzes');
+  const response = await fetch('/api/quizzes', { headers: getAuthHeaders() });
   if (!response.ok) throw new Error('REMOTE_QUIZ_LIST_FAILED');
   const data = await response.json().catch(() => ({}));
   return Array.isArray(data?.quizzes) ? data.quizzes : [];
 };
 
 const fetchRemoteAttempts = async () => {
-  const response = await fetch('/api/attempts');
+  const response = await fetch('/api/attempts', { headers: getAuthHeaders() });
   if (!response.ok) throw new Error('REMOTE_ATTEMPT_LIST_FAILED');
   const data = await response.json().catch(() => ({}));
   return Array.isArray(data?.attempts) ? data.attempts : [];
@@ -177,7 +183,7 @@ const fetchRemoteMetacog = async (entityName, criteria = null) => {
       if (value !== undefined && value !== null && value !== '') params.set(key, value);
     });
   }
-  const response = await fetch(`/api/metacog?${params.toString()}`);
+  const response = await fetch(`/api/metacog?${params.toString()}`, { headers: getAuthHeaders() });
   if (!response.ok) throw new Error('REMOTE_METACOG_LIST_FAILED');
   const data = await response.json().catch(() => ({}));
   return Array.isArray(data?.records) ? data.records : [];
@@ -218,6 +224,42 @@ const mockClient = {
 
   auth: {
     me: async () => {
+      const kcToken = localStorage.getItem('kc_token');
+      if (kcToken) {
+        try {
+          const response = await fetch('/api/me', {
+            headers: { Authorization: `Bearer ${kcToken}` }
+          });
+          if (response.ok) {
+            const data = await response.json().catch(() => ({}));
+            if (data?.role === 'admin') {
+              return {
+                id: 'admin_server',
+                email: 'admin@kognocore.local',
+                username: data.username || 'Axayakl',
+                full_name: data.username || 'Axayakl',
+                role: 'admin',
+                is_admin: true
+              };
+            }
+            const learnerId = getOrCreateLearnerId();
+            const displayName = localStorage.getItem('kc_display_name') || 'Estudiante';
+            return {
+              id: `student_${String(data?.courseId || 'unknown')}`,
+              email: `learner+${learnerId}@kognocore.local`,
+              username: displayName,
+              full_name: displayName,
+              role: 'user',
+              is_admin: false,
+              learner_id: learnerId,
+              courseId: data?.courseId || null
+            };
+          }
+        } catch (_e) {
+          // fall through to unauthenticated mock
+        }
+      }
+
       const localToken = localStorage.getItem('app_mock_token');
       if (localToken) {
         return JSON.parse(localToken);
@@ -444,7 +486,7 @@ const mockClient = {
             try {
               await fetch('/api/quizzes', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
                 body: JSON.stringify({ quiz: newItem })
               });
             } catch (_err) {
@@ -456,7 +498,7 @@ const mockClient = {
             try {
               await fetch('/api/attempts', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
                 body: JSON.stringify({ attempt: newItem })
               });
             } catch (_err) {
@@ -468,7 +510,7 @@ const mockClient = {
             try {
               await fetch('/api/metacog', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
                 body: JSON.stringify({ entity: entityName, record: newItem })
               });
             } catch (_err) {
@@ -489,7 +531,7 @@ const mockClient = {
               try {
                 await fetch('/api/quizzes', {
                   method: 'PATCH',
-                  headers: { 'Content-Type': 'application/json' },
+                  headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
                   body: JSON.stringify({ id, data })
                 });
               } catch (_err) {
@@ -501,7 +543,7 @@ const mockClient = {
               try {
                 await fetch('/api/attempts', {
                   method: 'PATCH',
-                  headers: { 'Content-Type': 'application/json' },
+                  headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
                   body: JSON.stringify({ id, data })
                 });
               } catch (_err) {
@@ -513,7 +555,7 @@ const mockClient = {
               try {
                 await fetch('/api/metacog', {
                   method: 'PATCH',
-                  headers: { 'Content-Type': 'application/json' },
+                  headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
                   body: JSON.stringify({ entity: entityName, id, data })
                 });
               } catch (_err) {
@@ -534,7 +576,7 @@ const mockClient = {
 
             if (entityName === 'Quiz') {
               try {
-                await fetch(`/api/quizzes?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+                await fetch(`/api/quizzes?id=${encodeURIComponent(id)}`, { method: 'DELETE', headers: getAuthHeaders() });
               } catch (_err) {
                 // keep local delete working
               }
@@ -542,7 +584,7 @@ const mockClient = {
 
             if (entityName === 'QuizAttempt') {
               try {
-                await fetch(`/api/attempts?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+                await fetch(`/api/attempts?id=${encodeURIComponent(id)}`, { method: 'DELETE', headers: getAuthHeaders() });
               } catch (_err) {
                 // keep local delete working
               }
@@ -550,7 +592,7 @@ const mockClient = {
 
             if (isMetacogEntity(entityName)) {
               try {
-                await fetch(`/api/metacog?entity=${encodeURIComponent(entityName)}&id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+                await fetch(`/api/metacog?entity=${encodeURIComponent(entityName)}&id=${encodeURIComponent(id)}`, { method: 'DELETE', headers: getAuthHeaders() });
               } catch (_err) {
                 // keep local delete working
               }

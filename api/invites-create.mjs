@@ -1,12 +1,5 @@
-import { createClient } from '@supabase/supabase-js'
 import crypto from 'crypto'
-
-function getSupabaseAdmin() {
-  const url = process.env.SUPABASE_URL
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!url || !key) return null
-  return createClient(url, key)
-}
+import { getSupabaseAdmin, unauthorizedResponse, verifyRequestAuth } from './_auth.mjs'
 
 function sha256(s) {
   return crypto.createHash('sha256').update(s).digest('hex')
@@ -14,6 +7,10 @@ function sha256(s) {
 
 export async function POST(req) {
   try {
+    const auth = await verifyRequestAuth(req)
+    if (!auth.ok) return unauthorizedResponse(auth)
+    if (auth.role !== 'admin') return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403 })
+
     const supabase = getSupabaseAdmin()
     if (!supabase || !process.env.CODE_PEPPER) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })

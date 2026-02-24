@@ -17,6 +17,11 @@ import {
 import { toast } from 'sonner';
 
 export default function CourseCodesPanel({ courses }) {
+  const authHeaders = () => {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('kc_token') : null;
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  };
+
   const [showDialog, setShowDialog] = useState(false);
   const [newCode, setNewCode] = useState({
     course_id: '',
@@ -37,7 +42,7 @@ export default function CourseCodesPanel({ courses }) {
       if (codes.length === 0) return {};
       const response = await fetch('/api/invites-usage', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeaders() },
         body: JSON.stringify({ codes: codes.map(c => c.code) })
       });
       if (!response.ok) return {};
@@ -99,7 +104,7 @@ export default function CourseCodesPanel({ courses }) {
         try {
           const response = await fetch('/api/invites-create', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', ...authHeaders() },
             body: JSON.stringify({
               code: payload.code,
               course_id: payload.course_id,
