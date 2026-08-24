@@ -1,0 +1,664 @@
+{
+  "metadata": {
+    "title": "Potenciales de membrana y potenciales de acción",
+    "source": "5.md",
+    "date": "2026-01-31",
+    "total": 50,
+    "sj": "FISIO",
+    "tp": "PMEM",
+    "dist": { "d1": 0.4, "d2": 0.36, "d3": 0.24 }
+  },
+  "q": [
+    {
+      "id": "FISIO-PMEM-001",
+      "sb": "Potenciales de membrana provocados por diferencias de concentración de iones",
+      "x": "¿Qué evento inicia la electronegatividad intracelular cuando la membrana es permeable solo al potasio?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Salida neta de potasio", "c": true, "r": "Correcto. Al difundirse iones positivos hacia el exterior, se desplazan cargas fuera de la célula. Los aniones no difusibles quedan atrás, estableciendo negatividad intracelular. El proceso progresa hasta que el voltaje resultante frena la difusión neta.", "et": null },
+        { "l": "B", "t": "Entrada neta de sodio", "c": false, "r": "Incorrecto. Con permeabilidad exclusiva al potasio, el sodio no cruza la membrana y no puede iniciar el cambio de voltaje.", "et": "conceptual" },
+        { "l": "C", "t": "Salida neta de sodio", "c": false, "r": "Incorrecto. La premisa excluye permeabilidad al sodio, por lo que su salida no puede explicar el potencial generado.", "et": "misinterpretation" },
+        { "l": "D", "t": "Entrada neta de cloruro", "c": false, "r": "Incorrecto. El fenómeno descrito depende de cationes difusibles; el cloruro no es el ion que atraviesa en este modelo.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Bombeo neto de potasio", "c": false, "r": "Incorrecto. Aquí el cambio inicial proviene de difusión a través de una membrana selectiva, no de un transporte activo.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-002",
+      "sb": "Potenciales de membrana provocados por diferencias de concentración de iones",
+      "x": "En una fibra nerviosa con permeabilidad selectiva al potasio, ¿qué nombre recibe la diferencia de potencial que frena la difusión neta?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Potencial de difusión", "c": true, "r": "Correcto. La difusión inicial de cargas positivas establece un voltaje que se opone al gradiente químico. Cuando el voltaje alcanza magnitud suficiente, bloquea la difusión neta adicional. Ese voltaje generado por difusión selectiva recibe este nombre.", "et": null },
+        { "l": "B", "t": "Potencial de acción", "c": false, "r": "Incorrecto. Describe un cambio rápido propagado de voltaje, no el equilibrio que frena una difusión neta de un ion.", "et": "conceptual" },
+        { "l": "C", "t": "Potencial de reposo", "c": false, "r": "Incorrecto. Es el voltaje basal con múltiples contribuyentes, no el voltaje aislado por difusión selectiva de un ion.", "et": "recall" },
+        { "l": "D", "t": "Potencial umbral", "c": false, "r": "Incorrecto. Es un nivel de voltaje que dispara un evento regenerativo, no un equilibrio de difusión iónica.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Potencial de meseta", "c": false, "r": "Incorrecto. La meseta describe un tramo sostenido durante ciertos potenciales de acción, no un voltaje de difusión selectiva.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-003",
+      "sb": "Potenciales de membrana provocados por diferencias de concentración de iones",
+      "x": "¿Qué polaridad se genera cuando la membrana es permeable solo al sodio con alta concentración extracelular?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Positividad en el interior", "c": true, "r": "Correcto. La difusión de sodio hacia el interior introduce cargas positivas. Esto hace que el interior se vuelva positivo respecto al exterior. El voltaje crece hasta oponerse al flujo neto adicional del ion.", "et": null },
+        { "l": "B", "t": "Negatividad en el interior", "c": false, "r": "Incorrecto. Esa polaridad corresponde al caso dominado por salida de cargas positivas, no a la entrada de sodio.", "et": "conceptual" },
+        { "l": "C", "t": "Positividad en el exterior", "c": false, "r": "Incorrecto. La entrada de sodio desplaza positividad hacia el interior, no hacia el exterior.", "et": "mechanistic" },
+        { "l": "D", "t": "Negatividad en el exterior", "c": false, "r": "Incorrecto. El exterior puede quedar relativamente negativo, pero el rasgo definitorio es la positividad intracelular.", "et": "misinterpretation" },
+        { "l": "E", "t": "Cero en ambos lados", "c": false, "r": "Incorrecto. Con gradiente y permeabilidad selectiva se establece un voltaje, no un estado sin diferencia de potencial.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-004",
+      "sb": "Ecuación de Nernst",
+      "x": "¿Cómo se denomina el potencial que se opone exactamente a la difusión neta de un ion específico?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Potencial de Nernst", "c": true, "r": "Correcto. Es el voltaje que equilibra el gradiente de concentración del ion y elimina el flujo neto. Depende del cociente de concentraciones a ambos lados de la membrana. Funciona como referencia para comparar con el voltaje real de membrana.", "et": null },
+        { "l": "B", "t": "Potencial de Goldman", "c": false, "r": "Incorrecto. Goldman calcula el voltaje cuando participan varios iones y permeabilidades, no el equilibrio de un solo ion.", "et": "recall" },
+        { "l": "C", "t": "Potencial de umbral", "c": false, "r": "Incorrecto. El umbral es un nivel que inicia un evento regenerativo, no un equilibrio electroquímico.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Potencial de dipolo", "c": false, "r": "Incorrecto. La capa de dipolo describe distribución de cargas en la membrana, no el equilibrio específico de un ion.", "et": "conceptual" },
+        { "l": "E", "t": "Potencial de conducción", "c": false, "r": "Incorrecto. La conducción describe propagación de señales; no define el potencial de equilibrio de un ion.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-005",
+      "sb": "Ecuación de Nernst",
+      "x": "En la ecuación de Nernst a 37 °C, ¿qué representa la variable z?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Carga eléctrica del ion", "c": true, "r": "Correcto. z corresponde a la valencia del ion, como +1 para potasio. Este término ajusta la magnitud del voltaje de equilibrio por unidad de gradiente. Cambiar la carga modifica el potencial calculado para un mismo cociente de concentraciones.", "et": null },
+        { "l": "B", "t": "Tamaño molecular del ion", "c": false, "r": "Incorrecto. El cálculo se basa en carga y concentraciones, no en el tamaño físico del ion.", "et": "conceptual" },
+        { "l": "C", "t": "Permeabilidad de la membrana", "c": false, "r": "Incorrecto. La permeabilidad no forma parte de Nernst; se integra en el cálculo de Goldman.", "et": "recall" },
+        { "l": "D", "t": "Concentración extracelular del ion", "c": false, "r": "Incorrecto. Las concentraciones aparecen como cociente, no como z.", "et": "misinterpretation" },
+        { "l": "E", "t": "Resistencia de la membrana", "c": false, "r": "Incorrecto. La resistencia afecta mediciones eléctricas, pero no define el potencial de equilibrio termodinámico.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-006",
+      "sb": "Ecuación de Goldman",
+      "x": "¿Qué tres iones se destacan como los más importantes en la generación del potencial de membrana en fibras nerviosas y musculares?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Sodio potasio y cloruro", "c": true, "r": "Correcto. Estos iones aportan gradientes y permeabilidades que determinan el voltaje de membrana. Sus concentraciones a ambos lados de la membrana participan directamente en el cálculo. Cambios rápidos en sodio y potasio explican gran parte de la señalización.", "et": null },
+        { "l": "B", "t": "Calcio magnesio y fosfato", "c": false, "r": "Incorrecto. No son los tres iones principales destacados para el cálculo del voltaje de membrana en este modelo.", "et": "recall" },
+        { "l": "C", "t": "Bicarbonato sulfato y cloruro", "c": false, "r": "Incorrecto. Incluye un ion relevante, pero omite los dos cationes clave del potencial de membrana.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Sodio calcio y magnesio", "c": false, "r": "Incorrecto. El modelo resalta potasio y cloruro junto con sodio como principales contribuyentes.", "et": "conceptual" },
+        { "l": "E", "t": "Potasio calcio y cloruro", "c": false, "r": "Incorrecto. Sustituye sodio por calcio, pero el trío principal incluye sodio, potasio y cloruro.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-007",
+      "sb": "Ecuación de Goldman",
+      "x": "En el cálculo tipo Goldman, ¿qué propiedad pondera la influencia de cada ion sobre el voltaje final?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Permeabilidad relativa de membrana", "c": true, "r": "Correcto. La contribución de cada ion se escala por la permeabilidad de la membrana para ese ion. Un ion con alta permeabilidad domina el voltaje, aun si otros tienen gradientes grandes. Por eso el potasio pesa mucho en reposo.", "et": null },
+        { "l": "B", "t": "Radio hidratado del ion", "c": false, "r": "Incorrecto. El peso del ion en el voltaje no se determina por su tamaño, sino por permeabilidad y concentraciones.", "et": "conceptual" },
+        { "l": "C", "t": "Número de canales totales", "c": false, "r": "Incorrecto. Lo relevante es la permeabilidad efectiva, no un conteo absoluto de estructuras.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Cantidad de aniones internos", "c": false, "r": "Incorrecto. Los aniones no difusibles explican carga interna, pero no aparecen como término ponderador en Goldman.", "et": "misinterpretation" },
+        { "l": "E", "t": "Actividad instantánea de bomba", "c": false, "r": "Incorrecto. La bomba modifica gradientes y agrega un componente, pero no es el ponderador directo del cálculo Goldman.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-008",
+      "sb": "Fuerza motriz electroquímica",
+      "x": "¿Cuál es la expresión de la fuerza motriz electroquímica para un ion?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Vme igual Vm menos Veq", "c": true, "r": "Correcto. Se define como la diferencia entre el potencial de membrana y el potencial de equilibrio del ion. Ese valor resume el impulso neto para mover el ion. El signo orienta la dirección esperada del flujo a través de la membrana.", "et": null },
+        { "l": "B", "t": "Vme igual Veq menos Vm", "c": false, "r": "Incorrecto. Invierte el orden y cambia el signo, alterando la predicción de dirección del flujo iónico.", "et": "mechanistic" },
+        { "l": "C", "t": "Vme igual Vm más Veq", "c": false, "r": "Incorrecto. Sumar voltajes no representa la diferencia que impulsa el movimiento neto del ion.", "et": "conceptual" },
+        { "l": "D", "t": "Vme igual Vm por Veq", "c": false, "r": "Incorrecto. El producto no describe una fuerza impulsora electroquímica en este marco.", "et": "misinterpretation" },
+        { "l": "E", "t": "Vme igual Veq dividido Vm", "c": false, "r": "Incorrecto. Un cociente no corresponde a la definición operativa de fuerza impulsora del ion.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-009",
+      "sb": "Fuerza motriz electroquímica",
+      "x": "Para un catión como sodio o potasio, ¿qué predice un Vme positivo?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Flujo neto hacia exterior", "c": true, "r": "Correcto. Para cationes, un Vme positivo indica que el impulso electroquímico favorece salida neta del ion. El signo se interpreta comparando Vm con el potencial de equilibrio. Cambiar Vm por encima o por debajo invierte la dirección esperada.", "et": null },
+        { "l": "B", "t": "Flujo neto hacia interior", "c": false, "r": "Incorrecto. Para cationes, esa predicción corresponde a un Vme negativo, no a uno positivo.", "et": "mechanistic" },
+        { "l": "C", "t": "No existe flujo neto", "c": false, "r": "Incorrecto. Ausencia de flujo neto ocurre cuando Vm iguala Veq, no por el signo positivo de Vme.", "et": "conceptual" },
+        { "l": "D", "t": "Flujo neto bidireccional", "c": false, "r": "Incorrecto. La fuerza impulsora define dirección neta, aunque siempre exista intercambio microscópico en ambos sentidos.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Bloqueo total de canales", "c": false, "r": "Incorrecto. El signo de Vme no implica cierre de canales; describe impulso neto si hay permeabilidad.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-010",
+      "sb": "Fuerza motriz electroquímica",
+      "x": "Para un anión como cloruro, ¿qué predice un Vme positivo?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Flujo neto hacia interior", "c": true, "r": "Correcto. Para aniones, la interpretación del signo se invierte respecto a cationes. Un Vme positivo favorece movimiento neto hacia el interior celular. La dirección cambia cuando Vm pasa por el valor del potencial de equilibrio.", "et": null },
+        { "l": "B", "t": "Flujo neto hacia exterior", "c": false, "r": "Incorrecto. Esa dirección para aniones se asocia a un Vme negativo en este marco.", "et": "mechanistic" },
+        { "l": "C", "t": "No hay flujo neto", "c": false, "r": "Incorrecto. El flujo neto se anula cuando Vm es igual a Veq, no por tener Vme positivo.", "et": "conceptual" },
+        { "l": "D", "t": "Entrada de cationes acompañante", "c": false, "r": "Incorrecto. La predicción se refiere al ion considerado y su fuerza impulsora, no a un acompañamiento obligatorio.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Activación de bomba de cloruro", "c": false, "r": "Incorrecto. La definición describe impulso pasivo; no implica la existencia de una bomba específica.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-011",
+      "sb": "Medición del potencial de membrana",
+      "x": "¿Qué disposición básica permite medir el potencial de membrana de una fibra nerviosa?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Microelectrodo intracelular y electrodo externo", "c": true, "r": "Correcto. Se introduce una micropipeta al interior y se coloca un electrodo indiferente en el líquido extracelular. La diferencia de potencial se registra con un voltímetro capaz de medir voltajes pequeños. Esta configuración compara interior celular contra el exterior.", "et": null },
+        { "l": "B", "t": "Dos electrodos externos superficiales", "c": false, "r": "Incorrecto. Sin un electrodo dentro de la célula no se registra la diferencia interior exterior del potencial de membrana.", "et": "conceptual" },
+        { "l": "C", "t": "Amperímetro unido a membrana", "c": false, "r": "Incorrecto. El potencial se mide como voltaje, no como corriente registrada sin referencia de interior y exterior.", "et": "misinterpretation" },
+        { "l": "D", "t": "Termómetro aplicado a la fibra", "c": false, "r": "Incorrecto. La medición eléctrica requiere electrodos; la temperatura no registra directamente voltaje de membrana.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Electrodo interno sin referencia externa", "c": false, "r": "Incorrecto. Sin referencia extracelular no existe comparación para definir la diferencia de potencial registrada.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-012",
+      "sb": "Medición del potencial de membrana",
+      "x": "¿Qué valor se registra cuando el electrodo de registro permanece fuera de la membrana neuronal?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Cero milivoltios registrados", "c": true, "r": "Correcto. Fuera de la membrana se toma el potencial del líquido extracelular como referencia de cero. Al atravesar la membrana, el registro cae a un valor negativo estable. Esa transición define el voltaje de membrana medido.", "et": null },
+        { "l": "B", "t": "Menos setenta milivoltios", "c": false, "r": "Incorrecto. Ese valor se observa tras atravesar la membrana hacia el interior, no cuando el electrodo está fuera.", "et": "recall" },
+        { "l": "C", "t": "Más treinta y cinco milivoltios", "c": false, "r": "Incorrecto. Ese valor se describe como posible inversión rápida, no como registro extracelular basal.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Menos noventa milivoltios", "c": false, "r": "Incorrecto. Ese nivel se asocia a combinaciones de mecanismos en reposo, no al registro extracelular de referencia.", "et": "misinterpretation" },
+        { "l": "E", "t": "Más sesenta milivoltios", "c": false, "r": "Incorrecto. Ese valor aparece como potencial de equilibrio en ejemplos de Nernst, no como registro fuera de la membrana.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-013",
+      "sb": "Potencial de membrana en reposo de las neuronas",
+      "x": "¿Cuál es el potencial de membrana en reposo aproximado de las fibras nerviosas grandes cuando no transmiten señales?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Aproximadamente menos setenta milivoltios", "c": true, "r": "Correcto. El interior de la fibra es más negativo que el exterior por decenas de milivoltios. Ese nivel define la polarización basal previa a cualquier potencial de acción. Desde ese punto, cambios hacia valores menos negativos facilitan la excitación.", "et": null },
+        { "l": "B", "t": "Aproximadamente menos diez milivoltios", "c": false, "r": "Incorrecto. Ese rango se asocia a células con voltajes pequeños, no al valor típico descrito para fibras nerviosas grandes.", "et": "recall" },
+        { "l": "C", "t": "Aproximadamente más sesenta milivoltios", "c": false, "r": "Incorrecto. La positividad interna corresponde a situaciones de difusión selectiva de sodio, no al reposo neuronal típico.", "et": "conceptual" },
+        { "l": "D", "t": "Aproximadamente menos ciento cuarenta", "c": false, "r": "Incorrecto. Ese número aparece como concentración de potasio intracelular, no como voltaje de reposo.", "et": "misinterpretation" },
+        { "l": "E", "t": "Aproximadamente cero milivoltios", "c": false, "r": "Incorrecto. Cero se usa como referencia extracelular; el reposo neuronal se registra como un valor negativo intracelular.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-014",
+      "sb": "Transporte activo de sodio y potasio",
+      "x": "¿Por qué se describe la bomba sodio potasio como electrógena?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Expulsa más cargas positivas netas", "c": true, "r": "Correcto. Se bombean tres iones sodio hacia el exterior por cada dos iones potasio hacia el interior. Ese desequilibrio deja un déficit neto de carga positiva intracelular. El resultado es un aporte directo de negatividad al voltaje de membrana.", "et": null },
+        { "l": "B", "t": "Introduce más cargas positivas netas", "c": false, "r": "Incorrecto. La dirección neta de carga positiva es hacia el exterior, no hacia el interior, en el intercambio descrito.", "et": "mechanistic" },
+        { "l": "C", "t": "Transporta cloruro contra gradiente", "c": false, "r": "Incorrecto. La bomba descrita mueve sodio y potasio; el cloruro no es el sustrato señalado.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Abre canales de sodio rápidamente", "c": false, "r": "Incorrecto. La apertura rápida corresponde a canales activados por voltaje, no a la acción de la bomba.", "et": "conceptual" },
+        { "l": "E", "t": "Neutraliza aniones internos difusibles", "c": false, "r": "Incorrecto. El efecto electrógeno depende del balance de cationes bombeados, no de neutralización de aniones internos.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-015",
+      "sb": "Transporte activo de sodio y potasio",
+      "x": "¿Cuál es la concentración extracelular aproximada de sodio indicada para nervio en reposo?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Ciento cuarenta y dos mEq por litro", "c": true, "r": "Correcto. Se muestran gradientes marcados de sodio con alta concentración extracelular y baja intracelular. Ese contraste sostiene diferencias electroquímicas relevantes para excitabilidad. La bomba contribuye a mantener ese gradiente de manera continua.", "et": null },
+        { "l": "B", "t": "Catorce mEq por litro", "c": false, "r": "Incorrecto. Ese valor corresponde a la concentración intracelular de sodio, no a la extracelular.", "et": "recall" },
+        { "l": "C", "t": "Ciento cuarenta mEq por litro", "c": false, "r": "Incorrecto. Ese número se presenta para potasio intracelular, no para sodio extracelular.", "et": "misinterpretation" },
+        { "l": "D", "t": "Cuatro mEq por litro", "c": false, "r": "Incorrecto. Ese valor corresponde al potasio extracelular, no al sodio extracelular.", "et": "recall" },
+        { "l": "E", "t": "Cero punto uno mEq por litro", "c": false, "r": "Incorrecto. Cero punto uno describe un cociente interno externo, no una concentración absoluta.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-016",
+      "sb": "Transporte activo de sodio y potasio",
+      "x": "¿Cuál es el cociente sodio intracelular sobre sodio extracelular reportado?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Cero punto uno", "c": true, "r": "Correcto. El cociente interno externo de sodio se presenta como una décima parte. Ese valor resume un gradiente fuerte con sodio mucho mayor fuera que dentro. Un gradiente así contribuye a la fuerza impulsora cuando aumenta la permeabilidad al sodio.", "et": null },
+        { "l": "B", "t": "Treinta y cinco", "c": false, "r": "Incorrecto. Ese cociente se asigna al potasio interno sobre externo, no al sodio.", "et": "recall" },
+        { "l": "C", "t": "Cien", "c": false, "r": "Incorrecto. Cien se usa como comparación de permeabilidades, no como cociente de concentraciones de sodio.", "et": "misinterpretation" },
+        { "l": "D", "t": "Mil", "c": false, "r": "Incorrecto. Mil se usa en cambios de conductancia o permeabilidad en otros contextos, no para este cociente.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Uno punto cincuenta y cuatro", "c": false, "r": "Incorrecto. Ese número aparece como logaritmo de un cociente distinto, no como el cociente sodio interno externo.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-017",
+      "sb": "Fuga de potasio a través de la membrana",
+      "x": "¿Qué característica describe mejor a los canales de fuga de potasio en reposo?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Permiten salida continua de potasio", "c": true, "r": "Correcto. Estos canales dejan escapar potasio incluso en reposo, sosteniendo una alta conductancia basal. También pueden permitir algo de sodio, pero con permeabilidad mucho menor. Ese sesgo es clave para el valor del voltaje de reposo.", "et": null },
+        { "l": "B", "t": "Permiten entrada continua de potasio", "c": false, "r": "Incorrecto. El gradiente típico favorece salida neta de potasio; la descripción central es fuga hacia el exterior.", "et": "mechanistic" },
+        { "l": "C", "t": "Bloquean por completo el sodio", "c": false, "r": "Incorrecto. Se menciona que puede perderse algo de sodio, aunque la permeabilidad es mucho mayor para potasio.", "et": "misinterpretation" },
+        { "l": "D", "t": "Generan apertura lenta dependiente voltaje", "c": false, "r": "Incorrecto. La apertura lenta dependiente de voltaje corresponde a canales activados por voltaje, no a canales de fuga.", "et": "conceptual" },
+        { "l": "E", "t": "Requieren energía directa de ATP", "c": false, "r": "Incorrecto. La fuga es pasiva; el uso directo de ATP corresponde al transporte activo por bombas.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-018",
+      "sb": "Fuga de potasio a través de la membrana",
+      "x": "¿Cuántas veces es mayor la permeabilidad al potasio que al sodio en canales de fuga descritos?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Aproximadamente cien veces mayor", "c": true, "r": "Correcto. Se indica que la membrana en reposo es mucho más permeable al potasio, con una relación cercana a cien. Ese desbalance hace que el potasio domine el voltaje. Así, pequeñas fugas de sodio solo desplazan moderadamente el potencial.", "et": null },
+        { "l": "B", "t": "Aproximadamente diez veces mayor", "c": false, "r": "Incorrecto. La relación descrita es mayor, y se presenta como un factor clave para el valor del potencial de reposo.", "et": "recall" },
+        { "l": "C", "t": "Aproximadamente dos veces mayor", "c": false, "r": "Incorrecto. Una diferencia tan pequeña no explica el dominio del potasio señalado para reposo.", "et": "conceptual" },
+        { "l": "D", "t": "Aproximadamente mil veces mayor", "c": false, "r": "Incorrecto. Mil aparece asociado a otros fenómenos de permeabilidad, no a esta relación de fuga en reposo.", "et": "misinterpretation" },
+        { "l": "E", "t": "Aproximadamente igual en reposo", "c": false, "r": "Incorrecto. Se enfatiza una permeabilidad claramente mayor al potasio que al sodio en reposo.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-019",
+      "sb": "Origen del potencial de membrana en reposo normal",
+      "x": "Si solo actuara difusión de potasio con cociente 35 a 1, ¿qué potencial intracelular se calcula para equilibrio?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Menos noventa y cuatro milivoltios", "c": true, "r": "Correcto. Con cociente 35 a 1 se usa logaritmo cercano a 1.54 y el factor de 61 mV a 37 °C. El resultado es un potencial negativo intracelular de alrededor de noventa y cuatro milivoltios. Ese valor representa el equilibrio para potasio aislado.", "et": null },
+        { "l": "B", "t": "Menos ochenta y seis milivoltios", "c": false, "r": "Incorrecto. Ese valor corresponde al resultado al incluir una permeabilidad pequeña al sodio, no al potasio aislado.", "et": "recall" },
+        { "l": "C", "t": "Menos setenta milivoltios", "c": false, "r": "Incorrecto. Menos setenta se usa como reposo típico registrado, no como equilibrio teórico para potasio aislado con ese cociente.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Más sesenta y un milivoltios", "c": false, "r": "Incorrecto. Ese valor positivo se obtiene en ejemplos de sodio con cociente distinto, no del potasio con cociente 35 a 1.", "et": "misinterpretation" },
+        { "l": "E", "t": "Menos cuatro milivoltios", "c": false, "r": "Incorrecto. Menos cuatro se atribuye al aporte electrógeno adicional de la bomba, no al equilibrio de difusión de potasio aislado.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-020",
+      "sb": "Origen del potencial de membrana en reposo normal",
+      "x": "Al considerar potasio dominante y sodio ligeramente permeable con relación de permeabilidades cien a uno, ¿qué potencial intracelular aproximado resulta?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Menos ochenta y seis milivoltios", "c": true, "r": "Correcto. Con potasio mucho más permeable que sodio, el voltaje se acerca al equilibrio del potasio pero se desplaza por la fuga pequeña de sodio. El cálculo con permeabilidad relativa elevada para potasio produce un valor cercano a menos ochenta y seis milivoltios. Así se integra difusión de ambos iones.", "et": null },
+        { "l": "B", "t": "Menos noventa y cuatro milivoltios", "c": false, "r": "Incorrecto. Ese valor corresponde al caso de potasio como único ion difusible, sin contribución por fuga de sodio.", "et": "recall" },
+        { "l": "C", "t": "Menos setenta milivoltios", "c": false, "r": "Incorrecto. Ese valor se registra en condiciones típicas, pero aquí se pregunta por el resultado del cálculo con sodio y potasio en el modelo.", "et": "misinterpretation" },
+        { "l": "D", "t": "Más sesenta y un milivoltios", "c": false, "r": "Incorrecto. Ese potencial positivo se asocia al equilibrio del sodio, no al voltaje resultante cuando domina potasio.", "et": "conceptual" },
+        { "l": "E", "t": "Menos noventa milivoltios", "c": false, "r": "Incorrecto. Menos noventa se describe como valor neto con aporte adicional de bomba, no el valor previo por difusión de sodio y potasio.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-021",
+      "sb": "Origen del potencial de membrana en reposo normal",
+      "x": "¿Cuánta contribución adicional al voltaje en reposo se atribuye al carácter electrógeno de la bomba sodio potasio?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Aproximadamente menos cuatro milivoltios", "c": true, "r": "Correcto. Se indica un aporte adicional de negatividad intracelular por el bombeo neto de cargas positivas hacia el exterior. Ese efecto suma unos pocos milivoltios al voltaje que se explica por difusión. El resultado final se acerca a menos noventa milivoltios en el modelo descrito.", "et": null },
+        { "l": "B", "t": "Aproximadamente menos noventa milivoltios", "c": false, "r": "Incorrecto. Menos noventa es el valor neto cuando actúan varios mecanismos, no el aporte incremental de la bomba.", "et": "conceptual" },
+        { "l": "C", "t": "Aproximadamente más sesenta milivoltios", "c": false, "r": "Incorrecto. Ese valor se asocia al equilibrio del sodio, no al aporte electrógeno pequeño de la bomba.", "et": "misinterpretation" },
+        { "l": "D", "t": "Aproximadamente menos ochenta y seis", "c": false, "r": "Incorrecto. Ese valor se describe por difusión de sodio y potasio, no por la contribución incremental de la bomba.", "et": "recall" },
+        { "l": "E", "t": "Aproximadamente cero milivoltios", "c": false, "r": "Incorrecto. La bomba no anula el voltaje; contribuye a hacerlo más negativo, no a llevarlo a cero.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-022",
+      "sb": "Potencial de acción de las neuronas",
+      "x": "¿Qué secuencia describe mejor un potencial de acción típico en neuronas?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Despolarización seguida de repolarización", "c": true, "r": "Correcto. El voltaje cambia rápidamente desde un nivel negativo hacia valores menos negativos o positivos, y luego retorna hacia el nivel basal. La fase ascendente corresponde a mayor permeabilidad al sodio. La fase descendente se asocia a cierre de sodio y aumento de salida de potasio.", "et": null },
+        { "l": "B", "t": "Hiperpolarización seguida de meseta", "c": false, "r": "Incorrecto. Esa secuencia no define el evento típico descrito para neuronas; la meseta se discute como fenómeno particular en otros tejidos.", "et": "plausible_distractor" },
+        { "l": "C", "t": "Repolarización seguida de despolarización", "c": false, "r": "Incorrecto. Invierte el orden temporal del cambio explosivo inicial y del retorno posterior al estado negativo.", "et": "mechanistic" },
+        { "l": "D", "t": "Meseta seguida de reposo", "c": false, "r": "Incorrecto. La meseta no es una fase universal del potencial de acción neuronal típico descrito en el capítulo.", "et": "misinterpretation" },
+        { "l": "E", "t": "Reposo seguido de hiperpolarización", "c": false, "r": "Incorrecto. El rasgo central es el cambio rápido hacia voltajes menos negativos por entrada de cargas positivas, no solo hiperpolarización.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-023",
+      "sb": "Potencial de acción de las neuronas",
+      "x": "Durante la fase de despolarización, ¿qué cambio inmediato permite el ascenso del potencial de membrana?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Aumento brusco permeabilidad al sodio", "c": true, "r": "Correcto. La membrana se vuelve muy permeable al sodio, permitiendo difusión rápida de cargas positivas hacia el interior. Esto neutraliza la negatividad basal y eleva el voltaje hacia cero o valores positivos. El proceso se vuelve explosivo al aumentar más la entrada de sodio.", "et": null },
+        { "l": "B", "t": "Aumento brusco permeabilidad al cloruro", "c": false, "r": "Incorrecto. El cloruro no se describe como el cambio principal responsable del ascenso rápido del potencial.", "et": "plausible_distractor" },
+        { "l": "C", "t": "Cierre completo canales de sodio", "c": false, "r": "Incorrecto. El ascenso requiere apertura de canales de sodio, no su cierre.", "et": "mechanistic" },
+        { "l": "D", "t": "Aumento brusco bombeo de potasio", "c": false, "r": "Incorrecto. La bomba no genera cambios tan rápidos; el ascenso se debe a difusión por canales activados por voltaje.", "et": "conceptual" },
+        { "l": "E", "t": "Aumento brusco salida de potasio", "c": false, "r": "Incorrecto. La salida de potasio predomina para restaurar negatividad durante repolarización, no para iniciar el ascenso.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-024",
+      "sb": "Potencial de acción de las neuronas",
+      "x": "Durante la repolarización, ¿qué combinación de eventos acelera el retorno al potencial negativo?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Cierre sodio y apertura potasio", "c": true, "r": "Correcto. Tras una breve fracción de tiempo, los canales de sodio comienzan a cerrarse y los de potasio se abren más. Disminuye la entrada de sodio y aumenta la salida de potasio, restaurando negatividad intracelular. Esa combinación acelera la repolarización.", "et": null },
+        { "l": "B", "t": "Apertura sodio y cierre potasio", "c": false, "r": "Incorrecto. Esa combinación mantendría entrada de cargas positivas y dificultaría el retorno a voltajes negativos.", "et": "mechanistic" },
+        { "l": "C", "t": "Apertura cloruro y cierre sodio", "c": false, "r": "Incorrecto. El cambio crítico descrito involucra aumento de salida de potasio junto con reducción de entrada de sodio.", "et": "conceptual" },
+        { "l": "D", "t": "Aumento bomba sodio potasio", "c": false, "r": "Incorrecto. La bomba contribuye al mantenimiento de gradientes, pero no explica el retorno rápido en diezmilésimas de segundo.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Cierre potasio y cierre sodio", "c": false, "r": "Incorrecto. Sin aumento de salida de potasio, el retorno rápido al potencial negativo no se acelera como se describe.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-025",
+      "sb": "Canales de sodio y potasio activados por el voltaje",
+      "x": "¿Qué compuerta del canal de sodio está cerrada en reposo y bloquea el paso de sodio inicialmente?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Compuerta de activación", "c": true, "r": "Correcto. En reposo, la compuerta de activación permanece cerrada, impidiendo la entrada de sodio a través del canal. Al volverse menos negativo el voltaje, esta compuerta se abre bruscamente. Ese cambio incrementa de forma marcada la permeabilidad al sodio.", "et": null },
+        { "l": "B", "t": "Compuerta de inactivación", "c": false, "r": "Incorrecto. La compuerta de inactivación se cierra después de la activación, no como principal bloqueo inicial en reposo.", "et": "mechanistic" },
+        { "l": "C", "t": "Compuerta de fuga", "c": false, "r": "Incorrecto. La fuga describe canales distintos; el canal activado por voltaje se caracteriza por compuertas de activación e inactivación.", "et": "conceptual" },
+        { "l": "D", "t": "Compuerta de cloruro", "c": false, "r": "Incorrecto. El canal descrito es de sodio; una compuerta de cloruro no corresponde a esta estructura.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Compuerta de meseta", "c": false, "r": "Incorrecto. Meseta describe un patrón de voltaje, no una compuerta estructural del canal de sodio.", "et": "misinterpretation" }
+      ]
+    },
+
+    {
+      "id": "FISIO-PMEM-026",
+      "sb": "Canales de sodio y potasio activados por el voltaje",
+      "x": "¿Qué evento de voltaje abre la compuerta de activación del canal de sodio?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Alcanzar voltaje cercano a menos cincuenta y cinco", "c": true, "r": "Correcto. Al hacerse el potencial menos negativo y aproximarse a un nivel alrededor de menos cincuenta y cinco milivoltios, ocurre un cambio conformacional súbito. La compuerta de activación bascula a abierta. Esto eleva enormemente la permeabilidad de membrana al sodio.", "et": null },
+        { "l": "B", "t": "Alcanzar voltaje cercano a menos noventa y cuatro", "c": false, "r": "Incorrecto. Ese valor se asocia al equilibrio del potasio en un caso idealizado, no al disparo de activación del canal de sodio.", "et": "misinterpretation" },
+        { "l": "C", "t": "Alcanzar voltaje cercano a más sesenta", "c": false, "r": "Incorrecto. La apertura se desencadena al despolarizar desde reposo hacia cero, no al alcanzar valores positivos muy altos.", "et": "conceptual" },
+        { "l": "D", "t": "Alcanzar voltaje cercano a menos diez", "c": false, "r": "Incorrecto. La activación ocurre antes, alrededor del umbral descrito, y no requiere acercarse tanto a cero.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Alcanzar voltaje cercano a menos setenta", "c": false, "r": "Incorrecto. Menos setenta corresponde a reposo típico; la apertura requiere despolarización hacia valores menos negativos.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-027",
+      "sb": "Canales de sodio y potasio activados por el voltaje",
+      "x": "¿Qué compuerta del canal de sodio se cierra con ligera demora tras abrirse la compuerta de activación?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Compuerta de inactivación", "c": true, "r": "Correcto. El mismo cambio de voltaje que favorece la activación también promueve cierre de la inactivación, pero con retraso. Por eso el canal permanece abierto solo una fracción breve. La inactivación contribuye al inicio del retorno del voltaje hacia valores negativos.", "et": null },
+        { "l": "B", "t": "Compuerta de activación", "c": false, "r": "Incorrecto. La activación se abre de forma súbita; la demora descrita corresponde a cierre por inactivación.", "et": "mechanistic" },
+        { "l": "C", "t": "Compuerta de potasio", "c": false, "r": "Incorrecto. El canal de potasio es una estructura distinta; la pregunta se refiere al canal de sodio y sus dos compuertas.", "et": "conceptual" },
+        { "l": "D", "t": "Compuerta de fuga", "c": false, "r": "Incorrecto. Los canales de fuga no se describen con estas compuertas; la inactivación es propia del canal de sodio activado por voltaje.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Compuerta de conducción", "c": false, "r": "Incorrecto. Conducción describe propagación del impulso, no una compuerta específica del canal de sodio.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-028",
+      "sb": "Canales de sodio y potasio activados por el voltaje",
+      "x": "¿Qué condición permite que la compuerta de inactivación del canal de sodio vuelva a abrirse?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Repolarización hacia valores de reposo", "c": true, "r": "Correcto. La compuerta de inactivación permanece cerrada mientras la membrana está despolarizada. Solo cuando el potencial se normaliza o se acerca al reposo, la inactivación se libera. Esto evita reapertura inmediata del canal durante el mismo evento eléctrico.", "et": null },
+        { "l": "B", "t": "Aumento mantenido de permeabilidad sodio", "c": false, "r": "Incorrecto. Mantener alta permeabilidad al sodio prolonga despolarización y favorece que la inactivación se mantenga cerrada.", "et": "conceptual" },
+        { "l": "C", "t": "Disminución sostenida de potasio externo", "c": false, "r": "Incorrecto. La reapertura descrita depende del estado de voltaje, no de un cambio sostenido aislado de potasio extracelular.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Aumento sostenido de sodio interno", "c": false, "r": "Incorrecto. La condición señalada es la recuperación del voltaje de membrana, no la concentración intracelular de sodio por sí sola.", "et": "misinterpretation" },
+        { "l": "E", "t": "Bloqueo completo de canales potasio", "c": false, "r": "Incorrecto. El bloqueo de potasio dificultaría repolarización; sin repolarizar, la inactivación no se revierte como se describe.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-029",
+      "sb": "Canal de potasio activado por el voltaje",
+      "x": "¿Qué describe mejor la activación del canal de potasio activado por voltaje durante un potencial de acción?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Se abre con ligera demora", "c": true, "r": "Correcto. La apertura del canal de potasio ocurre al despolarizar, pero su cinética es más lenta que la del canal de sodio. Por eso suele abrirse cuando el sodio ya inicia su inactivación. Esa coordinación favorece una repolarización rápida.", "et": null },
+        { "l": "B", "t": "Se abre antes que sodio", "c": false, "r": "Incorrecto. Se destaca que la activación del potasio es más tardía, no previa a la del sodio.", "et": "mechanistic" },
+        { "l": "C", "t": "Se cierra antes que sodio", "c": false, "r": "Incorrecto. El canal de potasio suele mantenerse abierto durante el voltaje positivo y se cierra al retornar a valores negativos.", "et": "misinterpretation" },
+        { "l": "D", "t": "Se abre solo en reposo", "c": false, "r": "Incorrecto. En reposo la compuerta se describe cerrada; se abre cuando el voltaje cambia hacia menos negativo.", "et": "recall" },
+        { "l": "E", "t": "Se abre por bomba electrógena", "c": false, "r": "Incorrecto. La apertura depende del voltaje, no del mecanismo de bombeo activo de sodio y potasio.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-030",
+      "sb": "Método de la pinza de voltaje",
+      "x": "¿Qué mantiene constante el método de la pinza de voltaje durante el experimento?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Voltaje intracelular fijado por operador", "c": true, "r": "Correcto. El sistema ajusta automáticamente la corriente inyectada para mantener el voltaje al nivel seleccionado. Así se evita que los flujos iónicos cambien el potencial medido. La corriente requerida refleja el flujo neto a través de canales con polaridad opuesta.", "et": null },
+        { "l": "B", "t": "Temperatura intracelular fijada por operador", "c": false, "r": "Incorrecto. El método controla voltaje mediante inyección de corriente; no se describe como un control térmico del interior celular.", "et": "plausible_distractor" },
+        { "l": "C", "t": "Concentración de aniones internos fijada", "c": false, "r": "Incorrecto. Se pueden modificar concentraciones en soluciones, pero lo que se mantiene constante durante el registro es el voltaje objetivo.", "et": "misinterpretation" },
+        { "l": "D", "t": "Resistencia de micropipeta fijada", "c": false, "r": "Incorrecto. La resistencia elevada de la micropipeta es una limitación técnica, no el parámetro que se sostiene constante por retrocontrol.", "et": "conceptual" },
+        { "l": "E", "t": "Conductancia de canales fijada", "c": false, "r": "Incorrecto. La conductancia cambia con el voltaje; el método mide esos cambios mientras sostiene el potencial constante.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-031",
+      "sb": "Método de la pinza de voltaje",
+      "x": "¿Qué indica la corriente que se inyecta para sostener el voltaje durante la pinza de voltaje?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Flujo neto de corriente de membrana", "c": true, "r": "Correcto. Para mantener el voltaje, el aparato inyecta una corriente igual en magnitud al flujo neto a través de canales, pero con polaridad opuesta. Por eso, el registro de esa corriente sirve como medida indirecta del movimiento iónico. Cambios temporales reflejan activación e inactivación de canales.", "et": null },
+        { "l": "B", "t": "Cantidad total de ATP consumido", "c": false, "r": "Incorrecto. La corriente inyectada refleja flujos eléctricos inmediatos por canales, no el consumo total de energía metabólica.", "et": "plausible_distractor" },
+        { "l": "C", "t": "Volumen del axoplasma interno", "c": false, "r": "Incorrecto. El volumen no se mide por la corriente compensatoria; el registro está ligado a cargas y canales.", "et": "misinterpretation" },
+        { "l": "D", "t": "Número fijo de canales abiertos", "c": false, "r": "Incorrecto. La corriente cambia continuamente; no implica un número fijo ni directo de canales abiertos sin considerar conductancias.", "et": "conceptual" },
+        { "l": "E", "t": "Potencial de Nernst del sodio", "c": false, "r": "Incorrecto. El potencial de equilibrio es un valor de voltaje, mientras que la corriente inyectada es una medición dinámica del flujo neto.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-032",
+      "sb": "Inicio del potencial de acción",
+      "x": "¿Qué mecanismo describe mejor el inicio explosivo del potencial de acción tras un estímulo suficiente?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Retroalimentación positiva por entrada de sodio", "c": true, "r": "Correcto. Un aumento inicial del voltaje abre canales de sodio, entra sodio y el voltaje sube más, abriendo aún más canales. Este bucle amplifica rápidamente la permeabilidad al sodio. El proceso continúa hasta activación extensa, y luego se detiene por inactivación y apertura de potasio.", "et": null },
+        { "l": "B", "t": "Retroalimentación negativa por salida de sodio", "c": false, "r": "Incorrecto. El inicio depende de entrada de cargas positivas y amplificación, no de una salida que reduzca la despolarización.", "et": "mechanistic" },
+        { "l": "C", "t": "Equilibrio inmediato por difusión de potasio", "c": false, "r": "Incorrecto. La difusión de potasio favorece retorno a negatividad; no explica la fase explosiva de ascenso del voltaje.", "et": "conceptual" },
+        { "l": "D", "t": "Bloqueo progresivo de canales sodio", "c": false, "r": "Incorrecto. El bloqueo por inactivación ocurre después de la activación, no como motor del inicio explosivo.", "et": "misinterpretation" },
+        { "l": "E", "t": "Apertura sostenida canales cloruro", "c": false, "r": "Incorrecto. El cloruro no se describe como responsable principal del disparo regenerativo del potencial de acción.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-033",
+      "sb": "Inicio del potencial de acción",
+      "x": "¿Qué cambio típico de voltaje desde reposo se menciona como necesario para alcanzar umbral en una fibra grande?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Entre quince y treinta milivoltios", "c": true, "r": "Correcto. Se indica que el aumento inicial debe ser lo bastante grande para que la entrada de sodio supere la salida de potasio. Ese incremento suele estar en el rango de quince a treinta milivoltios. Al llevar el potencial hacia menos cincuenta y cinco, se inicia el ciclo regenerativo.", "et": null },
+        { "l": "B", "t": "Entre uno y cinco milivoltios", "c": false, "r": "Incorrecto. Un cambio tan pequeño se describe como potencial local subumbral, incapaz de iniciar el proceso regenerativo.", "et": "recall" },
+        { "l": "C", "t": "Entre cincuenta y cien milivoltios", "c": false, "r": "Incorrecto. El rango descrito para alcanzar umbral es menor; no se requiere un salto tan grande desde reposo.", "et": "conceptual" },
+        { "l": "D", "t": "Entre doscientos y trescientos", "c": false, "r": "Incorrecto. Un cambio de ese tamaño no corresponde a los valores fisiológicos citados para umbral en fibras grandes.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Entre cero y cinco milisegundos", "c": false, "r": "Incorrecto. La pregunta pide cambio de voltaje, no duración temporal del estímulo o de la respuesta.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-034",
+      "sb": "Inicio del potencial de acción",
+      "x": "¿Qué valor aproximado se menciona como umbral típico en fibras nerviosas grandes al partir de menos setenta?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Aproximadamente menos cincuenta y cinco", "c": true, "r": "Correcto. Se describe que elevar el potencial desde menos setenta hacia menos cincuenta y cinco suele disparar el potencial de acción. Ese nivel marca el punto donde la entrada de sodio domina y se establece la retroalimentación positiva. Por debajo de ese nivel, el cambio queda subumbral.", "et": null },
+        { "l": "B", "t": "Aproximadamente menos noventa y cuatro", "c": false, "r": "Incorrecto. Ese valor es un potencial de equilibrio para potasio en un caso idealizado, no un umbral de excitación.", "et": "recall" },
+        { "l": "C", "t": "Aproximadamente menos ochenta y seis", "c": false, "r": "Incorrecto. Ese valor aparece como cálculo de voltaje por difusión de sodio y potasio, no como umbral para disparo.", "et": "misinterpretation" },
+        { "l": "D", "t": "Aproximadamente cero milivoltios", "c": false, "r": "Incorrecto. El potencial puede acercarse a cero durante despolarización, pero el umbral se alcanza antes de llegar a cero.", "et": "conceptual" },
+        { "l": "E", "t": "Aproximadamente más treinta y cinco", "c": false, "r": "Incorrecto. Más treinta y cinco se menciona como inversión posible del potencial, no como el nivel umbral de excitación.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-035",
+      "sb": "Propagación del potencial de acción",
+      "x": "¿Qué nombre recibe el flujo de corriente desde una zona despolarizada hacia zonas adyacentes en reposo que inicia la propagación?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Circuito local de corriente", "c": true, "r": "Correcto. La entrada de sodio en la zona activada desplaza cargas positivas que se distribuyen a lo largo del axón y del exterior cercano. Ese flujo eleva el voltaje de regiones adyacentes hasta umbral. Así se abren canales en la siguiente zona y la señal se propaga progresivamente.", "et": null },
+        { "l": "B", "t": "Capa de dipolo eléctrico", "c": false, "r": "Incorrecto. La capa de dipolo describe la transición de voltaje en la membrana, no el flujo longitudinal que propaga la excitación.", "et": "conceptual" },
+        { "l": "C", "t": "Pinza de voltaje activa", "c": false, "r": "Incorrecto. La pinza es un método experimental, no un mecanismo fisiológico de propagación a lo largo de la membrana.", "et": "misinterpretation" },
+        { "l": "D", "t": "Bombeo longitudinal de sodio", "c": false, "r": "Incorrecto. No se describe un bombeo longitudinal; la propagación depende de corrientes locales por redistribución de cargas.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Difusión axial de cloruro", "c": false, "r": "Incorrecto. El fenómeno principal involucra cargas positivas desplazadas por entrada de sodio y su distribución local, no cloruro axial.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-036",
+      "sb": "Propagación del potencial de acción",
+      "x": "¿Qué se afirma sobre la dirección de propagación del potencial de acción desde un punto estimulado?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Viaja en todas las direcciones", "c": true, "r": "Correcto. Se describe que la membrana excitable no tiene una sola dirección obligatoria y que el potencial se aleja del estímulo en ambos sentidos. El avance ocurre al excitar segmentos adyacentes mediante corrientes locales. También puede propagarse por ramas hasta despolarizar la membrana disponible.", "et": null },
+        { "l": "B", "t": "Viaja solo hacia el soma", "c": false, "r": "Incorrecto. No se establece una dirección única; se afirma propagación en múltiples direcciones desde el sitio activado.", "et": "misinterpretation" },
+        { "l": "C", "t": "Viaja solo hacia terminal", "c": false, "r": "Incorrecto. La descripción resalta propagación bidireccional y hacia ramas, no una dirección exclusiva hacia el extremo.", "et": "conceptual" },
+        { "l": "D", "t": "Viaja solo en mielina", "c": false, "r": "Incorrecto. La propagación ocurre en la membrana del axón; la mielina modifica la forma y velocidad, no es la única vía.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Viaja solo si hay meseta", "c": false, "r": "Incorrecto. La propagación depende de excitabilidad y umbral, no de la presencia de una meseta prolongada.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-037",
+      "sb": "Propagación del potencial de acción",
+      "x": "¿Qué significa el principio del todo o nada aplicado a tejidos excitables normales?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Se propaga completo o no", "c": true, "r": "Correcto. Una vez que se origina un potencial de acción con condiciones adecuadas, la despolarización avanza por la membrana. Si no se cumplen esas condiciones, no progresa. La magnitud no se gradúa a medias; el evento ocurre de forma completa o falla en propagarse.", "et": null },
+        { "l": "B", "t": "Cambia de amplitud con distancia", "c": false, "r": "Incorrecto. La característica destacada es propagación completa o ausencia de propagación, no un descenso gradual de amplitud como regla.", "et": "conceptual" },
+        { "l": "C", "t": "Depende del tamaño del axón", "c": false, "r": "Incorrecto. El tamaño modifica velocidad y seguridad, pero el principio describe el carácter no graduable del evento una vez iniciado.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Requiere bomba activa inmediata", "c": false, "r": "Incorrecto. La propagación inmediata depende de canales y corrientes locales; la bomba restablece gradientes a más largo plazo.", "et": "mechanistic" },
+        { "l": "E", "t": "Ocurre solo en fibras mielinizadas", "c": false, "r": "Incorrecto. Se aplica a tejidos excitables normales en general, no exclusivamente a fibras con mielina.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-038",
+      "sb": "Propagación del potencial de acción",
+      "x": "¿Qué define el factor de seguridad para la propagación mencionado?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Cociente potencial de acción sobre umbral", "c": true, "r": "Correcto. Se define como la relación entre la magnitud del potencial de acción y el umbral de excitación necesario para activar la siguiente región. Para propagación continua, ese cociente debe mantenerse mayor que uno. Si cae por debajo, la despolarización puede interrumpirse en algún punto.", "et": null },
+        { "l": "B", "t": "Cociente permeabilidad sodio sobre potasio", "c": false, "r": "Incorrecto. Ese cociente se usa para describir cambios de conductancia, pero el factor de seguridad se define respecto a umbral de excitación.", "et": "conceptual" },
+        { "l": "C", "t": "Cociente sodio interno sobre externo", "c": false, "r": "Incorrecto. Ese cociente resume un gradiente, no la seguridad de propagación que depende de voltajes relativos al umbral.", "et": "misinterpretation" },
+        { "l": "D", "t": "Cociente calor producido sobre tiempo", "c": false, "r": "Incorrecto. El calor se relaciona con gasto energético en recarga, no con la definición del factor de seguridad.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Cociente diámetro axón sobre mielina", "c": false, "r": "Incorrecto. La geometría afecta velocidad, pero el factor se define como relación de voltajes respecto al umbral.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-039",
+      "sb": "Restablecimiento de gradientes iónicos tras potenciales de acción",
+      "x": "¿Qué mecanismo restablece las diferencias de concentración de sodio y potasio tras muchos potenciales de acción?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Acción de bomba sodio potasio", "c": true, "r": "Correcto. La entrada de sodio durante despolarización y la salida de potasio durante repolarización alteran gradientes con el tiempo. Para recuperar el estado original, la bomba expulsa sodio e introduce potasio de forma sostenida. Este proceso requiere energía proveniente del sistema de ATP celular.", "et": null },
+        { "l": "B", "t": "Difusión pasiva de sodio al exterior", "c": false, "r": "Incorrecto. La difusión pasiva por sí sola no restablece gradientes; tiende a disiparlos en lugar de recuperarlos.", "et": "conceptual" },
+        { "l": "C", "t": "Difusión pasiva de potasio al interior", "c": false, "r": "Incorrecto. La dirección pasiva típica favorece salida de potasio; recuperar gradientes requiere transporte activo.", "et": "mechanistic" },
+        { "l": "D", "t": "Cierre completo canales de fuga", "c": false, "r": "Incorrecto. El cierre de fuga no reconstruye gradientes; solo reduce movimientos pasivos mientras la bomba hace el trabajo.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Apertura sostenida canales de cloruro", "c": false, "r": "Incorrecto. El cloruro no restablece el gradiente de sodio y potasio; se requiere bombeo específico de estos cationes.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-040",
+      "sb": "Restablecimiento de gradientes iónicos tras potenciales de acción",
+      "x": "¿Qué relación se menciona entre la actividad de la bomba sodio potasio y el sodio intracelular acumulado?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Aumenta con la tercera potencia", "c": true, "r": "Correcto. Se describe que la actividad de bombeo se estimula intensamente cuando se acumula sodio intracelular. El incremento se aproxima a una dependencia con la tercera potencia de esa concentración. Por eso, duplicar sodio interno puede multiplicar la actividad de la bomba varias veces y acelerar la recarga.", "et": null },
+        { "l": "B", "t": "Aumenta de forma lineal simple", "c": false, "r": "Incorrecto. Se indica una dependencia más pronunciada que lineal, con aumento desproporcionado al subir sodio intracelular.", "et": "conceptual" },
+        { "l": "C", "t": "Disminuye cuando sube sodio interno", "c": false, "r": "Incorrecto. El sodio interno estimula la actividad; no se describe un efecto inhibidor en este contexto.", "et": "misinterpretation" },
+        { "l": "D", "t": "Se vuelve independiente de ATP", "c": false, "r": "Incorrecto. La recarga se describe como proceso metabólico activo que utiliza energía del sistema de ATP celular.", "et": "mechanistic" },
+        { "l": "E", "t": "Se regula por cloruro extracelular", "c": false, "r": "Incorrecto. El regulador destacado en esta sección es el sodio intracelular acumulado, no el cloruro extracelular.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-041",
+      "sb": "Funciones de otros iones durante el potencial de acción",
+      "x": "¿Qué gradiente de concentración se menciona para calcio entre exterior e interior celular?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Aproximadamente diez mil veces", "c": true, "r": "Correcto. Se indica que el calcio se mantiene con un gradiente enorme, alrededor de diez mil. La concentración interna se describe cerca de diez a la menos siete molar frente a una externa de diez a la menos tres. Ese gradiente crea una fuerte fuerza impulsora cuando se abren canales de calcio.", "et": null },
+        { "l": "B", "t": "Aproximadamente cien veces", "c": false, "r": "Incorrecto. Cien se usa en comparación de permeabilidad de potasio frente a sodio en reposo, no para el gradiente de calcio.", "et": "recall" },
+        { "l": "C", "t": "Aproximadamente mil veces", "c": false, "r": "Incorrecto. Mil se menciona para la selectividad de permeabilidad calcio frente a sodio en canales, no para el gradiente total de concentración.", "et": "misinterpretation" },
+        { "l": "D", "t": "Aproximadamente diez veces", "c": false, "r": "Incorrecto. Un gradiente de diez no corresponde a los valores citados para calcio, que son mucho mayores.", "et": "conceptual" },
+        { "l": "E", "t": "Aproximadamente igual interior exterior", "c": false, "r": "Incorrecto. Se destaca un contraste de órdenes de magnitud entre concentraciones externa e interna de calcio.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-042",
+      "sb": "Funciones de otros iones durante el potencial de acción",
+      "x": "¿Qué se afirma sobre la permeabilidad de los canales de calcio activados por voltaje respecto al sodio en condiciones fisiológicas?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Mayor para calcio por mil", "c": true, "r": "Correcto. Se describe que estos canales pueden permitir sodio y calcio, pero el calcio atraviesa con mucha mayor facilidad. La permeabilidad al calcio se estima alrededor de mil veces mayor que al sodio. Así, su apertura produce una entrada significativa de calcio y contribuye a despolarización sostenida.", "et": null },
+        { "l": "B", "t": "Mayor para sodio por mil", "c": false, "r": "Incorrecto. Se indica el sentido contrario: el canal es más permeable al calcio que al sodio.", "et": "recall" },
+        { "l": "C", "t": "Igual para sodio y calcio", "c": false, "r": "Incorrecto. Se enfatiza una diferencia grande de permeabilidad a favor del calcio, no igualdad funcional.", "et": "conceptual" },
+        { "l": "D", "t": "Mayor para cloruro por mil", "c": false, "r": "Incorrecto. El canal descrito es de calcio con permeabilidad secundaria a sodio, no a cloruro.", "et": "misinterpretation" },
+        { "l": "E", "t": "Mayor para potasio por mil", "c": false, "r": "Incorrecto. El canal de calcio no se describe como altamente permeable al potasio; el contraste citado es calcio frente a sodio.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-043",
+      "sb": "Funciones de otros iones durante el potencial de acción",
+      "x": "¿Cómo se comparan los canales de calcio lentos con los canales de sodio rápidos en tiempo de activación?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Requieren de diez a veinte veces más", "c": true, "r": "Correcto. La activación de canales de calcio se describe como relativamente lenta. Se menciona que necesitan alrededor de diez a veinte veces más tiempo para activarse que los canales de sodio. Por eso su apertura sostiene despolarización, mientras sodio participa en el inicio rápido del potencial de acción.", "et": null },
+        { "l": "B", "t": "Requieren la mitad del tiempo", "c": false, "r": "Incorrecto. La comparación indicada es que son más lentos, no más rápidos que los canales de sodio.", "et": "recall" },
+        { "l": "C", "t": "Requieren el mismo tiempo", "c": false, "r": "Incorrecto. Se destaca una diferencia marcada: calcio es más lento que sodio en activación.", "et": "conceptual" },
+        { "l": "D", "t": "Requieren mil veces más tiempo", "c": false, "r": "Incorrecto. Mil se utiliza para diferencias de permeabilidad, no para un factor temporal de activación.", "et": "misinterpretation" },
+        { "l": "E", "t": "Requieren solo una fracción menor", "c": false, "r": "Incorrecto. La descripción contrasta canales lentos con rápidos; el calcio no se activa más rápido que el sodio.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-044",
+      "sb": "Funciones de otros iones durante el potencial de acción",
+      "x": "¿Qué ocurre con la excitabilidad nerviosa cuando disminuye el calcio extracelular?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Aumenta al abrirse sodio con menor despolarización", "c": true, "r": "Correcto. Se describe que un déficit de calcio reduce el voltaje necesario para activar canales de sodio. Con un pequeño aumento del potencial, los canales se abren con mayor facilidad. Esto incrementa excitabilidad y puede producir descargas repetitivas e incluso tetania por activación espontánea.", "et": null },
+        { "l": "B", "t": "Disminuye por cierre de canales sodio", "c": false, "r": "Incorrecto. Se indica que con menos calcio los canales de sodio se activan con mayor facilidad, no con mayor dificultad.", "et": "conceptual" },
+        { "l": "C", "t": "No cambia por ser ion irrelevante", "c": false, "r": "Incorrecto. Se menciona un efecto profundo del calcio extracelular sobre el nivel de activación de canales de sodio.", "et": "misinterpretation" },
+        { "l": "D", "t": "Aumenta por bloqueo de potasio", "c": false, "r": "Incorrecto. El mecanismo descrito relaciona calcio con activación de sodio, no con bloqueo primario de canales de potasio.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Disminuye por activación de cloruro", "c": false, "r": "Incorrecto. No se atribuye el efecto del déficit de calcio a activación de cloruro, sino a apertura más fácil de sodio.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-045",
+      "sb": "Meseta en algunos potenciales de acción",
+      "x": "¿En qué tejido se describe un potencial de acción con meseta que dura hasta 0.2 a 0.3 segundos?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Fibras musculares cardíacas", "c": true, "r": "Correcto. Se describe una meseta prolongada en potenciales de acción de tejido cardíaco. Esa meseta se asocia a una despolarización sostenida y a una contracción más larga. El intervalo citado de dos a tres décimas de segundo corresponde a esa característica.", "et": null },
+        { "l": "B", "t": "Eritrocitos circulantes", "c": false, "r": "Incorrecto. Los eritrocitos se mencionan con potenciales en reposo pequeños; no se describen como tejido con meseta de potencial de acción.", "et": "misinterpretation" },
+        { "l": "C", "t": "Astrocitos del sistema nervioso", "c": false, "r": "Incorrecto. Se listan potenciales en reposo, pero no se describe una meseta prolongada de potencial de acción para este caso.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Fibras nerviosas grandes mielinizadas", "c": false, "r": "Incorrecto. En neuronas se describen fases rápidas; la meseta prolongada se asocia al músculo cardíaco.", "et": "conceptual" },
+        { "l": "E", "t": "Células ciliadas de cóclea", "c": false, "r": "Incorrecto. Se mencionan rangos de reposo, no potenciales de acción con meseta prolongada de décimas de segundo.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-046",
+      "sb": "Meseta en algunos potenciales de acción",
+      "x": "¿Qué combinación de canales se menciona como causa de la porción en espiga y de la meseta en músculo cardíaco?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Canales rápidos de sodio y canales lentos calcio sodio", "c": true, "r": "Correcto. La porción en espiga se atribuye a canales rápidos de sodio activados por voltaje. La meseta se sostiene por apertura prolongada de canales lentos calcio sodio, permitiendo entrada mantenida. El cierre posterior de esos canales y el aumento de salida de potasio terminan la meseta.", "et": null },
+        { "l": "B", "t": "Canales de fuga de potasio y bomba electrógena", "c": false, "r": "Incorrecto. La meseta se explica por canales activados por voltaje, no por fuga basal y bombeo, que son más relevantes para reposo y gradientes.", "et": "conceptual" },
+        { "l": "C", "t": "Canales de cloruro y canales de fuga sodio", "c": false, "r": "Incorrecto. No se describe una meseta cardíaca basada en cloruro o en fuga; la explicación se centra en canales rápidos y lentos activados por voltaje.", "et": "misinterpretation" },
+        { "l": "D", "t": "Canales de potasio rápidos y canales de sodio lentos", "c": false, "r": "Incorrecto. Se describen canales rápidos de sodio y canales lentos de calcio sodio, no el patrón inverso propuesto.", "et": "mechanistic" },
+        { "l": "E", "t": "Canales de calcio y canales de cloruro", "c": false, "r": "Incorrecto. La espiga se atribuye a sodio rápido; el cloruro no se presenta como componente principal de la espiga y meseta.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-047",
+      "sb": "Ritmicidad de algunos tejidos excitables",
+      "x": "¿Qué condición de permeabilidad se describe como necesaria para ritmicidad espontánea en un tejido excitable?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Permeabilidad suficiente a sodio o calcio sodio", "c": true, "r": "Correcto. Se indica que, incluso en estado natural, la membrana debe permitir entrada automática de sodio o de calcio y sodio por canales lentos. Esa entrada eleva progresivamente el voltaje hasta umbral y dispara un potencial de acción. Tras repolarizar, el ciclo puede repetirse de manera indefinida.", "et": null },
+        { "l": "B", "t": "Permeabilidad nula a sodio y calcio", "c": false, "r": "Incorrecto. Si no entran iones que despolaricen, no existe el ascenso progresivo necesario para alcanzar umbral de forma espontánea.", "et": "conceptual" },
+        { "l": "C", "t": "Permeabilidad exclusiva a cloruro", "c": false, "r": "Incorrecto. El proceso descrito requiere entrada de cationes que eleven el voltaje hacia el umbral, no exclusividad de un anión.", "et": "misinterpretation" },
+        { "l": "D", "t": "Permeabilidad máxima sostenida a potasio", "c": false, "r": "Incorrecto. Un aumento sostenido de salida de potasio tiende a hiperpolarizar y a impedir autoexcitación, no a sostenerla.", "et": "mechanistic" },
+        { "l": "E", "t": "Permeabilidad controlada solo por bomba", "c": false, "r": "Incorrecto. El mecanismo descrito es principalmente pasivo por canales; la bomba mantiene gradientes, pero no produce el ascenso rítmico por sí sola.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-048",
+      "sb": "Ritmicidad de algunos tejidos excitables",
+      "x": "¿Qué evento descrito retrasa el inicio del siguiente potencial de acción en centros rítmicos, pese a repolarización previa?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Aumento transitorio de conductancia a potasio", "c": true, "r": "Correcto. Se describe que tras cada potencial de acción la membrana se vuelve más permeable al potasio por un periodo. La salida aumentada de potasio incrementa la negatividad y produce hiperpolarización, evitando autoexcitación inmediata. Al disminuir gradualmente esa conductancia, el potencial asciende de nuevo hasta umbral.", "et": null },
+        { "l": "B", "t": "Aumento transitorio de conductancia a sodio", "c": false, "r": "Incorrecto. Un aumento de sodio favorecería despolarización y adelantaría el disparo, no el retraso por hiperpolarización descrito.", "et": "conceptual" },
+        { "l": "C", "t": "Cierre prolongado de canales de fuga potasio", "c": false, "r": "Incorrecto. El retraso se vincula a mayor conductancia de potasio, no a cierre de vías que reduzcan salida de potasio.", "et": "mechanistic" },
+        { "l": "D", "t": "Entrada sostenida de cloruro", "c": false, "r": "Incorrecto. La explicación del retraso se centra en conductancia a potasio y estado de hiperpolarización, no en cloruro.", "et": "misinterpretation" },
+        { "l": "E", "t": "Aumento sostenido de actividad de bomba", "c": false, "r": "Incorrecto. La bomba mantiene gradientes, pero el retraso rítmico descrito se asocia a conductancia a potasio tras el potencial de acción.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-049",
+      "sb": "Características de transmisión en troncos nerviosos",
+      "x": "¿Qué estructura se repite aproximadamente cada uno a tres milímetros en una fibra mielinizada?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Nódulo de Ranvier", "c": true, "r": "Correcto. Se describe que la vaina de mielina deja zonas cortas no aisladas entre células de Schwann sucesivas. Estas zonas, de unos pocos micrómetros, aparecen cada uno a tres milímetros. En ellas ocurre el flujo iónico y se generan potenciales de acción en fibras mielinizadas.", "et": null },
+        { "l": "B", "t": "Capa de dipolo eléctrico", "c": false, "r": "Incorrecto. La capa de dipolo se describe como región de cambio de voltaje en la membrana, no como estructura repetitiva cada milímetros en mielina.", "et": "conceptual" },
+        { "l": "C", "t": "Canal de fuga de potasio", "c": false, "r": "Incorrecto. Los canales son proteínas distribuidas en membrana; no se describen como una estructura periódica cada milímetros a lo largo de mielina.", "et": "misinterpretation" },
+        { "l": "D", "t": "Electrodo indiferente externo", "c": false, "r": "Incorrecto. Es un componente de medición, no una estructura anatómica repetida a lo largo de un axón mielinizado.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Compuerta de inactivación", "c": false, "r": "Incorrecto. Es parte del canal de sodio; no es una estructura anatómica repetida por segmentos de mielina.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-PMEM-050",
+      "sb": "Características de transmisión en troncos nerviosos",
+      "x": "¿Qué ventaja energética se atribuye a la conducción saltatoria en fibras mielinizadas?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Menor pérdida iónica al despolarizar solo nódulos", "c": true, "r": "Correcto. Se indica que en fibras mielinizadas los potenciales de acción se generan en los nódulos, no en toda la membrana cubierta por mielina. Esto reduce pérdida de iones y disminuye la necesidad de recarga por transporte activo. Así se conserva energía al limitar el área que debe restablecer gradientes después de series de impulsos.", "et": null },
+        { "l": "B", "t": "Mayor pérdida iónica al despolarizar toda la vaina", "c": false, "r": "Incorrecto. La mielina reduce el flujo iónico; la despolarización principal ocurre en nódulos, disminuyendo pérdidas, no aumentándolas.", "et": "mechanistic" },
+        { "l": "C", "t": "Menor consumo por bloquear canales de sodio", "c": false, "r": "Incorrecto. La ventaja se explica por despolarizar menos membrana y perder menos iones, no por bloquear canales de sodio como mecanismo primario.", "et": "conceptual" },
+        { "l": "D", "t": "Mayor consumo por elevar capacitancia membrana", "c": false, "r": "Incorrecto. Se menciona disminución de capacitancia, lo que facilita conducción; no se atribuye a un aumento de capacitancia que eleve consumo.", "et": "misinterpretation" },
+        { "l": "E", "t": "Menor gasto por aumentar cloruro interno", "c": false, "r": "Incorrecto. La explicación energética se centra en pérdidas de sodio y potasio y su recarga, no en aumentar cloruro interno.", "et": "plausible_distractor" }
+      ]
+    }
+  ]
+}

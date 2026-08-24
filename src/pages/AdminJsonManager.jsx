@@ -1,0 +1,428 @@
+import { useState } from 'react';
+import { client } from '@/api/client';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  FileJson, Upload, CheckCircle2, XCircle,
+  Code, Download, AlertCircle, Sparkles
+} from 'lucide-react';
+import { toast } from 'sonner';
+import { toCompactFormat, fromCompactFormat, isCompactFormat } from '../components/utils/quizFormats';
+import AdminShell from '../components/admin/AdminShell';
+import AdminPageHeader from '../components/admin/AdminPageHeader';
+import { z } from 'zod';
+
+// Define Zod Schema for Quiz Validation
+const questionSchema = z.object({
+  text: z.string({ required_error: "Question text is required" }),
+  type: z.string().optional(),
+  options: z.array(z.string()).optional(),
+  correctAnswer: z.string().optional(),
+  explanation: z.string().optional()
+});
+
+const quizSchema = z.object({
+  title: z.string({ required_error: "Title is required" }),
+  description: z.string().optional(),
+  questions: z.array(questionSchema).min(1, "Must contain at least 1 question"),
+  subject_id: z.string().optional(),
+  is_hidden: z.boolean().optional(),
+  metadata: z.any().optional()
+});
+
+export default function AdminJsonManager() {
+  const queryClient = useQueryClient();
+  const [jsonInput, setJsonInput] = useState('');
+  const [validationResult, setValidationResult] = useState(null);
+  const [formattedJson, setFormattedJson] = useState('');
+  const [convertedJson, setConvertedJson] = useState('');
+
+  const { data: quizzes = [], isLoading } = useQuery({
+    queryKey: ['all-quizzes'],
+    queryFn: () => client.entities.Quiz.list('-created_date'),
+  });
+
+
+
+  const validateJson = () => {
+    try {
+      const parsed = JSON.parse(jsonInput);
+
+      // Auto-expand compact format for validation if needed
+      let dataToValidate = parsed;
+      if (isCompactFormat(parsed)) {
+        dataToValidate = fromCompactFormat(parsed);
+      }
+
+      const result = quizSchema.safeParse(dataToValidate);
+
+      if (result.success) {
+        setValidationResult({
+          valid: true,
+          message: 'JSON válido (Schema Correcto)',
+          data: result.data
+        });
+        toast.success('JSON válido');
+      } else {
+        const issues = result.error.issues.map(i => `${i.path.join('.')}: ${i.message}`).join(', ');
+        setValidationResult({
+          valid: false,
+          message: `Errores de Schema: ${issues}`,
+          data: null
+        });
+        toast.error('JSON inválido según schema');
+      }
+
+    } catch (error) {
+      setValidationResult({
+        valid: false,
+        message: `Error de sintaxis: ${error.message}`,
+        line: error.message.match(/position (\d+)/)?.[1]
+      });
+      toast.error('JSON mal formado');
+    }
+  };
+
+  const formatJson = () => {
+    try {
+      const parsed = JSON.parse(jsonInput);
+      const formatted = JSON.stringify(parsed, null, 2);
+      setFormattedJson(formatted);
+      toast.success('JSON formateado');
+    } catch (error) {
+      toast.error('No se puede formatear JSON inválido');
+    }
+  };
+
+  const convertToCompact = () => {
+    try {
+      const parsed = JSON.parse(jsonInput);
+
+      if (isCompactFormat(parsed)) {
+        toast.info('El JSON ya está en formato compacto');
+        setConvertedJson(JSON.stringify(parsed, null, 2));
+        return;
+      }
+
+      const compact = toCompactFormat(parsed);
+      setConvertedJson(JSON.stringify(compact, null, 2));
+      toast.success('Convertido a formato compacto');
+    } catch (error) {
+      toast.error('Error al convertir: ' + error.message);
+    }
+  };
+
+  const convertToFull = () => {
+    try {
+      const parsed = JSON.parse(jsonInput);
+
+      if (!isCompactFormat(parsed)) {
+        toast.info('El JSON no está en formato compacto');
+        setConvertedJson(JSON.stringify(parsed, null, 2));
+        return;
+      }
+
+      const full = fromCompactFormat(parsed);
+      setConvertedJson(JSON.stringify(full, null, 2));
+      toast.success('Convertido a formato completo');
+    } catch (error) {
+      toast.error('Error al expandir: ' + error.message);
+    }
+  };
+
+  const downloadJSON = (data, filename) => {
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Archivo descargado');
+  };
+
+  const handleFileUpload = (event) => {
+    const files = Array.from(event.target.files);
+    if (files.length === 0) return;
+
+    if (files.length === 1) {
+      // Single file - load into editor
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setJsonInput(e.target.result);
+        toast.success('Archivo cargado');
+      };
+      reader.readAsText(files[0]);
+    } else {
+      // Multiple files - import directly to DB
+      handleMultipleFileImport(files);
+    }
+  };
+
+  const handleMultipleFileImport = async (files) => {
+    let successCount = 0;
+    let errorCount = 0;
+    const errors = [];
+
+    toast.info(`Procesando ${files.length} archivos...`);
+
+    for (const file of files) {
+      try {
+        const text = await file.text();
+        const parsed = JSON.parse(text);
+        let quizData = parsed;
+
+        // Auto-convert compact format
+        if (isCompactFormat(parsed)) {
+          quizData = fromCompactFormat(parsed);
+        }
+
+        // Basic validation
+        if (!quizData.questions || !Array.isArray(quizData.questions)) {
+          throw new Error('El JSON debe contener un array de preguntas');
+        }
+
+        // Create new quiz
+        await client.entities.Quiz.create({
+          title: quizData.title || file.name.replace('.json', ''),
+          description: quizData.description || 'Importado desde JSON',
+          subject_id: 'root',
+          questions: quizData.questions,
+          is_hidden: false,
+        });
+
+        successCount++;
+      } catch (error) {
+        errorCount++;
+        errors.push(`${file.name}: ${error.message}`);
+      }
+    }
+
+    if (successCount > 0) {
+      toast.success(`${successCount} cuestionario(s) importado(s) exitosamente`);
+      queryClient.invalidateQueries(['quizzes']);
+    }
+
+    if (errorCount > 0) {
+      toast.error(`${errorCount} archivo(s) fallaron. Ver consola para detalles.`);
+      console.error('Errores de importación:', errors);
+    }
+  };
+
+
+
+  const handleImportToDb = async () => {
+    try {
+      const parsed = JSON.parse(jsonInput);
+      let quizData = parsed;
+
+      // Auto-convert compact format
+      if (isCompactFormat(parsed)) {
+        quizData = fromCompactFormat(parsed);
+        toast.info('Formato detectado: Compacto (convertido automáticamente)');
+      }
+
+      // Basic validation
+      if (!quizData.questions || !Array.isArray(quizData.questions)) {
+        throw new Error('El JSON debe contener un array de preguntas ("questions" o "q")');
+      }
+
+      // Create new quiz
+      await client.entities.Quiz.create({
+        title: quizData.title || `Importado ${new Date().toLocaleDateString()}`,
+        description: quizData.description || 'Importado desde JSON',
+        subject_id: 'root', // Default to root
+        questions: quizData.questions,
+        total_questions: quizData.questions.length,
+        is_hidden: false,
+        created_date: new Date().toISOString()
+      });
+
+      toast.success('¡Quiz importado exitosamente!');
+      setJsonInput(''); // Clear input on success
+
+      // Optionally invalidate query to refresh list
+      // queryClient.invalidateQueries(['all-quizzes']);
+
+    } catch (error) {
+      console.error('Import error:', error);
+      toast.error('Error al importar: ' + error.message);
+    }
+  };
+
+  return (
+    <AdminShell>
+      <AdminPageHeader
+        icon={FileJson}
+        title="JSON Manager"
+        subtitle="Importar, validar, convertir y exportar archivos JSON"
+      />
+
+      <Tabs defaultValue="import" className="w-full">
+        <TabsList className="grid w-full grid-cols-3 mb-6">
+          <TabsTrigger value="import">
+            <Upload className="w-4 h-4 mr-2" />
+            Importar
+          </TabsTrigger>
+          <TabsTrigger value="validate">
+            <CheckCircle2 className="w-4 h-4 mr-2" />
+            Validar
+          </TabsTrigger>
+          <TabsTrigger value="convert">
+            <Sparkles className="w-4 h-4 mr-2" />
+            Convertir
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="import" className="space-y-6">
+          <Card className="rounded-2xl">
+            <CardHeader>
+              <CardTitle className="text-lg font-semibold">Subir Archivo JSON</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                <div className="flex items-start gap-3">
+                  <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-blue-900">Exportación de Quizzes</p>
+                    <p className="text-sm text-blue-700 mt-1">
+                      La funcionalidad de exportación ahora se encuentra en el <strong>Dashboard Admin</strong> con organización jerárquica mejorada (Curso → Materia → Carpeta).
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-2 border-dashed border-muted rounded-xl p-8 text-center hover:border-primary/50 transition-colors">
+                <input
+                  type="file"
+                  accept=".json"
+                  multiple
+                  onChange={handleFileUpload}
+                  className="hidden"
+                  id="json-upload"
+                />
+                <label htmlFor="json-upload" className="cursor-pointer">
+                  <Upload className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+                  <p className="font-medium">Click para subir archivo JSON</p>
+                  <p className="text-sm text-muted-foreground mt-1">o pega el contenido abajo</p>
+                </label>
+              </div>
+
+              <Textarea
+                value={jsonInput}
+                onChange={(e) => setJsonInput(e.target.value)}
+                placeholder='{"title": "Mi Quiz", "questions": [...]}'
+                className="min-h-[300px] font-mono text-sm"
+              />
+
+              <Button onClick={handleImportToDb} className="w-full bg-indigo-600 hover:bg-indigo-700">
+                <Upload className="w-4 h-4 mr-2" />
+                Importar a Base de Datos
+              </Button>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="validate" className="space-y-6">
+          <Card className="rounded-2xl">
+            <CardHeader>
+              <CardTitle className="text-lg font-semibold">Validar JSON</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Textarea
+                value={jsonInput}
+                onChange={(e) => setJsonInput(e.target.value)}
+                placeholder='Pega tu JSON aquí...'
+                className="min-h-[200px] font-mono text-sm"
+              />
+
+              <Button onClick={validateJson} className="w-full">
+                <CheckCircle2 className="w-4 h-4 mr-2" />
+                Validar JSON
+              </Button>
+
+              {validationResult && (
+                <Card className={validationResult.valid ? 'border-green-500 bg-green-50' : 'border-destructive bg-destructive/10'}>
+                  <CardContent className="p-4">
+                    <div className="flex items-start gap-3">
+                      {validationResult.valid ? (
+                        <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      ) : (
+                        <XCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+                      )}
+                      <div>
+                        <p className="font-semibold">{validationResult.message}</p>
+                        {validationResult.valid && validationResult.data && (
+                          <p className="text-sm text-muted-foreground mt-1">
+                            Propiedades: {Object.keys(validationResult.data).join(', ')}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="convert" className="space-y-6">
+          <Card className="rounded-2xl">
+            <CardHeader>
+              <CardTitle className="text-lg font-semibold">Convertir Formatos</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Textarea
+                value={jsonInput}
+                onChange={(e) => setJsonInput(e.target.value)}
+                placeholder='Pega tu JSON aquí...'
+                className="min-h-[200px] font-mono text-sm"
+              />
+
+              <div className="grid grid-cols-3 gap-3">
+                <Button onClick={formatJson} variant="outline">
+                  <Code className="w-4 h-4 mr-2" />
+                  Formatear
+                </Button>
+                <Button onClick={convertToCompact} variant="outline">
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  A Compacto
+                </Button>
+                <Button onClick={convertToFull} variant="outline">
+                  <Code className="w-4 h-4 mr-2" />
+                  A Completo
+                </Button>
+              </div>
+
+              {(formattedJson || convertedJson) && (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-medium">Resultado:</p>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => downloadJSON(formattedJson || convertedJson, 'converted.json')}
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Descargar
+                    </Button>
+                  </div>
+                  <Textarea
+                    value={formattedJson || convertedJson}
+                    readOnly
+                    className="min-h-[300px] font-mono text-sm bg-muted"
+                  />
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+
+      </Tabs>
+    </AdminShell>
+  );
+}

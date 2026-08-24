@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vector-Chart Pro v3.2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050505; color: #a1a1aa; font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif; overflow: hidden; }
+        .panel-border { border-right: 1px solid #1f2937; }
+        ::-webkit-scrollbar { display: none; }
+        * { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="w-screen h-screen flex flex-col">
+
+    <header class="h-14 border-b border-gray-800 flex items-center justify-between px-6 bg-[#0a0a0a] shrink-0">
+        <div class="flex items-baseline gap-3">
+            <h1 class="text-cyan-400 font-bold tracking-wider text-lg">VECTOR-CHART PRO</h1>
+            <span class="text-xs text-gray-600 tracking-widest">v3.2 DINÁMICA DE MASAS</span>
+        </div>
+        <div class="flex items-center gap-6 text-xs font-mono">
+            <div>BPM: <span class="text-red-500">60</span></div>
+            <div>FASE: <span id="headerStatus" class="text-yellow-500">STANDBY</span></div>
+        </div>
+    </header>
+
+    <main class="flex-1 flex w-full overflow-hidden">
+        <div class="w-1/3 flex flex-col panel-border bg-[#0a0a0a]">
+            <div class="px-6 py-4 border-b border-gray-800 text-xs font-bold tracking-widest text-gray-500">
+                SISTEMA HEXAXIAL (INTERACTIVO)
+            </div>
+            
+            <div class="flex-1 relative flex items-center justify-center p-4">
+                <canvas id="vectorCanvas" width="450" height="450" class="cursor-crosshair touch-none w-full max-w-[450px] aspect-square"></canvas>
+            </div>
+
+            <div class="p-6 border-t border-gray-800 bg-[#050505]">
+                <div class="text-[10px] text-gray-500 mb-4 tracking-widest border-b border-gray-800 pb-2">PARÁMETROS DEL DIPOLO</div>
+                
+                <div class="mb-6">
+                    <label class="block text-xs font-mono text-gray-400 mb-2 flex justify-between">
+                        <span>AMPLITUD (Masa Vectorial):</span>
+                        <span id="magValue" class="text-cyan-400 font-bold">1.0 mV</span>
+                    </label>
+                    <input type="range" id="magSlider" min="0.1" max="3.0" step="0.1" value="1.0" class="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-cyan-500">
+                </div>
+
+                <div class="flex gap-2">
+                    <button id="btnReset" class="w-24 bg-transparent border border-gray-800 hover:border-red-500 hover:bg-red-950/30 text-gray-500 hover:text-red-400 py-3 px-4 rounded text-xs font-mono transition-colors focus:outline-none">
+                        RESET
+                    </button>
+                    <button id="btnDespolarizar" class="flex-1 bg-cyan-900/30 border border-cyan-800 hover:border-cyan-400 text-cyan-400 hover:text-cyan-300 py-3 px-4 rounded text-xs font-bold tracking-wider font-mono transition-colors focus:outline-none shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                        DISPARAR FRENTE
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-1/3 flex flex-col panel-border bg-[#050505]">
+            <div class="px-6 py-4 border-b border-gray-800 text-xs font-bold tracking-widest text-gray-500 flex justify-between">
+                <span>PROYECCIÓN EN DERIVACIONES</span>
+                <span class="font-mono text-cyan-500/50">10mm/mV</span>
+            </div>
+            
+            <div class="flex-1 relative p-4">
+                <canvas id="ecgCanvas" class="w-full h-full absolute inset-0"></canvas>
+            </div>
+        </div>
+
+        <div class="w-1/3 flex flex-col bg-[#0a0a0a]">
+            <div class="px-6 py-4 border-b border-gray-800 text-xs font-bold tracking-widest text-gray-500">
+                TELEMETRÍA INSTANTÁNEA
+            </div>
+            
+            <div class="p-6 pb-2">
+                <div class="flex justify-between items-baseline mb-6">
+                    <h3 class="text-yellow-500 font-bold text-sm tracking-widest">ONDA RESULTANTE</h3>
+                    <span class="text-xs font-mono text-gray-600">Max V: <span id="maxVolt">1.00</span> mV</span>
+                </div>
+                <div class="space-y-5" id="telemetryBars"></div>
+            </div>
+
+            <div class="px-6 py-8 text-sm text-gray-300 min-h-[40px] border-t border-gray-800 mt-auto" id="diagnosticText">
+                Despolarización auricular (Vector hacia abajo/izquierda)
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const LEADS = [
+            { id: 'I', angle: 0, color: '#ef4444' },
+            { id: 'II', angle: 60, color: '#06b6d4' },
+            { id: 'III', angle: 120, color: '#eab308' },
+            { id: 'aVR', angle: -150, color: '#ffffff' },
+            { id: 'aVL', angle: -30, color: '#ffffff' },
+            { id: 'aVF', angle: 90, color: '#ffffff' }
+        ];
+
+        const hexToRgb = (hex) => {
+            const r = parseInt(hex.slice(1, 3), 16);
+            const g = parseInt(hex.slice(3, 5), 16);
+            const b = parseInt(hex.slice(5, 7), 16);
+            return `${r},${g},${b}`;
+        };
+
+        function drawSafeRoundRect(ctx, x, y, w, h, r) {
+            if (typeof ctx.roundRect === 'function') {
+                ctx.beginPath();
+                ctx.roundRect(x, y, w, h, r);
+                return;
+            }
+            const radius = Math.min(r, w / 2, h / 2);
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + w - radius, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+            ctx.lineTo(x + w, y + h - radius);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+            ctx.lineTo(x + radius, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+
+        let state = {
+            angle: 60,
+            magnitude: 1.0,
+            isAnimating: false,
+            progress: 0,
+            baseData: [],
+            isDragging: false
+        };
+
+        const canvasVec = document.getElementById('vectorCanvas');
+        const canvasEcg = document.getElementById('ecgCanvas');
+        const ctxVec = canvasVec?.getContext('2d');
+        const ctxEcg = canvasEcg?.getContext('2d');
+
+        if (!canvasVec || !canvasEcg || !ctxVec || !ctxEcg) {
+            document.body.innerHTML = '<div style="padding:24px;color:#fca5a5;font-family:ui-monospace,monospace">Error: no se pudieron inicializar los canvas.</div>';
+            throw new Error('Canvas initialization failed');
+        }
+        
+        const headerStatus = document.getElementById('headerStatus');
+        const telemetryBars = document.getElementById('telemetryBars');
+        const diagnosticText = document.getElementById('diagnosticText');
+        const magSlider = document.getElementById('magSlider');
+        const magValue = document.getElementById('magValue');
+        const maxVolt = document.getElementById('maxVolt');
+
+        function initTelemetry() {
+            telemetryBars.innerHTML = '';
+            LEADS.forEach(lead => {
+                const row = document.createElement('div');
+                row.className = 'flex items-center text-xs font-mono';
+                row.innerHTML = `
+                    <div class="w-8 font-bold text-lg" style="color: ${lead.color}">${lead.id}</div>
+                    <div class="flex-1 h-3 bg-gray-900 relative mx-4 rounded overflow-hidden flex shadow-inner">
+                        <div class="w-1/2 h-full flex justify-end">
+                            <div id="bar-neg-${lead.id}" class="h-full transition-all duration-75 shadow-[0_0_10px_currentColor]" style="background-color: ${lead.color}; color: ${lead.color}; width: 0%;"></div>
+                        </div>
+                        <div class="w-[2px] h-full bg-gray-500 z-10 relative"></div>
+                        <div class="w-1/2 h-full">
+                            <div id="bar-pos-${lead.id}" class="h-full transition-all duration-75 shadow-[0_0_10px_currentColor]" style="background-color: ${lead.color}; color: ${lead.color}; width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div id="val-${lead.id}" class="w-14 text-right text-gray-300 font-bold text-sm">0.00</div>
+                `;
+                telemetryBars.appendChild(row);
+            });
+            updateTelemetry();
+        }
+
+        function updateTelemetry() {
+            headerStatus.textContent = state.isAnimating ? `${Math.round(state.progress * 100)}%` : 'STANDBY';
+            maxVolt.textContent = state.magnitude.toFixed(2);
+
+            LEADS.forEach(lead => {
+                const proj = Math.cos((state.angle - lead.angle) * Math.PI / 180) * state.magnitude;
+                const posBar = document.getElementById(`bar-pos-${lead.id}`);
+                const negBar = document.getElementById(`bar-neg-${lead.id}`);
+                const valTxt = document.getElementById(`val-${lead.id}`);
+
+                const percent = Math.min((Math.abs(proj) / 3.0) * 100, 100);
+
+                if (proj >= 0) {
+                    posBar.style.width = `${percent}%`;
+                    negBar.style.width = '0%';
+                } else {
+                    posBar.style.width = '0%';
+                    negBar.style.width = `${percent}%`;
+                }
+                valTxt.textContent = proj.toFixed(2);
+                valTxt.style.color = Math.abs(proj) > 1.5 ? '#f8fafc' : '#94a3b8';
+            });
+
+            let quad = '';
+            if (state.angle >= 0 && state.angle <= 90) quad = 'Eje Normal';
+            else if (state.angle > 90 && state.angle <= 180) quad = 'Desviación Derecha';
+            else if (state.angle < 0 && state.angle >= -90) quad = 'Desviación Izquierda';
+            else quad = 'Desviación Extrema';
+
+            let voltDiag = '';
+            if (state.magnitude > 2.0) voltDiag = "<br><span class='text-red-400 mt-2 block'>⚠️ Alerta de Alto Voltaje (Posible hipertrofia ventricular)</span>";
+            else if (state.magnitude < 0.5) voltDiag = "<br><span class='text-yellow-400 mt-2 block'>⚠️ Microvoltaje (Posible derrame pericárdico / enfisema)</span>";
+
+            diagnosticText.innerHTML = `<strong>Vector Resultante:</strong> ${quad} a ${state.angle}° ${voltDiag}`;
+        }
+
+        function drawInteractiveHexaxial() {
+            ctxVec.clearRect(0, 0, canvasVec.width, canvasVec.height);
+            const cx = canvasVec.width / 2;
+            const cy = canvasVec.height / 2;
+            const R = canvasVec.width * 0.38;
+            const baseLen = R * 0.5;
+
+            let visualMag = Math.pow(state.magnitude, 0.75);
+            let VEC_LEN = baseLen * visualMag;
+            if (VEC_LEN > R * 0.85) VEC_LEN = R * 0.85;
+
+            LEADS.forEach(lead => {
+                const rad = lead.angle * Math.PI / 180;
+
+                ctxVec.beginPath();
+                ctxVec.moveTo(cx - Math.cos(rad) * R, cy - Math.sin(rad) * R);
+                ctxVec.lineTo(cx + Math.cos(rad) * R, cy + Math.sin(rad) * R);
+                ctxVec.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+                ctxVec.lineWidth = 1;
+                ctxVec.stroke();
+
+                ctxVec.beginPath();
+                ctxVec.arc(cx, cy, baseLen, 0, Math.PI * 2);
+                ctxVec.strokeStyle = 'rgba(255,255,255,0.03)';
+                ctxVec.setLineDash([4, 6]);
+                ctxVec.stroke();
+                ctxVec.setLineDash([]);
+
+                ctxVec.fillStyle = lead.color;
+                ctxVec.font = 'bold 12px monospace';
+                ctxVec.textAlign = Math.cos(rad) > 0.1 ? 'left' : (Math.cos(rad) < -0.1 ? 'right' : 'center');
+                ctxVec.textBaseline = Math.sin(rad) > 0.1 ? 'top' : (Math.sin(rad) < -0.1 ? 'bottom' : 'middle');
+                ctxVec.fillText(lead.id, cx + Math.cos(rad) * (R + 15), cy + Math.sin(rad) * (R + 15));
+            });
+
+            const radV = state.angle * Math.PI / 180;
+            const offset = (state.progress === 0) ? 0 : (state.progress - 0.5) * VEC_LEN * 2.2;
+            const startX = cx + Math.cos(radV) * offset;
+            const startY = cy + Math.sin(radV) * offset;
+            const endX = cx + Math.cos(radV) * (VEC_LEN + offset);
+            const endY = cy + Math.sin(radV) * (VEC_LEN + offset);
+
+            ctxVec.beginPath();
+            ctxVec.moveTo(startX, startY);
+            ctxVec.lineTo(endX, endY);
+            ctxVec.strokeStyle = state.isDragging ? '#fbbf24' : (state.magnitude > 2.0 ? '#ef4444' : '#eab308');
+            ctxVec.lineWidth = 4 + (state.magnitude * 1.5);
+            ctxVec.lineCap = 'round';
+            ctxVec.stroke();
+
+            const arrowSize = 10 + (state.magnitude * 3);
+            ctxVec.beginPath();
+            ctxVec.moveTo(endX, endY);
+            ctxVec.lineTo(endX - arrowSize * Math.cos(radV - Math.PI / 7), endY - arrowSize * Math.sin(radV - Math.PI / 7));
+            ctxVec.lineTo(endX - arrowSize * Math.cos(radV + Math.PI / 7), endY - arrowSize * Math.sin(radV + Math.PI / 7));
+            ctxVec.lineTo(endX, endY);
+            ctxVec.fillStyle = state.isDragging ? '#fde68a' : (state.magnitude > 2.0 ? '#fca5a5' : '#fef08a');
+            ctxVec.fill();
+
+            if (state.progress > 0 && state.progress < 1) {
+                ctxVec.beginPath();
+                ctxVec.arc(endX, endY, (10 * state.magnitude) + Math.sin(state.progress * Math.PI) * (25 * state.magnitude), 0, Math.PI * 2);
+                ctxVec.strokeStyle = `rgba(250, 204, 21, ${Math.sin(state.progress * Math.PI)})`;
+                ctxVec.lineWidth = 2;
+                ctxVec.stroke();
+            }
+
+            ctxVec.beginPath();
+            ctxVec.arc(cx, cy, 4, 0, Math.PI * 2);
+            ctxVec.fillStyle = '#050505';
+            ctxVec.fill();
+            ctxVec.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+            ctxVec.lineWidth = 2;
+            ctxVec.stroke();
+        }
+
+        function drawECG() {
+            canvasEcg.width = canvasEcg.parentElement.clientWidth;
+            canvasEcg.height = canvasEcg.parentElement.clientHeight;
+            ctxEcg.clearRect(0, 0, canvasEcg.width, canvasEcg.height);
+
+            const rowH = canvasEcg.height / LEADS.length;
+            const points = 200;
+            const calWidth = 20;
+            const textOffset = 45;
+            const ppx = (canvasEcg.width - calWidth - textOffset - 10) / points;
+            const maxAmp = (rowH / 2) * 0.6;
+
+            LEADS.forEach((lead, idx) => {
+                const yOrigin = (idx * rowH) + (rowH / 2);
+                const proj = Math.cos((state.angle - lead.angle) * Math.PI / 180) * state.magnitude;
+
+                if (idx > 0) {
+                    ctxEcg.beginPath();
+                    ctxEcg.moveTo(0, idx * rowH);
+                    ctxEcg.lineTo(canvasEcg.width, idx * rowH);
+                    ctxEcg.strokeStyle = 'rgba(255,255,255,0.08)';
+                    ctxEcg.lineWidth = 1;
+                    ctxEcg.stroke();
+                }
+
+                ctxEcg.beginPath();
+                ctxEcg.moveTo(textOffset, yOrigin - maxAmp);
+                ctxEcg.lineTo(canvasEcg.width, yOrigin - maxAmp);
+                ctxEcg.moveTo(textOffset, yOrigin + maxAmp);
+                ctxEcg.lineTo(canvasEcg.width, yOrigin + maxAmp);
+                ctxEcg.strokeStyle = 'rgba(255,255,255,0.02)';
+                ctxEcg.stroke();
+
+                ctxEcg.fillStyle = lead.color;
+                ctxEcg.font = 'bold 12px ui-sans-serif';
+                ctxEcg.textAlign = 'left';
+                ctxEcg.textBaseline = 'bottom';
+                ctxEcg.fillText(lead.id, 5, yOrigin - 2);
+
+                ctxEcg.fillStyle = '#6b7280';
+                ctxEcg.font = '10px monospace';
+                ctxEcg.textBaseline = 'top';
+                const angleStr = lead.angle > 0 ? `+${lead.angle}°` : `${lead.angle}°`;
+                ctxEcg.fillText(angleStr, 5, yOrigin + 2);
+
+                ctxEcg.beginPath();
+                ctxEcg.moveTo(textOffset, yOrigin);
+                ctxEcg.lineTo(textOffset + 5, yOrigin);
+                ctxEcg.lineTo(textOffset + 5, yOrigin - maxAmp);
+                ctxEcg.lineTo(textOffset + 15, yOrigin - maxAmp);
+                ctxEcg.lineTo(textOffset + 15, yOrigin);
+                ctxEcg.lineTo(textOffset + calWidth, yOrigin);
+                ctxEcg.strokeStyle = lead.color;
+                ctxEcg.lineWidth = 1.5;
+                ctxEcg.lineJoin = 'miter';
+                ctxEcg.stroke();
+
+                if (state.baseData.length > 0) {
+                    ctxEcg.beginPath();
+                    ctxEcg.moveTo(textOffset + calWidth, yOrigin);
+                    for (let i = 0; i < state.baseData.length; i++) {
+                        ctxEcg.lineTo(textOffset + calWidth + (i * ppx), yOrigin - (state.baseData[i] * proj * maxAmp));
+                    }
+                    ctxEcg.lineTo(textOffset + calWidth + ((state.baseData.length - 1) * ppx), yOrigin);
+                    ctxEcg.fillStyle = `rgba(${hexToRgb(lead.color)}, 0.15)`;
+                    ctxEcg.fill();
+
+                    ctxEcg.beginPath();
+                    ctxEcg.moveTo(textOffset + calWidth, yOrigin);
+                    for (let i = 0; i < state.baseData.length; i++) {
+                        ctxEcg.lineTo(textOffset + calWidth + (i * ppx), yOrigin - (state.baseData[i] * proj * maxAmp));
+                    }
+                    ctxEcg.strokeStyle = lead.color;
+                    ctxEcg.lineWidth = 2.5;
+                    ctxEcg.lineJoin = 'round';
+                    ctxEcg.stroke();
+                } else {
+                    ctxEcg.beginPath();
+                    ctxEcg.moveTo(textOffset + calWidth, yOrigin);
+                    ctxEcg.lineTo(canvasEcg.width, yOrigin);
+                    ctxEcg.strokeStyle = lead.color;
+                    ctxEcg.lineWidth = 2.5;
+                    ctxEcg.stroke();
+                }
+
+                ctxEcg.beginPath();
+                const endX = textOffset + calWidth + (state.baseData.length > 0 ? (state.baseData.length - 1) * ppx : canvasEcg.width - calWidth - textOffset);
+                const endY = yOrigin - (state.baseData.length > 0 ? state.baseData[state.baseData.length - 1] * proj * maxAmp : 0);
+                ctxEcg.arc(endX, endY, 2.5, 0, Math.PI * 2);
+                ctxEcg.fillStyle = '#ffffff';
+                ctxEcg.fill();
+
+                const voltStr = `${proj > 0 ? '+' : ''}${proj.toFixed(2)}`;
+                ctxEcg.font = 'bold 10px monospace';
+                const boxW = ctxEcg.measureText(voltStr).width + 12;
+                const boxH = 18;
+                const peakY = yOrigin - (proj * maxAmp);
+                const hudY = Math.max(idx * rowH + 4, Math.min(peakY - (boxH / 2), (idx + 1) * rowH - boxH - 4));
+                const hudX = canvasEcg.width - boxW - 5;
+
+                drawSafeRoundRect(ctxEcg, hudX, hudY, boxW, boxH, 4);
+                ctxEcg.fillStyle = 'rgba(5, 5, 5, 0.85)';
+                ctxEcg.fill();
+                ctxEcg.strokeStyle = lead.color;
+                ctxEcg.lineWidth = 1;
+                ctxEcg.stroke();
+
+                ctxEcg.fillStyle = lead.color;
+                ctxEcg.textAlign = 'center';
+                ctxEcg.textBaseline = 'middle';
+                ctxEcg.fillText(voltStr, hudX + (boxW / 2), hudY + (boxH / 2));
+            });
+        }
+
+        function renderAll() {
+            drawInteractiveHexaxial();
+            drawECG();
+            updateTelemetry();
+        }
+
+        function generatePulse(t) {
+            const center = 0.4;
+            const width = 0.08;
+            return Math.exp(-Math.pow(t - center, 2) / (2 * Math.pow(width, 2)));
+        }
+
+        function updatePreview() {
+            if (state.isAnimating) return;
+            state.baseData = [];
+            for (let i = 0; i < 200; i++) {
+                state.baseData.push(generatePulse(i / 200));
+            }
+        }
+
+        function animate() {
+            if (!state.isAnimating) return;
+            state.progress += 0.008;
+
+            const amp = generatePulse(state.progress);
+            if (state.baseData.length < 200) state.baseData.push(amp);
+
+            renderAll();
+
+            if (state.progress >= 1) {
+                state.isAnimating = false;
+                while (state.baseData.length < 200) state.baseData.push(0);
+                renderAll();
+            } else {
+                requestAnimationFrame(animate);
+            }
+        }
+
+        function trigger() {
+            if (state.isAnimating) return;
+            state.isAnimating = true;
+            state.progress = 0;
+            state.baseData = [];
+            for (let i = 0; i < 15; i++) state.baseData.push(0);
+            animate();
+        }
+
+        function reset() {
+            state.isAnimating = false;
+            state.progress = 0;
+            state.baseData = [];
+            renderAll();
+        }
+
+        function getPointerPos(e) {
+            const rect = canvasVec.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            const scaleX = canvasVec.width / rect.width;
+            const scaleY = canvasVec.height / rect.height;
+
+            const x = (clientX - rect.left) * scaleX;
+            const y = (clientY - rect.top) * scaleY;
+
+            return { x, y, centerX: x - (canvasVec.width / 2), centerY: y - (canvasVec.height / 2) };
+        }
+
+        function checkHitbox(x, y) {
+            const cx = canvasVec.width / 2;
+            const cy = canvasVec.height / 2;
+            const R = canvasVec.width * 0.38;
+            const baseLen = R * 0.5;
+            let visualMag = Math.pow(state.magnitude, 0.75);
+            let VEC_LEN = baseLen * visualMag;
+            if (VEC_LEN > R * 0.85) VEC_LEN = R * 0.85;
+
+            const radV = state.angle * Math.PI / 180;
+            const headX = cx + Math.cos(radV) * VEC_LEN;
+            const headY = cy + Math.sin(radV) * VEC_LEN;
+
+            return Math.hypot(x - headX, y - headY) < 40;
+        }
+
+        function updateAngle(pos) {
+            state.angle = Math.round(Math.atan2(pos.centerY, pos.centerX) * 180 / Math.PI);
+            LEADS.forEach(l => {
+                if (Math.abs(state.angle - l.angle) < 6) state.angle = l.angle;
+                const negAngle = l.angle > 0 ? l.angle - 180 : l.angle + 180;
+                if (Math.abs(state.angle - negAngle) < 6) state.angle = negAngle;
+            });
+            updatePreview();
+            renderAll();
+        }
+
+        let isHoveringHead = false;
+
+        canvasVec.addEventListener('mousedown', (e) => {
+            if (state.isAnimating) return;
+            const pos = getPointerPos(e);
+            if (checkHitbox(pos.x, pos.y)) {
+                state.isDragging = true;
+                canvasVec.style.cursor = 'grabbing';
+            }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (state.isDragging) {
+                updateAngle(getPointerPos(e));
+            } else if (!state.isAnimating && e.target === canvasVec) {
+                const isHit = checkHitbox(getPointerPos(e).x, getPointerPos(e).y);
+                if (isHit !== isHoveringHead) {
+                    isHoveringHead = isHit;
+                    canvasVec.style.cursor = isHoveringHead ? 'grab' : 'crosshair';
+                }
+            }
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (state.isDragging) {
+                state.isDragging = false;
+                canvasVec.style.cursor = isHoveringHead ? 'grab' : 'crosshair';
+                renderAll();
+            }
+        });
+
+        canvasVec.addEventListener('touchstart', (e) => {
+            if (state.isAnimating) return;
+            const pos = getPointerPos(e);
+            if (checkHitbox(pos.x, pos.y)) {
+                state.isDragging = true;
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        window.addEventListener('touchmove', (e) => {
+            if (state.isDragging) {
+                e.preventDefault();
+                updateAngle(getPointerPos(e));
+            }
+        }, { passive: false });
+
+        window.addEventListener('touchend', () => {
+            state.isDragging = false;
+            renderAll();
+        });
+
+        magSlider.addEventListener('input', (e) => {
+            state.magnitude = parseFloat(e.target.value);
+            magValue.textContent = `${state.magnitude.toFixed(1)} mV`;
+            updatePreview();
+            renderAll();
+        });
+
+        document.getElementById('btnDespolarizar').addEventListener('click', trigger);
+        document.getElementById('btnReset').addEventListener('click', reset);
+        window.addEventListener('resize', renderAll);
+
+        initTelemetry();
+        updatePreview();
+        renderAll();
+    </script>
+</body>
+</html>

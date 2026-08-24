@@ -1,0 +1,2167 @@
+{
+  "metadata": {
+    "title": "Fundamentos de electrocardiografía",
+    "source": "11.md",
+    "date": "2025-02-01",
+    "total": 50,
+    "sj": "FIS",
+    "tp": "ECG",
+    "dist": {
+      "d1": 0.40,
+      "d2": 0.36,
+      "d3": 0.24
+    }
+  },
+  "q": [
+    {
+      "id": "FIS-ECG-001",
+      "sb": "Componentes del ECG",
+      "x": "¿Qué componentes conforman el electrocardiograma normal?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Onda P, complejo QRS y onda T",
+          "c": true,
+          "r": "Correcto. Estos tres elementos representan la actividad eléctrica completa del ciclo cardíaco: despolarización auricular, despolarización ventricular y repolarización ventricular respectivamente.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Onda P, onda Q y onda S exclusivamente",
+          "c": false,
+          "r": "Incorrecto. Omite el complejo QRS completo y la onda T, que son componentes esenciales del registro electrocardiográfico.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Complejo QRS, onda U y segmento PR",
+          "c": false,
+          "r": "Incorrecto. La onda U no se menciona como componente normal y el segmento PR no es una onda sino un intervalo.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Onda T, onda R y punto J",
+          "c": false,
+          "r": "Incorrecto. El punto J es un punto de referencia específico, no un componente ondulatorio del ECG normal.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Onda P, intervalo QT y onda de repolarización auricular",
+          "c": false,
+          "r": "Incorrecto. El intervalo QT es una medida temporal, no una onda. La onda T auricular habitualmente está oscurecida.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-002",
+      "sb": "Ondas de despolarización",
+      "x": "¿Qué representa la onda P en el electrocardiograma?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Despolarización ventricular completa",
+          "c": false,
+          "r": "Incorrecto. La despolarización ventricular está representada por el complejo QRS, no por la onda P.",
+          "et": "recall"
+        },
+        {
+          "l": "B",
+          "t": "Potenciales generados por la despolarización auricular",
+          "c": true,
+          "r": "Correcto. La onda P refleja los potenciales eléctricos generados cuando las aurículas se despolarizan antes del inicio de su contracción.",
+          "et": null
+        },
+        {
+          "l": "C",
+          "t": "Repolarización del nódulo sinusal",
+          "c": false,
+          "r": "Incorrecto. El nódulo sinusal genera el impulso pero la onda P representa la despolarización del músculo auricular.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Conducción a través del haz auriculoventricular",
+          "c": false,
+          "r": "Incorrecto. La conducción AV ocurre durante el intervalo P-R, no genera la onda P propiamente.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "E",
+          "t": "Activación del sistema de Purkinje auricular",
+          "c": false,
+          "r": "Incorrecto. La onda P refleja la despolarización del músculo auricular, no específicamente del sistema de conducción.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-003",
+      "sb": "Complejo QRS",
+      "x": "¿Qué evento cardíaco genera el complejo QRS?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Contracción auricular coordinada",
+          "c": false,
+          "r": "Incorrecto. La contracción auricular se asocia con la onda P, no con el complejo QRS.",
+          "et": "recall"
+        },
+        {
+          "l": "B",
+          "t": "Despolarización de los ventrículos antes de su contracción",
+          "c": true,
+          "r": "Correcto. El complejo QRS representa los potenciales generados durante la despolarización ventricular, que precede inmediatamente a la contracción mecánica de los ventrículos.",
+          "et": null
+        },
+        {
+          "l": "C",
+          "t": "Repolarización completa del miocardio ventricular",
+          "c": false,
+          "r": "Incorrecto. La repolarización ventricular está representada por la onda T, no por el complejo QRS.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Transmisión del impulso por el nódulo AV",
+          "c": false,
+          "r": "Incorrecto. La conducción AV ocurre antes del QRS, durante el intervalo P-R.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "E",
+          "t": "Recuperación de la despolarización auricular",
+          "c": false,
+          "r": "Incorrecto. La repolarización auricular está oscurecida por el QRS pero no es lo que genera este complejo.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-004",
+      "sb": "Onda T",
+      "x": "¿Cuál es el origen fisiológico de la onda T?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Potenciales generados durante la repolarización ventricular",
+          "c": true,
+          "r": "Correcto. La onda T representa los potenciales eléctricos generados cuando los ventrículos se recuperan de la despolarización, proceso que ocurre 0.25-0.35 s después de esta.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Despolarización tardía del tabique interventricular",
+          "c": false,
+          "r": "Incorrecto. La despolarización septal es parte del complejo QRS, no de la onda T.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Repolarización sincrónica de las aurículas",
+          "c": false,
+          "r": "Incorrecto. La repolarización auricular está oscurecida por el QRS y no genera la onda T.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Activación secundaria del sistema de Purkinje",
+          "c": false,
+          "r": "Incorrecto. El sistema de Purkinje participa en la despolarización, no en la repolarización que genera la onda T.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "E",
+          "t": "Conducción retrógrada desde el nódulo AV",
+          "c": false,
+          "r": "Incorrecto. La onda T es un fenómeno de repolarización ventricular, no de conducción AV.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-005",
+      "sb": "Nomenclatura del complejo QRS",
+      "x": "¿Qué representa la onda Q dentro del complejo QRS?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "La principal deflexión positiva del complejo",
+          "c": false,
+          "r": "Incorrecto. La principal deflexión positiva es la onda R, no la Q.",
+          "et": "recall"
+        },
+        {
+          "l": "B",
+          "t": "La deflexión negativa inicial si existe",
+          "c": true,
+          "r": "Correcto. La onda Q es la deflexión negativa inicial del complejo QRS cuando está presente, aunque no siempre aparece en todos los registros.",
+          "et": null
+        },
+        {
+          "l": "C",
+          "t": "La deflexión negativa final del complejo",
+          "c": false,
+          "r": "Incorrecto. La deflexión negativa final es la onda S, no la Q.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "La repolarización temprana del endocardio",
+          "c": false,
+          "r": "Incorrecto. La onda Q es parte de la despolarización ventricular, no de la repolarización.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "La despolarización exclusiva del ventrículo derecho",
+          "c": false,
+          "r": "Incorrecto. La onda Q puede reflejar despolarización septal inicial, no específicamente del ventrículo derecho.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-006",
+      "sb": "Clasificación de ondas",
+      "x": "¿Cuáles son las ondas de despolarización en el electrocardiograma normal?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Onda P y componentes del complejo QRS",
+          "c": true,
+          "r": "Correcto. Tanto la onda P como los componentes del complejo QRS son ondas de despolarización, representando la activación auricular y ventricular respectivamente antes de sus contracciones.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Onda T y onda P exclusivamente",
+          "c": false,
+          "r": "Incorrecto. La onda T es de repolarización, no de despolarización como la P.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Complejo QRS y onda T auricular",
+          "c": false,
+          "r": "Incorrecto. La onda T auricular es de repolarización y habitualmente está oscurecida por el QRS.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Onda P, onda R y segmento ST",
+          "c": false,
+          "r": "Incorrecto. El segmento ST no es una onda sino un intervalo. La respuesta debe incluir todo el complejo QRS.",
+          "et": "recall"
+        },
+        {
+          "l": "E",
+          "t": "Intervalo P-R y punto J ventricular",
+          "c": false,
+          "r": "Incorrecto. El intervalo P-R es una medida temporal y el punto J es un punto de referencia, no ondas de despolarización.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-007",
+      "sb": "Repolarización ventricular",
+      "x": "¿En qué intervalo de tiempo tras la despolarización comienza normalmente la repolarización ventricular?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Entre 0.25 y 0.35 segundos",
+          "c": true,
+          "r": "Correcto. La repolarización ventricular comienza aproximadamente 0.25-0.35 s después de la despolarización, generando la onda T durante este período.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Entre 0.06 y 0.08 segundos",
+          "c": false,
+          "r": "Incorrecto. Este intervalo corresponde a la duración normal del complejo QRS, no al inicio de la repolarización.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Entre 0.50 y 0.60 segundos",
+          "c": false,
+          "r": "Incorrecto. Este tiempo es excesivamente largo y excedería el ciclo cardíaco normal completo.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Entre 0.10 y 0.15 segundos",
+          "c": false,
+          "r": "Incorrecto. Este intervalo es demasiado corto para el inicio de la repolarización ventricular.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Entre 0.01 y 0.05 segundos",
+          "c": false,
+          "r": "Incorrecto. Este tiempo corresponde a fases tempranas de la despolarización, no al inicio de repolarización.",
+          "et": "mechanistic"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-008",
+      "sb": "Potencial de acción monofásico",
+      "x": "¿Cuál es la duración normal del potencial de acción monofásico del músculo ventricular?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Entre 0.25 y 0.35 segundos",
+          "c": true,
+          "r": "Correcto. El potencial de acción monofásico ventricular tiene una duración característica de 0.25-0.35 s, período durante el cual ocurre tanto la despolarización como la repolarización celular.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Entre 0.06 y 0.10 segundos",
+          "c": false,
+          "r": "Incorrecto. Esta duración es demasiado corta y corresponde aproximadamente al complejo QRS.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Entre 0.50 y 0.70 segundos",
+          "c": false,
+          "r": "Incorrecto. Este período excede la duración del potencial de acción ventricular normal.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Entre 0.15 y 0.20 segundos",
+          "c": false,
+          "r": "Incorrecto. Esta duración es menor que la del potencial de acción ventricular típico.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Entre 0.40 y 0.50 segundos",
+          "c": false,
+          "r": "Incorrecto. Este intervalo es más prolongado que la duración normal del potencial de acción ventricular.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-009",
+      "sb": "Relación potencial-ECG",
+      "x": "¿En qué momento del potencial de acción monofásico aparecen las ondas QRS en el ECG?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Al final del potencial de acción",
+          "c": false,
+          "r": "Incorrecto. Al final del potencial de acción aparece la onda T, no el QRS.",
+          "et": "recall"
+        },
+        {
+          "l": "B",
+          "t": "Al principio del potencial de acción",
+          "c": true,
+          "r": "Correcto. Las ondas QRS aparecen al inicio del potencial de acción monofásico, coincidiendo con el ascenso rápido producido por la despolarización ventricular.",
+          "et": null
+        },
+        {
+          "l": "C",
+          "t": "Durante la meseta del potencial de acción",
+          "c": false,
+          "r": "Incorrecto. Durante la meseta no hay flujo de corriente neto y el ECG es isoeléctrico.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "D",
+          "t": "En la fase de repolarización tardía",
+          "c": false,
+          "r": "Incorrecto. La repolarización tardía genera la onda T, no el complejo QRS.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Entre la despolarización y la repolarización",
+          "c": false,
+          "r": "Incorrecto. Este período corresponde al segmento ST, no al complejo QRS.",
+          "et": "mechanistic"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-010",
+      "sb": "Calibración horizontal",
+      "x": "¿Qué representan 10 divisiones de líneas pequeñas verticales en el ECG estándar?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "1 milivoltio de diferencia de potencial",
+          "c": true,
+          "r": "Correcto. Las líneas de calibración horizontal están dispuestas de modo que 10 divisiones pequeñas hacia arriba o abajo representan 1 mV en el registro electrocardiográfico estándar.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "0.2 segundos de tiempo transcurrido",
+          "c": false,
+          "r": "Incorrecto. Las líneas verticales representan calibración de voltaje, no de tiempo. El tiempo se mide horizontalmente.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "5 milímetros de desplazamiento del papel",
+          "c": false,
+          "r": "Incorrecto. Esta respuesta confunde la distancia física con la calibración de voltaje.",
+          "et": "misinterpretation"
+        },
+        {
+          "l": "D",
+          "t": "110 milivoltios del potencial de acción",
+          "c": false,
+          "r": "Incorrecto. Los 110 mV se refieren al potencial de acción intracelular, no a la calibración del ECG de superficie.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "0.04 segundos por segmento pequeño",
+          "c": false,
+          "r": "Incorrecto. Este valor corresponde a calibración temporal horizontal, no a calibración de voltaje vertical.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-011",
+      "sb": "Calibración temporal",
+      "x": "¿Qué intervalo de tiempo representa cada segmento entre las líneas verticales oscuras en un ECG registrado a 25 mm/s?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "0.2 segundos",
+          "c": true,
+          "r": "Correcto. A 25 mm/s de velocidad de registro, cada segmento de 5 mm entre líneas verticales oscuras representa 0.2 s de tiempo.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "0.04 segundos",
+          "c": false,
+          "r": "Incorrecto. Este valor corresponde a cada división pequeña entre líneas finas, no entre líneas oscuras.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "1.0 segundo completo",
+          "c": false,
+          "r": "Incorrecto. Un segundo completo corresponde a 25 mm, no a un segmento de 5 mm.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "0.5 segundos",
+          "c": false,
+          "r": "Incorrecto. Este intervalo es mayor que el representado por los segmentos de 5 mm a la velocidad estándar.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "0.16 segundos",
+          "c": false,
+          "r": "Incorrecto. Este valor se aproxima al intervalo P-R normal pero no a la calibración de las líneas oscuras.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-012",
+      "sb": "Voltajes normales",
+      "x": "¿Cuál es el voltaje normal de la onda P en el electrocardiograma?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Entre 0.1 y 0.3 mV",
+          "c": true,
+          "r": "Correcto. El voltaje normal de la onda P oscila entre 0.1 y 0.3 mV, siendo considerablemente menor que el del complejo QRS.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Entre 1.0 y 1.5 mV",
+          "c": false,
+          "r": "Incorrecto. Estos valores corresponden al complejo QRS, no a la onda P.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Entre 3.0 y 4.0 mV",
+          "c": false,
+          "r": "Incorrecto. Estos voltajes solo se observan cuando electrodos están directamente sobre los ventrículos, no en onda P.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Entre 0.5 y 0.8 mV",
+          "c": false,
+          "r": "Incorrecto. Este rango es excesivamente alto para la onda P normal.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Entre 110 y 120 mV",
+          "c": false,
+          "r": "Incorrecto. Estos valores corresponden al potencial de acción intracelular, no al ECG de superficie.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-013",
+      "sb": "Intervalo P-Q",
+      "x": "¿Qué evento fisiológico representa el intervalo P-Q?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Tiempo entre el inicio de la excitación auricular y el inicio de la excitación ventricular",
+          "c": true,
+          "r": "Correcto. El intervalo P-Q representa el tiempo transcurrido desde el comienzo de la despolarización auricular hasta el inicio de la despolarización ventricular, reflejando la conducción AV.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Duración total de la contracción auricular",
+          "c": false,
+          "r": "Incorrecto. La contracción auricular dura más allá del inicio del QRS, no coincide exactamente con el intervalo P-Q.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Período refractario del nódulo sinusal",
+          "c": false,
+          "r": "Incorrecto. El intervalo P-Q refleja conducción AV, no el período refractario del nódulo sinusal.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Tiempo de propagación por el sistema de Purkinje",
+          "c": false,
+          "r": "Incorrecto. El sistema de Purkinje se activa durante el QRS, no durante el intervalo P-Q.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "E",
+          "t": "Intervalo entre dos contracciones ventriculares sucesivas",
+          "c": false,
+          "r": "Incorrecto. Este concepto corresponde al intervalo R-R, no al P-Q.",
+          "et": "recall"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-014",
+      "sb": "Intervalo P-Q normal",
+      "x": "¿Cuál es la duración normal del intervalo P-Q?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Aproximadamente 0.16 segundos",
+          "c": true,
+          "r": "Correcto. El intervalo P-Q normal es aproximadamente 0.16 s, aunque puede variar con la frecuencia cardíaca por cambios en la conducción nodal AV.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Aproximadamente 0.35 segundos",
+          "c": false,
+          "r": "Incorrecto. Este valor corresponde al intervalo Q-T, no al P-Q.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Aproximadamente 0.08 segundos",
+          "c": false,
+          "r": "Incorrecto. Este tiempo es demasiado corto y correspondería a una conducción AV excesivamente rápida.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Aproximadamente 0.83 segundos",
+          "c": false,
+          "r": "Incorrecto. Este valor corresponde al intervalo R-R completo entre latidos, no al P-Q.",
+          "et": "recall"
+        },
+        {
+          "l": "E",
+          "t": "Aproximadamente 0.25 segundos",
+          "c": false,
+          "r": "Incorrecto. Este intervalo es más prolongado que el P-Q normal y podría indicar bloqueo de primer grado.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-015",
+      "sb": "Intervalo Q-T",
+      "x": "¿Qué evento mecánico cardíaco ocurre durante el intervalo Q-T?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Contracción del ventrículo",
+          "c": true,
+          "r": "Correcto. La contracción ventricular dura casi desde el comienzo de la onda Q hasta el final de la onda T, abarcando todo el intervalo Q-T de aproximadamente 0.35 s.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Llenado ventricular pasivo",
+          "c": false,
+          "r": "Incorrecto. El llenado ventricular ocurre durante la diástole, después del intervalo Q-T.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "Contracción auricular exclusivamente",
+          "c": false,
+          "r": "Incorrecto. La contracción auricular ocurre antes del QRS, no durante el intervalo Q-T.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "Relajación isovolumétrica completa",
+          "c": false,
+          "r": "Incorrecto. La relajación isovolumétrica ocurre después de la onda T, no durante el Q-T.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "E",
+          "t": "Conducción por el nódulo AV",
+          "c": false,
+          "r": "Incorrecto. La conducción AV ocurre antes del QRS, durante el intervalo P-R.",
+          "et": "recall"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-016",
+      "sb": "Frecuencia cardíaca",
+      "x": "¿Cómo se determina la frecuencia cardíaca a partir del electrocardiograma?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Calculando el recíproco del intervalo entre dos latidos sucesivos",
+          "c": true,
+          "r": "Correcto. La frecuencia cardíaca se obtiene calculando el recíproco del intervalo R-R, de modo que si el intervalo es 0.83 s, la frecuencia es 60/0.83 = 72 latidos/min.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Multiplicando la duración del complejo QRS por 60",
+          "c": false,
+          "r": "Incorrecto. La duración del QRS no determina la frecuencia cardíaca, solo refleja la conducción intraventricular.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Sumando los intervalos P-Q de un minuto",
+          "c": false,
+          "r": "Incorrecto. Los intervalos P-Q individuales no determinan la frecuencia, sino el intervalo entre latidos completos.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "D",
+          "t": "Dividiendo el voltaje total entre el tiempo",
+          "c": false,
+          "r": "Incorrecto. El voltaje no se utiliza para calcular la frecuencia cardíaca.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Contando las ondas P en 10 segundos",
+          "c": false,
+          "r": "Incorrecto. Aunque contar ondas P podría estimar la frecuencia auricular, el método descrito es calcular el recíproco del intervalo R-R.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-017",
+      "sb": "Onda T auricular",
+      "x": "¿Por qué raras veces se observa la onda de repolarización auricular en el ECG?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Está oscurecida por el complejo QRS que es mucho mayor",
+          "c": true,
+          "r": "Correcto. Las aurículas se repolarizan aproximadamente 0.15-0.2 s después de la onda P, coincidiendo temporalmente con el complejo QRS ventricular, que tiene mucho mayor voltaje y enmascara la onda T auricular.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Las aurículas no se repolarizan durante el ciclo normal",
+          "c": false,
+          "r": "Incorrecto. Las aurículas sí se repolarizan, pero su onda queda oscurecida.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Ocurre simultáneamente con la repolarización ventricular",
+          "c": false,
+          "r": "Incorrecto. La repolarización auricular ocurre durante el QRS, no durante la onda T ventricular.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "D",
+          "t": "El voltaje auricular es siempre isoeléctrico",
+          "c": false,
+          "r": "Incorrecto. La repolarización auricular genera voltajes, pero quedan ocultos por el QRS.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Se registra únicamente en derivaciones precordiales",
+          "c": false,
+          "r": "Incorrecto. La onda T auricular está oscurecida en todas las derivaciones por el complejo QRS.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-018",
+      "sb": "Flujo de corriente",
+      "x": "¿Cuándo se registran potenciales en el ECG durante el ciclo cardíaco?",
+      "dif": 3,
+      "o": [
+        {
+          "l": "A",
+          "t": "Solo cuando el músculo está parcialmente polarizado o parcialmente despolarizado",
+          "c": true,
+          "r": "Correcto. El ECG solo registra potenciales cuando existe flujo de corriente entre zonas con diferentes estados eléctricos. Cuando todo el músculo está completamente polarizado o completamente despolarizado no hay diferencia de potencial y el registro es isoeléctrico.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Durante todo el potencial de acción incluida la meseta",
+          "c": false,
+          "r": "Incorrecto. Durante la meseta del potencial de acción no hay flujo de corriente neto y el ECG es isoeléctrico.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "Únicamente cuando los ventrículos están totalmente despolarizados",
+          "c": false,
+          "r": "Incorrecto. Cuando todo está despolarizado no hay diferencia de potencial y no se registra voltaje.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Solamente durante la conducción por el nódulo AV",
+          "c": false,
+          "r": "Incorrecto. Los potenciales se registran durante despolarización y repolarización del músculo, no específicamente durante conducción nodal.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Continuamente durante todo el ciclo sin excepción",
+          "c": false,
+          "r": "Incorrecto. Existen períodos isoeléctricos cuando no hay flujo de corriente neto.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-019",
+      "sb": "Masa sincitial despolarizada",
+      "x": "¿Qué sucede cuando una zona del sincitio cardíaco se despolariza?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Cargas negativas salen hacia el exterior haciéndola electronegativa",
+          "c": true,
+          "r": "Correcto. Al despolarizarse una zona, se produce salida de cargas negativas hacia el exterior de las fibras, haciendo que esa superficie se vuelva electronegativa mientras el resto permanece positivo.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Cargas positivas entran al interior aumentando la positividad interna",
+          "c": false,
+          "r": "Incorrecto. Durante la despolarización, el interior se hace positivo pero por entrada de sodio, no por \"cargas positivas entrando\" per se. La superficie externa se vuelve negativa.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "La superficie externa se mantiene siempre positiva",
+          "c": false,
+          "r": "Incorrecto. La superficie externa de la zona despolarizada se vuelve negativa.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "No hay cambio en la polaridad de membrana",
+          "c": false,
+          "r": "Incorrecto. La despolarización precisamente invierte la polaridad transmembrana.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Se genera un potencial de reposo más negativo",
+          "c": false,
+          "r": "Incorrecto. La despolarización hace al interior menos negativo (más positivo), no más negativo.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-020",
+      "sb": "Dirección de corriente ventricular",
+      "x": "¿En qué dirección fluye principalmente la corriente durante la despolarización ventricular?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Desde la base del corazón hacia la punta",
+          "c": true,
+          "r": "Correcto. Durante casi todo el ciclo de despolarización ventricular, la corriente fluye principalmente desde la base hacia la punta, ya que las zonas internas se despolarizan primero haciendo las zonas externas de la base negativas.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Desde la punta del corazón hacia la base",
+          "c": false,
+          "r": "Incorrecto. Esta dirección solo ocurre brevemente al final de la despolarización, aproximadamente 0.01 s.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "Desde el ventrículo derecho hacia el izquierdo",
+          "c": false,
+          "r": "Incorrecto. La dirección predominante es base-punta, no entre ventrículos.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Desde el epicardio hacia el endocardio",
+          "c": false,
+          "r": "Incorrecto. La despolarización se propaga desde endocardio hacia epicardio, la corriente fluye en sentido base-punta.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "E",
+          "t": "Circularmente alrededor del corazón",
+          "c": false,
+          "r": "Incorrecto. Aunque hay componentes circulares, la dirección media es base-punta.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-021",
+      "sb": "Primera zona despolarizada",
+      "x": "¿Cuál es la primera zona de los ventrículos que se despolariza?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "El tabique interventricular",
+          "c": true,
+          "r": "Correcto. El impulso llega primero al tabique y poco después se propaga a la superficie interna del resto de la masa ventricular, iniciando la secuencia de despolarización.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "La pared libre del ventrículo izquierdo",
+          "c": false,
+          "r": "Incorrecto. La pared libre se despolariza después del tabique.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "La base de ambos ventrículos",
+          "c": false,
+          "r": "Incorrecto. La base es la última zona en despolarizarse, no la primera.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "D",
+          "t": "El ápex del ventrículo derecho",
+          "c": false,
+          "r": "Incorrecto. Aunque el ápex se despolariza tempranamente, el tabique es la primera zona.",
+          "et": "recall"
+        },
+        {
+          "l": "E",
+          "t": "Las paredes externas cerca de la base",
+          "c": false,
+          "r": "Incorrecto. Estas son las últimas zonas en despolarizarse.",
+          "et": "mechanistic"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-022",
+      "sb": "Derivaciones bipolares",
+      "x": "¿Qué significa que una derivación sea bipolar?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "El ECG se registra desde dos electrodos en lados opuestos del corazón",
+          "c": true,
+          "r": "Correcto. Una derivación bipolar registra la diferencia de potencial entre dos electrodos colocados en lados opuestos del corazón, formando un circuito completo con el electrocardiográfo.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Se registran dos latidos simultáneos del corazón",
+          "c": false,
+          "r": "Incorrecto. El término bipolar se refiere al número de electrodos, no a latidos registrados.",
+          "et": "misinterpretation"
+        },
+        {
+          "l": "C",
+          "t": "Mide potenciales tanto positivos como negativos",
+          "c": false,
+          "r": "Incorrecto. Todas las derivaciones miden potenciales positivos y negativos. Bipolar refiere a dos electrodos.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Registra despolarización y repolarización juntas",
+          "c": false,
+          "r": "Incorrecto. Todas las derivaciones registran ambos procesos. Bipolar se refiere a dos electrodos.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Utiliza un electrodo de referencia común",
+          "c": false,
+          "r": "Incorrecto. Esto describe derivaciones unipolares, no bipolares.",
+          "et": "recall"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-023",
+      "sb": "Derivación I",
+      "x": "¿Cómo se conectan los electrodos para registrar la derivación I?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Terminal negativo en brazo derecho y positivo en brazo izquierdo",
+          "c": true,
+          "r": "Correcto. En la derivación I, el terminal negativo se conecta al brazo derecho y el positivo al brazo izquierdo, registrando la diferencia de potencial horizontal.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Terminal negativo en brazo derecho y positivo en pierna izquierda",
+          "c": false,
+          "r": "Incorrecto. Esta configuración corresponde a la derivación II, no a la I.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Terminal negativo en brazo izquierdo y positivo en pierna izquierda",
+          "c": false,
+          "r": "Incorrecto. Esta configuración corresponde a la derivación III.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "Ambos terminales en el brazo derecho",
+          "c": false,
+          "r": "Incorrecto. Una derivación requiere dos puntos diferentes para medir diferencia de potencial.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Terminal positivo en el tórax y negativo en brazo",
+          "c": false,
+          "r": "Incorrecto. Esta configuración no corresponde a las derivaciones bipolares estándar de extremidades.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-024",
+      "sb": "Derivación II",
+      "x": "¿Qué conexión de electrodos define la derivación II?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Terminal negativo en brazo derecho y positivo en pierna izquierda",
+          "c": true,
+          "r": "Correcto. La derivación II se registra conectando el terminal negativo al brazo derecho y el positivo a la pierna izquierda, con eje aproximado de +60°.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Terminal negativo en brazo izquierdo y positivo en pierna izquierda",
+          "c": false,
+          "r": "Incorrecto. Esta configuración corresponde a la derivación III.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Terminal negativo en brazo derecho y positivo en brazo izquierdo",
+          "c": false,
+          "r": "Incorrecto. Esta configuración corresponde a la derivación I.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "Ambos terminales en las piernas",
+          "c": false,
+          "r": "Incorrecto. La derivación II conecta brazo derecho con pierna izquierda.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Terminal positivo en el tórax anterior",
+          "c": false,
+          "r": "Incorrecto. Esta configuración no corresponde a derivaciones bipolares estándar.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-025",
+      "sb": "Ley de Eithoven",
+      "x": "¿Qué establece la ley de Eithoven?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "La suma de los potenciales de las derivaciones I y III iguala al potencial de la derivación II",
+          "c": true,
+          "r": "Correcto. La ley de Eithoven establece que en cualquier momento, potencial(I) + potencial(III) = potencial(II), permitiendo calcular una derivación conociendo las otras dos.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "El voltaje de la onda P siempre es menor que el del QRS",
+          "c": false,
+          "r": "Incorrecto. Aunque cierto, esto no es lo que establece la ley de Eithoven.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "C",
+          "t": "Las tres derivaciones deben tener voltajes idénticos",
+          "c": false,
+          "r": "Incorrecto. La ley establece una relación algebraica específica, no igualdad de voltajes.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "La derivación II siempre es positiva",
+          "c": false,
+          "r": "Incorrecto. La ley de Eithoven trata sobre relaciones algebraicas entre derivaciones, no sobre polaridad fija.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "El intervalo P-R debe ser constante en las tres derivaciones",
+          "c": false,
+          "r": "Incorrecto. Los intervalos temporales son iguales en todas las derivaciones, pero esto no es la ley de Eithoven.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-026",
+      "sb": "Triángulo de Eithoven",
+      "x": "¿Qué representa el triángulo de Eithoven?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Los puntos donde los dos brazos y pierna izquierda se conectan eléctricamente con los líquidos que rodean el corazón",
+          "c": true,
+          "r": "Correcto. El triángulo de Eithoven ilustra cómo las extremidades forman vértices alrededor del corazón, representando los puntos de conexión eléctrica con el medio conductor circundante.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "La forma anatómica del corazón en el tórax",
+          "c": false,
+          "r": "Incorrecto. El triángulo es una representación eléctrica de las conexiones de derivación, no de anatomía cardíaca.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Los tres nodos del sistema de conducción",
+          "c": false,
+          "r": "Incorrecto. El triángulo de Eithoven se refiere a derivaciones de superficie, no a estructuras de conducción internas.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "La posición de los electrodos precordiales",
+          "c": false,
+          "r": "Incorrecto. Los electrodos precordiales no forman parte del triángulo de Eithoven de las derivaciones de extremidades.",
+          "et": "recall"
+        },
+        {
+          "l": "E",
+          "t": "Las tres cámaras principales del corazón",
+          "c": false,
+          "r": "Incorrecto. El triángulo representa posiciones de electrodos de extremidades, no cámaras cardíacas.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-027",
+      "sb": "Electrocardiografía ambulatoria",
+      "x": "¿Cuál es el propósito principal de la electrocardiografía ambulatoria?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Analizar el ECG durante períodos prolongados para detectar anomalías transitorias",
+          "c": true,
+          "r": "Correcto. La electrocardiografía ambulatoria permite valorar fenómenos eléctricos cardíacos durante actividades diarias, capturando eventos transitorios que podrían omitirse en un ECG de reposo breve.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Medir exclusivamente la frecuencia cardíaca máxima durante ejercicio",
+          "c": false,
+          "r": "Incorrecto. Aunque puede detectar cambios con ejercicio, el propósito principal es monitorizar eventos transitorios prolongados.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "C",
+          "t": "Sustituir completamente el ECG de reposo estándar",
+          "c": false,
+          "r": "Incorrecto. La electrocardiografía ambulatoria complementa, no sustituye, el ECG estándar.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Registrar únicamente arritmias ventriculares mortales",
+          "c": false,
+          "r": "Incorrecto. Detecta diversas anomalías transitorias, no solo arritmias ventriculares.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Calibrar la respuesta del corazón a medicamentos",
+          "c": false,
+          "r": "Incorrecto. Aunque puede monitorizar efectos de fármacos, el propósito principal es detectar eventos transitorios.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-028",
+      "sb": "Monitores Holter",
+      "x": "¿Cuál es la duración típica de uso de los monitores Holter continuos?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "24 a 48 horas",
+          "c": true,
+          "r": "Correcto. Los monitores Holter continuos se utilizan normalmente durante 24-48 h para investigar la relación entre síntomas y episodios electrocardiográficos que probablemente ocurran en ese marco temporal.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "2 a 3 años",
+          "c": false,
+          "r": "Incorrecto. Esta duración corresponde a dispositivos implantables subcutáneos, no a monitores Holter convencionales.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "5 a 10 minutos",
+          "c": false,
+          "r": "Incorrecto. Esta duración es demasiado corta para detectar eventos transitorios infrecuentes.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Semanas o meses continuamente",
+          "c": false,
+          "r": "Incorrecto. Los períodos de semanas o meses corresponden a monitores intermitentes, no a Holter continuos.",
+          "et": "recall"
+        },
+        {
+          "l": "E",
+          "t": "Una hora en reposo",
+          "c": false,
+          "r": "Incorrecto. Una hora es insuficiente para el propósito de los monitores Holter.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-029",
+      "sb": "Síncope y monitorización",
+      "x": "¿Por qué se utiliza electrocardiografía ambulatoria en pacientes con síncope?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Para registrar el ECG durante el momento preciso en que ocurre el desvanecimiento",
+          "c": true,
+          "r": "Correcto. La información crucial es capturar el ECG exactamente cuando aparece el síntoma, permitiendo correlacionar eventos eléctricos con el desvanecimiento para diagnosticar arritmias transitorias.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Para medir exclusivamente la presión arterial durante el evento",
+          "c": false,
+          "r": "Incorrecto. Aunque la presión arterial es relevante, el propósito específico es registrar el ECG durante el síncope.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "C",
+          "t": "Para prevenir completamente los episodios de síncope",
+          "c": false,
+          "r": "Incorrecto. La monitorización diagnostica, no previene los episodios.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Para sustituir el examen neurológico completo",
+          "c": false,
+          "r": "Incorrecto. La monitorización ambulatoria complementa, no sustituye, otras evaluaciones.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Para calibrar medicamentos antiarrítmicos únicamente",
+          "c": false,
+          "r": "Incorrecto. El propósito principal es diagnóstico, no ajuste de medicación.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-030",
+      "sb": "Fibrilación auricular asintomática",
+      "x": "¿Por qué es importante detectar fibrilación auricular asintomática mediante monitorización ambulatoria?",
+      "dif": 3,
+      "o": [
+        {
+          "l": "A",
+          "t": "Aumenta el riesgo de formación de émbolos que pueden originar accidentes cerebrovasculares",
+          "c": true,
+          "r": "Correcto. La fibrilación auricular, incluso asintomática, eleva el riesgo de formación de émbolos por estancamiento sanguíneo auricular. La detección permite iniciar anticoagulación preventiva para reducir el riesgo de accidente cerebrovascular.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Produce invariablemente insuficiencia cardíaca aguda",
+          "c": false,
+          "r": "Incorrecto. La fibrilación auricular no produce invariablemente insuficiencia aguda, pero sí aumenta riesgo tromboembólico.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "C",
+          "t": "Causa directamente infarto miocárdico masivo",
+          "c": false,
+          "r": "Incorrecto. La fibrilación auricular no causa directamente infartos, pero puede generar émbolos cerebrales.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Requiere siempre cardioversión eléctrica inmediata",
+          "c": false,
+          "r": "Incorrecto. La fibrilación auricular asintomática frecuentemente se maneja con anticoagulación, no necesariamente cardioversión inmediata.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Impide completamente el llenado ventricular",
+          "c": false,
+          "r": "Incorrecto. La fibrilación auricular reduce la eficiencia del llenado pero no lo impide completamente.",
+          "et": "conceptual"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-031",
+      "sb": "Repolarización ventricular",
+      "x": "¿Qué zona del ventrículo se repolariza primero?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "La superficie externa especialmente cerca de la punta",
+          "c": true,
+          "r": "Correcto. La superficie externa de los ventrículos, especialmente cerca de la punta, se repolariza primero, mientras que las zonas endocárdicas lo hacen al final, posiblemente por diferencias en el flujo sanguíneo coronario.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "El endocardio de la base ventricular",
+          "c": false,
+          "r": "Incorrecto. Las zonas endocárdicas se repolarizan al final, no primero.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "El tabique interventricular completo",
+          "c": false,
+          "r": "Incorrecto. El tabique no se repolariza uniformemente primero.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "La pared libre del ventrículo derecho",
+          "c": false,
+          "r": "Incorrecto. La superficie externa cerca de la punta se repolariza primero, no específicamente el ventrículo derecho.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Las fibras de Purkinje subendocárdicas",
+          "c": false,
+          "r": "Incorrecto. Las zonas endocárdicas se repolarizan tardíamente.",
+          "et": "mechanistic"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-032",
+      "sb": "Polaridad de onda T",
+      "x": "¿Por qué la onda T normal es positiva en las derivaciones bipolares estándar?",
+      "dif": 3,
+      "o": [
+        {
+          "l": "A",
+          "t": "Porque las superficies apicales externas se repolarizan antes y el extremo positivo del vector se dirige hacia la punta",
+          "c": true,
+          "r": "Correcto. Como la repolarización comienza en las superficies externas apicales, estas zonas recuperan su positividad externa primero. Esto hace que el extremo positivo del vector global de repolarización apunte hacia la punta, generando ondas T positivas en las derivaciones bipolares.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Porque el endocardio se repolariza simultáneamente en toda su extensión",
+          "c": false,
+          "r": "Incorrecto. El endocardio se repolariza tardíamente, no simultáneamente, y esto no explica la positividad de la onda T.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "Porque la despolarización y repolarización tienen la misma dirección vectorial",
+          "c": false,
+          "r": "Incorrecto. Aunque en este caso ambas son positivas, el mecanismo específico es que la superficie externa se repolariza primero.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Porque el voltaje de repolarización excede siempre al de despolarización",
+          "c": false,
+          "r": "Incorrecto. El voltaje de la onda T es menor que el del QRS, no mayor.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Porque el nódulo sinusal mantiene polaridad positiva constante",
+          "c": false,
+          "r": "Incorrecto. La polaridad de la onda T no depende directamente del nódulo sinusal.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-033",
+      "sb": "Voltaje del complejo QRS",
+      "x": "¿Cuál es el voltaje típico del complejo QRS cuando se registra desde extremidades?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "De 1 a 1.5 mV desde el punto más elevado de R hasta el más profundo de S",
+          "c": true,
+          "r": "Correcto. Cuando los electrodos están en extremidades, el voltaje del QRS habitualmente es 1-1.5 mV medido desde el pico de la onda R hasta el punto más bajo de la onda S.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "De 0.1 a 0.3 mV en toda su amplitud",
+          "c": false,
+          "r": "Incorrecto. Estos valores corresponden a la onda P, no al complejo QRS.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "De 3 a 4 mV cuando se mide desde extremidades",
+          "c": false,
+          "r": "Incorrecto. Voltajes de 3-4 mV solo se observan cuando un electrodo está directamente sobre los ventrículos.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "De 110 mV aproximadamente",
+          "c": false,
+          "r": "Incorrecto. Este valor corresponde al potencial de acción intracelular, no al ECG de superficie.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "De 0.2 a 0.3 mV máximo",
+          "c": false,
+          "r": "Incorrecto. Estos valores corresponden a la onda T, el QRS tiene mayor voltaje.",
+          "et": "recall"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-034",
+      "sb": "Registro de potenciales",
+      "x": "¿Por qué no se registra potencial en el ECG cuando todo el músculo ventricular está completamente despolarizado?",
+      "dif": 3,
+      "o": [
+        {
+          "l": "A",
+          "t": "Porque no hay flujo de corriente entre zonas con diferentes estados eléctricos",
+          "c": true,
+          "r": "Correcto. Solo cuando el músculo está parcialmente polarizado o despolarizado hay flujo de corriente de una parte a otra. Cuando todo está uniformemente despolarizado no existe diferencia de potencial y el ECG es isoeléctrico.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Porque el voltaje excede la capacidad de registro del aparato",
+          "c": false,
+          "r": "Incorrecto. La ausencia de registro se debe a falta de gradiente eléctrico, no a exceso de voltaje.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Porque los electrodos de superficie pierden contacto temporalmente",
+          "c": false,
+          "r": "Incorrecto. El fenómeno es fisiológico, no técnico. La ausencia de potencial es normal durante polarización o despolarización completa.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Porque la meseta del potencial de acción invierte la polaridad",
+          "c": false,
+          "r": "Incorrecto. Durante la meseta hay estabilidad de potencial pero no inversión que genere flujo de corriente.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Porque el sistema de Purkinje bloquea la transmisión",
+          "c": false,
+          "r": "Incorrecto. La ausencia de potencial se debe a uniformidad eléctrica, no a bloqueo de conducción.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-035",
+      "sb": "Onda T prolongada",
+      "x": "¿Por qué la onda T es una onda prolongada?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Porque el proceso de repolarización ventricular se extiende aproximadamente 0.15 segundos",
+          "c": true,
+          "r": "Correcto. La repolarización ventricular comienza en algunas fibras aproximadamente 0.2 s después del QRS pero en otras tarda hasta 0.35 s, extendiéndose el proceso completo alrededor de 0.15 s, lo que genera una onda T prolongada.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Porque la conducción AV retrasa la repolarización",
+          "c": false,
+          "r": "Incorrecto. La conducción AV no afecta directamente la duración de la onda T de repolarización ventricular.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Porque se superpone con la despolarización auricular",
+          "c": false,
+          "r": "Incorrecto. La onda T es ventricular y no se superpone con despolarización auricular.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Porque el voltaje bajo requiere más tiempo de registro",
+          "c": false,
+          "r": "Incorrecto. La duración prolongada se debe a la extensión temporal del proceso de repolarización, no al voltaje.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Porque incluye la repolarización de las cuatro cámaras",
+          "c": false,
+          "r": "Incorrecto. La onda T representa repolarización ventricular, no de todas las cámaras.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-036",
+      "sb": "Comparación voltajes",
+      "x": "¿Por qué el potencial de acción monofásico de 110 mV es mucho mayor que los 1-1.5 mV del QRS?",
+      "dif": 3,
+      "o": [
+        {
+          "l": "A",
+          "t": "Porque el potencial de acción es intracelular y el ECG registra solo una fracción que llega a la superficie",
+          "c": true,
+          "r": "Correcto. El potencial de acción de 110 mV se registra directamente en la membrana celular, mientras que el ECG de superficie solo capta una pequeña fracción de esta corriente que se propaga a través de tejidos conductores hasta los electrodos externos.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Porque los electrodos de superficie amplifican selectivamente las ondas P",
+          "c": false,
+          "r": "Incorrecto. Los electrodos no amplifican selectivamente, y la diferencia se debe a la atenuación tisular.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Porque el corazón filtra activamente los voltajes altos",
+          "c": false,
+          "r": "Incorrecto. No hay filtrado activo, la diferencia se debe a la distancia y tejidos entre membrana celular y superficie.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Porque el ECG mide únicamente la componente auricular",
+          "c": false,
+          "r": "Incorrecto. El QRS mide actividad ventricular, y la diferencia se debe a la atenuación por distancia.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Porque el sistema de Purkinje reduce el voltaje final",
+          "c": false,
+          "r": "Incorrecto. El sistema de Purkinje propaga, no reduce el potencial. La atenuación es por distancia y tejidos.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-037",
+      "sb": "Frecuencia cardíaca normal",
+      "x": "Si el intervalo R-R es de 0.83 segundos, ¿cuál es la frecuencia cardíaca aproximada?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "72 latidos por minuto",
+          "c": true,
+          "r": "Correcto. La frecuencia cardíaca se calcula como 60/0.83 = aproximadamente 72 latidos/min, que es el valor normal en adultos en reposo.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "60 latidos por minuto",
+          "c": false,
+          "r": "Incorrecto. 60 latidos/min correspondería a un intervalo R-R de exactamente 1.0 s.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "100 latidos por minuto",
+          "c": false,
+          "r": "Incorrecto. Esta frecuencia correspondería a un intervalo R-R de 0.6 s.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "150 latidos por minuto",
+          "c": false,
+          "r": "Incorrecto. Esta frecuencia correspondería a un intervalo mucho más corto, de 0.4 s.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "50 latidos por minuto",
+          "c": false,
+          "r": "Incorrecto. Esta frecuencia correspondería a un intervalo R-R de 1.2 s.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-038",
+      "sb": "Conducción de tejidos",
+      "x": "¿Por qué los pulmones conducen la electricidad a pesar de estar llenos de aire?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Porque contienen suficientes líquidos y tejidos para conducir en magnitud sorprendente",
+          "c": true,
+          "r": "Correcto. Aunque llenos de aire en su mayor parte, los pulmones contienen suficiente tejido vascularizado y líquidos intersticiales para conducir electricidad sorprendentemente bien, permitiendo la propagación de corrientes cardíacas.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Porque el aire ionizado actúa como conductor perfecto",
+          "c": false,
+          "r": "Incorrecto. El aire no está ionizado en condiciones fisiológicas normales y no conduce bien la electricidad.",
+          "et": "conceptual"
+        },
+        {
+          "l": "C",
+          "t": "Porque los alvéolos amplifican las señales eléctricas",
+          "c": false,
+          "r": "Incorrecto. Los alvéolos no amplifican señales; la conducción se debe a tejidos y líquidos pulmonares.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Porque el oxígeno facilita el transporte de electrones",
+          "c": false,
+          "r": "Incorrecto. La conducción eléctrica tisular depende de iones en solución, no del transporte de oxígeno.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Porque los bronquios forman una red conductora especial",
+          "c": false,
+          "r": "Incorrecto. La conducción se debe a la presencia de líquidos y tejidos, no a estructuras bronquiales especializadas.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-039",
+      "sb": "Dirección final de despolarización",
+      "x": "¿Qué ocurre con la dirección de la corriente inmediatamente antes de completar la despolarización ventricular?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Se invierte brevemente fluyendo desde la punta hacia la base durante aproximadamente 0.01 segundos",
+          "c": true,
+          "r": "Correcto. Al final de la despolarización, las últimas zonas en despolarizarse son las paredes externas cerca de la base, invirtiendo momentáneamente la dirección del flujo de corriente punta-base durante aproximadamente 0.01 s.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Continúa en la misma dirección base-punta sin cambios",
+          "c": false,
+          "r": "Incorrecto. Hay una breve inversión al final cuando la base se despolariza.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "Se detiene completamente sin flujo de corriente",
+          "c": false,
+          "r": "Incorrecto. Hay inversión breve de dirección, no detención del flujo.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Se distribuye uniformemente en todas direcciones",
+          "c": false,
+          "r": "Incorrecto. La dirección se invierte específicamente hacia la base, no se distribuye uniformemente.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Gira circularmente alrededor del corazón",
+          "c": false,
+          "r": "Incorrecto. La inversión es específica en dirección punta-base, no circular.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-040",
+      "sb": "Propagación de despolarización",
+      "x": "¿Desde dónde hacia dónde se propaga la despolarización en la masa del músculo ventricular?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Desde la superficie endocárdica hacia el exterior a través de la masa muscular",
+          "c": true,
+          "r": "Correcto. Después de alcanzar las superficies endocárdicas del tabique y ventrículos, la despolarización se propaga desde el endocardio hacia el epicardio a través de la masa del músculo ventricular.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Desde el epicardio hacia el endocardio",
+          "c": false,
+          "r": "Incorrecto. La dirección de propagación es opuesta: endocardio a epicardio.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "Desde la punta hacia la base exclusivamente",
+          "c": false,
+          "r": "Incorrecto. Aunque la corriente fluye base-punta, la propagación mural es endocardio-epicardio.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Desde el ventrículo izquierdo hacia el derecho",
+          "c": false,
+          "r": "Incorrecto. La propagación es transmural (endocardio-epicardio), no interventricular.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Simultáneamente en todas las capas del miocardio",
+          "c": false,
+          "r": "Incorrecto. Hay una secuencia clara: primero endocardio, luego epicardio.",
+          "et": "mechanistic"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-041",
+      "sb": "Nomenclatura derivaciones",
+      "x": "¿Por qué a veces se denomina intervalo P-R en lugar de P-Q?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Porque es probable que no haya onda Q en algunos registros",
+          "c": true,
+          "r": "Correcto. Con frecuencia el complejo QRS no presenta onda Q inicial, por lo que el intervalo se mide desde P hasta R. El término P-R se usa aunque técnicamente debería ser P-Q cuando esta onda está presente.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Porque la onda R siempre es más prominente",
+          "c": false,
+          "r": "Incorrecto. La razón es la ausencia frecuente de onda Q, no la prominencia de R.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "C",
+          "t": "Porque Q y R representan el mismo evento fisiológico",
+          "c": false,
+          "r": "Incorrecto. Q y R son deflexiones diferentes del complejo QRS, no el mismo evento.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Porque el intervalo P-Q es siempre negativo",
+          "c": false,
+          "r": "Incorrecto. El intervalo P-R/P-Q es isoeléctrico habitualmente, no negativo.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Porque históricamente se denominó así sin razón específica",
+          "c": false,
+          "r": "Incorrecto. Hay una razón específica: la frecuente ausencia de onda Q.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-042",
+      "sb": "Variación del intervalo P-R",
+      "x": "¿Qué ocurre con el intervalo P-R cuando la frecuencia cardíaca aumenta?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Se acorta debido al aumento de la velocidad de conducción del nódulo AV",
+          "c": true,
+          "r": "Correcto. Para frecuencias cardíacas más rápidas, el intervalo P-R se acorta por aumento de actividad simpática o reducción de parasimpática, que incrementan la velocidad de conducción nodal AV.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Se prolonga proporcionalmente a la frecuencia",
+          "c": false,
+          "r": "Incorrecto. El intervalo P-R se acorta con frecuencias rápidas, no se prolonga.",
+          "et": "mechanistic"
+        },
+        {
+          "l": "C",
+          "t": "Permanece constante independientemente de la frecuencia",
+          "c": false,
+          "r": "Incorrecto. El intervalo P-R varía con la frecuencia cardíaca.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "Desaparece completamente en taquicardias",
+          "c": false,
+          "r": "Incorrecto. El intervalo se acorta pero no desaparece en taquicardias normales.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Se invierte mostrando conducción retrógrada",
+          "c": false,
+          "r": "Incorrecto. El acortamiento no implica inversión de conducción.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-043",
+      "sb": "Organización derivaciones",
+      "x": "¿Cómo se organizan habitualmente las derivaciones en la visualización electrocardiográfica?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Bipolares estándar, seguidas de ampliadas y después precordiales",
+          "c": true,
+          "r": "Correcto. Las derivaciones se presentan normalmente en tres grupos: bipolares estándar (I, II, III), seguidas por ampliadas (aVR, aVL, aVF) y después precordiales (V1-V6).",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Precordiales primero y después las de extremidades",
+          "c": false,
+          "r": "Incorrecto. Las precordiales se presentan al final, no al principio.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Solo las tres derivaciones bipolares estándar",
+          "c": false,
+          "r": "Incorrecto. Un ECG completo incluye 12 derivaciones, no solo tres.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Aleatoriamente según preferencia del operador",
+          "c": false,
+          "r": "Incorrecto. Existe un orden estándar establecido de presentación.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Ampliadas primero seguidas de bipolares",
+          "c": false,
+          "r": "Incorrecto. Las bipolares estándar se presentan primero.",
+          "et": "recall"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-044",
+      "sb": "Velocidad de registro",
+      "x": "¿Cuál es la velocidad de registro típica de un ECG estándar?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "25 milímetros por segundo",
+          "c": true,
+          "r": "Correcto. Un ECG típico se realiza a velocidad de 25 mm/s, aunque ocasionalmente se emplean velocidades más rápidas para análisis detallado.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "5 milímetros por segundo",
+          "c": false,
+          "r": "Incorrecto. Esta velocidad es demasiado lenta para el registro estándar.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "C",
+          "t": "50 milímetros por segundo",
+          "c": false,
+          "r": "Incorrecto. Aunque velocidades más rápidas se usan ocasionalmente, 25 mm/s es el estándar.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "100 milímetros por segundo",
+          "c": false,
+          "r": "Incorrecto. Esta velocidad excede significativamente el estándar de 25 mm/s.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "10 milímetros por segundo",
+          "c": false,
+          "r": "Incorrecto. Esta velocidad es insuficiente para resolución temporal adecuada.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-045",
+      "sb": "Duración de repolarización",
+      "x": "¿Aproximadamente cuánto tiempo dura el proceso completo de repolarización ventricular?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Aproximadamente 0.15 segundos",
+          "c": true,
+          "r": "Correcto. El proceso de repolarización ventricular se extiende aproximadamente 0.15 s, desde que comienzan a repolarizarse las primeras fibras (0.2 s después del QRS) hasta las últimas (0.35 s después).",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Aproximadamente 0.04 segundos",
+          "c": false,
+          "r": "Incorrecto. Este tiempo es demasiado corto y corresponde a un intervalo de calibración temporal.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Aproximadamente 0.35 segundos",
+          "c": false,
+          "r": "Incorrecto. Este es el tiempo desde el QRS hasta el final de la repolarización, no la duración del proceso mismo.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Aproximadamente 0.50 segundos",
+          "c": false,
+          "r": "Incorrecto. Este intervalo excede la duración del proceso de repolarización.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Aproximadamente 0.08 segundos",
+          "c": false,
+          "r": "Incorrecto. Esta duración es menor que la extensión real del proceso de repolarización.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-046",
+      "sb": "Holter implantable",
+      "x": "¿Cuál es la duración máxima de monitorización de un Holter implantable subcutáneo?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Hasta 2 a 3 años",
+          "c": true,
+          "r": "Correcto. Los dispositivos Holter implantables subcutáneos pueden monitorizar la actividad eléctrica cardíaca de forma continua durante períodos de hasta 2-3 años.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Hasta 24 a 48 horas",
+          "c": false,
+          "r": "Incorrecto. Esta duración corresponde a monitores Holter externos convencionales, no implantables.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Hasta una semana máximo",
+          "c": false,
+          "r": "Incorrecto. Los dispositivos implantables tienen capacidad de monitorización mucho más prolongada.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Hasta un mes continuamente",
+          "c": false,
+          "r": "Incorrecto. La duración de monitorización implantable excede significativamente un mes.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Hasta 6 meses solamente",
+          "c": false,
+          "r": "Incorrecto. Los dispositivos implantables pueden funcionar por períodos mucho más largos.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-047",
+      "sb": "Activación Holter implantable",
+      "x": "¿Cómo se puede activar un Holter implantable subcutáneo?",
+      "dif": 2,
+      "o": [
+        {
+          "l": "A",
+          "t": "Automáticamente al detectar frecuencias anormales o manualmente por el paciente",
+          "c": true,
+          "r": "Correcto. El dispositivo puede programarse para iniciar registro cuando la frecuencia cardíaca exceda o descienda de niveles predeterminados, o bien puede activarse manualmente por el paciente cuando perciba síntomas.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Solo mediante activación médica presencial",
+          "c": false,
+          "r": "Incorrecto. El dispositivo puede activarse automáticamente o por el propio paciente.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "C",
+          "t": "Exclusivamente durante el ejercicio físico",
+          "c": false,
+          "r": "Incorrecto. La activación no está limitada al ejercicio, puede ocurrir en cualquier momento.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "D",
+          "t": "Únicamente cuando la presión arterial cambia",
+          "c": false,
+          "r": "Incorrecto. El dispositivo responde a cambios en frecuencia cardíaca o activación manual, no a presión arterial.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Solamente durante períodos de sueño",
+          "c": false,
+          "r": "Incorrecto. El dispositivo puede activarse en cualquier momento según los parámetros programados.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-048",
+      "sb": "Derivación III",
+      "x": "¿Cómo están conectados los electrodos en la derivación III?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Terminal negativo en brazo izquierdo y positivo en pierna izquierda",
+          "c": true,
+          "r": "Correcto. Para registrar la derivación III, el terminal negativo se conecta al brazo izquierdo y el positivo a la pierna izquierda, generando un eje de aproximadamente +120°.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Terminal negativo en brazo derecho y positivo en pierna izquierda",
+          "c": false,
+          "r": "Incorrecto. Esta configuración corresponde a la derivación II, no a la III.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Terminal negativo en brazo derecho y positivo en brazo izquierdo",
+          "c": false,
+          "r": "Incorrecto. Esta configuración corresponde a la derivación I.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "Ambos terminales en la pierna izquierda",
+          "c": false,
+          "r": "Incorrecto. Una derivación requiere dos puntos diferentes para medir diferencia de potencial.",
+          "et": "conceptual"
+        },
+        {
+          "l": "E",
+          "t": "Terminal positivo en el tórax precordial",
+          "c": false,
+          "r": "Incorrecto. Esta configuración no corresponde a derivaciones bipolares estándar de extremidades.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-049",
+      "sb": "Medición de divisiones",
+      "x": "¿Qué representa cada división pequeña en las líneas de calibración temporal?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "0.04 segundos de tiempo",
+          "c": true,
+          "r": "Correcto. A velocidad de 25 mm/s, cada división pequeña entre líneas finas representa 0.04 s, ya que los intervalos de 0.2 s están divididos en cinco segmentos.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "0.2 segundos de tiempo",
+          "c": false,
+          "r": "Incorrecto. Este valor corresponde a cada segmento entre líneas oscuras, no entre líneas finas.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "1.0 milivoltio de amplitud",
+          "c": false,
+          "r": "Incorrecto. Esta es calibración de voltaje vertical, no de tiempo horizontal.",
+          "et": "conceptual"
+        },
+        {
+          "l": "D",
+          "t": "0.16 segundos exactamente",
+          "c": false,
+          "r": "Incorrecto. Este valor se aproxima al intervalo P-R, no a una división pequeña.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "0.01 segundos de tiempo",
+          "c": false,
+          "r": "Incorrecto. Cada división pequeña representa 0.04 s, no 0.01 s.",
+          "et": "plausible_distractor"
+        }
+      ]
+    },
+    {
+      "id": "FIS-ECG-050",
+      "sb": "Voltaje de onda T",
+      "x": "¿Cuál es el voltaje normal de la onda T?",
+      "dif": 1,
+      "o": [
+        {
+          "l": "A",
+          "t": "Entre 0.2 y 0.3 mV",
+          "c": true,
+          "r": "Correcto. El voltaje de la onda T está normalmente entre 0.2 y 0.3 mV, siendo menor que el del complejo QRS pero mayor que el de la onda P.",
+          "et": null
+        },
+        {
+          "l": "B",
+          "t": "Entre 1.0 y 1.5 mV",
+          "c": false,
+          "r": "Incorrecto. Estos valores corresponden al complejo QRS, no a la onda T.",
+          "et": "recall"
+        },
+        {
+          "l": "C",
+          "t": "Entre 0.1 y 0.3 mV",
+          "c": false,
+          "r": "Incorrecto. Este rango corresponde a la onda P. La onda T está entre 0.2-0.3 mV.",
+          "et": "recall"
+        },
+        {
+          "l": "D",
+          "t": "Entre 3.0 y 4.0 mV",
+          "c": false,
+          "r": "Incorrecto. Estos voltajes solo se observan con electrodos directamente sobre ventrículos.",
+          "et": "plausible_distractor"
+        },
+        {
+          "l": "E",
+          "t": "Entre 110 y 120 mV",
+          "c": false,
+          "r": "Incorrecto. Estos valores corresponden al potencial de acción intracelular, no al ECG de superficie.",
+          "et": "plausible_distractor"
+        }
+      ]
+    }
+  ]
+}

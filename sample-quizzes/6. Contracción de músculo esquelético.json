@@ -1,0 +1,672 @@
+{
+  "metadata": {
+    "title": "Contracción de músculo esquelético",
+    "source": "6.md",
+    "date": "2026-01-31",
+    "total": 50,
+    "sj": "FISIO",
+    "tp": "MESC",
+    "dist": { "d1": 0.4, "d2": 0.36, "d3": 0.24 }
+  },
+  "q": [
+    {
+      "id": "FISIO-MESC-001",
+      "sb": "Anatomía fisiológica del músculo esquelético",
+      "x": "¿Qué proporción aproximada del cuerpo humano corresponde a músculo esquelético?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Alrededor de cuarenta por ciento", "c": true, "r": "Correcto. Se indica que el músculo esquelético constituye cerca del cuarenta por ciento del cuerpo. Esta cifra se presenta como una aproximación global. Sirve para dimensionar la relevancia funcional del tejido contráctil en el organismo.", "et": null },
+        { "l": "B", "t": "Alrededor de diez por ciento", "c": false, "r": "Incorrecto. Ese porcentaje se asocia a músculo liso y cardíaco en conjunto, no al esquelético.", "et": "recall" },
+        { "l": "C", "t": "Alrededor de veinte por ciento", "c": false, "r": "Incorrecto. La cifra señalada para músculo esquelético es mayor y se aproxima a cuarenta por ciento.", "et": "misinterpretation" },
+        { "l": "D", "t": "Alrededor de sesenta por ciento", "c": false, "r": "Incorrecto. El valor descrito para músculo esquelético no llega a sesenta por ciento del cuerpo.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Alrededor de cinco por ciento", "c": false, "r": "Incorrecto. Se reporta una proporción mucho mayor para músculo esquelético que cinco por ciento.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-002",
+      "sb": "Anatomía fisiológica del músculo esquelético",
+      "x": "¿Qué rango de diámetro se describe para fibras musculares esqueléticas?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Diez a ochenta micrómetros", "c": true, "r": "Correcto. Se describe que las fibras musculares esqueléticas son muy grandes y su diámetro varía entre diez y ochenta micrómetros. Ese rango resume la variabilidad entre músculos y tipos de fibra. También se usa para contextualizar su estructura interna en subunidades.", "et": null },
+        { "l": "B", "t": "Uno a cinco micrómetros", "c": false, "r": "Incorrecto. Ese rango es demasiado pequeño y no corresponde al intervalo reportado para fibras esqueléticas.", "et": "conceptual" },
+        { "l": "C", "t": "Cien a doscientos micrómetros", "c": false, "r": "Incorrecto. La cifra reportada llega a ochenta micrómetros, no al intervalo propuesto.", "et": "misinterpretation" },
+        { "l": "D", "t": "Dos a diez micrómetros", "c": false, "r": "Incorrecto. El límite inferior descrito es diez micrómetros, y el superior es mucho mayor que diez.", "et": "recall" },
+        { "l": "E", "t": "Ochenta a ciento veinte micrómetros", "c": false, "r": "Incorrecto. El rango incluye valores por encima del máximo descrito de ochenta micrómetros.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-003",
+      "sb": "Anatomía fisiológica del músculo esquelético",
+      "x": "En la mayoría de los músculos esqueléticos, ¿qué proporción de fibras está inervada por una sola terminación nerviosa?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Aproximadamente noventa y ocho por ciento", "c": true, "r": "Correcto. Se menciona que todas las fibras, excepto alrededor del dos por ciento, reciben una sola terminación nerviosa. Eso implica que la gran mayoría, cerca de noventa y ocho por ciento, tiene una única inervación terminal. La localización típica se describe cerca del punto medio de la fibra.", "et": null },
+        { "l": "B", "t": "Aproximadamente cincuenta por ciento", "c": false, "r": "Incorrecto. Se describe un predominio muy alto de inervación única, muy por encima de la mitad.", "et": "plausible_distractor" },
+        { "l": "C", "t": "Aproximadamente diez por ciento", "c": false, "r": "Incorrecto. El texto señala casi todas las fibras con una sola terminación, no una minoría pequeña.", "et": "misinterpretation" },
+        { "l": "D", "t": "Aproximadamente dos por ciento", "c": false, "r": "Incorrecto. Ese porcentaje se refiere a la fracción que no sigue la regla de una sola terminación, no a las que sí.", "et": "recall" },
+        { "l": "E", "t": "Aproximadamente setenta por ciento", "c": false, "r": "Incorrecto. El porcentaje reportado para inervación única es mayor, cercano a noventa y ocho por ciento.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-004",
+      "sb": "Sarcolema",
+      "x": "¿Qué estructura envuelve a una fibra de músculo esquelético?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Sarcolema", "c": true, "r": "Correcto. El sarcolema se define como la membrana fina que envuelve a la fibra musculoesquelética. Incluye una membrana plasmática y una cubierta externa con material polisacárido y fibrillas de colágeno. También se relaciona con la unión a fibras tendinosas en los extremos.", "et": null },
+        { "l": "B", "t": "Sarcoplasma", "c": false, "r": "Incorrecto. El sarcoplasma es el fluido intracelular entre miofibrillas, no la envoltura de la fibra.", "et": "recall" },
+        { "l": "C", "t": "Retículo sarcoplásmico", "c": false, "r": "Incorrecto. Es un retículo interno especializado, no una membrana que envuelva externamente a la fibra.", "et": "conceptual" },
+        { "l": "D", "t": "Disco Z", "c": false, "r": "Incorrecto. El disco Z es una estructura del sarcómero dentro de la miofibrilla, no la envoltura celular.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Sarcómero", "c": false, "r": "Incorrecto. El sarcómero es una unidad entre discos Z, no la membrana que rodea la fibra completa.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-005",
+      "sb": "Miofibrillas y filamentos",
+      "x": "¿De qué están formadas las miofibrillas de una fibra muscular?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Filamentos de actina y miosina", "c": true, "r": "Correcto. Se afirma que las miofibrillas están formadas por filamentos de actina y de miosina, responsables de la contracción. Cada fibra contiene cientos a miles de miofibrillas. La interacción entre filamentos finos y gruesos sostiene el acortamiento del sarcómero.", "et": null },
+        { "l": "B", "t": "Filamentos de colágeno y elastina", "c": false, "r": "Incorrecto. Colágeno se menciona en la cubierta del sarcolema, no como composición principal de las miofibrillas.", "et": "plausible_distractor" },
+        { "l": "C", "t": "Filamentos de tubulina y queratina", "c": false, "r": "Incorrecto. No se describen como componentes del aparato contráctil principal de la miofibrilla.", "et": "conceptual" },
+        { "l": "D", "t": "Filamentos de actina y distrofina", "c": false, "r": "Incorrecto. Distrofina se menciona en distrofia, pero la composición contráctil central es actina y miosina.", "et": "misinterpretation" },
+        { "l": "E", "t": "Filamentos de miosina y mioglobina", "c": false, "r": "Incorrecto. Mioglobina se menciona como almacenamiento de oxígeno, no como filamento de la miofibrilla.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-006",
+      "sb": "Miofibrillas y filamentos",
+      "x": "¿Cuántos filamentos de miosina y de actina se mencionan aproximadamente por miofibrilla?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Mil quinientos de miosina y tres mil de actina", "c": true, "r": "Correcto. Se indica que cada miofibrilla tiene aproximadamente mil quinientos filamentos de miosina y tres mil de actina adyacentes. Esa proporción ilustra la arquitectura repetitiva del sarcómero. También conecta con el patrón de bandas claras y oscuras por interdigitación.", "et": null },
+        { "l": "B", "t": "Tres mil de miosina y mil quinientos de actina", "c": false, "r": "Incorrecto. Invierte la relación descrita entre filamentos gruesos y finos en la miofibrilla.", "et": "misinterpretation" },
+        { "l": "C", "t": "Doscientos de miosina y doscientos de actina", "c": false, "r": "Incorrecto. Esos valores no corresponden a las cantidades aproximadas reportadas para una miofibrilla.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Mil de miosina y mil de actina", "c": false, "r": "Incorrecto. Se reporta una cantidad mayor y además con más actina que miosina.", "et": "conceptual" },
+        { "l": "E", "t": "Cinco mil de miosina y mil de actina", "c": false, "r": "Incorrecto. La cifra reportada no sugiere predominio de miosina sobre actina en esa magnitud.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-007",
+      "sb": "Bandas I y A",
+      "x": "¿Qué caracteriza a las bandas I en una miofibrilla?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Contienen solo filamentos de actina", "c": true, "r": "Correcto. Las bandas claras se describen como regiones con solo filamentos de actina. Se denominan bandas I por su comportamiento isótropo con luz polarizada. Esta distribución contrasta con la banda A, donde hay miosina y solapamiento con actina.", "et": null },
+        { "l": "B", "t": "Contienen solo filamentos de miosina", "c": false, "r": "Incorrecto. La miosina se ubica en la banda A; la banda I se describe sin filamentos gruesos.", "et": "recall" },
+        { "l": "C", "t": "Contienen actina y miosina en igual proporción", "c": false, "r": "Incorrecto. La banda I se define precisamente por ausencia de miosina, no por mezcla equivalente.", "et": "conceptual" },
+        { "l": "D", "t": "Contienen extremos de actina que se superponen con miosina", "c": false, "r": "Incorrecto. Esa descripción corresponde a la banda A, donde existe solapamiento de actina con miosina.", "et": "misinterpretation" },
+        { "l": "E", "t": "Contienen discos Z y línea M simultáneamente", "c": false, "r": "Incorrecto. El disco Z se asocia al límite del sarcómero, no a una coexistencia con línea M en la banda I.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-008",
+      "sb": "Bandas I y A",
+      "x": "¿Qué describe mejor a las bandas A en una miofibrilla?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Incluyen miosina y zonas de solapamiento con actina", "c": true, "r": "Correcto. Las bandas oscuras contienen filamentos de miosina y también los extremos de actina donde se superponen. Se denominan bandas A por su comportamiento anisótropo con luz polarizada. En esta región aparecen los puentes cruzados que interactúan con actina para generar fuerza.", "et": null },
+        { "l": "B", "t": "Incluyen solo actina sin miosina", "c": false, "r": "Incorrecto. Esa definición corresponde a la banda I, no a la banda A.", "et": "recall" },
+        { "l": "C", "t": "Incluyen solo miosina sin actina", "c": false, "r": "Incorrecto. En la banda A también están presentes los extremos de actina donde se superponen con miosina.", "et": "conceptual" },
+        { "l": "D", "t": "Incluyen mitocondrias alineadas con discos Z", "c": false, "r": "Incorrecto. Mitocondrias se mencionan en el sarcoplasma, no como rasgo definitorio de una banda específica.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Incluyen solo colágeno de la cubierta externa", "c": false, "r": "Incorrecto. Colágeno se asocia a la cubierta del sarcolema, no a la banda A de la miofibrilla.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-009",
+      "sb": "Disco Z y sarcómero",
+      "x": "¿Cómo se denomina la porción de miofibrilla entre dos discos Z sucesivos?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Sarcómero", "c": true, "r": "Correcto. Se define como la región entre dos discos Z consecutivos. Es la unidad funcional repetitiva de la contracción en músculo estriado. Su longitud cambia con el deslizamiento de filamentos, determinando fuerza según el grado de superposición actina miosina.", "et": null },
+        { "l": "B", "t": "Sarcolema", "c": false, "r": "Incorrecto. El sarcolema envuelve la fibra completa, no delimita unidades repetitivas dentro de la miofibrilla.", "et": "recall" },
+        { "l": "C", "t": "Sarcoplasma", "c": false, "r": "Incorrecto. El sarcoplasma es el fluido entre miofibrillas, no una unidad estructural delimitada por discos Z.", "et": "conceptual" },
+        { "l": "D", "t": "Retículo sarcoplásmico", "c": false, "r": "Incorrecto. Es un retículo interno relacionado con calcio, no el segmento entre discos Z.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Unidad motora", "c": false, "r": "Incorrecto. Unidad motora se define por motoneurona y fibras inervadas, no por discos Z.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-010",
+      "sb": "Disco Z y sarcómero",
+      "x": "¿Qué longitud aproximada del sarcómero se menciona cuando la fibra muscular está contraída?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Alrededor de dos micrómetros", "c": true, "r": "Correcto. Se indica que, en estado contraído mostrado, la longitud del sarcómero es aproximadamente dos micrómetros. En ese punto hay superposición completa de actina con miosina y comienza la superposición entre actinas. Esa geometría se asocia a capacidad de generar máxima fuerza.", "et": null },
+        { "l": "B", "t": "Alrededor de un micrómetro", "c": false, "r": "Incorrecto. Un micrómetro se reporta como longitud aproximada del filamento de actina, no del sarcómero contraído típico.", "et": "misinterpretation" },
+        { "l": "C", "t": "Alrededor de tres micrómetros", "c": false, "r": "Incorrecto. Se describen valores relevantes alrededor de dos a dos punto dos micrómetros para fuerza elevada, no tres micrómetros.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Alrededor de uno punto seis micrómetros", "c": false, "r": "Incorrecto. Uno punto seis micrómetros se menciona como longitud del filamento de miosina, no como longitud del sarcómero en el ejemplo.", "et": "recall" },
+        { "l": "E", "t": "Alrededor de cero punto dos micrómetros", "c": false, "r": "Incorrecto. Cero punto dos micrómetros se menciona como región central sin cabezas en filamento de miosina, no como sarcómero.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-011",
+      "sb": "Titina",
+      "x": "¿Qué proteína filamentosa elástica se describe como armazón que mantiene filamentos en el sarcómero?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Titina", "c": true, "r": "Correcto. Se presenta a titina como una proteína filamentosa muy grande y elástica. Actúa como armazón para mantener filamentos de miosina alineados y suspendidos entre actina y miosina. También se describe como plantilla para el orden inicial del sarcómero.", "et": null },
+        { "l": "B", "t": "Troponina", "c": false, "r": "Incorrecto. Troponina participa en regulación por calcio, no en el armazón elástico que mantiene filamentos alineados.", "et": "recall" },
+        { "l": "C", "t": "Tropomiosina", "c": false, "r": "Incorrecto. Tropomiosina cubre puntos activos en reposo; no se describe como armazón elástico del sarcómero.", "et": "conceptual" },
+        { "l": "D", "t": "Distrofina", "c": false, "r": "Incorrecto. Distrofina se menciona en distrofia muscular, no como proteína estructural del sarcómero descrita aquí.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Mioglobina", "c": false, "r": "Incorrecto. Mioglobina transporta y almacena oxígeno en fibras lentas, no organiza filamentos del sarcómero.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-012",
+      "sb": "Titina",
+      "x": "¿Qué peso molecular aproximado se atribuye a una molécula de titina?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Aproximadamente tres millones", "c": true, "r": "Correcto. Se menciona que la titina tiene un peso molecular cercano a tres millones, destacándola como una de las mayores proteínas del cuerpo. Ese tamaño se relaciona con su naturaleza filamentosa y elástica. La elasticidad se vincula con cambios de longitud durante contracción y relajación.", "et": null },
+        { "l": "B", "t": "Aproximadamente cuatrocientos ochenta mil", "c": false, "r": "Incorrecto. Ese valor se atribuye a la molécula de miosina, no a la titina.", "et": "recall" },
+        { "l": "C", "t": "Aproximadamente doscientos mil", "c": false, "r": "Incorrecto. Doscientos mil corresponde al peso de cada cadena pesada de miosina, no a titina.", "et": "misinterpretation" },
+        { "l": "D", "t": "Aproximadamente cuarenta y dos mil", "c": false, "r": "Incorrecto. Cuarenta y dos mil se atribuye a la G actina, no a la titina.", "et": "recall" },
+        { "l": "E", "t": "Aproximadamente setenta mil", "c": false, "r": "Incorrecto. Setenta mil se menciona para tropomiosina, no para titina.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-013",
+      "sb": "Sarcoplasma",
+      "x": "¿Cómo se denomina el fluido intracelular entre las miofibrillas?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Sarcoplasma", "c": true, "r": "Correcto. Se define al sarcoplasma como el fluido intracelular que llena los espacios entre miofibrillas. Contiene potasio, magnesio, fosfato y numerosas enzimas proteicas. También se menciona la presencia de mitocondrias paralelas a miofibrillas que aportan ATP.", "et": null },
+        { "l": "B", "t": "Sarcolema", "c": false, "r": "Incorrecto. Sarcolema es la membrana que envuelve la fibra, no el fluido interno entre miofibrillas.", "et": "recall" },
+        { "l": "C", "t": "Sarcómero", "c": false, "r": "Incorrecto. Sarcómero es una unidad estructural delimitada por discos Z, no un fluido intracelular.", "et": "conceptual" },
+        { "l": "D", "t": "Retículo sarcoplásmico", "c": false, "r": "Incorrecto. Es una red membranosa especializada, no el fluido que rodea a las miofibrillas.", "et": "misinterpretation" },
+        { "l": "E", "t": "Tendón muscular", "c": false, "r": "Incorrecto. Tendón es tejido conjuntivo de inserción, no un componente intracelular de la fibra.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-014",
+      "sb": "Retículo sarcoplásmico",
+      "x": "¿Qué función central se atribuye al retículo sarcoplásmico en músculo esquelético?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Almacenar liberar y recaptar calcio", "c": true, "r": "Correcto. Se describe al retículo sarcoplásmico como un retículo endoplásmico especializado crucial para regular el calcio. Su organización permite almacenamiento, liberación y recaptación, controlando la contracción. Además, se menciona que fibras de contracción rápida tienen retículos más extensos, apoyando liberación rápida de calcio.", "et": null },
+        { "l": "B", "t": "Sintetizar colágeno para el sarcolema", "c": false, "r": "Incorrecto. El colágeno se asocia a la cubierta externa del sarcolema, no al rol principal del retículo sarcoplásmico.", "et": "plausible_distractor" },
+        { "l": "C", "t": "Producir acetilcolina en terminal nerviosa", "c": false, "r": "Incorrecto. La acetilcolina se libera desde el nervio motor, no desde el retículo dentro de la fibra muscular.", "et": "misinterpretation" },
+        { "l": "D", "t": "Formar puentes cruzados en miosina", "c": false, "r": "Incorrecto. Los puentes cruzados dependen de la estructura de miosina; el retículo regula calcio para activarlos.", "et": "conceptual" },
+        { "l": "E", "t": "Anclar discos Z a tendones", "c": false, "r": "Incorrecto. La unión a tendón se describe en el extremo de la fibra vía sarcolema, no por el retículo sarcoplásmico.", "et": "plausible_distractor" }
+      ]
+    },
+
+    {
+      "id": "FISIO-MESC-015",
+      "sb": "Mecanismo general de la contracción muscular",
+      "x": "¿Qué neurotransmisor se libera en la terminación nerviosa sobre la fibra muscular?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Acetilcolina", "c": true, "r": "Correcto. En la secuencia descrita, el nervio motor secreta acetilcolina en la terminación sobre la fibra muscular. Esta sustancia actúa localmente en la membrana para abrir canales activados por acetilcolina. La apertura permite entrada de sodio y desencadena el potencial de acción muscular.", "et": null },
+        { "l": "B", "t": "Adrenalina", "c": false, "r": "Incorrecto. No se menciona como neurotransmisor de la unión neuromuscular en esta secuencia.", "et": "plausible_distractor" },
+        { "l": "C", "t": "Dopamina", "c": false, "r": "Incorrecto. No se describe como señal química liberada por la terminación motora en este mecanismo.", "et": "recall" },
+        { "l": "D", "t": "Serotonina", "c": false, "r": "Incorrecto. La señal química descrita en la terminación motora es acetilcolina, no serotonina.", "et": "misinterpretation" },
+        { "l": "E", "t": "Glicina", "c": false, "r": "Incorrecto. La secuencia presentada identifica acetilcolina como neurotransmisor en la unión neuromuscular.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-016",
+      "sb": "Mecanismo general de la contracción muscular",
+      "x": "¿Qué ion difunde en grandes cantidades al interior de la fibra muscular tras abrirse canales activados por acetilcolina?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Iones sodio", "c": true, "r": "Correcto. La apertura de canales activados por acetilcolina permite que grandes cantidades de sodio difundan al interior. Esa entrada despolariza la membrana muscular. La despolarización induce apertura de canales con compuerta de voltaje y se genera el potencial de acción de la fibra.", "et": null },
+        { "l": "B", "t": "Iones potasio", "c": false, "r": "Incorrecto. Se describe entrada de sodio como evento que despolariza, no entrada masiva de potasio.", "et": "mechanistic" },
+        { "l": "C", "t": "Iones calcio", "c": false, "r": "Incorrecto. El calcio se libera del retículo después del potencial de acción, no como el ion que entra por canales activados por acetilcolina.", "et": "misinterpretation" },
+        { "l": "D", "t": "Iones cloruro", "c": false, "r": "Incorrecto. No se señala difusión masiva de cloruro por estos canales como causa de la despolarización inicial.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Iones fosfato", "c": false, "r": "Incorrecto. Fosfato se menciona en sarcoplasma y energía, no como ion que entra por esos canales en el inicio.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-017",
+      "sb": "Mecanismo general de la contracción muscular",
+      "x": "¿Qué evento inmediato ocurre tras la despolarización de la membrana muscular por entrada de sodio?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Apertura de canales con compuerta de voltaje", "c": true, "r": "Correcto. Tras la despolarización local, se induce la apertura de muchos canales con compuerta de voltaje. Ese paso permite generar el potencial de acción de la membrana muscular. La señal luego se propaga a lo largo de la fibra de manera similar a una fibra nerviosa.", "et": null },
+        { "l": "B", "t": "Liberación de acetilcolina desde la fibra", "c": false, "r": "Incorrecto. La acetilcolina se libera desde el nervio motor, no como respuesta producida por la fibra muscular.", "et": "misinterpretation" },
+        { "l": "C", "t": "Recaptación de calcio al retículo", "c": false, "r": "Incorrecto. La recaptación ocurre después de la contracción, no inmediatamente tras la despolarización inicial.", "et": "mechanistic" },
+        { "l": "D", "t": "Formación de fosfocreatina en sarcoplasma", "c": false, "r": "Incorrecto. Fosfocreatina se asocia a reconstitución de ATP, no al evento eléctrico inmediato del inicio.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Bloqueo de puntos activos de actina", "c": false, "r": "Incorrecto. El bloqueo se levanta por calcio a nivel del complejo regulador, no por la despolarización en sí.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-018",
+      "sb": "Mecanismo general de la contracción muscular",
+      "x": "¿Qué estructura libera grandes cantidades de calcio cuando el potencial de acción alcanza el centro de la fibra?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Retículo sarcoplásmico", "c": true, "r": "Correcto. Se describe que la electricidad del potencial de acción llega hacia el centro de la fibra y provoca liberación de calcio almacenado. Esa liberación ocurre desde el retículo sarcoplásmico. El calcio rodea rápidamente a miofibrillas y permite interacción actina miosina mediante activación regulatoria.", "et": null },
+        { "l": "B", "t": "Sarcolema", "c": false, "r": "Incorrecto. El sarcolema conduce la señal, pero el reservorio señalado para liberar calcio es el retículo sarcoplásmico.", "et": "conceptual" },
+        { "l": "C", "t": "Sarcoplasma", "c": false, "r": "Incorrecto. Sarcoplasma es el fluido donde aparece calcio tras liberación, pero no es la estructura que lo almacena y libera.", "et": "misinterpretation" },
+        { "l": "D", "t": "Disco Z", "c": false, "r": "Incorrecto. Discos Z delimitan sarcómeros; no se describen como depósito de calcio para iniciar contracción.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Tendón muscular", "c": false, "r": "Incorrecto. El tendón es tejido conjuntivo extracelular, sin papel descrito en liberación intracelular de calcio.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-019",
+      "sb": "Mecanismo general de la contracción muscular",
+      "x": "¿Qué evento detiene la contracción poco después de iniciada?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Bombeo de calcio de regreso al retículo", "c": true, "r": "Correcto. Se señala que, tras una fracción de segundo, el calcio es bombeado de vuelta al retículo sarcoplásmico por una bomba de calcio de membrana. Al retirarse el calcio de las miofibrillas se detiene la contracción. El calcio queda almacenado en el retículo hasta el siguiente potencial de acción.", "et": null },
+        { "l": "B", "t": "Entrada sostenida de sodio por canales activados", "c": false, "r": "Incorrecto. La terminación de la contracción se vincula a retirada de calcio, no a mantener entrada de sodio.", "et": "conceptual" },
+        { "l": "C", "t": "Ruptura de puentes cruzados por autólisis", "c": false, "r": "Incorrecto. Autólisis se menciona en rigidez cadavérica, no como evento normal de finalización de una contracción.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Bloqueo permanente de troponina por calcio", "c": false, "r": "Incorrecto. El calcio activa el complejo; al retirarse, el bloqueo se restablece. No se describe activación permanente.", "et": "mechanistic" },
+        { "l": "E", "t": "Fosforilación de ADP a ATP en el retículo", "c": false, "r": "Incorrecto. La detención inmediata se asocia a calcio, no a la fosforilación de ADP localizada en el retículo.", "et": "misinterpretation" }
+      ]
+    },
+
+    {
+      "id": "FISIO-MESC-020",
+      "sb": "Mecanismo de deslizamiento de los filamentos",
+      "x": "¿Qué describe el mecanismo básico de la contracción muscular a nivel del sarcómero?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Deslizamiento de actina entre miosina", "c": true, "r": "Correcto. Se describe que durante la contracción los filamentos de actina son traccionados hacia el interior entre los filamentos de miosina. Los discos Z se aproximan hacia los extremos de miosina. Ese patrón se resume como mecanismo de deslizamiento de los filamentos.", "et": null },
+        { "l": "B", "t": "Acortamiento de miosina por plegamiento", "c": false, "r": "Incorrecto. No se describe que el filamento grueso se acorte por plegamiento; se enfatiza el deslizamiento relativo.", "et": "conceptual" },
+        { "l": "C", "t": "Crecimiento de discos Z por polimerización", "c": false, "r": "Incorrecto. La contracción se explica por desplazamiento de filamentos y aproximación de discos Z, no por crecimiento del disco.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Rotación del sarcolema alrededor del eje", "c": false, "r": "Incorrecto. El evento descrito es molecular en filamentos contráctiles, no una rotación de la membrana externa.", "et": "misinterpretation" },
+        { "l": "E", "t": "Separación de filamentos de actina por repulsión", "c": false, "r": "Incorrecto. La contracción se asocia a fuerzas de atracción e interacción con puentes cruzados, no a repulsión que los separe.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-021",
+      "sb": "Puentes cruzados",
+      "x": "¿Cómo se denomina a los pequeños salientes que se proyectan de los lados de los filamentos de miosina?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Puentes cruzados", "c": true, "r": "Correcto. Se describe que del filamento de miosina sobresalen salientes laterales llamados puentes cruzados. La interacción de estos con filamentos de actina produce la contracción. Su orientación y flexibilidad permiten alcanzar puntos activos y realizar el golpe activo durante el ciclo.", "et": null },
+        { "l": "B", "t": "Discos Z", "c": false, "r": "Incorrecto. Los discos Z atraviesan miofibrillas y delimitan sarcómeros; no son salientes del filamento de miosina.", "et": "recall" },
+        { "l": "C", "t": "Túbulos T", "c": false, "r": "Incorrecto. Los túbulos T se mencionan en figuras como parte de transmisión eléctrica, no como salientes del filamento grueso.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Mitocondrias", "c": false, "r": "Incorrecto. Mitocondrias aportan ATP en sarcoplasma; no son salientes estructurales del filamento de miosina.", "et": "misinterpretation" },
+        { "l": "E", "t": "Fibrillas de colágeno", "c": false, "r": "Incorrecto. Colágeno se menciona en cubierta externa del sarcolema, no en la estructura del filamento de miosina.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-022",
+      "sb": "Estructura de la miosina",
+      "x": "¿Cuántas cadenas polipeptídicas forman una molécula de miosina?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Seis cadenas polipeptídicas", "c": true, "r": "Correcto. Se menciona que la miosina está formada por seis cadenas: dos pesadas y cuatro ligeras. Las pesadas se enrollan en doble hélice formando la cola. Las ligeras forman parte de las dos cabezas y ayudan a controlar su función durante la contracción.", "et": null },
+        { "l": "B", "t": "Cuatro cadenas polipeptídicas", "c": false, "r": "Incorrecto. Cuatro corresponde a cadenas ligeras, pero además se describen dos cadenas pesadas, sumando seis.", "et": "misinterpretation" },
+        { "l": "C", "t": "Dos cadenas polipeptídicas", "c": false, "r": "Incorrecto. Dos cadenas pesadas son parte de la molécula, pero no representan la totalidad de cadenas descritas.", "et": "recall" },
+        { "l": "D", "t": "Ocho cadenas polipeptídicas", "c": false, "r": "Incorrecto. El número descrito es seis, no ocho. El detalle distingue dos pesadas y cuatro ligeras.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Tres cadenas polipeptídicas", "c": false, "r": "Incorrecto. Tres se usa para subunidades de troponina, no para el número de cadenas de miosina.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-023",
+      "sb": "Estructura de la miosina",
+      "x": "¿Qué característica enzimática esencial se atribuye a la cabeza de la miosina?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Actividad adenosina trifosfatasa", "c": true, "r": "Correcto. Se indica que la cabeza de miosina actúa como una ATPasa. Esto permite escindir ATP y usar la energía del enlace de alta energía para impulsar el proceso contráctil. La hidrólisis de ATP se integra en el ciclo de unión, golpe activo y separación de actina.", "et": null },
+        { "l": "B", "t": "Actividad ubiquitina ligasa", "c": false, "r": "Incorrecto. Ubiquitina se vincula a degradación proteica en atrofia, no a función enzimática de la cabeza de miosina.", "et": "plausible_distractor" },
+        { "l": "C", "t": "Actividad fosfatasa de fosfocreatina", "c": false, "r": "Incorrecto. Fosfocreatina se menciona como reserva de energía para reconstituir ATP, no como actividad en la cabeza.", "et": "conceptual" },
+        { "l": "D", "t": "Actividad colagenasa", "c": false, "r": "Incorrecto. Colágeno se asocia al sarcolema y tendón; no se describe una colagenasa en la cabeza de miosina.", "et": "misinterpretation" },
+        { "l": "E", "t": "Actividad lactato deshidrogenasa", "c": false, "r": "Incorrecto. Enzimas glucolíticas se mencionan en fibras rápidas, no como propiedad esencial de la cabeza de miosina.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-024",
+      "sb": "Estructura de la miosina",
+      "x": "¿Qué se describe como parte del filamento de miosina que separa la cabeza del cuerpo?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Brazo del puente cruzado", "c": true, "r": "Correcto. Se explica que parte del cuerpo de miosina se proyecta lateralmente junto con la cabeza formando un brazo. Brazo y cabeza en conjunto se denominan puentes cruzados. La flexibilidad del brazo, con bisagras, permite que la cabeza alcance actina y genere fuerza.", "et": null },
+        { "l": "B", "t": "Disco Z del sarcómero", "c": false, "r": "Incorrecto. El disco Z es una estructura de anclaje de actina, no una parte de la molécula de miosina.", "et": "conceptual" },
+        { "l": "C", "t": "Tropomiosina del filamento fino", "c": false, "r": "Incorrecto. Tropomiosina pertenece al filamento de actina, no al filamento grueso de miosina.", "et": "misinterpretation" },
+        { "l": "D", "t": "Titina del armazón elástico", "c": false, "r": "Incorrecto. Titina mantiene alineación en el sarcómero, pero no se define como el segmento que separa cabeza y cuerpo de miosina.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Mioglobina del músculo rojo", "c": false, "r": "Incorrecto. Mioglobina es una proteína de almacenamiento de oxígeno, no un elemento estructural de miosina.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-025",
+      "sb": "Estructura del filamento de miosina",
+      "x": "¿Cuántas moléculas individuales de miosina se mencionan como parte de un filamento de miosina?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Doscientas o más moléculas", "c": true, "r": "Correcto. Se reporta que el filamento de miosina está formado por doscientas o más moléculas individuales. Estas se agrupan para formar el cuerpo del filamento. Muchas cabezas sobresalen en los lados, permitiendo contacto múltiple con actina y desarrollo de fuerza.", "et": null },
+        { "l": "B", "t": "Veinte o más moléculas", "c": false, "r": "Incorrecto. El número indicado es del orden de cientos, no de decenas.", "et": "recall" },
+        { "l": "C", "t": "Cincuenta o más moléculas", "c": false, "r": "Incorrecto. Se menciona un orden mayor, alrededor de doscientas o más, para componer el filamento.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Mil o más moléculas", "c": false, "r": "Incorrecto. Mil se usa en otros contextos numéricos; para filamento de miosina se describe un número de centenas.", "et": "misinterpretation" },
+        { "l": "E", "t": "Cinco o más moléculas", "c": false, "r": "Incorrecto. Un filamento grueso se describe como agregado de muchas moléculas, muy por encima de cinco.", "et": "conceptual" }
+      ]
+    },
+
+    {
+      "id": "FISIO-MESC-026",
+      "sb": "Estructura del filamento de actina",
+      "x": "¿Qué proteína forma el esqueleto del filamento de actina en forma de doble hélice?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "F actina polimerizada", "c": true, "r": "Correcto. Se describe que el esqueleto del filamento fino es una F actina polimerizada en dos hebras helicoidales. Cada hebra está formada por moléculas de G actina polimerizadas. Esta arquitectura sostiene puntos activos escalonados que interactúan con puentes cruzados para producir contracción.", "et": null },
+        { "l": "B", "t": "G actina monomérica", "c": false, "r": "Incorrecto. G actina forma las subunidades, pero el esqueleto helicoidal descrito corresponde a F actina polimerizada.", "et": "conceptual" },
+        { "l": "C", "t": "Titina filamentosa elástica", "c": false, "r": "Incorrecto. Titina se asocia a armazón y alineación del sarcómero, no al esqueleto del filamento fino.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Troponina reguladora de calcio", "c": false, "r": "Incorrecto. Troponina es un complejo regulador unido a tropomiosina, no el esqueleto helicoidal del filamento de actina.", "et": "misinterpretation" },
+        { "l": "E", "t": "Tropomiosina enrollada lateral", "c": false, "r": "Incorrecto. Tropomiosina se enrolla a lo largo de actina, pero no es el esqueleto principal de doble hélice.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-027",
+      "sb": "Estructura del filamento de actina",
+      "x": "¿Qué molécula se une a cada G actina y se asocia con los puntos activos para interacción con miosina?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Difosfato de adenosina", "c": true, "r": "Correcto. Se menciona que a cada molécula de G actina se une una molécula de ADP. Se propone que estos complejos representan puntos activos donde interactúan cabezas de miosina. La disposición escalonada genera puntos activos repetidos a lo largo del filamento.", "et": null },
+        { "l": "B", "t": "Trifosfato de adenosina", "c": false, "r": "Incorrecto. ATP se discute como fuente de energía en miosina, mientras que en G actina se menciona ADP unido.", "et": "misinterpretation" },
+        { "l": "C", "t": "Fosfocreatina", "c": false, "r": "Incorrecto. Fosfocreatina se vincula a reconstitución de ATP, no a unión directa descrita a G actina.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Ubiquitina", "c": false, "r": "Incorrecto. Ubiquitina se asocia a degradación proteica, no a la unión estructural a moléculas de actina.", "et": "conceptual" },
+        { "l": "E", "t": "Mioglobina", "c": false, "r": "Incorrecto. Mioglobina se relaciona con oxígeno en fibras lentas, no con sitios activos del filamento de actina.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-028",
+      "sb": "Estructura del filamento de actina",
+      "x": "¿Cada qué distancia se menciona un punto activo a lo largo del filamento de actina?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Cada dos punto siete nanómetros", "c": true, "r": "Correcto. Se indica que los puntos activos en las dos hebras de F actina están escalonados. Esto permite un punto activo en toda la longitud del filamento cada dos punto siete nanómetros. Esa repetición facilita interacciones frecuentes con puentes cruzados durante la contracción.", "et": null },
+        { "l": "B", "t": "Cada cuarenta nanómetros", "c": false, "r": "Incorrecto. Cuarenta nanómetros se menciona como longitud de tropomiosina, no como separación de puntos activos.", "et": "recall" },
+        { "l": "C", "t": "Cada cero punto dos micrómetros", "c": false, "r": "Incorrecto. Cero punto dos micrómetros se menciona en el centro del filamento de miosina sin cabezas, no en puntos activos de actina.", "et": "misinterpretation" },
+        { "l": "D", "t": "Cada un micrómetro", "c": false, "r": "Incorrecto. Un micrómetro se da como longitud total del filamento de actina, no como separación de sus puntos activos.", "et": "conceptual" },
+        { "l": "E", "t": "Cada dos micrómetros", "c": false, "r": "Incorrecto. Dos micrómetros se asocia a longitudes de sarcómero, no a separación nanométrica de puntos activos.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-029",
+      "sb": "Tropomiosina",
+      "x": "En reposo, ¿qué hace la tropomiosina respecto a los puntos activos de actina?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Los cubre e impide la atracción con miosina", "c": true, "r": "Correcto. Se describe que la tropomiosina descansa sobre los puntos activos en reposo. Esto impide la atracción entre actina y miosina y evita la contracción. La regulación consiste en desplazar tropomiosina para descubrir los puntos activos cuando aparece el estímulo por calcio.", "et": null },
+        { "l": "B", "t": "Los destruye por proteólisis rápida", "c": false, "r": "Incorrecto. No se describe destrucción de puntos activos, sino un bloqueo físico reversible en reposo.", "et": "plausible_distractor" },
+        { "l": "C", "t": "Los fosforila para activar unión", "c": false, "r": "Incorrecto. El mecanismo descrito es cobertura física; no se menciona fosforilación de puntos activos por tropomiosina.", "et": "conceptual" },
+        { "l": "D", "t": "Los une a discos Z para acortar", "c": false, "r": "Incorrecto. La unión a disco Z corresponde a la base del filamento de actina, no a la función regulatoria de tropomiosina.", "et": "misinterpretation" },
+        { "l": "E", "t": "Los reemplaza por puntos nuevos de unión", "c": false, "r": "Incorrecto. No se menciona reemplazo; se menciona cobertura y desplazamiento para permitir interacción.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-030",
+      "sb": "Troponina",
+      "x": "¿Cuántas subunidades proteicas se describen en el complejo de troponina?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Tres subunidades", "c": true, "r": "Correcto. Se describe que troponina es un complejo de tres subunidades unidas. Cada subunidad cumple una función en control contráctil. Una se asocia a actina, otra a tropomiosina y la tercera a calcio, coordinando el desplazamiento regulatorio del filamento fino.", "et": null },
+        { "l": "B", "t": "Dos subunidades", "c": false, "r": "Incorrecto. Se mencionan tres subunidades distintas, no dos.", "et": "recall" },
+        { "l": "C", "t": "Cuatro subunidades", "c": false, "r": "Incorrecto. No se describen cuatro; el complejo se reporta con tres componentes proteicos.", "et": "misinterpretation" },
+        { "l": "D", "t": "Seis subunidades", "c": false, "r": "Incorrecto. Seis se usa para cadenas de miosina, no para el número de subunidades de troponina.", "et": "conceptual" },
+        { "l": "E", "t": "Una subunidad", "c": false, "r": "Incorrecto. Troponina se define explícitamente como complejo de tres subunidades, no como una proteína única.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-031",
+      "sb": "Troponina",
+      "x": "¿Qué subunidad de troponina se describe con afinidad especial por iones calcio?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Troponina C", "c": true, "r": "Correcto. Se especifica que la subunidad troponina C tiene afinidad especial por iones calcio. Al unirse calcio, el complejo cambia su conformación. Ese cambio desplaza tropomiosina hacia un surco más profundo, descubriendo puntos activos y permitiendo interacción actina miosina.", "et": null },
+        { "l": "B", "t": "Troponina I", "c": false, "r": "Incorrecto. Troponina I se describe con afinidad por actina, no como sitio principal de unión a calcio.", "et": "recall" },
+        { "l": "C", "t": "Troponina T", "c": false, "r": "Incorrecto. Troponina T se describe con afinidad por tropomiosina, no como unión preferente a calcio.", "et": "misinterpretation" },
+        { "l": "D", "t": "Tropomiosina", "c": false, "r": "Incorrecto. Tropomiosina es una proteína del filamento fino, pero la afinidad especial por calcio se atribuye a troponina C.", "et": "conceptual" },
+        { "l": "E", "t": "F actina", "c": false, "r": "Incorrecto. La unión a calcio se atribuye al complejo de troponina, no a la F actina como tal.", "et": "plausible_distractor" }
+      ]
+    },
+
+    {
+      "id": "FISIO-MESC-032",
+      "sb": "Teoría del trinquete y golpe activo",
+      "x": "¿Cómo se denomina el inclinamiento de la cabeza de miosina que arrastra al filamento de actina?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Golpe activo", "c": true, "r": "Correcto. En la descripción de la teoría tipo trinquete, la unión de la cabeza a un punto activo se acompaña de un cambio intramolecular. Ese cambio inclina la cabeza en el brazo y arrastra al filamento de actina. A ese inclinamiento se le denomina golpe activo.", "et": null },
+        { "l": "B", "t": "Efecto de Fenn", "c": false, "r": "Incorrecto. Efecto de Fenn se refiere a mayor escisión de ATP cuando se realiza más trabajo, no al movimiento de la cabeza.", "et": "recall" },
+        { "l": "C", "t": "Tetanización", "c": false, "r": "Incorrecto. Tetanización describe sumación por frecuencia de estímulos, no el evento mecánico molecular de la cabeza.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Efecto de la escalera", "c": false, "r": "Incorrecto. Treppe describe aumento progresivo de fuerza en contracciones sucesivas, no el inclinamiento de la cabeza.", "et": "misinterpretation" },
+        { "l": "E", "t": "Principio de tamaño", "c": false, "r": "Incorrecto. El principio de tamaño describe reclutamiento de unidades motoras, no el movimiento del puente cruzado.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-033",
+      "sb": "ATP y ciclo de puentes cruzados",
+      "x": "Antes de iniciar la contracción, ¿qué se une a las cabezas de los puentes cruzados según la secuencia descrita?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Trifosfato de adenosina", "c": true, "r": "Correcto. Se indica que, antes de comenzar la contracción, las cabezas se unen a ATP. La ATPasa escinde ATP pero deja ADP y fosfato unidos, manteniendo una conformación preparada. Esa energía queda almacenada y luego se usa para el golpe activo al unirse a actina.", "et": null },
+        { "l": "B", "t": "Difosfato de adenosina", "c": false, "r": "Incorrecto. ADP aparece después de la escisión del ATP; el evento inicial señalado es unión de ATP a la cabeza.", "et": "mechanistic" },
+        { "l": "C", "t": "Fosfocreatina", "c": false, "r": "Incorrecto. Fosfocreatina se usa para reconstituir ATP a partir de ADP, no como ligando inicial de la cabeza del puente cruzado.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Calcio libre citosólico", "c": false, "r": "Incorrecto. Calcio activa el filamento de actina por troponina, pero no se describe como unión inicial a la cabeza de miosina.", "et": "conceptual" },
+        { "l": "E", "t": "Ubiquitina", "c": false, "r": "Incorrecto. Ubiquitina se asocia a degradación proteica, no a preparación del ciclo de puentes cruzados.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-034",
+      "sb": "ATP y ciclo de puentes cruzados",
+      "x": "¿Qué evento permite que la cabeza de miosina se separe del filamento de actina durante el ciclo?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Unión de una nueva molécula de ATP", "c": true, "r": "Correcto. Tras el golpe activo se liberan ADP y fosfato. En ese punto se une una nueva molécula de ATP a la cabeza. Esa unión se asocia con la separación de la cabeza respecto a actina, permitiendo reiniciar el ciclo y recargar la conformación para otro golpe activo.", "et": null },
+        { "l": "B", "t": "Unión de fosfato al ADP en la cabeza", "c": false, "r": "Incorrecto. La separación se asocia a unión de ATP, no a una fosforilación local de ADP en la cabeza.", "et": "mechanistic" },
+        { "l": "C", "t": "Cierre de canales de sodio en sarcolema", "c": false, "r": "Incorrecto. Canales de sodio pertenecen al evento eléctrico, no al mecanismo químico de separación actina miosina.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Bombeo de calcio al retículo", "c": false, "r": "Incorrecto. Retirar calcio detiene activación, pero la separación descrita durante el ciclo depende de ATP en la cabeza.", "et": "conceptual" },
+        { "l": "E", "t": "Unión de troponina I a actina", "c": false, "r": "Incorrecto. Troponina I se asocia con actina en regulación, pero la separación del puente cruzado se vincula a ATP.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-035",
+      "sb": "Efecto de Fenn",
+      "x": "¿Cómo se denomina el aumento de escisión de ATP cuando el músculo realiza más trabajo?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Efecto de Fenn", "c": true, "r": "Correcto. Se describe que durante la contracción se escinden grandes cantidades de ATP y que el trabajo realizado incrementa esa escisión. A este fenómeno se le llama efecto de Fenn. Con más carga y trabajo mecánico, aumenta el consumo de ATP asociado al ciclo contráctil.", "et": null },
+        { "l": "B", "t": "Principio de tamaño", "c": false, "r": "Incorrecto. El principio de tamaño se relaciona con reclutamiento de unidades motoras, no con consumo de ATP por trabajo.", "et": "recall" },
+        { "l": "C", "t": "Tetanización", "c": false, "r": "Incorrecto. Tetanización describe fusión de contracciones por alta frecuencia, no el aumento de escisión de ATP por trabajo.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Rigidez cadavérica", "c": false, "r": "Incorrecto. La rigidez se atribuye a pérdida total de ATP y falta de separación de puentes, no a aumento de escisión por trabajo.", "et": "misinterpretation" },
+        { "l": "E", "t": "Treppe", "c": false, "r": "Incorrecto. Treppe se refiere a aumento progresivo de fuerza con contracciones sucesivas tras reposo, no al consumo de ATP por trabajo.", "et": "conceptual" }
+      ]
+    },
+
+    {
+      "id": "FISIO-MESC-036",
+      "sb": "Relación longitud tensión",
+      "x": "¿En qué longitud de sarcómero se describe máxima fuerza de contracción de un sarcómero único?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Dos a dos punto dos micrómetros", "c": true, "r": "Correcto. Se indica que la tensión activa máxima ocurre cuando el sarcómero mide de dos a dos punto dos micrómetros. En ese rango hay superposición adecuada para que la mayoría de puentes cruzados contacten actina. Al alejarse de ese rango, la superposición se reduce o se vuelve desfavorable y la fuerza cae.", "et": null },
+        { "l": "B", "t": "Uno punto cero a uno punto dos micrómetros", "c": false, "r": "Incorrecto. Ese intervalo no se describe como óptimo; se mencionan longitudes cercanas a dos micrómetros para fuerza máxima.", "et": "plausible_distractor" },
+        { "l": "C", "t": "Tres a tres punto dos micrómetros", "c": false, "r": "Incorrecto. Longitudes mayores de dos punto dos se asocian a menor tensión activa por menor superposición.", "et": "conceptual" },
+        { "l": "D", "t": "Cero punto dos a cero punto cuatro micrómetros", "c": false, "r": "Incorrecto. Son longitudes demasiado pequeñas y además ese orden se usa en otra descripción del filamento de miosina.", "et": "misinterpretation" },
+        { "l": "E", "t": "Cuatro a cuatro punto dos micrómetros", "c": false, "r": "Incorrecto. No se describe ese rango como compatible con máxima fuerza; la superposición sería insuficiente.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-037",
+      "sb": "Relación longitud tensión",
+      "x": "¿Qué ocurre con la tensión activa cuando el músculo se estira más allá de su longitud normal de reposo?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Disminuye al superar una longitud de sarcómero mayor de dos punto dos", "c": true, "r": "Correcto. Se señala que cuando el músculo se estira más allá de la longitud normal en reposo, la tensión activa disminuye. Esto se describe como un efecto asociado a sarcómeros con longitud mayor de aproximadamente dos punto dos micrómetros. La reducción refleja menos superposición efectiva entre filamentos para generar fuerza.", "et": null },
+        { "l": "B", "t": "Aumenta de forma progresiva al estirarlo más", "c": false, "r": "Incorrecto. Se describe lo contrario: al estirar más allá de la longitud normal, la tensión activa disminuye.", "et": "misinterpretation" },
+        { "l": "C", "t": "No cambia mientras exista estimulación nerviosa", "c": false, "r": "Incorrecto. Se menciona una dependencia clara de tensión activa con la longitud muscular, aun con activación.", "et": "conceptual" },
+        { "l": "D", "t": "Se vuelve cero al pasar de dos micrómetros exactos", "c": false, "r": "Incorrecto. La tensión se mantiene alta alrededor de dos a dos punto dos; no cae a cero de manera inmediata al rebasar dos.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Se invierte y genera fuerza negativa", "c": false, "r": "Incorrecto. No se describe inversión de fuerza; se describe disminución de la tensión activa al estirar.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-038",
+      "sb": "Relación velocidad carga",
+      "x": "¿Qué ocurre con la velocidad de contracción cuando aumenta la carga contra la que se contrae el músculo?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Disminuye conforme aumenta la carga", "c": true, "r": "Correcto. Se indica que el músculo se contrae más rápido contra carga nula y que la velocidad se hace más lenta al aumentar la carga. La carga actúa como fuerza inversa que se opone a la fuerza contráctil. Por eso la fuerza neta disponible para acortamiento disminuye y baja la velocidad.", "et": null },
+        { "l": "B", "t": "Aumenta conforme aumenta la carga", "c": false, "r": "Incorrecto. Se describe que el aumento de carga reduce la velocidad de acortamiento, no la incrementa.", "et": "misinterpretation" },
+        { "l": "C", "t": "No cambia mientras haya ATP suficiente", "c": false, "r": "Incorrecto. La relación descrita depende de la carga mecánica; no se reduce a disponibilidad inmediata de ATP.", "et": "conceptual" },
+        { "l": "D", "t": "Se mantiene constante en cualquier carga", "c": false, "r": "Incorrecto. Se reporta una curva carga velocidad con cambios claros, incluida disminución progresiva de velocidad.", "et": "recall" },
+        { "l": "E", "t": "Se hace mayor solo al inicio y luego desaparece", "c": false, "r": "Incorrecto. No se describe ese patrón; se describe disminución gradual de velocidad con carga creciente.", "et": "plausible_distractor" }
+      ]
+    },
+
+    {
+      "id": "FISIO-MESC-039",
+      "sb": "Energética de la contracción muscular",
+      "x": "¿Cómo se define matemáticamente el trabajo generado durante la contracción contra una carga?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Trabajo igual carga por distancia", "c": true, "r": "Correcto. Se define el trabajo como el producto de la carga por la distancia de desplazamiento de esa carga. Esta relación expresa la transferencia de energía desde el músculo hacia el objeto movido. Con mayor carga o mayor desplazamiento, aumenta el trabajo realizado.", "et": null },
+        { "l": "B", "t": "Trabajo igual distancia dividida carga", "c": false, "r": "Incorrecto. La ecuación presentada usa multiplicación, no división, entre carga y distancia.", "et": "mechanistic" },
+        { "l": "C", "t": "Trabajo igual carga más distancia", "c": false, "r": "Incorrecto. Sumar magnitudes no corresponde a la definición expresada; se presenta un producto entre carga y desplazamiento.", "et": "conceptual" },
+        { "l": "D", "t": "Trabajo igual carga menos distancia", "c": false, "r": "Incorrecto. La definición no usa una resta; se especifica multiplicación para representar transferencia de energía.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Trabajo igual distancia por tiempo", "c": false, "r": "Incorrecto. Esa relación correspondería a velocidad; el trabajo se define con carga y distancia en este apartado.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-040",
+      "sb": "Energética de la contracción muscular",
+      "x": "¿Cuánto tiempo puede mantener una contracción total la concentración de ATP de aproximadamente cuatro milimolar en la fibra muscular?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Uno a dos segundos", "c": true, "r": "Correcto. Se señala que la concentración de ATP en la fibra muscular es de aproximadamente cuatro milimolar. Ese ATP almacenado solo puede mantener una contracción total durante uno a dos segundos como máximo. Por eso se requiere reconstituir ATP rápidamente mediante otras fuentes energéticas.", "et": null },
+        { "l": "B", "t": "Cinco a ocho segundos", "c": false, "r": "Incorrecto. Cinco a ocho segundos se asocia a energía combinada de ATP y fosfocreatina, no ATP aislado.", "et": "recall" },
+        { "l": "C", "t": "Diez a veinte segundos", "c": false, "r": "Incorrecto. El ATP aislado se describe con duración más corta, de uno a dos segundos.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Treinta a sesenta segundos", "c": false, "r": "Incorrecto. Duraciones cercanas a un minuto se vinculan a glucólisis en ausencia de oxígeno, no al ATP almacenado inicial.", "et": "misinterpretation" },
+        { "l": "E", "t": "Dos a cuatro horas", "c": false, "r": "Incorrecto. Horas se asocian a metabolismo oxidativo y combustibles, no al ATP almacenado intramuscular inmediato.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-041",
+      "sb": "Energética de la contracción muscular",
+      "x": "¿Qué sustancia se describe como primera fuente para reconstituir ATP y con enlace de alta energía mayor que el del ATP?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Fosfocreatina", "c": true, "r": "Correcto. Se menciona que la primera fuente para reconstituir ATP es la fosfocreatina. Su enlace de alta energía libera incluso más energía libre que el del ATP. Al escindirse, su energía permite añadir fosfato al ADP y regenerar ATP con rapidez.", "et": null },
+        { "l": "B", "t": "Glucógeno", "c": false, "r": "Incorrecto. Glucógeno se usa como sustrato de glucólisis, pero no se describe como primera fuente inmediata de alta energía para reconstituir ATP.", "et": "conceptual" },
+        { "l": "C", "t": "Ácido láctico", "c": false, "r": "Incorrecto. Se menciona como producto final de glucólisis rápida, no como reserva de alta energía para regenerar ATP.", "et": "misinterpretation" },
+        { "l": "D", "t": "Oxígeno", "c": false, "r": "Incorrecto. Oxígeno participa en metabolismo oxidativo a largo plazo, no como primera fuente inmediata para reconstituir ATP.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Mioglobina", "c": false, "r": "Incorrecto. Mioglobina almacena oxígeno en fibras lentas; no se describe como donador directo de energía para formar ATP.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-042",
+      "sb": "Energética de la contracción muscular",
+      "x": "¿Cuánto tiempo puede sostener una contracción máxima la energía combinada de ATP y fosfocreatina almacenada?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Cinco a ocho segundos", "c": true, "r": "Correcto. Se explica que la fosfocreatina total es pequeña, alrededor de cinco veces mayor que el ATP. Aun así, la energía combinada de ATP y fosfocreatina permite una contracción muscular máxima durante cinco a ocho segundos. Esto cubre la fase inmediata antes de depender más de glucólisis y oxidación.", "et": null },
+        { "l": "B", "t": "Uno a dos segundos", "c": false, "r": "Incorrecto. Uno a dos segundos se atribuye al ATP almacenado por sí solo, sin considerar fosfocreatina.", "et": "recall" },
+        { "l": "C", "t": "Quince a treinta segundos", "c": false, "r": "Incorrecto. El intervalo descrito para ATP más fosfocreatina es de segundos, no de decenas de segundos.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Cuarenta a sesenta segundos", "c": false, "r": "Incorrecto. Aproximadamente un minuto se relaciona con glucólisis y su limitación por acumulación de productos finales.", "et": "misinterpretation" },
+        { "l": "E", "t": "Dos a cuatro horas", "c": false, "r": "Incorrecto. Horas se asocian a metabolismo oxidativo sostenido, no a reservas inmediatas de ATP y fosfocreatina.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-043",
+      "sb": "Energética de la contracción muscular",
+      "x": "¿Qué proceso se describe como segunda fuente importante para reconstituir ATP y fosfocreatina mediante degradación de glucógeno?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Glucólisis del glucógeno", "c": true, "r": "Correcto. Se describe como segunda fuente la glucólisis del glucógeno almacenado. La escisión rápida conduce a piruvato y ácido láctico y libera energía para convertir ADP en ATP. También se usa para reconstituir fosfocreatina, aportando energía rápida cuando el oxígeno es limitado.", "et": null },
+        { "l": "B", "t": "Metabolismo oxidativo de grasas", "c": false, "r": "Incorrecto. El metabolismo oxidativo se menciona como tercera fuente y principal para contracción sostenida a largo plazo.", "et": "recall" },
+        { "l": "C", "t": "Proteólisis por ubiquitina proteasoma", "c": false, "r": "Incorrecto. Esa vía se menciona en atrofia muscular, no como fuente energética para reconstituir ATP en contracción.", "et": "misinterpretation" },
+        { "l": "D", "t": "Fijación de oxígeno por mioglobina", "c": false, "r": "Incorrecto. Mioglobina ayuda al transporte de oxígeno, pero no es el proceso de reconstituir ATP desde ADP descrito como segunda fuente.", "et": "conceptual" },
+        { "l": "E", "t": "Síntesis de colágeno en sarcolema", "c": false, "r": "Incorrecto. Colágeno se menciona en la cubierta externa; no se describe como fuente energética para regenerar ATP.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-044",
+      "sb": "Energética de la contracción muscular",
+      "x": "¿Qué se afirma sobre la velocidad de formación de ATP por glucólisis comparada con la formación en respuesta a oxígeno?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Es aproximadamente dos punto cinco veces más rápida", "c": true, "r": "Correcto. Se afirma que la velocidad de formación de ATP por glucólisis es aproximadamente dos punto cinco veces más rápida que la formación en respuesta a la reacción con oxígeno. Esta ventaja permite energía rápida en esfuerzos intensos. La limitación aparece cuando se acumulan productos finales y se reduce la capacidad de sostener máximo rendimiento cerca de un minuto.", "et": null },
+        { "l": "B", "t": "Es aproximadamente una vez más rápida", "c": false, "r": "Incorrecto. Se indica un factor mayor que uno, específicamente alrededor de dos punto cinco veces.", "et": "recall" },
+        { "l": "C", "t": "Es aproximadamente cinco veces más rápida", "c": false, "r": "Incorrecto. Cinco veces se usa para cantidad relativa de fosfocreatina respecto a ATP, no para la velocidad de glucólisis.", "et": "misinterpretation" },
+        { "l": "D", "t": "Es aproximadamente diez veces más lenta", "c": false, "r": "Incorrecto. Se destaca que glucólisis es más rápida, no más lenta, que la formación de ATP ligada a oxígeno.", "et": "conceptual" },
+        { "l": "E", "t": "Es aproximadamente igual en ambos procesos", "c": false, "r": "Incorrecto. Se describe una diferencia clara en velocidad a favor de glucólisis en el apartado energético.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-045",
+      "sb": "Energética de la contracción muscular",
+      "x": "¿Qué proporción de energía para contracción sostenida a largo plazo se atribuye al metabolismo oxidativo?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Más de noventa y cinco por ciento", "c": true, "r": "Correcto. Se afirma que más de noventa y cinco por ciento de la energía para contracción sostenida a largo plazo proviene del metabolismo oxidativo. Este proceso combina oxígeno con productos finales de glucólisis y otros nutrientes. Carbohidratos, grasas y proteínas se mencionan como combustibles consumidos.", "et": null },
+        { "l": "B", "t": "Alrededor de veinticinco por ciento", "c": false, "r": "Incorrecto. Veinticinco por ciento se menciona como límite de eficiencia de conversión a trabajo, no como fracción energética del metabolismo oxidativo.", "et": "misinterpretation" },
+        { "l": "C", "t": "Alrededor de cuarenta por ciento", "c": false, "r": "Incorrecto. La fracción reportada para metabolismo oxidativo a largo plazo es mucho mayor que cuarenta por ciento.", "et": "conceptual" },
+        { "l": "D", "t": "Alrededor de cincuenta por ciento", "c": false, "r": "Incorrecto. Se menciona que carbohidratos pueden aportar hasta la mitad durante dos a cuatro horas, pero la energía total a largo plazo proviene mayormente de oxidación en más de noventa y cinco por ciento.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Alrededor de diez por ciento", "c": false, "r": "Incorrecto. Diez por ciento se menciona para músculo liso y cardíaco en conjunto, no como aporte energético del metabolismo oxidativo.", "et": "recall" }
+      ]
+    },
+
+    {
+      "id": "FISIO-MESC-046",
+      "sb": "Eficiencia de la contracción muscular",
+      "x": "¿Qué porcentaje máximo aproximado del aporte energético se menciona que puede convertirse en trabajo en el músculo?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Menos de veinticinco por ciento", "c": true, "r": "Correcto. Se señala que incluso en mejores condiciones la fracción del aporte energético que puede convertirse en trabajo es menor de veinticinco por ciento. El resto se convierte en calor. Se explica que se pierde energía durante formación de ATP y además solo una parte de la energía del ATP se convierte en trabajo.", "et": null },
+        { "l": "B", "t": "Alrededor de cincuenta por ciento", "c": false, "r": "Incorrecto. Se menciona que aproximadamente la mitad se pierde durante formación de ATP, lo que hace inverosímil una eficiencia de cincuenta por ciento.", "et": "conceptual" },
+        { "l": "C", "t": "Más de noventa por ciento", "c": false, "r": "Incorrecto. Se enfatiza una eficiencia baja con mucha conversión a calor, no un rendimiento cercano a noventa por ciento.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Alrededor de cuarenta y cinco por ciento", "c": false, "r": "Incorrecto. Cuarenta a cuarenta y cinco por ciento se menciona como fracción de energía del ATP que podría convertirse en trabajo, no como eficiencia total del músculo.", "et": "misinterpretation" },
+        { "l": "E", "t": "Alrededor de diez por ciento", "c": false, "r": "Incorrecto. Se describe un límite superior menor de veinticinco por ciento, no un valor fijo de diez por ciento.", "et": "plausible_distractor" }
+      ]
+    },
+
+    {
+      "id": "FISIO-MESC-047",
+      "sb": "Contracción isométrica e isotónica",
+      "x": "¿Qué define una contracción isométrica?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "No acorta el músculo durante la contracción", "c": true, "r": "Correcto. Se define isométrica como contracción en la que el músculo no se acorta. En este caso se desarrolla tensión contra un transductor que no permite acortamiento. La variable principal registrada es la tensión, no el cambio de longitud muscular.", "et": null },
+        { "l": "B", "t": "Acorta el músculo a tensión constante", "c": false, "r": "Incorrecto. Esa definición corresponde a contracción isotónica, no a isométrica.", "et": "recall" },
+        { "l": "C", "t": "Acorta el músculo sin generar tensión", "c": false, "r": "Incorrecto. La isométrica se define por generación de tensión sin acortamiento, no por ausencia de tensión.", "et": "conceptual" },
+        { "l": "D", "t": "Mantiene longitud variable con carga fija", "c": false, "r": "Incorrecto. La isométrica mantiene longitud, no la hace variable; la idea central es ausencia de acortamiento.", "et": "misinterpretation" },
+        { "l": "E", "t": "Depende de la presencia de meseta cardíaca", "c": false, "r": "Incorrecto. Meseta se discute en músculo cardíaco; no define el tipo isométrico en músculo esquelético.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-048",
+      "sb": "Contracción isométrica e isotónica",
+      "x": "¿Qué define una contracción isotónica?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Acorta el músculo a tensión constante", "c": true, "r": "Correcto. Isotónica se define como contracción donde el músculo se acorta mientras la tensión permanece constante. Se describe como un músculo que eleva una carga fija y se registra el cambio de longitud. La condición clave es acortamiento con tensión mantenida durante la carga.", "et": null },
+        { "l": "B", "t": "No acorta el músculo durante la contracción", "c": false, "r": "Incorrecto. Eso describe contracción isométrica; la isotónica sí implica acortamiento muscular.", "et": "recall" },
+        { "l": "C", "t": "Aumenta tensión sin cambio de longitud", "c": false, "r": "Incorrecto. Aumentar tensión sin acortamiento corresponde al sistema isométrico, no al isotónico.", "et": "conceptual" },
+        { "l": "D", "t": "Mantiene tensión variable con longitud fija", "c": false, "r": "Incorrecto. En isotónica la tensión se mantiene constante y la longitud cambia, no al revés.", "et": "misinterpretation" },
+        { "l": "E", "t": "Ocurre solo en músculos oculares", "c": false, "r": "Incorrecto. Se describen sistemas de registro, no una exclusividad por músculo específico.", "et": "plausible_distractor" }
+      ]
+    },
+
+    {
+      "id": "FISIO-MESC-049",
+      "sb": "Espasmos y duración de contracción",
+      "x": "¿Qué duración aproximada se menciona para un espasmo isométrico en un músculo ocular?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Menos de un cincuentavo de segundo", "c": true, "r": "Correcto. Se indica que el músculo ocular presenta una contracción isométrica muy breve, de menos de un cincuentavo de segundo. Esa rapidez se relaciona con su función para fijar la mirada con exactitud. Contrasta con músculos grandes que muestran contracciones más prolongadas.", "et": null },
+        { "l": "B", "t": "Alrededor de un décimo de segundo", "c": false, "r": "Incorrecto. Un décimo de segundo se menciona para contracción total de un músculo medio contra carga nula, no para el músculo ocular isométrico.", "et": "misinterpretation" },
+        { "l": "C", "t": "Alrededor de un minuto", "c": false, "r": "Incorrecto. Un minuto se discute como límite de glucólisis para contracción máxima sostenida, no como duración de un espasmo ocular.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Diez a veinte milisegundos", "c": false, "r": "Incorrecto. Diez milisegundos se menciona como posible duración mínima en ciertos músculos pequeños, pero el ocular se reporta con menos de un cincuentavo de segundo.", "et": "conceptual" },
+        { "l": "E", "t": "Quince a veinticinco horas", "c": false, "r": "Incorrecto. Ese intervalo se menciona para destrucción proteica tras rigidez cadavérica, no para espasmos.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-MESC-050",
+      "sb": "Unidad motora y sumación",
+      "x": "¿Cómo se denomina el fenómeno por el cual se incrementa la fuerza al activar más unidades motoras al mismo tiempo?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Sumación de fibras múltiples", "c": true, "r": "Correcto. Se explica que la sumación puede aumentar fuerza elevando el número de unidades motoras activas simultáneamente. A ese mecanismo se le llama sumación de fibras múltiples. Este proceso complementa la sumación por frecuencia y permite gradación de fuerza por reclutamiento progresivo.", "et": null },
+        { "l": "B", "t": "Sumación de frecuencia", "c": false, "r": "Incorrecto. La sumación de frecuencia depende de aumentar la frecuencia de estímulos, no del número simultáneo de unidades motoras.", "et": "misinterpretation" },
+        { "l": "C", "t": "Tetanización", "c": false, "r": "Incorrecto. Tetanización es la fusión de contracciones por alta frecuencia, no el reclutamiento simultáneo de más unidades.", "et": "conceptual" },
+        { "l": "D", "t": "Efecto de la escalera", "c": false, "r": "Incorrecto. Treppe describe aumento progresivo de fuerza tras reposo, no reclutamiento simultáneo de unidades motoras.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Efecto de Fenn", "c": false, "r": "Incorrecto. Efecto de Fenn se refiere a mayor consumo de ATP con mayor trabajo, no a reclutamiento de unidades motoras.", "et": "recall" }
+      ]
+    }
+  ]
+}

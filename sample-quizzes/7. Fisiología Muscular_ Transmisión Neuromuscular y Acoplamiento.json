@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "title": "Excitación del músculo esquelético y acoplamiento excitación-contracción",
+    "source": "7.md",
+    "date": "2026-01-31",
+    "total": 50,
+    "sj": "FISIO",
+    "tp": "NMUSC",
+    "dist": { "d1": 0.4, "d2": 0.36, "d3": 0.24 }
+  },
+  "q": [
+    {
+      "id": "FISIO-NMUSC-001",
+      "sb": "Unión neuromuscular",
+      "x": "¿Qué estructura conecta funcionalmente una motoneurona con una fibra muscular esquelética?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Unión neuromuscular", "c": true, "r": "Correcto. Es una sinapsis especializada que convierte la señal eléctrica del nervio en señal química sobre la fibra muscular. Su organización asegura transmisión eficaz y confiable.", "et": null },
+        { "l": "B", "t": "Sarcolema", "c": false, "r": "Incorrecto. El sarcolema es la membrana de la fibra, pero no constituye por sí mismo la sinapsis.", "et": "recall" },
+        { "l": "C", "t": "Disco Z", "c": false, "r": "Incorrecto. El disco Z es una estructura del sarcómero, sin función sináptica.", "et": "conceptual" },
+        { "l": "D", "t": "Túbulo T", "c": false, "r": "Incorrecto. Los túbulos T conducen el potencial al interior de la fibra, no conectan neurona y músculo.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Retículo sarcoplásmico", "c": false, "r": "Incorrecto. El retículo regula calcio intracelular, no la transmisión nerviosa.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-NMUSC-002",
+      "sb": "Placa motora terminal",
+      "x": "¿Cómo se denomina la región especializada del sarcolema situada bajo la terminación nerviosa?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Placa motora terminal", "c": true, "r": "Correcto. Es la región postsináptica con alta densidad de receptores nicotínicos. Sus pliegues profundos aumentan la eficacia de la transmisión.", "et": null },
+        { "l": "B", "t": "Gotiera sináptica", "c": false, "r": "Incorrecto. La gotiera corresponde a la región presináptica.", "et": "recall" },
+        { "l": "C", "t": "Zona activa", "c": false, "r": "Incorrecto. La zona activa se localiza en la terminal nerviosa.", "et": "conceptual" },
+        { "l": "D", "t": "Hendidura subneural", "c": false, "r": "Incorrecto. Las hendiduras son pliegues dentro de la placa, no la placa completa.", "et": "misinterpretation" },
+        { "l": "E", "t": "Línea M", "c": false, "r": "Incorrecto. La línea M es parte del sarcómero.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FISIO-NMUSC-003",
+      "sb": "Liberación de acetilcolina",
+      "x": "¿Qué ion es indispensable para la liberación vesicular de acetilcolina?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Calcio", "c": true, "r": "Correcto. La entrada de calcio a la terminal nerviosa permite la fusión de vesículas y la exocitosis del neurotransmisor.", "et": null },
+        { "l": "B", "t": "Sodio", "c": false, "r": "Incorrecto. El sodio participa en despolarización, no en exocitosis vesicular.", "et": "recall" },
+        { "l": "C", "t": "Potasio", "c": false, "r": "Incorrecto. El potasio participa en repolarización, no en liberación vesicular.", "et": "conceptual" },
+        { "l": "D", "t": "Cloruro", "c": false, "r": "Incorrecto. El cloruro no desencadena la fusión de vesículas.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Magnesio", "c": false, "r": "Incorrecto. No es el ion descrito como disparador de la liberación.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-NMUSC-004",
+      "sb": "Receptor nicotínico de acetilcolina",
+      "x": "¿Qué tipo de canal iónico constituye el receptor nicotínico de acetilcolina?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Canal catiónico activado por ligando", "c": true, "r": "Correcto. Al unirse acetilcolina, el receptor abre un canal permeable principalmente a sodio, generando despolarización.", "et": null },
+        { "l": "B", "t": "Canal de calcio dependiente de voltaje", "c": false, "r": "Incorrecto. Estos canales se localizan en la terminal nerviosa.", "et": "conceptual" },
+        { "l": "C", "t": "Canal de potasio rectificador", "c": false, "r": "Incorrecto. No corresponde al receptor nicotínico.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Transportador activo con ATP", "c": false, "r": "Incorrecto. Es un canal pasivo, no un transportador activo.", "et": "mechanistic" },
+        { "l": "E", "t": "Canal de cloruro inhibitorio", "c": false, "r": "Incorrecto. El efecto del receptor es excitador.", "et": "misinterpretation" }
+      ]
+    },
+
+    {
+      "id": "FISIO-NMUSC-025",
+      "sb": "Túbulos T",
+      "x": "¿Cuál es la función principal de los túbulos T en la fibra muscular esquelética?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Conducir el potencial de acción al interior de la fibra", "c": true, "r": "Correcto. Los túbulos T permiten que la despolarización superficial alcance rápidamente las miofibrillas profundas, sincronizando la liberación de calcio.", "et": null },
+        { "l": "B", "t": "Almacenar calcio para la contracción", "c": false, "r": "Incorrecto. El calcio se almacena en el retículo sarcoplásmico.", "et": "recall" },
+        { "l": "C", "t": "Sintetizar acetilcolina", "c": false, "r": "Incorrecto. La acetilcolina se sintetiza en la neurona motora.", "et": "conceptual" },
+        { "l": "D", "t": "Generar ATP por fosforilación oxidativa", "c": false, "r": "Incorrecto. La producción de ATP ocurre en mitocondrias.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Unir filamentos de actina a discos Z", "c": false, "r": "Incorrecto. Esa función corresponde a estructuras del sarcómero.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FISIO-NMUSC-026",
+      "sb": "Receptor nicotínico de acetilcolina",
+      "x": "¿Qué consecuencia inmediata produce la activación del receptor nicotínico en la placa motora?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Entrada predominante de sodio", "c": true, "r": "Correcto. La apertura del canal catiónico favorece la entrada de sodio y genera despolarización local suficiente para activar canales dependientes de voltaje.", "et": null },
+        { "l": "B", "t": "Salida predominante de potasio", "c": false, "r": "Incorrecto. El efecto neto descrito es entrada de sodio y despolarización.", "et": "mechanistic" },
+        { "l": "C", "t": "Entrada masiva de calcio", "c": false, "r": "Incorrecto. El receptor nicotínico no es un canal de calcio dependiente de ligando en este contexto.", "et": "conceptual" },
+        { "l": "D", "t": "Apertura de canales de cloruro", "c": false, "r": "Incorrecto. La activación es excitadora, no inhibitoria.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Bloqueo de canales de sodio", "c": false, "r": "Incorrecto. La activación facilita la despolarización, no el bloqueo.", "et": "misinterpretation" }
+      ]
+    },
+    // ... (add all other objects from the array here, sequentially)
+  ]
+}

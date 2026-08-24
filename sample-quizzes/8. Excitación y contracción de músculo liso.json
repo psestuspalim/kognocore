@@ -1,0 +1,667 @@
+{
+  "metadata": {
+    "title": "Excitación y contracción de músculo liso",
+    "source": "8.md",
+    "date": "2026-01-31",
+    "total": 50,
+    "sj": "FIS",
+    "tp": "MUSC_LISO",
+    "dist": {
+      "d1": 0.30,
+      "d2": 0.40,
+      "d3": 0.30
+    }
+  },
+  "q": [
+    {
+      "id": "FIS-MUSC_LISO-001",
+      "sb": "tipos",
+      "x": "¿Cuál es la característica estructural distintiva de las fibras musculares lisas multiunitarias?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Están conectadas por múltiples uniones en hendidura", "c": false, "r": "Incorrecto. Las uniones en hendidura son características del músculo unitario, permitiendo la transmisión eléctrica entre células.", "et": "recall" },
+        { "l": "B", "t": "Operan como una masa sincicial única", "c": false, "r": "Incorrecto. El comportamiento sincicial define al músculo liso unitario o visceral.", "et": "recall" },
+        { "l": "C", "t": "Están cubiertas por una capa de colágeno y glucoproteína", "c": true, "r": "Correcto. Esta capa similar a la membrana basal aísla eléctricamente a cada fibra, permitiendo su contracción independiente.", "et": null },
+        { "l": "D", "t": "Poseen una organización estriada de actina y miosina", "c": false, "r": "Incorrecto. Ningún tipo de músculo liso presenta estriaciones; esa es una propiedad del músculo esquelético y cardíaco.", "et": "conceptual" },
+        { "l": "E", "t": "Carecen de inervación nerviosa directa", "c": false, "r": "Incorrecto. El músculo multiunitario depende casi exclusivamente de la inervación nerviosa para su control.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-002",
+      "sb": "tipos",
+      "x": "¿Qué estructura celular permite la transmisión de fuerza entre células en el músculo liso unitario?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Las uniones en hendidura de baja resistencia", "c": false, "r": "Incorrecto. Las uniones en hendidura transmiten potenciales eléctricos (iones), no fuerza mecánica.", "et": "conceptual" },
+        { "l": "B", "t": "Los puentes proteicos intercelulares en cuerpos densos", "c": true, "r": "Correcto. Los cuerpos densos de membranas adyacentes se unen mediante puentes proteicos para transmitir la fuerza contráctil.", "et": null },
+        { "l": "C", "t": "El retículo sarcoplásmico compartido", "c": false, "r": "Incorrecto. El retículo sarcoplásmico es una organela intracelular y no conecta mecánicamente células distintas.", "et": "recall" },
+        { "l": "D", "t": "Las cavéolas de la superficie celular", "c": false, "r": "Incorrecto. Las cavéolas están implicadas en la señalización de calcio, no en la transmisión mecánica intercelular.", "et": "mechanistic" },
+        { "l": "E", "t": "La lámina basal de colágeno fino", "c": false, "r": "Incorrecto. La lámina basal aísla las células en el músculo multiunitario, no transmite fuerza activa en el unitario.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-003",
+      "sb": "mecanismo_contractil",
+      "x": "¿Qué diferencia fundamental existe en la regulación proteica de la contracción entre músculo liso y esquelético?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "La ausencia de filamentos de actina en el liso", "c": false, "r": "Incorrecto. El músculo liso contiene abundantes filamentos de actina, superando en número a los de miosina.", "et": "recall" },
+        { "l": "B", "t": "La carencia del complejo de troponina en el liso", "c": true, "r": "Correcto. El músculo liso no utiliza troponina para el control del calcio; utiliza calmodulina.", "et": null },
+        { "l": "C", "t": "La falta de ATPasa en la cabeza de miosina lisa", "c": false, "r": "Incorrecto. La ATPasa existe, aunque su actividad es mucho menor que en el músculo esquelético.", "et": "mechanistic" },
+        { "l": "D", "t": "La inexistencia de tropomiosina en el citoesqueleto liso", "c": false, "r": "Incorrecto. La tropomiosina está presente en el músculo liso, aunque no regula la contracción vía troponina.", "et": "recall" },
+        { "l": "E", "t": "La sustitución de miosina por calmodulina", "c": false, "r": "Incorrecto. La calmodulina es una proteína reguladora, no sustituye a la proteína contráctil miosina.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-004",
+      "sb": "mecanismo_contractil",
+      "x": "¿Cuál es la función análoga de los cuerpos densos en el músculo liso comparada con el músculo esquelético?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Actúan como los túbulos T para la conducción", "c": false, "r": "Incorrecto. Los túbulos T conducen potenciales de acción; los cuerpos densos son puntos de anclaje mecánico.", "et": "conceptual" },
+        { "l": "B", "t": "Corresponden funcionalmente a los discos Z", "c": true, "r": "Correcto. Sirven como punto de anclaje para los filamentos de actina, análogo a los discos Z sarcoméricos.", "et": null },
+        { "l": "C", "t": "Reemplazan a la troponina C en la fijación de calcio", "c": false, "r": "Incorrecto. La fijación de calcio la realiza la calmodulina, no una estructura física como el cuerpo denso.", "et": "recall" },
+        { "l": "D", "t": "Funcionan como retículo sarcoplásmico de reserva", "c": false, "r": "Incorrecto. Los cuerpos densos son estructuras estructurales del citoesqueleto, no almacenes de iones.", "et": "mechanistic" },
+        { "l": "E", "t": "Mimetizan la acción de la placa motora terminal", "c": false, "r": "Incorrecto. No tienen función en la transmisión sináptica ni en la recepción de neurotransmisores.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-005",
+      "sb": "mecanismo_contractil",
+      "x": "¿Qué característica de los puentes cruzados de miosina permite un acortamiento de hasta el 80% en el músculo liso?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "La disposición de polaridad lateral", "c": true, "r": "Correcto. Permite traccionar filamentos de actina simultáneamente en direcciones opuestas sin chocar contra un disco Z central.", "et": null },
+        { "l": "B", "t": "La mayor actividad ATPasa de la cabeza", "c": false, "r": "Incorrecto. La actividad ATPasa es menor en el músculo liso, lo que ralentiza el ciclado pero no aumenta el rango de acortamiento.", "et": "mechanistic" },
+        { "l": "C", "t": "La longitud reducida de los filamentos de actina", "c": false, "r": "Incorrecto. Los filamentos de actina son largos e irradian desde los cuerpos densos para permitir gran superposición.", "et": "conceptual" },
+        { "l": "D", "t": "El mecanismo de cerrojo energético", "c": false, "r": "Incorrecto. El mecanismo de cerrojo mantiene la tensión con baja energía, no determina el grado físico de acortamiento.", "et": "conceptual" },
+        { "l": "E", "t": "La ausencia de superposición de filamentos", "c": false, "r": "Incorrecto. La contracción requiere superposición; la disposición lateral maximiza esta capacidad.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-006",
+      "sb": "comparacion_eskeletico",
+      "x": "¿Cómo se compara la frecuencia de ciclado de los puentes cruzados del músculo liso con la del músculo esquelético?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Es 10 a 300 veces menor en el músculo liso", "c": true, "r": "Correcto. La baja actividad ATPasa reduce drásticamente la velocidad de unión y separación de los puentes.", "et": null },
+        { "l": "B", "t": "Es aproximadamente igual en ambos tejidos", "c": false, "r": "Incorrecto. Existe una diferencia de magnitud significativa debido a las distintas isoformas de miosina.", "et": "recall" },
+        { "l": "C", "t": "Es 50 veces mayor en el músculo liso", "c": false, "r": "Incorrecto. El músculo liso es notablemente más lento, no más rápido, en su mecánica de ciclado.", "et": "recall" },
+        { "l": "D", "t": "Es variable y depende exclusivamente del voltaje", "c": false, "r": "Incorrecto. Depende de la actividad enzimática intrínseca y la fosforilación, no directamente del voltaje de membrana.", "et": "mechanistic" },
+        { "l": "E", "t": "Es infinitamente rápida durante el mecanismo de cerrojo", "c": false, "r": "Incorrecto. Durante el cerrojo el ciclado es extremadamente lento o casi detenido, no rápido.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-007",
+      "sb": "comparacion_eskeletico",
+      "x": "¿Cuál es la causa principal de la mayor fuerza máxima de contracción (kg/cm²) en el músculo liso?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "El periodo prolongado de unión de los puentes cruzados", "c": true, "r": "Correcto. Al permanecer unidos más tiempo, hay un mayor número de puentes generando fuerza simultáneamente en un momento dado.", "et": null },
+        { "l": "B", "t": "La mayor densidad de mitocondrias por fibra", "c": false, "r": "Incorrecto. El músculo liso consume menos energía y generalmente tiene menos densidad mitocondrial.", "et": "plausible_distractor" },
+        { "l": "C", "t": "La presencia de estriaciones transversales alineadas", "c": false, "r": "Incorrecto. La falta de estriaciones es definitoria del músculo liso; la fuerza no depende de esta alineación.", "et": "recall" },
+        { "l": "D", "t": "El alto consumo de ATP durante la fase de cerrojo", "c": false, "r": "Incorrecto. El mecanismo de cerrojo se caracteriza precisamente por un bajo consumo de ATP.", "et": "mechanistic" },
+        { "l": "E", "t": "La rápida velocidad de la bomba de calcio del retículo", "c": false, "r": "Incorrecto. La bomba es lenta, lo que prolonga la contracción, pero no genera la fuerza per se.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-008",
+      "sb": "fisiologia_contraccion",
+      "x": "¿Qué fenómeno permite a la vejiga urinaria mantener una presión interna constante pese a grandes aumentos de volumen?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "El mecanismo de tensión-relajación", "c": true, "r": "Correcto. Permite al músculo reordenar sus filamentos para recuperar la fuerza original tras un cambio de longitud.", "et": null },
+        { "l": "B", "t": "La activación de potenciales en espiga repetitivos", "c": false, "r": "Incorrecto. Los potenciales causarían contracciones fásicas activas, aumentando la presión, no adaptándose.", "et": "conceptual" },
+        { "l": "C", "t": "El bloqueo irreversible de la miosina fosfatasa", "c": false, "r": "Incorrecto. El bloqueo enzimático impediría la regulación dinámica necesaria para la adaptación volumétrica.", "et": "mechanistic" },
+        { "l": "D", "t": "La inhibición simpática de los cuerpos densos", "c": false, "r": "Incorrecto. Los cuerpos densos son estructuras físicas, no objetivos de inhibición nerviosa directa.", "et": "recall" },
+        { "l": "E", "t": "La hiperpolarización sostenida de la membrana", "c": false, "r": "Incorrecto. La hiperpolarización relajaría el músculo flácidamente, perdiendo la capacidad de mantener presión.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-009",
+      "sb": "regulacion_calcio",
+      "x": "¿Qué evento molecular inicia directamente la activación de la cinasa de la cadena ligera de miosina (MLCK)?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "La unión del complejo calcio-calmodulina", "c": true, "r": "Correcto. El calcio se une primero a la calmodulina, y este complejo es el que activa a la enzima MLCK.", "et": null },
+        { "l": "B", "t": "La fosforilación directa por AMP cíclico", "c": false, "r": "Incorrecto. El AMPc suele estar asociado a vías de relajación o modulación, no es el activador primario de MLCK.", "et": "mechanistic" },
+        { "l": "C", "t": "La liberación de troponina I del filamento", "c": false, "r": "Incorrecto. No hay troponina en el músculo liso; este mecanismo es irrelevante.", "et": "recall" },
+        { "l": "D", "t": "La despolarización del túbulo transverso", "c": false, "r": "Incorrecto. Es un evento de membrana previo, no la interacción molecular directa con la enzima.", "et": "sequence" },
+        { "l": "E", "t": "La hidrólisis de ATP en la cabeza de miosina", "c": false, "r": "Incorrecto. La hidrólisis ocurre en la cabeza de miosina después de ser activada, no activa a la cinasa.", "et": "sequence" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-010",
+      "sb": "regulacion_calcio",
+      "x": "¿Qué efecto tiene la fosforilación de la cadena ligera reguladora en la cabeza de miosina?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Permite la unión repetitiva con el filamento de actina", "c": true, "r": "Correcto. La fosforilación es el interruptor que habilita a la cabeza de miosina para entrar en el ciclo de puentes.", "et": null },
+        { "l": "B", "t": "Inhibe la actividad ATPasa de la miosina", "c": false, "r": "Incorrecto. Al contrario, la fosforilación aumenta la capacidad de ciclado y uso de ATP.", "et": "conceptual" },
+        { "l": "C", "t": "Promueve la disociación inmediata de la calmodulina", "c": false, "r": "Incorrecto. La fosforilación es un evento aguas abajo; no causa la disociación de la calmodulina.", "et": "mechanistic" },
+        { "l": "D", "t": "Activa la bomba de calcio del retículo sarcoplásmico", "c": false, "r": "Incorrecto. La fosforilación afecta a la miosina, no a las bombas de membrana.", "et": "misinterpretation" },
+        { "l": "E", "t": "Bloquea los sitios activos en los cuerpos densos", "c": false, "r": "Incorrecto. No tiene efecto sobre los cuerpos densos estructurales.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-011",
+      "sb": "fisiologia_contraccion",
+      "x": "¿Cuál es la fuente principal de iones calcio para la contracción en la mayoría de los músculos lisos?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "El líquido extracelular", "c": true, "r": "Correcto. Debido al retículo sarcoplásmico poco desarrollado, la difusión desde el exterior es crítica.", "et": null },
+        { "l": "B", "t": "El retículo sarcoplásmico", "c": false, "r": "Incorrecto. Es la fuente principal en el músculo esquelético, pero secundaria o menor en el liso.", "et": "recall" },
+        { "l": "C", "t": "Las mitocondrias", "c": false, "r": "Incorrecto. Las mitocondrias pueden almacenar calcio patológicamente, pero no son la fuente fisiológica para la contracción.", "et": "conceptual" },
+        { "l": "D", "t": "El núcleo celular", "c": false, "r": "Incorrecto. El núcleo no participa en el ciclo de calcio para la contracción.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Los cuerpos densos", "c": false, "r": "Incorrecto. Son estructuras de anclaje mecánico, no almacenes iónicos.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-012",
+      "sb": "fisiologia_contraccion",
+      "x": "¿Qué estructura del músculo liso se considera análoga a los túbulos transversos del músculo esquelético?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Las cavéolas", "c": true, "r": "Correcto. Son invaginaciones de la membrana que llevan la excitación eléctrica cerca del retículo sarcoplásmico rudimentario.", "et": null },
+        { "l": "B", "t": "Las varicosidades", "c": false, "r": "Incorrecto. Las varicosidades son parte de la terminación nerviosa, no de la membrana muscular.", "et": "recall" },
+        { "l": "C", "t": "Las uniones en hendidura", "c": false, "r": "Incorrecto. Conectan células entre sí, no la superficie con el interior para acoplamiento excitación-contracción.", "et": "conceptual" },
+        { "l": "D", "t": "Los cuerpos densos", "c": false, "r": "Incorrecto. Son análogos a los discos Z, no a los túbulos T.", "et": "recall" },
+        { "l": "E", "t": "Las bombas de calcio", "c": false, "r": "Incorrecto. Son proteínas de transporte, no estructuras anatómicas de invaginación.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-013",
+      "sb": "regulacion_calcio",
+      "x": "¿Qué enzima es esencial para finalizar la contracción del músculo liso induciendo la relajación?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Miosina fosfatasa", "c": true, "r": "Correcto. Elimina el fosfato de la cadena ligera reguladora, deteniendo el ciclo de puentes cruzados.", "et": null },
+        { "l": "B", "t": "Miosina cinasa", "c": false, "r": "Incorrecto. Esta enzima (MLCK) inicia la contracción, no la relajación.", "et": "recall" },
+        { "l": "C", "t": "Calmodulina polimerasa", "c": false, "r": "Incorrecto. Enzima ficticia en este contexto; la calmodulina es una proteína reguladora, no una enzima.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Adenilato ciclasa", "c": false, "r": "Incorrecto. Puede participar en vías de señalización, pero no es el mecanismo directo de desfosforilación de la miosina.", "et": "mechanistic" },
+        { "l": "E", "t": "Fosfodiesterasa", "c": false, "r": "Incorrecto. Degrada nucleótidos cíclicos, no desfosforila la miosina directamente.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-014",
+      "sb": "fisiologia_contraccion",
+      "x": "¿Cuál es la duración típica del periodo latente en el músculo liso?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "200 a 300 ms", "c": true, "r": "Correcto. Este tiempo refleja la lenta difusión del calcio desde el líquido extracelular hacia el interior.", "et": null },
+        { "l": "B", "t": "2 a 5 ms", "c": false, "r": "Incorrecto. Este rango es típico del músculo esquelético rápido.", "et": "recall" },
+        { "l": "C", "t": "10 a 20 ms", "c": false, "r": "Incorrecto. Demasiado rápido para el mecanismo difusivo del músculo liso.", "et": "plausible_distractor" },
+        { "l": "D", "t": "30 a 60 segundos", "c": false, "r": "Incorrecto. Excesivamente largo; correspondería a una respuesta metabólica o hormonal lenta, no al inicio contráctil.", "et": "plausible_distractor" },
+        { "l": "E", "t": "1 a 3 segundos", "c": false, "r": "Incorrecto. Este es el tiempo total de contracción, no el periodo latente inicial.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-015",
+      "sb": "fisiologia_contraccion",
+      "x": "¿Qué ocurre con la contracción del músculo liso si la concentración extracelular de calcio desciende a 1/10 de lo normal?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "La contracción casi desaparece", "c": true, "r": "Correcto. Al depender del calcio extracelular, su reducción drástica detiene el proceso contráctil.", "et": null },
+        { "l": "B", "t": "Se mantiene gracias al calcio del retículo", "c": false, "r": "Incorrecto. El retículo es insuficiente en el músculo liso para sostener la contracción sin aporte externo.", "et": "conceptual" },
+        { "l": "C", "t": "Aumenta debido a la hiperexcitabilidad", "c": false, "r": "Incorrecto. Aunque la hipocalcemia excita nervios, en el músculo liso la falta de calcio impide la fuerza contráctil directa.", "et": "misinterpretation" },
+        { "l": "D", "t": "Se activa el mecanismo de cerrojo indefinidamente", "c": false, "r": "Incorrecto. El cerrojo requiere una activación inicial que necesita calcio; sin calcio, no hay contracción.", "et": "mechanistic" },
+        { "l": "E", "t": "Se generan potenciales de acción espontáneos", "c": false, "r": "Incorrecto. Sin calcio para entrar, los potenciales de acción dependientes de calcio no pueden generarse o son ineficaces.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-016",
+      "sb": "fisiologia_contraccion",
+      "x": "¿Cuál es la explicación más aceptada para el mecanismo de cerrojo (latch) en el músculo liso?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "La miosina desfosforilada permanece unida a la actina", "c": true, "r": "Correcto. Al desfosforilarse mientras está unida, la cabeza de miosina se disocia muy lentamente, manteniendo tensión sin gastar ATP.", "et": null },
+        { "l": "B", "t": "La bomba de calcio se inhibe completamente", "c": false, "r": "Incorrecto. La inhibición de la bomba mantendría el calcio alto y el ciclado activo y costoso, no un estado de bajo consumo.", "et": "mechanistic" },
+        { "l": "C", "t": "La calmodulina se une irreversiblemente a la actina", "c": false, "r": "Incorrecto. La calmodulina se une a la cinasa (MLCK), no a la actina, y el proceso es reversible.", "et": "recall" },
+        { "l": "D", "t": "Los cuerpos densos se fusionan permanentemente", "c": false, "r": "Incorrecto. No hay evidencia de fusión estructural de los cuerpos densos en este proceso.", "et": "plausible_distractor" },
+        { "l": "E", "t": "El potencial de membrana se mantiene en meseta", "c": false, "r": "Incorrecto. El cerrojo puede mantenerse sin actividad eléctrica continua elevada.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-017",
+      "sb": "control_nervioso",
+      "x": "¿Cómo se denominan las estructuras de las terminaciones nerviosas autónomas que liberan neurotransmisores sobre el músculo liso?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Varicosidades", "c": true, "r": "Correcto. Son ensanchamientos a lo largo del axón que contienen vesículas y liberan transmisor de forma difusa.", "et": null },
+        { "l": "B", "t": "Botones terminales", "c": false, "r": "Incorrecto. Término específico para la sinapsis neuromuscular esquelética o nerviosa central, no la difusa autónoma.", "et": "recall" },
+        { "l": "C", "t": "Placas motoras", "c": false, "r": "Incorrecto. Estructura compleja y organizada exclusiva del músculo esquelético.", "et": "recall" },
+        { "l": "D", "t": "Nodos de Ranvier", "c": false, "r": "Incorrecto. Son interrupciones en la mielina para la conducción saltatoria, no sitios de liberación de transmisor.", "et": "conceptual" },
+        { "l": "E", "t": "Dendritas postsinápticas", "c": false, "r": "Incorrecto. Las dendritas reciben señales, no son estructuras de liberación en la terminación axónica.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-018",
+      "sb": "control_nervioso",
+      "x": "¿Qué determina si un neurotransmisor como la acetilcolina excita o inhibe un músculo liso específico?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "El tipo de proteína receptora en la membrana", "c": true, "r": "Correcto. La respuesta depende de si el receptor acoplado es excitador o inhibidor, no de la molécula transmisora per se.", "et": null },
+        { "l": "B", "t": "La cantidad de calcio en la vesícula sináptica", "c": false, "r": "Incorrecto. El contenido vesicular afecta la magnitud, no la cualidad (excitación vs inhibición) de la señal.", "et": "mechanistic" },
+        { "l": "C", "t": "El diámetro de la fibra nerviosa", "c": false, "r": "Incorrecto. El diámetro afecta la velocidad de conducción nerviosa, no el efecto postsináptico.", "et": "conceptual" },
+        { "l": "D", "t": "La presencia de mielina en el axón", "c": false, "r": "Incorrecto. La mielina es estructural y de conducción, irrelevante para la especificidad del receptor.", "et": "conceptual" },
+        { "l": "E", "t": "La frecuencia de los potenciales de acción", "c": false, "r": "Incorrecto. La frecuencia codifica intensidad, no la polaridad (excitación/inhibición) de la respuesta.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-019",
+      "sb": "control_nervioso",
+      "x": "¿Qué tipo de uniones neuromusculares se encuentran típicamente en el músculo liso multiunitario?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Uniones de contacto estrechas", "c": true, "r": "Correcto. La hendidura es pequeña (20-30 nm), permitiendo una respuesta rápida y precisa similar a la esquelética.", "et": null },
+        { "l": "B", "t": "Uniones difusas a gran distancia", "c": false, "r": "Incorrecto. Estas son típicas del músculo unitario o visceral, no del multiunitario de control fino.", "et": "recall" },
+        { "l": "C", "t": "Sinapsis eléctricas directas", "c": false, "r": "Incorrecto. Las sinapsis eléctricas son uniones en hendidura entre células musculares, no entre nervio y músculo.", "et": "conceptual" },
+        { "l": "D", "t": "Placas motoras con pliegues subneurales", "c": false, "r": "Incorrecto. Estructura exclusiva del músculo esquelético.", "et": "recall" },
+        { "l": "E", "t": "Conexiones citoplasmáticas continuas", "c": false, "r": "Incorrecto. No hay continuidad física citoplasmática entre neuronas y células musculares.", "et": "misinterpretation" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-020",
+      "sb": "potenciales_accion",
+      "x": "¿Cuál es el potencial de membrana en reposo típico del músculo liso?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "–50 a –60 mV", "c": true, "r": "Correcto. Es menos negativo que el del músculo esquelético (que ronda los -90 mV).", "et": null },
+        { "l": "B", "t": "–80 a –90 mV", "c": false, "r": "Incorrecto. Rango característico del músculo esquelético y nervios grandes.", "et": "recall" },
+        { "l": "C", "t": "–20 a –30 mV", "c": false, "r": "Incorrecto. Demasiado despolarizado, cercano al umbral de disparo continuo.", "et": "plausible_distractor" },
+        { "l": "D", "t": "0 mV", "c": false, "r": "Incorrecto. Representaría una célula totalmente despolarizada o muerta.", "et": "conceptual" },
+        { "l": "E", "t": "+35 mV", "c": false, "r": "Incorrecto. Este valor corresponde al pico de sobretiro de un potencial de acción.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-021",
+      "sb": "potenciales_accion",
+      "x": "¿Qué ion es el principal responsable de la fase de despolarización del potencial de acción en el músculo liso?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Calcio", "c": true, "r": "Correcto. Los canales de calcio activados por voltaje son numerosos y su apertura causa el potencial de acción.", "et": null },
+        { "l": "B", "t": "Sodio", "c": false, "r": "Incorrecto. A diferencia del nervio o músculo esquelético, el sodio tiene una participación menor en el liso.", "et": "conceptual" },
+        { "l": "C", "t": "Potasio", "c": false, "r": "Incorrecto. El potasio es responsable de la repolarización, no de la despolarización.", "et": "recall" },
+        { "l": "D", "t": "Cloruro", "c": false, "r": "Incorrecto. El cloruro generalmente estabiliza o hiperpolariza, no despolariza en este contexto.", "et": "mechanistic" },
+        { "l": "E", "t": "Magnesio", "c": false, "r": "Incorrecto. El magnesio bloquea canales, no genera la corriente despolarizante.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-022",
+      "sb": "potenciales_accion",
+      "x": "¿Qué característica eléctrica explica la duración prolongada de los potenciales de acción en meseta?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "La apertura lenta y cierre lento de canales de calcio", "c": true, "r": "Correcto. La cinética lenta de estos canales mantiene la despolarización por cientos de milisegundos.", "et": null },
+        { "l": "B", "t": "La inactivación instantánea de canales de potasio", "c": false, "r": "Incorrecto. La inactivación rápida de potasio no es el mecanismo primario de la meseta.", "et": "mechanistic" },
+        { "l": "C", "t": "La entrada masiva de iones cloruro", "c": false, "r": "Incorrecto. El cloruro no participa en el sostenimiento de la meseta despolarizada.", "et": "conceptual" },
+        { "l": "D", "t": "La ausencia de bombas de sodio-potasio", "c": false, "r": "Incorrecto. Las bombas existen y son vitales para el mantenimiento iónico a largo plazo.", "et": "misinterpretation" },
+        { "l": "E", "t": "La liberación de calcio intracelular exclusiva", "c": false, "r": "Incorrecto. La meseta depende de flujos transmembrana, no solo de liberación interna.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-023",
+      "sb": "potenciales_accion",
+      "x": "¿Qué son las ondas lentas en el músculo liso visceral?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Fluctuaciones rítmicas del potencial de membrana", "c": true, "r": "Correcto. Son oscilaciones subumbrales que pueden desencadenar potenciales de acción si alcanzan el umbral.", "et": null },
+        { "l": "B", "t": "Potenciales de acción verdaderos autopropagados", "c": false, "r": "Incorrecto. Las ondas lentas en sí mismas no son potenciales de acción regenerativos.", "et": "conceptual" },
+        { "l": "C", "t": "Contracciones tetánicas sostenidas", "c": false, "r": "Incorrecto. Son fenómenos eléctricos, no mecánicos, aunque pueden llevar a contracción.", "et": "misinterpretation" },
+        { "l": "D", "t": "Respuestas directas a neurotransmisores", "c": false, "r": "Incorrecto. Son intrínsecas y espontáneas (marcapasos), no necesariamente evocadas por nervios.", "et": "mechanistic" },
+        { "l": "E", "t": "Hiperpolarizaciones inducidas por potasio", "c": false, "r": "Incorrecto. Son oscilaciones que incluyen despolarización, no solo hiperpolarización.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-024",
+      "sb": "potenciales_accion",
+      "x": "¿Cuál es el umbral de voltaje aproximado para generar un potencial de acción en la cima de una onda lenta?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "–35 mV", "c": true, "r": "Correcto. Cuando la onda lenta eleva el potencial desde -60 mV hasta aprox -35 mV, se dispara la espiga.", "et": null },
+        { "l": "B", "t": "–60 mV", "c": false, "r": "Incorrecto. Este es el potencial de reposo o base, no el umbral de disparo.", "et": "recall" },
+        { "l": "C", "t": "–90 mV", "c": false, "r": "Incorrecto. Valor hiperpolarizado típico del músculo esquelético, lejos del umbral liso.", "et": "plausible_distractor" },
+        { "l": "D", "t": "0 mV", "c": false, "r": "Incorrecto. El umbral debe ser negativo; 0 mV ya es fase de despolarización avanzada.", "et": "conceptual" },
+        { "l": "E", "t": "+20 mV", "c": false, "r": "Incorrecto. Un valor positivo es el pico del potencial, no el umbral de inicio.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-025",
+      "sb": "fisiologia_contraccion",
+      "x": "¿Qué factor causa relajación y vasodilatación en el músculo liso vascular local como respuesta a la isquemia?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "La disminución de oxígeno", "c": true, "r": "Correcto. La hipoxia tisular actúa directamente inhibiendo la contracción para aumentar el flujo sanguíneo.", "et": null },
+        { "l": "B", "t": "El descenso de dióxido de carbono", "c": false, "r": "Incorrecto. La hipocapnia (bajo CO2) suele causar vasoconstricción, no dilatación.", "et": "mechanistic" },
+        { "l": "C", "t": "El aumento de pH (alcalosis)", "c": false, "r": "Incorrecto. La acidosis (iones H+), no la alcalosis, es la que causa vasodilatación local.", "et": "conceptual" },
+        { "l": "D", "t": "La reducción de iones potasio", "c": false, "r": "Incorrecto. El aumento de potasio local vasodilata; su reducción no es el factor de isquemia.", "et": "recall" },
+        { "l": "E", "t": "La presencia de glucosa elevada", "c": false, "r": "Incorrecto. La glucosa per se no es un vasodilatador metabólico potente en este contexto agudo.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-026",
+      "sb": "factores_locales",
+      "x": "¿Qué efecto provoca la angiotensina II sobre el músculo liso vascular que posee receptores excitadores?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Contracción y vasoconstricción", "c": true, "r": "Correcto. La angiotensina II es un potente vasoconstrictor que activa el mecanismo contráctil.", "et": null },
+        { "l": "B", "t": "Relajación y vasodilatación", "c": false, "r": "Incorrecto. Efecto opuesto; la angiotensina II aumenta la presión arterial contrayendo vasos.", "et": "recall" },
+        { "l": "C", "t": "Hiperpolarización de membrana", "c": false, "r": "Incorrecto. La excitación implica despolarización, no hiperpolarización.", "et": "conceptual" },
+        { "l": "D", "t": "Inhibición de la entrada de calcio", "c": false, "r": "Incorrecto. Para contraer, debe promover la entrada o liberación de calcio.", "et": "mechanistic" },
+        { "l": "E", "t": "Bloqueo de la cinasa de miosina", "c": false, "r": "Incorrecto. Bloquear la cinasa impediría la contracción.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-027",
+      "sb": "factores_locales",
+      "x": "¿Qué mecanismo explica la inhibición de la contracción muscular por hormonas sin cambios de voltaje?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Formación de segundos mensajeros como AMPc o GMPc", "c": true, "r": "Correcto. Estos mensajeros activan bombas de calcio o cinasas que reducen el calcio intracelular.", "et": null },
+        { "l": "B", "t": "Apertura directa de canales de sodio", "c": false, "r": "Incorrecto. Abrir canales de sodio despolarizaría y excitaría la célula.", "et": "mechanistic" },
+        { "l": "C", "t": "Inhibición de la miosina fosfatasa", "c": false, "r": "Incorrecto. Inhibir la fosfatasa mantendría la miosina fosforilada y el músculo contraído.", "et": "conceptual" },
+        { "l": "D", "t": "Bloqueo de la unión de actina a cuerpos densos", "c": false, "r": "Incorrecto. No existe un mecanismo hormonal que desacople físicamente la actina de su anclaje.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Degradación proteolítica de la calmodulina", "c": false, "r": "Incorrecto. La regulación es reversible, no implica destrucción de proteínas.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-028",
+      "sb": "tipos",
+      "x": "¿Cuál es un ejemplo clásico de músculo liso multiunitario?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "El músculo ciliar del ojo", "c": true, "r": "Correcto. Requiere control fino y preciso del enfoque, característica del multiunitario.", "et": null },
+        { "l": "B", "t": "La pared del intestino delgado", "c": false, "r": "Incorrecto. El intestino requiere ondas peristálticas coordinadas, típicas del unitario.", "et": "recall" },
+        { "l": "C", "t": "El miometrio del útero", "c": false, "r": "Incorrecto. El útero funciona como un sincitio para el parto, siendo unitario.", "et": "recall" },
+        { "l": "D", "t": "Los uréteres", "c": false, "r": "Incorrecto. Necesitan peristaltismo coordinado, siendo unitario.", "et": "recall" },
+        { "l": "E", "t": "Las vías biliares", "c": false, "r": "Incorrecto. Son musculatura visceral unitaria.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-029",
+      "sb": "fisiologia_contraccion",
+      "x": "¿Qué proporción de energía consume el músculo liso comparado con el esquelético para la misma tensión?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "De 1/10 a 1/300", "c": true, "r": "Correcto. Es extremadamente económico, crucial para mantener el tono vascular y visceral perpetuo.", "et": null },
+        { "l": "B", "t": "Aproximadamente la mitad", "c": false, "r": "Incorrecto. La diferencia es de orden de magnitud, no solo del 50%.", "et": "recall" },
+        { "l": "C", "t": "El doble", "c": false, "r": "Incorrecto. El músculo liso es más eficiente, no menos.", "et": "conceptual" },
+        { "l": "D", "t": "Es idéntica", "c": false, "r": "Incorrecto. Ignora las diferencias metabólicas fundamentales de ciclado lento.", "et": "conceptual" },
+        { "l": "E", "t": "10 veces más", "c": false, "r": "Incorrecto. Sería metabólicamente insostenible para contracciones tónicas de horas.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-030",
+      "sb": "potenciales_accion",
+      "x": "¿Qué ocurre en el músculo multiunitario en respuesta a neurotransmisores, dado que rara vez genera potenciales de acción?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "Despolarización local o potencial de la unión", "c": true, "r": "Correcto. Esta despolarización se propaga electrónicamente y es suficiente para activar la contracción en fibras pequeñas.", "et": null },
+        { "l": "B", "t": "Generación de ondas lentas espontáneas", "c": false, "r": "Incorrecto. Las ondas lentas son del músculo unitario visceral.", "et": "conceptual" },
+        { "l": "C", "t": "Hiperpolarización paradójica activadora", "c": false, "r": "Incorrecto. Mecanismo inexistente; la hiperpolarización relaja.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Contracción inducida exclusivamente por estiramiento", "c": false, "r": "Incorrecto. El multiunitario responde principalmente a nervios, no a estiramiento visceral.", "et": "mechanistic" },
+        { "l": "E", "t": "Transmisión de calcio vía uniones gap", "c": false, "r": "Incorrecto. El multiunitario carece de uniones gap significativas.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-031",
+      "sb": "regulacion_calcio",
+      "x": "¿Qué molécula actúa como el 'interruptor' regulador en ausencia de troponina?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Calmodulina", "c": true, "r": "Correcto. Es la proteína sensora de calcio ubicua en el músculo liso.", "et": null },
+        { "l": "B", "t": "Titina", "c": false, "r": "Incorrecto. Proteína estructural elástica, no reguladora de calcio.", "et": "recall" },
+        { "l": "C", "t": "Nebulina", "c": false, "r": "Incorrecto. Proteína estructural que regula la longitud de actina.", "et": "recall" },
+        { "l": "D", "t": "Distrofina", "c": false, "r": "Incorrecto. Proteína de anclaje membrana-citoesqueleto.", "et": "recall" },
+        { "l": "E", "t": "Actinina", "c": false, "r": "Incorrecto. Proteína de unión en los cuerpos densos/discos Z.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-032",
+      "sb": "mecanismo_contractil",
+      "x": "¿Cuál es la función del complejo calcio-calmodulina una vez formado?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Activar la cinasa de cadena ligera de miosina", "c": true, "r": "Correcto. Se une a la MLCK inactiva y la activa para fosforilar la miosina.", "et": null },
+        { "l": "B", "t": "Unirse directamente a la actina para descubrir sitios", "c": false, "r": "Incorrecto. Ese es el mecanismo de la troponina-calcio en músculo esquelético.", "et": "conceptual" },
+        { "l": "C", "t": "Fosforilar directamente la cabeza de miosina", "c": false, "r": "Incorrecto. La calmodulina activa a la enzima (cinasa), no fosforila por sí misma.", "et": "mechanistic" },
+        { "l": "D", "t": "Bombear calcio fuera de la célula", "c": false, "r": "Incorrecto. La bomba de calcio es una ATPasa, no el complejo regulador contráctil.", "et": "misinterpretation" },
+        { "l": "E", "t": "Inhibir la miosina fosfatasa", "c": false, "r": "Incorrecto. Aunque existen vías de inhibición, la función primaria descrita es activar la cinasa.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-033",
+      "sb": "regulacion_calcio",
+      "x": "¿Qué determina el tiempo necesario para la relajación del músculo liso después de cesar el estímulo?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "La cantidad de miosina fosfatasa activa", "c": true, "r": "Correcto. La velocidad de desfosforilación depende de la concentración y actividad de esta enzima.", "et": null },
+        { "l": "B", "t": "La velocidad de degradación de la acetilcolina", "c": false, "r": "Incorrecto. Esto termina la señal nerviosa, pero la relajación mecánica depende de procesos intracelulares más lentos.", "et": "mechanistic" },
+        { "l": "C", "t": "El agotamiento de las reservas de ATP", "c": false, "r": "Incorrecto. El músculo no se relaja por falta de energía (eso causaría rigor), sino por regulación.", "et": "conceptual" },
+        { "l": "D", "t": "El cierre de los canales de potasio", "c": false, "r": "Incorrecto. El cierre de potasio excitaría, no relajaría.", "et": "mechanistic" },
+        { "l": "E", "t": "La disociación de la actina de los cuerpos densos", "c": false, "r": "Incorrecto. La estructura no se desmonta durante la relajación.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-034",
+      "sb": "fisiologia_contraccion",
+      "x": "¿Qué ocurre cuando el músculo liso visceral es distendido o estirado?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Se generan potenciales de acción espontáneos", "c": true, "r": "Correcto. El estiramiento despolariza la membrana y aumenta la excitabilidad de las ondas lentas.", "et": null },
+        { "l": "B", "t": "Se produce una inhibición refleja inmediata", "c": false, "r": "Incorrecto. El músculo visceral suele responder contrayéndose para resistir el estiramiento (respuesta miogénica).", "et": "conceptual" },
+        { "l": "C", "t": "Se bloquean las uniones en hendidura", "c": false, "r": "Incorrecto. El estiramiento no cierra las uniones comunicantes.", "et": "mechanistic" },
+        { "l": "D", "t": "La miosina pierde su fosforilación instantáneamente", "c": false, "r": "Incorrecto. No hay un mecanismo de desfosforilación instantánea por estiramiento.", "et": "mechanistic" },
+        { "l": "E", "t": "El potencial de membrana se hiperpolariza", "c": false, "r": "Incorrecto. El estiramiento disminuye la negatividad (despolariza), no hiperpolariza.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-035",
+      "sb": "factores_locales",
+      "x": "¿Qué efecto tiene el aumento de la temperatura corporal sobre el músculo liso vascular local?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Vasodilatación", "c": true, "r": "Correcto. El calor aumenta el metabolismo y promueve la relajación vascular para disipar calor o aumentar flujo.", "et": null },
+        { "l": "B", "t": "Vasoconstricción intensa", "c": false, "r": "Incorrecto. El frío causa vasoconstricción; el calor dilata.", "et": "recall" },
+        { "l": "C", "t": "Detención del flujo sanguíneo", "c": false, "r": "Incorrecto. La vasodilatación aumenta el flujo, no lo detiene.", "et": "misinterpretation" },
+        { "l": "D", "t": "Calcificación de la pared vascular", "c": false, "r": "Incorrecto. Proceso patológico crónico, no una respuesta fisiológica aguda.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Conversión a músculo estriado", "c": false, "r": "Incorrecto. Imposible biológicamente.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-036",
+      "sb": "mecanismo_contractil",
+      "x": "¿Qué papel juega el ADP en la mecánica del músculo liso?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Es el producto de degradación del ATP que aporta energía", "c": true, "r": "Correcto. La hidrólisis de ATP a ADP provee la energía para el golpe de fuerza de la cabeza de miosina.", "et": null },
+        { "l": "B", "t": "Actúa como segundo mensajero en lugar del calcio", "c": false, "r": "Incorrecto. El ADP es un metabolito energético, no un mensajero de señalización.", "et": "conceptual" },
+        { "l": "C", "t": "Fosforila la cadena ligera de miosina", "c": false, "r": "Incorrecto. El fosfato proviene del ATP, no del ADP (que ya perdió un fosfato).", "et": "mechanistic" },
+        { "l": "D", "t": "Se une a la calmodulina para activarla", "c": false, "r": "Incorrecto. El calcio se une a la calmodulina, no el ADP.", "et": "recall" },
+        { "l": "E", "t": "Forma la estructura de los cuerpos densos", "c": false, "r": "Incorrecto. Los cuerpos densos son proteínas estructurales, no nucleótidos.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-037",
+      "sb": "regulacion_calcio",
+      "x": "¿Cuál es el destino de los iones calcio para terminar la contracción?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Son bombeados al exterior celular y al retículo sarcoplásmico", "c": true, "r": "Correcto. Se requiere reducir la concentración citosólica mediante transporte activo.", "et": null },
+        { "l": "B", "t": "Son degradados por enzimas citoplasmáticas", "c": false, "r": "Incorrecto. Los iones elementales no se degradan biológicamente.", "et": "conceptual" },
+        { "l": "C", "t": "Se unen permanentemente a la miosina", "c": false, "r": "Incorrecto. El calcio no se une a la miosina; se une a la calmodulina y debe liberarse.", "et": "mechanistic" },
+        { "l": "D", "t": "Se transforman en iones sodio", "c": false, "r": "Incorrecto. La transmutación de elementos no ocurre en biología.", "et": "conceptual" },
+        { "l": "E", "t": "Se almacenan en los cuerpos densos", "c": false, "r": "Incorrecto. No son reservorios de calcio.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-038",
+      "sb": "comparacion_eskeletico",
+      "x": "¿Por qué el inicio de la contracción es mucho más lento en el músculo liso que en el esquelético?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Por la lentitud de la unión/separación de puentes cruzados", "c": true, "r": "Correcto. La baja actividad enzimática intrínseca ralentiza todo el ciclo mecánico.", "et": null },
+        { "l": "B", "t": "Por la falta de ATP en el citoplasma", "c": false, "r": "Incorrecto. El ATP es abundante; la velocidad de uso es la limitante, no su disponibilidad.", "et": "conceptual" },
+        { "l": "C", "t": "Por la ausencia total de retículo sarcoplásmico", "c": false, "r": "Incorrecto. Existe retículo, aunque escaso; la lentitud es propiedad de la miosina.", "et": "conceptual" },
+        { "l": "D", "t": "Debido a la rápida conducción nerviosa", "c": false, "r": "Incorrecto. La conducción nerviosa rápida favorecería una respuesta rápida, no lenta.", "et": "logic" },
+        { "l": "E", "t": "Por el grosor excesivo de las fibras lisas", "c": false, "r": "Incorrecto. Las fibras lisas son mucho más pequeñas que las esqueléticas.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-039",
+      "sb": "control_nervioso",
+      "x": "¿Qué caracteriza a las 'uniones difusas' en el músculo liso?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "El neurotransmisor se secreta a distancia de la célula", "c": true, "r": "Correcto. Se libera en la matriz y difunde micras hasta alcanzar los receptores.", "et": null },
+        { "l": "B", "t": "Existe contacto membrana con membrana", "c": false, "r": "Incorrecto. Eso definiría una unión gap o contacto estrecho, no difuso.", "et": "conceptual" },
+        { "l": "C", "t": "Siempre usan noradrenalina como transmisor", "c": false, "r": "Incorrecto. Pueden usar acetilcolina u otros transmisores.", "et": "recall" },
+        { "l": "D", "t": "Son exclusivas del músculo esquelético", "c": false, "r": "Incorrecto. Son características del músculo liso visceral.", "et": "recall" },
+        { "l": "E", "t": "Tienen una hendidura sináptica de 20 nm", "c": false, "r": "Incorrecto. Las uniones difusas tienen distancias mucho mayores; 20 nm es para uniones de contacto.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-040",
+      "sb": "tipos",
+      "x": "¿Qué tipo de músculo liso conforma los músculos piloerectores?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Multiunitario", "c": true, "r": "Correcto. Requieren inervación simpática específica para cada unidad motora (pelo).", "et": null },
+        { "l": "B", "t": "Unitario visceral", "c": false, "r": "Incorrecto. No funcionan como sincitio ni tienen ondas peristálticas.", "et": "recall" },
+        { "l": "C", "t": "Estriado involuntario", "c": false, "r": "Incorrecto. No son estriados.", "et": "conceptual" },
+        { "l": "D", "t": "Cardíaco modificado", "c": false, "r": "Incorrecto. Tejido irrelevante en la piel.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Sincicial vascular", "c": false, "r": "Incorrecto. No son vasos sanguíneos.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-041",
+      "sb": "potenciales_accion",
+      "x": "¿Qué ion puede inhibir la contracción si sus canales se abren provocando hiperpolarización?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Potasio", "c": true, "r": "Correcto. La salida de potasio (carga positiva) hace el interior más negativo, alejándolo del umbral.", "et": null },
+        { "l": "B", "t": "Sodio", "c": false, "r": "Incorrecto. La entrada de sodio despolariza y excita.", "et": "mechanistic" },
+        { "l": "C", "t": "Calcio", "c": false, "r": "Incorrecto. La entrada de calcio despolariza y activa la contracción.", "et": "mechanistic" },
+        { "l": "D", "t": "Hierro", "c": false, "r": "Incorrecto. No participa en la electrofisiología de membrana.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Fosfato", "c": false, "r": "Incorrecto. Es un anión intracelular, no un ion de conductancia de membrana reguladora.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-042",
+      "sb": "factores_locales",
+      "x": "¿Qué efecto provoca el óxido nítrico (NO) en el músculo liso vascular local?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Vasodilatación", "c": true, "r": "Correcto. Es uno de los factores relajantes más potentes derivados del endotelio o tejido.", "et": null },
+        { "l": "B", "t": "Vasoconstricción", "c": false, "r": "Incorrecto. El NO relaja, no contrae.", "et": "recall" },
+        { "l": "C", "t": "Aumento de la frecuencia de ondas lentas", "c": false, "r": "Incorrecto. Actúa sobre el tono sostenido, no necesariamente sobre la frecuencia marcapasos intestinal.", "et": "conceptual" },
+        { "l": "D", "t": "Incremento de la entrada de calcio", "c": false, "r": "Incorrecto. Reduce el calcio citosólico (vía GMPc) para relajar.", "et": "mechanistic" },
+        { "l": "E", "t": "Fosforilación de la cadena ligera", "c": false, "r": "Incorrecto. Promueve la desfosforilación.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-043",
+      "sb": "mecanismo_contractil",
+      "x": "¿Cómo se organizan físicamente los filamentos de actina en el interior de la célula muscular lisa?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Irradian desde los cuerpos densos", "c": true, "r": "Correcto. Forman un armazón estructural anclado en estos cuerpos proteicos.", "et": null },
+        { "l": "B", "t": "Flotan libremente en el citoplasma", "c": false, "r": "Incorrecto. Requieren anclaje para transmitir fuerza.", "et": "conceptual" },
+        { "l": "C", "t": "Se enrollan alrededor del núcleo", "c": false, "r": "Incorrecto. Distribución funcional incorrecta.", "et": "plausible_distractor" },
+        { "l": "D", "t": "Forman sarcómeros hexagonales perfectos", "c": false, "r": "Incorrecto. Los sarcómeros alineados son de músculo estriado; aquí la organización es menos regular.", "et": "recall" },
+        { "l": "E", "t": "Están unidos exclusivamente a la membrana celular", "c": false, "r": "Incorrecto. También se unen a cuerpos densos citoplasmáticos internos.", "et": "recall" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-044",
+      "sb": "mecanismo_contractil",
+      "x": "¿Cuál es la relación cuantitativa aproximada entre filamentos de actina y miosina en el músculo liso?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "5 a 10 veces más actina que miosina", "c": true, "r": "Correcto. Hay una desproporción marcada a favor de la actina comparado con el estriado.", "et": null },
+        { "l": "B", "t": "Igual cantidad de ambos", "c": false, "r": "Incorrecto. La proporción no es 1:1.", "et": "recall" },
+        { "l": "C", "t": "Más miosina que actina", "c": false, "r": "Incorrecto. La actina es mucho más abundante.", "et": "recall" },
+        { "l": "D", "t": "Solo hay miosina, no actina", "c": false, "r": "Incorrecto. Imposible la contracción sin ambos.", "et": "conceptual" },
+        { "l": "E", "t": "100 veces más actina que miosina", "c": false, "r": "Incorrecto. Exagerado; el rango documentado es 5-10 veces.", "et": "plausible_distractor" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-045",
+      "sb": "control_nervioso",
+      "x": "¿Qué sustancia transmisora suele inhibir el músculo liso intestinal?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Noradrenalina", "c": true, "r": "Correcto. La activación simpática (noradrenalina) suele relajar el intestino (inhibición).", "et": null },
+        { "l": "B", "t": "Acetilcolina", "c": false, "r": "Incorrecto. La acetilcolina suele excitar la motilidad intestinal (parasimpático).", "et": "recall" },
+        { "l": "C", "t": "Calcio", "c": false, "r": "Incorrecto. El calcio es un ion intracelular excitador, no un neurotransmisor inhibidor externo.", "et": "conceptual" },
+        { "l": "D", "t": "Glutamato", "c": false, "r": "Incorrecto. Principal excitador del SNC, no típico inhibidor periférico visceral.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Sodio", "c": false, "r": "Incorrecto. Es un ion, no un neurotransmisor.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-046",
+      "sb": "fisiologia_contraccion",
+      "x": "¿Qué permite que un órgano hueco mantenga su presión luminal tras un cambio súbito de volumen?",
+      "dif": 2,
+      "o": [
+        { "l": "A", "t": "Fenómeno de tensión-relajación inversa", "c": true, "r": "Correcto. El músculo se adapta activamente para recuperar la presión original tras la distensión o vaciado.", "et": null },
+        { "l": "B", "t": "Rigidez cadavérica", "c": false, "r": "Incorrecto. Estado patológico post-mortem.", "et": "conceptual" },
+        { "l": "C", "t": "Bloqueo neuromuscular", "c": false, "r": "Incorrecto. Esto causaría parálisis flácida, no adaptación de presión.", "et": "mechanistic" },
+        { "l": "D", "t": "Atrofia muscular rápida", "c": false, "r": "Incorrecto. Cambio estructural lento, no fisiológico agudo.", "et": "conceptual" },
+        { "l": "E", "t": "Fosforilación irreversible", "c": false, "r": "Incorrecto. Impediría la adaptación dinámica.", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-047",
+      "sb": "regulacion_calcio",
+      "x": "¿Qué ocurre si la miosina cinasa (MLCK) y la miosina fosfatasa están ambas fuertemente activadas?",
+      "dif": 3,
+      "o": [
+        { "l": "A", "t": "La velocidad de ciclado y contracción es elevada", "c": true, "r": "Correcto. El ciclo de fosforilación-desfosforilación es rápido, consumiendo mucha energía y ciclando velozmente.", "et": null },
+        { "l": "B", "t": "El músculo se relaja completamente", "c": false, "r": "Incorrecto. La actividad de la cinasa mantiene la activación.", "et": "mechanistic" },
+        { "l": "C", "t": "Se produce el estado de cerrojo inmediatamente", "c": false, "r": "Incorrecto. El cerrojo ocurre cuando la cinasa se desactiva pero la miosina sigue unida.", "et": "mechanistic" },
+        { "l": "D", "t": "La célula entra en apoptosis", "c": false, "r": "Incorrecto. No es un evento de muerte celular.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Se bloquean los canales de calcio", "c": false, "r": "Incorrecto. La actividad enzimática interna no bloquea los canales directamente.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-048",
+      "sb": "fisiologia_contraccion",
+      "x": "¿Qué molécula energética se degrada para aportar la energía del movimiento de la cabeza de miosina?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "ATP", "c": true, "r": "Correcto. El trifosfato de adenosina es la moneda energética universal para la contracción.", "et": null },
+        { "l": "B", "t": "GTP", "c": false, "r": "Incorrecto. Usado en síntesis proteica y señalización, no como motor primario contráctil.", "et": "recall" },
+        { "l": "C", "t": "Creatina", "c": false, "r": "Incorrecto. La fosfocreatina repone ATP, pero no alimenta directamente la miosina.", "et": "mechanistic" },
+        { "l": "D", "t": "Glucosa", "c": false, "r": "Incorrecto. Sustrato metabólico previo, no la molécula de uso directo en el puente.", "et": "conceptual" },
+        { "l": "E", "t": "Ácido láctico", "c": false, "r": "Incorrecto. Producto de desecho metabólico.", "et": "conceptual" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-049",
+      "sb": "control_nervioso",
+      "x": "¿Qué vesículas se encuentran en las varicosidades de los nervios autónomos que inervan músculo liso?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Vesículas con acetilcolina o noradrenalina", "c": true, "r": "Correcto. Son los dos neurotransmisores principales del sistema autónomo simpático y parasimpático.", "et": null },
+        { "l": "B", "t": "Solo vesículas con acetilcolina", "c": false, "r": "Incorrecto. Esto es cierto para el músculo esquelético, no para el liso autónomo.", "et": "recall" },
+        { "l": "C", "t": "Vesículas con iones calcio puro", "c": false, "r": "Incorrecto. Las vesículas contienen transmisores químicos orgánicos, no iones libres.", "et": "conceptual" },
+        { "l": "D", "t": "Vesículas de lípidos para membrana", "c": false, "r": "Incorrecto. Función estructural, no de transmisión nerviosa.", "et": "plausible_distractor" },
+        { "l": "E", "t": "Vesículas vacías para endocitosis", "c": false, "r": "Incorrecto. Las varicosidades son secretoras (exocitosis).", "et": "mechanistic" }
+      ]
+    },
+    {
+      "id": "FIS-MUSC_LISO-050",
+      "sb": "factores_locales",
+      "x": "¿Qué condición local favorece la vasodilatación en tejidos con flujo sanguíneo insuficiente?",
+      "dif": 1,
+      "o": [
+        { "l": "A", "t": "Exceso de dióxido de carbono", "c": true, "r": "Correcto. La acumulación de CO2 indica metabolismo activo o estasis, requiriendo más flujo.", "et": null },
+        { "l": "B", "t": "Exceso de oxígeno", "c": false, "r": "Incorrecto. El alto oxígeno suele causar vasoconstricción porque la demanda está satisfecha.", "et": "conceptual" },
+        { "l": "C", "t": "Disminución de hidrogeniones", "c": false, "r": "Incorrecto. La alcalosis (bajos H+) suele constreñir; la acidosis dilata.", "et": "mechanistic" },
+        { "l": "D", "t": "Descenso de la temperatura", "c": false, "r": "Incorrecto. El frío reduce el metabolismo y causa vasoconstricción.", "et": "recall" },
+        { "l": "E", "t": "Ausencia de adenosina", "c": false, "r": "Incorrecto. La adenosina es un vasodilatador; su ausencia no promueve la dilatación.", "et": "logic" }
+      ]
+    }
+  ]
+}
