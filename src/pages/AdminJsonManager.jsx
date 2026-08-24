@@ -55,11 +55,71 @@ export default function AdminJsonManager() {
 
 
 
+  const validateTextareaRef = useRef(null);
+  const importTextareaRef = useRef(null);
+
+  const parseSyntaxError = (errMessage, text) => {
+    let position = null;
+    let line = null;
+    let column = null;
+
+    const posMatch = errMessage.match(/position\s+(\d+)/i) || errMessage.match(/at\s+(\d+)/i);
+    if (posMatch) position = parseInt(posMatch[1], 10);
+
+    const lineMatch = errMessage.match(/line\s+(\d+)/i);
+    const colMatch = errMessage.match(/column\s+(\d+)/i);
+    if (lineMatch) line = parseInt(lineMatch[1], 10);
+    if (colMatch) column = parseInt(colMatch[1], 10);
+
+    if (position !== null && line === null) {
+      const upToError = text.slice(0, position);
+      const lines = upToError.split('\n');
+      line = lines.length;
+      column = lines[lines.length - 1].length + 1;
+    } else if (line !== null && position === null) {
+      const lines = text.split('\n');
+      let currentPos = 0;
+      for (let i = 0; i < Math.min(line - 1, lines.length); i++) {
+        currentPos += lines[i].length + 1;
+      }
+      position = currentPos + (column ? Math.max(0, column - 1) : 0);
+    }
+
+    return { message: errMessage, line, column, position };
+  };
+
+  const jumpToError = (textareaRef, errorInfo) => {
+    if (!textareaRef?.current) return;
+    const textarea = textareaRef.current;
+    const text = textarea.value;
+
+    let targetStart = 0;
+    let targetEnd = 0;
+
+    if (errorInfo?.position !== null && errorInfo?.position !== undefined) {
+      targetStart = Math.min(text.length, errorInfo.position);
+      targetEnd = Math.min(text.length, errorInfo.position + 15);
+    } else if (errorInfo?.line) {
+      const lines = text.split('\n');
+      let charCount = 0;
+      for (let i = 0; i < Math.min(errorInfo.line - 1, lines.length); i++) {
+        charCount += lines[i].length + 1;
+      }
+      targetStart = charCount;
+      targetEnd = charCount + (lines[errorInfo.line - 1]?.length || 10);
+    }
+
+    textarea.focus();
+    textarea.setSelectionRange(targetStart, targetEnd);
+    const linesBefore = text.slice(0, targetStart).split('\n').length;
+    textarea.scrollTop = Math.max(0, (linesBefore - 4) * 20);
+    textarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
   const validateJson = () => {
     try {
       const parsed = JSON.parse(jsonInput);
 
-      // Auto-expand compact format for validation if needed
       let dataToValidate = parsed;
       if (isCompactFormat(parsed)) {
         dataToValidate = fromCompactFormat(parsed);
@@ -85,10 +145,11 @@ export default function AdminJsonManager() {
       }
 
     } catch (error) {
+      const errorInfo = parseSyntaxError(error.message, jsonInput);
       setValidationResult({
         valid: false,
         message: `Error de sintaxis: ${error.message}`,
-        line: error.message.match(/position (\d+)/)?.[1]
+        errorInfo
       });
       toast.error('JSON mal formado');
     }
@@ -341,10 +402,11 @@ export default function AdminJsonManager() {
             </CardHeader>
             <CardContent className="space-y-4">
               <Textarea
+                ref={validateTextareaRef}
                 value={jsonInput}
                 onChange={(e) => setJsonInput(e.target.value)}
                 placeholder='Pega tu JSON aquí...'
-                className="min-h-[200px] font-mono text-sm"
+                className="min-h-[220px] font-mono text-xs leading-relaxed"
               />
 
               <Button onClick={validateJson} className="w-full">
@@ -355,20 +417,38 @@ export default function AdminJsonManager() {
               {validationResult && (
                 <Card className={validationResult.valid ? 'border-green-500 bg-green-50' : 'border-destructive bg-destructive/10'}>
                   <CardContent className="p-4">
-                    <div className="flex items-start gap-3">
-                      {validationResult.valid ? (
-                        <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      ) : (
-                        <XCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                      )}
-                      <div>
-                        <p className="font-semibold">{validationResult.message}</p>
-                        {validationResult.valid && validationResult.data && (
-                          <p className="text-sm text-muted-foreground mt-1">
-                            Propiedades: {Object.keys(validationResult.data).join(', ')}
-                          </p>
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <div className="flex items-start gap-3">
+                        {validationResult.valid ? (
+                          <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                        ) : (
+                          <XCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
                         )}
+                        <div>
+                          <p className="font-semibold text-sm">{validationResult.message}</p>
+                          {validationResult.valid && validationResult.data && (
+                            <p className="text-xs text-muted-foreground mt-1">
+                              Propiedades: {Object.keys(validationResult.data).join(', ')}
+                            </p>
+                          )}
+                          {validationResult.errorInfo?.line && (
+                            <p className="text-xs text-destructive font-medium mt-1">
+                              Línea {validationResult.errorInfo.line}{validationResult.errorInfo.column ? `, Columna ${validationResult.errorInfo.column}` : ''}
+                            </p>
+                          )}
+                        </div>
                       </div>
+
+                      {!validationResult.valid && validationResult.errorInfo && (
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          onClick={() => jumpToError(validateTextareaRef, validationResult.errorInfo)}
+                          className="shrink-0"
+                        >
+                          Ir directo al error
+                        </Button>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
