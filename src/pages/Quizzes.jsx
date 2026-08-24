@@ -63,9 +63,24 @@ import ExamOverview from '../components/course/ExamOverview';
 
 export default function QuizzesPage() {
   const { user: authUser } = useAuth();
-  const [view, setView] = useState('home');
-  const [selectedCourse, setSelectedCourse] = useState(null);
-  const [selectedSubject, setSelectedSubject] = useState(null);
+  // Restore navigation state from sessionStorage so quizzes are visible on refresh
+  const _initNav = (() => {
+    try {
+      const raw = sessionStorage.getItem('kc_nav_state');
+      return raw ? JSON.parse(raw) : {};
+    } catch { return {}; }
+  })();
+  // Don't restore to volatile views (quiz/results/swipe) since progress state would be lost
+  const _restoredView = (() => {
+    const v = _initNav.view;
+    if (!v) return 'home';
+    if (['quiz', 'results', 'swipe'].includes(v)) return _initNav.subjectId ? 'list' : 'home';
+    return v;
+  })();
+  const [view, setView] = useState(_restoredView);
+  const [selectedCourse, setSelectedCourse] = useState(null); // resolved after queries load
+  const [selectedSubject, setSelectedSubject] = useState(null); // resolved after queries load
+  const [_navRestored, _setNavRestored] = useState(false);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -94,12 +109,12 @@ export default function QuizzesPage() {
   const [showUploader, setShowUploader] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
-
   const [editingQuiz, setEditingQuiz] = useState(null);
   const [editingSubject, setEditingSubject] = useState(null);
   const [editingFolder, setEditingFolder] = useState(null);
   const [editingCourse, setEditingCourse] = useState(null);
-  const [currentFolderId, setCurrentFolderId] = useState(null);
+  const [currentFolderId, setCurrentFolderId] = useState(_initNav.currentFolderId || null);
+
   const [showBulkUploader, setShowBulkUploader] = useState(false);
   const [activeSubjectTab, setActiveSubjectTab] = useState('quizzes');
   const [swipeMode, setSwipeMode] = useState(false);
@@ -255,6 +270,48 @@ export default function QuizzesPage() {
   });
 
 
+
+  // --- Restore navigation objects from sessionStorage IDs (runs once after queries load) ---
+  useEffect(() => {
+    if (_navRestored) return;
+    if (courses.length === 0 && subjects.length === 0) return; // queries not loaded yet
+
+    const nav = _initNav;
+    if (!nav.view || nav.view === 'home') return; // nothing to restore
+
+    let didRestore = false;
+
+    if (nav.courseId) {
+      const course = courses.find(c => c.id === nav.courseId);
+      if (course) {
+        setSelectedCourse(course);
+        didRestore = true;
+      }
+    }
+
+    if (nav.subjectId) {
+      const subject = subjects.find(s => s.id === nav.subjectId);
+      if (subject) {
+        setSelectedSubject(subject);
+        didRestore = true;
+      }
+    }
+
+    _setNavRestored(true);
+  }, [courses, subjects, _navRestored]);
+
+  // --- Save navigation state whenever it changes ---
+  useEffect(() => {
+    try {
+      const navState = {
+        view,
+        courseId: selectedCourse?.id || null,
+        subjectId: selectedSubject?.id || null,
+        currentFolderId: currentFolderId || null
+      };
+      sessionStorage.setItem('kc_nav_state', JSON.stringify(navState));
+    } catch { /* ignore */ }
+  }, [view, selectedCourse?.id, selectedSubject?.id, currentFolderId]);
 
   const isAdmin = currentUser?.role === 'admin';
   const isProfessor = currentUser?.role === 'professor';
@@ -1334,27 +1391,17 @@ export default function QuizzesPage() {
 
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                       <div>
-                        <h1 className="text-2xl sm:text-4xl font-bold text-gray-900">Mis Cursos</h1>
-                        <p className="text-gray-600">Selecciona un curso para ver sus materias</p>
+                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Cursos</h1>
+                        <p className="text-sm text-gray-600">Selecciona un curso para ver sus materias y cuestionarios</p>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        <Link to={createPageUrl('Adivino')}>
-                          <Button
-                            variant="outline"
-                            className="text-xs sm:text-sm h-9 border-slate-300 text-slate-700 hover:bg-slate-50"
-                          >
-                            <Calculator className="w-4 h-4 mr-2" />
-                            Adivino
-                          </Button>
-                        </Link>
                         {!canEdit && (
                           <Button
                             onClick={() => setShowJoinModal(true)}
-                            variant="outline"
-                            className="text-xs sm:text-sm h-9 border-green-300 text-green-600 hover:bg-green-50"
+                            className="text-xs sm:text-sm h-9 bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm"
                           >
                             <BookOpen className="w-4 h-4 mr-2" />
-                            Unirse a Curso
+                            Ingresar Código de Curso
                           </Button>
                         )}
 
@@ -1550,15 +1597,6 @@ export default function QuizzesPage() {
                     <Breadcrumb />
                     <FlowStatusBar />
 
-                    {/* Exam Overview - Solo en cursos, no en carpetas */}
-                    {selectedCourse && !currentFolderId && (
-                      <ExamOverview
-                        courseId={selectedCourse.id}
-                        subjects={currentCourseSubjects}
-                        currentUser={currentUser}
-                        isAdmin={isAdmin}
-                      />
-                    )}
 
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                       <div>
@@ -1894,70 +1932,11 @@ export default function QuizzesPage() {
                       </div>
 
 
-                      <div className="flex gap-4 mb-6 border-b">
-                        <button
-                          className={`pb-2 px-1 ${activeTab === 'quizzes' ? 'border-b-2 border-indigo-600 font-semibold text-indigo-600' : 'text-gray-500'}`}
-                          onClick={() => setActiveTab('quizzes')}
-                        >
-                          Cuestionarios ({currentLevelQuizzes.length})
-                        </button>
-                        <button
-                          className={`pb-2 px-1 ${activeTab === 'resources' ? 'border-b-2 border-indigo-600 font-semibold text-indigo-600' : 'text-gray-500'}`}
-                          onClick={() => setActiveTab('resources')}
-                        >
-                          Recursos ({currentLevelResources.length})
-                        </button>
+                      <div className="flex items-center justify-between mb-4 border-b pb-2">
+                        <span className="text-sm font-semibold text-indigo-700 uppercase tracking-wide">
+                          Cuestionarios ({subjectQuizzes.length})
+                        </span>
                       </div>
-
-                      {/* Resources Grid - Subject Level */}
-                      {activeTab === 'resources' && (
-                        <div className="mb-8">
-                          {canEdit && (
-                            <div className="flex justify-end mb-4">
-                              <Button
-                                size="sm"
-                                onClick={() => {
-                                  setEditingResource(null);
-                                  setShowResourceEditor(true);
-                                }}
-                                className="bg-indigo-600 hover:bg-indigo-700"
-                              >
-                                <Upload className="w-4 h-4 mr-2" /> Subir Recurso
-                              </Button>
-                            </div>
-                          )}
-                          {currentLevelResources.length > 0 ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                              {currentLevelResources.map(resource => (
-                                <ResourceCard
-                                  key={resource.id}
-                                  resource={resource}
-                                  canEdit={canEdit}
-                                  onClick={(r) => setViewingResource(r)}
-                                  onEdit={(r) => {
-                                    setEditingResource(r);
-                                    setShowResourceEditor(true);
-                                  }}
-                                  onDelete={(id) => {
-                                    if (confirm('¿Estás seguro de eliminar este recurso?')) {
-                                      deleteResourceMutation.mutate(id);
-                                    }
-                                  }}
-                                />
-                              ))}
-                            </div>
-                          ) : (
-                            <div className="text-center py-12 bg-gray-50 rounded-lg border border-dashed border-gray-300">
-                              <p className="text-gray-500 mb-2">No hay recursos disponibles aún.</p>
-                              {canEdit && (
-                                <Button variant="outline" onClick={() => { setEditingResource(null); setShowResourceEditor(true); }}>
-                                  Subir el primer recurso
-                                </Button>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      )}
 
 
                       {/* Carpetas dentro de la materia con droppable */}
@@ -2100,65 +2079,14 @@ export default function QuizzesPage() {
               </AnimatePresence>
 
 
-              <SessionTimer />
-              <TaskProgressFloat />
-
-              {/* Move Quiz Modal */}
-              <MoveQuizModal
-                open={!!movingQuiz}
-                onClose={() => setMovingQuiz(null)}
-                quiz={movingQuiz}
-                containers={subjects}
-                onMove={async (quizId, newSubjectId) => {
-                  await updateQuizMutation.mutateAsync({ id: quizId, data: { subject_id: newSubjectId } });
-                  setMovingQuiz(null);
-                }}
-              />
-
-              {/* Content Manager Modal */}
-              {showContentManager && (
-                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-                  <div className="w-full max-w-3xl">
-                    <ContentManager
-                      courses={courses}
-                      folders={folders}
-                      subjects={subjects}
-                      quizzes={quizzes}
-                      onDeleteCourses={handleBulkDeleteCourses}
-                      onDeleteFolders={handleBulkDeleteFolders}
-                      onDeleteSubjects={handleBulkDeleteSubjects}
-                      onUpdateCourse={handleUpdateCourse}
-                      onUpdateFolder={handleUpdateFolder}
-                      onUpdateSubject={handleUpdateSubject}
-                      onClose={() => setShowContentManager(false)}
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* Quiz Exporter Modal */}
-              {showQuizExporter && (
-                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-                  <QuizExporter onClose={() => setShowQuizExporter(false)} />
-                </div>
-              )}
+              {/* Extras desactivados para mantener la experiencia simple y enfocada */}
+              {/* <SessionTimer /> */}
+              {/* <TaskProgressFloat /> */}
 
               {/* Course Join Modal */}
               <CourseJoinModal
                 open={showJoinModal}
                 onClose={() => setShowJoinModal(false)}
-                currentUser={currentUser}
-              />
-
-              {/* Feature Analytics Modal */}
-              {showFeatureAnalytics && (
-                <FeatureAnalytics onClose={() => setShowFeatureAnalytics(false)} />
-              )}
-
-              {/* Track page view */}
-              <FeatureTracker
-                featureName="Página Principal Quizzes"
-                category="general"
                 currentUser={currentUser}
               />
             </div>
