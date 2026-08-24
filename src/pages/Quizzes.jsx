@@ -697,8 +697,27 @@ export default function QuizzesPage() {
     ? subjects.filter(s => s && s.id && sameId(s.folder_id, currentFolderId) && canUserAccess(s))
     : currentCourseSubjects.filter(s => s && s.id && !s.folder_id);
 
+  const matchesSubject = (q, subject) => {
+    if (!q || !subject) return false;
+    const targetId = normalizeId(subject.id);
+    const targetName = (subject.name || '').trim().toLowerCase();
+    const targetCode = (subject.code || '').trim().toLowerCase();
+
+    const qSubjId = normalizeId(q.subject_id);
+    const qSubj = (q.subject || q.subject_name || '').trim().toLowerCase();
+    const qSubjIdStr = (q.subject_id ? String(q.subject_id) : '').trim().toLowerCase();
+
+    return (
+      sameId(qSubjId, targetId) ||
+      qSubjIdStr === targetName ||
+      qSubjIdStr === targetCode ||
+      qSubj === targetName ||
+      qSubj === targetCode
+    );
+  };
+
   const subjectQuizzes = selectedSubject
-    ? quizzes.filter(q => q && q.id && sameId(q.subject_id, selectedSubject.id) && (isAdmin || !q.is_hidden))
+    ? quizzes.filter(q => q && q.id && matchesSubject(q, selectedSubject) && (isAdmin || !q.is_hidden))
     : [];
 
   const currentLevelQuizzes = currentFolderId ? currentFolderQuizzes : subjectQuizzes;
@@ -1163,13 +1182,14 @@ export default function QuizzesPage() {
   };
 
   const getRecursiveQuizCount = (subjectId) => {
+    const subj = subjects.find(s => sameId(s.id, subjectId)) || { id: subjectId };
     // 1. Direct quizzes
-    const directCount = quizzes.filter(q => sameId(q.subject_id, subjectId)).length;
+    const directCount = quizzes.filter(q => matchesSubject(q, subj)).length;
 
     // 2. Quizzes in folders belonging to this subject
     const subjectFolders = folders.filter(f => sameId(f.subject_id, subjectId));
     const folderIds = subjectFolders.map(f => f.id);
-    const folderCount = quizzes.filter(q => folderIds.includes(q.folder_id)).length;
+    const folderCount = quizzes.filter(q => folderIds.some(fid => sameId(q.folder_id, fid))).length;
 
     return directCount + folderCount;
   };

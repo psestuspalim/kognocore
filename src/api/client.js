@@ -138,8 +138,19 @@ const sortByField = (items, orderBy) => {
 
 const mergeById = (primary, secondary) => {
   const map = new Map();
-  secondary.forEach((item) => map.set(item.id, item));
-  primary.forEach((item) => map.set(item.id, item));
+  (secondary || []).forEach((item) => {
+    if (item?.id) map.set(item.id, item);
+  });
+  (primary || []).forEach((item) => {
+    if (item?.id) {
+      const existing = map.get(item.id);
+      if (existing) {
+        map.set(item.id, { ...existing, ...item });
+      } else {
+        map.set(item.id, item);
+      }
+    }
+  });
   return Array.from(map.values());
 };
 

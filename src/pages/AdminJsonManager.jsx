@@ -258,7 +258,8 @@ export default function AdminJsonManager() {
         await client.entities.Quiz.create({
           title: quizData.title || file.name.replace('.json', ''),
           description: quizData.description || 'Importado desde JSON',
-          subject_id: 'root',
+          subject_id: quizData.subject_id || selectedTargetSubject || 'subj_med_interna',
+          course_id: 'course_enarm2026',
           questions: quizData.questions,
           is_hidden: false,
         });
@@ -281,15 +282,17 @@ export default function AdminJsonManager() {
     }
   };
 
-
+  const [selectedTargetSubject, setSelectedTargetSubject] = useState('subj_med_interna');
 
   const handleImportToDb = async () => {
     try {
       const parsed = JSON.parse(jsonInput);
       let quizData = parsed;
 
-      // Auto-convert compact format
-      if (isCompactFormat(parsed)) {
+      // Auto-convert compact format or simplified format
+      if (isSimplifiedFormat(parsed)) {
+        quizData = fromSimplifiedFormat(parsed);
+      } else if (isCompactFormat(parsed)) {
         quizData = fromCompactFormat(parsed);
         toast.info('Formato detectado: Compacto (convertido automáticamente)');
       }
@@ -301,16 +304,18 @@ export default function AdminJsonManager() {
 
       // Create new quiz
       await client.entities.Quiz.create({
-        title: quizData.title || `Importado ${new Date().toLocaleDateString()}`,
+        title: quizData.title || `Cuestionario ${new Date().toLocaleDateString()}`,
         description: quizData.description || 'Importado desde JSON',
-        subject_id: 'root', // Default to root
+        subject_id: quizData.subject_id || selectedTargetSubject || 'subj_med_interna',
+        course_id: 'course_enarm2026',
         questions: quizData.questions,
         total_questions: quizData.questions.length,
         is_hidden: false,
         created_date: new Date().toISOString()
       });
 
-      toast.success('¡Quiz importado exitosamente!');
+      toast.success('¡Quiz importado exitosamente a ENARM 2026!');
+      queryClient.invalidateQueries(['quizzes']);
       setJsonInput(''); // Clear input on success
 
       // Optionally invalidate query to refresh list
