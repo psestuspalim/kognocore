@@ -34,14 +34,20 @@ const initializeStorage = () => {
     localStorage.setItem('structure_initialized', 'true');
   }
 
-  // Ensure app_quizzes exists
+  // Ensure app_quizzes exists and includes the full ENARM bank
   if (!localStorage.getItem('app_quizzes')) {
     localStorage.setItem('app_quizzes', JSON.stringify(mockQuizzes));
   } else {
-    // Auto-heal existing quizzes: ensure valid subject_id and course_id
     try {
-      const stored = JSON.parse(localStorage.getItem('app_quizzes') || '[]');
-      if (Array.isArray(stored) && stored.length > 0) {
+      let stored = JSON.parse(localStorage.getItem('app_quizzes') || '[]');
+      if (!Array.isArray(stored) || stored.length === 0) {
+        stored = [...mockQuizzes];
+        localStorage.setItem('app_quizzes', JSON.stringify(stored));
+      } else if (!stored.some(q => q && q.id === 'quiz_enarm2026_mega')) {
+        stored.unshift(mockQuizzes[0]);
+        localStorage.setItem('app_quizzes', JSON.stringify(stored));
+      }
+
         const validIds = ['subj_med_interna', 'subj_cirugia_gen', 'subj_pediatria', 'subj_ginecologia_obs', 'subj_simuladores'];
         let updated = false;
         const healed = stored.map(q => {

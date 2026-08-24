@@ -7,7 +7,10 @@ export const mockUser = {
     username: 'jesus'
 };
 
-export const mockQuizzes = [];
+import defaultQuiz from '@/data/enarm_full_quiz.json';
+
+export const mockQuizzes = [defaultQuiz];
+
 
 // ─── CURSO: ENARM 2026 ───────────────────────────────────────────────────────
 export const mockCourses = [
