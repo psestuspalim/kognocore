@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, Lightbulb, ChevronRight, ChevronLeft } from 'lucide-react';
 import { client } from '@/api/client';
@@ -28,6 +28,7 @@ export default function QuestionView({
   const [showFeedback, setShowFeedback] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [isMarked, setIsMarked] = useState(initialIsMarked);
+  const feedbackRef = useRef(null);
 
   // Reiniciar estado y hacer scroll al inicio cuando cambia el número de pregunta
   useEffect(() => {
@@ -38,6 +39,15 @@ export default function QuestionView({
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [questionNumber]);
+
+  // Cuando se muestra la justificación, hacer scroll suave para que sea 100% visible arriba de la barra fija
+  useEffect(() => {
+    if (showFeedback && feedbackRef.current) {
+      setTimeout(() => {
+        feedbackRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }, [showFeedback]);
 
   // Actualizar sesión cuando cambia la pregunta
   useEffect(() => {
@@ -159,7 +169,7 @@ export default function QuestionView({
   const progressPercent = totalQuestions > 0 ? Math.round((answeredCount / totalQuestions) * 100) : 0;
 
   return (
-    <div className="relative w-full min-h-screen pb-32 bg-[linear-gradient(160deg,#f8fafc_0%,#f1f5f9_50%,#e2e8f0_100%)] font-sans">
+    <div className="relative w-full min-h-screen pb-44 bg-[linear-gradient(160deg,#f8fafc_0%,#f1f5f9_50%,#e2e8f0_100%)] font-sans">
       {/* Top Bar */}
       <header className="px-4 pt-4 md:px-6">
         <div className="max-w-4xl mx-auto rounded-2xl border border-slate-200/80 bg-white/95 px-4 py-3 shadow-sm backdrop-blur-sm">
@@ -270,7 +280,10 @@ export default function QuestionView({
 
           {/* Single Clean Justification Box (When Answered) */}
           {showFeedback && (
-            <div className="mt-6 rounded-xl border border-emerald-300 bg-emerald-50/95 p-4 sm:p-5 shadow-sm animate-fade-in">
+            <div
+              ref={feedbackRef}
+              className="mt-6 mb-8 rounded-xl border border-emerald-300 bg-emerald-50/95 p-4 sm:p-5 shadow-sm animate-fade-in scroll-mt-24"
+            >
               <div className="flex items-center gap-2 mb-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
                 <span className="font-bold text-xs text-emerald-900 uppercase tracking-wide">
@@ -282,6 +295,9 @@ export default function QuestionView({
               </div>
             </div>
           )}
+
+          {/* Generous bottom spacer so content is never behind the bottom bar */}
+          <div className="h-16 w-full" />
         </div>
       </main>
 
