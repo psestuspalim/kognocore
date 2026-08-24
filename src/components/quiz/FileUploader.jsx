@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Textarea } from '@/components/ui/textarea';
-import { fromCompactFormat } from '../utils/quizFormats';
+import { fromCompactFormat, isSimplifiedFormat, fromSimplifiedFormat } from '../utils/quizFormats';
 
 export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -16,6 +16,15 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
     let questions = [];
     let title = fileName.replace('.json', '');
     let description = '';
+
+    // FORMATO SIMPLIFICADO ESPAÑOL { id, pregunta, opciones, correcta, justificacion, serie }
+    if (isSimplifiedFormat(data)) {
+      const simplified = fromSimplifiedFormat(data);
+      title = simplified.title !== 'Cuestionario' ? simplified.title : title;
+      description = simplified.description || '';
+      questions = simplified.questions;
+      return { title, description, questions };
+    }
 
     // Mapeo de dificultad inglés a español
     const difficultyMap = {
@@ -113,8 +122,29 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
     const info = [];
 
     // Validar estructura base
-    if (!Array.isArray(data) && !data.quiz && !data.questions && (!data.t || !data.q) && (!data.metadata || !data.q)) {
-      errors.push("❌ Estructura raíz inválida. Se espera array, objeto con 'quiz', 'questions', {metadata, q} o formato compacto {t, q}");
+    if (!isSimplifiedFormat(data) && !Array.isArray(data) && !data.quiz && !data.questions && (!data.t || !data.q) && (!data.metadata || !data.q)) {
+      errors.push("❌ Estructura raíz inválida. Se espera array de preguntas, formato simplificado {id, pregunta, opciones, correcta}, {metadata, q} o formato compacto {t, q}");
+      return { errors, warnings, info };
+    }
+
+    // Identificar formato simplificado
+    if (isSimplifiedFormat(data)) {
+      info.push("ℹ️ Formato simplificado (ENARM / Médico) detectado");
+      try {
+        const expanded = fromSimplifiedFormat(data);
+        info.push(`ℹ️ ${expanded.questions.length} preguntas encontradas`);
+        expanded.questions.forEach((q, idx) => {
+          if (!q.question) errors.push(`❌ P${idx + 1}: Falta el enunciado 'pregunta'`);
+          if (!q.answerOptions || q.answerOptions.length === 0) {
+            errors.push(`❌ P${idx + 1}: Faltan 'opciones' de respuesta`);
+          } else {
+            const correct = q.answerOptions.filter(o => o.isCorrect);
+            if (correct.length === 0) warnings.push(`⚠️ P${idx + 1}: La clave 'correcta' no coincide con ninguna opción`);
+          }
+        });
+      } catch (err) {
+        errors.push("❌ Error al procesar formato simplificado: " + err.message);
+      }
       return { errors, warnings, info };
     }
 

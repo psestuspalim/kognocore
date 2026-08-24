@@ -17,15 +17,23 @@ import { z } from 'zod';
 
 // Define Zod Schema for Quiz Validation
 const questionSchema = z.object({
-  text: z.string({ required_error: "Question text is required" }),
+  text: z.string().optional(),
+  question: z.string().optional(),
   type: z.string().optional(),
-  options: z.array(z.string()).optional(),
-  correctAnswer: z.string().optional(),
-  explanation: z.string().optional()
+  options: z.any().optional(),
+  answerOptions: z.any().optional(),
+  correctAnswer: z.any().optional(),
+  explanation: z.string().optional(),
+  justificacion: z.string().optional(),
+  feedback: z.string().optional(),
+  serie: z.any().optional(),
+  difficulty: z.string().optional()
+}).refine(data => Boolean(data.text || data.question), {
+  message: "Question text is required"
 });
 
 const quizSchema = z.object({
-  title: z.string({ required_error: "Title is required" }),
+  title: z.string().optional(),
   description: z.string().optional(),
   questions: z.array(questionSchema).min(1, "Must contain at least 1 question"),
   subject_id: z.string().optional(),

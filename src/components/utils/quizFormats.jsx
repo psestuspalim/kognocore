@@ -29,10 +29,123 @@ const bloomTextToNumber = {
 };
 
 /**
+ * Detecta si los datos están en el formato simplificado en español
+ * Ejemplo: [{ id: 1, pregunta: "...", opciones: { a: "...", b: "..." }, correcta: "d", justificacion: "..." }]
+ */
+export function isSimplifiedFormat(data) {
+  if (!data) return false;
+
+  // Array directo de preguntas simplificadas
+  if (Array.isArray(data) && data.length > 0) {
+    const first = data[0];
+    return Boolean(first && (first.pregunta || (first.opciones && typeof first.opciones === 'object')));
+  }
+
+  // Objeto contenedor con array de preguntas simplificadas (ej: { preguntas: [...] } o { questions: [...] })
+  const items = data.preguntas || data.questions || data.q || data.items;
+  if (Array.isArray(items) && items.length > 0) {
+    const first = items[0];
+    return Boolean(first && (first.pregunta || (first.opciones && typeof first.opciones === 'object')));
+  }
+
+  // Objeto individual de pregunta simplificada
+  if (typeof data === 'object' && !Array.isArray(data) && data.pregunta && data.opciones) {
+    return true;
+  }
+
+  return false;
+}
+
+/**
+ * Convierte un item o lista de formato simplificado al formato estándar expandido
+ */
+export function fromSimplifiedFormat(data) {
+  let list = [];
+  let title = 'Cuestionario';
+  let description = '';
+
+  if (Array.isArray(data)) {
+    list = data;
+  } else if (data && typeof data === 'object') {
+    title = data.titulo || data.title || data.nombre || title;
+    description = data.descripcion || data.description || '';
+    list = data.preguntas || data.questions || data.q || data.items || [data];
+  }
+
+  const questions = list.map((item, idx) => {
+    const questionText = item.pregunta || item.question || item.enunciado || item.text || `Pregunta ${idx + 1}`;
+    const questionId = item.id != null ? String(item.id) : `Q${idx + 1}`;
+    const justificacion = item.justificacion || item.justificación || item.explicacion || item.explicación || item.explanation || item.feedback || '';
+    const correctaKey = String(item.correcta || item.respuesta_correcta || item.correctAnswer || '').trim().toLowerCase();
+    const serie = item.serie || null;
+
+    let answerOptions = [];
+
+    if (item.opciones && typeof item.opciones === 'object' && !Array.isArray(item.opciones)) {
+      // Objeto clave-valor: { a: "...", b: "...", c: "...", d: "..." }
+      answerOptions = Object.entries(item.opciones).map(([key, val]) => {
+        const cleanKey = key.trim().toLowerCase();
+        const isCorrect = cleanKey === correctaKey;
+        const text = typeof val === 'object' && val !== null ? (val.text || val.t || '') : String(val);
+        return {
+          label: key.trim().toUpperCase(),
+          text: text,
+          isCorrect: isCorrect,
+          rationale: isCorrect ? justificacion : '',
+          errorType: isCorrect ? '' : 'conceptual'
+        };
+      });
+    } else if (Array.isArray(item.opciones || item.options || item.answerOptions)) {
+      // Array de opciones
+      const rawOptions = item.opciones || item.options || item.answerOptions;
+      answerOptions = rawOptions.map((opt, optIdx) => {
+        const label = String.fromCharCode(65 + optIdx); // A, B, C, D...
+        const isCorrect = typeof opt === 'object' && opt !== null
+          ? (opt.isCorrect === true || opt.c === true || correctaKey === label.toLowerCase() || correctaKey === String(optIdx))
+          : (correctaKey === label.toLowerCase() || correctaKey === String(optIdx));
+        const text = typeof opt === 'object' && opt !== null ? (opt.text || opt.t || opt.v || '') : String(opt);
+
+        return {
+          label: label,
+          text: text,
+          isCorrect: isCorrect,
+          rationale: isCorrect ? justificacion : (opt.rationale || opt.r || ''),
+          errorType: isCorrect ? '' : (opt.errorType || opt.et || 'conceptual')
+        };
+      });
+    }
+
+    return {
+      type: 'text',
+      question: questionText,
+      difficulty: 'moderado',
+      bloomLevel: 'Comprender',
+      questionId: questionId,
+      serie: serie,
+      feedback: justificacion,
+      justificacion: justificacion,
+      hint: item.pista || item.hint || '',
+      answerOptions: answerOptions
+    };
+  });
+
+  return {
+    title: title,
+    description: description,
+    total_questions: questions.length,
+    questions: questions
+  };
+}
+
+/**
  * Convierte cualquier formato de quiz a formato compacto longitudinal
  * Estructura: {t: "título", q: [{x, dif, qt, id, sj, tp, sb, o}]}
  */
 export function toCompactFormat(quizData) {
+  if (isSimplifiedFormat(quizData)) {
+    quizData = fromSimplifiedFormat(quizData);
+  }
+
   const { title, description, questions = [], total_questions } = quizData;
 
   return {
@@ -43,15 +156,16 @@ export function toCompactFormat(quizData) {
         : q.difficulty || 2;
 
       return {
-        x: q.question || q.questionText || q.text || '',
+        x: q.question || q.questionText || q.text || q.pregunta || '',
         dif: diffNum,
         qt: q.type || 'mcq',
         id: q.id || q.questionId || `Q${String(idx + 1).padStart(3, '0')}`,
         sj: q.subject || '',
         tp: q.topic || '',
         sb: q.subtopic || '',
+        serie: q.serie || undefined,
         img: q.imageUrl || undefined,
-        hint: q.hint || undefined,
+        hint: q.hint || q.pista || undefined,
         o: (q.answerOptions || q.options || []).map((opt) => ({
           text: opt.text || opt,
           c: opt.isCorrect === true,
@@ -64,10 +178,16 @@ export function toCompactFormat(quizData) {
 }
 
 /**
- * Convierte de formato compacto a formato expandido para uso en componentes
- * Soporta: formato longitudinal {t, q:[{x, dif, qt...}]}, formato viejo {m, q}
+ * Convierte de formato compacto, simplificado o legado a formato expandido para uso en componentes
  */
 export function fromCompactFormat(compactData) {
+  if (!compactData) return { title: 'Quiz', questions: [] };
+
+  // Detectar formato simplificado { pregunta, opciones: { a, b }, correcta, justificacion }
+  if (isSimplifiedFormat(compactData)) {
+    return fromSimplifiedFormat(compactData);
+  }
+
   // Detectar formato longitudinal (t es opcional si q tiene estructura correcta)
   const isLongitudinalFormat = compactData && Array.isArray(compactData.q) &&
     compactData.q.length > 0 && compactData.q[0].x;
@@ -97,6 +217,7 @@ export function fromCompactFormat(compactData) {
         subject: question.sj || '',
         topic: question.tp || '',
         subtopic: question.sb || '',
+        serie: question.serie || null,
         hint: question.hint || '',
         answerOptions: (question.o || []).map(opt => ({
           text: opt.text || opt.t || '',
@@ -144,9 +265,11 @@ export function fromCompactFormat(compactData) {
 }
 
 /**
- * Detecta si un quiz está en formato compacto
+ * Detecta si un quiz está en formato compacto o requiere normalización
  */
 export function isCompactFormat(data) {
+  if (isSimplifiedFormat(data)) return true;
+
   // Formato longitudinal: {q: [{x, ...}]} (t es opcional)
   const isLongitudinalFormat = data && Array.isArray(data.q) &&
     data.q.length > 0 && data.q[0].x;
