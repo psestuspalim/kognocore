@@ -1727,16 +1727,28 @@ export default function QuizzesPage() {
                     {currentFolderId && (
                       <div className="mt-6">
                         <div className="space-y-4">
-                          <h2 className="text-lg font-semibold text-gray-700 flex items-center gap-2">
-                            <BookOpen className="w-5 h-5" /> Cuestionarios ({currentFolderQuizzes.length})
-                          </h2>
+                          <div className="flex items-center justify-between">
+                            <h2 className="text-lg font-semibold text-gray-700 flex items-center gap-2">
+                              <BookOpen className="w-5 h-5 text-indigo-600" /> Cuestionarios ({currentFolderQuizzes.length})
+                            </h2>
+                            {canEdit && (
+                              <Button onClick={() => setShowUploader(true)} size="sm" className="bg-indigo-600 hover:bg-indigo-700">
+                                <Upload className="w-4 h-4 mr-2" /> Subir Cuestionario (JSON)
+                              </Button>
+                            )}
+                          </div>
                           {currentFolderQuizzes.length === 0 ? (
                             <div className="flex flex-col items-center justify-center py-12 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
                               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm ring-1 ring-gray-100">
                                 <BookOpen className="w-6 h-6 text-gray-400" />
                               </div>
-                              <h3 className="text-lg font-semibold text-gray-900 mb-1">No hay cuestionarios</h3>
-                              <p className="text-sm text-gray-500">Sube un archivo JSON para agregar contenido.</p>
+                              <h3 className="text-lg font-semibold text-gray-900 mb-1">No hay cuestionarios en esta carpeta</h3>
+                              <p className="text-sm text-gray-500 mb-3">Sube un archivo JSON para agregar contenido.</p>
+                              {canEdit && (
+                                <Button onClick={() => setShowUploader(true)} className="bg-indigo-600 hover:bg-indigo-700">
+                                  <Upload className="w-4 h-4 mr-2" /> Subir Cuestionario (JSON)
+                                </Button>
+                              )}
                             </div>
                           ) : (
                             <div className="space-y-2">
@@ -1783,10 +1795,34 @@ export default function QuizzesPage() {
                       onUploadSuccess={async (data) => {
                         await createQuizMutation.mutateAsync({
                           ...data,
+                          folder_id: currentFolderId || null,
+                          course_id: selectedCourse?.id || 'course_enarm2026'
+                        });
+                        setShowUploader(false);
+                        queryClient.invalidateQueries({ queryKey: ['quizzes'] });
+                      }}
+                      jsonOnly={true}
+                    />
+                  </motion.div>
+                )}
+
+                {/* File Uploader - Subject Level */}
+                {view === 'list' && selectedSubject && showUploader && (
+                  <motion.div key="uploader-subject" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <Button onClick={() => setShowUploader(false)} variant="ghost" className="mb-6">
+                      <ArrowLeft className="w-4 h-4 mr-2" /> Volver a {selectedSubject.name}
+                    </Button>
+                    <FileUploader
+                      onUploadSuccess={async (data) => {
+                        await createQuizMutation.mutateAsync({
+                          ...data,
+                          subject_id: selectedSubject.id,
+                          course_id: selectedSubject.course_id || selectedCourse?.id || 'course_enarm2026',
                           folder_id: currentFolderId || null
                         });
                         setShowUploader(false);
                         queryClient.invalidateQueries({ queryKey: ['quizzes'] });
+                        toast.success('Cuestionario agregado a ' + selectedSubject.name);
                       }}
                       jsonOnly={true}
                     />
@@ -1803,12 +1839,18 @@ export default function QuizzesPage() {
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                         <div>
                           <h1 className="text-xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
-                            <BookOpen className="w-6 h-6" /> {selectedSubject.name}
+                            <BookOpen className="w-6 h-6 text-indigo-600" /> {selectedSubject.name}
                           </h1>
-
                         </div>
                         {isAdmin && (
-                          <div className="flex gap-2">
+                          <div className="flex flex-wrap gap-2">
+                            <Button onClick={() => setShowUploader(true)} className="bg-indigo-600 hover:bg-indigo-700 text-xs sm:text-sm h-9">
+                              <Upload className="w-4 h-4 mr-2" /> Subir Cuestionario (JSON)
+                            </Button>
+
+                            <Button variant="outline" onClick={() => setEditingQuiz({ title: '', subject_id: selectedSubject.id, questions: [] })} className="text-xs sm:text-sm h-9">
+                              <Plus className="w-4 h-4 mr-2" /> Nuevo Cuestionario
+                            </Button>
 
                             <Dialog open={showFolderDialog} onOpenChange={setShowFolderDialog}>
                               <DialogTrigger asChild>
@@ -1821,7 +1863,7 @@ export default function QuizzesPage() {
                                 <div className="space-y-4 mt-4">
                                   <div>
                                     <Label>Nombre</Label>
-                                    <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Parcial 1" />
+                                    <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Módulo 1" />
                                   </div>
                                   <Button onClick={() => createFolderMutation.mutate({ ...newItem, subject_id: selectedSubject.id })} className="w-full bg-amber-500 hover:bg-amber-600">
                                     Crear carpeta
@@ -1931,7 +1973,27 @@ export default function QuizzesPage() {
                         </div>
                       )}
 
-                      {subjectQuizzes.filter(q => !q.folder_id).length === 0 ? null : (
+                      {subjectQuizzes.filter(q => !q.folder_id).length === 0 ? (
+                        <div className="flex flex-col items-center justify-center py-12 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
+                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm ring-1 ring-gray-100">
+                            <BookOpen className="w-6 h-6 text-indigo-500" />
+                          </div>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-1">No hay cuestionarios en {selectedSubject.name}</h3>
+                          <p className="text-sm text-gray-500 mb-4 text-center max-w-md">
+                            Sube un archivo JSON o crea un cuestionario manualmente en la raíz de esta materia.
+                          </p>
+                          {isAdmin && (
+                            <div className="flex flex-wrap gap-2 justify-center">
+                              <Button onClick={() => setShowUploader(true)} className="bg-indigo-600 hover:bg-indigo-700">
+                                <Upload className="w-4 h-4 mr-2" /> Subir Cuestionario (JSON)
+                              </Button>
+                              <Button variant="outline" onClick={() => setEditingQuiz({ title: '', subject_id: selectedSubject.id, questions: [] })}>
+                                <Plus className="w-4 h-4 mr-2" /> Crear Manualmente
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                      ) : (
                         <DroppableArea droppableId={`subject-${selectedSubject.id}`} type="QUIZ" className="space-y-2">
                           {subjectQuizzes.filter(q => !q.folder_id).map((quiz, index) => (
                             <DraggableItem key={quiz.id} id={quiz.id} index={index} isAdmin={isAdmin}>
