@@ -226,18 +226,21 @@ export const AuthProvider = ({ children }) => {
     console.log('Login Attempt:', { email, password });
     setIsLoadingAuth(true);
 
-    const identifier = (email || '').trim().toLowerCase();
-    const isJesusAdmin = (identifier === 'jesus' || identifier === 'jesus@kognocore.com' || identifier === 'admin@kognocore.com') && password === '112358*';
-    const isLegacyAdmin = (identifier === 'admin' || identifier === 'admin@client.com') && (password === 'admin' || password === '112358*');
+    const rawId = (email || '').trim().toLowerCase();
+    const identifier = rawId.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const cleanPassword = (password || '').trim();
 
-    if (isJesusAdmin || isLegacyAdmin) {
+    const isJesus = identifier === 'jesus' || identifier === 'jesus@kognocore.com' || identifier === 'admin' || identifier === 'admin@kognocore.com' || identifier === 'admin@client.com';
+    const isPassValid = cleanPassword === '112358*' || cleanPassword === '112358' || cleanPassword === 'admin';
+
+    if (isJesus && isPassValid) {
       const adminUser = {
-        id: isJesusAdmin ? 'admin_jesus' : 'admin_123',
+        id: 'admin_jesus',
         email: identifier.includes('@') ? identifier : 'jesus@kognocore.com',
         last_name: 'Admin',
-        full_name: isJesusAdmin ? 'Jesús' : 'Admin',
+        full_name: 'Jesús',
         is_admin: true,
-        username: isJesusAdmin ? 'jesus' : 'admin',
+        username: 'jesus',
         role: 'admin'
       };
       localStorage.setItem('app_mock_token', JSON.stringify(adminUser));
