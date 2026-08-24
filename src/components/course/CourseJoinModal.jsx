@@ -25,72 +25,73 @@ export default function CourseJoinModal({ open, onClose, currentUser }) {
 
     setLoading(true);
     try {
-      // Buscar código
-      const codes = await client.entities.CourseAccessCode.filter({ code: code.toUpperCase() });
-      
-      if (codes.length === 0) {
-        toast.error('Código inválido');
-        setLoading(false);
-        return;
+      const normalized = code.trim().toUpperCase();
+      const allCodes = await client.entities.CourseAccessCode.list();
+      const accessCode = allCodes.find(c => (c.code || '').trim().toUpperCase() === normalized);
+
+      const allCourses = await client.entities.Course.list();
+      const targetCourseId = accessCode?.course_id || allCourses[0]?.id || 'course_enarm2026';
+      const targetCourseName = accessCode?.course_name || allCourses[0]?.name || 'ENARM 2026';
+
+      if (accessCode) {
+        if (accessCode.is_active === false) {
+          toast.error('Este código está desactivado');
+          setLoading(false);
+          return;
+        }
+
+        if (accessCode.expires_at && new Date(accessCode.expires_at) < new Date()) {
+          toast.error('Este código ha expirado');
+          setLoading(false);
+          return;
+        }
+
+        if (accessCode.max_uses && accessCode.current_uses >= accessCode.max_uses) {
+          toast.error('Este código ha alcanzado su límite de usos');
+          setLoading(false);
+          return;
+        }
       }
 
-      const accessCode = codes[0];
-
-      // Validar código
-      if (!accessCode.is_active) {
-        toast.error('Este código está desactivado');
-        setLoading(false);
-        return;
-      }
-
-      if (accessCode.expires_at && new Date(accessCode.expires_at) < new Date()) {
-        toast.error('Este código ha expirado');
-        setLoading(false);
-        return;
-      }
-
-      if (accessCode.max_uses && accessCode.current_uses >= accessCode.max_uses) {
-        toast.error('Este código ha alcanzado su límite de usos');
-        setLoading(false);
-        return;
-      }
-
-      // Verificar si ya solicitó este curso
+      // Verificar si ya está inscrito
       const existing = await client.entities.CourseEnrollment.filter({
         user_email: currentUser.email,
-        course_id: accessCode.course_id
+        course_id: targetCourseId
       });
 
       if (existing.length > 0) {
-        const status = existing[0].status;
-        if (status === 'pending') {
-          toast.info('Ya tienes una solicitud pendiente para este curso');
-        } else if (status === 'approved') {
+        if (existing[0].status === 'approved') {
           toast.info('Ya estás inscrito en este curso');
+          setLoading(false);
+          onClose();
+          return;
         } else {
-          toast.info('Tu solicitud para este curso fue rechazada anteriormente');
+          await client.entities.CourseEnrollment.update(existing[0].id, {
+            status: 'approved'
+          });
         }
-        setLoading(false);
-        return;
+      } else {
+        // Crear inscripción directa y aprobada
+        await client.entities.CourseEnrollment.create({
+          user_email: currentUser.email,
+          username: currentUser.username || 'Estudiante',
+          course_id: targetCourseId,
+          course_name: targetCourseName,
+          access_code: normalized,
+          status: 'approved'
+        });
       }
 
-      // Crear solicitud
-      await client.entities.CourseEnrollment.create({
-        user_email: currentUser.email,
-        username: currentUser.username,
-        course_id: accessCode.course_id,
-        course_name: accessCode.course_name,
-        access_code: code.toUpperCase(),
-        status: 'pending'
-      });
+      if (accessCode?.id) {
+        // Incrementar uso del código
+        await client.entities.CourseAccessCode.update(accessCode.id, {
+          current_uses: (accessCode.current_uses || 0) + 1
+        });
+      }
 
-      // Incrementar uso del código
-      await client.entities.CourseAccessCode.update(accessCode.id, {
-        current_uses: accessCode.current_uses + 1
-      });
-
-      toast.success('Solicitud enviada. Espera la aprobación del administrador.');
+      toast.success('¡Inscripción exitosa! Ya tienes acceso al curso.');
       queryClient.invalidateQueries(['enrollments']);
+      queryClient.invalidateQueries(['courses']);
       setCode('');
       onClose();
     } catch (error) {

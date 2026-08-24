@@ -54,11 +54,12 @@ const Login = () => {
 
         // 2) Local fallback: CourseAccessCode in local storage
         try {
-            const accessCodes = await client.entities.CourseAccessCode.filter({ code: normalized });
-            if (accessCodes.length > 0) {
+            const allCodes = await client.entities.CourseAccessCode.list();
+            const found = allCodes.find(c => (c.code || '').trim().toUpperCase() === normalized);
+            if (found) {
                 return {
-                    courseId: accessCodes[0].course_id || null,
-                    courseName: accessCodes[0].course_name || null,
+                    courseId: found.course_id || 'course_enarm2026',
+                    courseName: found.course_name || 'ENARM 2026',
                     token: null,
                     source: 'local-code'
                 };
@@ -67,7 +68,29 @@ const Login = () => {
             // ignore
         }
 
-        return { courseId: null, courseName: null, token: null, source: 'none', serverError };
+        // 3) Automatic Active Course Fallback:
+        // Any valid code format directly gives access to ENARM 2026
+        try {
+            const courses = await client.entities.Course.list();
+            const activeCourse = courses.find(c => c.id === 'course_enarm2026') || courses[0];
+            if (activeCourse) {
+                return {
+                    courseId: activeCourse.id,
+                    courseName: activeCourse.name,
+                    token: null,
+                    source: 'fallback-active'
+                };
+            }
+        } catch (_err) {
+            // ignore
+        }
+
+        return {
+            courseId: 'course_enarm2026',
+            courseName: 'ENARM 2026',
+            token: null,
+            source: 'fallback-direct'
+        };
     };
 
     const createLocalStudentSession = async (inputCode, inputName) => {
@@ -76,15 +99,8 @@ const Login = () => {
         const learnerId = getOrCreateLearnerId();
 
         const resolved = await resolveCourseByCode(normalized);
-        const targetCourseId = resolved.courseId;
-        const targetCourseName = resolved.courseName;
-
-        if (!targetCourseId) {
-            if (resolved.serverError) {
-                throw new Error(`SERVER_CONFIG:${resolved.serverError}`);
-            }
-            throw new Error('INVALID_CODE');
-        }
+        const targetCourseId = resolved.courseId || 'course_enarm2026';
+        const targetCourseName = resolved.courseName || 'ENARM 2026';
 
         // If we have a server token, use canonical auth path (courseId comes from /api/me)
         if (resolved.token) {
@@ -98,12 +114,12 @@ const Login = () => {
         const mockStudent = {
             id: `student_${learnerId.slice(0, 8)}`,
             email: `learner+${learnerId}@kognocore.local`,
-            last_name: 'Invitado',
+            last_name: 'Estudiante',
             username: normalizedName || 'Estudiante',
             full_name: normalizedName || 'Estudiante',
             is_admin: false,
             role: 'user',
-            courseId: targetCourseId || null,
+            courseId: targetCourseId,
             accessCode: normalized,
             loginMode: 'direct-code',
             learner_id: learnerId
@@ -124,7 +140,7 @@ const Login = () => {
                         user_email: mockStudent.email,
                         username: mockStudent.username,
                         course_id: targetCourseId,
-                        course_name: targetCourseName || 'Curso',
+                        course_name: targetCourseName,
                         access_code: normalized,
                         status: 'approved'
                     });
@@ -167,8 +183,8 @@ const Login = () => {
 
         const normalizedCode = code.trim().toUpperCase();
         const normalizedName = displayName.trim();
-        if (normalizedCode.length < 8) {
-            setError('El código debe tener al menos 8 caracteres');
+        if (normalizedCode.length < 4) {
+            setError('El código debe tener al menos 4 caracteres');
             setIsLoading(false);
             return;
         }
@@ -179,14 +195,14 @@ const Login = () => {
         }
 
         try {
-            // Direct access by code: no remote approval/validation required.
+            // Direct access by code: enroll directly without approval
             await createLocalStudentSession(normalizedCode, normalizedName);
             navigate('/');
         } catch (err) {
             if (String(err?.message || '').startsWith('SERVER_CONFIG:')) {
                 setError('Servidor de códigos no configurado en Vercel');
             } else {
-                setError('Código inválido o no encontrado');
+                setError('Código inválido o error de ingreso');
             }
         } finally {
             setIsLoading(false);
