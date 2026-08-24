@@ -20,7 +20,7 @@ import { mockCourses, mockFolders, mockSubjects, mockQuizzes, mockQuizSettings, 
 // Helper to initialize storage
 // Courses, subjects, and folders are ALWAYS seeded from mock-data to keep the
 // medicine curriculum up to date. Other entities only initialize if absent.
-const SEED_VERSION = 'v8_enarm2026_clean'; // bump this to force a re-seed
+const SEED_VERSION = 'v9_enarm280_complete'; // bump this to force a re-seed
 
 const initializeStorage = () => {
   if (typeof window === 'undefined') return;
@@ -34,7 +34,7 @@ const initializeStorage = () => {
     localStorage.setItem('structure_initialized', 'true');
   }
 
-  // Ensure app_quizzes exists and includes the full ENARM bank
+  // Ensure app_quizzes exists and includes the full ENARM bank of 280 questions
   if (!localStorage.getItem('app_quizzes')) {
     localStorage.setItem('app_quizzes', JSON.stringify(mockQuizzes));
   } else {
@@ -43,9 +43,15 @@ const initializeStorage = () => {
       if (!Array.isArray(stored) || stored.length === 0) {
         stored = [...mockQuizzes];
         localStorage.setItem('app_quizzes', JSON.stringify(stored));
-      } else if (!stored.some(q => q && q.id === 'quiz_enarm2026_mega')) {
-        stored.unshift(mockQuizzes[0]);
-        localStorage.setItem('app_quizzes', JSON.stringify(stored));
+      } else {
+        const megaIdx = stored.findIndex(q => q && q.id === 'quiz_enarm2026_mega');
+        if (megaIdx < 0) {
+          stored.unshift(mockQuizzes[0]);
+          localStorage.setItem('app_quizzes', JSON.stringify(stored));
+        } else if ((stored[megaIdx]?.questions?.length || 0) < 280) {
+          stored[megaIdx] = mockQuizzes[0];
+          localStorage.setItem('app_quizzes', JSON.stringify(stored));
+        }
       }
 
         const validIds = ['subj_med_interna', 'subj_cirugia_gen', 'subj_pediatria', 'subj_ginecologia_obs', 'subj_simuladores'];

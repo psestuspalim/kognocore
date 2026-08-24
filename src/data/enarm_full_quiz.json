@@ -181,6 +181,2106 @@
       "difficulty": "moderado"
     },
     {
+      "id": 6,
+      "question": "Masculino de 59 años, fumador activo desde hace 30 años, presenta saciedad temprana desde hace 9 meses. En los últimos meses ha presentado disfagia y pérdida de peso no intencionada. El paciente le comenta que su padre y su hermano fallecieron por cáncer gástrico por lo que usted le indica realizarse endoscopia flexible gastrointestinal alta con toma de biopsia. Para cáncer gástrico, se recomienda tomar un mínimo de:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "3 biopsias",
+          "isCorrect": true,
+          "rationale": "Para cáncer gástrico, se recomienda tomar un mínimo de 3 biopsias. Guía de Práctica Clínica Diagnóstico y Tratamiento del Adenocarcinoma Gástrico en Pacientes Adultos, México; Instituto Mexicano del Seguro Social, 2009."
+        },
+        {
+          "id": "1",
+          "text": "5 biopsias",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "8 biopsias",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "10 biopsias",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "Para cáncer gástrico, se recomienda tomar un mínimo de 3 biopsias. Guía de Práctica Clínica Diagnóstico y Tratamiento del Adenocarcinoma Gástrico en Pacientes Adultos, México; Instituto Mexicano del Seguro Social, 2009.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 7,
+      "question": "La siguiente entidad no es considerada como un precursor del cáncer gástrico:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Metaplasia intestinal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Úlcera prepilórica",
+          "isCorrect": true,
+          "rationale": "Los pacientes que presentan alguno de los siguientes síndromes: poliposis adenomatosa familiar, cáncer de colon no poliposis hereditario y el síndrome de Peutz-Jeghers; tienen mayor riesgo para desarrollar cáncer gástrico. Los pacientes con infección con H. pylori, gastritis atrófica severa, gastritis predominante en el cuerpo del estómago y/o metaplasia intestinal tienen mayor riesgo de desarrollar cáncer gástrico. Guía de Práctica Clínica Diagnóstico y Tratamiento del Adenocarcinoma Gástrico en Pacientes Adultos, México; Instituto Mexicano del Seguro Social, 2009."
+        },
+        {
+          "id": "2",
+          "text": "Gastritis atrófica severa",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Mutaciones del gen de la cadherina E",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Los pacientes que presentan alguno de los siguientes síndromes: poliposis adenomatosa familiar, cáncer de colon no poliposis hereditario y el síndrome de Peutz-Jeghers; tienen mayor riesgo para desarrollar cáncer gástrico. Los pacientes con infección con H. pylori, gastritis atrófica severa, gastritis predominante en el cuerpo del estómago y/o metaplasia intestinal tienen mayor riesgo de desarrollar cáncer gástrico. Guía de Práctica Clínica Diagnóstico y Tratamiento del Adenocarcinoma Gástrico en Pacientes Adultos, México; Instituto Mexicano del Seguro Social, 2009.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 8,
+      "question": "Paciente de 11 años presenta orina oscura. Niega disuria, polaquiuria o fiebre. A la exploración FC 80 lpm, TA 150/96 mmHg, FR 18 rpm, con edema en extremidades inferiores. EGO proteínas ++, 55 eritrocitos por campo, 118 leucocitos por campo y cilindros granulosos. Creatinina sérica 2.5 mg/dL. Cuál de los siguientes diagnósticos es más probable:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Glomerulonefritis aguda postestreptocócica",
+          "isCorrect": true,
+          "rationale": "Las manifestaciones clínicas en la glomerulonefritis aguda postestreptocócica se caracterizan por la aparición repentina de hematuria micro o macroscópica, edema, hipertensión y proteinuria generalmente de leve a moderada, en algunos casos oliguria, con tiempo de inicio menor de 3 meses. Diagnóstico y Tratamiento del Síndrome Nefrítico Agudo Post-estreptocócico en Edad Pediátrica. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, Instituto Mexicano del Seguro Social; 2018."
+        },
+        {
+          "id": "1",
+          "text": "Síndrome nefrótico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Nefritis rápidamente progresiva",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Púrpura de Henoch-Schönlein",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "Las manifestaciones clínicas en la glomerulonefritis aguda postestreptocócica se caracterizan por la aparición repentina de hematuria micro o macroscópica, edema, hipertensión y proteinuria generalmente de leve a moderada, en algunos casos oliguria, con tiempo de inicio menor de 3 meses. Diagnóstico y Tratamiento del Síndrome Nefrítico Agudo Post-estreptocócico en Edad Pediátrica. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, Instituto Mexicano del Seguro Social; 2018.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 9,
+      "question": "Además de los hallazgos descritos en el examen general de orina del paciente, usted sabe que en el sedimento se observan células dismórficas llamadas acantocitos, también llamadas de:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Pata Daisy",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Minnie Mouse",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Pato Donald",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Mickey Mouse",
+          "isCorrect": true,
+          "rationale": "Examen de Orina. La hematuria es el signo más consistente, el aspecto macroscópico suele ser de color rojo obscuro y turbio. En el sedimento se observan células dismórficas llamadas acantocitos o de 'Mickey Mouse', sedimento leucocitario y cilindros granulosos suelen estar presentes en algunos casos así como cilindros eritrocitarios. Diagnóstico y Tratamiento del Síndrome Nefrítico Agudo Post-estreptocócico en Edad Pediátrica. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, Instituto Mexicano del Seguro Social; 2018."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "Examen de Orina. La hematuria es el signo más consistente, el aspecto macroscópico suele ser de color rojo obscuro y turbio. En el sedimento se observan células dismórficas llamadas acantocitos o de 'Mickey Mouse', sedimento leucocitario y cilindros granulosos suelen estar presentes en algunos casos así como cilindros eritrocitarios. Diagnóstico y Tratamiento del Síndrome Nefrítico Agudo Post-estreptocócico en Edad Pediátrica. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, Instituto Mexicano del Seguro Social; 2018.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 10,
+      "question": "A 66-year-old woman refers fatigue, palpitations, lightheadedness and shortness of breath developed. The vital signs and evaluation were normal. Laboratory: Hto 28%, Hb 8.1 g/dl, MCV 72 fl, reticulocytes 1.5%, white cell count 6,000, platelet count 410,000, iron 30 mg/dl, total iron blinding capacity 520 mg/dl, ferritin 5 ng/ml. In adults over 65 years of age, the following is recommended, except:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Ensure sufficient iron intake through food",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Perform annual endoscopies if varicose veins are suspected",
+          "isCorrect": true,
+          "rationale": "En el adulto mayor de 65 años de edad se recomienda: Asegurar un aporte de hierro suficiente a través de la alimentación. Evaluación odontológica semestral. Evitar el uso innecesario de antiinflamatorios no esteroideos. GPC: Prevención, Diagnóstico y Tratamiento de la Anemia por Deficiencia de Hierro en Niños y Adultos."
+        },
+        {
+          "id": "2",
+          "text": "Semi-annual dental evaluation",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Avoid unnecessary use of anti-inflammatories non-steroidal",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "En el adulto mayor de 65 años de edad se recomienda: Asegurar un aporte de hierro suficiente a través de la alimentación. Evaluación odontológica semestral. Evitar el uso innecesario de antiinflamatorios no esteroideos. GPC: Prevención, Diagnóstico y Tratamiento de la Anemia por Deficiencia de Hierro en Niños y Adultos.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 11,
+      "question": "The most likely diagnosis in this patient is:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Sideroblastic anemia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Anemia of chronic inflammation",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Thalassemia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Iron deficiency",
+          "isCorrect": true,
+          "rationale": "Biometría hemática completa (BHC): Hemoglobina y hematócrito: disminuidos. Volumen corpuscular medio (VCM): disminuido. Hemoglobina corpuscular media (HCM): normal o disminuida. Amplitud de la distribución eritrocitaria (ADE): aumentado. Recuento de plaquetas: normales o aumentadas. Recuento de leucocitos: normales. GPC: Prevención, Diagnóstico y Tratamiento de la Anemia por Deficiencia de Hierro en Niños y Adultos."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "Biometría hemática completa (BHC): Hemoglobina y hematócrito: disminuidos. Volumen corpuscular medio (VCM): disminuido. Hemoglobina corpuscular media (HCM): normal o disminuida. Amplitud de la distribución eritrocitaria (ADE): aumentado. Recuento de plaquetas: normales o aumentadas. Recuento de leucocitos: normales. GPC: Prevención, Diagnóstico y Tratamiento de la Anemia por Deficiencia de Hierro en Niños y Adultos.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 12,
+      "question": "Corresponds to the expected result in case of suspected diagnosis:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Total serum iron: increased",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Total iron fixation capacity: decreased",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Transferrin saturation percentage: decreased",
+          "isCorrect": true,
+          "rationale": "Si se detecta anemia microcítica hipocrómica deberán solicitarse estudios que evalúen el estado del hierro como son: Hierro sérico total: disminuido. Capacidad total de fijación del hierro: aumentada. Porcentaje de saturación de la transferrina: disminuida. Ferritina sérica: disminuida. Resultado esperado en caso de anemia por deficiencia de hierro. GPC: Prevención, Diagnóstico y Tratamiento de la Anemia por Deficiencia de Hierro en Niños y Adultos."
+        },
+        {
+          "id": "3",
+          "text": "Serum ferritin: increased",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Si se detecta anemia microcítica hipocrómica deberán solicitarse estudios que evalúen el estado del hierro como son: Hierro sérico total: disminuido. Capacidad total de fijación del hierro: aumentada. Porcentaje de saturación de la transferrina: disminuida. Ferritina sérica: disminuida. Resultado esperado en caso de anemia por deficiencia de hierro. GPC: Prevención, Diagnóstico y Tratamiento de la Anemia por Deficiencia de Hierro en Niños y Adultos.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 13,
+      "question": "Nivel de gravedad en fiebre hemorrágica por dengue donde se encuentra hipotensión, presión diferencial de 20 mm Hg o menos, pulso rápido y débil:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "I",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "II",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "III",
+          "isCorrect": true,
+          "rationale": "Grado III: Hipotensión, presión diferencial de 20 mmHg o menos, pulso rápido y débil. Manejo del dengue no grave y el dengue grave, México: Secretaría de Salud, 2008."
+        },
+        {
+          "id": "3",
+          "text": "IV",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Grado III: Hipotensión, presión diferencial de 20 mmHg o menos, pulso rápido y débil. Manejo del dengue no grave y el dengue grave, México: Secretaría de Salud, 2008.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 14,
+      "question": "Femenino de 28 años presenta dispareunia y flujo vaginal grisáceo. Refiere utilizar espermicidas y ha presentado tres episodios de cervicovaginitis en los últimos seis meses. A la exploración se observa tumoración vulvar localizada a nivel de la horquilla de aproximadamente 4 cm, con aumento de la temperatura local y dolor intenso que aumenta cuando camina. El diagnóstico más probable es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Liquen escleroso",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Chancro blando",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Absceso de la glándula de Bartholin",
+          "isCorrect": true,
+          "rationale": "La infección de la glándula de Bartholin se puede manifestar con alguna/o algunas de las siguientes características: Tumoración vulvar generalmente localizada a nivel de la horquilla o como alas 4 del reloj. Dolor local que aumenta al caminar o al estar sentado. Aumento de la temperatura local. Dispareunia (dolor en la relación sexual). Leucorrea en casos de infecciones de transmisión sexual. El quiste generalmente es asintomático. Diagnóstico y Tratamiento de Quiste y Absceso de la Glándula de Bartholin en los tres niveles de Atención. México: Instituto Mexicano del Seguro Social, 2010."
+        },
+        {
+          "id": "3",
+          "text": "Quiste de la glándula de Bartholin",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "La infección de la glándula de Bartholin se puede manifestar con alguna/o algunas de las siguientes características: Tumoración vulvar generalmente localizada a nivel de la horquilla o como alas 4 del reloj. Dolor local que aumenta al caminar o al estar sentado. Aumento de la temperatura local. Dispareunia (dolor en la relación sexual). Leucorrea en casos de infecciones de transmisión sexual. El quiste generalmente es asintomático. Diagnóstico y Tratamiento de Quiste y Absceso de la Glándula de Bartholin en los tres niveles de Atención. México: Instituto Mexicano del Seguro Social, 2010.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 15,
+      "question": "Masculino de 2 meses, acude a cita de control del niño sano. A la exploración presenta soplo continuo que se irradia al tórax y aumento de los pulsos periféricos. Como antecedente de importancia, cursó con taquipnea transitoria del recién nacido. El paciente se encuentra en adecuadas condiciones generales y es alimentado con lactancia materna exclusiva. Sospecha una persistencia del conducto arterioso, de acuerdo con los hallazgos clínicos del paciente se clasifica como:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Silente",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Pequeño",
+          "isCorrect": true,
+          "rationale": "Pequeño: Pacientes con soplo continuo audible, con insignificantes cambios hemodinámicos, sin sobrecarga en cavidades izquierdas, sin hipertensión arterial pulmonar. Guía de Práctica Clínica Diagnóstico y Tratamiento de la Persistencia del Conducto Arterioso en niños, adolescentes y adultos, México; Instituto Mexicano del Seguro Social, 2011."
+        },
+        {
+          "id": "2",
+          "text": "Moderado",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Grande",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Pequeño: Pacientes con soplo continuo audible, con insignificantes cambios hemodinámicos, sin sobrecarga en cavidades izquierdas, sin hipertensión arterial pulmonar. Guía de Práctica Clínica Diagnóstico y Tratamiento de la Persistencia del Conducto Arterioso en niños, adolescentes y adultos, México; Instituto Mexicano del Seguro Social, 2011.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 16,
+      "question": "No es un factor asociado a esta patología:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Influenza materna",
+          "isCorrect": true,
+          "rationale": "Factores asociados a PCA: Hipotiroidismo en el recién nacido. Consanguinidad entre padres. Diabetes o fenilcetonuria materna. Guía de Práctica Clínica Diagnóstico y Tratamiento de la Persistencia del Conducto Arterioso en niños, adolescentes y adultos, México; Instituto Mexicano del Seguro Social, 2011."
+        },
+        {
+          "id": "1",
+          "text": "Hipotiroidismo en el recién nacido",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Consanguinidad entre los padres",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Fenilcetonuria materna",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "Factores asociados a PCA: Hipotiroidismo en el recién nacido. Consanguinidad entre padres. Diabetes o fenilcetonuria materna. Guía de Práctica Clínica Diagnóstico y Tratamiento de la Persistencia del Conducto Arterioso en niños, adolescentes y adultos, México; Instituto Mexicano del Seguro Social, 2011.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 17,
+      "question": "Una gestante de 12 semanas acude por sus resultados de laboratorio de primer trimestre y en el cultivo de orina se encuentran >100,000 UFC de E. coli. La paciente está asintomática. Tratamiento más adecuado:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Ninguno, dado que está asintomática",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Nitrofurantoina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Fosfomicina",
+          "isCorrect": true,
+          "rationale": "Bacteriuria asintomática tratamiento preferente: Fosfomicina trometamol 3 gramos dosis única. Evite nitrofurantoína en primer trimestre si otro antimicrobiano efectivo y seguro está disponible, y a término debido al riesgo potencial de anemia hemolítica en el recién nacido. Prevención, abordaje y manejo de bacteriuria asintomática e infección de vías urinarias durante el embarazo. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021."
+        },
+        {
+          "id": "3",
+          "text": "Amoxicilina con ácido clavulánico",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Bacteriuria asintomática tratamiento preferente: Fosfomicina trometamol 3 gramos dosis única. Evite nitrofurantoína en primer trimestre si otro antimicrobiano efectivo y seguro está disponible, y a término debido al riesgo potencial de anemia hemolítica en el recién nacido. Prevención, abordaje y manejo de bacteriuria asintomática e infección de vías urinarias durante el embarazo. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 18,
+      "question": "A newborn boy, two days-old, has a pink, flat and irregular macula on the back of the neck, which was present at birth. The diagnosis is:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Hemangioma",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Salmon patch",
+          "isCorrect": true,
+          "rationale": "Mancha salmón: Se trata de lesiones vasculares muy frecuentes al nacimiento, aunque suelen aclararse y, en muchos casos, resolverse con el tiempo. Su localización más habitual es nuca, párpados superiores y glabela. Manual CTO de medicina y cirugía. Pediatría, ENARM 6ª edición, México."
+        },
+        {
+          "id": "2",
+          "text": "Mongolian spot",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Sturge-Weber syndrome",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Mancha salmón: Se trata de lesiones vasculares muy frecuentes al nacimiento, aunque suelen aclararse y, en muchos casos, resolverse con el tiempo. Su localización más habitual es nuca, párpados superiores y glabela. Manual CTO de medicina y cirugía. Pediatría, ENARM 6ª edición, México.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 19,
+      "question": "Paciente de 55 años acude a urgencias por presentar dolor torácico de características isquémicas. Se realiza EKG que presenta elevación del ST en II, III, aVF. Señala el enunciado falso:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "La arteria del nodo sinusal depende de la coronaria izquierda en el 60% de los casos",
+          "isCorrect": true,
+          "rationale": "La arteria del nodo sinusal depende en un 55% de la coronaria derecha y un 45% de la arteria circunfleja (rama de la izquierda). Diagnóstico y Tratamiento del Infarto Agudo de Miocardio con Elevación del Segmento ST. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021."
+        },
+        {
+          "id": "1",
+          "text": "La mayor parte de los IAM posteriores se deben a patología de la coronaria derecha",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "La intervención coronaria percutánea primaria es el método preferido de reperfusión en el contexto de IAMCEST",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Se recomienda el uso de atorvastatina a dosis altas en el tratamiento del IAMCEST para la reducción de nuevos eventos cardiovasculares a corto plazo",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "La arteria del nodo sinusal depende en un 55% de la coronaria derecha y un 45% de la arteria circunfleja (rama de la izquierda). Diagnóstico y Tratamiento del Infarto Agudo de Miocardio con Elevación del Segmento ST. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 20,
+      "question": "Femenino de 19 años presenta diarrea de dos meses de evolución, pérdida de peso no intencionada, fatiga y debilidad muscular. A la exploración física FC 110 lpm, TA 140/90 mmHg, bocio, exoftalmia y temblor fino distal. TSH baja, T3 y T4 altas. La mejor forma de determinar la función tiroidea es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "T4 total",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "T4 libre",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "TSH",
+          "isCorrect": true,
+          "rationale": "La mejor manera de determinar la función tiroidea es medir niveles de TSH en una muestra de sangre. Diagnóstico y Tratamiento de la Enfermedad de Graves en > de 18 años. México: Instituto Mexicano del Seguro Social, 2011."
+        },
+        {
+          "id": "3",
+          "text": "Índice de T4 libre",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "La mejor manera de determinar la función tiroidea es medir niveles de TSH en una muestra de sangre. Diagnóstico y Tratamiento de la Enfermedad de Graves en > de 18 años. México: Instituto Mexicano del Seguro Social, 2011.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 21,
+      "question": "Dosis efectiva inicial de metamizol para llevar a la paciente a eutirodismo:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "10 a 20 mg",
+          "isCorrect": true,
+          "rationale": "La dosis efectiva inicial del metamizol es de 10 a 20 mg día para llevar al paciente a eutirodismo. Diagnóstico y Tratamiento de la Enfermedad de Graves en > de 18 años. México: Instituto Mexicano del Seguro Social, 2011."
+        },
+        {
+          "id": "1",
+          "text": "20 a 40 mg",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "40 a 60 mg",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "60 a 80 mg",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "La dosis efectiva inicial del metamizol es de 10 a 20 mg día para llevar al paciente a eutirodismo. Diagnóstico y Tratamiento de la Enfermedad de Graves en > de 18 años. México: Instituto Mexicano del Seguro Social, 2011.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 22,
+      "question": "Masculino de 8 años presenta episodio de 'gripa' de doce semanas de evolución, caracterizado por rinorrea hialina, estornudos y prurito ocular. Niega fiebre, tos o malestar general. A la exploración se observan cornetes violáceos con abundantes puentes hialinos. El tratamiento más adecuado para este paciente es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Esteroides nasales",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Antihistamínicos orales de primera generación",
+          "isCorrect": true,
+          "rationale": "Se debe recomendar el uso de esteroides nasales en pacientes con diagnóstico clínico de Rinitis Alérgica cuyos síntomas afecten su calidad de vida. En caso de no hacerlo como en este caso clínico se deben dejar solo antihistamínicos de segunda generación por ser el tratamiento de primera línea. Diagnóstico y Tratamiento de Rinitis Alérgica. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, IMSS; 2017."
+        },
+        {
+          "id": "2",
+          "text": "Inmunoterapia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Antagonistas del receptor de leucotrieno",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Se debe recomendar el uso de esteroides nasales en pacientes con diagnóstico clínico de Rinitis Alérgica cuyos síntomas afecten su calidad de vida. En caso de no hacerlo como en este caso clínico se deben dejar solo antihistamínicos de segunda generación por ser el tratamiento de primera línea. Diagnóstico y Tratamiento de Rinitis Alérgica. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, IMSS; 2017.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 23,
+      "question": "Mujer de 22 años se presenta a su centro de salud y refiere haber tomado misoprostol hace 96 horas, hace 2 días inició con sangrado transvaginal abundante. El día de hoy el sangrado es escaso, achocolatado, fétido además presenta hipersensibilidad abdominal, disuria y fiebre de 39°C. La conducta más adecuada en este caso es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Iniciar antibioticoterapia y valoración en 24 horas",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Solicitar cultivo de secreción vaginal y control estricto de signos vitales",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Solicitar EGO, urocultivo y antibioticoterapia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Envío a segundo nivel",
+          "isCorrect": true,
+          "rationale": "Enviar a segundo o tercer nivel toda paciente que haya recibido misoprostol y posterior a su administración presente sangrado excesivo, fiebre de 24 horas y dolor abdominal intenso. Considerando como sangrado excesivo: cuando la paciente refiere cambio de apósitos vaginales saturados de sangre, en un tiempo menor a 1 hora y durante un periodo consecutivo de 2 horas. Guía de Práctica Clínica Diagnóstico y Tratamiento del Aborto Espontáneo, Manejo Inicial de Aborto Recurrente, México; Instituto Mexicano del Seguro Social, 2009."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "Enviar a segundo o tercer nivel toda paciente que haya recibido misoprostol y posterior a su administración presente sangrado excesivo, fiebre de 24 horas y dolor abdominal intenso. Considerando como sangrado excesivo: cuando la paciente refiere cambio de apósitos vaginales saturados de sangre, en un tiempo menor a 1 hora y durante un periodo consecutivo de 2 horas. Guía de Práctica Clínica Diagnóstico y Tratamiento del Aborto Espontáneo, Manejo Inicial de Aborto Recurrente, México; Instituto Mexicano del Seguro Social, 2009.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 24,
+      "question": "Hombre de 39 años, usuario de drogas intravenosas, acude por ictericia de diez días de evolución, la exploración física es normal. Laboratorios: VIH-, ALT 120, AST 100, BT 3.3, FA 180. Perfil viral IgG VHA+, AgsVHB+, anti-core IgM+, AgeVHB+, Anti-HBe-, Acpos VHC-. El diagnóstico más probable es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Hepatitis A aguda",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Hepatitis B aguda",
+          "isCorrect": true,
+          "rationale": "Estado de infección Aguda (Temprana): Antígeno de Superficie (HBsAg) +, Antígeno 'e' (HBeAg) +, Anticuerpos IgM Anticore +, Anticuerpos IgG Anticore+, DNA VHB +, Anti HBe -, Anti HBs -, ALT elevada. Diagnóstico y tratamiento de la infección crónica por virus de Hepatitis B."
+        },
+        {
+          "id": "2",
+          "text": "Hepatitis C aguda",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Hepatitis B crónica",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Estado de infección Aguda (Temprana): Antígeno de Superficie (HBsAg) +, Antígeno 'e' (HBeAg) +, Anticuerpos IgM Anticore +, Anticuerpos IgG Anticore+, DNA VHB +, Anti HBe -, Anti HBs -, ALT elevada. Diagnóstico y tratamiento de la infección crónica por virus de Hepatitis B.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 25,
+      "question": "A 24 year old woman went to the hospital because of anemia. The patient was in her usual state of health and the examination was normal. Laboratory data: Hto 30%, Hb 11 g/dl, MCV 62 fl, MCH 21 pg, RDW 11, white cell count 6,400, platelet count 180,000. Peripheral blood smear hypochromia and microcytosis. Serum ferritin 225 ng/ml. Which one of the following diagnosis is most likely?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Anemia of chronic inflammation",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Thalassemia",
+          "isCorrect": true,
+          "rationale": "Talasemia minor o rasgo talasémico (heterocigotos simples). Estas personas no presentan prácticamente anemia ni sintomatología, y corresponden a la variante clínica más frecuente. Debe sospecharse un rasgo talasémico en un paciente que presenta microcitosis importante con un número normal o ligeramente incrementado de hematíes (los índices corpusculares, sobre todo el VCM, son el mejor método de cribado en estos pacientes). Un rasgo diferencial con la ferropenia es que, en estos casos, la CHCM es normal, a diferencia de la ferropenia, en donde está disminuida. En el hemograma se reporta anemia con hemoglobina en rangos de 11 a 13 g/dL, típicamente hay microcitosis con volumen corpuscular medio menor (VCM) de 70 fL, la hemoglobina corpuscular media (HCM) es menor de 23 pg. REVISTA MÉDICA DE CENTROAMÉRICA LXVIII (598) 355-357 2011. HEMATOLOGÍA. β – TALASEMIA. Manual CTO de medicina y cirugía. Hematología, ENARM 6ª edición, México."
+        },
+        {
+          "id": "2",
+          "text": "Iron deficiency",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Sideroblastic anemia",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Talasemia minor o rasgo talasémico (heterocigotos simples). Estas personas no presentan prácticamente anemia ni sintomatología, y corresponden a la variante clínica más frecuente. Debe sospecharse un rasgo talasémico en un paciente que presenta microcitosis importante con un número normal o ligeramente incrementado de hematíes (los índices corpusculares, sobre todo el VCM, son el mejor método de cribado en estos pacientes). Un rasgo diferencial con la ferropenia es que, en estos casos, la CHCM es normal, a diferencia de la ferropenia, en donde está disminuida. En el hemograma se reporta anemia con hemoglobina en rangos de 11 a 13 g/dL, típicamente hay microcitosis con volumen corpuscular medio menor (VCM) de 70 fL, la hemoglobina corpuscular media (HCM) es menor de 23 pg. REVISTA MÉDICA DE CENTROAMÉRICA LXVIII (598) 355-357 2011. HEMATOLOGÍA. β – TALASEMIA. Manual CTO de medicina y cirugía. Hematología, ENARM 6ª edición, México.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 26,
+      "question": "Hombre de 38 años acude a revisión porque tiene una lesión muy dolorosa, urente, necrótica, en el dorso del antebrazo izquierdo de 3 días de evolución. La lesión tiene el centro azulado, eritema alrededor de ella y hundimiento del centro de la lesión. El paciente refiere mordedura de animal no identificado días antes de la sintomatología referida. A la exploración único hallazgo T 37.9°C. La opción terapéutica más apropiada para mejorar el pronóstico en este paciente es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Dapsona oral",
+          "isCorrect": true,
+          "rationale": "La dapsona en algunos reportes ha demostrado controversia por sus múltiples efectos adversos, sobre todo en pacientes con deficiencia de glucosa 6-fosfato deshidrogenasa. Y, además, cuando se ha utilizado inadecuadamente (con dosis mayor a 2 mg/kg/día) ya que es un inductor de metahemoglobinemia tóxica. Sin embargo, cuando se emplea en forma adecuada ha tenido buenos resultados, ya que actúa inhibiendo la migración de los neutrófilos al sitio de la lesión, disminuye producción de radicales libres de oxígeno, y estabiliza la membrana lisosomal; de esta forma, disminuye el dolor, el proceso inflamatorio y la necrosis. Diagnóstico y Tratamiento de Mordeduras por Arañas Venenosas, México: Secretaría de Salud, 2011."
+        },
+        {
+          "id": "1",
+          "text": "Esteroides intravenosos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Resección quirúrgica de la lesión",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Esteroides orales",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "La dapsona en algunos reportes ha demostrado controversia por sus múltiples efectos adversos, sobre todo en pacientes con deficiencia de glucosa 6-fosfato deshidrogenasa. Y, además, cuando se ha utilizado inadecuadamente (con dosis mayor a 2 mg/kg/día) ya que es un inductor de metahemoglobinemia tóxica. Sin embargo, cuando se emplea en forma adecuada ha tenido buenos resultados, ya que actúa inhibiendo la migración de los neutrófilos al sitio de la lesión, disminuye producción de radicales libres de oxígeno, y estabiliza la membrana lisosomal; de esta forma, disminuye el dolor, el proceso inflamatorio y la necrosis. Diagnóstico y Tratamiento de Mordeduras por Arañas Venenosas, México: Secretaría de Salud, 2011.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 27,
+      "question": "Es el agente que más probablemente causó el cuadro en el paciente:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Centruroides noxius",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Latrodectus mactans",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Heloderma suspectum",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Loxosceles reclusae",
+          "isCorrect": true,
+          "rationale": "Araña Loxosceles reclusae: La forma más común del envenenamiento, el loxocelismo local o cutáneo originado por la acción de la esfingomielinasa-D sobre la esfingomielina de la membrana de los eritrocitos. Diagnóstico y Tratamiento de Mordeduras por Arañas Venenosas, México: Secretaría de Salud, 2011."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "Araña Loxosceles reclusae: La forma más común del envenenamiento, el loxocelismo local o cutáneo originado por la acción de la esfingomielinasa-D sobre la esfingomielina de la membrana de los eritrocitos. Diagnóstico y Tratamiento de Mordeduras por Arañas Venenosas, México: Secretaría de Salud, 2011.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 28,
+      "question": "Acude a su consulta un neonato, clínicamente sano, quien previamente fue atendido por particular por presentar hematomas en área periumbilical y extremidades inferiores. La madre niega antecedentes familiares de hemofilia o de deficiencias de otros factores de la coagulación. En laboratorios destacan TP y TTP prolongados con BHC y fibrinógeno normales. El diagnóstico más probable es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Deficiencia de FVII",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Hemofilia A",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Enfermedad hemorrágica del recién nacido",
+          "isCorrect": true,
+          "rationale": "Algoritmo GPC: Neonato clínicamente sano con hemorragias y estudios de laboratorio alterados. ¿Tiene antecedentes familiares de hemofilia o de deficiencias de otros factores de la coagulación? No. TP y TTP prolongados con BHC y fibrinógeno normales. Enfermedad hemorrágica del recién nacido. Guía de Práctica Clínica Prevención, Diagnóstico y tratamiento enfermedad hemorrágica del recién nacido en primero, segundo y tercer nivel de atención. México: Instituto Mexicano del Seguro Social; 03/11/2016."
+        },
+        {
+          "id": "3",
+          "text": "Hemofilia B",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Algoritmo GPC: Neonato clínicamente sano con hemorragias y estudios de laboratorio alterados. ¿Tiene antecedentes familiares de hemofilia o de deficiencias de otros factores de la coagulación? No. TP y TTP prolongados con BHC y fibrinógeno normales. Enfermedad hemorrágica del recién nacido. Guía de Práctica Clínica Prevención, Diagnóstico y tratamiento enfermedad hemorrágica del recién nacido en primero, segundo y tercer nivel de atención. México: Instituto Mexicano del Seguro Social; 03/11/2016.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 29,
+      "question": "Femenino de 54 años sufre caída de su propia altura apoyándose con ambas manos. Se realiza proyección radiografía lateral y anteroposterior de la muñeca izquierda observando fractura metafisaria de tercio distal de radio acompañada de una fractura de la apófisis estiloides del cúbito. El diagnóstico de esta paciente es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Fractura de Pouteau-Colles",
+          "isCorrect": true,
+          "rationale": "Fractura de Pouteau-Colles: La fractura más frecuente del radio distal. El fragmento distal se desplaza a dorsal y radial con cierto grado de supinación. Esta fractura consiste en fractura metafisaria de tercio distal de radio acompañada de una fractura de la apófisis estiloides del cúbito."
+        },
+        {
+          "id": "1",
+          "text": "Fractura de Goyrand-Smith",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Fractura luxación de Rhea-Barton",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Fractura de Hutchinson",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "Fractura de Pouteau-Colles: La fractura más frecuente del radio distal. El fragmento distal se desplaza a dorsal y radial con cierto grado de supinación. Esta fractura consiste en fractura metafisaria de tercio distal de radio acompañada de una fractura de la apófisis estiloides del cúbito.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 30,
+      "question": "Masculino de 41 años, con antecedente de alcoholismo y prácticas sexuales sin protección con sexoservidoras, refiere fiebre vespertina de 96 horas de evolución controlada con metamizol. Se presenta hoy a su clínica con T 39.9°C, diaforético, con escalofríos y dolor debajo de las costillas que se irradia al hombro. En la exploración únicamente destaca hepatomegalia dolorosa. El diagnóstico más probable es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Infección por el virus de la hepatitis A",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Malaria",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Absceso hepático amebiano",
+          "isCorrect": true,
+          "rationale": "La fiebre es de inicio abrupto de 38 a 40°C vespertina o nocturna, escalofríos y diaforesis. La hepatomegalia dolorosa, debajo de las costillas o en los espacios intercostales es un hallazgo típico. La participación de la cara diafragmática del hígado puede provocar dolor pleural del lado derecho o referido al hombro. Diagnóstico y tratamiento del Absceso Hepático Amebiano no complicado. México: Secretaría de salud, 2010."
+        },
+        {
+          "id": "3",
+          "text": "Diarrea del viajero",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "La fiebre es de inicio abrupto de 38 a 40°C vespertina o nocturna, escalofríos y diaforesis. La hepatomegalia dolorosa, debajo de las costillas o en los espacios intercostales es un hallazgo típico. La participación de la cara diafragmática del hígado puede provocar dolor pleural del lado derecho o referido al hombro. Diagnóstico y tratamiento del Absceso Hepático Amebiano no complicado. México: Secretaría de salud, 2010.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 31,
+      "question": "El tratamiento más adecuado es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Tratamiento de soporte",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Sulfato de quinina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Metronidazol",
+          "isCorrect": true,
+          "rationale": "El metronidazol deberá usarse como fármaco de primera línea a una dosis de 30 a 50 mg/Kg/día si es VO y de 7.5 mg/Kg/dosis si es endovenosa. Diagnóstico y tratamiento del Absceso Hepático Amebiano no complicado. México: Secretaría de salud, 2010."
+        },
+        {
+          "id": "3",
+          "text": "Ciprofloxacina",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "El metronidazol deberá usarse como fármaco de primera línea a una dosis de 30 a 50 mg/Kg/día si es VO y de 7.5 mg/Kg/dosis si es endovenosa. Diagnóstico y tratamiento del Absceso Hepático Amebiano no complicado. México: Secretaría de salud, 2010.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 32,
+      "question": "Hombre de 63 años con insuficiencia hepática crónica, presenta aumento del perímetro abdominal y signo del témpano de hielo, decide iniciar tratamiento con 100 mg de espironolactona y 40 mg de furosemida. Decide evaluar la respuesta clínica con base al peso, indicándole al paciente que la pérdida de peso no debe exceder:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "0.5 kg/día",
+          "isCorrect": true,
+          "rationale": "Se sugiere evaluar la respuesta clínica con base al peso, sin exceder de 0.5 kg/día en el paciente sin edema periférico y de 1 kg/día con edema periférico. Guía de práctica clínica Diagnóstico y tratamiento de la insuficiencia hepática crónica, México; Instituto Mexicano del Seguro Social, año de autorización para publicación 2009."
+        },
+        {
+          "id": "1",
+          "text": "1 kg/día",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "1.5 kg/día",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "< 2 kg/día",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "Se sugiere evaluar la respuesta clínica con base al peso, sin exceder de 0.5 kg/día en el paciente sin edema periférico y de 1 kg/día con edema periférico. Guía de práctica clínica Diagnóstico y tratamiento de la insuficiencia hepática crónica, México; Instituto Mexicano del Seguro Social, año de autorización para publicación 2009.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 33,
+      "question": "El paciente le comenta que previamente le habían indicado espironolactona, pero no la toleró así que dejó de utilizarla. Decide cambiar este fármaco por el siguiente:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Amilorida",
+          "isCorrect": true,
+          "rationale": "En caso de intolerancia a la espironolactona se puede utilizar amilorida 5 a 30 mg/día. Guía de práctica clínica Diagnóstico y tratamiento de la insuficiencia hepática crónica, México; Instituto Mexicano del Seguro Social, año de autorización para publicación 2009."
+        },
+        {
+          "id": "1",
+          "text": "Hidroclorotiazida",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Clortalidona",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Metalazona",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "En caso de intolerancia a la espironolactona se puede utilizar amilorida 5 a 30 mg/día. Guía de práctica clínica Diagnóstico y tratamiento de la insuficiencia hepática crónica, México; Instituto Mexicano del Seguro Social, año de autorización para publicación 2009.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 34,
+      "question": "En un paciente diagnóstico con SARS-CoV-19 que presenta signos clínicos o radiográficos de neumonía, frecuencia respiratoria menor de 30 respiraciones por minuto, SpO2 > 90% al aire, sin requerimientos de oxígeno, se clasifica como:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Enfermedad leve",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Enfermedad moderada",
+          "isCorrect": true,
+          "rationale": "Enfermedad moderada: signos clínicos o radiográficos de neumonía, frecuencia respiratoria menor de 30 respiraciones por minuto, SpO2 > 90% al aire, sin requerimientos de oxígeno. Guía Clínica para el Tratamiento de la COVID 19 en México. Consenso de personas expertas del sector salud. 2022."
+        },
+        {
+          "id": "2",
+          "text": "Enfermedad grave",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Enfermedad severa",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Enfermedad moderada: signos clínicos o radiográficos de neumonía, frecuencia respiratoria menor de 30 respiraciones por minuto, SpO2 > 90% al aire, sin requerimientos de oxígeno. Guía Clínica para el Tratamiento de la COVID 19 en México. Consenso de personas expertas del sector salud. 2022.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 35,
+      "question": "Mujer de 53 años con los siguientes antecedentes de importancia: obesidad, uso de anticonceptivos orales durante 15 años y antecedente familiar de hermana con cáncer de mama. Acude con su médico porque se realizó mastografía en la cual se aprecia un nódulo denso y espiculado en el cuadrante superior externo de la mama derecha. Se realiza a la paciente una PAAF que confirma el diagnóstico de carcinoma intraductal. La paciente le solicita información acerca de los factores pronóstico de esta enfermedad. Usted le indica que el factor pronóstico más importante del cáncer de mama es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Grado histológico G3 (poco diferenciado)",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Invasión vascular o linfática",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Componente intraductal extenso",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Número de ganglios afectados",
+          "isCorrect": true,
+          "rationale": "Número de ganglios afectados: constituye el factor más importante como elemento pronóstico. Tratamiento del cáncer de mama en segundo y tercer nivel de atención. Instituto Mexicano del Seguro Social, Ciudad de México. 16/03/2017."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "Número de ganglios afectados: constituye el factor más importante como elemento pronóstico. Tratamiento del cáncer de mama en segundo y tercer nivel de atención. Instituto Mexicano del Seguro Social, Ciudad de México. 16/03/2017.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 36,
+      "question": "A 13-day-old full-term newborn is brought to the emergency department presenting with tendency to fall asleep and refusal to breastfeeding. Physical examination shows ambiguous genitalia with partial fusion of the labioscrotal folds but with no palpable testes. Vital signs are 50x', hear rate 130x', BP 70/50 mmHg and the fontanelles seem sunken. Blood Laboratory test results are Na 125 mEq/L, K 7 mEq/L, BUN 32 mg/dL, Creatinine 0.6 mg/dL. Karyotype is 46 XX. Which of the following hormones would probably be increased in this patient?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Thyroid stimulating Hormone",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "17 Hydroxyprogesterone",
+          "isCorrect": true,
+          "rationale": "Hiperplasia suprarrenal congénita: La prueba diagnóstica se basa en el aumento del precursor 17 hidroxiprogesterona y los andrógenos androstendiona y testosterona. Tamizaje, diagnóstico y tratamiento de la hiperplasia suprarrenal congénita por deficiencia de 21 hidroxilasa. México: Instituto Mexicano del Seguro Social; 2014."
+        },
+        {
+          "id": "2",
+          "text": "Insulin",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Glucagon",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Hiperplasia suprarrenal congénita: La prueba diagnóstica se basa en el aumento del precursor 17 hidroxiprogesterona y los andrógenos androstendiona y testosterona. Tamizaje, diagnóstico y tratamiento de la hiperplasia suprarrenal congénita por deficiencia de 21 hidroxilasa. México: Instituto Mexicano del Seguro Social; 2014.",
+      "serie": 1,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 37,
+      "question": "95% of the patients with this pathology have a mutation in the gene:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "CYP21A2",
+          "isCorrect": true,
+          "rationale": "La forma más común de Hiperplasia suprarrenal congénita es causada por mutación en CYP21A2, el gen que codifica la síntesis de 21 hidroxilasa (P450c21) correspondiendo al 90-95% de los casos. Tamizaje, diagnóstico y tratamiento de la hiperplasia suprarrenal congénita por deficiencia de 21 hidroxilasa. México: Instituto Mexicano del Seguro Social; 2014."
+        },
+        {
+          "id": "1",
+          "text": "HSC13",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "P450C21",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "6p21.3",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "La forma más común de Hiperplasia suprarrenal congénita es causada por mutación en CYP21A2, el gen que codifica la síntesis de 21 hidroxilasa (P450c21) correspondiendo al 90-95% de los casos. Tamizaje, diagnóstico y tratamiento de la hiperplasia suprarrenal congénita por deficiencia de 21 hidroxilasa. México: Instituto Mexicano del Seguro Social; 2014.",
+      "serie": 1,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 38,
+      "question": "The treatment of choice for this patient:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Levothyroxine",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Bilateral adrenalectomy",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Glucose bolus",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Hydrocortisone",
+          "isCorrect": true,
+          "rationale": "La hidrocortisona es el tratamiento de elección, debido a su equivalencia al cortisol endógeno, su tiempo de vida corta, sus mínimos efectos sobre el crecimiento. Tamizaje, diagnóstico y tratamiento de la hiperplasia suprarrenal congénita por deficiencia de 21 hidroxilasa. México: Instituto Mexicano del Seguro Social; 2014."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "La hidrocortisona es el tratamiento de elección, debido a su equivalencia al cortisol endógeno, su tiempo de vida corta, sus mínimos efectos sobre el crecimiento. Tamizaje, diagnóstico y tratamiento de la hiperplasia suprarrenal congénita por deficiencia de 21 hidroxilasa. México: Instituto Mexicano del Seguro Social; 2014.",
+      "serie": 1,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 39,
+      "question": "Paciente masculino de 47 años, con diagnóstico previo de enfermedad diverticular, acude a urgencias por dolor en cuadrante inferior izquierdo del abdomen. Se solicita tomografía abdominal en la cual se observa absceso retroperitoneal. De acuerdo con la escala de Hinchey, este paciente se clasifica:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Estadio IA",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Estadio IB",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Estadio II",
+          "isCorrect": true,
+          "rationale": "Estadio II: Absceso intrabdominal, pélvico o retroperitoneal. Absceso distante al sitio inflamatorio primario. Diagnóstico y tratamiento de la enfermedad diverticular del colon. México: Secretaría de Salud; 27/Marzo/2014."
+        },
+        {
+          "id": "3",
+          "text": "Estadio III",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Estadio II: Absceso intrabdominal, pélvico o retroperitoneal. Absceso distante al sitio inflamatorio primario. Diagnóstico y tratamiento de la enfermedad diverticular del colon. México: Secretaría de Salud; 27/Marzo/2014.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 40,
+      "question": "Nivel de proteína C reactiva que ha demostrado mejorar el diagnóstico clínico de diverticulitis aguda:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "> 30 mg/l",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "> 40 mg/l",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "> 50 mg/l",
+          "isCorrect": true,
+          "rationale": "La proteína C reactiva con un nivel > 50 mg/l ha demostrado mejorar el diagnóstico clínico de la diverticulitis aguda. Diagnóstico y tratamiento de la enfermedad diverticular del colon. México: Secretaría de Salud; 27/Marzo/2014."
+        },
+        {
+          "id": "3",
+          "text": "> 60 mg/l",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "La proteína C reactiva con un nivel > 50 mg/l ha demostrado mejorar el diagnóstico clínico de la diverticulitis aguda. Diagnóstico y tratamiento de la enfermedad diverticular del colon. México: Secretaría de Salud; 27/Marzo/2014.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 41,
+      "question": "Masculino de 60 años solicita atención médica por presentar síncope. A la exploración física con elevación lenta del pulso carotídeo, disminución de la intensidad del segundo ruido cardiaco y soplo sistólico que se irradia hacia la arteria carótida derecha. El diagnóstico clínico más probable de este paciente es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Prolapso mitral",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Estenosis aórtica",
+          "isCorrect": true,
+          "rationale": "La confiabilidad de una exploración física realizada por un cardiólogo, para detectar un soplo cardiaco, es buena. Los hallazgos más útiles para detectar una estenosis aórtica son una elevación lenta del pulso carotídeo, intensidad máxima del soplo media o tardía y disminución en la intensidad del segundo ruido cardiaco. El hallazgo más útil para descartar estenosis aórtica es la ausencia de irradiación del soplo hacia la arteria carótida derecha. Prevención, diagnóstico y criterios de referencia de la estenosis aórtica en el primer nivel de atención, México: Secretaría de Salud, 2008."
+        },
+        {
+          "id": "2",
+          "text": "Insuficiencia tricúspidea",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Estenosis mitral",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "La confiabilidad de una exploración física realizada por un cardiólogo, para detectar un soplo cardiaco, es buena. Los hallazgos más útiles para detectar una estenosis aórtica son una elevación lenta del pulso carotídeo, intensidad máxima del soplo media o tardía y disminución en la intensidad del segundo ruido cardiaco. El hallazgo más útil para descartar estenosis aórtica es la ausencia de irradiación del soplo hacia la arteria carótida derecha. Prevención, diagnóstico y criterios de referencia de la estenosis aórtica en el primer nivel de atención, México: Secretaría de Salud, 2008.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 42,
+      "question": "La presentación más frecuente de esta patología es causada por:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Degeneración y calcificación senil",
+          "isCorrect": true,
+          "rationale": "La presentación más frecuente es la estenosis aórtica por degeneración y calcificación senil, en el adulto mayor. En segundo lugar, se presenta la valvulopatía aórtica congénita. La valvulopatía aórtica reumática es cada vez menos frecuente. Es común que se asocie con valvulopatía mitral. Prevención, diagnóstico y criterios de referencia de la estenosis aórtica en el primer nivel de atención, México: Secretaría de Salud, 2008."
+        },
+        {
+          "id": "1",
+          "text": "Fiebre reumática",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Valvulopatía mitral",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Valvulopatía congénita",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "La presentación más frecuente es la estenosis aórtica por degeneración y calcificación senil, en el adulto mayor. En segundo lugar, se presenta la valvulopatía aórtica congénita. La valvulopatía aórtica reumática es cada vez menos frecuente. Es común que se asocie con valvulopatía mitral. Prevención, diagnóstico y criterios de referencia de la estenosis aórtica en el primer nivel de atención, México: Secretaría de Salud, 2008.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 43,
+      "question": "Paciente de 27 años, a quien se le hizo el diagnóstico de infección por VIH cuatro semanas antes del parto vía abdominal realizado el día de hoy. Con carga viral de 2578 copias y 390 células CD4+. Se le inició manejo ARV con lopinavir/ritonavir y zidovudina, no se ha realizado estudios de control. Cuál de las siguientes es la mejor estrategia en su caso:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Si el producto recibe profilaxis con zidovudina, puede iniciar lactancia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Tomar nueva carga viral y si es indetectable, iniciar lactancia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Puede alternar la lactancia materna con fórmula de inicio",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "No alimentar al seno materno",
+          "isCorrect": true,
+          "rationale": "La lactancia materna se contraindica en infección por virus de VIH. La transmisión por virus de VIH es multifactorial e interviene la carga viral materna, estado inmunológico de la madre, patrón y duración de la alimentación al seno materno. Lactancia materna: Madre con enfermedad tratada con medicamentos. México: Instituto Mexicano del Seguro Social, 2013."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "La lactancia materna se contraindica en infección por virus de VIH. La transmisión por virus de VIH es multifactorial e interviene la carga viral materna, estado inmunológico de la madre, patrón y duración de la alimentación al seno materno. Lactancia materna: Madre con enfermedad tratada con medicamentos. México: Instituto Mexicano del Seguro Social, 2013.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 44,
+      "question": "Meta de tratamiento antes de los alimentos en jóvenes con DM1:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "72 a 126 mg/dl",
+          "isCorrect": true,
+          "rationale": "Para los jóvenes con DMT1, las metas de glucemia deseadas son: Antes de los alimentos de 72 a 126 mg/dl. Después de los alimentos de 90 a 180 mg/dl. A la hora de dormir de 108 a 180 mg/dl. A las 3 a.m. de 90 a 144 mg/dl. Diagnóstico y tratamiento de la diabetes mellitus Tipo 1 y Tipo 2 en paciente pediátrico en los tres niveles de atención. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021."
+        },
+        {
+          "id": "1",
+          "text": "90 a 180 mg/dl",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "108 a 180 mg/dl",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "90 a 144 mg/dl",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "Para los jóvenes con DMT1, las metas de glucemia deseadas son: Antes de los alimentos de 72 a 126 mg/dl. Después de los alimentos de 90 a 180 mg/dl. A la hora de dormir de 108 a 180 mg/dl. A las 3 a.m. de 90 a 144 mg/dl. Diagnóstico y tratamiento de la diabetes mellitus Tipo 1 y Tipo 2 en paciente pediátrico en los tres niveles de atención. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 45,
+      "question": "Recién nacido masculino con peso de 1750 g y diagnóstico de anemia del prematuro recibe transfusión con dos paquetes eritrocitarios. La mamá pregunta acerca de la aplicación de la vacuna que deja cicatriz en el hombro derecho, usted le indica que esta vacuna se aplicará al neonato:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Cuando el peso mínimo sea de 2,000 gramos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Después de tres meses de la transfusión sanguínea",
+          "isCorrect": true,
+          "rationale": "Las personas que hayan recibido transfusiones, o inmunoglobulina, esperarán cuando menos tres meses para ser vacunadas. Control y seguimiento de la nutrición, el crecimiento y desarrollo de la niña y del niño menor de 5 años. México: Instituto Mexicano del Seguro Social; 2 de diciembre de 2015."
+        },
+        {
+          "id": "2",
+          "text": "En la semana 37 de vida extrauterina corregida",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Se aplicará en la primera consulta en su centro de salud",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Las personas que hayan recibido transfusiones, o inmunoglobulina, esperarán cuando menos tres meses para ser vacunadas. Control y seguimiento de la nutrición, el crecimiento y desarrollo de la niña y del niño menor de 5 años. México: Instituto Mexicano del Seguro Social; 2 de diciembre de 2015.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 46,
+      "question": "Femenino de 49 años refiere pirosis desde 15 días y regurgitaciones mientras toma su siesta vespertina además de dolor torácico posprandial. Menciona ser vendedora por catálogo y llevar adecuada alimentación, aunque en ocasiones come en la calle y toma mucho café y refresco. La conducta terapéutica inicial es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Endoscopia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Terapia cuádruple para erradicación de H. pylori",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "IBP durante dos semanas",
+          "isCorrect": true,
+          "rationale": "Se sugiere realizar la prueba terapéutica con IBP durante dos semanas, como abordaje inicial en pacientes con datos clínicos de ERGE de reciente aparición. Diagnóstico y tratamiento de la enfermedad por reflujo gastroesofágico en el adulto. Guía de Práctica Clínica. México, CENETEC; 2018."
+        },
+        {
+          "id": "3",
+          "text": "Terapia triple para erradicación de H. pylori",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Se sugiere realizar la prueba terapéutica con IBP durante dos semanas, como abordaje inicial en pacientes con datos clínicos de ERGE de reciente aparición. Diagnóstico y tratamiento de la enfermedad por reflujo gastroesofágico en el adulto. Guía de Práctica Clínica. México, CENETEC; 2018.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 47,
+      "question": "Efecto adverso a largo plazo asociado al uso de IBP:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Osteomalacia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Cicatrización inadecuada",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Osteoporosis",
+          "isCorrect": true,
+          "rationale": "Se sugiere realizar seguimiento de probables efectos adversos a largo plazo asociado al uso de IBP como la osteoporosis. GPC: Profilaxis, Diagnóstico y Tratamiento de la Gastritis Aguda (Erosiva) en los Tres Niveles de Atención México: Secretaría de Salud, 2011."
+        },
+        {
+          "id": "3",
+          "text": "Prolongación de TP",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Se sugiere realizar seguimiento de probables efectos adversos a largo plazo asociado al uso de IBP como la osteoporosis. GPC: Profilaxis, Diagnóstico y Tratamiento de la Gastritis Aguda (Erosiva) en los Tres Niveles de Atención México: Secretaría de Salud, 2011.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 48,
+      "question": "Varón de 71 años acude a urgencias por un cuadro de 6 días de evolución de ictericia cutánea y conjuntival y refiere pérdida de peso de 15 kg en los últimos 6 meses. Solicita tomografía abdominal en la cual se observa una masa en los conductos biliares intrahepáticos, motivo por el que se realiza una colangiografía con la cual se diagnostica colangiocarcinoma. Representa el 95% de los casos:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Adenocarcinoma",
+          "isCorrect": true,
+          "rationale": "El adenocarcinoma representa el 95% de los casos. Otros tumores malignos de los conductos biliares incluyen carcinomas anaplásicos y escamosos, cistoadenocarcinoma, melanoma primario maligno, leiomiosarcoma, carcinosarcoma y tumores metastáticos principalmente cáncer mamario, mielomas y linfomas. Diagnóstico y Tratamiento del Cáncer de Vías Biliares. México: Instituto Mexicano del Seguro Social, 2011."
+        },
+        {
+          "id": "1",
+          "text": "Carcinosarcoma",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Carcinomas anaplásicos y escamosos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Cistoadenocarcinoma",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "El adenocarcinoma representa el 95% de los casos. Otros tumores malignos de los conductos biliares incluyen carcinomas anaplásicos y escamosos, cistoadenocarcinoma, melanoma primario maligno, leiomiosarcoma, carcinosarcoma y tumores metastáticos principalmente cáncer mamario, mielomas y linfomas. Diagnóstico y Tratamiento del Cáncer de Vías Biliares. México: Instituto Mexicano del Seguro Social, 2011.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 49,
+      "question": "No forma parte de los factores de riesgo más importantes para esta enfermedad:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Infestación parasitaria por E. coli",
+          "isCorrect": true,
+          "rationale": "Los factores de riesgo más importantes para CC son: Colangitis esclerosante primaria, coledocolitiasis crónica, quiste de colédoco y enfermedad inflamatoria intestinal. Diagnóstico y Tratamiento del Cáncer de Vías Biliares. México: Instituto Mexicano del Seguro Social, 2011."
+        },
+        {
+          "id": "1",
+          "text": "Colangitis esclerosante primaria",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Coledocolitiasis crónica",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Quiste de colédoco",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "Los factores de riesgo más importantes para CC son: Colangitis esclerosante primaria, coledocolitiasis crónica, quiste de colédoco y enfermedad inflamatoria intestinal. Diagnóstico y Tratamiento del Cáncer de Vías Biliares. México: Instituto Mexicano del Seguro Social, 2011.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 50,
+      "question": "Es la principal causa de anemia secundaria a enfermedad renal crónica:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Deficiencia en la ingesta dietética",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Inadecuada salud odontológica",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Uso de antiinflamatorios no esteroideos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Deficiencia de eritropoyetina",
+          "isCorrect": true,
+          "rationale": "La deficiencia de eritropoyetina es la principal causa de anemia secundaria a enfermedad renal crónica. Guía de Práctica Clínica: Evaluación, diagnóstico y tratamiento de anemia secundaria a enfermedad renal crónica. IMSS-403-10."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "La deficiencia de eritropoyetina es la principal causa de anemia secundaria a enfermedad renal crónica. Guía de Práctica Clínica: Evaluación, diagnóstico y tratamiento de anemia secundaria a enfermedad renal crónica. IMSS-403-10.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 51,
+      "question": "Paciente de 66 años presenta desde hace 24 horas sensación de falta de aire y tos. A la exploración FC 110 lpm, FR 19 rpm, TA 140/80 mmHg, T 38.4°C, SatO2 89%, disminución de sonidos respiratorios y crepitaciones a la auscultación. El tratamiento inicial más adecuado es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Amoxicilina",
+          "isCorrect": true,
+          "rationale": "El tratamiento para una neumonía leve, como es el caso, es con Amoxicilina. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, IMSS; 2017."
+        },
+        {
+          "id": "1",
+          "text": "Azitromicina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Levofloxacino",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Ampicilina",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "El tratamiento para una neumonía leve, como es el caso, es con Amoxicilina. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, IMSS; 2017.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 52,
+      "question": "Hombre de 25 años, previamente sano, comenta que desde hace 12 horas tiene fiebre no cuantificada que se acompaña de pujo, tenesmo y diarrea con sangre. A la exploración FC 76 lpm, T 38.9°C, FR 20 rpm, con distensión abdominal importante. El agente etiológico más probable es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Vibrio cholerae",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Clostridium perfringens",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Shigella sp",
+          "isCorrect": true,
+          "rationale": "Las personas con fiebre o diarrea sanguinolenta deben ser evaluadas para detectar enteropatógenos, para los cuales los agentes antimicrobianos pueden conferir un beneficio clínico, incluida la subespecie de Salmonella enterica, Shigella y Campylobacter. Prevención, diagnóstico y tratamiento de diarrea aguda en el paciente adulto en primer nivel de atención. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2020."
+        },
+        {
+          "id": "3",
+          "text": "Escherichia coli",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Las personas con fiebre o diarrea sanguinolenta deben ser evaluadas para detectar enteropatógenos, para los cuales los agentes antimicrobianos pueden conferir un beneficio clínico, incluida la subespecie de Salmonella enterica, Shigella y Campylobacter. Prevención, diagnóstico y tratamiento de diarrea aguda en el paciente adulto en primer nivel de atención. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2020.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 53,
+      "question": "El tratamiento médico más adecuado para este paciente es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Doxiciclina 300 mg dosis única",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Azitromicina 1 g dosis única",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Ciprofloxacino 2 g dosis única",
+          "isCorrect": true,
+          "rationale": "Shigelosis: Ciprofloxacino 500 mg cada 12 horas por tres días o 2 g dosis única. Ceftriaxona 2 a 4 g, dosis única. Prevención, diagnóstico y tratamiento de diarrea aguda en el paciente adulto en primer nivel de atención. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2020."
+        },
+        {
+          "id": "3",
+          "text": "Metronidazol 750 mg tres veces al día por cinco días",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Shigelosis: Ciprofloxacino 500 mg cada 12 horas por tres días o 2 g dosis única. Ceftriaxona 2 a 4 g, dosis única. Prevención, diagnóstico y tratamiento de diarrea aguda en el paciente adulto en primer nivel de atención. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2020.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 54,
+      "question": "A 14-year-old patient, weeks after a country walk he starts with the following symptoms: fever and chills, headache, muscular pain and photophobia. In one of his legs he has a macular erythematous lesion with an area of central pallor. The most probably etiology is:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Franciscella tularensis",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Borrelia burgdorferi",
+          "isCorrect": true,
+          "rationale": "La enfermedad de Lyme o borreliosis de Lyme es una enfermedad infecciosa emergente causada por la bacteria Borrelia burgdorferi sensu lato, la cual se transmite por la mordedura de garrapatas del género Ixodes. En el estadio temprano localizado se encuentra el eritema migratorio (eritema migrans) que se presenta en el 60-80% de los casos como signo inicial. Diagnóstico Diferencial de los Exantemas Infecciosos en la Infancia. México: Instituto Mexicano del Seguro Social, 2011."
+        },
+        {
+          "id": "2",
+          "text": "Mycobacterium tuberculosis",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Bacillus anthracis",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "La enfermedad de Lyme o borreliosis de Lyme es una enfermedad infecciosa emergente causada por la bacteria Borrelia burgdorferi sensu lato, la cual se transmite por la mordedura de garrapatas del género Ixodes. En el estadio temprano localizado se encuentra el eritema migratorio (eritema migrans) que se presenta en el 60-80% de los casos como signo inicial. Diagnóstico Diferencial de los Exantemas Infecciosos en la Infancia. México: Instituto Mexicano del Seguro Social, 2011.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 55,
+      "question": "Mujer de 33 años, G3 P2, cursando embarazo de 25 SDG se realiza curva de tolerancia a la glucosa oral con 100 g, obteniendo los siguientes resultados: 88, 165, 160, 145. El diagnóstico que se integra es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Embarazo normoevolutivo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Diabetes gestacional",
+          "isCorrect": true,
+          "rationale": "Se realizará el diagnóstico de Diabetes gestacional con 2 valores por arriba de los valores de referencia. Glucosa plasmática en ayuno: 95 mg/dL. Glucosa plasmática 1 hora poscarga: 180 mg/dL. Glucosa plasmática 2 horas poscarga: 155 mg/dL. Glucosa plasmática 3 horas poscarga: 140 mg/dL. Diagnóstico y tratamiento de la diabetes en el embarazo. México: Instituto Mexicano del Seguro Social; 03/11/2016."
+        },
+        {
+          "id": "2",
+          "text": "Estudio no concluyente",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Diabetes pregestacional",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Se realizará el diagnóstico de Diabetes gestacional con 2 valores por arriba de los valores de referencia. Glucosa plasmática en ayuno: 95 mg/dL. Glucosa plasmática 1 hora poscarga: 180 mg/dL. Glucosa plasmática 2 horas poscarga: 155 mg/dL. Glucosa plasmática 3 horas poscarga: 140 mg/dL. Diagnóstico y tratamiento de la diabetes en el embarazo. México: Instituto Mexicano del Seguro Social; 03/11/2016.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 56,
+      "question": "Kcal/día indicadas en diabéticas embarazadas para mejorar la glucemia de ayuno sin impedir el crecimiento fetal:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "< 1500",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "1500-1700",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "1600-1800",
+          "isCorrect": true,
+          "rationale": "La restricción energética moderada con dietas entre 1600-1800 kcal/día en diabéticas embarazadas mejora la glucemia de ayuno sin impedir el crecimiento fetal, no afecta el peso del producto al nacimiento, ni induce cetosis. Diagnóstico y tratamiento de la diabetes en el embarazo. México: Instituto Mexicano del Seguro Social; 03/11/2016."
+        },
+        {
+          "id": "3",
+          "text": "1800-2000",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "La restricción energética moderada con dietas entre 1600-1800 kcal/día en diabéticas embarazadas mejora la glucemia de ayuno sin impedir el crecimiento fetal, no afecta el peso del producto al nacimiento, ni induce cetosis. Diagnóstico y tratamiento de la diabetes en el embarazo. México: Instituto Mexicano del Seguro Social; 03/11/2016.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 57,
+      "question": "Masculino de 3 años ingresa a urgencias por presentar fiebre de 6 días de evolución y edema en plantas. A la exploración se observa exantema macular eritematoso generalizado, conjuntivitis bulbar bilateral no exudativa, eritema difuso en mucosa orofaríngea, fisura en labios y se palpa adenopatía cervical izquierda de 3 cm de diámetro. Soplo II/IV en borde esternal inferior. Laboratorios reportan neutrofilia y plaquetosis. La causa más probable del cuadro clínico que presenta el paciente es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Púrpura fulminans",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Vasculitis sistémica",
+          "isCorrect": true,
+          "rationale": "La enfermedad de Kawasaki (EK) es una vasculitis sistémica de la que aún no se conoce la causa, pero se sospecha que existe activación del sistema inmunológico secundario a una infección en un huésped genéticamente susceptible. Los criterios diagnósticos para la enfermedad clásica/completa son: Fiebre por ≥ 5 días y ≥4 de los siguientes signos. Conjuntivitis bulbar, bilateral, no exudativa. Cambios orofaríngeos como: Lengua de fresa. Eritema difuso en mucosa orofaríngea. Eritema o fisuras en los labios. Adenopatía cervical (≥1.5 cm de diámetro, unilateral). Exantema polimorfo. Cambios periféricos en extremidades. Eritema o edema en palmas o plantas. Descamación periungueal en fase subaguda. Diagnóstico Diferencial de los Exantemas Infecciosos en la Infancia. México: Instituto Mexicano del Seguro Social, 2011."
+        },
+        {
+          "id": "2",
+          "text": "Fiebre reumática",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Infección por estreptococo betahemolítico del grupo A",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "La enfermedad de Kawasaki (EK) es una vasculitis sistémica de la que aún no se conoce la causa, pero se sospecha que existe activación del sistema inmunológico secundario a una infección en un huésped genéticamente susceptible. Los criterios diagnósticos para la enfermedad clásica/completa son: Fiebre por ≥ 5 días y ≥4 de los siguientes signos. Conjuntivitis bulbar, bilateral, no exudativa. Cambios orofaríngeos como: Lengua de fresa. Eritema difuso en mucosa orofaríngea. Eritema o fisuras en los labios. Adenopatía cervical (≥1.5 cm de diámetro, unilateral). Exantema polimorfo. Cambios periféricos en extremidades. Eritema o edema en palmas o plantas. Descamación periungueal en fase subaguda. Diagnóstico Diferencial de los Exantemas Infecciosos en la Infancia. México: Instituto Mexicano del Seguro Social, 2011.",
+      "serie": 2,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 58,
+      "question": "El tratamiento más adecuado para este paciente es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Glucocorticoides",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Metotrexato",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Salicilatos y gamaglobulina intravenosa",
+          "isCorrect": true,
+          "rationale": "La frecuencia de alteraciones en las arterias coronarias es de 20%, el objetivo de un tratamiento adecuado (salicilatos a dosis antiinflamatorias y gamaglobulina intravenosa) es disminuir la frecuencia de aneurismas a 3%. Diagnóstico Diferencial de los Exantemas Infecciosos en la Infancia. México: Instituto Mexicano del Seguro Social, 2011."
+        },
+        {
+          "id": "3",
+          "text": "Penicilina G benzatínica",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "La frecuencia de alteraciones en las arterias coronarias es de 20%, el objetivo de un tratamiento adecuado (salicilatos a dosis antiinflamatorias y gamaglobulina intravenosa) es disminuir la frecuencia de aneurismas a 3%. Diagnóstico Diferencial de los Exantemas Infecciosos en la Infancia. México: Instituto Mexicano del Seguro Social, 2011.",
+      "serie": 2,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 59,
+      "question": "Es la principal causa de morbilidad y mortalidad de esta enfermedad:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Regurgitación mitral",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Aneurismas coronarios",
+          "isCorrect": true,
+          "rationale": "Se desarrollan en el 20% de los pacientes sin tratamiento y son la principal causa de morbilidad y mortalidad de esta enfermedad. Diagnóstico Diferencial de los Exantemas Infecciosos en la Infancia. México: Instituto Mexicano del Seguro Social, 2011."
+        },
+        {
+          "id": "2",
+          "text": "Falla hepática aguda",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Falla renal aguda",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Se desarrollan en el 20% de los pacientes sin tratamiento y son la principal causa de morbilidad y mortalidad de esta enfermedad. Diagnóstico Diferencial de los Exantemas Infecciosos en la Infancia. México: Instituto Mexicano del Seguro Social, 2011.",
+      "serie": 2,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 60,
+      "question": "Femenino de 81 años, con diagnóstico de cardiopatía isquémica, es llevada por sus familiares al servicio de urgencias tras sufrir caída de su propia altura. Se realiza radiografía con hallazgos de fractura completa, parcialmente desplazada, menos de 50%. Es la principal causa de fractura del extremo proximal del fémur:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Síndrome de fragilidad",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Caída desde su propia altura",
+          "isCorrect": true,
+          "rationale": "La principal causa de las fracturas proximales del fémur es la caída de las personas desde su propia altura, con una mayor incidencia a los 80 años, en 1 de cada 3 mujeres, asociado a este tipo de fracturas se encuentran la pérdida de peso, trastornos de la visión, disfunción de los miembros inferiores, disminución de la fuerza muscular y la pérdida del equilibrio. Diagnóstico y Tratamiento de las Fracturas Intracapsulares del Extremo Proximal de Fémur. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, CENETEC; 2017."
+        },
+        {
+          "id": "2",
+          "text": "Osteoporosis",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Polifarmacia",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "La principal causa de las fracturas proximales del fémur es la caída de las personas desde su propia altura, con una mayor incidencia a los 80 años, en 1 de cada 3 mujeres, asociado a este tipo de fracturas se encuentran la pérdida de peso, trastornos de la visión, disfunción de los miembros inferiores, disminución de la fuerza muscular y la pérdida del equilibrio. Diagnóstico y Tratamiento de las Fracturas Intracapsulares del Extremo Proximal de Fémur. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, CENETEC; 2017.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 61,
+      "question": "De acuerdo con la clasificación de Garden, la fractura que presenta la paciente se clasifica como:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Tipo I",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Tipo II",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Tipo III",
+          "isCorrect": true,
+          "rationale": "Tipo III: Fractura completa, parcialmente desplazada, menos de 50%. Diagnóstico y Tratamiento de las Fracturas Intracapsulares del Extremo Proximal de Fémur. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, CENETEC; 2017."
+        },
+        {
+          "id": "3",
+          "text": "Tipo IV",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Tipo III: Fractura completa, parcialmente desplazada, menos de 50%. Diagnóstico y Tratamiento de las Fracturas Intracapsulares del Extremo Proximal de Fémur. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, CENETEC; 2017.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 62,
+      "question": "Niño de 7 años presenta dolor abdominal y articular además de cuadro purpúrico limitado a extremidades inferiores que evoluciona por brotes. El día de hoy comienza con orina oscura y discreta proteinuria, cifras arteriales normales. Solicita valores de urea y creatinina los cuales son normales. Solicita una biopsia renal, esperando encontrar el siguiente hallazgo:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Engrosamiento difuso de la membrana basal glomerular",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "GN endocapilar",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Depósitos mesangiales de IgA",
+          "isCorrect": true,
+          "rationale": "Púrpura de Henoch-Schönlein: Depósitos de inmunoglobulina A, afectando a capilares, vénulas o arteriolas, típicamente involucran a piel, intestino y glomérulo; asociada con artralgias o artritis. Diagnóstico y Tratamiento de Poliarteritis Nodosa. México: Instituto Mexicano del Seguro Social, 2011."
+        },
+        {
+          "id": "3",
+          "text": "Proliferación extracapilar difusa en forma de semilunas",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Púrpura de Henoch-Schönlein: Depósitos de inmunoglobulina A, afectando a capilares, vénulas o arteriolas, típicamente involucran a piel, intestino y glomérulo; asociada con artralgias o artritis. Diagnóstico y Tratamiento de Poliarteritis Nodosa. México: Instituto Mexicano del Seguro Social, 2011.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 63,
+      "question": "Gestante de 9 semanas acude a consulta para realizarse un ultrasonido. Usted observa gestación intrauterina con un embrión único con LCC de 14 mm sin latido cardíaco. Le explica a la paciente su diagnóstico y decide indicarle tratamiento domiciliario. Para evaluar la total evacuación del contenido uterino, se debe realizar un USG:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Entre los 3 a 5 días después del inicio del tratamiento farmacológico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Entre los 5 a 8 días después del inicio del tratamiento farmacológico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Entre los 8 a 15 días después del inicio del tratamiento farmacológico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Entre los 7 a 14 días después del inicio del tratamiento farmacológico",
+          "isCorrect": true,
+          "rationale": "Se debe realizar USG entre los 7 a 14 días después del inicio del tratamiento farmacológico para valorar la total evacuación del contenido uterino. Guía de Práctica Clínica Diagnóstico y Tratamiento del Aborto Espontáneo, Manejo Inicial de Aborto Recurrente, México; Instituto Mexicano del Seguro Social, 2009."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "Se debe realizar USG entre los 7 a 14 días después del inicio del tratamiento farmacológico para valorar la total evacuación del contenido uterino. Guía de Práctica Clínica Diagnóstico y Tratamiento del Aborto Espontáneo, Manejo Inicial de Aborto Recurrente, México; Instituto Mexicano del Seguro Social, 2009.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 64,
+      "question": "Una mamá primigesta acude a su consulta porque tiene un bebé de 6 meses y leyó en internet acerca del síndrome de muerte súbita del lactante y quiere saber si su hijo podría desarrollarlo. Respecto a esta patología, señala la opción correcta:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Existe un predominio en el sexo femenino",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "La máxima incidencia se presenta entre los dos y los tres meses de edad",
+          "isCorrect": true,
+          "rationale": "La máxima incidencia de SMSL se presenta entre los dos y tres meses de edad, siendo poco frecuentes los casos antes de las dos semanas de vida y después de los seis meses. Se debe colocar al lactante en posición supina para dormir. Intervenciones de enfermería para la prevención del síndrome de muerte súbita del lactante en el primer nivel de atención. Guía de Práctica Clínica de enfermería. México: Secretaría de Salud, CENETEC, 2016."
+        },
+        {
+          "id": "2",
+          "text": "Es muy frecuente que se presente antes de las dos semanas de vida",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Está asociado a Violencia en el Lactante",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "La máxima incidencia de SMSL se presenta entre los dos y tres meses de edad, siendo poco frecuentes los casos antes de las dos semanas de vida y después de los seis meses. Se debe colocar al lactante en posición supina para dormir. Intervenciones de enfermería para la prevención del síndrome de muerte súbita del lactante en el primer nivel de atención. Guía de Práctica Clínica de enfermería. México: Secretaría de Salud, CENETEC, 2016.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 65,
+      "question": "Hombre de 67 años presenta neoformación exofítica en la nariz con borde aperlado y telangiectasias en su superficie. Se realiza biopsia excisional y patología reporta histología micronodular y microquístico con invasión hasta dermis. Es la variedad clínica e histológica de carcinoma basocelular que presenta este paciente:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Superficial",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Nodular",
+          "isCorrect": true,
+          "rationale": "Nodular: Comúnmente se presenta en cara. Neoformación exofítica con borde aperlado y telangiectasias en su superficie. Puede estar ulcerado. Histología micronodular y microquístico con invasión hasta dermis. Diagnóstico y Tratamiento del Carcinoma Basocelular. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, CENETEC, 2019."
+        },
+        {
+          "id": "2",
+          "text": "Morfeiforme",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Pigmentado",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Nodular: Comúnmente se presenta en cara. Neoformación exofítica con borde aperlado y telangiectasias en su superficie. Puede estar ulcerado. Histología micronodular y microquístico con invasión hasta dermis. Diagnóstico y Tratamiento del Carcinoma Basocelular. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, CENETEC, 2019.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
       "id": 66,
       "question": "Femenino de 25 años, con antecedente de viaje a Chiapas hace tres semanas, acude a su consulta por presentar fiebre no cuantificada e intensos escalofríos desde hace una semana, pero esto no le ocurre todos los días. Los intervalos en los que no tiene fiebre se encuentra clínicamente bien. El agente etiológico más probable es:",
       "answerOptions": [
@@ -7706,7 +9806,7 @@
       "difficulty": "moderado"
     }
   ],
-  "total_questions": 220,
+  "total_questions": 280,
   "is_hidden": false,
   "created_date": "2026-08-24T05:10:10.115Z"
 }
