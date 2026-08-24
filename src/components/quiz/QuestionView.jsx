@@ -1,34 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, XCircle, Lightbulb, ChevronRight, ChevronLeft } from 'lucide-react';
+import { CheckCircle2, Lightbulb, ChevronRight, ChevronLeft } from 'lucide-react';
 import { client } from '@/api/client';
 import MathText from './MathText';
 import ImageQuestionView from './ImageQuestionView';
-import AIErrorFeedback from './AIErrorFeedback';
-import { diagnoseError } from '@/services/mockAIService';
-
-/**
- * @typedef {Object} QuestionViewProps
- * @property {any} question
- * @property {number} questionNumber
- * @property {number} totalQuestions
- * @property {number} [correctAnswers]
- * @property {number} [wrongAnswers]
- * @property {(isCorrect: boolean, selectedOption: any, question: any) => void} onAnswer
- * @property {() => void} [onBack]
- * @property {(question: any, isMarked: boolean) => void} [onMarkForReview]
- * @property {any[]} [previousAttempts]
- * @property {string} [quizId]
- * @property {string} [userEmail]
- * @property {Object} [settings]
- * @property {boolean} [settings.show_feedback]
- * @property {boolean} [settings.show_hint]
- * @property {boolean} [settings.enable_tutor]
- * @property {string} [quizTitle]
- * @property {string} [subjectId]
- * @property {string} [sessionId]
- * @property {boolean} [initialIsMarked]
- */
 
 export default function QuestionView({
   question,
@@ -48,15 +23,11 @@ export default function QuestionView({
   sessionId = null,
   initialIsMarked = false
 }) {
-  const showFeedbackSetting = settings.show_feedback !== false;
   const showHintSetting = settings.show_hint !== false;
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [isMarked, setIsMarked] = useState(initialIsMarked);
-  const [answerStartTime, setAnswerStartTime] = useState(Date.now());
-  const [aiAnalysis, setAiAnalysis] = useState(null);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   // Actualizar sesión cuando cambia la pregunta
   useEffect(() => {
@@ -77,7 +48,6 @@ export default function QuestionView({
     updateSession();
   }, [sessionId, questionNumber, correctAnswers, wrongAnswers]);
 
-
   // Normalize options
   const options = question.answerOptions || question.options || [];
 
@@ -92,48 +62,24 @@ export default function QuestionView({
     );
   }
 
-
-  const handleSelectAnswer = async (index) => {
+  const handleSelectAnswer = (index) => {
     if (showFeedback) return;
-
-    const selected = options[index];
     setSelectedAnswer(index);
     setShowFeedback(true);
-
-    if (!selected.isCorrect) {
-      // Only run AI analysis if enabled in settings
-      if (settings.enable_tutor) {
-        setIsAnalyzing(true);
-        try {
-          const analysis = await diagnoseError(
-            question.question,
-            question.answerOptions?.find(o => o.isCorrect)?.rationale || "N/A",
-            selected.text
-          );
-          setAiAnalysis(analysis);
-        } catch (error) {
-          console.error("Error analyzing answer:", error);
-        } finally {
-          setIsAnalyzing(false);
-        }
-      }
-    }
   };
 
   const selectedOption = selectedAnswer !== null ? options[selectedAnswer] : null;
   const correctOption = options.find(o => o.isCorrect) || null;
-  const incorrectOption = selectedOption && !selectedOption.isCorrect
-    ? selectedOption
-    : (options.find(o => !o.isCorrect) || null);
 
-  const getCorrectFeedback = () => {
-    if (!correctOption) return question.feedback || "Explicación correcta.";
-    return correctOption.rationale || question.feedback || "Explicación correcta.";
-  };
-
-  const getIncorrectFeedback = () => {
-    if (!incorrectOption) return null;
-    return incorrectOption.rationale || "Esta opción no es la más adecuada.";
+  const getJustificationText = () => {
+    return (
+      question.justificacion ||
+      question.justificación ||
+      question.feedback ||
+      question.explanation ||
+      correctOption?.rationale ||
+      "Respuesta correcta."
+    );
   };
 
   const handleNext = () => {
@@ -145,58 +91,57 @@ export default function QuestionView({
     const isSelected = selectedAnswer === index;
     const option = options[index];
     const isCorrect = option.isCorrect;
-
-    // Logic for revealed state
     const isRevealed = showFeedback;
+
     const isCorrectlySelected = isRevealed && isSelected && isCorrect;
     const isIncorrectlySelected = isRevealed && isSelected && !isCorrect;
     const isMissedCorrect = isRevealed && !isSelected && isCorrect;
 
-    const baseStyle = "relative p-3 md:p-3.5 rounded-xl border border-transparent flex flex-col w-full text-left group transition-all duration-150 ease-out";
+    const baseStyle = "relative p-3.5 md:p-4 rounded-xl border flex flex-col w-full text-left transition-all duration-150 ease-out";
 
     if (isCorrectlySelected) {
-      return `${baseStyle} border-emerald-500 bg-emerald-100 shadow-sm`;
+      return `${baseStyle} border-emerald-500 bg-emerald-50 text-emerald-950 font-medium shadow-sm ring-1 ring-emerald-400`;
     }
     if (isIncorrectlySelected) {
-      return `${baseStyle} border-rose-500 bg-rose-100 shadow-sm`;
+      return `${baseStyle} border-rose-400 bg-rose-50 text-rose-950 shadow-sm ring-1 ring-rose-300`;
     }
     if (isMissedCorrect) {
-      return `${baseStyle} border-emerald-400 bg-emerald-50`;
+      return `${baseStyle} border-emerald-400 bg-emerald-50/80 text-emerald-950 font-medium`;
     }
     if (isSelected && !isRevealed) {
-      return `${baseStyle} border-indigo-600 bg-indigo-50 shadow-sm`;
+      return `${baseStyle} border-indigo-600 bg-indigo-50 shadow-sm text-slate-900`;
     }
 
-    return `${baseStyle} bg-white hover:-translate-y-[1px] hover:shadow-md text-slate-800`;
+    return `${baseStyle} border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/80 text-slate-800 shadow-sm`;
   };
 
   const getLetterPrefix = (index) => {
     const letters = ['A.', 'B.', 'C.', 'D.', 'E.', 'F.'];
-    return letters[index] || '';
+    return letters[index] || `${index + 1}.`;
   };
 
-  const getLetterIcon = (index) => {
+  const getLetterBadge = (index) => {
     const isSelected = selectedAnswer === index;
     const option = options[index];
     const isCorrect = option.isCorrect;
     const isRevealed = showFeedback;
 
-    let textColor = "text-slate-500";
+    let badgeClass = "text-slate-600 bg-slate-100";
 
     if (isRevealed) {
-      if (option.isCorrect) {
-        textColor = "text-emerald-800";
+      if (isCorrect) {
+        badgeClass = "text-emerald-800 bg-emerald-200 font-bold";
       } else if (isSelected && !isCorrect) {
-        textColor = "text-rose-800";
+        badgeClass = "text-rose-800 bg-rose-200 font-bold";
       }
     } else if (isSelected) {
-      textColor = "text-blue-800";
+      badgeClass = "text-indigo-800 bg-indigo-200 font-bold";
     }
 
     return (
-      <div className={`text-base font-medium mt-0.5 ${textColor}`}>
-        {getLetterPrefix(index)}
-      </div>
+      <span className={`inline-flex items-center justify-center w-7 h-7 rounded-lg text-sm font-semibold shrink-0 ${badgeClass}`}>
+        {getLetterPrefix(index).replace('.', '')}
+      </span>
     );
   };
 
@@ -204,214 +149,158 @@ export default function QuestionView({
   const progressPercent = totalQuestions > 0 ? Math.round((answeredCount / totalQuestions) * 100) : 0;
 
   return (
-    <div className="h-[100dvh] bg-[linear-gradient(165deg,#f3f7fb_0%,#edf3fb_52%,#e7eef8_100%)] flex flex-col overflow-hidden font-sans">
-      <header className="flex-none z-20 px-3 pt-3 md:px-4">
-        <div className="relative rounded-2xl border border-slate-200/80 bg-white/90 px-3 py-3 shadow-sm backdrop-blur-sm">
-          <button
-            onClick={onBack}
-            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-700"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
+    <div className="min-h-[100dvh] bg-[linear-gradient(160deg,#f8fafc_0%,#f1f5f9_50%,#e2e8f0_100%)] flex flex-col font-sans">
+      {/* Header Bar */}
+      <header className="flex-none px-4 pt-4 md:px-6">
+        <div className="max-w-4xl mx-auto rounded-2xl border border-slate-200/80 bg-white/95 px-4 py-3 shadow-sm backdrop-blur-sm">
+          <div className="flex items-center justify-between gap-3 mb-2">
+            <button
+              onClick={onBack}
+              className="flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg px-2 py-1 hover:bg-slate-100 transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              <span>Salir</span>
+            </button>
 
-          <div className="mx-auto flex max-w-4xl flex-col gap-2 px-10">
-            <div className="text-center">
-              <h1 className="text-[clamp(20px,1.6vw,30px)] font-bold leading-tight text-slate-900">
-                {quizTitle || 'Quiz'}
+            <div className="text-center flex-1 truncate px-2">
+              <h1 className="text-base sm:text-lg font-bold text-slate-900 truncate">
+                {quizTitle || 'Cuestionario'}
               </h1>
-              {subjectId && (
-                <p className="mt-0.5 text-xs text-slate-500">{subjectId}</p>
-              )}
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-200">
-                <div
-                  className="h-full rounded-full bg-slate-900 transition-all duration-300"
-                  style={{ width: `${progressPercent}%` }}
-                />
-              </div>
-              <span className="text-xs font-semibold text-slate-600">{progressPercent}%</span>
+            <div className="flex items-center gap-3 text-xs font-semibold">
+              <span className="text-emerald-700">✓ {correctAnswers}</span>
+              <span className="text-rose-700">✗ {wrongAnswers}</span>
             </div>
-            <div className="flex items-center justify-between text-xs text-slate-600">
-              <span>Pregunta {questionNumber} de {totalQuestions}</span>
-              <div className="flex items-center gap-3">
-                <span className="font-semibold text-emerald-700">Aciertos: {correctAnswers}</span>
-                <span className="font-semibold text-rose-700">Errores: {wrongAnswers}</span>
-              </div>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="flex items-center gap-3">
+            <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100 border border-slate-200">
+              <div
+                className="h-full rounded-full bg-indigo-600 transition-all duration-300"
+                style={{ width: `${progressPercent}%` }}
+              />
             </div>
+            <span className="text-xs font-medium text-slate-500">
+              {questionNumber} / {totalQuestions} ({progressPercent}%)
+            </span>
           </div>
         </div>
       </header>
 
-      {/* Main Content Area - Flexible Scroll Container */}
-      {/* Mobile: overflow-y-auto (global scroll) */}
-      {/* Desktop: overflow-hidden (panels scroll individually) */}
-      <div className="relative z-10 flex-1 min-h-0 w-full overflow-y-auto p-3 md:p-4">
-        <div className="mx-auto h-full w-full max-w-6xl gap-3 lg:grid lg:grid-cols-[0.88fr_1.12fr]">
+      {/* Main Content Area */}
+      <main className="flex-1 w-full max-w-4xl mx-auto p-4 md:p-6 flex flex-col justify-start">
+        <div className="rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-7 shadow-sm space-y-6">
+          
+          {/* Question Meta Badge */}
+          <div className="flex items-center justify-between gap-2">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200/60 uppercase tracking-wide">
+              Pregunta {questionNumber} de {totalQuestions}
+            </span>
+            {question.serie && (
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+                Serie: {question.serie}
+              </span>
+            )}
+          </div>
 
-          {/* LEFT COLUMN: Question Content & Analysis */}
-          {/* Mobile: Block flow. Desktop: Scrollable Panel */}
-          <div className="p-0 lg:h-full overflow-hidden flex flex-col">
-            <div className="mx-auto h-full w-full rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm md:p-6 lg:overflow-y-auto">
+          {/* Question Text */}
+          <h2 className="text-lg sm:text-xl md:text-[22px] font-semibold leading-relaxed text-slate-900">
+            <MathText text={question.question} />
+          </h2>
 
-              {/* Question Number Badge */}
-              <div className="mb-4">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-indigo-900 text-indigo-50 uppercase tracking-[0.12em]">
-                  Pregunta {questionNumber}
+          {/* Image (if any) */}
+          {question.imageUrl && (
+            <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-50 max-h-[260px] flex items-center justify-center">
+              <img
+                src={question.imageUrl}
+                alt="Imagen del reactivo"
+                className="max-h-[260px] w-auto object-contain mx-auto"
+              />
+            </div>
+          )}
+
+          {/* Optional Hint */}
+          {question.hint && !showFeedback && showHintSetting && (
+            <div>
+              <button
+                onClick={() => setShowHint(!showHint)}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 hover:text-amber-800"
+              >
+                <Lightbulb className="w-3.5 h-3.5" />
+                <span>{showHint ? 'Ocultar pista' : 'Ver pista'}</span>
+              </button>
+              {showHint && (
+                <div className="mt-2 p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 leading-relaxed">
+                  <MathText text={question.hint} />
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Answer Options */}
+          <div className="space-y-3 pt-2">
+            {options.map((option, index) => (
+              <button
+                key={index}
+                onClick={() => handleSelectAnswer(index)}
+                disabled={showFeedback}
+                className={getOptionStyle(index)}
+              >
+                <div className="flex items-start gap-3.5 w-full">
+                  {getLetterBadge(index)}
+                  <div className="pt-0.5 flex-1 text-sm sm:text-base font-normal leading-snug">
+                    <MathText text={option.text} />
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Single Clean Justification Box (When Answered) */}
+          {showFeedback && (
+            <div className="mt-5 rounded-xl border border-emerald-300 bg-emerald-50/90 p-4 shadow-sm animate-fade-in">
+              <div className="flex items-center gap-2 mb-1.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
+                <span className="font-bold text-xs text-emerald-900 uppercase tracking-wide">
+                  Justificación
                 </span>
               </div>
-
-              {/* Question Text */}
-              <h2 className="mb-4 text-[clamp(23px,2vw,34px)] font-semibold leading-[1.2] text-slate-900">
-                <MathText text={question.question} />
-              </h2>
-
-              {/* Image */}
-              {question.imageUrl && (
-                <div className="mb-6 rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
-                  <img
-                    src={question.imageUrl}
-                    alt="Pregunta"
-                    className="w-full h-auto max-h-[220px] object-contain mx-auto"
-                  />
-                </div>
-              )}
-
-              {/* Hints */}
-              {question.hint && !showFeedback && showHintSetting && (
-                <div className="mb-6">
-                  <button
-                    onClick={() => setShowHint(!showHint)}
-                    className="flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-900"
-                  >
-                    Mostrar pista
-                    <ChevronRight className={`w-4 h-4 ${showHint ? 'rotate-[-90deg]' : 'rotate-90'}`} />
-                  </button>
-                  {showHint && (
-                    <div className="mt-4 p-4 bg-amber-50 border border-amber-300 rounded-xl">
-                      <div className="flex gap-3">
-                        <Lightbulb className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                        <div className="text-amber-900 text-[15px] leading-relaxed">
-                          <MathText text={question.hint} />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              <div className="mb-5 rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-sm text-slate-700">
-                <p className="font-semibold text-slate-900">Cómo responder</p>
-                <p className="mt-1">Selecciona una opción y revisa feedback correcto/incorrecto antes de avanzar.</p>
-              </div>
-
-              {/* AI Analysis Feedback Only */}
-              <AIErrorFeedback isLoading={isAnalyzing} analysis={aiAnalysis} />
-            </div>
-          </div>
-
-          {/* RIGHT COLUMN: Options */}
-          {/* Mobile: Block flow (below left col). Desktop: Scrollable Panel (Right side) */}
-          <div className="flex flex-col lg:h-full overflow-hidden">
-            <div className="h-full flex flex-col min-h-0">
-              <div className="mx-auto h-full w-full rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm md:p-5 flex flex-col min-h-0">
-
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="text-[11px] font-bold tracking-[0.12em] text-slate-600 uppercase">Opciones</span>
-                  <span className="rounded-full bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-700">{options.length} respuestas</span>
-                </div>
-
-                <div className="flex-1 min-h-0 overflow-y-auto pr-1 space-y-2">
-                  {options.map((option, index) => {
-                    return (
-                      <button
-                        key={index}
-                        onClick={() => handleSelectAnswer(index)}
-                        disabled={showFeedback}
-                        className={getOptionStyle(index)}
-                      >
-                        <div className="flex items-start gap-3 w-full">
-                          {/* Letter Prefix instead of Radio */}
-                          <div className="flex-shrink-0 pt-0.5 w-[24px]">
-                            {getLetterIcon(index)}
-                          </div>
-
-                          {/* Text Header */}
-                          <div className="mt-[1px] flex-1 text-[clamp(16px,1.05vw,20px)] font-medium leading-snug text-slate-800">
-                            <MathText text={option.text} />
-                          </div>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {/* Unified feedback panel (keeps option cards compact and visible) */}
-                <div className="mt-3 min-h-[112px]">
-                  {showFeedback && selectedOption && (
-                    <div className="space-y-2">
-                      <div className="rounded-xl border border-emerald-600 bg-emerald-100 p-3">
-                        <div className="flex items-center gap-2 mb-1.5 w-full">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
-                          <span className="font-bold text-[12px] text-emerald-900 tracking-wide uppercase">Respuesta correcta</span>
-                        </div>
-                        <div className="text-[14px] leading-snug text-emerald-950">
-                          <MathText text={getCorrectFeedback()} />
-                        </div>
-                      </div>
-
-                      {getIncorrectFeedback() && (
-                        <div className="rounded-xl border border-rose-600 bg-rose-100 p-3">
-                          <div className="flex items-center gap-2 mb-1.5 w-full">
-                            <XCircle className="w-4 h-4 text-rose-700 shrink-0" />
-                            <span className="font-bold text-[12px] text-rose-900 tracking-wide uppercase">
-                              {selectedOption.isCorrect ? 'Distractor a evitar' : 'Tu opción incorrecta'}
-                            </span>
-                          </div>
-                          <div className="text-[14px] leading-snug text-rose-950">
-                            <MathText text={getIncorrectFeedback()} />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-
+              <div className="text-sm leading-relaxed text-emerald-950 font-normal">
+                <MathText text={getJustificationText()} />
               </div>
             </div>
-          </div>
-
+          )}
         </div>
-      </div>
+      </main>
 
-      {/* Footer Navigation - Global Sticky/Fixed at Bottom */}
-      <div className="relative z-[80] w-full flex-none bg-transparent px-3 pb-3 pointer-events-auto md:px-4">
-        <div className="rounded-xl border border-slate-200/80 bg-white p-3 shadow-sm md:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-            <Button
-              variant="ghost"
-              onClick={() => { /* Handle Previous if needed */ }}
-              disabled={questionNumber <= 1}
-              className="text-slate-600 hover:text-slate-900 h-10 px-4 relative z-[81] pointer-events-auto touch-manipulation rounded-lg"
-            >
-              <ChevronLeft className="w-4 h-4 mr-1" />
-              <span className="hidden sm:inline">Anterior</span>
-            </Button>
+      {/* Footer Navigation Bar */}
+      <footer className="flex-none p-4 md:px-6 md:pb-6">
+        <div className="max-w-4xl mx-auto rounded-xl border border-slate-200/80 bg-white p-3 shadow-sm flex items-center justify-between gap-4">
+          <Button
+            variant="ghost"
+            onClick={onBack}
+            className="text-slate-600 hover:text-slate-900 text-sm h-10 px-4 rounded-lg"
+          >
+            <ChevronLeft className="w-4 h-4 mr-1" />
+            <span>Volver</span>
+          </Button>
 
-            <Button
-              onClick={handleNext}
-              disabled={!showFeedback && selectedAnswer === null}
-              className={`h-11 min-w-[210px] w-full sm:w-auto rounded-lg font-semibold text-white shadow-md relative z-[81] pointer-events-auto touch-manipulation transition-all duration-150 ${showFeedback ? 'bg-indigo-600 hover:bg-indigo-700 hover:shadow-indigo-300/40' : 'bg-slate-900 hover:bg-black hover:shadow-slate-400/40'
-                }`}
-            >
-              <span>{questionNumber === totalQuestions ? 'Finalizar' : 'Siguiente'}</span>
-              <ChevronRight className="w-4 h-4 ml-1.5" />
-            </Button>
-          </div>
+          <Button
+            onClick={handleNext}
+            disabled={!showFeedback && selectedAnswer === null}
+            className={`h-11 px-6 rounded-xl font-semibold text-white shadow-md transition-all duration-150 ${
+              showFeedback
+                ? 'bg-indigo-600 hover:bg-indigo-700 hover:shadow-indigo-300/40'
+                : 'bg-slate-900 hover:bg-black'
+            }`}
+          >
+            <span>{questionNumber === totalQuestions ? 'Finalizar Cuestionario' : 'Siguiente Reactivo'}</span>
+            <ChevronRight className="w-4 h-4 ml-1.5" />
+          </Button>
         </div>
-      </div>
-
-    </div >
+      </footer>
+    </div>
   );
 }
