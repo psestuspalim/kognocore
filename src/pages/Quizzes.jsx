@@ -764,13 +764,44 @@ export default function QuizzesPage() {
     const qSubj = (q.subject || q.subject_name || '').trim().toLowerCase();
     const qSubjIdStr = (q.subject_id ? String(q.subject_id) : '').trim().toLowerCase();
 
-    return (
+    // 1. Direct ID, code, or name match
+    if (
       sameId(qSubjId, targetId) ||
       qSubjIdStr === targetName ||
       qSubjIdStr === targetCode ||
       qSubj === targetName ||
       qSubj === targetCode
-    );
+    ) {
+      return true;
+    }
+
+    // 2. Partial name match
+    if (targetName && (qSubj.includes(targetName) || qSubjIdStr.includes(targetName))) {
+      return true;
+    }
+
+    // 3. Keyword heuristic match (e.g. Pediatria, Cirugia, etc.)
+    const fullText = `${q.title || ''} ${q.description || ''} ${q.subject || ''}`.toLowerCase();
+    if (targetId === 'subj_pediatria' || targetName.includes('pediatr')) {
+      if (fullText.includes('pediatr') || fullText.includes('niño') || fullText.includes('neonato') || fullText.includes('reneo') || fullText.includes('gestación')) {
+        return true;
+      }
+    } else if (targetId === 'subj_cirugia_gen' || targetName.includes('cirug')) {
+      if (fullText.includes('cirug') || fullText.includes('quirúrg') || fullText.includes('apendic')) {
+        return true;
+      }
+    } else if (targetId === 'subj_ginecologia_obs' || targetName.includes('ginec')) {
+      if (fullText.includes('ginec') || fullText.includes('obstet') || fullText.includes('embaraz') || fullText.includes('parto')) {
+        return true;
+      }
+    }
+
+    // 4. If there's only a single subject or fallback for legacy quizzes
+    if ((!q.subject_id || q.subject_id === 'root') && targetId === 'subj_pediatria') {
+      return true;
+    }
+
+    return false;
   };
 
   const subjectQuizzes = selectedSubject
@@ -1970,14 +2001,14 @@ export default function QuizzesPage() {
                         </div>
                       )}
 
-                      {subjectQuizzes.filter(q => !q.folder_id).length === 0 ? (
+                      {subjectQuizzes.length === 0 ? (
                         <div className="flex flex-col items-center justify-center py-12 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
                           <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm ring-1 ring-gray-100">
                             <BookOpen className="w-6 h-6 text-indigo-500" />
                           </div>
                           <h3 className="text-lg font-semibold text-gray-900 mb-1">No hay cuestionarios en {selectedSubject.name}</h3>
                           <p className="text-sm text-gray-500 mb-4 text-center max-w-md">
-                            Sube un archivo JSON o crea un cuestionario manualmente en la raíz de esta materia.
+                            Sube un archivo JSON o crea un cuestionario manualmente en esta materia.
                           </p>
                           {isAdmin && (
                             <div className="flex flex-wrap gap-2 justify-center">
@@ -1991,8 +2022,8 @@ export default function QuizzesPage() {
                           )}
                         </div>
                       ) : (
-                        <DroppableArea droppableId={`subject-${selectedSubject.id}`} type="QUIZ" className="space-y-2">
-                          {subjectQuizzes.filter(q => !q.folder_id).map((quiz, index) => (
+                        <DroppableArea droppableId={`subject-${selectedSubject.id}`} type="QUIZ" className="space-y-2.5">
+                          {subjectQuizzes.map((quiz, index) => (
                             <DraggableItem key={quiz.id} id={quiz.id} index={index} isAdmin={isAdmin}>
                               <QuizListItem
                                 quiz={quiz}
