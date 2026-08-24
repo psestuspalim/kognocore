@@ -806,21 +806,16 @@ export default function QuizzesPage() {
       filteredQuestions = Array.from(wrongQuestionsMap.values());
     }
 
-    const shuffledQuestions = [...filteredQuestions]
+    const orderedQuestions = [...filteredQuestions]
       .map(normalizeQuestionOptions)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, Math.min(questionCount, filteredQuestions.length))
-      .map(q => ({
-        ...q,
-        answerOptions: [...(q.answerOptions || [])].sort(() => Math.random() - 0.5)
-      }));
+      .slice(0, Math.min(questionCount, filteredQuestions.length));
 
     const attempt = await saveAttemptMutation.mutateAsync({
       quiz_id: quiz.id,
       subject_id: quiz.subject_id || expandedQuiz.subject_id,
       ...buildAttemptIdentity(),
       score: 0,
-      total_questions: shuffledQuestions.length,
+      total_questions: orderedQuestions.length,
       answered_questions: 0,
       is_completed: false,
       wrong_questions: [],
@@ -836,7 +831,7 @@ export default function QuizzesPage() {
         quiz_title: expandedQuiz.title,
         subject_id: quiz.subject_id || expandedQuiz.subject_id,
         current_question: 0,
-        total_questions: shuffledQuestions.length,
+        total_questions: orderedQuestions.length,
         score: 0,
         wrong_count: 0,
         started_at: new Date().toISOString(),
@@ -850,7 +845,10 @@ export default function QuizzesPage() {
     }
 
     setCurrentAttemptId(attempt.id);
-    setSelectedQuiz({ ...quiz, id: quiz.id, subject_id: quiz.subject_id, title: expandedQuiz.title, questions: shuffledQuestions });
+    setSelectedQuiz({
+      ...expandedQuiz,
+      questions: orderedQuestions
+    });
     setCurrentQuestionIndex(0);
     setScore(0);
     setWrongAnswers([]);
