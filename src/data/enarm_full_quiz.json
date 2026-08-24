@@ -41,6 +41,146 @@
       "difficulty": "moderado"
     },
     {
+      "id": 2,
+      "question": "Es referida a su consulta una menor de 14 años por talla baja e historia de otitis media de repetición. A la exploración estrabismo, TA 150/90 mmHg, FC 80 lpm, cuarto metacarpiano corto, Tanner estadio I, talla 3 desviaciones estándar por debajo de la media. De acuerdo con tu sospecha diagnóstica, selecciona la opción correcta:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Se caracteriza por talla baja y disgenesia gonadal en mujeres que tienen un solo cromosoma Y",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "En el 50-60% de los casos se demuestra una monosomía o ausencia completa de un cromosoma X (45,X)",
+          "isCorrect": true,
+          "rationale": "En el 50-60% de los casos se demuestra una monosomía o ausencia completa de un cromosoma X (45,X) y en la mayoría de las veces el cromosoma X perdido es de origen paterno; en un 20% de los casos se encuentran alteraciones estructurales en un cromosoma X (monosomía parcial) como deleciones mayores, microdeleciones, isocromosomas o cromosoma en anillo. Guía de Práctica Clínica Diagnóstico, Tratamiento y Cuidado de la Salud en niñas y mujeres con Síndrome de Turner. México: Instituto Mexicano del Seguro Social, 2012."
+        },
+        {
+          "id": "2",
+          "text": "El retraso del crecimiento es el dato menos constante presente en más del 10% de los casos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "En la mayor proporción de los casos el diagnóstico es prenatal y neonatal",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "En el 50-60% de los casos se demuestra una monosomía o ausencia completa de un cromosoma X (45,X) y en la mayoría de las veces el cromosoma X perdido es de origen paterno; en un 20% de los casos se encuentran alteraciones estructurales en un cromosoma X (monosomía parcial) como deleciones mayores, microdeleciones, isocromosomas o cromosoma en anillo. Guía de Práctica Clínica Diagnóstico, Tratamiento y Cuidado de la Salud en niñas y mujeres con Síndrome de Turner. México: Instituto Mexicano del Seguro Social, 2012.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 3,
+      "question": "Es la principal característica clínica observada en niñas mayores de 1 año con esta patología:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Linfedema",
+          "isCorrect": true,
+          "rationale": "Las principales características clínicas observadas en niñas > 1 año son: linfedema (97%), displasia ungueal (uñas pequeñas, estrechas e hiperconvexas) (90%), paladar alto y en arco (84%), línea capilar posterior baja (76%), cuello alado (73%), implantación baja de pabellones auriculares (73%), retrognatia (67%), cubitus valgus (52%). Guía de Práctica Clínica Diagnóstico, Tratamiento y Cuidado de la Salud en niñas y mujeres con Síndrome de Turner. México: Instituto Mexicano del Seguro Social, 2012."
+        },
+        {
+          "id": "1",
+          "text": "Displasia ungueal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Cuello alado",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Paladar alto y en arco",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "Las principales características clínicas observadas en niñas > 1 año son: linfedema (97%), displasia ungueal (uñas pequeñas, estrechas e hiperconvexas) (90%), paladar alto y en arco (84%), línea capilar posterior baja (76%), cuello alado (73%), implantación baja de pabellones auriculares (73%), retrognatia (67%), cubitus valgus (52%). Guía de Práctica Clínica Diagnóstico, Tratamiento y Cuidado de la Salud en niñas y mujeres con Síndrome de Turner. México: Instituto Mexicano del Seguro Social, 2012.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 4,
+      "question": "Para confirmar el diagnóstico etiológico, el estudio más útil es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "LH, FSH, Estradiol",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Perfil tiroideo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Curva de estimulación con GH",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Cariotipo",
+          "isCorrect": true,
+          "rationale": "Para confirmar el diagnóstico de alteraciones cromosómicas se debe realizar un estudio citogenético en el que se analicen al menos 30-50 células (metafases) e idealmente sea efectuado por personal capacitado durante al menos 2 años en citogenética clásica. Guía de Práctica Clínica Diagnóstico, Tratamiento y Cuidado de la Salud en niñas y mujeres con Síndrome de Turner. México: Instituto Mexicano del Seguro Social, 2012."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "Para confirmar el diagnóstico de alteraciones cromosómicas se debe realizar un estudio citogenético en el que se analicen al menos 30-50 células (metafases) e idealmente sea efectuado por personal capacitado durante al menos 2 años en citogenética clásica. Guía de Práctica Clínica Diagnóstico, Tratamiento y Cuidado de la Salud en niñas y mujeres con Síndrome de Turner. México: Instituto Mexicano del Seguro Social, 2012.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
+      "id": 5,
+      "question": "Tratamiento de primera elección en la enfermedad de Chagas:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Nifurtimox",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Albendazol",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Benzidazol",
+          "isCorrect": true,
+          "rationale": "El benzidazol es considerado como la terapia de primera elección para el tratamiento de pacientes con Chagas. Manual de Diagnóstico y Tratamiento de la Enfermedad de Chagas."
+        },
+        {
+          "id": "3",
+          "text": "Metronidazol",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "El benzidazol es considerado como la terapia de primera elección para el tratamiento de pacientes con Chagas. Manual de Diagnóstico y Tratamiento de la Enfermedad de Chagas.",
+      "serie": null,
+      "type": "multiple-choice",
+      "difficulty": "moderado"
+    },
+    {
       "id": 66,
       "question": "Femenino de 25 años, con antecedente de viaje a Chiapas hace tres semanas, acude a su consulta por presentar fiebre no cuantificada e intensos escalofríos desde hace una semana, pero esto no le ocurre todos los días. Los intervalos en los que no tiene fiebre se encuentra clínicamente bien. El agente etiológico más probable es:",
       "answerOptions": [
@@ -7566,7 +7706,7 @@
       "difficulty": "moderado"
     }
   ],
-  "total_questions": 216,
+  "total_questions": 220,
   "is_hidden": false,
   "created_date": "2026-08-24T05:10:10.115Z"
 }

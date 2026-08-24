@@ -67,16 +67,26 @@ export function fromSimplifiedFormat(data) {
   if (Array.isArray(data)) {
     list = data;
   } else if (data && typeof data === 'object') {
-    title = data.titulo || data.title || data.nombre || title;
-    description = data.descripcion || data.description || '';
+    title = data.metadata?.fuente ? `Simulador ${data.metadata.fuente}` : (data.titulo || data.title || data.nombre || title);
+    description = data.metadata?.fecha ? `Fecha: ${data.metadata.fecha}` : (data.descripcion || data.description || '');
     list = data.preguntas || data.questions || data.q || data.items || [data];
   }
 
   const questions = list.map((item, idx) => {
     const questionText = item.pregunta || item.question || item.enunciado || item.text || `Pregunta ${idx + 1}`;
-    const questionId = item.id != null ? String(item.id) : `Q${idx + 1}`;
+    const questionId = item.numero != null ? String(item.numero) : (item.id != null ? String(item.id) : `Q${idx + 1}`);
     const justificacion = item.justificacion || item.justificación || item.explicacion || item.explicación || item.explanation || item.feedback || '';
-    const correctaKey = String(item.correcta || item.respuesta_correcta || item.correctAnswer || '').trim().toLowerCase();
+    
+    // Detect correct key from various schema formats
+    const correctaKey = String(
+      item.correcta ||
+      item.respuesta?.letra ||
+      (typeof item.respuesta === 'string' ? item.respuesta : '') ||
+      item.respuesta_correcta ||
+      item.correctAnswer ||
+      ''
+    ).trim().toLowerCase();
+
     const serie = item.serie || null;
 
     let answerOptions = [];
@@ -86,7 +96,7 @@ export function fromSimplifiedFormat(data) {
       answerOptions = Object.entries(item.opciones).map(([key, val]) => {
         const cleanKey = key.trim().toLowerCase();
         const isCorrect = cleanKey === correctaKey;
-        const text = typeof val === 'object' && val !== null ? (val.text || val.t || '') : String(val);
+        const text = typeof val === 'object' && val !== null ? (val.texto || val.text || val.t || '') : String(val);
         return {
           label: key.trim().toUpperCase(),
           text: text,
@@ -96,14 +106,18 @@ export function fromSimplifiedFormat(data) {
         };
       });
     } else if (Array.isArray(item.opciones || item.options || item.answerOptions)) {
-      // Array de opciones
+      // Array de opciones (ej: [{ letra: "a", texto: "..." }, ...])
       const rawOptions = item.opciones || item.options || item.answerOptions;
       answerOptions = rawOptions.map((opt, optIdx) => {
-        const label = String.fromCharCode(65 + optIdx); // A, B, C, D...
+        const defaultLabel = String.fromCharCode(65 + optIdx); // A, B, C, D...
+        const optLetra = typeof opt === 'object' && opt !== null && opt.letra ? String(opt.letra).trim().toLowerCase() : defaultLabel.toLowerCase();
+        const label = typeof opt === 'object' && opt !== null && opt.letra ? String(opt.letra).trim().toUpperCase() : defaultLabel;
+        
         const isCorrect = typeof opt === 'object' && opt !== null
-          ? (opt.isCorrect === true || opt.c === true || correctaKey === label.toLowerCase() || correctaKey === String(optIdx))
-          : (correctaKey === label.toLowerCase() || correctaKey === String(optIdx));
-        const text = typeof opt === 'object' && opt !== null ? (opt.text || opt.t || opt.v || '') : String(opt);
+          ? (opt.isCorrect === true || opt.c === true || correctaKey === optLetra || correctaKey === String(optIdx))
+          : (correctaKey === optLetra || correctaKey === String(optIdx));
+        
+        const text = typeof opt === 'object' && opt !== null ? (opt.texto || opt.text || opt.t || opt.v || '') : String(opt);
 
         return {
           label: label,
