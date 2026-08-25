@@ -57,6 +57,9 @@ export default function QuizListItem({
     return 'bg-rose-400';
   };
 
+  const inProgressAttempt = attempts.find(a => !a.is_completed && getAnsweredCount(a) > 0);
+  const inProgressAnswered = inProgressAttempt ? getAnsweredCount(inProgressAttempt) : 0;
+
   return (
     <div
       className={`group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-white border transition-all duration-150 hover:shadow-sm cursor-pointer ${
@@ -76,7 +79,9 @@ export default function QuizListItem({
 
       {/* Score or status indicator */}
       <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 border border-slate-100 bg-slate-50">
-        {hasAttempts ? (
+        {inProgressAttempt ? (
+          <span className="text-[10px] font-bold text-amber-600 bg-amber-50 rounded px-1 text-center">EN PROGRESO</span>
+        ) : hasAttempts ? (
           <span className={`text-sm font-bold ${getScoreColor()}`}>{bestScore}%</span>
         ) : (
           <span className="text-[10px] font-semibold text-slate-400 uppercase">Nuevo</span>
@@ -85,9 +90,16 @@ export default function QuizListItem({
 
       {/* Info */}
       <div className="flex-1 min-w-0">
-        <h4 className="font-semibold text-slate-800 text-sm sm:text-base truncate leading-tight">
-          {quiz.title}
-        </h4>
+        <div className="flex items-center gap-2">
+          <h4 className="font-semibold text-slate-800 text-sm sm:text-base truncate leading-tight">
+            {quiz.title}
+          </h4>
+          {inProgressAttempt && (
+            <span className="inline-flex items-center text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200/80 shrink-0">
+              ⚡ Pregunta {inProgressAnswered + 1}/{totalQuestions}
+            </span>
+          )}
+        </div>
         <div className="flex items-center gap-3 mt-1.5">
           <span className="text-xs text-slate-400">{totalQuestions} preguntas</span>
           {hasAttempts && (
