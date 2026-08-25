@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import {
-  ChevronDown, Shield, LayoutDashboard, Key, PenTool, TrendingUp
+  ChevronDown, Shield, LayoutDashboard, Key, PenTool, TrendingUp, Users
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -34,6 +34,12 @@ export default function AdminMenu({
       icon: PenTool,
       href: 'AdminContent',
       description: 'Cursos, materias y quizzes'
+    },
+    {
+      label: 'Estudiantes',
+      icon: Users,
+      href: 'AdminStudents',
+      description: 'Usuarios inscritos en cursos'
     },
     {
       label: 'Progreso y Reportes',

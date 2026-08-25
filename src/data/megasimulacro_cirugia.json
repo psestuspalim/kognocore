@@ -1,0 +1,1914 @@
+{
+  "id": "quiz_megasimulacro_cirugia_1",
+  "title": "1° MEGASIMULACRO: CX. 2025",
+  "description": "1° MEGASIMULACRO: CX. 2025 con 56 reactivos clínicos.",
+  "subject_id": "subj_cirugia_gen",
+  "course_id": "course_enarm2026",
+  "total_questions": 56,
+  "questions": [
+    {
+      "id": 1,
+      "question": "Microbusero de 41 años, mientras circulaba su ruta regular, es interceptado por 3 sujetos quienes inmediatamente lo golpean y al resistirse al asalto sufre impacto por arma de fuego en el brazo derecho. Es atendido por paramédicos que identifican una herida de gran tamaño en extensión y profundidad con existencia de cuerpos extraños en la zona expuesta. De acuerdo con la clasificación de Gustilo y cols, el hallazgo descrito corresponde al grado:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "I",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "II",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "III",
+          "isCorrect": true,
+          "rationale": "Las fracturas por arma de fuego se clasifican directamente en grado III. Diagnóstico y Tratamiento de la Fractura de Antebra"
+        },
+        {
+          "id": "3",
+          "text": "IV",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Las fracturas por arma de fuego se clasifican directamente en grado III. Diagnóstico y Tratamiento de la Fractura de Antebra",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 2,
+      "question": "El tratamiento antimicrobiano más adecuado en este caso es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Cefalosporinas de primera generación",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Penicilina + metronidazol",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Cefalosporinas de primera generación + aminoglucósido",
+          "isCorrect": true,
+          "rationale": "Se recomienda el siguiente esquema antimicrobiano: Fracturas expuestas I y II: cefalosporinas de primera generación. Fracturas expuestas III: agregar un aminoglucósido. Si se sospecha de anaerobios valorar el uso de penicilina. En heridas con contaminación masiva independientemente del grado agregar metronida"
+        },
+        {
+          "id": "3",
+          "text": "Metronidazol + betalactámico",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Se recomienda el siguiente esquema antimicrobiano: Fracturas expuestas I y II: cefalosporinas de primera generación. Fracturas expuestas III: agregar un aminoglucósido. Si se sospecha de anaerobios valorar el uso de penicilina. En heridas con contaminación masiva independientemente del grado agregar metronida",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 3,
+      "question": "La rinitis alérgica es una respuesta de hipersensibilidad tipo:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "I",
+          "isCorrect": true,
+          "rationale": "La rinitis alérgica es una reacción de hipersensibilidad tipo I mediada por IgE."
+        },
+        {
+          "id": "1",
+          "text": "II",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "III",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "IV",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "La rinitis alérgica es una reacción de hipersensibilidad tipo I mediada por IgE.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 4,
+      "question": "Un paciente de 72 años acude a su consulta debido a que presenta una tumoración inguinal de año y medio de evolución. A la exploración, con el paciente de pie y usted delante, se observa protrusión en la región inguinal derecha, que llega hasta el escroto. ¿Cuál es el diagnóstico?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Hernia inguinal indirecta",
+          "isCorrect": true,
+          "rationale": "La hernia inguinal más frecuente tanto en hombres como en mujeres es la hernia inguinal indirecta. Acompaña a las estructuras del cordón inguinal por el interior de las fibras del músculo cremáster, pudiendo salir por el orificio externo hasta el escroto. Diagnóstico y Tratamiento de Hernias Inguinales y Femorales, México: Secretaría de Salud; 2008."
+        },
+        {
+          "id": "1",
+          "text": "Hernia femoral",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Hernia inguinal directa",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Hernia de Spiegel",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "La hernia inguinal más frecuente tanto en hombres como en mujeres es la hernia inguinal indirecta. Acompaña a las estructuras del cordón inguinal por el interior de las fibras del músculo cremáster, pudiendo salir por el orificio externo hasta el escroto. Diagnóstico y Tratamiento de Hernias Inguinales y Femorales, México: Secretaría de Salud; 2008.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 5,
+      "question": "De acuerdo con tu sospecha diagnóstica, se considera el origen de este tipo de defectos:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Defecto en la fascia transversalis por debajo de la cintilla iliopubiana de Thompson",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Orificio músculo pectíneo",
+          "isCorrect": true,
+          "rationale": "El origen de las hernias inguinales está en el orificio músculo pectíneo, siendo sus límites: el arco transverso, el músculo recto del abdomen, la rama iliopubiana y el músculo iliopsoas, estando tapi"
+        },
+        {
+          "id": "2",
+          "text": "Defecto en la fascia transversalis por encima de la cintilla iliopubiana de Thompson",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Protrusión a través del suelo del canal inguinal a nivel del triángulo de Hesselbach",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "El origen de las hernias inguinales está en el orificio músculo pectíneo, siendo sus límites: el arco transverso, el músculo recto del abdomen, la rama iliopubiana y el músculo iliopsoas, estando tapi",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 6,
+      "question": "Se encuentra en una fiesta, cuando un conocido de la primaria que sabe que usted es médico, le pide hacerle una preguntita. Le comenta que, en su familia, ha habido varios casos de cáncer de colon. Su abuelo fue operado por este motivo a los 35 años. Su padre también fue diagnosticado de esta enfermedad, así como su tío paterno. Usted sospecha de poliposis colónica familiar, pero su conocido le dice que frecuentemente se realiza colonoscopias y nunca le han comentado que hayan encontrado pólipos. Sobre la enfermedad que probablemente padece, señale la respuesta correcta:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "El examen rectal digital como prueba única de detección de sangre oculta cuenta con una alta sensibilidad y puede ser utilizado como método de escrutinio primario",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Se estima que al menos el 65% de los cánceres colorrectales surgen de pólipos preexistentes",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Debería realizarse una colectomía total de forma profiláctica, debido a que la probabilidad de desarrollar cáncer de colon es prácticamente del 100%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Se debe realizar estudio genético detección de mutaciones MSH2 y MLH1 por medio de IHC y búsqueda de inestabilidad microsatelital",
+          "isCorrect": true,
+          "rationale": "El cáncer colorrectal hereditario no asociado a poliposis (CCHNP) representa el 3-5% de todos los cánceres colorrectales. Existe un riesgo de 70-80% en el transcurso de la vida de desarrollar cáncer colorrectal en pacientes con mutación del gen CCHNP. El CCHNP presenta mutaciones MSH2 y MLH1, estas representan el 95% de todas las mutaciones. Se ha reportado inestabilidad microsatelital (IMS), en los tumores colorrectales, se asocian con 90% de los casos de CCHNP y en el 15% de los casos esporádicos de cáncer de colon. Ante sospecha de cáncer hereditario no asociado a poliposis (CCHNP) si se cuenta con el recurso referir a centro especiali"
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "El cáncer colorrectal hereditario no asociado a poliposis (CCHNP) representa el 3-5% de todos los cánceres colorrectales. Existe un riesgo de 70-80% en el transcurso de la vida de desarrollar cáncer colorrectal en pacientes con mutación del gen CCHNP. El CCHNP presenta mutaciones MSH2 y MLH1, estas representan el 95% de todas las mutaciones. Se ha reportado inestabilidad microsatelital (IMS), en los tumores colorrectales, se asocian con 90% de los casos de CCHNP y en el 15% de los casos esporádicos de cáncer de colon. Ante sospecha de cáncer hereditario no asociado a poliposis (CCHNP) si se cuenta con el recurso referir a centro especiali",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 7,
+      "question": "Se considera el estándar de oro para el diagnóstico de cáncer de colon:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Sigmoidoscopia flexible",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Colon por enema con doble contraste",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Enema de bario fluoroscópico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Colonoscopía con toma de biopsia",
+          "isCorrect": true,
+          "rationale": "El estándar de oro para el diagnóstico de cáncer de colon y los pólipos adenomatosos es la colonoscopía con toma de biopsia, para la confirmación histopatológica. Guía de Práctica Clínica, Detección Oportuna y Diagnóstico de Cáncer de Colon y Recto no Hereditario en Adultos en Primero, Segundo y Tercer Nivel de Atención, México: Instituto Mexicano del Seguro Social; Actuali"
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "El estándar de oro para el diagnóstico de cáncer de colon y los pólipos adenomatosos es la colonoscopía con toma de biopsia, para la confirmación histopatológica. Guía de Práctica Clínica, Detección Oportuna y Diagnóstico de Cáncer de Colon y Recto no Hereditario en Adultos en Primero, Segundo y Tercer Nivel de Atención, México: Instituto Mexicano del Seguro Social; Actuali",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 8,
+      "question": "30-year-old male consults with you because yesterday while he was working in the field, he felt a bite in his right hand. He didn't care until today when he woke up with intense pain and a tingling sensation in his hand. He mentions that it is common to find scorpions in his workplace. The half-life of the scorpion venom is:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "12 hours",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "24 hours",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "36 hours",
+          "isCorrect": true,
+          "rationale": "La vida media del veneno del alacrán es de 36 horas. Prevención, Diagnóstico, Tratamiento y Referencia de la Intoxicación por Picadura de Alacrán. México: Secretaría de Salud; 26/Mar"
+        },
+        {
+          "id": "3",
+          "text": "48 hours",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "La vida media del veneno del alacrán es de 36 horas. Prevención, Diagnóstico, Tratamiento y Referencia de la Intoxicación por Picadura de Alacrán. México: Secretaría de Salud; 26/Mar",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 9,
+      "question": "Paciente diagnosticado con rinitis alérgica que afecta la calidad de vida, el tratamiento de elección son:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Esteroides nasales",
+          "isCorrect": true,
+          "rationale": "El caso clínico no tiene justificación. \"Pacientes diagnosticados con rinitis alérgica que afecta la calidad de vida el tratamiento de elección son los esteroides nasales\". Diagnóstico y Tratamiento de Rinitis Alérgica. Guía de Evidencia y Recomendaciones; CENETEC 2017 (GPC-IMSS-041-08)."
+        },
+        {
+          "id": "1",
+          "text": "Antihistamínicos orales",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Antihistamínicos nasales",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Antagonistas del receptor de leucotrienos",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "El caso clínico no tiene justificación. \"Pacientes diagnosticados con rinitis alérgica que afecta la calidad de vida el tratamiento de elección son los esteroides nasales\". Diagnóstico y Tratamiento de Rinitis Alérgica. Guía de Evidencia y Recomendaciones; CENETEC 2017 (GPC-IMSS-041-08).",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 10,
+      "question": "Inflamación de la vaina común de los tendones del extensor corto y abductor largo del pulgar a su paso sobre la estiloides radial, con estenosis progresiva de la misma:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Tenosinovitis de Quervain",
+          "isCorrect": true,
+          "rationale": "Tenosinovitis de Quervain: Inflamación de la vaina común de los tendones del extensor corto y abductor largo del pulgar a su paso sobre la estiloides radial, con estenosis progresiva de la misma. Origina un cuadro de dolor y crepitación local que aumenta al desviar cubitalmente la muñeca con el primer dedo sujeto en la palma de la mano (test de Finkelstein). Manual CTO de Medicina y Cirugía. Traumatología y Ortopedia, ENARM 6ª Edición, México."
+        },
+        {
+          "id": "1",
+          "text": "Tendinitis de Dupuytren",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Tenosinovitis de Baker",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Tendinitis de Glander",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "Tenosinovitis de Quervain: Inflamación de la vaina común de los tendones del extensor corto y abductor largo del pulgar a su paso sobre la estiloides radial, con estenosis progresiva de la misma. Origina un cuadro de dolor y crepitación local que aumenta al desviar cubitalmente la muñeca con el primer dedo sujeto en la palma de la mano (test de Finkelstein). Manual CTO de Medicina y Cirugía. Traumatología y Ortopedia, ENARM 6ª Edición, México.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 11,
+      "question": "Hombre de 17 años presenta dolor sordo intenso, de predominio nocturno, desde hace unas semanas. Refiere que no ha buscado atención médica debido a que este dolor desaparece al tomar aspirinas. De acuerdo con tu sospecha diagnóstica, la localización más frecuente es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Fémur proximal",
+          "isCorrect": true,
+          "rationale": "Osteoma osteoide: Tumor típico de adultos jóvenes que ocasiona dolor sordo e intenso, de predominio nocturno, que cede con aspirina y otros AINE. Radiológicamente constan de un nidus lítico de pequeño tamaño (< 1 cm) rodeado de una"
+        },
+        {
+          "id": "1",
+          "text": "Tibia proximal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Fémur distal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Epífisis de fémur distal",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "Osteoma osteoide: Tumor típico de adultos jóvenes que ocasiona dolor sordo e intenso, de predominio nocturno, que cede con aspirina y otros AINE. Radiológicamente constan de un nidus lítico de pequeño tamaño (< 1 cm) rodeado de una",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 12,
+      "question": "Mujer de 29 años inicia el día de hoy con dolor abdominal agudo, tipo cólico, en la región periumbilical, con incremento rápido de intensidad y horas después este dolor migra al cuadrante inferior derecho, ha vomitado en dos ocasiones y presenta náuseas intensas. A la exploración física T 38.1°C, FC 90 lpm, con datos de resistencia abdominal y el dolor se incrementa cuando camina, genitales externos y vagina con restos hemáticos escasos. FUM hace 4 semanas, ciclos regulares, menciona sexo casual con uso de condón masculino en pocas ocasiones. De acuerdo con tu sospecha diagnóstica, señala la opción correcta:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "En las pacientes en edad reproductiva con esta patología debe solicitarse interconsulta a Ginecobstetricia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Tiene alta sensibilidad la presencia de leucocitosis con mayor predominio de neutrófilos",
+          "isCorrect": true,
+          "rationale": "De las manifestaciones clínicas y de laboratorio, las que tienen mayor sensibilidad para el diagnóstico de apendicitis (manifestaciones cardinales) son: 1. Dolor característico (migración de la región periumbilical al CID o locali"
+        },
+        {
+          "id": "2",
+          "text": "Es la segunda causa más frecuente de dolor abdominal agudo en el adulto mayor",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Aunque el diagnóstico clínico sea claro, el ultrasonido abdominal debe hacerse rutinariamente",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "De las manifestaciones clínicas y de laboratorio, las que tienen mayor sensibilidad para el diagnóstico de apendicitis (manifestaciones cardinales) son: 1. Dolor característico (migración de la región periumbilical al CID o locali",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 13,
+      "question": "El incremento de dolor en la FID con la tos que describe el paciente se conoce como:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Signo de Mussy",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Signo de Bloomberg",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Signo de Dunphy",
+          "isCorrect": true,
+          "rationale": "Signo de Dunphy: Incremento de dolor en la FID con la tos. Guía de Práctica Clínica Diagnóstico de Apendicitis Aguda, México; Instituto Mexicano del Seguro Social, 2009."
+        },
+        {
+          "id": "3",
+          "text": "Signo de Dubard",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Signo de Dunphy: Incremento de dolor en la FID con la tos. Guía de Práctica Clínica Diagnóstico de Apendicitis Aguda, México; Instituto Mexicano del Seguro Social, 2009.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 14,
+      "question": "Síntoma más frecuente de la apendicitis aguda en el embarazo:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Fiebre",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Dolor en fosa ilíaca derecha",
+          "isCorrect": true,
+          "rationale": "\"La apendicitis es el procedimiento quirúrgico no obstétrico más frecuente, tiene una mayor incidencia en el 2do trimestre y el signo más confiable es el dolor en la fosa ilíaca derecha presente en el 75% de los casos\". Diagnóstico y Tratamiento Inicial de las Emergencias Obstétricas. Guía de Práctica Clínica Evidencias y Recomendaciones. México, CENETEC 2019. GPC-IMSS-436-19."
+        },
+        {
+          "id": "2",
+          "text": "Resistencia muscular",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Dolor en flanco derecho",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "\"La apendicitis es el procedimiento quirúrgico no obstétrico más frecuente, tiene una mayor incidencia en el 2do trimestre y el signo más confiable es el dolor en la fosa ilíaca derecha presente en el 75% de los casos\". Diagnóstico y Tratamiento Inicial de las Emergencias Obstétricas. Guía de Práctica Clínica Evidencias y Recomendaciones. México, CENETEC 2019. GPC-IMSS-436-19.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 15,
+      "question": "Mujer de 47 años, fumadora crónica desde hace 15 años, a la cual recientemente se le realizó colonoscopía para biopsia de pólipo colónico, acude por dolor epigástrico de meses de evolución, asociando pirosis, dispepsia y disnea inmediatamente después de la ingesta. Se realiza una radiografía de tórax en la que se observa lo que muestra la imagen. El diagnóstico más probable de esta paciente es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Hernia hiatal",
+          "isCorrect": true,
+          "rationale": "La sintomatología asociada a la hernia paraesofágica comprende pirosis en 87% de los pacientes, regurgitación en 72%, dolor torácico posprandial y disfagia en 60%. Diagnóstico y Tratamiento de la Hernia Paraesofágica. México: Secretaría de Salud; 8 de diciembre de 2011."
+        },
+        {
+          "id": "1",
+          "text": "Acalasia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Úlcera gástrica perforada",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Enfermedad por reflujo gastroesofágico",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "La sintomatología asociada a la hernia paraesofágica comprende pirosis en 87% de los pacientes, regurgitación en 72%, dolor torácico posprandial y disfagia en 60%. Diagnóstico y Tratamiento de la Hernia Paraesofágica. México: Secretaría de Salud; 8 de diciembre de 2011.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 16,
+      "question": "El diagnóstico inicial en este caso debe realizarse con:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Serie esofagogástrica",
+          "isCorrect": true,
+          "rationale": "La serie esofagogástrica tiene una alta sensibilidad para el diagnóstico inicial y de recurrencia de hernia paraesofágica y se debe reali"
+        },
+        {
+          "id": "1",
+          "text": "Endoscopia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Inhibidor de bomba de protones",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Somatostatina",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "La serie esofagogástrica tiene una alta sensibilidad para el diagnóstico inicial y de recurrencia de hernia paraesofágica y se debe reali",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 17,
+      "question": "Se define como la pérdida de la capacidad de acomodación por disminución de la elasticidad del cristalino y por descenso de la fuerza contráctil del músculo ciliar:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Miopía",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Hipermetropía",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Astigmatismo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Presbicia",
+          "isCorrect": true,
+          "rationale": "\"La presbicia es la disminución fisiológica de la capacidad de acomodación que ocurre generalmente a partir de los 40-45 años, su tratamiento requiere de uso de lentes bifocales\". Manual CTO de Medicina y Cirugía. Oftalmología, ENARM 6° Edición."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "\"La presbicia es la disminución fisiológica de la capacidad de acomodación que ocurre generalmente a partir de los 40-45 años, su tratamiento requiere de uso de lentes bifocales\". Manual CTO de Medicina y Cirugía. Oftalmología, ENARM 6° Edición.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 18,
+      "question": "63-year-old man comes to your office for a health check-up. Currently referred in adequate general conditions only refers persistent changes in bowel habit. He has medical history of well-controlled diabetes, and had his gallbladder removed 3 years ago. He doesn't smoke and drinks four beers a day. He has a family history of colon cancer in his mother at age 45 and a brother at age 49. He also has a sister who developed endometrial cancer at age 53. He has never been screened for colon cancer and are interested in doing so. Which colorectal cancer screening test would be best for this patient?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "CT colonography",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Barium enema",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Flexible sigmoidoscopy and barium enema",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Colonoscopy",
+          "isCorrect": true,
+          "rationale": "El paciente forma parte de la población en riesgo alto para presentar cáncer colorrectal y refiere cambios persistentes en el hábito intestinal. El estándar de oro para el diagnóstico de cáncer de colon y los pólipos adenomatosos es la colonoscopía con toma de biopsia, para la confirmación histopatológica. Este estudio invasivo, permite visuali"
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "El paciente forma parte de la población en riesgo alto para presentar cáncer colorrectal y refiere cambios persistentes en el hábito intestinal. El estándar de oro para el diagnóstico de cáncer de colon y los pólipos adenomatosos es la colonoscopía con toma de biopsia, para la confirmación histopatológica. Este estudio invasivo, permite visuali",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 19,
+      "question": "A 34-year-old female is diagnosed with adenocarcinoma of the colon at age 30. Her brother was diagnosed with colorectal cancer at age 45, and her sister was diagnosed with endometrial cancer at age 48. She has no polyps. Which of the following is the most likely diagnosis?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Familial hamartrose polyposis",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Peutz-Jegher syndrome",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Hereditary nonpolyposis colorectal cancer",
+          "isCorrect": true,
+          "rationale": "Considerar en familiares de primer grado (padres, hijos o hermanos) de pacientes con diagnóstico de CCR la presencia de estos dos síndromes genéticos que predisponen al cáncer colorrectal hereditario: Poliposis adenomatosa familiar (PAF). Cáncer colorrectal hereditario no asociado a poliposis (CCHNP). Guía de Práctica Clínica, Detección Oportuna y Diagnóstico de Cáncer de Colon y Recto no Hereditario en Adultos en Primero, Segundo y Tercer Nivel de Atención, México: Instituto Mexicano del Seguro Social; Actuali"
+        },
+        {
+          "id": "3",
+          "text": "Inflammatory bowel disease",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Considerar en familiares de primer grado (padres, hijos o hermanos) de pacientes con diagnóstico de CCR la presencia de estos dos síndromes genéticos que predisponen al cáncer colorrectal hereditario: Poliposis adenomatosa familiar (PAF). Cáncer colorrectal hereditario no asociado a poliposis (CCHNP). Guía de Práctica Clínica, Detección Oportuna y Diagnóstico de Cáncer de Colon y Recto no Hereditario en Adultos en Primero, Segundo y Tercer Nivel de Atención, México: Instituto Mexicano del Seguro Social; Actuali",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 20,
+      "question": "Masculino de 56 años, con antecedente de resección transuretral de próstata debido a cáncer prostático, con estatificación T1c, N0, M0, estadio I. Estirpe histológica más común de cáncer de próstata:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Ductal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Adenocarcinoma",
+          "isCorrect": true,
+          "rationale": "El 95% de los carcinomas prostáticos son adenocarcinomas originados en la"
+        },
+        {
+          "id": "2",
+          "text": "Carcinoma escamoso",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Sarcomatoide",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "El 95% de los carcinomas prostáticos son adenocarcinomas originados en la",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 21,
+      "question": "Principal sitio de metástasis de este cáncer:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Columna lumbar",
+          "isCorrect": true,
+          "rationale": "\"El cáncer prostático hace metástasis a la columna lumbar entre L4-L5, la gammagrafía es el mejor estudio para excluir la afección ósea\". Diagnóstico y Tratamiento del Cáncer de Próstata. Guía de Evidencias y Recomendaciones GPC-IMSS-140-18."
+        },
+        {
+          "id": "1",
+          "text": "Columna dorsal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Hepático",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Pulmonar",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "\"El cáncer prostático hace metástasis a la columna lumbar entre L4-L5, la gammagrafía es el mejor estudio para excluir la afección ósea\". Diagnóstico y Tratamiento del Cáncer de Próstata. Guía de Evidencias y Recomendaciones GPC-IMSS-140-18.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 22,
+      "question": "En caso de un cáncer de alto riesgo, ¿qué Gleason esperarías encontrar?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Igual o menor a 6",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Igual a 7",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Entre 8-10",
+          "isCorrect": true,
+          "rationale": "Un cáncer de próstata de alto grado se define con un estadio T2c-T3, PSA > 20 ng/dL, Gleason 8-10."
+        },
+        {
+          "id": "3",
+          "text": "Mayor a 12",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Un cáncer de próstata de alto grado se define con un estadio T2c-T3, PSA > 20 ng/dL, Gleason 8-10.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 23,
+      "question": "Es la causa más común de daño auditivo en niños en países desarrollados y pérdida permanente de la audición:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Otosclerosis",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Otitis media aguda de repetición",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Otitis externa crónica",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Otitis media con derrame",
+          "isCorrect": true,
+          "rationale": "\"La OMA con derrame es la primera causa de pérdida de la audición adquirida en la infancia, su tratamiento en los primeros 3 meses es vigilancia y se coloca un tubo de ventilación en casos refractarios para mejorar la calidad de vida y evitar problemas en el desarrollo y lenguaje\". Prevención, Diagnóstico y Tratamiento de la Otitis Media Aguda en la Edad Pediátrica. México, CENETEC; 2021 (GPC-IMSS-496-21)."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "\"La OMA con derrame es la primera causa de pérdida de la audición adquirida en la infancia, su tratamiento en los primeros 3 meses es vigilancia y se coloca un tubo de ventilación en casos refractarios para mejorar la calidad de vida y evitar problemas en el desarrollo y lenguaje\". Prevención, Diagnóstico y Tratamiento de la Otitis Media Aguda en la Edad Pediátrica. México, CENETEC; 2021 (GPC-IMSS-496-21).",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 24,
+      "question": "Masculino presenta cuadro súbito, con vértigo gradual, severo (con náuseas y vómito), con sensación de movimiento o rotación de las cosas, se presenta en reposo, pero que puede exacerbar con los cambios de posición. Pueden presentarse hipoacusia y acúfeno. Frecuentemente es precedido por cuadro viral:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Enfermedad de Meniere",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Neuritis vestibular",
+          "isCorrect": true,
+          "rationale": "Neuritis vestibular y/o laberintitis: Cuadro súbito, con vértigo gradual, severo (con náuseas y vómito), con sensación de movimiento o rotación de las cosas, se presenta en reposo, pero que puede exacerbar con los cambios de posición. Pueden presentarse hipoacusia y acúfeno. Frecuentemente es precedido por cuadro viral. Guía de Práctica Clínica \"Diagnóstico y Tratamiento del Vértigo Postural Paroxístico Benigno en el Adulto\", México; Instituto Mexicano del Seguro Social, 2010."
+        },
+        {
+          "id": "2",
+          "text": "Dehiscencia del CSCS",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Insuficiencia vertebrobasilar",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Neuritis vestibular y/o laberintitis: Cuadro súbito, con vértigo gradual, severo (con náuseas y vómito), con sensación de movimiento o rotación de las cosas, se presenta en reposo, pero que puede exacerbar con los cambios de posición. Pueden presentarse hipoacusia y acúfeno. Frecuentemente es precedido por cuadro viral. Guía de Práctica Clínica \"Diagnóstico y Tratamiento del Vértigo Postural Paroxístico Benigno en el Adulto\", México; Instituto Mexicano del Seguro Social, 2010.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 25,
+      "question": "El tratamiento en pacientes con difícil control para esta patología es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Maniobra de Epley",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Clonazepam",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Gentamicina intratimpánica",
+          "isCorrect": true,
+          "rationale": "\"En pacientes con neuritis vestibular de difícil control y sin respuesta a la terapia vestibular podemos utili"
+        },
+        {
+          "id": "3",
+          "text": "Estapedioplastia",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "\"En pacientes con neuritis vestibular de difícil control y sin respuesta a la terapia vestibular podemos utili",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 26,
+      "question": "Es un sedante vestibular que podemos utilizar en estos pacientes:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Cinarizina",
+          "isCorrect": true,
+          "rationale": "Para disminuir los síntomas de estos pacientes se sugiere utili"
+        },
+        {
+          "id": "1",
+          "text": "Metoclopramida",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Hioscina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Pinaverio",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "Para disminuir los síntomas de estos pacientes se sugiere utili",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 27,
+      "question": "Femenino de 60 años acude a revisión oftalmológica anual por vivir con diabetes mellitus tipo 2. Refiere escotomas periféricos. Se denota alteración en el campo visual periférico y papila, presión intraocular de 23 mmHg. El diagnóstico más probable es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Tumor que comprime el quiasma óptico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Glaucoma de ángulo cerrado",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Hipertensión intracraneal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Glaucoma de ángulo abierto",
+          "isCorrect": true,
+          "rationale": "El glaucoma de ángulo abierto se caracteri"
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "El glaucoma de ángulo abierto se caracteri",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 28,
+      "question": "Tratamiento inicial en caso de un ataque agudo de glaucoma:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Inhibidores de la anhidrasa carbónica",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Betabloqueadores",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Iridotomía",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Gonioscopia dinámica",
+          "isCorrect": true,
+          "rationale": "El tratamiento inicial en estos pacientes es gonioscopia dinámica para romper bloqueo angular y el tratamiento de primera elección son los inhibidores de la anhidrasa carbónica."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "El tratamiento inicial en estos pacientes es gonioscopia dinámica para romper bloqueo angular y el tratamiento de primera elección son los inhibidores de la anhidrasa carbónica.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 29,
+      "question": "Es un factor de riesgo que esperaríamos encontrar en pacientes con glaucoma de ángulo cerrado:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Miopía",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Hipermetropía",
+          "isCorrect": true,
+          "rationale": "Uno de los principales factores de riesgo para desarrollar un glaucoma de ángulo cerrado es la hipermetropía por la longitud axial corta, y para glaucoma de ángulo abierto es la miopía."
+        },
+        {
+          "id": "2",
+          "text": "Astigmatismo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Presbicia",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Uno de los principales factores de riesgo para desarrollar un glaucoma de ángulo cerrado es la hipermetropía por la longitud axial corta, y para glaucoma de ángulo abierto es la miopía.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 30,
+      "question": "Masculino de 76 años dolor y distensión abdominal desde hace 28 horas. También refiere que no ha podido evacuar ni echar gases y ha vomitado en 3 ocasiones. A la exploración física presenta hipersensibilidad abdominal, resistencia muscular y ruidos peristálticos de tono metálico, con ausencia de materia fecal en la exploración rectal. Es el signo radiológico más frecuente en esta patología:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Ausencia de gas rectal",
+          "isCorrect": true,
+          "rationale": "Halla"
+        },
+        {
+          "id": "1",
+          "text": "Sigmoide distendido en forma de U invertida",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Signo del grano de café",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Ampliación sigmoide desproporcionada",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "Halla",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 31,
+      "question": "Tratamiento inicial en pacientes estables con esta patología se sugiere el siguiente tratamiento:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Conservador",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Megasigmoidoplastia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Procedimiento de Hartmann",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Colonoscopia descompresiva",
+          "isCorrect": true,
+          "rationale": "Para pacientes estables se sugiere iniciar con colonoscopia descompresiva, y si es exitosa se programa a cirugía electiva."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "Para pacientes estables se sugiere iniciar con colonoscopia descompresiva, y si es exitosa se programa a cirugía electiva.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 32,
+      "question": "¿Cuál es el estudio con mayor probabilidad diagnóstica en estos pacientes?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "RX",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "USG",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "TAC",
+          "isCorrect": true,
+          "rationale": "La GPC indica a la TAC como el estudio con mayor probabilidad diagnóstica."
+        },
+        {
+          "id": "3",
+          "text": "RM",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "La GPC indica a la TAC como el estudio con mayor probabilidad diagnóstica.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 33,
+      "question": "31-year-old male, with a history of alcoholism and unprotected oral-anal practices, presents with fever of 96 hours of evolution controlled with paracetamol. Presents today with T 39.5°C, diaphoretic, with chills and referring pain under the ribs that radiates to the shoulder. On examination he revealed painful hepatomegaly. The most likely diagnosis is:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Hepatitis A virus infection",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Malaria",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Amebic liver abscess",
+          "isCorrect": true,
+          "rationale": "La fiebre es de inicio abrupto de 38 a 40°C vespertina o nocturna, escalofríos y diaforesis. La hepatomegalia dolorosa, debajo de las costillas o en los espacios intercostales es un halla"
+        },
+        {
+          "id": "3",
+          "text": "Traveler's diarrhea",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "La fiebre es de inicio abrupto de 38 a 40°C vespertina o nocturna, escalofríos y diaforesis. La hepatomegalia dolorosa, debajo de las costillas o en los espacios intercostales es un halla",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 34,
+      "question": "The treatment indicated in this patient is:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Support treatment",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Quinine sulfate",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Metronidazole",
+          "isCorrect": true,
+          "rationale": "El metronida"
+        },
+        {
+          "id": "3",
+          "text": "Ciprofloxacin",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "El metronida",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 35,
+      "question": "Tratamiento específico para una intoxicación por atropina:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Antihistamínicos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Fisostigmina",
+          "isCorrect": true,
+          "rationale": "El tratamiento específico para la intoxicación por organofosforados/atropina es con fisostigmina."
+        },
+        {
+          "id": "2",
+          "text": "Flumazenil",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Naloxona",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "El tratamiento específico para la intoxicación por organofosforados/atropina es con fisostigmina.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 36,
+      "question": "La intoxicación por atropina produce un síndrome:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Colinérgico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Serotoninérgico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Anticolinérgico",
+          "isCorrect": true,
+          "rationale": "La intoxicación por atropina produce un síndrome anticolinérgico en donde el paciente se encuentra con taquicardia, midriasis, hipertermia."
+        },
+        {
+          "id": "3",
+          "text": "Simpaticomimético",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "La intoxicación por atropina produce un síndrome anticolinérgico en donde el paciente se encuentra con taquicardia, midriasis, hipertermia.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 37,
+      "question": "De acuerdo con el toxidrome anterior, señale la respuesta correcta:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Los pacientes con este toxidrome cursan con miosis, bradicardia y sialorrea",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Los pacientes con este toxidrome cursan con taquicardia, midriasis y piel seca",
+          "isCorrect": true,
+          "rationale": "\"Los pacientes intoxicados por atropina generan un síndrome anticolinérgico caracteri"
+        },
+        {
+          "id": "2",
+          "text": "La intoxicación se produce por una inhibición de GABA",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "La tríada en esta patología es miosis, depresión respiratoria y alteración del nivel de conciencia",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "\"Los pacientes intoxicados por atropina generan un síndrome anticolinérgico caracteri",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 38,
+      "question": "After carrying out the test indicated above, the diagnosis of HCV infection, genotype 1, is reached. Treatment with pegylated interferon plus ribavirin is started. The duration of treatment should be during:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "12 weeks",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "24 weeks",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "24 to 36 weeks",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "48 weeks",
+          "isCorrect": true,
+          "rationale": "La duración del tratamiento combinado, interferón pegilado más ribavirina, en principio, se debe administrar de 12 a 24 semanas en pacientes con genotipo 2 y 3 y, de 48 semanas para pacientes con genotipo 1 y 4. Guía de Práctica Clínica, Diagnóstico y Tratamiento de Hepatitis C, México: Instituto Mexicano del Seguro Social, 2010."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "La duración del tratamiento combinado, interferón pegilado más ribavirina, en principio, se debe administrar de 12 a 24 semanas en pacientes con genotipo 2 y 3 y, de 48 semanas para pacientes con genotipo 1 y 4. Guía de Práctica Clínica, Diagnóstico y Tratamiento de Hepatitis C, México: Instituto Mexicano del Seguro Social, 2010.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 39,
+      "question": "In patients with genotype 1, early virologic response should be evaluated:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "At week 12",
+          "isCorrect": true,
+          "rationale": "En pacientes con genotipo 1 se debe investigar respuesta virológica temprana a la semana 12. Si alcan"
+        },
+        {
+          "id": "1",
+          "text": "Depending on the number of CD4",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "At week 20",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "If the symptoms worsen regardless of the number of CD4",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "En pacientes con genotipo 1 se debe investigar respuesta virológica temprana a la semana 12. Si alcan",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 40,
+      "question": "Femenino de 23 años se encontraba supervisando una construcción cuando sintió una picadura en su antebrazo izquierdo provocando dolor e inflamación. A los 30 minutos comienza con dolor muy intenso en el sitio del piquete, espasmos musculares y rigidez que progresa a región abdominal y cara. Es la toxina predominante en el agente etiológico de este caso:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Esfingomielinasa-D",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Alfa-latrotoxina",
+          "isCorrect": true,
+          "rationale": "Toxicidad por capulina: Toxina predominante alfa-latrotoxina. Diagnóstico y Tratamiento de Mordeduras por Arañas Venenosas, México: Secretaría de Salud, 2011."
+        },
+        {
+          "id": "2",
+          "text": "Esfingomielinasa-B",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Escorpaminas",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Toxicidad por capulina: Toxina predominante alfa-latrotoxina. Diagnóstico y Tratamiento de Mordeduras por Arañas Venenosas, México: Secretaría de Salud, 2011.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 41,
+      "question": "Es la especie de alacrán más tóxica del país:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Centruroides noxius",
+          "isCorrect": true,
+          "rationale": "La especie más tóxica de este alacrán en nuestro país es Centruroides noxius y lo podemos encontrar con mayor frecuencia en el estado de Nayarit."
+        },
+        {
+          "id": "1",
+          "text": "Centruroides edparvus",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Centruroides crotalus",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Centruroides bothrops",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "La especie más tóxica de este alacrán en nuestro país es Centruroides noxius y lo podemos encontrar con mayor frecuencia en el estado de Nayarit.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 42,
+      "question": "Es una medida para prevenir la picadura de este artrópodo:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Separar la cama 15 cm de la pared",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Utilizar pabellones en cunas y camas de niños",
+          "isCorrect": true,
+          "rationale": "\"Son medidas preventivas para evitar la picadura de alacrán: separar la cama 10 cm de la pared, utili"
+        },
+        {
+          "id": "2",
+          "text": "Vivir en una zona no endémica",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Que el niño use casco de seguridad y no ande en triciclo",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "\"Son medidas preventivas para evitar la picadura de alacrán: separar la cama 10 cm de la pared, utili",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 43,
+      "question": "Femenino de 31 años, refiere que en los últimos 3 días ha presentado disuria acompañado de tenesmo y polaquiuria, el día de hoy presentó fiebre y hematuria por lo que decide acudir para valoración. Tiene como antecedente estar casada y 1 pareja sexual. ¿Cuál es el diagnóstico más probable?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Prostatitis",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Urolitiasis",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Crecimiento prostático benigno",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "IVU",
+          "isCorrect": true,
+          "rationale": "La paciente presenta una IVU por la sintomatología de disuria + tenesmo + polaquiuria + hematuria + fiebre. GPC-IMSS-77-08. Diagnóstico y Tratamiento de la IVU no Complicada en la Mujer."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "La paciente presenta una IVU por la sintomatología de disuria + tenesmo + polaquiuria + hematuria + fiebre. GPC-IMSS-77-08. Diagnóstico y Tratamiento de la IVU no Complicada en la Mujer.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 44,
+      "question": "¿Qué estudio inicial indicaría?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "EGO",
+          "isCorrect": true,
+          "rationale": "El estudio inicial para la IVU es el EGO esperando encontrar piuria + bacteriuria + hematuria + nitritos. GPC-IMSS-77-08. Diagnóstico y Tratamiento de la IVU no Complicada en la Mujer."
+        },
+        {
+          "id": "1",
+          "text": "Hemocultivo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Urocultivo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Tira reactiva",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "El estudio inicial para la IVU es el EGO esperando encontrar piuria + bacteriuria + hematuria + nitritos. GPC-IMSS-77-08. Diagnóstico y Tratamiento de la IVU no Complicada en la Mujer.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 45,
+      "question": "¿Cuál es el agente etiológico más frecuente?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "P. aeruginosa",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Klebsiella",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Proteus",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "E. coli",
+          "isCorrect": true,
+          "rationale": "El agente etiológico más frecuente en IVU tanto complicada como no complicada es E. coli. GPC-IMSS-77-08. Diagnóstico y Tratamiento de la IVU no Complicada en la Mujer."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "El agente etiológico más frecuente en IVU tanto complicada como no complicada es E. coli. GPC-IMSS-77-08. Diagnóstico y Tratamiento de la IVU no Complicada en la Mujer.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 46,
+      "question": "Es la causa más frecuente de rectorragia en la consulta de atención primaria:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Fisura anal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Enfermedad hemorroidal",
+          "isCorrect": true,
+          "rationale": "Las causas más frecuentes de rectorragia en la consulta de atención primaria son las hemorroides. GPC-SSA.003-08. Prevención, Diagnóstico y Tratamiento Oportuno de la Enfermedad Hemorroidal en el Primer Nivel de Atención."
+        },
+        {
+          "id": "2",
+          "text": "Cáncer de colon",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Estreñimiento",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "Las causas más frecuentes de rectorragia en la consulta de atención primaria son las hemorroides. GPC-SSA.003-08. Prevención, Diagnóstico y Tratamiento Oportuno de la Enfermedad Hemorroidal en el Primer Nivel de Atención.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 47,
+      "question": "Femenino de 23 años embarazada; es trasladada por paramédicos al área de urgencias por referir encontrarla como víctima en un accidente automovilístico, la paciente se encuentra consciente, asustada, refiere dolor abdominal y pregunta por el estado de salud de su bebé. FC 130, TA 120/85, FR 32, T 36.8°C. En este momento ¿cuál de los siguientes estudios solicitas de inmediato?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Doppler fetal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Cuantificación de gonadotropinas",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "FAST",
+          "isCorrect": true,
+          "rationale": "La valoración inicial en casos de traumatismo abdominopélvico en mujeres embara"
+        },
+        {
+          "id": "3",
+          "text": "Lavado peritoneal",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "La valoración inicial en casos de traumatismo abdominopélvico en mujeres embara",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 48,
+      "question": "¿Qué áreas debe valorar el FAST en un embarazo?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Pericardio, cuadrantes superiores derecho e izquierdo y vejiga",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Pericardio, cuadrantes superiores derecho e izquierdo, vejiga, FCF, movimientos fetales y volumen de líquido amniótico",
+          "isCorrect": true,
+          "rationale": "El estudio FAST en el embara"
+        },
+        {
+          "id": "2",
+          "text": "Cuadrantes inferiores derecho e izquierdo, región hepática",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Cuadrantes inferiores derecho e izquierdo, región hepática y volumen de líquido amniótico",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "El estudio FAST en el embara",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 49,
+      "question": "Maniobra recomendable para prevenir la disminución del gasto cardiaco en esta paciente:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Colocar a la paciente en decúbito supino",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Desplazar manualmente el útero hacia el lado izquierdo",
+          "isCorrect": true,
+          "rationale": "La compresión uterina de la VCI puede reducir el retorno venoso, disminuyendo el gasto cardiaco. El útero debe ser despla"
+        },
+        {
+          "id": "2",
+          "text": "Colocar a la paciente en decúbito lateral derecho",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Colocar a la paciente en semifowler",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "La compresión uterina de la VCI puede reducir el retorno venoso, disminuyendo el gasto cardiaco. El útero debe ser despla",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 50,
+      "question": "Paciente femenino de 70 años que inicia con dolor persistente en CII hace 3 días y que se ha incrementado en las últimas 12 horas. Evacuaciones pastosas en la mañana. En la EF con signos vitales normales y temperatura 38.5°C, sin distensión abdominal y con palpación de tumoración mal definida en fosa ilíaca izquierda dolorosa, con rebote positivo en esa zona. Leucocitos 13,000. ¿Cuál es su sospecha diagnóstica?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Cáncer de colon",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Síndrome de intestino irritable",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Diverticulitis",
+          "isCorrect": true,
+          "rationale": "La diverticulitis se presenta generalmente en colon sigmoides y por lo tanto provocó dolor en el CII. Es inusual que el cáncer de colon genere un cuadro abdominal agudo, la enfermedad de Crohn suele causar diarrea y dolor en fosa ilíaca derecha. GPC-SS-212-09. Diagnóstico y Tratamiento de la Enfermedad Diverticular del Colon."
+        },
+        {
+          "id": "3",
+          "text": "Enfermedad de Crohn",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "La diverticulitis se presenta generalmente en colon sigmoides y por lo tanto provocó dolor en el CII. Es inusual que el cáncer de colon genere un cuadro abdominal agudo, la enfermedad de Crohn suele causar diarrea y dolor en fosa ilíaca derecha. GPC-SS-212-09. Diagnóstico y Tratamiento de la Enfermedad Diverticular del Colon.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 51,
+      "question": "¿Gold standard diagnóstica para diverticulitis aguda?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "RX",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "USG",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "TAC",
+          "isCorrect": true,
+          "rationale": "Para el diagnóstico de la diverticulitis aguda se encontró que la TAC tiene una sensibilidad del 94% y la especificidad del 99%, siendo este el método más apropiado para el diagnóstico de diverticulitis aguda. GPC-SS-212-09. Diagnóstico y Tratamiento de la Enfermedad Diverticular del Colon."
+        },
+        {
+          "id": "3",
+          "text": "RM",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Para el diagnóstico de la diverticulitis aguda se encontró que la TAC tiene una sensibilidad del 94% y la especificidad del 99%, siendo este el método más apropiado para el diagnóstico de diverticulitis aguda. GPC-SS-212-09. Diagnóstico y Tratamiento de la Enfermedad Diverticular del Colon.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 52,
+      "question": "¿Cuál es la clasificación más utilizada en diverticulitis?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Clasificación de Hinchey por Kaiser",
+          "isCorrect": true,
+          "rationale": "Para clasificar los halla"
+        },
+        {
+          "id": "1",
+          "text": "Minnesota",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Buckley",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Alvarado",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "Para clasificar los halla",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 53,
+      "question": "Paciente masculino de 29 años, de ascendencia anglosajona, sufre accidente en motocicleta, al chocar su moto contra un coche estacionado en Avenida Zapata. Por lo que es llevado de forma urgente por dueño del coche al hospital. A su llegada paciente con temperatura de 36.1°C, frecuencia cardiaca de 129, TA 92/49, FR de 23. A la exploración física paciente con palidez de tegumentos, precordio taquicárdico, ausencia de ruidos respiratorios a niveles basales y matidez a la percusión. ¿Cuál es tu sospecha diagnóstica?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Neumotórax a tensión",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Tórax inestable",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Hemotórax masivo",
+          "isCorrect": true,
+          "rationale": "\"Dado por el antecedente de nuestro paciente, mecanismo de lesión y matide"
+        },
+        {
+          "id": "3",
+          "text": "Taponamiento cardiaco",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "\"Dado por el antecedente de nuestro paciente, mecanismo de lesión y matide",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 54,
+      "question": "Paciente masculino de 25 años sufre accidente automovilístico, presenta pérdida de la conciencia. A los 30 minutos se recupera y se encuentra alerta, sin embargo, nuevamente pierde la conciencia y presenta signos de focalización. ¿Diagnóstico de este paciente?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Hemorragia subaracnoidea",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Hematoma epidural",
+          "isCorrect": true,
+          "rationale": "\"Dado por el antecedente de nuestro paciente, mecanismo de lesión y deterioro neurológico después de un momento lúcido posterior al traumatismo craneoencefálico se integra el diagnóstico de hematoma epidural\"."
+        },
+        {
+          "id": "2",
+          "text": "Hematoma subdural",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "EVC",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "\"Dado por el antecedente de nuestro paciente, mecanismo de lesión y deterioro neurológico después de un momento lúcido posterior al traumatismo craneoencefálico se integra el diagnóstico de hematoma epidural\".",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 55,
+      "question": "Paciente femenino de 72 años, sufre quemadura en región anterior del tórax y abdomen. Además, en ambos antebrazos tanto en región posterior como en la anterior. La paciente refiere no sentir dolor en el sitio de la quemadura, el aspecto de esta es pálida. Es tratada en unidad de quemados de forma exitosa, a los pocos días la paciente inicia con dolor epigástrico y pirosis. ¿Qué complicación sospechas que esté cursando la paciente?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Desequilibrio hidroelectrolítico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Úlcera de Curling",
+          "isCorrect": true,
+          "rationale": "\"Pacientes gran quemados o quemaduras que comprometen la vida puede existir una fuga plasmática al tercer espacio condicionando las úlceras de Curling características de estos pacientes\"."
+        },
+        {
+          "id": "2",
+          "text": "Quemadura con afectación intraabdominal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Úlcera de Cushing",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "\"Pacientes gran quemados o quemaduras que comprometen la vida puede existir una fuga plasmática al tercer espacio condicionando las úlceras de Curling características de estos pacientes\".",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 56,
+      "question": "Paciente femenino de 37 años, con antecedentes de IVUS de repetición, y dos cesáreas. AHF hermana y madre operada por apendicitis. Acude por dolor intenso en fosa ilíaca derecha que se irradia hacia región inguinal, con vómitos de repetición. Temperatura de 38.2°C, TA de 129/82, FR 24. Orientada en tiempo y espacio. Laboratorio leucos de 9 mil, Hb 12, PCR 4. EGO con presencia de bacterias y leucos y cristales en ataúd. Sospecha diagnóstica:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Apendicitis",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Torsión de ovario",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Litiasis por estruvita",
+          "isCorrect": true,
+          "rationale": "\"Las IVUS de repetición condicionan a la formación de litos de estruvita (por agentes infecciosos)\"."
+        },
+        {
+          "id": "3",
+          "text": "IVU complicada",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "\"Las IVUS de repetición condicionan a la formación de litos de estruvita (por agentes infecciosos)\".",
+      "serie": null,
+      "type": "multiple-choice"
+    }
+  ]
+}

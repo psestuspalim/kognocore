@@ -226,25 +226,10 @@ function restoreQuizFromSavedSession(savedSession, availableQuizzes = []) {
 
 export default function QuizzesPage() {
   const { user: authUser } = useAuth();
-  // Restore navigation state from sessionStorage so quizzes are visible on refresh
-  const _initNav = (() => {
-    try {
-      const raw = sessionStorage.getItem('kc_nav_state');
-      return raw ? JSON.parse(raw) : {};
-    } catch { return {}; }
-  })();
-
-  // Initialize view directly to 'home' or restored navigation state (never auto-hijack into quiz on link load)
-  const _restoredView = (() => {
-    const v = _initNav.view;
-    if (!v || ['quiz', 'results', 'swipe'].includes(v)) return _initNav.subjectId ? 'list' : 'home';
-    return v;
-  })();
-
-  const [view, setView] = useState(_restoredView);
+  const [view, setView] = useState('home');
   const [selectedCourse, setSelectedCourse] = useState(null); // resolved after queries load
   const [selectedSubject, setSelectedSubject] = useState(null); // resolved after queries load
-  const [_navRestored, _setNavRestored] = useState(false);
+
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -256,7 +241,7 @@ export default function QuizzesPage() {
   const [responseTimes, setResponseTimes] = useState([]);
   const [currentAttemptId, setCurrentAttemptId] = useState(null);
   const [currentSessionId, setCurrentSessionId] = useState(null);
-  const autoRestoreAttempted = useRef(false);
+
 
   const [resumeModalState, setResumeModalState] = useState({
     open: false,
@@ -278,7 +263,7 @@ export default function QuizzesPage() {
   const [editingSubject, setEditingSubject] = useState(null);
   const [editingFolder, setEditingFolder] = useState(null);
   const [editingCourse, setEditingCourse] = useState(null);
-  const [currentFolderId, setCurrentFolderId] = useState(_initNav.currentFolderId || null);
+  const [currentFolderId, setCurrentFolderId] = useState(null);
 
   const [showBulkUploader, setShowBulkUploader] = useState(false);
   const [activeSubjectTab, setActiveSubjectTab] = useState('quizzes');
@@ -385,58 +370,7 @@ export default function QuizzesPage() {
     loadUser();
   }, [authUser]);
 
-  // Keep view clean on load
-  useEffect(() => {
-    if (autoRestoreAttempted.current) return;
-    if (quizzes.length === 0 && attempts.length === 0) return;
-    autoRestoreAttempted.current = true;
-
-    if (view === 'quiz' && !selectedQuiz) {
-      setView(_initNav.subjectId ? 'list' : 'home');
-    }
-  }, [quizzes.length, attempts.length]);
-
-  // --- Restore navigation objects from sessionStorage IDs (runs once after queries load) ---
-  useEffect(() => {
-    if (_navRestored) return;
-    if (courses.length === 0 && subjects.length === 0) return; // queries not loaded yet
-
-    const nav = _initNav;
-    if (!nav.view || nav.view === 'home') return; // nothing to restore
-
-    let didRestore = false;
-
-    if (nav.courseId) {
-      const course = courses.find(c => c.id === nav.courseId);
-      if (course) {
-        setSelectedCourse(course);
-        didRestore = true;
-      }
-    }
-
-    if (nav.subjectId) {
-      const subject = subjects.find(s => s.id === nav.subjectId);
-      if (subject) {
-        setSelectedSubject(subject);
-        didRestore = true;
-      }
-    }
-
-    _setNavRestored(true);
-  }, [courses, subjects, _navRestored]);
-
-  // --- Save navigation state whenever it changes ---
-  useEffect(() => {
-    try {
-      const navState = {
-        view,
-        courseId: selectedCourse?.id || null,
-        subjectId: selectedSubject?.id || null,
-        currentFolderId: currentFolderId || null
-      };
-      sessionStorage.setItem('kc_nav_state', JSON.stringify(navState));
-    } catch { /* ignore */ }
-  }, [view, selectedCourse?.id, selectedSubject?.id, currentFolderId]);
+  // Navigation restore removed — always start at home on page load
 
   const handleMarkForReview = (question, isMarked) => {
     let nextSet;
@@ -549,22 +483,37 @@ export default function QuizzesPage() {
     return payload;
   };
 
+  const inferSubjectId = (quizData) => {
+    const txt = `${quizData.title || ''} ${quizData.subject || ''} ${quizData.description || ''} ${JSON.stringify(quizData.questions || []).slice(0, 2000)}`.toLowerCase();
+    if (txt.includes('pediatr') || txt.includes('niño') || txt.includes('neonato') || txt.includes('lactante')) return 'subj_pediatria';
+    if (txt.includes('cirug') || txt.includes('quirúrg') || txt.includes('apendic') || txt.includes('hernia')) return 'subj_cirugia_gen';
+    if (txt.includes('ginec') || txt.includes('obstet') || txt.includes('embaraz') || txt.includes('parto') || txt.includes('gyo')) return 'subj_ginecologia_obs';
+    if (txt.includes('simulad') || txt.includes('simulacro') || txt.includes('mega')) return 'subj_simuladores';
+    return 'subj_med_interna';
+  };
+
   const buildQuizPayload = (data) => {
     const payload = { ...data };
 
     if (currentFolderId) {
       const ctx = getFolderHierarchyContext(currentFolderId);
       payload.folder_id = currentFolderId;
-      payload.subject_id = payload.subject_id || ctx.subject_id || null;
+      payload.subject_id = payload.subject_id || ctx.subject_id || inferSubjectId(payload);
+      payload.course_id = payload.course_id || ctx.course_id || selectedCourse?.id || 'course_enarm2026';
       return payload;
     }
 
     if (selectedSubject?.id) {
       payload.subject_id = selectedSubject.id;
+      payload.course_id = payload.course_id || selectedSubject.course_id || selectedCourse?.id || 'course_enarm2026';
       payload.folder_id = null;
       return payload;
     }
 
+    if (!payload.subject_id) {
+      payload.subject_id = inferSubjectId(payload);
+    }
+    payload.course_id = payload.course_id || selectedCourse?.id || 'course_enarm2026';
     return payload;
   };
 

@@ -1,0 +1,2860 @@
+{
+  "id": "quiz_megasimulacro_pediatria_2",
+  "title": "2° MEGASIMULACRO: PED",
+  "description": "2° MEGASIMULACRO: PED con 84 reactivos clínicos.",
+  "subject_id": "subj_pediatria",
+  "course_id": "course_enarm2026",
+  "total_questions": 84,
+  "questions": [
+    {
+      "id": 1,
+      "question": "Adolescente mujer de 14 años, atendida en consulta externa por haber tenido contacto con vecina de 2 años diagnosticada con varicela hace 3 días. La paciente no ha padecido la enfermedad ni cuenta con vacunación para varicela, acude para orientación pues teme contagio. ¿Cuál es el periodo de incubación de la varicela?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "10-21 días",
+          "isCorrect": true,
+          "rationale": "EL PERIODO DE INCUBACIÓN DE VARICELA ES DE 10 A 21 DÍAS. PREGUNTA ENARM 2020"
+        },
+        {
+          "id": "1",
+          "text": "72 a 96 horas",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "14 a 28 horas",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "5 a 7 días",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "EL PERIODO DE INCUBACIÓN DE VARICELA ES DE 10 A 21 DÍAS. PREGUNTA ENARM 2020",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 2,
+      "question": "Un niño de 6 años de edad es llevado a consulta por disnea de esfuerzo. Tiene antecedentes de infección de vías respiratorias bajas en forma frecuente y los padres refieren fatiga de moderados esfuerzos desde hace 2 años. FC: 90 lpm, presión arterial normal, bajo peso para la edad, levantamiento paraesternal izquierdo bajo, ápex desplazado hacia abajo y soplo sistólico 'en barra' en el borde paraesternal izquierdo que se irradia a toda el área precordial. En el EKG se observa ritmo sinusal y datos de hipertrofia ventricular izquierda y derecha. ¿Cuál es la localización más frecuente del defecto en la comunicación interauricular?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Yuxtaductal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Preductal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Ostium secundum",
+          "isCorrect": true,
+          "rationale": "LA LOCALIZACIÓN MÁS FRECUENTE DE ESTE DEFECTO LA ENCONTRAMOS EN EL OSTIUM SECUNDUM"
+        },
+        {
+          "id": "3",
+          "text": "Ostium primum",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "LA LOCALIZACIÓN MÁS FRECUENTE DE ESTE DEFECTO LA ENCONTRAMOS EN EL OSTIUM SECUNDUM",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 3,
+      "question": "¿Cuál es el diagnóstico más probable en este paciente?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Comunicación interventricular",
+          "isCorrect": true,
+          "rationale": "EL PACIENTE PRESENTA UN SOPLO SISTÓLICO EN BARRA, LO QUE NOS PERMITE LLEGAR AL DIAGNÓSTICO DE UNA COMUNICACIÓN INTERVENTRICULAR."
+        },
+        {
+          "id": "1",
+          "text": "Foramen oval permeable",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Persistencia del conducto arterioso",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Comunicación interauricular",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "EL PACIENTE PRESENTA UN SOPLO SISTÓLICO EN BARRA, LO QUE NOS PERMITE LLEGAR AL DIAGNÓSTICO DE UNA COMUNICACIÓN INTERVENTRICULAR.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 4,
+      "question": "Paciente lactante masculino de 42 días de edad, es llevado a consulta pediátrica debido a que hace 5 días inició con vómitos abundantes y llanto intenso. Avidez por el seno materno. La madre cree que ha perdido mucho peso. Niega otra sintomatología. Exploración física: signos de deshidratación moderada, ictericia leve, abdomen con peristalsis presente, se palpa un píloro duro y móvil de diámetro aproximado de 1.5 cm. Precordio a expensas de taquicardia, campos pulmonares bien ventilados, sin agregados. El lactante se observa letárgico. El médico le comenta a la madre el diagnóstico sugestivo de estenosis hipertrófica del píloro. Signo patognomónico de la estenosis hipertrófica del píloro:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Signo de la morcilla",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Oliva pilórica",
+          "isCorrect": true,
+          "rationale": "LA PALPACIÓN DE LA 'OLIVA PILÓRICA' SE CONSIDERA EL SIGNO PATOGNOMÓNICO DE LA ESTENOSIS HIPERTRÓFICA DE PÍLORO, REQUIERE SER VALORADO POR UN MÉDICO EXPERIMENTADO. LA OLIVA PILÓRICA SE ENCUENTRA AL PALPAR EL CUADRANTE SUPERIOR DERECHO O EPIGASTRIO DEL ABDOMEN."
+        },
+        {
+          "id": "2",
+          "text": "Signo de doble riel",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Signo de la diana",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "LA PALPACIÓN DE LA 'OLIVA PILÓRICA' SE CONSIDERA EL SIGNO PATOGNOMÓNICO DE LA ESTENOSIS HIPERTRÓFICA DE PÍLORO, REQUIERE SER VALORADO POR UN MÉDICO EXPERIMENTADO. LA OLIVA PILÓRICA SE ENCUENTRA AL PALPAR EL CUADRANTE SUPERIOR DERECHO O EPIGASTRIO DEL ABDOMEN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 5,
+      "question": "¿Cuál de las siguientes es una característica esperada del vómito en estenosis hipertrófica del píloro?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Disminución de residuo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "En proyectil",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "No biliares",
+          "isCorrect": true,
+          "rationale": "LOS DATOS QUE EL PREMATURO PRESENTA CON MÁS FRECUENCIA SON: AUMENTO DEL RESIDUO, VÓMITOS NO BILIARES NO EN PROYECTIL, ALCALOSIS METABÓLICA HIPOCLORÉMICA."
+        },
+        {
+          "id": "3",
+          "text": "Alcalosis metabólica hipoclorémica",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "LOS DATOS QUE EL PREMATURO PRESENTA CON MÁS FRECUENCIA SON: AUMENTO DEL RESIDUO, VÓMITOS NO BILIARES NO EN PROYECTIL, ALCALOSIS METABÓLICA HIPOCLORÉMICA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 6,
+      "question": "¿Cuál de los siguientes es un signo característico de estadio avanzado de estenosis hipertrófica del píloro?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Melena",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Ictericia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Desnutrición",
+          "isCorrect": true,
+          "rationale": "EN ESTADIO AVANZADO DE LA ENFERMEDAD SE PUEDE ENCONTRAR PÉRDIDA DE PESO, SIGNOS DE DESHIDRATACIÓN Y DESNUTRICIÓN."
+        },
+        {
+          "id": "3",
+          "text": "Deficiencias motoras",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "EN ESTADIO AVANZADO DE LA ENFERMEDAD SE PUEDE ENCONTRAR PÉRDIDA DE PESO, SIGNOS DE DESHIDRATACIÓN Y DESNUTRICIÓN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 7,
+      "question": "Paciente masculino de 3 años de edad, que acude a urgencias por presentar cuadro catarral de 5 días de evolución, sin fiebre, con otalgia e hipoacusia derecha de 24 horas de evolución. En el examen físico se encuentra faringe enrojecida, y congestión nasal. Se realiza otoscopia donde se encontró el oído izquierdo normal, y otoscopia derecha con tímpano enrojecido, y membrana timpánica abombada. ¿Cuál es el tratamiento de elección?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Ibuprofeno",
+          "isCorrect": true,
+          "rationale": "DE ACUERDO AL CUADRO CLÍNICO EL PACIENTE NO CUMPLE CON LOS CRITERIOS PARA SER TRATADO CON ANTIBIÓTICO. GPC-IMSS-496-2021"
+        },
+        {
+          "id": "1",
+          "text": "Ceftriaxona",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Amoxicilina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Amoxicilina/clavulanato",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "DE ACUERDO AL CUADRO CLÍNICO EL PACIENTE NO CUMPLE CON LOS CRITERIOS PARA SER TRATADO CON ANTIBIÓTICO. GPC-IMSS-496-2021",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 8,
+      "question": "Agente etiológico más frecuente en esta patología:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Rinovirus",
+          "isCorrect": true,
+          "rationale": "LA ETIOLOGÍA VIRAL SIEMPRE SERÁ MÁS FRECUENTE EN LA OMA. GPC-IMSS-496-2021"
+        },
+        {
+          "id": "1",
+          "text": "S. pneumoniae",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "H. influenzae",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "M. catharralis",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "LA ETIOLOGÍA VIRAL SIEMPRE SERÁ MÁS FRECUENTE EN LA OMA. GPC-IMSS-496-2021",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 9,
+      "question": "¿Cuál es el recurso más apropiado para el diagnóstico de OMA?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Diapasón",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Otoscopia neumática",
+          "isCorrect": true,
+          "rationale": "LA OTOSCOPIA NEUMÁTICA ES EL RECURSO MÁS APROPIADO PARA EL DIAGNÓSTICO DE OMA. EN LA AUSENCIA DE ESTE SE DEBE UTILIZAR EL OTOSCOPIO ESTÁTICO. GPC-IMSS-496-2021"
+        },
+        {
+          "id": "2",
+          "text": "Otoscopia simple",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Timpanometría",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "LA OTOSCOPIA NEUMÁTICA ES EL RECURSO MÁS APROPIADO PARA EL DIAGNÓSTICO DE OMA. EN LA AUSENCIA DE ESTE SE DEBE UTILIZAR EL OTOSCOPIO ESTÁTICO. GPC-IMSS-496-2021",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 10,
+      "question": "3-month-old female patient who, three days ago, started with hyaline rhinorrhea, coughing, and sneezing. Yesterday she presented tachypnea with 55 rpm, intercostal indrawing with nasal flaring. On admission, respiratory distress was observed with inspiratory and expiratory wheezing and some bilateral crackles. Presents: pH 7.24; PCO2: 58 mmHg; HCO3: 21 mEq/L. What is the most probable diagnosis?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Bilateral bronchopneumonia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Asthmatic attack of infectious origin",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Bronchiolitis",
+          "isCorrect": true,
+          "rationale": "SE RECOMIENDA SOSPECHAR BRONQUIOLITIS EN EL/LA NIÑO/A MENOR DE 2 AÑOS CON: RINORREA, TOS, DIFICULTAD RESPIRATORIA, SIBILANCIAS O ESTERTORES CREPITANTES FINOS, HIPERINSUFLACIÓN Y DIFICULTAD RESPIRATORIA. GUÍA DE PRÁCTICA CLÍNICA DE DIAGNÓSTICO Y TRATAMIENTO DE BRONQUIOLITIS AGUDA EN NIÑAS/NIÑOS Y EN EL PRIMER NIVEL DE ATENCIÓN. MÉXICO: INSTITUTO MEXICANO DEL SEGURO SOCIAL; 2 DE DICIEMBRE DE 2015."
+        },
+        {
+          "id": "3",
+          "text": "Interstitial pneumonitis",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "SE RECOMIENDA SOSPECHAR BRONQUIOLITIS EN EL/LA NIÑO/A MENOR DE 2 AÑOS CON: RINORREA, TOS, DIFICULTAD RESPIRATORIA, SIBILANCIAS O ESTERTORES CREPITANTES FINOS, HIPERINSUFLACIÓN Y DIFICULTAD RESPIRATORIA. GUÍA DE PRÁCTICA CLÍNICA DE DIAGNÓSTICO Y TRATAMIENTO DE BRONQUIOLITIS AGUDA EN NIÑAS/NIÑOS Y EN EL PRIMER NIVEL DE ATENCIÓN. MÉXICO: INSTITUTO MEXICANO DEL SEGURO SOCIAL; 2 DE DICIEMBRE DE 2015.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 11,
+      "question": "En un lactante con bronquiolitis, ¿cuál de los siguientes tratamientos ha demostrado utilidad?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Solución salina hipertónica al 3%",
+          "isCorrect": true,
+          "rationale": "LA NEBULIZACIÓN DE SOLUCIÓN SALINA HIPERTÓNICA AL 3% MEJORA LA HIDRATACIÓN DE LAS VÍAS AÉREAS POR MOVILIZACIÓN DE AGUA DEL INTERSTICIO A LAS VÍAS AÉREAS, CON DISMINUCIÓN DEL EDEMA INTERSTICIAL Y VISCOSIDAD DE LA MUCOSA, LO CUAL PRODUCE ACLARAMIENTO MUCOCILIAR DE LAS SECRECIONES DE LAS VÍAS RESPIRATORIAS Y DISMINUCIÓN DE LA ESTANCIA HOSPITALARIA EN EL/LA NIÑO/A CON BRONQUIOLITIS NO GRAVE. GUÍA DE PRÁCTICA CLÍNICA DE DIAGNÓSTICO Y TRATAMIENTO DE BRONQUIOLITIS AGUDA EN NIÑAS/NIÑOS Y EN EL PRIMER NIVEL DE ATENCIÓN. MÉXICO: INSTITUTO MEXICANO DEL SEGURO SOCIAL; 2 DE DICIEMBRE DE 2015."
+        },
+        {
+          "id": "1",
+          "text": "Salbutamol",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Salbutamol más solución salina hipertónica al 3%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Solución salina hipertónica al 6%",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "LA NEBULIZACIÓN DE SOLUCIÓN SALINA HIPERTÓNICA AL 3% MEJORA LA HIDRATACIÓN DE LAS VÍAS AÉREAS POR MOVILIZACIÓN DE AGUA DEL INTERSTICIO A LAS VÍAS AÉREAS, CON DISMINUCIÓN DEL EDEMA INTERSTICIAL Y VISCOSIDAD DE LA MUCOSA, LO CUAL PRODUCE ACLARAMIENTO MUCOCILIAR DE LAS SECRECIONES DE LAS VÍAS RESPIRATORIAS Y DISMINUCIÓN DE LA ESTANCIA HOSPITALARIA EN EL/LA NIÑO/A CON BRONQUIOLITIS NO GRAVE. GUÍA DE PRÁCTICA CLÍNICA DE DIAGNÓSTICO Y TRATAMIENTO DE BRONQUIOLITIS AGUDA EN NIÑAS/NIÑOS Y EN EL PRIMER NIVEL DE ATENCIÓN. MÉXICO: INSTITUTO MEXICANO DEL SEGURO SOCIAL; 2 DE DICIEMBRE DE 2015.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 12,
+      "question": "Paciente masculino de 9 años es llevado a urgencias por su papá porque su hijo se queja de dolor torácico del lado derecho, dificultad para respirar, tos de 1 semana de evolución, se toman signos vitales; FC 119, FR 26, T/A 125/85, saturación 83% y temperatura de 38.2. A la exploración física notas tiraje intercostal y uso de músculos accesorios, auscultas ambos pulmones y te llama la atención que en base pulmonar derecha escuchas estertores. Su papá desconoce si tiene las vacunas de acuerdo con la edad del paciente. (Alergias preguntas y negadas). ¿Cuál es el diagnóstico más probable de este paciente?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Neumonía nosocomial",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Neumonía adquirida en la comunidad",
+          "isCorrect": true,
+          "rationale": "El caso clínico presenta los criterios de neumonía adquirida en la comunidad: fiebre, tos, taquipnea, presencia de estertores y datos de dificultad respiratoria en un paciente sin antecedentes de hospitalización reciente."
+        },
+        {
+          "id": "2",
+          "text": "Embolia pulmonar",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Insuficiencia cardíaca de fracción disminuida",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "El caso clínico presenta los criterios de neumonía adquirida en la comunidad: fiebre, tos, taquipnea, presencia de estertores y datos de dificultad respiratoria en un paciente sin antecedentes de hospitalización reciente.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 13,
+      "question": "¿Cuál es el tratamiento antibiótico empírico en estos pacientes?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Amoxicilina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Ceftriaxona",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Doxiciclina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Azitromicina",
+          "isCorrect": true,
+          "rationale": "EL TRATAMIENTO MÁS ADECUADO EN LAS NEUMONÍAS ATÍPICAS SON LOS MACRÓLIDOS."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "EL TRATAMIENTO MÁS ADECUADO EN LAS NEUMONÍAS ATÍPICAS SON LOS MACRÓLIDOS.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 14,
+      "question": "¿Cuál es el agente que más frecuentemente se ve implicado en esta patología?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "S. pneumoniae",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Trachomatis",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Mycoplasma",
+          "isCorrect": true,
+          "rationale": "EL AGENTE MÁS FRECUENTEMENTE IMPLICADO EN ESTA PATOLOGÍA ES MYCOPLASMA PNEUMONIAE."
+        },
+        {
+          "id": "3",
+          "text": "Legionella",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "EL AGENTE MÁS FRECUENTEMENTE IMPLICADO EN ESTA PATOLOGÍA ES MYCOPLASMA PNEUMONIAE.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 15,
+      "question": "Masculino de 18 meses es traído al servicio de urgencias por presentar sangrado de tubo digestivo bajo. Ha presentado tres cuadros previos manifestados con hematoquecia sin fiebre ni ataque al estado general, no presenta dolor abdominal u otra sintomatología agregada. Método diagnóstico más sensible para comprobar esta patología:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Enema opaco",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Radiografía abdominal con contraste baritado",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Colonoscopia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Gammagrafía con pertecnetato de Tc-99m",
+          "isCorrect": true,
+          "rationale": "DIVERTÍCULO DE MECKEL: SUELE COMENZAR EN LOS DOS PRIMEROS AÑOS DE VIDA, LA PRESENTACIÓN MÁS FRECUENTE EN LOS NIÑOS ES LA HEMORRAGIA INTESTINAL. EL ESTUDIO MÁS SENSIBLE ES LA GAMMAGRAFÍA CON PERTECNETATO DE TC-99M, QUE ES CAPTADO POR LAS CÉLULAS DE LA MUCOSA GÁSTRICA ECTÓPICA. MANUAL CTO DE MEDICINA Y CIRUGÍA. PEDIATRÍA, ENARM 6ª EDICIÓN, MÉXICO."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "DIVERTÍCULO DE MECKEL: SUELE COMENZAR EN LOS DOS PRIMEROS AÑOS DE VIDA, LA PRESENTACIÓN MÁS FRECUENTE EN LOS NIÑOS ES LA HEMORRAGIA INTESTINAL. EL ESTUDIO MÁS SENSIBLE ES LA GAMMAGRAFÍA CON PERTECNETATO DE TC-99M, QUE ES CAPTADO POR LAS CÉLULAS DE LA MUCOSA GÁSTRICA ECTÓPICA. MANUAL CTO DE MEDICINA Y CIRUGÍA. PEDIATRÍA, ENARM 6ª EDICIÓN, MÉXICO.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 16,
+      "question": "A 5-month-old male is brought to your office by his mother for presenting diarrheal evacuations on 7 occasions since yesterday afternoon. The patient is observed with a good appearance, reactive, moist mucous membranes, normal skin turgor. Refers to breastfeeding and adequately tolerates the oral route. It is the main enteropathogen in children under 1 year of age:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Rotavirus",
+          "isCorrect": true,
+          "rationale": "EN < 1 AÑO LOS PRINCIPALES ENTEROPATÓGENOS SON: ROTAVIRUS, NORAVIRUS, ADENOVIRUS Y SALMONELLA. PREVENCIÓN, DIAGNÓSTICO Y TRATAMIENTO DE LA ENFERMEDAD DIARREICA AGUDA EN NIÑOS DE DOS MESES A CINCO AÑOS EN EL PRIMERO Y SEGUNDO NIVEL DE ATENCIÓN."
+        },
+        {
+          "id": "1",
+          "text": "Noraviruses",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Adenovirus",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Salmonella",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "EN < 1 AÑO LOS PRINCIPALES ENTEROPATÓGENOS SON: ROTAVIRUS, NORAVIRUS, ADENOVIRUS Y SALMONELLA. PREVENCIÓN, DIAGNÓSTICO Y TRATAMIENTO DE LA ENFERMEDAD DIARREICA AGUDA EN NIÑOS DE DOS MESES A CINCO AÑOS EN EL PRIMERO Y SEGUNDO NIVEL DE ATENCIÓN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 17,
+      "question": "10-year-old female has had a fever of 38°C for the past 3 days, thick, greenish rhinorrhea, myalgia and adynamia. Today starts with a cough. In the examination, hyperemic pharynx with tonsillar hypertrophy without the presence of exudate. She does not present data on respiratory distress. Allergic to penicillins. The most likely diagnosis is:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Bacterial pneumonia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Viral pneumonia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Common cold",
+          "isCorrect": true,
+          "rationale": "CUADRO TÍPICO DE RESFRIADO COMÚN. TÍPICAMENTE DURA ENTRE 5 A 14 DÍAS, SE CARACTERIZA POR COMBINACIÓN DE ALGUNOS DE LOS SIGUIENTES SÍNTOMAS: RINORREA, TOS, FIEBRE, ODINOFAGIA. GPC: DIAGNÓSTICO Y TRATAMIENTO DE LA NEUMONÍA ADQUIRIDA EN LA COMUNIDAD EN LAS/LOS PACIENTES DE 3 MESES A 18 AÑOS EN EL PRIMERO Y SEGUNDO NIVEL DE ATENCIÓN."
+        },
+        {
+          "id": "3",
+          "text": "Atypical pneumonia",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "CUADRO TÍPICO DE RESFRIADO COMÚN. TÍPICAMENTE DURA ENTRE 5 A 14 DÍAS, SE CARACTERIZA POR COMBINACIÓN DE ALGUNOS DE LOS SIGUIENTES SÍNTOMAS: RINORREA, TOS, FIEBRE, ODINOFAGIA. GPC: DIAGNÓSTICO Y TRATAMIENTO DE LA NEUMONÍA ADQUIRIDA EN LA COMUNIDAD EN LAS/LOS PACIENTES DE 3 MESES A 18 AÑOS EN EL PRIMERO Y SEGUNDO NIVEL DE ATENCIÓN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 18,
+      "question": "Paciente masculino con bajo peso al nacer 1500 g, prematuro de 30.6 SDG con RCIU por desnutrición materna. En su segundo día de vida en UCIN inicia con letargia, episodios de bradicardia, inestabilidad térmica, distensión abdominal, residuo gástrico, enfermera de turno refiere última evacuación presentó rasgos de sangre fresca. Se decide tomar hemocultivo y se solicita RX abdominal en la que se aprecia distención de asas intestinales, aire portal. Se integra diagnóstico de:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Enfermedad hemorrágica del prematuro",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Sepsis neonatal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Sepsis abdominal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Enterocolitis necrotizante",
+          "isCorrect": true,
+          "rationale": "LA PRESENCIA DE SANGRE FRESCA EN HECES Y LA DISTENSIÓN ABDOMINAL EN UN PREMATURO SON DATOS QUE NOS DEBEN ORIENTAR HACIA ESTA PATOLOGÍA."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "LA PRESENCIA DE SANGRE FRESCA EN HECES Y LA DISTENSIÓN ABDOMINAL EN UN PREMATURO SON DATOS QUE NOS DEBEN ORIENTAR HACIA ESTA PATOLOGÍA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 19,
+      "question": "Esta patología es la principal causa de:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Síndrome de mala absorción intestinal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Intestino corto",
+          "isCorrect": true,
+          "rationale": "LOS PACIENTES SOMETIDOS A CIRUGÍA TENDRÁN COMO PRINCIPAL SECUELA INTESTINO CORTO, Y ESTA PATOLOGÍA ES LA PRINCIPAL CAUSA DE INTESTINO CORTO EN PEDIATRÍA."
+        },
+        {
+          "id": "2",
+          "text": "Obstrucción intestinal en neonatos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Sangrado de tubo digestivo bajo en pediátricos",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "LOS PACIENTES SOMETIDOS A CIRUGÍA TENDRÁN COMO PRINCIPAL SECUELA INTESTINO CORTO, Y ESTA PATOLOGÍA ES LA PRINCIPAL CAUSA DE INTESTINO CORTO EN PEDIATRÍA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 20,
+      "question": "¿En qué estadio se encuentra este paciente?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "I",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "IIA",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "IIB",
+          "isCorrect": true,
+          "rationale": "LA PRESENCIA DE GAS EN VENA PORTA NOS INDICA UN BELL IIB."
+        },
+        {
+          "id": "3",
+          "text": "IIIB",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "LA PRESENCIA DE GAS EN VENA PORTA NOS INDICA UN BELL IIB.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 21,
+      "question": "4-year-old female was admitted to the emergency department due to a fever of 39°C of 72 hours of evolution in addition to vomiting and crying on urination. Urine is collected with a bag for a general urine test, which is cloudy and has a bad odor. Laboratory findings that lead to suspicion of urinary tract infection are:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Positive bacteria and leukocytes",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Protein and nitrite positive",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Erythrocytes and bacteria positive",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Nitrites and leukocyte esterase positive",
+          "isCorrect": true,
+          "rationale": "SE DEBE DIAGNOSTICAR IVU, CON SÍNTOMAS Y CUANDO LA MICROSCOPÍA DETECTA PIURIA, BACTERIURIA, Y NITRITOS."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "SE DEBE DIAGNOSTICAR IVU, CON SÍNTOMAS Y CUANDO LA MICROSCOPÍA DETECTA PIURIA, BACTERIURIA, Y NITRITOS.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 22,
+      "question": "Se trata de una recién nacida pretérmino, 31 semanas de gestación, antecedente de Coombs positivo por isoinyecución anti D en el primer trimestre, madre grupo A Rh- y feto O Rh+. En la semana 28 aparecen signos de anemia fetal por lo que se realizó transfusión fetal. En la semana 30 se presenta amenaza de parto pretérmino, se administran tocolíticos y esquema de maduración pulmonar. Nacimiento a la semana 31, obteniendo un producto único vivo femenino, 1500 g, Apgar 6/8, respiración espontánea, adecuado tono muscular, ictericia generalizada. Se detecta anemia severa persistente por lo que se decide transfundir. Posteriormente la recién nacida muestra datos de intenso dolor, distensión abdominal, ausencia de peristalsis, hipotensión y bradicardia. Se diagnostica con enfermedad hemolítica perinatal, enterocolitis necrosante con afectación de intestino delgado e inestabilidad hemodinámica. Una vez estabilizada se programa para resección y anastomosis intestinal. ¿Cuál podría ser una medida de prevención para enterocolitis necrosante?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Ayuno previo, durante y postransfusión",
+          "isCorrect": true,
+          "rationale": "EN RECIÉN NACIDOS QUE VAN A SER TRANSFUNDIDOS SE SUGIERE DEJAR EN AYUNO PREVIO, DURANTE Y POSTRANSFUSIÓN PARA DISMINUIR EL RIESGO DE DESARROLLAR ENTEROCOLITIS NECROSANTE."
+        },
+        {
+          "id": "1",
+          "text": "Uso de pentoxifilina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Uso de antibióticos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Uso de prebióticos",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "EN RECIÉN NACIDOS QUE VAN A SER TRANSFUNDIDOS SE SUGIERE DEJAR EN AYUNO PREVIO, DURANTE Y POSTRANSFUSIÓN PARA DISMINUIR EL RIESGO DE DESARROLLAR ENTEROCOLITIS NECROSANTE.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 23,
+      "question": "¿Cuál de los siguientes es un factor de riesgo para enterocolitis necrosante?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Enfermedad de Crohn",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Oligohidramnios",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Polihidramnios",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Corioamnionitis",
+          "isCorrect": true,
+          "rationale": "LA CORIOAMNIONITIS ESTÁ FUERTEMENTE INVOLUCRADA CON DESARROLLO DE ENTEROCOLITIS NECROSANTE."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "LA CORIOAMNIONITIS ESTÁ FUERTEMENTE INVOLUCRADA CON DESARROLLO DE ENTEROCOLITIS NECROSANTE.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 24,
+      "question": "Se realiza primera consulta de control prenatal a una embarazada de 14 semanas de gestación, G2P0A1C0, antecedente de aborto en primer trimestre de embarazo hace 2 años, diagnóstico de hipotiroidismo subclínico hace 6 meses, suplementada con ácido fólico. Ecografía fetal: feto de 63 mm de longitud craneocaudal, translucencia nucal de 1.69, imagen capsulada extraabdominal en la que se observan asas intestinales e hígado. Resto de anatomía sin anormalidades. Se refiere a tercer nivel de atención para estudio genético y atención prenatal de alto riesgo. Diagnóstico:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Onfalocele",
+          "isCorrect": true,
+          "rationale": "EL ONFALOCELE ES UN DEFECTO EN EL DESARROLLO DE LA PARED ABDOMINAL, EN EL QUE LAS VÍSCERAS HERNIADAS ESTÁN CUBIERTAS POR PERITONEO, AMNIOS Y GELATINA DE WHARTON. LOS ÓRGANOS COMPROMETIDOS EN LA EVISCERACIÓN PUEDEN SER ASAS DE INTESTINO DELGADO O GRUESO, HÍGADO Y ESTÓMAGO, ESTANDO SIEMPRE INCLUIDO EL CORDÓN EN EL SACO HERNIADO. SE DIAGNOSTICA A PARTIR DE LA SEMANA 12 DE GESTACIÓN, YA QUE DURANTE LA VIDA FETAL EL INTESTINO MEDIO MIGRA DENTRO DEL CORDÓN UMBILICAL, PARA RETORNAR A LA CAVIDAD ALREDEDOR DE LAS SEMANAS 10-12."
+        },
+        {
+          "id": "1",
+          "text": "Gastrosquisis",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Síndrome de Edwards",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Síndrome de Patau",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "EL ONFALOCELE ES UN DEFECTO EN EL DESARROLLO DE LA PARED ABDOMINAL, EN EL QUE LAS VÍSCERAS HERNIADAS ESTÁN CUBIERTAS POR PERITONEO, AMNIOS Y GELATINA DE WHARTON. LOS ÓRGANOS COMPROMETIDOS EN LA EVISCERACIÓN PUEDEN SER ASAS DE INTESTINO DELGADO O GRUESO, HÍGADO Y ESTÓMAGO, ESTANDO SIEMPRE INCLUIDO EL CORDÓN EN EL SACO HERNIADO. SE DIAGNOSTICA A PARTIR DE LA SEMANA 12 DE GESTACIÓN, YA QUE DURANTE LA VIDA FETAL EL INTESTINO MEDIO MIGRA DENTRO DEL CORDÓN UMBILICAL, PARA RETORNAR A LA CAVIDAD ALREDEDOR DE LAS SEMANAS 10-12.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 25,
+      "question": "Es llamado para valorar un recién nacido pretérmino de 3 días de vida, madre con antecedente de amenaza de parto pretérmino con una longitud cervical de 10 mm y test de fibronectina positivo, manejada con tocolíticos y esquema de maduración pulmonar. Inicia trabajo de parto 6 días después y se obtiene un producto único vivo masculino de 29 semanas de gestación por FUM de 1100 gramos, Apgar 6. Se utilizó CPAP con puntas nasales de 5 a 6 cm H2O, actualmente con requerimiento de oxígeno suplementario. ¿Qué riesgo está aumentado en el recién nacido?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Neumotórax",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Edema pulmonar",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Displasia broncopulmonar",
+          "isCorrect": true,
+          "rationale": "LOS RECIÉN NACIDOS DE MENOS DE 32 SEMANAS DE GESTACIÓN O CON PESO MUY BAJO AL NACER SON SUSCEPTIBLES A DESARROLLAR DISPLASIA BRONCOPULMONAR."
+        },
+        {
+          "id": "3",
+          "text": "Asma",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "LOS RECIÉN NACIDOS DE MENOS DE 32 SEMANAS DE GESTACIÓN O CON PESO MUY BAJO AL NACER SON SUSCEPTIBLES A DESARROLLAR DISPLASIA BRONCOPULMONAR.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 26,
+      "question": "¿Cuál de los siguientes es una medida de prevención para el síndrome de dificultad respiratoria?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Uso de esteroides prenatales",
+          "isCorrect": true,
+          "rationale": "COMO MEDIDA DE PREVENCIÓN SECUNDARIA EL USO DE ESTEROIDES PRENATALES DISMINUYE EL RIESGO DE MUERTE Y SDR CON UN CICLO DE ESTEROIDES (DEXAMETASONA O BETAMETASONA) CUANDO SE ADMINISTRA DE 1 A 7 DÍAS ANTES DEL NACIMIENTO Y EN LA SEMANA 23 A 35 DE GESTACIÓN."
+        },
+        {
+          "id": "1",
+          "text": "Uso de oxígeno suplementario al 21%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Uso de oxígeno suplementario al 100%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Hipercapnia permisiva",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "COMO MEDIDA DE PREVENCIÓN SECUNDARIA EL USO DE ESTEROIDES PRENATALES DISMINUYE EL RIESGO DE MUERTE Y SDR CON UN CICLO DE ESTEROIDES (DEXAMETASONA O BETAMETASONA) CUANDO SE ADMINISTRA DE 1 A 7 DÍAS ANTES DEL NACIMIENTO Y EN LA SEMANA 23 A 35 DE GESTACIÓN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 27,
+      "question": "¿Cuál de los siguientes es un criterio de falla a CPAP?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Necesidad de oxígeno con FiO2 > 50% para mantener una saturación de oxígeno periférica de 90%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Necesidad de oxígeno con FiO2 > 50% para mantener una saturación periférica de 88%",
+          "isCorrect": true,
+          "rationale": "EL CRITERIO DE FALLA A CPAP INCLUYE LA NECESIDAD DE OXÍGENO CON FiO2 > 50% PARA MANTENER SATURACIÓN PERIFÉRICA DE 88% O UNA PaCO2 > 65 MMHG, O BIEN QUE EXISTA INESTABILIDAD HEMODINÁMICA."
+        },
+        {
+          "id": "2",
+          "text": "Necesidad de oxígeno con FiO2 > 20% para mantener una saturación de oxígeno periférica de 90%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Necesidad de oxígeno con FiO2 > 20% para mantener una saturación de oxígeno periférica de 88%",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "EL CRITERIO DE FALLA A CPAP INCLUYE LA NECESIDAD DE OXÍGENO CON FiO2 > 50% PARA MANTENER SATURACIÓN PERIFÉRICA DE 88% O UNA PaCO2 > 65 MMHG, O BIEN QUE EXISTA INESTABILIDAD HEMODINÁMICA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 28,
+      "question": "Se trata de un recién nacido masculino, madre refiere una sola consulta prenatal, producto de gesta II (anterior un producto femenino sin complicaciones), parto vaginal a término, se requirió uso de fórceps, al nacimiento; Apgar 8/9, con llanto y respiración espontánea, perímetro cefálico de 44 cm, se detecta cuadriparesia espástica y atrapamiento del pulgar. ¿Cuál es el diagnóstico más probable?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Lesión neurológica por uso de fórceps",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Tumor de fosa posterior",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Hemorragia intraventricular",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Hidrocefalia ligada al X",
+          "isCorrect": true,
+          "rationale": "LA HIDROCEFALIA LIGADA AL X PRESENTA LOS SIGUIENTES DATOS: RECIÉN NACIDO DE SEXO MASCULINO, MACROCEFALIA, PARAPARESIA O CUADRIPARESIA ESPÁSTICA, FLEXIÓN-ADUCCIÓN DE PULGAR, RECURRENCIA DE CASOS."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "LA HIDROCEFALIA LIGADA AL X PRESENTA LOS SIGUIENTES DATOS: RECIÉN NACIDO DE SEXO MASCULINO, MACROCEFALIA, PARAPARESIA O CUADRIPARESIA ESPÁSTICA, FLEXIÓN-ADUCCIÓN DE PULGAR, RECURRENCIA DE CASOS.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 29,
+      "question": "¿Cuál es la conducta a seguir?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Realizar electromiografía",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Realizar TAC de cráneo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Derivar a genética",
+          "isCorrect": true,
+          "rationale": "Ante la sospecha de hidrocefalia ligada al X, la conducta adecuada es la derivación a genética para estudio y asesoramiento."
+        },
+        {
+          "id": "3",
+          "text": "Derivar a neurocirugía",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "Ante la sospecha de hidrocefalia ligada al X, la conducta adecuada es la derivación a genética para estudio y asesoramiento.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 30,
+      "question": "¿Cuál de los siguientes medicamentos no está relacionado con el desarrollo de hidrocefalia y malformaciones del SNC?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Metotrexato",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Aminopterin",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Ácido retinoico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Dextrometorfano",
+          "isCorrect": true,
+          "rationale": "LOS FÁRMACOS ASOCIADOS CON HIDROCEFALIA Y MALFORMACIONES DEL SNC SON: AMINOPTERIN, METOTREXATO, ANTITUBERCULOSOS, COUMARIN Y DERIVADOS, ÁCIDO RETINOICO, TRIMETOPRIM, WARFARINA, TRIMETHADIONE Y PARAMETHADIONE."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "LOS FÁRMACOS ASOCIADOS CON HIDROCEFALIA Y MALFORMACIONES DEL SNC SON: AMINOPTERIN, METOTREXATO, ANTITUBERCULOSOS, COUMARIN Y DERIVADOS, ÁCIDO RETINOICO, TRIMETOPRIM, WARFARINA, TRIMETHADIONE Y PARAMETHADIONE.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 31,
+      "question": "Una pareja acude a valoración con médico de la reproducción ya que desean un embarazo. Ambos en edad reproductiva, sin comorbilidades, ni medicaciones. Antecedente de 1 aborto en la primera semana de gestación y un aborto en el segundo trimestre del embarazo debido a detección de producto con anencefalia hace cuatro años. Por el antecedente de producto con defecto del tubo neural, el médico les comenta que es primordial iniciar suplementación con ácido fólico, así como una dieta rica en ácido fólico. ¿Cuál de los siguientes alimentos es más rico en ácido fólico?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Avena",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Espinacas",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Yema de huevo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Hígado de pollo",
+          "isCorrect": true,
+          "rationale": "EL HÍGADO DE POLLO CONTIENE 590 MCG DE ÁCIDO FÓLICO EN 100 GR DE ALIMENTO, LA AVENA 60 MCG, LAS ESPINACAS 140 MCG Y LA YEMA DE HUEVO 52 MCG."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "EL HÍGADO DE POLLO CONTIENE 590 MCG DE ÁCIDO FÓLICO EN 100 GR DE ALIMENTO, LA AVENA 60 MCG, LAS ESPINACAS 140 MCG Y LA YEMA DE HUEVO 52 MCG.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 32,
+      "question": "¿Cuál es una medida de prevención para anencefalia?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Ácido fólico 0.4 mg/día",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Ácido fólico 4.0 mg/día",
+          "isCorrect": true,
+          "rationale": "EN CASO DE TENER ANTECEDENTE DE UN HIJO CON DEFECTO DE TUBO NEURAL LA MADRE DEBE SUPLEMENTARSE CON ÁCIDO FÓLICO 4.0 MG/DÍA, TRES MESES ANTES DEL EMBARAZO."
+        },
+        {
+          "id": "2",
+          "text": "Ácido fólico 40 mg/día",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Ácido fólico 400 mg/día",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "EN CASO DE TENER ANTECEDENTE DE UN HIJO CON DEFECTO DE TUBO NEURAL LA MADRE DEBE SUPLEMENTARSE CON ÁCIDO FÓLICO 4.0 MG/DÍA, TRES MESES ANTES DEL EMBARAZO.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 33,
+      "question": "¿Cuál es la prevalencia de defectos de tubo neural en México?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "1.9/10000",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "4.9/10000",
+          "isCorrect": true,
+          "rationale": "MÉXICO TIENE UNA PREVALENCIA DE 4.9 POR 10000 DE DEFECTOS DE TUBO NEURAL, EL 75% DE LOS CASOS CORRESPONDE A ESPINA BÍFIDA."
+        },
+        {
+          "id": "2",
+          "text": "10.9/10000",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "80.9/10000",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "MÉXICO TIENE UNA PREVALENCIA DE 4.9 POR 10000 DE DEFECTOS DE TUBO NEURAL, EL 75% DE LOS CASOS CORRESPONDE A ESPINA BÍFIDA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 34,
+      "question": "Se trata de una recién nacida femenina, nacimiento hace 3 días a las 30 semanas de gestación, curso con datos de asfixia neonatal por lo que se corrigió acidosis metabólica y se usó CPAP, actualmente con oxígeno suplementario al 30%. El día de hoy se detectaron múltiples periodos de apnea de 12 segundos durante el sueño, sin estar acompañado de alteración de otros signos vitales ni cianosis. ¿Cuál es el diagnóstico?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Apnea del prematuro",
+          "isCorrect": true,
+          "rationale": "PARA DIAGNÓSTICO DE APNEA DEL PREMATURO DEBE HABER: AUSENCIA DE RESPIRACIÓN POR MÁS DE 20 SEGUNDOS O AUSENCIA DE RESPIRACIÓN MENOR DE 20 SEGUNDOS ACOMPAÑADA DE BRADICARDIA O CIANOSIS."
+        },
+        {
+          "id": "1",
+          "text": "Síndrome de dificultad respiratoria",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Displasia broncopulmonar",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Ninguno de los anteriores",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "PARA DIAGNÓSTICO DE APNEA DEL PREMATURO DEBE HABER: AUSENCIA DE RESPIRACIÓN POR MÁS DE 20 SEGUNDOS O AUSENCIA DE RESPIRACIÓN MENOR DE 20 SEGUNDOS ACOMPAÑADA DE BRADICARDIA O CIANOSIS.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 35,
+      "question": "¿Qué estudio es de elección?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Electroencefalograma",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Polisomnografía",
+          "isCorrect": true,
+          "rationale": "EN RECIÉN NACIDOS PREMATUROS CON FACTORES DE RIESGO NEUROLÓGICO Y EN LOS QUE SE TENGA DUDA SI PRESENTAN O NO EVENTOS DE APNEA, SE RECOMIENDA REALIZAR ESTUDIO POLISOMNOGRÁFICO DURANTE EL SUEÑO PARA DETECTAR APNEA."
+        },
+        {
+          "id": "2",
+          "text": "Ecocardiograma",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Radiografía de tórax",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "EN RECIÉN NACIDOS PREMATUROS CON FACTORES DE RIESGO NEUROLÓGICO Y EN LOS QUE SE TENGA DUDA SI PRESENTAN O NO EVENTOS DE APNEA, SE RECOMIENDA REALIZAR ESTUDIO POLISOMNOGRÁFICO DURANTE EL SUEÑO PARA DETECTAR APNEA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 36,
+      "question": "¿Cuál es el tratamiento de elección?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Teofilina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Cafeína",
+          "isCorrect": true,
+          "rationale": "TODOS LOS MEDICAMENTOS SON ÚTILES PERO EL DE PRIMERA ELECCIÓN ES LA CAFEÍNA, YA QUE TIENE MENOS EFECTOS ADVERSOS, SU VIDA MEDIA ES MÁS AMPLIA Y SUS NIVELES PLASMÁTICOS SON ESTABLES. LA CAFEÍNA ES ASOCIADA CON MEJOR EFECTO A LARGO PLAZO Y CUENTA CON MENOR TOXICIDAD."
+        },
+        {
+          "id": "2",
+          "text": "Metilxantinas",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Doxapram",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "TODOS LOS MEDICAMENTOS SON ÚTILES PERO EL DE PRIMERA ELECCIÓN ES LA CAFEÍNA, YA QUE TIENE MENOS EFECTOS ADVERSOS, SU VIDA MEDIA ES MÁS AMPLIA Y SUS NIVELES PLASMÁTICOS SON ESTABLES. LA CAFEÍNA ES ASOCIADA CON MEJOR EFECTO A LARGO PLAZO Y CUENTA CON MENOR TOXICIDAD.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 37,
+      "question": "¿Cuál de los siguientes disminuye el riesgo de apnea en prematuros?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Estimulación sensorial con olores",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Estimulación kinestésica",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Técnica de madre canguro",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Posición prona",
+          "isCorrect": true,
+          "rationale": "EN EL PREMATURO MENOR DE 34 SEMANAS SE RECOMIENDA POSICIÓN PRONA, SOLO BAJO SUPERVISIÓN MÉDICA CONTINUA, YA QUE DA MAYOR ESTABILIDAD A LA CAJA TORÁCICA Y REGULA EL PATRÓN RESPIRATORIO."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "EN EL PREMATURO MENOR DE 34 SEMANAS SE RECOMIENDA POSICIÓN PRONA, SOLO BAJO SUPERVISIÓN MÉDICA CONTINUA, YA QUE DA MAYOR ESTABILIDAD A LA CAJA TORÁCICA Y REGULA EL PATRÓN RESPIRATORIO.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 38,
+      "question": "Se trata de una recién nacida a término que se encuentra en contacto piel con piel con la madre, la enfermera de turno reportó los siguientes signos: FC 160 lpm, FR 80 lpm, SpO2 83%, T 39°. Se queja y rechaza el seno materno. El médico solicita laboratorios y hemocultivo bajo la sospecha de sepsis neonatal temprana e inicia tratamiento antibiótico empírico con ampicilina y gentamicina. ¿Cuál de los siguientes es predictivo de sepsis neonatal temprana?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Conteo leucocitario inmediato al nacimiento",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Conteo leucocitario entre las 6 h y 12 h de nacimiento",
+          "isCorrect": true,
+          "rationale": "CONSIDERAR EL CONTEO CELULAR LEUCOCITARIO OBTENIDO ENTRE LAS 6 Y 12 HORAS DE NACIDO COMO MÁS PREDICTIVO DE SEPSIS NEONATAL TEMPRANA QUE EL OBTENIDO INMEDIATAMENTE DESPUÉS DEL NACIMIENTO."
+        },
+        {
+          "id": "2",
+          "text": "Procalcitonina inmediata al nacimiento",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Procalcitonina entre las 6 y 12 horas de nacimiento",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "CONSIDERAR EL CONTEO CELULAR LEUCOCITARIO OBTENIDO ENTRE LAS 6 Y 12 HORAS DE NACIDO COMO MÁS PREDICTIVO DE SEPSIS NEONATAL TEMPRANA QUE EL OBTENIDO INMEDIATAMENTE DESPUÉS DEL NACIMIENTO.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 39,
+      "question": "¿En qué circunstancias se recomienda suspender el antibiótico?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Hemocultivo negativo",
+          "isCorrect": true,
+          "rationale": "SE RECOMIENDA SUSPENDER EL ANTIBIÓTICO A LAS 36 HORAS SI: EL HEMOCULTIVO ES NEGATIVO, LA SOSPECHA CLÍNICA INICIAL DE INFECCIÓN NO ES TAN FUERTE, LA CONDICIÓN CLÍNICA DEL RN NO PRESENTA INDICADORES DE POSIBLE INFECCIÓN, LOS NIVELES DE PCR SE NORMALIZAN."
+        },
+        {
+          "id": "1",
+          "text": "Mejoría clínica a las 24 horas",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Normalización de nivel de leucocitos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Ninguna de las anteriores",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "SE RECOMIENDA SUSPENDER EL ANTIBIÓTICO A LAS 36 HORAS SI: EL HEMOCULTIVO ES NEGATIVO, LA SOSPECHA CLÍNICA INICIAL DE INFECCIÓN NO ES TAN FUERTE, LA CONDICIÓN CLÍNICA DEL RN NO PRESENTA INDICADORES DE POSIBLE INFECCIÓN, LOS NIVELES DE PCR SE NORMALIZAN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 40,
+      "question": "¿Qué tipo de choque se presenta en la sepsis neonatal?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Distributivo",
+          "isCorrect": true,
+          "rationale": "EL TIPO DE CHOQUE QUE SE PRESENTA EN LA SEPSIS NEONATAL ES EL DISTRIBUTIVO."
+        },
+        {
+          "id": "1",
+          "text": "Cardiogénico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Hipovolémico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Obstructivo",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "EL TIPO DE CHOQUE QUE SE PRESENTA EN LA SEPSIS NEONATAL ES EL DISTRIBUTIVO.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 41,
+      "question": "¿Cuál es el método diagnóstico definitivo para sepsis neonatal?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Hemocultivo",
+          "isCorrect": true,
+          "rationale": "SE DEBE REALIZAR HEMOCULTIVO PARA DETERMINAR EL DIAGNÓSTICO DEFINITIVO DE SEPSIS NEONATAL. NO SUSTITUIR AL HEMOCULTIVO COMO PRUEBA DIAGNÓSTICA POR LA PCR, YA QUE LA EVIDENCIA DISPONIBLE NO PERMITE DETERMINAR SU PRECISIÓN DIAGNÓSTICA."
+        },
+        {
+          "id": "1",
+          "text": "Cultivo de aspirado endotraqueal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "PCR",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "El diagnóstico es clínico",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "SE DEBE REALIZAR HEMOCULTIVO PARA DETERMINAR EL DIAGNÓSTICO DEFINITIVO DE SEPSIS NEONATAL. NO SUSTITUIR AL HEMOCULTIVO COMO PRUEBA DIAGNÓSTICA POR LA PCR, YA QUE LA EVIDENCIA DISPONIBLE NO PERMITE DETERMINAR SU PRECISIÓN DIAGNÓSTICA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 42,
+      "question": "Paciente lactante de 5 semanas de nacimiento, ingresa a urgencia en estado letárgico. Se detecta hipokalemia y alcalosis metabólica hipoclorémica. Exploración física: signos de desnutrición y deshidratación grave. Se detecta 'oliva pilórica' y distensión abdominal. Taquicardia sinusal. Uno de los cuidadores refiere que el bebé presenta emesis en proyectil desde hace 7 días. ¿Qué volumen de líquidos se recomienda administrar al paciente?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "50 ml/kg/día",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "75-100 ml/kg/día",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "120-150 ml/kg/día",
+          "isCorrect": true,
+          "rationale": "EN PACIENTES SIN DESEQUILIBRIO HIDROELECTROLÍTICO EL VOLUMEN Y COMPOSICIÓN DE LOS LÍQUIDOS PARENTERALES QUE SE RECOMIENDA ADMINISTRAR ES: LÍQUIDOS: 120-150 ML/KG/DÍA, GLUCOSA: 5-8 MG/KILO/MINUTO, SODIO: 2 A 3 MEQ/KG/DÍA, POTASIO: 2 A 3 MEQ/KG/DÍA, CLORO: 2 A 3 MEQ/KG/DÍA."
+        },
+        {
+          "id": "3",
+          "text": "200 ml/kg/día",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "EN PACIENTES SIN DESEQUILIBRIO HIDROELECTROLÍTICO EL VOLUMEN Y COMPOSICIÓN DE LOS LÍQUIDOS PARENTERALES QUE SE RECOMIENDA ADMINISTRAR ES: LÍQUIDOS: 120-150 ML/KG/DÍA, GLUCOSA: 5-8 MG/KILO/MINUTO, SODIO: 2 A 3 MEQ/KG/DÍA, POTASIO: 2 A 3 MEQ/KG/DÍA, CLORO: 2 A 3 MEQ/KG/DÍA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 43,
+      "question": "Se trata de una recién nacida que se encuentra en área de alojamiento conjunto. Antecedentes heredofamiliares: madre de 20 años sana. 5 consultas prenatales. Producto de tercera gestación. Se realizó parto vaginal de una recién nacida a las 12:00 horas hace 2 días. Recién nacida a término, buen tono muscular, respira y llora, se realizó la eliminación de secreciones con una pera, pinzamiento tardío del cordón umbilical. Piel con color, integridad, perfusión normales, cabeza sin lesiones, tamaños de fontanelas normales, ojos con reactividad y buen tamaño, ausencia de hemorragias escleróticas, sin anomalías faciales, orejas de implantación y estructura normal, tórax simétrico, sin agregados, corazón rítmico, ausencia de soplos, abdomen asignológico, perímetro abdominal de 30 cm. Ballard 45 puntos. ¿Cuál es la finalidad del método Ballard?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Definir la edad gestacional de un recién nacido",
+          "isCorrect": true,
+          "rationale": "EL MÉTODO BALLARD ES UNA SERIE DE PROCEDIMIENTOS CLÍNICOS, BASADO EN INDICADORES FETALES DE MADURACIÓN FÍSICA Y NEUROMUSCULAR CON EL FIN DE DEFINIR LA EDAD GESTACIONAL DE UN RECIÉN NACIDO."
+        },
+        {
+          "id": "1",
+          "text": "Definir la madurez cerebral de un recién nacido",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Definir el estado nutricional de un recién nacido",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Definir el riesgo de morbimortalidad del recién nacido",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "EL MÉTODO BALLARD ES UNA SERIE DE PROCEDIMIENTOS CLÍNICOS, BASADO EN INDICADORES FETALES DE MADURACIÓN FÍSICA Y NEUROMUSCULAR CON EL FIN DE DEFINIR LA EDAD GESTACIONAL DE UN RECIÉN NACIDO.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 44,
+      "question": "¿Qué principio del examen físico desempeña el papel más importante?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Inspección",
+          "isCorrect": true,
+          "rationale": "LA INSPECCIÓN DESEMPEÑA EL PAPEL MÁS IMPORTANTE EN EL EXAMEN FÍSICO DEL RECIÉN NACIDO."
+        },
+        {
+          "id": "1",
+          "text": "Palpación",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Auscultación",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Todas por igual",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "LA INSPECCIÓN DESEMPEÑA EL PAPEL MÁS IMPORTANTE EN EL EXAMEN FÍSICO DEL RECIÉN NACIDO.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 45,
+      "question": "Anormalidad motora más común en el periodo neonatal:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Parálisis cerebral",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Ataxia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Hipotonia",
+          "isCorrect": true,
+          "rationale": "LA HIPOTONÍA ES LA ANORMALIDAD MOTORA MÁS COMÚN EN EL PERIODO NEONATAL. ES IMPORTANTE RECORDAR QUE EN LAS LESIONES DE LA MOTONEURONA SUPERIOR, LOS REFLEJOS TENDINOSOS SE CONSERVAN, A DIFERENCIA DE LA LESIÓN DE LA MOTONEURONA INFERIOR O NERVIOSA."
+        },
+        {
+          "id": "3",
+          "text": "Espasticidad",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "LA HIPOTONÍA ES LA ANORMALIDAD MOTORA MÁS COMÚN EN EL PERIODO NEONATAL. ES IMPORTANTE RECORDAR QUE EN LAS LESIONES DE LA MOTONEURONA SUPERIOR, LOS REFLEJOS TENDINOSOS SE CONSERVAN, A DIFERENCIA DE LA LESIÓN DE LA MOTONEURONA INFERIOR O NERVIOSA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 46,
+      "question": "Mencione lo cierto acerca de los reflejos neonatales primarios:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "El reflejo de Moro desaparece a los 6 meses de edad",
+          "isCorrect": true,
+          "rationale": "EL REFLEJO DE MORO DESAPARECE A LOS 6 MESES DE VIDA POSNATAL EN LOS LACTANTES NORMALES, EL REFLEJO DE PRESIÓN PALMAR DESAPARECE ENTRE EL 3 Y 4 MES DE VIDA, EL REFLEJO TÓNICO CERVICAL ASIMÉTRICO APARECE EN LA SEMANA 35 DE GESTACIÓN Y DESAPARECE PROGRESIVAMENTE A LOS 6 MESES DE EDAD. EL CLONUS AQUILIANO ES UN HALLAZGO NORMAL."
+        },
+        {
+          "id": "1",
+          "text": "El reflejo de presión palmar desaparece al año de edad",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "El reflejo tónico cervical asimétrico es patológico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "El clonus aquiliano es un hallazgo anormal",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "EL REFLEJO DE MORO DESAPARECE A LOS 6 MESES DE VIDA POSNATAL EN LOS LACTANTES NORMALES, EL REFLEJO DE PRESIÓN PALMAR DESAPARECE ENTRE EL 3 Y 4 MES DE VIDA, EL REFLEJO TÓNICO CERVICAL ASIMÉTRICO APARECE EN LA SEMANA 35 DE GESTACIÓN Y DESAPARECE PROGRESIVAMENTE A LOS 6 MESES DE EDAD. EL CLONUS AQUILIANO ES UN HALLAZGO NORMAL.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 47,
+      "question": "Se trata de una paciente recién nacido a término en seguimiento de displasia congénita de cadera tras maniobras de Ortolani y Barlow positivos. Antecedente de polihidramnios durante etapa gestacional, parto por cesárea a las 40 semanas de gestación por FUM, presentación pélvica, peso al nacer de 4150 g, Apgar 7-9. Antecedentes heredofamiliares: madre con diabetes gestacional, hermana de 3 años con diagnóstico de displasia congénita de cadera corregida. ¿Cuándo se recomienda tomar ultrasonido?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Inmediatamente",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "En la primer semana de nacimiento",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Entre la cuarta y sexta semana",
+          "isCorrect": true,
+          "rationale": "SE RECOMIENDA REALIZAR EL ULTRASONIDO DE FORMA TEMPRANA ENTRE LA 4A Y 6A SEMANA, EN RECIÉN NACIDOS QUE CUENTEN CON UNA EXPLORACIÓN FÍSICA ANORMAL O CON FACTORES DE RIESGO PARA DDC."
+        },
+        {
+          "id": "3",
+          "text": "No es un estudio recomendable",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "SE RECOMIENDA REALIZAR EL ULTRASONIDO DE FORMA TEMPRANA ENTRE LA 4A Y 6A SEMANA, EN RECIÉN NACIDOS QUE CUENTEN CON UNA EXPLORACIÓN FÍSICA ANORMAL O CON FACTORES DE RIESGO PARA DDC.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 48,
+      "question": "Se trata de un recién nacido masculino, resolución vía vaginal, placenta tipo Duncan, antecedente materno de hipertensión gestacional y polihidramnios 2490 g, pinzamiento tardío, respiración espontánea, frecuencia cardíaca 120 lpm, frecuencia respiratoria 50 rpm, Apgar 7, edad gestacional por Capurro 36 semanas. Se destaca una criptorquidia unilateral no palpable, el recién nacido es fenotípica y metabólicamente normal. ¿A qué edad se recomienda la corrección quirúrgica?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Antes del primer mes de nacimiento",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "A los 6 meses",
+          "isCorrect": true,
+          "rationale": "LA CORRECCIÓN QUIRÚRGICA EN CASO DE QUE LA CRIPTORQUIDIA PERSISTA DEBE REALIZARSE A PARTIR DE LOS 6 MESES DE NACIMIENTO CON UN MÁXIMO DE 18 MESES DE EDAD; YA QUE LOS RESULTADOS FINALES EN PACIENTES ADULTOS SE OBSERVÓ MEJORÍA EN LA ESPERMATOGÉNESIS Y EN LA PRODUCCIÓN HORMONAL, ASÍ COMO EN LA DISMINUCIÓN DEL RIESGO DE TUMORES."
+        },
+        {
+          "id": "2",
+          "text": "Al año",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "A los dos años",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "LA CORRECCIÓN QUIRÚRGICA EN CASO DE QUE LA CRIPTORQUIDIA PERSISTA DEBE REALIZARSE A PARTIR DE LOS 6 MESES DE NACIMIENTO CON UN MÁXIMO DE 18 MESES DE EDAD; YA QUE LOS RESULTADOS FINALES EN PACIENTES ADULTOS SE OBSERVÓ MEJORÍA EN LA ESPERMATOGÉNESIS Y EN LA PRODUCCIÓN HORMONAL, ASÍ COMO EN LA DISMINUCIÓN DEL RIESGO DE TUMORES.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 49,
+      "question": "¿Cuál de los siguientes es un dato clínico de aparición tardía de asfixia neonatal?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Alteraciones de perfusión",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Disminución de reflejos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Dificultad para la respiración",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Sangrado de tubo digestivo",
+          "isCorrect": true,
+          "rationale": "LAS MANIFESTACIONES TARDÍAS DE ASFIXIA NEONATAL SON: SANGRADO DE TUBO DIGESTIVO, SANGRADO PULMONAR, RETRASO EN LA PRIMERA MICCIÓN, OLIGURIA Y POLIURIA."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "LAS MANIFESTACIONES TARDÍAS DE ASFIXIA NEONATAL SON: SANGRADO DE TUBO DIGESTIVO, SANGRADO PULMONAR, RETRASO EN LA PRIMERA MICCIÓN, OLIGURIA Y POLIURIA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 50,
+      "question": "¿Cuál de los siguientes es un factor de riesgo obstétrico para asfixia neonatal?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Hipertensión gestacional",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Eritroblastosis fetal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Alteración de la contractilidad uterina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Ruptura prematura de membranas",
+          "isCorrect": true,
+          "rationale": "LOS FACTORES DE RIESGO OBSTÉTRICOS PARA ASFIXIA NEONATAL SON LOS SIGUIENTES: LÍQUIDO AMNIÓTICO MECONIAL, INCOMPATIBILIDAD CEFALOPÉLVICA, USO DE MEDICAMENTOS: OXITOCINA, PRESENTACIÓN FETAL ANORMAL, TRABAJO DE PARTO PROLONGADO O PRECIPITADO, PARTO INSTRUMENTADO O CESÁREA, RUPTURA PREMATURA DE MEMBRANAS, OLIGOAMNIOS O POLIHIDRAMNIOS."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "LOS FACTORES DE RIESGO OBSTÉTRICOS PARA ASFIXIA NEONATAL SON LOS SIGUIENTES: LÍQUIDO AMNIÓTICO MECONIAL, INCOMPATIBILIDAD CEFALOPÉLVICA, USO DE MEDICAMENTOS: OXITOCINA, PRESENTACIÓN FETAL ANORMAL, TRABAJO DE PARTO PROLONGADO O PRECIPITADO, PARTO INSTRUMENTADO O CESÁREA, RUPTURA PREMATURA DE MEMBRANAS, OLIGOAMNIOS O POLIHIDRAMNIOS.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 51,
+      "question": "¿Qué porcentaje de eventos de hipoxia ocurren dentro del trabajo de parto?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "5%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "10%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "50%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "85%",
+          "isCorrect": true,
+          "rationale": "LA MAYORÍA DE LOS EVENTOS DE HIPOXIA SE PRESENTAN EN LA ETAPA FETAL. APROXIMADAMENTE EL 5% OCURRE ANTES DEL INICIO DEL TRABAJO DE PARTO, 85% DURANTE EL PARTO Y EL 10% RESTANTE DURANTE EL PERIODO NEONATAL."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "LA MAYORÍA DE LOS EVENTOS DE HIPOXIA SE PRESENTAN EN LA ETAPA FETAL. APROXIMADAMENTE EL 5% OCURRE ANTES DEL INICIO DEL TRABAJO DE PARTO, 85% DURANTE EL PARTO Y EL 10% RESTANTE DURANTE EL PERIODO NEONATAL.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 52,
+      "question": "Usted es llamado para atender un parto de 42 semanas de gestación, después de un parto prolongado se obtiene un producto único vivo, presencia de meconio. Poco esfuerzo respiratorio y tono disminuido, frecuencia cardíaca de 65 lpm que después disminuye a 50 lpm. Más adelante el recién nacido entra en paro cardiorrespiratorio secundario a aspiración masiva de meconio. Se decide iniciar maniobras de reanimación neonatal con pobre respuesta. Mencione lo cierto sobre la reanimación neonatal avanzada en recién nacidos:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "La relación compresión ventilación debe ser 3:1",
+          "isCorrect": true,
+          "rationale": "EN LA REANIMACIÓN NEONATAL AVANZADA LA RELACIÓN COMPRESIÓN VENTILACIÓN DEBE SER 3:1; SALVO CUANDO EL PARO CARDIO RESPIRATORIO SEA DE ETIOLOGÍA CARDÍACA."
+        },
+        {
+          "id": "1",
+          "text": "La relación compresión ventilación debe ser 5:1",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "La relación compresión ventilación debe ser 7:1",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "La relación compresión ventilación debe ser 10:1",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "EN LA REANIMACIÓN NEONATAL AVANZADA LA RELACIÓN COMPRESIÓN VENTILACIÓN DEBE SER 3:1; SALVO CUANDO EL PARO CARDIO RESPIRATORIO SEA DE ETIOLOGÍA CARDÍACA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 53,
+      "question": "Durante la reanimación neonatal, ¿cuándo está indicado el uso de expansores de volumen?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Oxígeno al 21%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Uso de bolsa y mascarilla",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Uso de epinefrina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Uso de expansores de volumen",
+          "isCorrect": true,
+          "rationale": "DURANTE LA REANIMACIÓN NEONATAL EL USO DE EXPANSORES DE VOLUMEN CON CRISTALOIDES O HEMODERIVADOS ESTÁ INDICADO SOLO SI SE HA TENIDO PÉRDIDA DE SANGRE Y NO HAY RESPUESTA A LA REANIMACIÓN."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "DURANTE LA REANIMACIÓN NEONATAL EL USO DE EXPANSORES DE VOLUMEN CON CRISTALOIDES O HEMODERIVADOS ESTÁ INDICADO SOLO SI SE HA TENIDO PÉRDIDA DE SANGRE Y NO HAY RESPUESTA A LA REANIMACIÓN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 54,
+      "question": "¿Cuándo se recomienda considerar detener la reanimación?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Después de los 5 minutos de reanimación efectiva sin respuesta",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Después de los 10 minutos de reanimación efectiva sin respuesta",
+          "isCorrect": true,
+          "rationale": "EL PERSONAL DE SALUD QUE ATIENDE AL RECIÉN NACIDO QUE NO RECUPERA LA FRECUENCIA CARDÍACA O QUE ESTA SE MANTIENE POR DEBAJO DE 60 LPM, DESPUÉS DE 10 MINUTOS DE REANIMACIÓN EFECTIVA, DEBERÁ CONSIDERAR DETENER LA REANIMACIÓN, TOMANDO EN CUENTA: EDAD GESTACIONAL, POTENCIAL REVERSIBILIDAD DE LA SITUACIÓN (COMORBILIDADES), OPINIÓN DE LOS PADRES."
+        },
+        {
+          "id": "2",
+          "text": "Después de los 15 minutos de reanimación efectiva sin respuesta",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Después de los 20 minutos de reanimación efectiva sin respuesta",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "EL PERSONAL DE SALUD QUE ATIENDE AL RECIÉN NACIDO QUE NO RECUPERA LA FRECUENCIA CARDÍACA O QUE ESTA SE MANTIENE POR DEBAJO DE 60 LPM, DESPUÉS DE 10 MINUTOS DE REANIMACIÓN EFECTIVA, DEBERÁ CONSIDERAR DETENER LA REANIMACIÓN, TOMANDO EN CUENTA: EDAD GESTACIONAL, POTENCIAL REVERSIBILIDAD DE LA SITUACIÓN (COMORBILIDADES), OPINIÓN DE LOS PADRES.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 55,
+      "question": "Se trata de un recién nacido masculino de madre primigesta de 17 años, madre niega control prenatal. Refiere toxicomanía a tabaco y cocaína. Madre ingresa por dolor y trabajo de parto activo, parto eutócico, se obtiene un producto masculino de 38 SDG por Capurro, peso 2400 g, longitud 47 cm, Apgar 4/6, tono muscular disminuido, presenta extrusión de asas intestinales, no cubiertas de peritoneo. Paciente se ingresa a unidad de cuidados intensivos neonatales. ¿Cuál es el diagnóstico?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Onfalocele",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Gastrosquisis",
+          "isCorrect": true,
+          "rationale": "LA GASTROSQUISIS SE CARACTERIZA POR LA PRESENCIA DE UN PEQUEÑO DEFECTO DE LA PARED ABDOMINAL, PARAUMBILICAL, HABITUALMENTE DERECHO Y GENERALMENTE PEQUEÑO, MENOS DE 4 CM. LA CARACTERÍSTICA DE ESTE DEFECTO ES LA HERNIACIÓN DE ASAS INTESTINALES DIRECTAMENTE EN LA CAVIDAD AMNIÓTICA A TRAVÉS DE LA PARED ABDOMINAL, SIN LA PARTICIPACIÓN DEL CORDÓN UMBILICAL."
+        },
+        {
+          "id": "2",
+          "text": "Extrofia vesical",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Pentalogía de Cantrell",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "LA GASTROSQUISIS SE CARACTERIZA POR LA PRESENCIA DE UN PEQUEÑO DEFECTO DE LA PARED ABDOMINAL, PARAUMBILICAL, HABITUALMENTE DERECHO Y GENERALMENTE PEQUEÑO, MENOS DE 4 CM. LA CARACTERÍSTICA DE ESTE DEFECTO ES LA HERNIACIÓN DE ASAS INTESTINALES DIRECTAMENTE EN LA CAVIDAD AMNIÓTICA A TRAVÉS DE LA PARED ABDOMINAL, SIN LA PARTICIPACIÓN DEL CORDÓN UMBILICAL.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 56,
+      "question": "Paciente femenino de 2 años de edad por su madre, la madre refiere que su hija ha presentado diarrea acuosa de 2 días de evolución acompañado de vómito en repetidas ocasiones, niega fiebre, diarrea con sangre u otro síntoma acompañante. Esquema de vacunación incompleta, la madre refiere que solo recibió las vacunas que se le administran al nacer, al año se presentó un cuadro de intususcepción. EF: somnolienta y poco cooperadora, mucosa oral deshidratada, ojos hundidos, piel seca y LLC > 3 segundos. ¿A qué edad se debe administrar la vacuna que protege contra este cuadro clínico?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "1 año y 6 años",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "2, 4 y 6 meses",
+          "isCorrect": true,
+          "rationale": "EL ESQUEMA DE VACUNACIÓN DE ROTAVIRUS ES DE 2 ML VÍA ORAL A LOS 2, 4 Y 6 MESES DE EDAD. MANUAL DE VACUNACIÓN 2017. SECRETARÍA DE SALUD."
+        },
+        {
+          "id": "2",
+          "text": "1 año y refuerzo a los 4 años",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "0, 4 y 6 meses",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "EL ESQUEMA DE VACUNACIÓN DE ROTAVIRUS ES DE 2 ML VÍA ORAL A LOS 2, 4 Y 6 MESES DE EDAD. MANUAL DE VACUNACIÓN 2017. SECRETARÍA DE SALUD.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 57,
+      "question": "¿Cuál es el efecto adverso relacionado con la vacuna rotavirus?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Guillain Barré",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Invaginación intestinal",
+          "isCorrect": true,
+          "rationale": "LA VACUNA DE ROTAVIRUS SE RELACIONA CON LA INVAGINACIÓN INTESTINAL POR LO CUAL FUE SACADA DEL MERCADO Y SE CONTINUÓ ADMINISTRANDO LA VACUNA DE ROTAVIRUS. MANUAL DE VACUNACIÓN 2017. SECRETARÍA DE SALUD."
+        },
+        {
+          "id": "2",
+          "text": "Autismo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Alergia a neomicina",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "LA VACUNA DE ROTAVIRUS SE RELACIONA CON LA INVAGINACIÓN INTESTINAL POR LO CUAL FUE SACADA DEL MERCADO Y SE CONTINUÓ ADMINISTRANDO LA VACUNA DE ROTAVIRUS. MANUAL DE VACUNACIÓN 2017. SECRETARÍA DE SALUD.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 58,
+      "question": "¿En qué trimestre es mayor el riesgo de transmisión transplacentaria de infecciones por TORCH?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Primer trimestre",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Segundo trimestre",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Tercer trimestre",
+          "isCorrect": true,
+          "rationale": "LA TRANSMISIÓN PLACENTARIA OCURRE EN RELACIÓN LINEAL CON EL TIEMPO DE GESTACIÓN: ES BAJA LA FRECUENCIA EN EL PRIMER TRIMESTRE Y AUMENTA HACIA EL FINAL DEL EMBARAZO."
+        },
+        {
+          "id": "3",
+          "text": "Es igual en todo el embarazo",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "LA TRANSMISIÓN PLACENTARIA OCURRE EN RELACIÓN LINEAL CON EL TIEMPO DE GESTACIÓN: ES BAJA LA FRECUENCIA EN EL PRIMER TRIMESTRE Y AUMENTA HACIA EL FINAL DEL EMBARAZO.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 59,
+      "question": "Femenino de 4 años de edad es traída por su madre porque hace 2 días estuvo en contacto con una persona enferma por varicela. No presenta síntomas, pero la madre quiere saber si debe hacer algo. ¿Cuál es el periodo de incubación del virus de la varicela?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "14-28 días",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "10-21 días",
+          "isCorrect": true,
+          "rationale": "EL PERIODO DE INCUBACIÓN ES DE 10-21 DÍAS. ESTE PERIODO SE PUEDE ACORTAR EN PACIENTES INMUNODEPRIMIDOS O ALARGAR EN PACIENTES QUE HAYAN RECIBIDO INMUNOGLOBULINA. GPC-ISSSTE-129-08. ACTUALIZACIÓN 2015. PREVENCIÓN, DIAGNÓSTICO Y TRATAMIENTO DE VARICELA."
+        },
+        {
+          "id": "2",
+          "text": "7 días",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "4-7 días",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "EL PERIODO DE INCUBACIÓN ES DE 10-21 DÍAS. ESTE PERIODO SE PUEDE ACORTAR EN PACIENTES INMUNODEPRIMIDOS O ALARGAR EN PACIENTES QUE HAYAN RECIBIDO INMUNOGLOBULINA. GPC-ISSSTE-129-08. ACTUALIZACIÓN 2015. PREVENCIÓN, DIAGNÓSTICO Y TRATAMIENTO DE VARICELA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 60,
+      "question": "¿Qué le indicaría al paciente?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Aplicar la vacuna",
+          "isCorrect": true,
+          "rationale": "LA VACUNACIÓN CONTRA VARICELA PREVIENE O ATENÚA LA ENFERMEDAD DE LOS CONTACTOS SUSCEPTIBLES SI ESTA ES ADMINISTRADA EN LOS PRIMEROS 5 DÍAS POSTERIORES A LA EXPOSICIÓN. GPC-ISSSTE-129-08. ACTUALIZACIÓN 2015. PREVENCIÓN, DIAGNÓSTICO Y TRATAMIENTO DE VARICELA."
+        },
+        {
+          "id": "1",
+          "text": "Iniciar manejo con aciclovir",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Vigilancia ante aparición de síntomas",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Inmunoglobulina VZV",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "LA VACUNACIÓN CONTRA VARICELA PREVIENE O ATENÚA LA ENFERMEDAD DE LOS CONTACTOS SUSCEPTIBLES SI ESTA ES ADMINISTRADA EN LOS PRIMEROS 5 DÍAS POSTERIORES A LA EXPOSICIÓN. GPC-ISSSTE-129-08. ACTUALIZACIÓN 2015. PREVENCIÓN, DIAGNÓSTICO Y TRATAMIENTO DE VARICELA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 61,
+      "question": "En caso de ser necesario, dentro de qué lapso está indicada la administración de la inmunoglobulina VZV:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Dentro de los primeros 7 días después de la exposición",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Dentro de las primeras 24-72 horas después de la exposición",
+          "isCorrect": true,
+          "rationale": "EN PACIENTES DE ALTO RIESGO EN QUIENES ESTÉ INDICADA LA ADMINISTRACIÓN DE INMUNOGLOBULINAS VZV, SE DEBE ADMINISTRAR EN UN PLAZO DE 24-72 HORAS POSTERIOR A LA EXPOSICIÓN. GPC-ISSSTE-129-08. ACTUALIZACIÓN 2015. PREVENCIÓN, DIAGNÓSTICO Y TRATAMIENTO DE VARICELA."
+        },
+        {
+          "id": "2",
+          "text": "Dentro de las primeras 12 horas después de la exposición",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Dentro de los primeros 14 días después de la exposición",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "EN PACIENTES DE ALTO RIESGO EN QUIENES ESTÉ INDICADA LA ADMINISTRACIÓN DE INMUNOGLOBULINAS VZV, SE DEBE ADMINISTRAR EN UN PLAZO DE 24-72 HORAS POSTERIOR A LA EXPOSICIÓN. GPC-ISSSTE-129-08. ACTUALIZACIÓN 2015. PREVENCIÓN, DIAGNÓSTICO Y TRATAMIENTO DE VARICELA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 62,
+      "question": "Paciente de 2 años es traída a urgencias por presentar alteración del estado de alerta. Desde hace 3 días presenta evacuaciones diarreicas e intolerancia a la vía oral. A la EF, se encuentra a la paciente somnolienta, piel fría, ojos hundidos, membranas mucosas secas, lágrimas ausentes, llanto débil y LLC 3 segundos. ¿Qué tipo de plan de hidratación le corresponde a esta paciente?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Plan A",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Plan B",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Plan C",
+          "isCorrect": true,
+          "rationale": "A LOS PACIENTES CON CHOQUE HIPOVOLÉMICO, SE LES DEBE INDICAR UN PLAN DE HIDRATACIÓN C. DIARREA AGUDA EN NIÑOS DE 2 MESES A 5 AÑOS. GPC-IMSS-156-18."
+        },
+        {
+          "id": "3",
+          "text": "Plan D",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "A LOS PACIENTES CON CHOQUE HIPOVOLÉMICO, SE LES DEBE INDICAR UN PLAN DE HIDRATACIÓN C. DIARREA AGUDA EN NIÑOS DE 2 MESES A 5 AÑOS. GPC-IMSS-156-18.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 63,
+      "question": "¿Qué cantidad de solución recomienda administrar a la paciente durante la primera hora?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "60 ml/kg/hora",
+          "isCorrect": true,
+          "rationale": "A LOS PACIENTES CON CHOQUE HIPOVOLÉMICO, SE LES DEBE INDICAR SS O HARTMANN CON UN ESQUEMA DE 60 ML/KG/HORA EN LA PRIMERA HORA, DIVIDIDAS EN 3 CARGAS DE 20 ML/KG/HORA. DIARREA AGUDA EN NIÑOS DE 2 MESES A 5 AÑOS. GPC-IMSS-156-18."
+        },
+        {
+          "id": "1",
+          "text": "25 ml/kg/hora",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "150 ml/kg/hora",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "75 ml/kg/hora",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "A LOS PACIENTES CON CHOQUE HIPOVOLÉMICO, SE LES DEBE INDICAR SS O HARTMANN CON UN ESQUEMA DE 60 ML/KG/HORA EN LA PRIMERA HORA, DIVIDIDAS EN 3 CARGAS DE 20 ML/KG/HORA. DIARREA AGUDA EN NIÑOS DE 2 MESES A 5 AÑOS. GPC-IMSS-156-18.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 64,
+      "question": "¿Cuál es una medida de prevención de VHA?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Conocimiento adecuado de la carne",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Hogar con buena ventilación e iluminación",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Lavado de manos y evitar usar el mismo baño",
+          "isCorrect": true,
+          "rationale": "LAS MEDIDAS DE PREVENCIÓN DEL VHA SON MEDIDAS DE HIGIENE PERSONAL, LAVADO DE MANOS, CONSUMO DE AGUA POTABLE, ELIMINACIÓN ADECUADA DE RESIDUOS SANITARIOS, INMUNIZACIÓN."
+        },
+        {
+          "id": "3",
+          "text": "Vacunación de animales y gatos del hogar",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "LAS MEDIDAS DE PREVENCIÓN DEL VHA SON MEDIDAS DE HIGIENE PERSONAL, LAVADO DE MANOS, CONSUMO DE AGUA POTABLE, ELIMINACIÓN ADECUADA DE RESIDUOS SANITARIOS, INMUNIZACIÓN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 65,
+      "question": "Femenino de 7 años de edad es llevada por su madre la cual refiere que inició con lesiones en el tronco, cuello y extremidades superiores, menciona que ayer presentó fiebre de 40°C la cual no presentaba por la mañana, sin embargo, inició la aparición de lesiones descritas por la madre. Tiene esquema de vacunación completo y un cuadro de gastroenteritis hace 3 semanas. A la EF, afebril con lesiones maculopapulares en tronco, cuello y extremidades superiores. ¿Cuál es el diagnóstico más probable?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Rubéola",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Sexta enfermedad",
+          "isCorrect": true,
+          "rationale": "EL CUADRO CLÍNICO DE FIEBRE ELEVADA QUE DESAPARECE Y SÚBITAMENTE APARECE EXANTEMA EN TRONCO, CUELLO Y EXTREMIDADES ES SUGESTIVO DE ROSÉOLA, TAMBIÉN CONOCIDA COMO SEXTA ENFERMEDAD. GPC-IMSS-588-12. DIAGNÓSTICO DIFERENCIAL DE LOS EXANTEMAS INFECCIOSOS EN LA INFANCIA."
+        },
+        {
+          "id": "2",
+          "text": "Mano-pie-boca",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Sarampión",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "EL CUADRO CLÍNICO DE FIEBRE ELEVADA QUE DESAPARECE Y SÚBITAMENTE APARECE EXANTEMA EN TRONCO, CUELLO Y EXTREMIDADES ES SUGESTIVO DE ROSÉOLA, TAMBIÉN CONOCIDA COMO SEXTA ENFERMEDAD. GPC-IMSS-588-12. DIAGNÓSTICO DIFERENCIAL DE LOS EXANTEMAS INFECCIOSOS EN LA INFANCIA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 66,
+      "question": "¿Cuál es la principal complicación de esta patología?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Convulsiones febriles",
+          "isCorrect": true,
+          "rationale": "LA PRINCIPAL COMPLICACIÓN DE LA ROSÉOLA O SEXTA ENFERMEDAD ES LA PRESENCIA DE CONVULSIONES. GPC-IMSS-588-12. DIAGNÓSTICO DIFERENCIAL DE LOS EXANTEMAS INFECCIOSOS EN LA INFANCIA."
+        },
+        {
+          "id": "1",
+          "text": "Aplasia medular",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Panencefalitis",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Otitis media aguda",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "LA PRINCIPAL COMPLICACIÓN DE LA ROSÉOLA O SEXTA ENFERMEDAD ES LA PRESENCIA DE CONVULSIONES. GPC-IMSS-588-12. DIAGNÓSTICO DIFERENCIAL DE LOS EXANTEMAS INFECCIOSOS EN LA INFANCIA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 67,
+      "question": "¿Cuál es el nombre del signo clínico descrito en la cavidad oral?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Manchas de Forchheimer",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Manchas de Nagayama",
+          "isCorrect": true,
+          "rationale": "A LA PRESENCIA DE ENANTEMA PAPULAR ERITEMATOSO EN EL PALADAR BLANCO Y ÚVULA SE CONOCE COMO MANCHAS DE NAGAYAMA. GPC-IMSS-588-12. DIAGNÓSTICO DIFERENCIAL DE LOS EXANTEMAS INFECCIOSOS EN LA INFANCIA."
+        },
+        {
+          "id": "2",
+          "text": "Manchas de Koplik",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Manchas de Filatov",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "A LA PRESENCIA DE ENANTEMA PAPULAR ERITEMATOSO EN EL PALADAR BLANCO Y ÚVULA SE CONOCE COMO MANCHAS DE NAGAYAMA. GPC-IMSS-588-12. DIAGNÓSTICO DIFERENCIAL DE LOS EXANTEMAS INFECCIOSOS EN LA INFANCIA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 68,
+      "question": "¿Cuál es la aseveración correcta con respecto a la roséola?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Es causada por un togavirus",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Los niños transmiten la enfermedad durante el periodo febril y una semana previa",
+          "isCorrect": true,
+          "rationale": "LOS NIÑOS CON ROSÉOLA TRANSMITEN LA ENFERMEDAD DURANTE EL PERIODO FEBRIL Y UNA SEMANA PREVIA. GPC-IMSS-588-12. DIAGNÓSTICO DIFERENCIAL DE LOS EXANTEMAS INFECCIOSOS EN LA INFANCIA."
+        },
+        {
+          "id": "2",
+          "text": "Dentro de sus complicaciones se encuentra la sordera neurosensorial y encefalitis",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Es denominada la 5ª enfermedad",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "LOS NIÑOS CON ROSÉOLA TRANSMITEN LA ENFERMEDAD DURANTE EL PERIODO FEBRIL Y UNA SEMANA PREVIA. GPC-IMSS-588-12. DIAGNÓSTICO DIFERENCIAL DE LOS EXANTEMAS INFECCIOSOS EN LA INFANCIA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 69,
+      "question": "Crisis que causa el parvovirus B19:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Crisis renal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Crisis hipertensiva",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Crisis aplásica",
+          "isCorrect": true,
+          "rationale": "EL PARVOVIRUS B19 PUEDE PRECIPITAR UNA CRISIS APLÁSICA EN LOS PACIENTES QUE TIENEN ANEMIA FALCIFORME."
+        },
+        {
+          "id": "3",
+          "text": "Insuficiencia hepática aguda",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "EL PARVOVIRUS B19 PUEDE PRECIPITAR UNA CRISIS APLÁSICA EN LOS PACIENTES QUE TIENEN ANEMIA FALCIFORME.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 70,
+      "question": "Paciente masculino de 1 año de edad es traído por su madre porque ha notado aumento de la intensidad de los latidos del corazón de su hijo desde hace 2 meses, tiene como antecedente ser primogénito de un parto de 38 SDG, la madre tuvo diabetes gestacional, fumó de forma ocasional y no tuvo suplementación de ácido fólico, esquema de vacunación completo y dejó la lactancia hace 1 semana. A la EF se ausculta en foco aórtico sin anormalidades, foco pulmonar con hiperflujo entre S1 y S2, se escucha el desdoblamiento fisiológico, en el foco tricuspídeo y mitral con soplo holosistólico en barra ligeramente decreciente. ¿Cuál es el diagnóstico más probable?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "CIA",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "PCA",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Atresia pulmonar",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "CIV",
+          "isCorrect": true,
+          "rationale": "LA CIV SE CARACTERIZA POR ESCUCHAR A LA AUSCULTACIÓN UN SOPLO DE HIPERFLUJO SISTÓLICO EN EL FOCO PULMONAR Y SOPLO HOLOSISTÓLICO EN BARRA LIGERAMENTE DECRECIENTE EN FOCO TRICUSPÍDEO Y MITRAL. GPC-SS-482-18. DIAGNÓSTICO Y TRATAMIENTO DE LOS DEFECTOS DE LOS TABIQUES INTERAURICULARES E INTERVENTRICULARES EN MENORES DE 18 AÑOS EN SEGUNDO Y TERCER NIVEL DE ATENCIÓN."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "LA CIV SE CARACTERIZA POR ESCUCHAR A LA AUSCULTACIÓN UN SOPLO DE HIPERFLUJO SISTÓLICO EN EL FOCO PULMONAR Y SOPLO HOLOSISTÓLICO EN BARRA LIGERAMENTE DECRECIENTE EN FOCO TRICUSPÍDEO Y MITRAL. GPC-SS-482-18. DIAGNÓSTICO Y TRATAMIENTO DE LOS DEFECTOS DE LOS TABIQUES INTERAURICULARES E INTERVENTRICULARES EN MENORES DE 18 AÑOS EN SEGUNDO Y TERCER NIVEL DE ATENCIÓN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 71,
+      "question": "¿Cuál de estas opciones es la topología más frecuente de esta patología?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Muscular",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Perimembranosa",
+          "isCorrect": true,
+          "rationale": "LA TOPOLOGÍA PERIMEMBRANOSA ES EL DEFECTO DE CIV MÁS COMÚN Y OCURRE EN UN 80% DE LOS CASOS. GPC-SS-482-18. DIAGNÓSTICO Y TRATAMIENTO DE LOS DEFECTOS DE LOS TABIQUES INTERAURICULARES E INTERVENTRICULARES EN MENORES DE 18 AÑOS EN SEGUNDO Y TERCER NIVEL DE ATENCIÓN."
+        },
+        {
+          "id": "2",
+          "text": "Infundibular",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "De entrada",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "LA TOPOLOGÍA PERIMEMBRANOSA ES EL DEFECTO DE CIV MÁS COMÚN Y OCURRE EN UN 80% DE LOS CASOS. GPC-SS-482-18. DIAGNÓSTICO Y TRATAMIENTO DE LOS DEFECTOS DE LOS TABIQUES INTERAURICULARES E INTERVENTRICULARES EN MENORES DE 18 AÑOS EN SEGUNDO Y TERCER NIVEL DE ATENCIÓN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 72,
+      "question": "¿Cuál de estas opciones es un factor de riesgo para esta patología?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Diabetes mellitus",
+          "isCorrect": true,
+          "rationale": "ENTRE LOS FACTORES DE RIESGO PARA DEFECTOS SEPTALES ESTÁN INFECCIONES MATERNAS Y ALTERACIONES METABÓLICAS NO TRATADAS, PRINCIPALMENTE FENILCETONURIA Y DIABETES MELLITUS GESTACIONAL. GPC-SS-482-18. DIAGNÓSTICO Y TRATAMIENTO DE LOS DEFECTOS DE LOS TABIQUES INTERAURICULARES E INTERVENTRICULARES EN MENORES DE 18 AÑOS EN SEGUNDO Y TERCER NIVEL DE ATENCIÓN."
+        },
+        {
+          "id": "1",
+          "text": "Tabaquismo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Alcoholismo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Deficiencia de ácido fólico",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "ENTRE LOS FACTORES DE RIESGO PARA DEFECTOS SEPTALES ESTÁN INFECCIONES MATERNAS Y ALTERACIONES METABÓLICAS NO TRATADAS, PRINCIPALMENTE FENILCETONURIA Y DIABETES MELLITUS GESTACIONAL. GPC-SS-482-18. DIAGNÓSTICO Y TRATAMIENTO DE LOS DEFECTOS DE LOS TABIQUES INTERAURICULARES E INTERVENTRICULARES EN MENORES DE 18 AÑOS EN SEGUNDO Y TERCER NIVEL DE ATENCIÓN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 73,
+      "question": "Paciente de 10 años de edad es llevada por su padre al servicio de urgencias, ingresa con crisis convulsiva activa de 10 minutos de duración, con pérdida del control de esfínteres. El padre refiere que la paciente era previamente sana. Usted indica:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Realizar TAC simple de cráneo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Colocar protector dentario",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Colocar al paciente en decúbito lateral",
+          "isCorrect": true,
+          "rationale": "ANTE UNA CRISIS CONVULSIVA ACTIVA, SE RECOMIENDA COLOCAR AL PACIENTE EN DECÚBITO LATERAL, RETIRAR ORTESIS, PROTECCIÓN DE VÍA AÉREA, AFLOJAR LA ROPA Y TOMAR TIEMPO DESDE EL INICIO DEL EVENTO. GPC-IMSS-244-09. DIAGNÓSTICO Y TRATAMIENTO DE LA PRIMERA CRISIS CONVULSIVA EN NIÑAS, NIÑOS Y ADOLESCENTES."
+        },
+        {
+          "id": "3",
+          "text": "Traccionar lengua para evitar obstrucción de la vía aérea",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "ANTE UNA CRISIS CONVULSIVA ACTIVA, SE RECOMIENDA COLOCAR AL PACIENTE EN DECÚBITO LATERAL, RETIRAR ORTESIS, PROTECCIÓN DE VÍA AÉREA, AFLOJAR LA ROPA Y TOMAR TIEMPO DESDE EL INICIO DEL EVENTO. GPC-IMSS-244-09. DIAGNÓSTICO Y TRATAMIENTO DE LA PRIMERA CRISIS CONVULSIVA EN NIÑAS, NIÑOS Y ADOLESCENTES.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 74,
+      "question": "¿Cuál es el tratamiento farmacológico de primera línea para el estado epiléptico en pediatría?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Diazepam",
+          "isCorrect": true,
+          "rationale": "SE RECOMIENDA COMO TRATAMIENTO FARMACOLÓGICO INICIAR LA ADMINISTRACIÓN DE DIAZEPAM IV O RECTAL. GPC-IMSS-244-09. DIAGNÓSTICO Y TRATAMIENTO DE LA PRIMERA CRISIS CONVULSIVA EN NIÑAS, NIÑOS Y ADOLESCENTES."
+        },
+        {
+          "id": "1",
+          "text": "Propofol",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Valproato de magnesio",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Fenitoína",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "SE RECOMIENDA COMO TRATAMIENTO FARMACOLÓGICO INICIAR LA ADMINISTRACIÓN DE DIAZEPAM IV O RECTAL. GPC-IMSS-244-09. DIAGNÓSTICO Y TRATAMIENTO DE LA PRIMERA CRISIS CONVULSIVA EN NIÑAS, NIÑOS Y ADOLESCENTES.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 75,
+      "question": "Masculino de 11 años, es llevado por su madre desde hace 3 meses por disnea de esfuerzo cuando el paciente realiza actividad física, asociado con sensación de presión torácica, sibilancias y tos de predominio nocturno. Tiene antecedente de dermatitis atópica, actualmente sin tratamiento. En la EF, el paciente está asignológico. ¿Cuál es su diagnóstico de sospecha?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "EPOC",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Asma",
+          "isCorrect": true,
+          "rationale": "EL DIAGNÓSTICO DE ASMA ES CLÍNICO EN BASE A LA PRESENCIA DE 2 O MÁS DE LOS SIGUIENTES SÍNTOMAS CLAVE COMO SIBILANCIAS, TOS, DISNEA Y OPRESIÓN TORÁCICA. GPC-SS-009-20. TRATAMIENTO DEL ASMA EN EDAD PEDIÁTRICA."
+        },
+        {
+          "id": "2",
+          "text": "Churg-Strauss",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Fibrosis quística",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "EL DIAGNÓSTICO DE ASMA ES CLÍNICO EN BASE A LA PRESENCIA DE 2 O MÁS DE LOS SIGUIENTES SÍNTOMAS CLAVE COMO SIBILANCIAS, TOS, DISNEA Y OPRESIÓN TORÁCICA. GPC-SS-009-20. TRATAMIENTO DEL ASMA EN EDAD PEDIÁTRICA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 76,
+      "question": "¿Cuál es el estudio confirmatorio para el diagnóstico de asma?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Pletismografía",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "RX T",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Espirometría",
+          "isCorrect": true,
+          "rationale": "PARA CONFIRMAR EL DIAGNÓSTICO DE ASMA REQUIERE DEMOSTRAR EL PROCESO OBSTRUCTIVO REVERSIBLE, DE ESTA FORMA ES NECESARIO SOLICITAR ESPIROMETRÍA. GPC-SS-009-20. TRATAMIENTO DEL ASMA EN EDAD PEDIÁTRICA."
+        },
+        {
+          "id": "3",
+          "text": "Prueba terapéutica",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "PARA CONFIRMAR EL DIAGNÓSTICO DE ASMA REQUIERE DEMOSTRAR EL PROCESO OBSTRUCTIVO REVERSIBLE, DE ESTA FORMA ES NECESARIO SOLICITAR ESPIROMETRÍA. GPC-SS-009-20. TRATAMIENTO DEL ASMA EN EDAD PEDIÁTRICA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 77,
+      "question": "¿Con qué resultado de VEF1/FVC confirma la presencia de un proceso obstructivo?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Menor a 0.8",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Menor a 0.5",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Menor a 0.6",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Menor a 0.7",
+          "isCorrect": true,
+          "rationale": "UNA RELACIÓN DE FEV1/FVC MENOR A 0.7 O 70% ES DIAGNÓSTICA DE OBSTRUCCIÓN DE FLUJO DE AIRE. GPC-SS-009-20. TRATAMIENTO DEL ASMA EN EDAD PEDIÁTRICA."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "UNA RELACIÓN DE FEV1/FVC MENOR A 0.7 O 70% ES DIAGNÓSTICA DE OBSTRUCCIÓN DE FLUJO DE AIRE. GPC-SS-009-20. TRATAMIENTO DEL ASMA EN EDAD PEDIÁTRICA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 78,
+      "question": "Es una prueba con reversibilidad positiva post-broncodilatador:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Modificación ≥ 12%",
+          "isCorrect": true,
+          "rationale": "SE CONSIDERARÁ REVERSIBILIDAD POSITIVA SI EL FEV1 POST-BRONCODILATADOR SE MODIFICA ≥ 12%. GPC-SS-009-20. TRATAMIENTO DEL ASMA EN EDAD PEDIÁTRICA."
+        },
+        {
+          "id": "1",
+          "text": "Modificación ≥ 10%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Modificación ≥ 20%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Modificación ≥ 22%",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "SE CONSIDERARÁ REVERSIBILIDAD POSITIVA SI EL FEV1 POST-BRONCODILATADOR SE MODIFICA ≥ 12%. GPC-SS-009-20. TRATAMIENTO DEL ASMA EN EDAD PEDIÁTRICA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 79,
+      "question": "Usted indica como tratamiento de rescate:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Formoterol",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Budesonida",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Bromuro de ipratropio",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Salbutamol",
+          "isCorrect": true,
+          "rationale": "EN EL TRATAMIENTO INTERMITENTE PARA EL ALIVIO RÁPIDO DE LOS SÍNTOMAS EN EL MANEJO ESCALONADO 1-5, SE DEBE PRESCRIBIR BRONCODILATADOR DE ACCIÓN RÁPIDA INHALADO. GPC-SS-009-20. TRATAMIENTO DEL ASMA EN EDAD PEDIÁTRICA."
+        }
+      ],
+      "correctAnswer": 3,
+      "justificacion": "EN EL TRATAMIENTO INTERMITENTE PARA EL ALIVIO RÁPIDO DE LOS SÍNTOMAS EN EL MANEJO ESCALONADO 1-5, SE DEBE PRESCRIBIR BRONCODILATADOR DE ACCIÓN RÁPIDA INHALADO. GPC-SS-009-20. TRATAMIENTO DEL ASMA EN EDAD PEDIÁTRICA.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 80,
+      "question": "RN de pretérmino de 36.1 SDG edad que coincide con Capurro. Padres consanguíneos, sin antecedentes mórbidos personales. Madre primigesta de 19 años de edad, se realizó cesárea por presentar pérdida del bienestar fetal. Nació con Apgar 7-8, a la hora presentó cianosis central, retracción xifoidea, uso de músculos accesorios de la respiración, polipnea, febril; se le realiza RXT que muestra patrón con vidrio esmerilado y broncograma aéreo a las 2h de vida. ¿En qué población es más prevalente la patología sospechada?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "RN término",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "RN postérmino",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "RN prematuro",
+          "isCorrect": true,
+          "rationale": "EL SÍNDROME DE DIFICULTAD RESPIRATORIA POR DEFICIENCIA DE SURFACTANTE ES MÁS COMÚN EN LOS RN PREMATUROS. GPC-IMSS-137-08. DIAGNÓSTICO Y TRATAMIENTO DEL SÍNDROME DE DIFICULTAD RESPIRATORIA EN EL RN."
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "EL SÍNDROME DE DIFICULTAD RESPIRATORIA POR DEFICIENCIA DE SURFACTANTE ES MÁS COMÚN EN LOS RN PREMATUROS. GPC-IMSS-137-08. DIAGNÓSTICO Y TRATAMIENTO DEL SÍNDROME DE DIFICULTAD RESPIRATORIA EN EL RN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 81,
+      "question": "¿Cuál es una complicación frecuente del síndrome de dificultad respiratoria en el prematuro?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Persistencia del conducto arterioso",
+          "isCorrect": true,
+          "rationale": "LAS COMPLICACIONES MÁS FRECUENTES EN EL PREMATURO CON SDR SON: SÍNDROME DE FUGA DE AIRE, SEPSIS, NEUMONÍA, CONDUCTO ARTERIAL CON REPERCUSIÓN HEMODINÁMICA, HEMORRAGIA PERI E INTRAVENTRICULAR, ENTEROCOLITIS NECROTIZANTE. GPC-IMSS-137-08. DIAGNÓSTICO Y TRATAMIENTO DEL SÍNDROME DE DIFICULTAD RESPIRATORIA EN EL RN."
+        },
+        {
+          "id": "1",
+          "text": "Neumotórax",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Taquipnea transitoria del RN",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Neumonitis química",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "LAS COMPLICACIONES MÁS FRECUENTES EN EL PREMATURO CON SDR SON: SÍNDROME DE FUGA DE AIRE, SEPSIS, NEUMONÍA, CONDUCTO ARTERIAL CON REPERCUSIÓN HEMODINÁMICA, HEMORRAGIA PERI E INTRAVENTRICULAR, ENTEROCOLITIS NECROTIZANTE. GPC-IMSS-137-08. DIAGNÓSTICO Y TRATAMIENTO DEL SÍNDROME DE DIFICULTAD RESPIRATORIA EN EL RN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 82,
+      "question": "Otra complicación frecuente del síndrome de dificultad respiratoria en el prematuro es:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Persistencia del conducto arterioso",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Neumotórax",
+          "isCorrect": true,
+          "rationale": "LAS COMPLICACIONES MÁS FRECUENTES EN EL PREMATURO CON SDR SON: SÍNDROME DE FUGA DE AIRE, SEPSIS, NEUMONÍA, CONDUCTO ARTERIAL CON REPERCUSIÓN HEMODINÁMICA, HEMORRAGIA PERI E INTRAVENTRICULAR, ENTEROCOLITIS NECROTIZANTE. GPC-IMSS-137-08. DIAGNÓSTICO Y TRATAMIENTO DEL SÍNDROME DE DIFICULTAD RESPIRATORIA EN EL RN."
+        },
+        {
+          "id": "2",
+          "text": "Taquipnea transitoria del RN",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Neumonitis química",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 1,
+      "justificacion": "LAS COMPLICACIONES MÁS FRECUENTES EN EL PREMATURO CON SDR SON: SÍNDROME DE FUGA DE AIRE, SEPSIS, NEUMONÍA, CONDUCTO ARTERIAL CON REPERCUSIÓN HEMODINÁMICA, HEMORRAGIA PERI E INTRAVENTRICULAR, ENTEROCOLITIS NECROTIZANTE. GPC-IMSS-137-08. DIAGNÓSTICO Y TRATAMIENTO DEL SÍNDROME DE DIFICULTAD RESPIRATORIA EN EL RN.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 83,
+      "question": "Contraindicación de la vacuna SRP:",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Infección por VIH",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Edad > 4 años",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Alergia a la neomicina",
+          "isCorrect": true,
+          "rationale": "LAS CONTRAINDICACIONES PARA LA APLICACIÓN DE LA VACUNA SRP SON: REACCIÓN ALÉRGICA GRAVE A UNA DOSIS PREVIA O CUALQUIER COMPONENTE DE LA VACUNA COMO LA NEOMICINA, PERSONAS CON INMUNODEFICIENCIA PRIMARIA O ADQUIRIDA Y EMBARAZO."
+        },
+        {
+          "id": "3",
+          "text": "Lesión en músculo izquierdo",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 2,
+      "justificacion": "LAS CONTRAINDICACIONES PARA LA APLICACIÓN DE LA VACUNA SRP SON: REACCIÓN ALÉRGICA GRAVE A UNA DOSIS PREVIA O CUALQUIER COMPONENTE DE LA VACUNA COMO LA NEOMICINA, PERSONAS CON INMUNODEFICIENCIA PRIMARIA O ADQUIRIDA Y EMBARAZO.",
+      "serie": null,
+      "type": "multiple-choice"
+    },
+    {
+      "id": 84,
+      "question": "¿En qué trimestre existe mayor gravedad del cuadro si se adquiere una infección TORCH?",
+      "answerOptions": [
+        {
+          "id": "0",
+          "text": "Primer trimestre",
+          "isCorrect": true,
+          "rationale": "LA GRAVEDAD DEL CUADRO ESTÁ ESTRECHAMENTE RELACIONADA CON LAS SEMANAS DE GESTACIÓN. SI LA INFECCIÓN SE PRODUCE EN LAS PRIMERAS 8 SEMANAS DE EMBARAZO, EL RIESGO DE SÍNDROME DE RUBÉOLA CONGÉNITA ES DE 85-95%; ENTRE 9-12 SEMANAS SE REDUCE A 52%; ENTRE 13-20% A 16%."
+        },
+        {
+          "id": "1",
+          "text": "Segundo trimestre",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Tercer trimestre",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Es igual en todo el embarazo",
+          "isCorrect": false,
+          "rationale": ""
+        }
+      ],
+      "correctAnswer": 0,
+      "justificacion": "LA GRAVEDAD DEL CUADRO ESTÁ ESTRECHAMENTE RELACIONADA CON LAS SEMANAS DE GESTACIÓN. SI LA INFECCIÓN SE PRODUCE EN LAS PRIMERAS 8 SEMANAS DE EMBARAZO, EL RIESGO DE SÍNDROME DE RUBÉOLA CONGÉNITA ES DE 85-95%; ENTRE 9-12 SEMANAS SE REDUCE A 52%; ENTRE 13-20% A 16%.",
+      "serie": null,
+      "type": "multiple-choice"
+    }
+  ]
+}

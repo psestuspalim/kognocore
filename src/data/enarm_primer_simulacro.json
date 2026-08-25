@@ -1,9 +1,10 @@
 {
-  "id": "quiz_enarm2026_mega",
-  "title": "Simulador ENARM 2026 - Banco Completo",
-  "description": "Simulador clínico con casos seriados y preguntas de práctica ENARM 2026",
-  "subject_id": "subj_pediatria",
+  "id": "quiz_enarm_primer_simulacro",
+  "title": "ULTIMO MEGASIMULACRO - Punto ENARM",
+  "description": "ULTIMO MEGASIMULACRO - Punto ENARM con 280 reactivos clínicos.",
+  "subject_id": "subj_simuladores",
   "course_id": "course_enarm2026",
+  "total_questions": 280,
   "questions": [
     {
       "id": 1,
@@ -37,8 +38,7 @@
       "correctAnswer": 3,
       "justificacion": "Algoritmo reanimación neonatal: Preguntas iniciales ¿Respira o llora?; Sí. ¿Buen tono muscular?; Sí. ¿Gestación a término? No. Colocar bajo fuente de calor. Posicionar cabeza, vía aérea abierta. Secar, estimular. Reposicionar cabeza. MANUAL RENEO.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 2,
@@ -72,8 +72,7 @@
       "correctAnswer": 1,
       "justificacion": "En el 50-60% de los casos se demuestra una monosomía o ausencia completa de un cromosoma X (45,X) y en la mayoría de las veces el cromosoma X perdido es de origen paterno; en un 20% de los casos se encuentran alteraciones estructurales en un cromosoma X (monosomía parcial) como deleciones mayores, microdeleciones, isocromosomas o cromosoma en anillo. Guía de Práctica Clínica Diagnóstico, Tratamiento y Cuidado de la Salud en niñas y mujeres con Síndrome de Turner. México: Instituto Mexicano del Seguro Social, 2012.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 3,
@@ -107,8 +106,7 @@
       "correctAnswer": 0,
       "justificacion": "Las principales características clínicas observadas en niñas > 1 año son: linfedema (97%), displasia ungueal (uñas pequeñas, estrechas e hiperconvexas) (90%), paladar alto y en arco (84%), línea capilar posterior baja (76%), cuello alado (73%), implantación baja de pabellones auriculares (73%), retrognatia (67%), cubitus valgus (52%). Guía de Práctica Clínica Diagnóstico, Tratamiento y Cuidado de la Salud en niñas y mujeres con Síndrome de Turner. México: Instituto Mexicano del Seguro Social, 2012.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 4,
@@ -142,8 +140,7 @@
       "correctAnswer": 3,
       "justificacion": "Para confirmar el diagnóstico de alteraciones cromosómicas se debe realizar un estudio citogenético en el que se analicen al menos 30-50 células (metafases) e idealmente sea efectuado por personal capacitado durante al menos 2 años en citogenética clásica. Guía de Práctica Clínica Diagnóstico, Tratamiento y Cuidado de la Salud en niñas y mujeres con Síndrome de Turner. México: Instituto Mexicano del Seguro Social, 2012.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 5,
@@ -177,8 +174,7 @@
       "correctAnswer": 2,
       "justificacion": "El benzidazol es considerado como la terapia de primera elección para el tratamiento de pacientes con Chagas. Manual de Diagnóstico y Tratamiento de la Enfermedad de Chagas.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 6,
@@ -212,8 +208,7 @@
       "correctAnswer": 0,
       "justificacion": "Para cáncer gástrico, se recomienda tomar un mínimo de 3 biopsias. Guía de Práctica Clínica Diagnóstico y Tratamiento del Adenocarcinoma Gástrico en Pacientes Adultos, México; Instituto Mexicano del Seguro Social, 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 7,
@@ -247,8 +242,7 @@
       "correctAnswer": 1,
       "justificacion": "Los pacientes que presentan alguno de los siguientes síndromes: poliposis adenomatosa familiar, cáncer de colon no poliposis hereditario y el síndrome de Peutz-Jeghers; tienen mayor riesgo para desarrollar cáncer gástrico. Los pacientes con infección con H. pylori, gastritis atrófica severa, gastritis predominante en el cuerpo del estómago y/o metaplasia intestinal tienen mayor riesgo de desarrollar cáncer gástrico. Guía de Práctica Clínica Diagnóstico y Tratamiento del Adenocarcinoma Gástrico en Pacientes Adultos, México; Instituto Mexicano del Seguro Social, 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 8,
@@ -282,8 +276,7 @@
       "correctAnswer": 0,
       "justificacion": "Las manifestaciones clínicas en la glomerulonefritis aguda postestreptocócica se caracterizan por la aparición repentina de hematuria micro o macroscópica, edema, hipertensión y proteinuria generalmente de leve a moderada, en algunos casos oliguria, con tiempo de inicio menor de 3 meses. Diagnóstico y Tratamiento del Síndrome Nefrítico Agudo Post-estreptocócico en Edad Pediátrica. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, Instituto Mexicano del Seguro Social; 2018.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 9,
@@ -311,14 +304,13 @@
           "id": "3",
           "text": "Mickey Mouse",
           "isCorrect": true,
-          "rationale": "Examen de Orina. La hematuria es el signo más consistente, el aspecto macroscópico suele ser de color rojo obscuro y turbio. En el sedimento se observan células dismórficas llamadas acantocitos o de 'Mickey Mouse', sedimento leucocitario y cilindros granulosos suelen estar presentes en algunos casos así como cilindros eritrocitarios. Diagnóstico y Tratamiento del Síndrome Nefrítico Agudo Post-estreptocócico en Edad Pediátrica. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, Instituto Mexicano del Seguro Social; 2018."
+          "rationale": "Examen de Orina. La hematuria es el signo más consistente, el aspecto macroscópico suele ser de color rojo obscuro y turbio. En el sedimento se observan células dismórficas llamadas acantocitos o de \"Mickey Mouse\", sedimento leucocitario y cilindros granulosos suelen estar presentes en algunos casos así como cilindros eritrocitarios. Diagnóstico y Tratamiento del Síndrome Nefrítico Agudo Post-estreptocócico en Edad Pediátrica. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, Instituto Mexicano del Seguro Social; 2018."
         }
       ],
       "correctAnswer": 3,
-      "justificacion": "Examen de Orina. La hematuria es el signo más consistente, el aspecto macroscópico suele ser de color rojo obscuro y turbio. En el sedimento se observan células dismórficas llamadas acantocitos o de 'Mickey Mouse', sedimento leucocitario y cilindros granulosos suelen estar presentes en algunos casos así como cilindros eritrocitarios. Diagnóstico y Tratamiento del Síndrome Nefrítico Agudo Post-estreptocócico en Edad Pediátrica. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, Instituto Mexicano del Seguro Social; 2018.",
+      "justificacion": "Examen de Orina. La hematuria es el signo más consistente, el aspecto macroscópico suele ser de color rojo obscuro y turbio. En el sedimento se observan células dismórficas llamadas acantocitos o de \"Mickey Mouse\", sedimento leucocitario y cilindros granulosos suelen estar presentes en algunos casos así como cilindros eritrocitarios. Diagnóstico y Tratamiento del Síndrome Nefrítico Agudo Post-estreptocócico en Edad Pediátrica. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, Instituto Mexicano del Seguro Social; 2018.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 10,
@@ -352,8 +344,7 @@
       "correctAnswer": 1,
       "justificacion": "En el adulto mayor de 65 años de edad se recomienda: Asegurar un aporte de hierro suficiente a través de la alimentación. Evaluación odontológica semestral. Evitar el uso innecesario de antiinflamatorios no esteroideos. GPC: Prevención, Diagnóstico y Tratamiento de la Anemia por Deficiencia de Hierro en Niños y Adultos.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 11,
@@ -387,8 +378,7 @@
       "correctAnswer": 3,
       "justificacion": "Biometría hemática completa (BHC): Hemoglobina y hematócrito: disminuidos. Volumen corpuscular medio (VCM): disminuido. Hemoglobina corpuscular media (HCM): normal o disminuida. Amplitud de la distribución eritrocitaria (ADE): aumentado. Recuento de plaquetas: normales o aumentadas. Recuento de leucocitos: normales. GPC: Prevención, Diagnóstico y Tratamiento de la Anemia por Deficiencia de Hierro en Niños y Adultos.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 12,
@@ -422,8 +412,7 @@
       "correctAnswer": 2,
       "justificacion": "Si se detecta anemia microcítica hipocrómica deberán solicitarse estudios que evalúen el estado del hierro como son: Hierro sérico total: disminuido. Capacidad total de fijación del hierro: aumentada. Porcentaje de saturación de la transferrina: disminuida. Ferritina sérica: disminuida. Resultado esperado en caso de anemia por deficiencia de hierro. GPC: Prevención, Diagnóstico y Tratamiento de la Anemia por Deficiencia de Hierro en Niños y Adultos.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 13,
@@ -457,8 +446,7 @@
       "correctAnswer": 2,
       "justificacion": "Grado III: Hipotensión, presión diferencial de 20 mmHg o menos, pulso rápido y débil. Manejo del dengue no grave y el dengue grave, México: Secretaría de Salud, 2008.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 14,
@@ -492,8 +480,7 @@
       "correctAnswer": 2,
       "justificacion": "La infección de la glándula de Bartholin se puede manifestar con alguna/o algunas de las siguientes características: Tumoración vulvar generalmente localizada a nivel de la horquilla o como alas 4 del reloj. Dolor local que aumenta al caminar o al estar sentado. Aumento de la temperatura local. Dispareunia (dolor en la relación sexual). Leucorrea en casos de infecciones de transmisión sexual. El quiste generalmente es asintomático. Diagnóstico y Tratamiento de Quiste y Absceso de la Glándula de Bartholin en los tres niveles de Atención. México: Instituto Mexicano del Seguro Social, 2010.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 15,
@@ -527,8 +514,7 @@
       "correctAnswer": 1,
       "justificacion": "Pequeño: Pacientes con soplo continuo audible, con insignificantes cambios hemodinámicos, sin sobrecarga en cavidades izquierdas, sin hipertensión arterial pulmonar. Guía de Práctica Clínica Diagnóstico y Tratamiento de la Persistencia del Conducto Arterioso en niños, adolescentes y adultos, México; Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 16,
@@ -562,8 +548,7 @@
       "correctAnswer": 0,
       "justificacion": "Factores asociados a PCA: Hipotiroidismo en el recién nacido. Consanguinidad entre padres. Diabetes o fenilcetonuria materna. Guía de Práctica Clínica Diagnóstico y Tratamiento de la Persistencia del Conducto Arterioso en niños, adolescentes y adultos, México; Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 17,
@@ -597,8 +582,7 @@
       "correctAnswer": 2,
       "justificacion": "Bacteriuria asintomática tratamiento preferente: Fosfomicina trometamol 3 gramos dosis única. Evite nitrofurantoína en primer trimestre si otro antimicrobiano efectivo y seguro está disponible, y a término debido al riesgo potencial de anemia hemolítica en el recién nacido. Prevención, abordaje y manejo de bacteriuria asintomática e infección de vías urinarias durante el embarazo. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 18,
@@ -632,8 +616,7 @@
       "correctAnswer": 1,
       "justificacion": "Mancha salmón: Se trata de lesiones vasculares muy frecuentes al nacimiento, aunque suelen aclararse y, en muchos casos, resolverse con el tiempo. Su localización más habitual es nuca, párpados superiores y glabela. Manual CTO de medicina y cirugía. Pediatría, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 19,
@@ -667,8 +650,7 @@
       "correctAnswer": 0,
       "justificacion": "La arteria del nodo sinusal depende en un 55% de la coronaria derecha y un 45% de la arteria circunfleja (rama de la izquierda). Diagnóstico y Tratamiento del Infarto Agudo de Miocardio con Elevación del Segmento ST. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 20,
@@ -702,8 +684,7 @@
       "correctAnswer": 2,
       "justificacion": "La mejor manera de determinar la función tiroidea es medir niveles de TSH en una muestra de sangre. Diagnóstico y Tratamiento de la Enfermedad de Graves en > de 18 años. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 21,
@@ -737,12 +718,11 @@
       "correctAnswer": 0,
       "justificacion": "La dosis efectiva inicial del metamizol es de 10 a 20 mg día para llevar al paciente a eutirodismo. Diagnóstico y Tratamiento de la Enfermedad de Graves en > de 18 años. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 22,
-      "question": "Masculino de 8 años presenta episodio de 'gripa' de doce semanas de evolución, caracterizado por rinorrea hialina, estornudos y prurito ocular. Niega fiebre, tos o malestar general. A la exploración se observan cornetes violáceos con abundantes puentes hialinos. El tratamiento más adecuado para este paciente es:",
+      "question": "Masculino de 8 años presenta episodio de \"gripa\" de doce semanas de evolución, caracterizado por rinorrea hialina, estornudos y prurito ocular. Niega fiebre, tos o malestar general. A la exploración se observan cornetes violáceos con abundantes puentes hialinos. El tratamiento más adecuado para este paciente es:",
       "answerOptions": [
         {
           "id": "0",
@@ -772,8 +752,7 @@
       "correctAnswer": 1,
       "justificacion": "Se debe recomendar el uso de esteroides nasales en pacientes con diagnóstico clínico de Rinitis Alérgica cuyos síntomas afecten su calidad de vida. En caso de no hacerlo como en este caso clínico se deben dejar solo antihistamínicos de segunda generación por ser el tratamiento de primera línea. Diagnóstico y Tratamiento de Rinitis Alérgica. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, IMSS; 2017.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 23,
@@ -807,8 +786,7 @@
       "correctAnswer": 3,
       "justificacion": "Enviar a segundo o tercer nivel toda paciente que haya recibido misoprostol y posterior a su administración presente sangrado excesivo, fiebre de 24 horas y dolor abdominal intenso. Considerando como sangrado excesivo: cuando la paciente refiere cambio de apósitos vaginales saturados de sangre, en un tiempo menor a 1 hora y durante un periodo consecutivo de 2 horas. Guía de Práctica Clínica Diagnóstico y Tratamiento del Aborto Espontáneo, Manejo Inicial de Aborto Recurrente, México; Instituto Mexicano del Seguro Social, 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 24,
@@ -824,7 +802,7 @@
           "id": "1",
           "text": "Hepatitis B aguda",
           "isCorrect": true,
-          "rationale": "Estado de infección Aguda (Temprana): Antígeno de Superficie (HBsAg) +, Antígeno 'e' (HBeAg) +, Anticuerpos IgM Anticore +, Anticuerpos IgG Anticore+, DNA VHB +, Anti HBe -, Anti HBs -, ALT elevada. Diagnóstico y tratamiento de la infección crónica por virus de Hepatitis B."
+          "rationale": "Estado de infección Aguda (Temprana): Antígeno de Superficie (HBsAg) +, Antígeno \"e\" (HBeAg) +, Anticuerpos IgM Anticore +, Anticuerpos IgG Anticore+, DNA VHB +, Anti HBe -, Anti HBs -, ALT elevada. Diagnóstico y tratamiento de la infección crónica por virus de Hepatitis B."
         },
         {
           "id": "2",
@@ -840,10 +818,9 @@
         }
       ],
       "correctAnswer": 1,
-      "justificacion": "Estado de infección Aguda (Temprana): Antígeno de Superficie (HBsAg) +, Antígeno 'e' (HBeAg) +, Anticuerpos IgM Anticore +, Anticuerpos IgG Anticore+, DNA VHB +, Anti HBe -, Anti HBs -, ALT elevada. Diagnóstico y tratamiento de la infección crónica por virus de Hepatitis B.",
+      "justificacion": "Estado de infección Aguda (Temprana): Antígeno de Superficie (HBsAg) +, Antígeno \"e\" (HBeAg) +, Anticuerpos IgM Anticore +, Anticuerpos IgG Anticore+, DNA VHB +, Anti HBe -, Anti HBs -, ALT elevada. Diagnóstico y tratamiento de la infección crónica por virus de Hepatitis B.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 25,
@@ -877,8 +854,7 @@
       "correctAnswer": 1,
       "justificacion": "Talasemia minor o rasgo talasémico (heterocigotos simples). Estas personas no presentan prácticamente anemia ni sintomatología, y corresponden a la variante clínica más frecuente. Debe sospecharse un rasgo talasémico en un paciente que presenta microcitosis importante con un número normal o ligeramente incrementado de hematíes (los índices corpusculares, sobre todo el VCM, son el mejor método de cribado en estos pacientes). Un rasgo diferencial con la ferropenia es que, en estos casos, la CHCM es normal, a diferencia de la ferropenia, en donde está disminuida. En el hemograma se reporta anemia con hemoglobina en rangos de 11 a 13 g/dL, típicamente hay microcitosis con volumen corpuscular medio menor (VCM) de 70 fL, la hemoglobina corpuscular media (HCM) es menor de 23 pg. REVISTA MÉDICA DE CENTROAMÉRICA LXVIII (598) 355-357 2011. HEMATOLOGÍA. β – TALASEMIA. Manual CTO de medicina y cirugía. Hematología, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 26,
@@ -912,8 +888,7 @@
       "correctAnswer": 0,
       "justificacion": "La dapsona en algunos reportes ha demostrado controversia por sus múltiples efectos adversos, sobre todo en pacientes con deficiencia de glucosa 6-fosfato deshidrogenasa. Y, además, cuando se ha utilizado inadecuadamente (con dosis mayor a 2 mg/kg/día) ya que es un inductor de metahemoglobinemia tóxica. Sin embargo, cuando se emplea en forma adecuada ha tenido buenos resultados, ya que actúa inhibiendo la migración de los neutrófilos al sitio de la lesión, disminuye producción de radicales libres de oxígeno, y estabiliza la membrana lisosomal; de esta forma, disminuye el dolor, el proceso inflamatorio y la necrosis. Diagnóstico y Tratamiento de Mordeduras por Arañas Venenosas, México: Secretaría de Salud, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 27,
@@ -947,8 +922,7 @@
       "correctAnswer": 3,
       "justificacion": "Araña Loxosceles reclusae: La forma más común del envenenamiento, el loxocelismo local o cutáneo originado por la acción de la esfingomielinasa-D sobre la esfingomielina de la membrana de los eritrocitos. Diagnóstico y Tratamiento de Mordeduras por Arañas Venenosas, México: Secretaría de Salud, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 28,
@@ -982,8 +956,7 @@
       "correctAnswer": 2,
       "justificacion": "Algoritmo GPC: Neonato clínicamente sano con hemorragias y estudios de laboratorio alterados. ¿Tiene antecedentes familiares de hemofilia o de deficiencias de otros factores de la coagulación? No. TP y TTP prolongados con BHC y fibrinógeno normales. Enfermedad hemorrágica del recién nacido. Guía de Práctica Clínica Prevención, Diagnóstico y tratamiento enfermedad hemorrágica del recién nacido en primero, segundo y tercer nivel de atención. México: Instituto Mexicano del Seguro Social; 03/11/2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 29,
@@ -1017,8 +990,7 @@
       "correctAnswer": 0,
       "justificacion": "Fractura de Pouteau-Colles: La fractura más frecuente del radio distal. El fragmento distal se desplaza a dorsal y radial con cierto grado de supinación. Esta fractura consiste en fractura metafisaria de tercio distal de radio acompañada de una fractura de la apófisis estiloides del cúbito.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 30,
@@ -1052,8 +1024,7 @@
       "correctAnswer": 2,
       "justificacion": "La fiebre es de inicio abrupto de 38 a 40°C vespertina o nocturna, escalofríos y diaforesis. La hepatomegalia dolorosa, debajo de las costillas o en los espacios intercostales es un hallazgo típico. La participación de la cara diafragmática del hígado puede provocar dolor pleural del lado derecho o referido al hombro. Diagnóstico y tratamiento del Absceso Hepático Amebiano no complicado. México: Secretaría de salud, 2010.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 31,
@@ -1087,8 +1058,7 @@
       "correctAnswer": 2,
       "justificacion": "El metronidazol deberá usarse como fármaco de primera línea a una dosis de 30 a 50 mg/Kg/día si es VO y de 7.5 mg/Kg/dosis si es endovenosa. Diagnóstico y tratamiento del Absceso Hepático Amebiano no complicado. México: Secretaría de salud, 2010.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 32,
@@ -1122,8 +1092,7 @@
       "correctAnswer": 0,
       "justificacion": "Se sugiere evaluar la respuesta clínica con base al peso, sin exceder de 0.5 kg/día en el paciente sin edema periférico y de 1 kg/día con edema periférico. Guía de práctica clínica Diagnóstico y tratamiento de la insuficiencia hepática crónica, México; Instituto Mexicano del Seguro Social, año de autorización para publicación 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 33,
@@ -1157,8 +1126,7 @@
       "correctAnswer": 0,
       "justificacion": "En caso de intolerancia a la espironolactona se puede utilizar amilorida 5 a 30 mg/día. Guía de práctica clínica Diagnóstico y tratamiento de la insuficiencia hepática crónica, México; Instituto Mexicano del Seguro Social, año de autorización para publicación 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 34,
@@ -1192,8 +1160,7 @@
       "correctAnswer": 1,
       "justificacion": "Enfermedad moderada: signos clínicos o radiográficos de neumonía, frecuencia respiratoria menor de 30 respiraciones por minuto, SpO2 > 90% al aire, sin requerimientos de oxígeno. Guía Clínica para el Tratamiento de la COVID 19 en México. Consenso de personas expertas del sector salud. 2022.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 35,
@@ -1227,12 +1194,11 @@
       "correctAnswer": 3,
       "justificacion": "Número de ganglios afectados: constituye el factor más importante como elemento pronóstico. Tratamiento del cáncer de mama en segundo y tercer nivel de atención. Instituto Mexicano del Seguro Social, Ciudad de México. 16/03/2017.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 36,
-      "question": "A 13-day-old full-term newborn is brought to the emergency department presenting with tendency to fall asleep and refusal to breastfeeding. Physical examination shows ambiguous genitalia with partial fusion of the labioscrotal folds but with no palpable testes. Vital signs are 50x', hear rate 130x', BP 70/50 mmHg and the fontanelles seem sunken. Blood Laboratory test results are Na 125 mEq/L, K 7 mEq/L, BUN 32 mg/dL, Creatinine 0.6 mg/dL. Karyotype is 46 XX. Which of the following hormones would probably be increased in this patient?",
+      "question": "A 13-day-old full-term newborn is brought to the emergency department presenting with tendency to fall asleep and refusal to breastfeeding. Physical examination shows ambiguous genitalia with partial fusion of the labioscrotal folds but with no palpable testes. Vital signs are temperature 50°C? (likely typo, 50x'), heart rate 130x', BP 70/50 mmHg and the fontanelles seem sunken. Blood laboratory test results are Na 125 mEq/L, K 7 mEq/L, BUN 32 mg/dL, Creatinine 0.6 mg/dL. Karyotype is 46 XX. Which of the following hormones would probably be increased in this patient?",
       "answerOptions": [
         {
           "id": "0",
@@ -1261,9 +1227,8 @@
       ],
       "correctAnswer": 1,
       "justificacion": "Hiperplasia suprarrenal congénita: La prueba diagnóstica se basa en el aumento del precursor 17 hidroxiprogesterona y los andrógenos androstendiona y testosterona. Tamizaje, diagnóstico y tratamiento de la hiperplasia suprarrenal congénita por deficiencia de 21 hidroxilasa. México: Instituto Mexicano del Seguro Social; 2014.",
-      "serie": 1,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 37,
@@ -1296,9 +1261,8 @@
       ],
       "correctAnswer": 0,
       "justificacion": "La forma más común de Hiperplasia suprarrenal congénita es causada por mutación en CYP21A2, el gen que codifica la síntesis de 21 hidroxilasa (P450c21) correspondiendo al 90-95% de los casos. Tamizaje, diagnóstico y tratamiento de la hiperplasia suprarrenal congénita por deficiencia de 21 hidroxilasa. México: Instituto Mexicano del Seguro Social; 2014.",
-      "serie": 1,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 38,
@@ -1331,9 +1295,8 @@
       ],
       "correctAnswer": 3,
       "justificacion": "La hidrocortisona es el tratamiento de elección, debido a su equivalencia al cortisol endógeno, su tiempo de vida corta, sus mínimos efectos sobre el crecimiento. Tamizaje, diagnóstico y tratamiento de la hiperplasia suprarrenal congénita por deficiencia de 21 hidroxilasa. México: Instituto Mexicano del Seguro Social; 2014.",
-      "serie": 1,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 39,
@@ -1367,8 +1330,7 @@
       "correctAnswer": 2,
       "justificacion": "Estadio II: Absceso intrabdominal, pélvico o retroperitoneal. Absceso distante al sitio inflamatorio primario. Diagnóstico y tratamiento de la enfermedad diverticular del colon. México: Secretaría de Salud; 27/Marzo/2014.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 40,
@@ -1402,8 +1364,7 @@
       "correctAnswer": 2,
       "justificacion": "La proteína C reactiva con un nivel > 50 mg/l ha demostrado mejorar el diagnóstico clínico de la diverticulitis aguda. Diagnóstico y tratamiento de la enfermedad diverticular del colon. México: Secretaría de Salud; 27/Marzo/2014.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 41,
@@ -1437,8 +1398,7 @@
       "correctAnswer": 1,
       "justificacion": "La confiabilidad de una exploración física realizada por un cardiólogo, para detectar un soplo cardiaco, es buena. Los hallazgos más útiles para detectar una estenosis aórtica son una elevación lenta del pulso carotídeo, intensidad máxima del soplo media o tardía y disminución en la intensidad del segundo ruido cardiaco. El hallazgo más útil para descartar estenosis aórtica es la ausencia de irradiación del soplo hacia la arteria carótida derecha. Prevención, diagnóstico y criterios de referencia de la estenosis aórtica en el primer nivel de atención, México: Secretaría de Salud, 2008.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 42,
@@ -1472,8 +1432,7 @@
       "correctAnswer": 0,
       "justificacion": "La presentación más frecuente es la estenosis aórtica por degeneración y calcificación senil, en el adulto mayor. En segundo lugar, se presenta la valvulopatía aórtica congénita. La valvulopatía aórtica reumática es cada vez menos frecuente. Es común que se asocie con valvulopatía mitral. Prevención, diagnóstico y criterios de referencia de la estenosis aórtica en el primer nivel de atención, México: Secretaría de Salud, 2008.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 43,
@@ -1507,8 +1466,7 @@
       "correctAnswer": 3,
       "justificacion": "La lactancia materna se contraindica en infección por virus de VIH. La transmisión por virus de VIH es multifactorial e interviene la carga viral materna, estado inmunológico de la madre, patrón y duración de la alimentación al seno materno. Lactancia materna: Madre con enfermedad tratada con medicamentos. México: Instituto Mexicano del Seguro Social, 2013.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 44,
@@ -1542,8 +1500,7 @@
       "correctAnswer": 0,
       "justificacion": "Para los jóvenes con DMT1, las metas de glucemia deseadas son: Antes de los alimentos de 72 a 126 mg/dl. Después de los alimentos de 90 a 180 mg/dl. A la hora de dormir de 108 a 180 mg/dl. A las 3 a.m. de 90 a 144 mg/dl. Diagnóstico y tratamiento de la diabetes mellitus Tipo 1 y Tipo 2 en paciente pediátrico en los tres niveles de atención. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 45,
@@ -1577,8 +1534,7 @@
       "correctAnswer": 1,
       "justificacion": "Las personas que hayan recibido transfusiones, o inmunoglobulina, esperarán cuando menos tres meses para ser vacunadas. Control y seguimiento de la nutrición, el crecimiento y desarrollo de la niña y del niño menor de 5 años. México: Instituto Mexicano del Seguro Social; 2 de diciembre de 2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 46,
@@ -1612,8 +1568,7 @@
       "correctAnswer": 2,
       "justificacion": "Se sugiere realizar la prueba terapéutica con IBP durante dos semanas, como abordaje inicial en pacientes con datos clínicos de ERGE de reciente aparición. Diagnóstico y tratamiento de la enfermedad por reflujo gastroesofágico en el adulto. Guía de Práctica Clínica. México, CENETEC; 2018.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 47,
@@ -1647,8 +1602,7 @@
       "correctAnswer": 2,
       "justificacion": "Se sugiere realizar seguimiento de probables efectos adversos a largo plazo asociado al uso de IBP como la osteoporosis. GPC: Profilaxis, Diagnóstico y Tratamiento de la Gastritis Aguda (Erosiva) en los Tres Niveles de Atención México: Secretaría de Salud, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 48,
@@ -1682,8 +1636,7 @@
       "correctAnswer": 0,
       "justificacion": "El adenocarcinoma representa el 95% de los casos. Otros tumores malignos de los conductos biliares incluyen carcinomas anaplásicos y escamosos, cistoadenocarcinoma, melanoma primario maligno, leiomiosarcoma, carcinosarcoma y tumores metastáticos principalmente cáncer mamario, mielomas y linfomas. Diagnóstico y Tratamiento del Cáncer de Vías Biliares. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 49,
@@ -1717,8 +1670,7 @@
       "correctAnswer": 0,
       "justificacion": "Los factores de riesgo más importantes para CC son: Colangitis esclerosante primaria, coledocolitiasis crónica, quiste de colédoco y enfermedad inflamatoria intestinal. Diagnóstico y Tratamiento del Cáncer de Vías Biliares. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 50,
@@ -1752,8 +1704,7 @@
       "correctAnswer": 3,
       "justificacion": "La deficiencia de eritropoyetina es la principal causa de anemia secundaria a enfermedad renal crónica. Guía de Práctica Clínica: Evaluación, diagnóstico y tratamiento de anemia secundaria a enfermedad renal crónica. IMSS-403-10.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 51,
@@ -1787,8 +1738,7 @@
       "correctAnswer": 0,
       "justificacion": "El tratamiento para una neumonía leve, como es el caso, es con Amoxicilina. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, IMSS; 2017.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 52,
@@ -1822,8 +1772,7 @@
       "correctAnswer": 2,
       "justificacion": "Las personas con fiebre o diarrea sanguinolenta deben ser evaluadas para detectar enteropatógenos, para los cuales los agentes antimicrobianos pueden conferir un beneficio clínico, incluida la subespecie de Salmonella enterica, Shigella y Campylobacter. Prevención, diagnóstico y tratamiento de diarrea aguda en el paciente adulto en primer nivel de atención. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2020.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 53,
@@ -1857,8 +1806,7 @@
       "correctAnswer": 2,
       "justificacion": "Shigelosis: Ciprofloxacino 500 mg cada 12 horas por tres días o 2 g dosis única. Ceftriaxona 2 a 4 g, dosis única. Prevención, diagnóstico y tratamiento de diarrea aguda en el paciente adulto en primer nivel de atención. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2020.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 54,
@@ -1892,8 +1840,7 @@
       "correctAnswer": 1,
       "justificacion": "La enfermedad de Lyme o borreliosis de Lyme es una enfermedad infecciosa emergente causada por la bacteria Borrelia burgdorferi sensu lato, la cual se transmite por la mordedura de garrapatas del género Ixodes. En el estadio temprano localizado se encuentra el eritema migratorio (eritema migrans) que se presenta en el 60-80% de los casos como signo inicial. Diagnóstico Diferencial de los Exantemas Infecciosos en la Infancia. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 55,
@@ -1927,8 +1874,7 @@
       "correctAnswer": 1,
       "justificacion": "Se realizará el diagnóstico de Diabetes gestacional con 2 valores por arriba de los valores de referencia. Glucosa plasmática en ayuno: 95 mg/dL. Glucosa plasmática 1 hora poscarga: 180 mg/dL. Glucosa plasmática 2 horas poscarga: 155 mg/dL. Glucosa plasmática 3 horas poscarga: 140 mg/dL. Diagnóstico y tratamiento de la diabetes en el embarazo. México: Instituto Mexicano del Seguro Social; 03/11/2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 56,
@@ -1962,8 +1908,7 @@
       "correctAnswer": 2,
       "justificacion": "La restricción energética moderada con dietas entre 1600-1800 kcal/día en diabéticas embarazadas mejora la glucemia de ayuno sin impedir el crecimiento fetal, no afecta el peso del producto al nacimiento, ni induce cetosis. Diagnóstico y tratamiento de la diabetes en el embarazo. México: Instituto Mexicano del Seguro Social; 03/11/2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 57,
@@ -1996,9 +1941,8 @@
       ],
       "correctAnswer": 1,
       "justificacion": "La enfermedad de Kawasaki (EK) es una vasculitis sistémica de la que aún no se conoce la causa, pero se sospecha que existe activación del sistema inmunológico secundario a una infección en un huésped genéticamente susceptible. Los criterios diagnósticos para la enfermedad clásica/completa son: Fiebre por ≥ 5 días y ≥4 de los siguientes signos. Conjuntivitis bulbar, bilateral, no exudativa. Cambios orofaríngeos como: Lengua de fresa. Eritema difuso en mucosa orofaríngea. Eritema o fisuras en los labios. Adenopatía cervical (≥1.5 cm de diámetro, unilateral). Exantema polimorfo. Cambios periféricos en extremidades. Eritema o edema en palmas o plantas. Descamación periungueal en fase subaguda. Diagnóstico Diferencial de los Exantemas Infecciosos en la Infancia. México: Instituto Mexicano del Seguro Social, 2011.",
-      "serie": 2,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 58,
@@ -2031,9 +1975,8 @@
       ],
       "correctAnswer": 2,
       "justificacion": "La frecuencia de alteraciones en las arterias coronarias es de 20%, el objetivo de un tratamiento adecuado (salicilatos a dosis antiinflamatorias y gamaglobulina intravenosa) es disminuir la frecuencia de aneurismas a 3%. Diagnóstico Diferencial de los Exantemas Infecciosos en la Infancia. México: Instituto Mexicano del Seguro Social, 2011.",
-      "serie": 2,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 59,
@@ -2066,9 +2009,8 @@
       ],
       "correctAnswer": 1,
       "justificacion": "Se desarrollan en el 20% de los pacientes sin tratamiento y son la principal causa de morbilidad y mortalidad de esta enfermedad. Diagnóstico Diferencial de los Exantemas Infecciosos en la Infancia. México: Instituto Mexicano del Seguro Social, 2011.",
-      "serie": 2,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 60,
@@ -2102,8 +2044,7 @@
       "correctAnswer": 1,
       "justificacion": "La principal causa de las fracturas proximales del fémur es la caída de las personas desde su propia altura, con una mayor incidencia a los 80 años, en 1 de cada 3 mujeres, asociado a este tipo de fracturas se encuentran la pérdida de peso, trastornos de la visión, disfunción de los miembros inferiores, disminución de la fuerza muscular y la pérdida del equilibrio. Diagnóstico y Tratamiento de las Fracturas Intracapsulares del Extremo Proximal de Fémur. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, CENETEC; 2017.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 61,
@@ -2137,8 +2078,7 @@
       "correctAnswer": 2,
       "justificacion": "Tipo III: Fractura completa, parcialmente desplazada, menos de 50%. Diagnóstico y Tratamiento de las Fracturas Intracapsulares del Extremo Proximal de Fémur. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, CENETEC; 2017.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 62,
@@ -2172,8 +2112,7 @@
       "correctAnswer": 2,
       "justificacion": "Púrpura de Henoch-Schönlein: Depósitos de inmunoglobulina A, afectando a capilares, vénulas o arteriolas, típicamente involucran a piel, intestino y glomérulo; asociada con artralgias o artritis. Diagnóstico y Tratamiento de Poliarteritis Nodosa. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 63,
@@ -2207,8 +2146,7 @@
       "correctAnswer": 3,
       "justificacion": "Se debe realizar USG entre los 7 a 14 días después del inicio del tratamiento farmacológico para valorar la total evacuación del contenido uterino. Guía de Práctica Clínica Diagnóstico y Tratamiento del Aborto Espontáneo, Manejo Inicial de Aborto Recurrente, México; Instituto Mexicano del Seguro Social, 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 64,
@@ -2242,8 +2180,7 @@
       "correctAnswer": 1,
       "justificacion": "La máxima incidencia de SMSL se presenta entre los dos y tres meses de edad, siendo poco frecuentes los casos antes de las dos semanas de vida y después de los seis meses. Se debe colocar al lactante en posición supina para dormir. Intervenciones de enfermería para la prevención del síndrome de muerte súbita del lactante en el primer nivel de atención. Guía de Práctica Clínica de enfermería. México: Secretaría de Salud, CENETEC, 2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 65,
@@ -2277,8 +2214,7 @@
       "correctAnswer": 1,
       "justificacion": "Nodular: Comúnmente se presenta en cara. Neoformación exofítica con borde aperlado y telangiectasias en su superficie. Puede estar ulcerado. Histología micronodular y microquístico con invasión hasta dermis. Diagnóstico y Tratamiento del Carcinoma Basocelular. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, CENETEC, 2019.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 66,
@@ -2312,8 +2248,7 @@
       "correctAnswer": 1,
       "justificacion": "En México, la única especie endémica es P. vivax. NORMA Oficial Mexicana NOM-032-SSA2-2002, Para la vigilancia epidemiológica, prevención y control de enfermedades transmitidas por vector.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 67,
@@ -2347,8 +2282,7 @@
       "correctAnswer": 2,
       "justificacion": "Tratamiento médico del paludismo. Se emplea la combinación de dos medicamentos, la cloroquina que elimina las formas sanguíneas del P. vivax y del P. falciparum, excepto los gametocitos de este último y la primaquina que elimina los hipnozoitos del P. vivax y los gametocitos del P. falciparum. Tratamiento de cura radical a catorce días, tal como se indica para la curación de casos individuales. NORMA Oficial Mexicana NOM-032-SSA2-2002, Para la vigilancia epidemiológica, prevención y control de enfermedades transmitidas por vector.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 68,
@@ -2382,8 +2316,7 @@
       "correctAnswer": 2,
       "justificacion": "Es la forma más frecuente de encefalitis esporádica en adultos inmunocompetentes. Producida por virus herpes simple tipo 1 (VHS-1) en adultos; en neonatos, el VHS-2 puede causar encefalitis en el seno de una infección perinatal. Clínicamente se manifiesta en forma de cefalea, fiebre y, característicamente, alteración del nivel de la consciencia en diferentes grados, desde estupor a coma profundo. En ocasiones se acompaña de focalidad neurológica o convulsiones (50% de los casos). La asociación de fiebre y focalidad del lóbulo temporal sugiere encefalitis por herpes simple. Manual CTO de medicina y cirugía. Infectología, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 69,
@@ -2417,8 +2350,7 @@
       "correctAnswer": 1,
       "justificacion": "Ante un cuadro sugestivo se debe iniciar tratamiento empírico, de elección con aciclovir por vía intravenosa. Manual CTO de medicina y cirugía. Infectología, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 70,
@@ -2452,8 +2384,7 @@
       "correctAnswer": 2,
       "justificacion": "Síndrome de Prader-Willi: cursa con hipotonía, hipogonadismo, hipometia y obesidad (síndrome HHHO). Responden bien al tratamiento con clomifeno. Manual CTO de medicina y cirugía. Ginecología y Obstetricia, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 71,
@@ -2487,8 +2418,7 @@
       "correctAnswer": 2,
       "justificacion": "El diagnóstico de cáncer cervicouterino microinvasor sólo puede llevarse a cabo mediante cono cervical. Y eventualmente éste puede ser terapéutico. Tratamiento del cáncer cervicouterino en segundo y tercer nivel de atención. Ciudad de México: Instituto Mexicano del Seguro Social, 16/03/2017.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 72,
@@ -2522,8 +2452,7 @@
       "correctAnswer": 2,
       "justificacion": "Se estima que el porcentaje de metástasis en el cáncer cervicouterino en etapas localmente avanzadas es: Pulmonares: 5-21%. Óseas: 16%. Ganglios paraórticos: 15-25%. Cavidad abdominal: 8%. Ganglios supraclaviculares: 7%. Tratamiento del cáncer cervicouterino en segundo y tercer nivel de atención. Ciudad de México: Instituto Mexicano del Seguro Social, 16/03/2017.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 73,
@@ -2557,8 +2486,7 @@
       "correctAnswer": 3,
       "justificacion": "Considerar que la AS se presenta con más frecuencia en menores de 5 años y con mayor afección a miembros inferiores, generalmente en una única localización. Se debe sospechar como microorganismo más frecuente en todas las edades S. aureus. En RN y hasta los 3 meses de edad, también S. agalactiae y enterobacterias (sobre todo E. coli). K. kingae en niños entre 3 meses y 5 años, donde es la segunda causa etiológica. Prevención, Diagnóstico y Tratamiento de la Artritis Séptica en Niños y Adultos. México. Instituto Mexicano del Seguro Social; 03/11/2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 74,
@@ -2592,8 +2520,7 @@
       "correctAnswer": 3,
       "justificacion": "El estándar de oro es el cultivo. Tiene una alta especificidad, pero la sensibilidad varía entre 20 y 70% de acuerdo en los diferentes reportes. Se ha encontrado que la sensibilidad aumenta si la muestra de LS se inocula directamente en una botella de hemocultivo además de la siembra directa en medios sólidos habituales. Prevención, Diagnóstico y Tratamiento de la Artritis Séptica en Niños y Adultos. México. Instituto Mexicano del Seguro Social; 03/11/2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 75,
@@ -2627,8 +2554,7 @@
       "correctAnswer": 3,
       "justificacion": "La realización de artrocentesis de la articulación afectada sirve para obtener el diagnóstico microbiológico, conseguir la descompresión del espacio articular (efecto benéfico en el compromiso vascular de la epífisis de hombro y cadera) y favorecer la eficacia del antibiótico tras la evacuación del material purulento, que a su vez contiene enzimas que destruyen el cartílago. Prevención, Diagnóstico y Tratamiento de la Artritis Séptica en Niños y Adultos. México. Instituto Mexicano del Seguro Social; 03/11/2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 76,
@@ -2662,8 +2588,7 @@
       "correctAnswer": 3,
       "justificacion": "Taponamiento cardiaco: Tríada clínica clásica de ruidos cardíacos apagados, hipotensión y venas distendidas. MANUAL ATLS 10ª EDICIÓN.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 77,
@@ -2696,9 +2621,8 @@
       ],
       "correctAnswer": 3,
       "justificacion": "Los salicilatos son recomendados como primera línea (excepto en niños donde el tratamiento es con paracetamol) de tratamiento debido a la amplia experiencia en fiebre reumática aguda (dosis de 30-60 mg/kg/día). Deberá iniciarse en pacientes con artritis o artralgias severas tan pronto como el diagnóstico se haya confirmado. Prevención y diagnóstico oportuno de fiebre reumática, Secretaría de Salud, 2008.",
-      "serie": 3,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 78,
@@ -2731,9 +2655,8 @@
       ],
       "correctAnswer": 1,
       "justificacion": "La sospecha de estenosis mitral se sustenta en el antecedente de fiebre reumática y en la exploración física del paciente quien presenta ruido cardíaco de apertura después del segundo ruido, así como murmullo diastólico apical. Diagnóstico y tratamiento de la patología de la válvula mitral. Adultos en 1º, 2º y 3er nivel de atención. Ciudad de México, Instituto Mexicano del Seguro Social, 16/03/2017.",
-      "serie": 3,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 79,
@@ -2767,8 +2690,7 @@
       "correctAnswer": 2,
       "justificacion": "Ante la aparición de un cuadro de confusión, ataxia y nistagmo horizontal en un paciente alcohólico, se debe sospechar de una encefalopatía de Wernicke. El tratamiento indicado es tiamina o vitamina B1. Manual CTO de medicina y cirugía. Neurología, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 80,
@@ -2802,8 +2724,7 @@
       "correctAnswer": 0,
       "justificacion": "Forrest Ia: Hemorragia en chorro (ulcer bleeding in jet). Diagnóstico y Tratamiento de Úlcera Péptica Aguda Complicada. México: Instituto Mexicano del Seguro Social; 5 de octubre de 2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 81,
@@ -2837,8 +2758,7 @@
       "correctAnswer": 0,
       "justificacion": "Escala de Blatchford para predictor de intervención terapéutica. Diagnóstico y Tratamiento de Úlcera Péptica Aguda Complicada. México: Instituto Mexicano del Seguro Social; 5 de octubre de 2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 82,
@@ -2872,8 +2792,7 @@
       "correctAnswer": 0,
       "justificacion": "El ultrasonido del primer trimestre, específicamente la medición de la longitud cráneo-caudal es el parámetro más exacto para estimar la edad gestacional y su fecha probable de parto. Diagnóstico y Tratamiento de la Restricción del Crecimiento Intrauterino. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 83,
@@ -2907,8 +2826,7 @@
       "correctAnswer": 3,
       "justificacion": "En el interrogatorio se deberán buscar en forma intencionada los siguientes factores de riesgo: Antecedente familiar. Es más frecuente en hombres que en mujeres 4-5:1. Ser primogénito. Ingestión de macrólidos durante las dos primeras semanas de vida. Diagnóstico y tratamiento de la estenosis hipertrófica congénita de píloro. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, IMSS; 2017.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 84,
@@ -2916,13 +2834,13 @@
       "answerOptions": [
         {
           "id": "0",
-          "text": "Imagen de 'doble riel'",
+          "text": "Imagen de \"doble riel\"",
           "isCorrect": true,
-          "rationale": "El ultrasonido abdominal debe reportar como mínimo: El tamaño de la hipertrofia muscular del píloro. Se considera positivo en presencia de: Diámetro total del píloro mayor de 15-18 mm. Espesor del músculo pilórico mayor 3-4 mm. Longitud mayor de 17 mm. Imagen de 'doble riel' por estrechamiento de la luz intestinal. Diagnóstico y tratamiento de la estenosis hipertrófica congénita de píloro. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, IMSS; 2017."
+          "rationale": "El ultrasonido abdominal debe reportar como mínimo: El tamaño de la hipertrofia muscular del píloro. Se considera positivo en presencia de: Diámetro total del píloro mayor de 15-18 mm. Espesor del músculo pilórico mayor 3-4 mm. Longitud mayor de 17 mm. Imagen de \"doble riel\" por estrechamiento de la luz intestinal. Diagnóstico y tratamiento de la estenosis hipertrófica congénita de píloro. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, IMSS; 2017."
         },
         {
           "id": "1",
-          "text": "Signo del 'hombro'",
+          "text": "Signo del \"hombro\"",
           "isCorrect": false,
           "rationale": ""
         },
@@ -2940,10 +2858,9 @@
         }
       ],
       "correctAnswer": 0,
-      "justificacion": "El ultrasonido abdominal debe reportar como mínimo: El tamaño de la hipertrofia muscular del píloro. Se considera positivo en presencia de: Diámetro total del píloro mayor de 15-18 mm. Espesor del músculo pilórico mayor 3-4 mm. Longitud mayor de 17 mm. Imagen de 'doble riel' por estrechamiento de la luz intestinal. Diagnóstico y tratamiento de la estenosis hipertrófica congénita de píloro. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, IMSS; 2017.",
+      "justificacion": "El ultrasonido abdominal debe reportar como mínimo: El tamaño de la hipertrofia muscular del píloro. Se considera positivo en presencia de: Diámetro total del píloro mayor de 15-18 mm. Espesor del músculo pilórico mayor 3-4 mm. Longitud mayor de 17 mm. Imagen de \"doble riel\" por estrechamiento de la luz intestinal. Diagnóstico y tratamiento de la estenosis hipertrófica congénita de píloro. Guía de Evidencias y Recomendaciones: Guía de Práctica Clínica. México, IMSS; 2017.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 85,
@@ -2977,8 +2894,7 @@
       "correctAnswer": 3,
       "justificacion": "Síndrome sedativo-hipnótico: Se manifiesta por deterioro del estado de la consciencia de intensidad variable (obnubilación, estupor, coma), miosis (con respuesta lenta a la luz), hipotermia, compromiso respiratorio (bradipnea, paro respiratorio) y a nivel cardiovascular (hipotensión, bradicardia, paro cardíaco). Etiología Benzodiacepinas: en la actualidad constituyen la causa más frecuente. Antídoto: Flumazenil. Toxicología: Síndromes toxicológicos Dra. Laura Ferreirós Gagoa.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 86,
@@ -3012,8 +2928,7 @@
       "correctAnswer": 1,
       "justificacion": "El OS es la causa más frecuente de cáncer primario de hueso con una incidencia de 2-3/100,000/año, esta incidencia es mayor en la adolescencia registrándose 8-11/100,000/año entre los 15 y los 19 años, esto representa 10% de todos los tumores sólidos. El osteosarcoma puede iniciar en cualquier hueso, sin embargo, ocurre principalmente en las regiones yuxtaepifisarias de crecimiento rápido de huesos largos. Si el tumor se localiza en extremidad inferior se manifiesta con claudicación al caminar. Diagnóstico Oportuno De Osteosarcoma En Niños y Adolescentes En Primer Y Segundo Nivel De Atención Médica. México: Instituto Mexicano del Seguro Social, 2013.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 87,
@@ -3047,8 +2962,7 @@
       "correctAnswer": 2,
       "justificacion": "Cortisol plasmático basal: se procede a la medición del cortisol plasmático basal entre las 8:00 y las 9:00 horas en dos días diferentes. Si es < 3.5 μg/dL, se procede al diagnóstico de insuficiencia suprarrenal. Si es > 18 μg/dL, se excluye la insuficiencia suprarrenal. Con valores intermedios, es preciso realizar pruebas de estimulación. Manual CTO de medicina y cirugía. Endocrinología, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 88,
@@ -3082,8 +2996,7 @@
       "correctAnswer": 2,
       "justificacion": "La palpación de una masa fluctuante, crepitante acompañada de cambios eritematosos sugiere la presencia de una mastitis infecciosa. Los principios fundamentales del tratamiento de la mastitis puerperal son: consejos de apoyo, vaciamiento eficaz de la leche, tratamiento antibiótico y tratamiento sintomático. Diagnóstico y Tratamiento de la Patología Mamaria Benigna en Primer y Segundo Nivel de Atención, México; Instituto Mexicano del Seguro Social 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 89,
@@ -3117,12 +3030,11 @@
       "correctAnswer": 1,
       "justificacion": "Hipertonía uterina o polisistolia y sangrado transvaginal, con dolor abdominal y repercusión fetal en grado variable, con o sin trabajo de parto, así como presencia de factores de riesgo; orientan al diagnóstico de desprendimiento prematuro de placenta normoinserta. Diagnóstico y Tratamiento de la Hemorragia Obstétrica en la Segunda Mitad del Embarazo y Puerperio Inmediato, México: Secretaría de Salud; 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 90,
-      "question": "Niño de 3 años, hijo de padres antivacunas, presenta desde hace 15 días cuadro catarral acompañado de tos en accesos y febrícula. La madre refiere que la tos empeora por las tardes provocando que vomite y presenta un 'silbido' al querer respirar. En los exámenes de laboratorio se reporta 25,000 leucocitos/mL con predominio de linfocitos. El periodo de incubación de este cuadro es:",
+      "question": "Niño de 3 años, hijo de padres antivacunas, presenta desde hace 15 días cuadro catarral acompañado de tos en accesos y febrícula. La madre refiere que la tos empeora por las tardes provocando que vomite y presenta un \"silbido\" al querer respirar. En los exámenes de laboratorio se reporta 25,000 leucocitos/mL con predominio de linfocitos. El periodo de incubación de este cuadro es:",
       "answerOptions": [
         {
           "id": "0",
@@ -3151,9 +3063,8 @@
       ],
       "correctAnswer": 1,
       "justificacion": "Bordetella pertussis infecta el epitelio ciliado de las vías respiratorias incubándose durante 7 a 10 días (rango de 5-21 días) antes de que inicien los síntomas. Manual CTO de medicina y cirugía. Pediatría, ENARM 6ª edición, México.",
-      "serie": 4,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 91,
@@ -3186,9 +3097,8 @@
       ],
       "correctAnswer": 1,
       "justificacion": "Existe un aumento de la transmisión durante la fase catarral de la infección. Manual CTO de medicina y cirugía. Pediatría, ENARM 6ª edición, México.",
-      "serie": 4,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 92,
@@ -3221,9 +3131,8 @@
       ],
       "correctAnswer": 1,
       "justificacion": "El uso de eritromicina (durante 14 días) o claritromicina (durante 7 días) a partir del mes de edad puede disminuir los síntomas en la fase catarral, aunque no modifican el desenlace en las fases paroxística y catarral. Manual CTO de medicina y cirugía. Pediatría, ENARM 6ª edición, México.",
-      "serie": 4,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 93,
@@ -3257,8 +3166,7 @@
       "correctAnswer": 1,
       "justificacion": "Pacientes con sospecha o diagnóstico de oclusión intestinal por adherencias se colocará sonda nasogástrica (SNG) o tubo intestinal largo. Tratamiento Quirúrgico de Oclusión Intestinal por Adherencias en el Adulto en el Segundo Nivel de Atención. México: Secretaría de Salud, 2012.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 94,
@@ -3292,8 +3200,7 @@
       "correctAnswer": 2,
       "justificacion": "Clase III: Marcada limitación de la actividad física. Alivio sólo en reposo ya que actividades menores a las habituales causan síntomas. Prevención, Diagnóstico y Tratamiento de la Insuficiencia Cardiaca Crónica en adultos en los tres niveles de atención. Guía de Práctica Clínica, México: Secretaría de Salud, CENETEC; 02/07/2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 95,
@@ -3327,8 +3234,7 @@
       "correctAnswer": 2,
       "justificacion": "Biopsia de vellosidades coriónicas (BVC). La BVC debe realizarse entre 9 a 13 semanas de gestación utilizando la vía transcervical o transabdominal. La ventaja que tiene la BVC sobre la amniocentesis es que el resultado del cariotipo fetal se obtiene más rápido. Diagnóstico Prenatal de Síndrome Down, México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 96,
@@ -3362,8 +3268,7 @@
       "correctAnswer": 1,
       "justificacion": "La hipoplasia nasal ha sido considerada como el marcador aislado más sensible y específico de la trisomía 21 durante el segundo trimestre, observándose durante este período en el 60 al 70% de los fetos con síndrome de Down. Diagnóstico Prenatal de Síndrome Down, México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 97,
@@ -3397,8 +3302,7 @@
       "correctAnswer": 0,
       "justificacion": "Los tres síntomas cardinales de EPOC son: disnea, tos crónica, y producción de esputo y el síntoma de presentación temprana más común es disnea con el ejercicio. Diagnóstico y Tratamiento de la Enfermedad Pulmonar Obstructiva Crónica. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 98,
@@ -3432,8 +3336,7 @@
       "correctAnswer": 0,
       "justificacion": "El test CAT (COPD Assessment Test) es un cuestionario para personas con EPOC, diseñado para medir el impacto de la EPOC en la calidad de vida de una persona, y cómo esto va cambiando a través del tiempo. Diagnóstico y Tratamiento de la Enfermedad Pulmonar Obstructiva Crónica. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 99,
@@ -3467,8 +3370,7 @@
       "correctAnswer": 3,
       "justificacion": "Hemorroides internas grado III: Indica que las hemorroides sobresalen del canal anal durante la defecación o de forma espontánea y permanecen así hasta que sean regresadas digitalmente dentro del ano. Diagnóstico y tratamiento de la enfermedad hemorroidal en la adultez. Guía de Práctica Clínica. México: Secretaría de Salud, CENETEC; 2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 100,
@@ -3502,8 +3404,7 @@
       "correctAnswer": 2,
       "justificacion": "Algoritmo Tratamiento de las hemorroides internas: Hemorroides internas Grado III. Para bajo dolor: Hemorroidepedia o Ligadura de la arteria guiada por USG. Diagnóstico y tratamiento de la enfermedad hemorroidal en la adultez. Guía de Práctica Clínica. México: Secretaría de Salud, CENETEC; 2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 101,
@@ -3537,8 +3438,7 @@
       "correctAnswer": 2,
       "justificacion": "Los signos de dificultad respiratoria temprana son la manifestación principal del SDR en los RNP. En la radiografía de tórax anteroposterior los hallazgos típicos, aunque no patognomónicos son los siguientes: Infiltrado reticulogranular fino bilateral o vidrio esmerilado. Broncograma aéreo. Elevación de hemidiafragmas (disminución de volumen pulmonar). Diagnóstico y Tratamiento del Síndrome de Dificultad Respiratoria en el Recién Nacido Prematuro. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 102,
@@ -3572,8 +3472,7 @@
       "correctAnswer": 2,
       "justificacion": "En RNP < 32 SEG se debe alcanzar SpO2 > 80% y FC > 100/min en un plazo de 5 min después del nacimiento. Diagnóstico y Tratamiento del Síndrome de Dificultad Respiratoria en el Recién Nacido Prematuro. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 103,
@@ -3607,8 +3506,7 @@
       "correctAnswer": 1,
       "justificacion": "El cuadro clínico presenta aparición súbita con eritema, edema, piel de naranja y sensación de aumento de temperatura en la mama. Se recomienda realizar biopsia con aguja de corte para establecer el diagnóstico histológico. Tratamiento del cáncer de mama en segundo y tercer nivel de atención. Instituto Mexicano del Seguro Social, Ciudad de México. 16/03/2017.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 104,
@@ -3642,8 +3540,7 @@
       "correctAnswer": 2,
       "justificacion": "En pacientes con antecedente de DM se recomienda mantener PAS < 140 mmHg para reducir los ECVM. Se recomiendan metas de PAS de al menos 140 mmHg en pacientes con hipertensión y enfermedad renal crónica terminal. Promoción, Prevención, Diagnóstico y Tratamiento de la Hipertensión Arterial en Primer Nivel de Atención. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 105,
@@ -3677,8 +3574,7 @@
       "correctAnswer": 1,
       "justificacion": "El tamiz neonatal es la medida preventiva efectiva y de costo accesible que ayuda a la detección de los niños afectados por hipotiroidismo congénito. Prevención, Detección y Diagnóstico Hipotiroidismo Congénito en el Primer Nivel de Atención. Guía de Práctica Clínica: ISSSTE; 2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 106,
@@ -3712,8 +3608,7 @@
       "correctAnswer": 3,
       "justificacion": "La Asociación Americana de Tiroides establece como meta ideal de inicio de tratamiento los primeros 15 días de vida. Prevención, Detección y Diagnóstico Hipotiroidismo Congénito en el Primer Nivel de Atención. Guía de Práctica Clínica: ISSSTE; 2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 107,
@@ -3747,8 +3642,7 @@
       "correctAnswer": 3,
       "justificacion": "Los pacientes con PA suelen presentar dolor abdominal superior intenso. También pueden presentar náuseas, vómitos, distensión abdominal, estreñimiento, fiebre, resfriado o escalofríos e ictericia. La PA leve solo produce dolor epigástrico leve, mientras que la grave se acompaña de dolor a la palpación, dolor de rebote y tensión muscular en la parte superior o en todo el abdomen. Prevención, diagnóstico, tratamiento y pronóstico de la pancreatitis aguda. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2022.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 108,
@@ -3782,8 +3676,7 @@
       "correctAnswer": 0,
       "justificacion": "En México, hasta en el 90% de los casos, las etiologías más frecuentes de la PA son la biliar (49% a 66%) y la alcohólica (16% a 37%). En el 10% restante, las causas identificadas son idiopáticas, post-CPRE, hipertrigliceridemia, infecciosa, por trauma, entre otras. Prevención, diagnóstico, tratamiento y pronóstico de la pancreatitis aguda. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2022.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 109,
@@ -3817,8 +3710,7 @@
       "correctAnswer": 3,
       "justificacion": "La reanimación intensiva con líquidos para la prevención de la pancreatitis necrotizante y grave se ha considerado durante mucho tiempo como la piedra angular del tratamiento temprano de la PA. Prevención, diagnóstico, tratamiento y pronóstico de la pancreatitis aguda. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2022.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 110,
@@ -3852,8 +3744,7 @@
       "correctAnswer": 3,
       "justificacion": "El sangrado vaginal durante las primeras 20 a 22 semanas de gestación, con o sin dolor lumbopélvico y cérvix cerrado, se conoce como amenaza de aborto involuntario. Esto se puede presentar en forma de manchas de sangre al choque potencialmente fatal. Prevención, diagnóstico, tratamiento y referencia de la paciente con amenaza de aborto en el primer y segundo nivel de atención. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2020.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 111,
@@ -3887,8 +3778,7 @@
       "correctAnswer": 3,
       "justificacion": "Se sugiere el reposo absoluto, hasta 48 horas, tras el cese del sangrado, suplementar con ácido fólico, uso de sedante, el tratamiento hormonal con la administración de una dosis de gonadotropina coriónica humana (GCH) hasta la semana 12, y 17α-hidroxiprogesterona después de la semana 12. Prevención, diagnóstico, tratamiento y referencia de la paciente con amenaza de aborto en el primer y segundo nivel de atención. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2020.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 112,
@@ -3922,8 +3812,7 @@
       "correctAnswer": 2,
       "justificacion": "EXANTEMA SÚBITO: Enfermedad viral, caracterizada por fiebre elevada y exantema. Causada por un Herpes virus (HHV-6). La clave del diagnóstico es la presencia de fiebre alta que desaparece súbitamente cuando aparecen las lesiones dérmicas. Diagnóstico Diferencial de los Exantemas en la Infancia. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 113,
@@ -3957,8 +3846,7 @@
       "correctAnswer": 3,
       "justificacion": "La principal morbilidad asociada con roséola son las crisis convulsivas (6-15%) durante la fase febril de la enfermedad. Diagnóstico Diferencial de los Exantemas en la Infancia. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 114,
@@ -3992,8 +3880,7 @@
       "correctAnswer": 1,
       "justificacion": "Los pacientes con carcinoma folicular mayor a 4 cm de diámetro deben de ser tratados con tiroidectomía total. Se recomienda la ablación a todos los pacientes con tiroidectomía total o casi total y vigilancia aún en microcarcinomas. Guía de Práctica Clínica, Diagnóstico y Tratamiento del Tumor Maligno de Tiroides, México: Instituto Mexicano del Seguro Social; 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 115,
@@ -4027,8 +3914,7 @@
       "correctAnswer": 3,
       "justificacion": "En la Isquemia Intestinal Aguda, el principal dato clínico es la presencia de dolor abdominal severo, el cual puede persistir por hasta dos o tres horas y el estado clínico del paciente no sugiere otra patología abdominal. Cuando un paciente presenta dolor abdominal agudo, severo, desproporcionado con respecto a los hallazgos clínicos y con factores de riesgo debe sospecharse Isquemia Intestinal Aguda. Tratamiento Quirúrgico del Infarto e Isquemia Intestinal en el Segundo y Tercer Nivel de Atención. México: Secretaría de Salud, 2010.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 116,
@@ -4062,8 +3948,7 @@
       "correctAnswer": 1,
       "justificacion": "Es ocasionada principalmente por émbolos, trombosis arterial o venosa; o vasoconstricción secundaria a bajo gasto cardiaco. Tratamiento Quirúrgico del Infarto e Isquemia Intestinal en el Segundo y Tercer Nivel de Atención. México: Secretaría de Salud, 2010.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 117,
@@ -4097,8 +3982,7 @@
       "correctAnswer": 3,
       "justificacion": "Factores de riesgo y probabilidad de desarrollar ETG: Mola previa 50%. Aborto previo 25%. Embarazo ectópico previo 05%. Embarazo previo de término 20%. GPC para el Diagnóstico y Tratamiento de la Enfermedad Trofoblástica Gestacional, México; Instituto Mexicano del Seguro Social, 2010.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 118,
@@ -4132,8 +4016,7 @@
       "correctAnswer": 3,
       "justificacion": "La histerectomía es el tratamiento definitivo en mujeres con paridad satisfecha y miomatosis uterina sintomática. Guía de Práctica Clínica para Diagnóstico y Tratamiento de Miomatosis Uterina, México: Instituto Mexicano del Seguro Social; 2010.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 119,
@@ -4161,14 +4044,13 @@
           "id": "3",
           "text": "Tetralogía de Fallot",
           "isCorrect": true,
-          "rationale": "La tetralogía de Fallot (TF) se debe a la desviación anterocefálica del septum de salida; caracterizada por cabalgamiento aórtico, defecto septal interventricular (sub-aórtico), obstrucción del tracto de salida del VD el cual puede ser infundibular, valvular, supravalvular o combinación de todos e hipertrofia del ventrículo derecho. En la radiografía de tórax se muestra la silueta cardiaca en forma de 'zapato sueco'. Tratamiento de la Tetralogía de Fallot en Edad Pediátrica. México: Instituto Mexicano del Seguro Social, 2011."
+          "rationale": "La tetralogía de Fallot (TF) se debe a la desviación anterocefálica del septum de salida; caracterizada por cabalgamiento aórtico, defecto septal interventricular (sub-aórtico), obstrucción del tracto de salida del VD el cual puede ser infundibular, valvular, supravalvular o combinación de todos e hipertrofia del ventrículo derecho. En la radiografía de tórax se muestra la silueta cardiaca en forma de \"zapato sueco\". Tratamiento de la Tetralogía de Fallot en Edad Pediátrica. México: Instituto Mexicano del Seguro Social, 2011."
         }
       ],
       "correctAnswer": 3,
-      "justificacion": "La tetralogía de Fallot (TF) se debe a la desviación anterocefálica del septum de salida; caracterizada por cabalgamiento aórtico, defecto septal interventricular (sub-aórtico), obstrucción del tracto de salida del VD el cual puede ser infundibular, valvular, supravalvular o combinación de todos e hipertrofia del ventrículo derecho. En la radiografía de tórax se muestra la silueta cardiaca en forma de 'zapato sueco'. Tratamiento de la Tetralogía de Fallot en Edad Pediátrica. México: Instituto Mexicano del Seguro Social, 2011.",
+      "justificacion": "La tetralogía de Fallot (TF) se debe a la desviación anterocefálica del septum de salida; caracterizada por cabalgamiento aórtico, defecto septal interventricular (sub-aórtico), obstrucción del tracto de salida del VD el cual puede ser infundibular, valvular, supravalvular o combinación de todos e hipertrofia del ventrículo derecho. En la radiografía de tórax se muestra la silueta cardiaca en forma de \"zapato sueco\". Tratamiento de la Tetralogía de Fallot en Edad Pediátrica. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 120,
@@ -4202,8 +4084,7 @@
       "correctAnswer": 0,
       "justificacion": "TF clásica con estenosis pulmonar la cual puede ser a nivel subvalvular, valvular, supravalvular. Es el tipo más frecuente. Tratamiento de la Tetralogía de Fallot en Edad Pediátrica. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 121,
@@ -4237,8 +4118,7 @@
       "correctAnswer": 3,
       "justificacion": "Dentro de los criterios para el diagnóstico de glaucoma primario de ángulo abierto es necesario realizar evaluación de la cabeza del nervio óptico. Se debe poner especial atención en la exploración de: 1. Anillo neuroretiniano con pérdida de la relación ISNT (Inferior, Superior, Nasal, Temporal). 2. Excavación de la papila siendo mayor el eje vertical. Diagnóstico y tratamiento de glaucoma primario de ángulo abierto. México, Instituto Mexicano del Seguro Social; 17 de marzo de 2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 122,
@@ -4272,8 +4152,7 @@
       "correctAnswer": 1,
       "justificacion": "El incremento de presión intraocular es el factor de riesgo más importante, pero no define la característica principal de la enfermedad. Diagnóstico y tratamiento de glaucoma primario de ángulo abierto. México, Instituto Mexicano del Seguro Social; 17 de marzo de 2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 123,
@@ -4307,8 +4186,7 @@
       "correctAnswer": 0,
       "justificacion": "Los análogos de prostaglandinas y los beta bloqueadores son los medicamentos más utilizados para reducir la presión intraocular en pacientes con glaucoma. Los análogos de prostaglandinas son considerados los más eficaces, cuando se considera el costo, efectos adversos, intolerancia o rechazo del paciente. Diagnóstico y tratamiento de glaucoma primario de ángulo abierto. México, Instituto Mexicano del Seguro Social; 17 de marzo de 2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 124,
@@ -4342,8 +4220,7 @@
       "correctAnswer": 2,
       "justificacion": "Los microorganismos patógenos más frecuentemente asociados con ITU son Escherichia coli (86%), Staphylococcus saprophyticus, Klebsiella spp, Enterobacter spp, Proteus spp, Enterococcus spp, Estreptococo del grupo B, entre otros. Prevención, abordaje y manejo de bacteriuria asintomática e infección de vías urinarias durante el embarazo. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 125,
@@ -4377,8 +4254,7 @@
       "correctAnswer": 3,
       "justificacion": "El tratamiento de pacientes con pielonefritis en el embarazo incluye ingreso hospitalario y manejo con antimicrobiano intravenoso e hidratación. El tratamiento inicial suele ser empírico, ajustado de acuerdo al resultado del cultivo de orina, y debe mantenerse de 7 a 14 días. Prevención, abordaje y manejo de bacteriuria asintomática e infección de vías urinarias durante el embarazo. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC, 2021.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 126,
@@ -4412,8 +4288,7 @@
       "correctAnswer": 3,
       "justificacion": "La PCA puede manifestarse de las siguientes formas: a) Sin soplo (PCA silente). b) Con soplo sistólico, sistodiastólico o continuo (máquina de vapor), puede ser grado > 3/6 y se escucha mejor en la región infraclavicular izquierda y no se modifica con los cambios de posición. Guía de Práctica Clínica Diagnóstico y Tratamiento de la Persistencia del Conducto Arterioso en niños, adolescentes y adultos, México; Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 127,
@@ -4446,9 +4321,8 @@
       ],
       "correctAnswer": 2,
       "justificacion": "Enterocolitis necrosante: Estadio II-A Definida. Igual a I más: Ausencia de peristalsis. Con o sin dolor abdominal. Rx: Dilatación de asas, neumatosis intestinal. Prevención, diagnóstico y tratamiento de la enterocolitis necrosante del recién nacido en el segundo y tercer nivel de atención. Guía de Práctica Clínica. México, CENETEC; 2018.",
-      "serie": 5,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 128,
@@ -4481,9 +4355,8 @@
       ],
       "correctAnswer": 1,
       "justificacion": "Enterocolitis necrosante: Estadio II-A. TRATAMIENTO: Ayuno. Cultivos. Antibióticos por 7 a 10 días. Valoración por Cirujano Pediatra. Prevención, diagnóstico y tratamiento de la enterocolitis necrosante del recién nacido en el segundo y tercer nivel de atención. Guía de Práctica Clínica. México, CENETEC; 2018.",
-      "serie": 5,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 129,
@@ -4517,8 +4390,7 @@
       "correctAnswer": 0,
       "justificacion": "Solicite la determinación de los marcadores tumorales (AFP, HCG y DHL), para complementar el diagnóstico, estadificar el tumor, monitorear la respuesta al tratamiento y evaluar recaídas. Guía de Práctica Clínica Diagnóstico y Tratamiento del Tumor Maligno del Testículo en Todas las Edades, México; Instituto Mexicano del Seguro Social, 2010.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 130,
@@ -4552,8 +4424,7 @@
       "correctAnswer": 3,
       "justificacion": "La fisura anal es una úlcera por un desgarro lineal (en el eje longitudinal) del anodermo que se extiende del margen del ano a la línea anorrectal. El síntoma principal de la fisura anal es el dolor anal trans y posdefecatorio de tipo ardoroso o quemante, que puede durar varias horas. Diagnóstico y tratamiento de la fisura anal en el adulto. México: Secretaría de Salud; 26/marzo/2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 131,
@@ -4587,8 +4458,7 @@
       "correctAnswer": 2,
       "justificacion": "Se recomienda la esfinterotomía lateral interna como el tratamiento de elección ante la falla del tratamiento médico. Diagnóstico y tratamiento de la fisura anal en el adulto. México: Secretaría de Salud; 26/marzo/2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 132,
@@ -4622,8 +4492,7 @@
       "correctAnswer": 3,
       "justificacion": "La complicación más temida de la esfinterotomía lateral interna es la incontinencia, la cual se reporta de manera temporal en 7%. Diagnóstico y tratamiento de la fisura anal en el adulto. México: Secretaría de Salud; 26/marzo/2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 133,
@@ -4657,8 +4526,7 @@
       "correctAnswer": 2,
       "justificacion": "Se recomienda el uso de sulfato de magnesio como parte del tratamiento inicial de la paciente con eclampsia. Recurrencia de convulsión: 2-4 gramos para pasar en 10 minutos diluido en 100 mililitros de solución fisiológica. Prevención, diagnóstico y tratamiento de la Preeclampsia en segundo y tercer nivel de atención, Instituto Mexicano del Seguro Social; Ciudad de México, 16/03/2017.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 134,
@@ -4691,9 +4559,8 @@
       ],
       "correctAnswer": 1,
       "justificacion": "En pacientes con sospecha clínica de anomalías de inserción placentaria o de vasa previa, se recomienda hospitalización, realizar ultrasonido para confirmar el diagnóstico y especuloscopía para evaluar la presencia de sangrado procedente de cavidad uterina. Diagnóstico y manejo de las anomalías en la inserción placentaria y vasa previa. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, IMSS; 2019.",
-      "serie": 6,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 135,
@@ -4726,9 +4593,8 @@
       ],
       "correctAnswer": 0,
       "justificacion": "En casos de vasa previa, la principal manifestación clínica es el sangrado transvaginal obscuro, sin presencia de dolor, seguido de alteraciones súbitas en el registro cardiotocográfico (debido a la exanguinación fetal), que se asocia a una mortalidad perinatal del 60 al 100%. Diagnóstico y manejo de las anomalías en la inserción placentaria y vasa previa. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, IMSS; 2019.",
-      "serie": 6,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 136,
@@ -4762,8 +4628,7 @@
       "correctAnswer": 3,
       "justificacion": "Atresia esofágica: Radiografía con contraste hidrosoluble en la que aparecerá la sonda que se ha intentado pasar enrollada en el bolsón esofágico. Manual CTO de medicina y cirugía. Pediatría, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 137,
@@ -4797,8 +4662,7 @@
       "correctAnswer": 3,
       "justificacion": "La forma más frecuente corresponde al tipo III: Atresia proximal y fístula distal. Manual CTO de medicina y cirugía. Pediatría, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 138,
@@ -4832,8 +4696,7 @@
       "correctAnswer": 1,
       "justificacion": "En la atresia esofágica las malformaciones más frecuentes corresponden a 35% cardiacas, 23% gastrointestinales y genitourinarias.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 139,
@@ -4867,8 +4730,7 @@
       "correctAnswer": 1,
       "justificacion": "Colangitis: Clínicamente, se caracteriza por la tríada de Charcot (ictericia, dolor en hipocondrio derecho y fiebre intermitente). Presentan leucocitosis y hemocultivos generalmente positivos, siendo E. coli el microorganismo más frecuentemente aislado. Manual CTO de medicina y cirugía. Cirugía General, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 140,
@@ -4902,8 +4764,7 @@
       "correctAnswer": 1,
       "justificacion": "Cuando no se ha resuelto el cuadro con medidas conservadoras en 48 a 72 horas, es indicativo de laparotomía. Tratamiento Quirúrgico de Oclusión Intestinal por Adherencias en el Adulto en el Segundo Nivel de Atención. México: Secretaría de Salud, 2012.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 141,
@@ -4937,8 +4798,7 @@
       "correctAnswer": 2,
       "justificacion": "Grado III: Daño a músculos perineales, involucrando al esfínter anal. 3a: lesión con afectación < 50% del esfínter anal. 3b: lesión con afectación > 50% del esfínter anal. 3c: Desgarro con afectación del esfínter anal interno. Prevención, Diagnóstico y Tratamiento de Episiotomía Complicada. México: Instituto Mexicano del Seguro Social, 2013.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 142,
@@ -4972,8 +4832,7 @@
       "correctAnswer": 1,
       "justificacion": "Sospechar una invaginación intestinal ante un paciente con edad comprendida entre los tres meses y los seis años con crisis de llanto, vómitos, irritabilidad y deposiciones hemorrágicas. Manual CTO de medicina y cirugía. Pediatría, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 143,
@@ -4989,7 +4848,7 @@
           "id": "1",
           "text": "Ecografía abdominal",
           "isCorrect": true,
-          "rationale": "Ecografía abdominal: es la técnica de elección. Se observa la típica imagen de 'donut' o 'diana'. Manual CTO de medicina y cirugía. Pediatría, ENARM 6ª edición, México."
+          "rationale": "Ecografía abdominal: es la técnica de elección. Se observa la típica imagen de \"donut\" o \"diana\". Manual CTO de medicina y cirugía. Pediatría, ENARM 6ª edición, México."
         },
         {
           "id": "2",
@@ -5005,10 +4864,9 @@
         }
       ],
       "correctAnswer": 1,
-      "justificacion": "Ecografía abdominal: es la técnica de elección. Se observa la típica imagen de 'donut' o 'diana'. Manual CTO de medicina y cirugía. Pediatría, ENARM 6ª edición, México.",
+      "justificacion": "Ecografía abdominal: es la técnica de elección. Se observa la típica imagen de \"donut\" o \"diana\". Manual CTO de medicina y cirugía. Pediatría, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 144,
@@ -5042,8 +4900,7 @@
       "correctAnswer": 3,
       "justificacion": "La presentación clásica de la acalasia se caracteriza por disfagia a sólidos y líquidos asociado a regurgitación de alimentos no digeridos o saliva. Puede presentarse con dolor torácico posprandial asociado a la disfagia, pérdida de peso o pirosis, lo que puede condicionar un diagnóstico inicial erróneo de enfermedad por reflujo gastroesofágico. Diagnóstico y tratamiento de la acalasia en adultos. Guía de Práctica Clínica. México: Secretaría de Salud; 2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 145,
@@ -5077,8 +4934,7 @@
       "correctAnswer": 3,
       "justificacion": "Se recomienda realizar primero esofagograma baritado, posteriormente endoscopia y siempre debe confirmarse el diagnóstico de acalasia con manometría esofágica, para tener una valoración integral (anatómica, morfológica y funcional) del esófago. Diagnóstico y tratamiento de la acalasia en adultos. Guía de Práctica Clínica. México: Secretaría de Salud; 2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 146,
@@ -5112,8 +4968,7 @@
       "correctAnswer": 0,
       "justificacion": "La mayoría de los gérmenes llegan a la cavidad amniótica por vía ascendente, sin embargo, existen otras vías menos frecuentes que permiten la entrada de bacterias al líquido amniótico: 1. Vía ascendente: Es la más frecuente a través de migración de microorganismos de vagina o cérvix. Guía de Práctica Clínica Prevención, Diagnóstico y Tratamiento de la Corioamnionitis en los Tres Niveles de Atención. México: Secretaría de Salud, 2013.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 147,
@@ -5147,8 +5002,7 @@
       "correctAnswer": 3,
       "justificacion": "El tratamiento de las pacientes con corioamnionitis clínica se basa en la interrupción del embarazo y administración de antibióticos de amplio espectro. Guía de Práctica Clínica Prevención, Diagnóstico y Tratamiento de la Corioamnionitis en los Tres Niveles de Atención. México: Secretaría de Salud, 2013.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 148,
@@ -5182,8 +5036,7 @@
       "correctAnswer": 1,
       "justificacion": "La velocidad de crecimiento es el parámetro más valioso para evaluar el crecimiento de un niño, al ser éste un proceso dinámico una medición aislada no tiene valor, ya que sólo determina la altura en ese momento. En este caso clínico se trata de un niño con una velocidad de crecimiento normal. Por otra parte, la talla se puede considerar baja pero dentro de los límites normales y, sobre todo, acorde con la talla materna. Abordaje diagnóstico y Seguimiento del Paciente Pediátrico con Talla Baja. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 149,
@@ -5217,8 +5070,7 @@
       "correctAnswer": 2,
       "justificacion": "El Síndrome de Mirizzi es una entidad caracterizada por la compresión por una litiasis vesicular en el infundíbulo generalmente sobre la vía biliar, la compresión provoca dilatación desde ese nivel con colédoco distal de calibre normal. Manual CTO de medicina y cirugía. Cirugía General, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 150,
@@ -5252,8 +5104,7 @@
       "correctAnswer": 3,
       "justificacion": "Faringoamigdalitis bacteriana. Es posible establecer un diagnóstico de faringoamigdalitis estreptocócica e iniciar tratamiento empírico cuando se encuentran 4 de los síntomas clásicos (crecimiento amigdalino o exudado, adenopatía cervical anterior y fiebre de 38°C en ausencia de tos). Diagnóstico y Tratamiento de Faringoamigdalitis Aguda, México: Instituto Mexicano del Seguro Social, 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 151,
@@ -5287,8 +5138,7 @@
       "correctAnswer": 2,
       "justificacion": "Estadio III: Tumor de cualquier tamaño con afectación de 1/3 inferior uretra, 1/3 inferior vagina o ano, con metástasis ganglionares. Tratamiento Estadios II-III: vulvectomía radical y linfadenectomía inguinal completa bilateral con radioterapia posterior. Manual CTO de medicina y cirugía. Ginecología y Obstetricia, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 152,
@@ -5322,8 +5172,7 @@
       "correctAnswer": 0,
       "justificacion": "Se sugiere el uso de misoprostol con oxitocina en el caso de no contar con carbetocina en situaciones especiales, tales como sobredistensión uterina (polihidramnios, embarazo de alto orden fetal o macrosomía fetal) y trabajo de parto prolongado. Prevención y manejo de la hemorragia postparto. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2021.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 153,
@@ -5357,8 +5206,7 @@
       "correctAnswer": 2,
       "justificacion": "Colitis ulcerosa: en general, el síntoma o signo más frecuente es la diarrea sanguinolenta. Hallazgos macroscópicos: Pared adelgazada. Mucosa de aspecto granular con úlceras y pseudopólipos. Úlceras superficiales. Manual CTO de medicina y cirugía. Endocrinología, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 154,
@@ -5392,8 +5240,7 @@
       "correctAnswer": 0,
       "justificacion": "Colitis ulcerosa, asociaciones: Pioderma gangrenoso. Colangitis esclerosante. Manual CTO de medicina y cirugía. Endocrinología, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 155,
@@ -5427,8 +5274,7 @@
       "correctAnswer": 3,
       "justificacion": "El personal médico no debería indicar el ingreso de la mujer a sala de labor durante la fase latente del trabajo de parto. En caso de indicar el egreso a domicilio, se le debe de informar a la mujer embarazada acerca de los signos de alarma obstétrica y las diferencias entre las contracciones de Braxton Hicks y las contracciones efectivas del trabajo de parto, así como entre las pérdidas transvaginales normales y las sugestivas de ruptura del amnios. Vigilancia y atención amigable en el trabajo de parto en embarazo de bajo riesgo. Guía de Práctica Clínica: Guía de Evidencias y Recomendaciones. México, CENETEC; 2019.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 156,
@@ -5462,8 +5308,7 @@
       "correctAnswer": 1,
       "justificacion": "La fase activa del trabajo de parto es un periodo de tiempo que se caracteriza por actividad uterina regular y dolorosa, asociado a modificaciones cervicales. Inicia a los 5 centímetros de dilatación y culmina con la dilatación cervical completa. Vigilancia y atención amigable en el trabajo de parto en embarazo de bajo riesgo. Guía de Práctica Clínica: Guía de Evidencias y Recomendaciones. México, CENETEC; 2019.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 157,
@@ -5497,8 +5342,7 @@
       "correctAnswer": 1,
       "justificacion": "Presentación: Es la parte del feto que se aboca al estrecho superior de la pelvis materna y que es capaz de desencadenar trabajo de parto. Guía de Práctica Clínica Prevención, Diagnóstico y Tratamiento de la Ruptura Prematura de Membranas, México; Instituto Mexicano del Seguro Social, 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 158,
@@ -5532,8 +5376,7 @@
       "correctAnswer": 3,
       "justificacion": "La regurgitación infantil funcional, se presenta en lactantes sanos de 3 a 12 meses de edad, con dos o más regurgitaciones al día, en al menos 3 semanas; sin falla para crecer, hematemesis, apnea, anormalidades posturales, dificultad para la alimentación, alteración de mecánica de la deglución o aspiraciones pulmonares. Puede considerarse el espesamiento de la fórmula, ya que se observa una moderada reducción de la regurgitación. Diagnóstico y tratamiento del reflujo gastroesofágico y de la enfermedad por reflujo gastroesofágico en pediatría en el primer y segundo nivel de atención. México: Secretaría de Salud; 08/09/2014.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 159,
@@ -5567,8 +5410,7 @@
       "correctAnswer": 2,
       "justificacion": "Maniobra de Tarnier: Consiste en realizar un tacto vaginal, desplazar la presentación hacia arriba y al mismo tiempo con la otra mano realizar presión en el fondo uterino, evidencia salida de líquido amniótico transcervical. Guía de Práctica Clínica Prevención, Diagnóstico y Tratamiento de la Ruptura Prematura de Membranas, México; Instituto Mexicano del Seguro Social, 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 160,
@@ -5602,8 +5444,7 @@
       "correctAnswer": 1,
       "justificacion": "Prueba de Nitrazina: Prueba diagnóstica de ruptura prematura de las membranas que consiste en el uso de una tira reactiva, que cambia de color cuando entra en contacto con una sustancia con un pH igual o mayor a 7 (generalmente cambia de color amarillo a azul). Guía de Práctica Clínica Prevención, Diagnóstico y Tratamiento de la Ruptura Prematura de Membranas, México; Instituto Mexicano del Seguro Social, 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 161,
@@ -5637,8 +5478,7 @@
       "correctAnswer": 3,
       "justificacion": "pH del líquido amniótico: Es de 7.1 a 7.3. Guía de Práctica Clínica Prevención, Diagnóstico y Tratamiento de la Ruptura Prematura de Membranas, México; Instituto Mexicano del Seguro Social, 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 162,
@@ -5672,8 +5512,7 @@
       "correctAnswer": 2,
       "justificacion": "Escala de Kramer. Zona 3: Definición: Parte inferior del tronco, desde el ombligo hasta las rodillas. Bilirrubinas totales: 11.7 mg/dL (200 μmol/L). Diagnóstico y Tratamiento de la Ictericia Neonatal. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, IMSS; 2019.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 163,
@@ -5707,8 +5546,7 @@
       "correctAnswer": 1,
       "justificacion": "En la mujer, los síntomas de infección por Chlamydia trachomatis incluyen aumento en la descarga vaginal, sangrado postcoital y/o intermenstrual, dolor abdominal bajo y disuria. Los signos incluyen una descarga cervical mucopurulenta, cérvix friable e hipersensibilidad en anexos al examen vaginal. Prevención y Diagnóstico Oportuno de la Infección del tracto genitourinario inferior por Chlamydia trachomatis en el Primer Nivel de Atención; México: Secretaría de Salud; 2008.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 164,
@@ -5742,8 +5580,7 @@
       "correctAnswer": 3,
       "justificacion": "La hemorragia subaracnoidea secundaria a ruptura de aneurismas cerebrales se presenta en 5 a 15% de los casos de enfermedad cerebrovascular. En los Estados Unidos de Norteamérica se manifiestan como hemorragia subaracnoidea hasta 30,000 aneurismas por año. El diagnóstico oportuno puede realizarse mediante estudios de neuroimagen como la tomografía computarizada de cráneo con angiotomografía y la resonancia magnética con angioresonancia o incluso la angiografía cerebral. Detección, Diagnóstico, Tratamiento y Pronóstico del Aneurisma Cerebral sin Ruptura. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 165,
@@ -5777,8 +5614,7 @@
       "correctAnswer": 2,
       "justificacion": "A pesar de los conocimientos y avances en la comprensión de desórdenes hipertensivos en el embarazo, la causa aún no es del todo conocida, se asocia a una placentación anómala que condiciona hipoxia e isquemia placentaria, asociado a disfunción del endotelio materno, posiblemente incrementada por predisposición inmunogenética, y una inapropiada o exagerada respuesta inflamatoria sistémica. Prevención, diagnóstico y tratamiento de la Preeclampsia en segundo y tercer nivel de atención, Instituto Mexicano del Seguro Social. Ciudad de México. 2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 166,
@@ -5812,8 +5648,7 @@
       "correctAnswer": 1,
       "justificacion": "Enfermedades autoinmunes (lupus eritematoso sistémico, síndrome de anticuerpos antifosfolípidos). RIESGO RELATIVO: 9.72. Antecedente de preeclampsia en embarazo previo menor de 34 semanas. RIESGO RELATIVO: 7.19. Prevención, diagnóstico y tratamiento de la Preeclampsia en segundo y tercer nivel de atención, Instituto Mexicano del Seguro Social. Ciudad de México. 2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 167,
@@ -5847,8 +5682,7 @@
       "correctAnswer": 3,
       "justificacion": "Durante la exploración física de un niño con sospecha de tumor de Wilms se deben tener en cuenta los signos y síntomas más frecuentes: Masa abdominal (75%). Dolor abdominal (28%). Hematuria macroscópica (18%). Hematuria microscópica (24%). Fiebre (22%). Diagnóstico y tratamiento del tumor de Wilms en pediatría. Guía de Práctica Clínica. México: Secretaría de Salud, CENETEC, 2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 168,
@@ -5870,7 +5704,7 @@
           "id": "2",
           "text": "Resección quirúrgica",
           "isCorrect": true,
-          "rationale": "Independientemente del protocolo que se utilice (National Wilms Tumor Study 'NWTS' vs Société Internationale D'Oncologie Pédiatrique 'SIOP'), la resección quirúrgica es la piedra angular del tratamiento. Diagnóstico y tratamiento del tumor de Wilms en pediatría. Guía de Práctica Clínica. México: Secretaría de Salud, CENETEC, 2015."
+          "rationale": "Independientemente del protocolo que se utilice (National Wilms Tumor Study \"NWTS\" vs Société Internationale D'Oncologie Pédiatrique \"SIOP\"), la resección quirúrgica es la piedra angular del tratamiento. Diagnóstico y tratamiento del tumor de Wilms en pediatría. Guía de Práctica Clínica. México: Secretaría de Salud, CENETEC, 2015."
         },
         {
           "id": "3",
@@ -5880,10 +5714,9 @@
         }
       ],
       "correctAnswer": 2,
-      "justificacion": "Independientemente del protocolo que se utilice (National Wilms Tumor Study 'NWTS' vs Société Internationale D'Oncologie Pédiatrique 'SIOP'), la resección quirúrgica es la piedra angular del tratamiento. Diagnóstico y tratamiento del tumor de Wilms en pediatría. Guía de Práctica Clínica. México: Secretaría de Salud, CENETEC, 2015.",
+      "justificacion": "Independientemente del protocolo que se utilice (National Wilms Tumor Study \"NWTS\" vs Société Internationale D'Oncologie Pédiatrique \"SIOP\"), la resección quirúrgica es la piedra angular del tratamiento. Diagnóstico y tratamiento del tumor de Wilms en pediatría. Guía de Práctica Clínica. México: Secretaría de Salud, CENETEC, 2015.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 169,
@@ -5917,8 +5750,7 @@
       "correctAnswer": 2,
       "justificacion": "Himen imperforado: el diagnóstico se basa en la exploración genital que debe realizarse a toda niña prepúber en la primera visita al pediatra. El acúmulo menstrual se manifestará con dolor abdominal cíclico y se podrá corroborar por medio sonografía demostrando la presencia de hematómetra. Su tratamiento es quirúrgico y consiste en la incisión y la evacuación del contenido vaginal acumulado. Manual CTO de medicina y cirugía. Ginecología y Obstetricia, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 170,
@@ -5952,8 +5784,7 @@
       "correctAnswer": 2,
       "justificacion": "Los síntomas afectan múltiples procesos psicológicos y causan percepciones anormales del entorno en forma de alucinaciones, verificación de la realidad a través de juicios aberrantes que resultan en creencias extraordinarias y delirantes (delirios), procesos de pensamiento (asociaciones laxas), sentimientos (afecto plano, afecto inapropiado), conducta (catatonia, desorganización), cognición (atención, concentración), motivación y juicio. Los pacientes padecen además problemas cognoscitivos que afectan a la memoria, a las funciones ejecutivas y pueden presentar un comportamiento extraño o desorganizado. Diagnóstico y Tratamiento de la Esquizofrenia en el Primer Nivel de Atención y de Especialidad. México, Secretaría de Salud, 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 171,
@@ -5987,8 +5818,7 @@
       "correctAnswer": 0,
       "justificacion": "El tratamiento de primera elección son los antipsicóticos atípicos, basándose en el hecho de su mejor tolerabilidad y el reducido riesgo de discinesia tardía. Diagnóstico y Tratamiento de la Esquizofrenia en el Primer Nivel de Atención y de Especialidad. México, Secretaría de Salud, 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 172,
@@ -6022,8 +5852,7 @@
       "correctAnswer": 1,
       "justificacion": "La RM de mama no se recomienda durante el embarazo. Se deben evitar los estudios de tomografía computada y de medicina nuclear durante el embarazo. Tratamiento del cáncer de mama en segundo y tercer nivel de atención. Instituto Mexicano del Seguro Social, Ciudad de México. 16/03/2017.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 173,
@@ -6057,8 +5886,7 @@
       "correctAnswer": 2,
       "justificacion": "Deberá sospecharse cáncer de endometrio en mujeres con las siguientes consideraciones clínicas: Sangrado uterino anormal en pacientes con factores de riesgo. Sangrado uterino anormal con antecedente de terapia estrogénica sin oposición, hormonoterapia con tamoxifeno. Cualquier sangrado uterino en la postmenopausia. El diagnóstico definitivo se realiza a través del estudio Histopatológico de la biopsia endometrial, la cual puede realizarse por diversos métodos: Biopsia endometrial ambulatoria (Cánula de Pipelle) considerada el primer procedimiento diagnóstico. Diagnóstico y Tratamiento del Cáncer de Endometrio. México: Instituto Mexicano del Seguro Social, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 174,
@@ -6092,8 +5920,7 @@
       "correctAnswer": 3,
       "justificacion": "La ubicación más frecuente de los cuerpos extraños en vía aérea es en los bronquios principales, los cuerpos extraños en laringe o tráquea son menos frecuentes, pero su morbilidad y mortalidad es mucho mayor. Extracción de cuerpos extraños en vía aérea en niños de 2 a 12 años en el tercer nivel de Atención. México: Secretaría de Salud, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 175,
@@ -6127,8 +5954,7 @@
       "correctAnswer": 1,
       "justificacion": "Cuando el cuerpo extraño pasa a la laringe ocasiona estridor, tos, disfonía y tiraje intercostal. Extracción de cuerpos extraños en vía aérea en niños de 2 a 12 años en el tercer nivel de Atención. México: Secretaría de Salud, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 176,
@@ -6162,8 +5988,7 @@
       "correctAnswer": 3,
       "justificacion": "El diagnóstico mediante radiografías muestra hiperclaridad en el 42%, atelectasia en 27%, opacidad en algún segmento pulmonar 8%, infiltración 8% y se observan placas radiológicamente normales en 12% de la población. Extracción de cuerpos extraños en vía aérea en niños de 2 a 12 años en el tercer nivel de Atención. México: Secretaría de Salud, 2011.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 177,
@@ -6197,8 +6022,7 @@
       "correctAnswer": 1,
       "justificacion": "En niños mayores de 5 años: Síntomas diurnos ≥ 2 veces por semana. Uso de medicamento de rescate ≥ 2 veces por semana. Despertares nocturnos por síntomas de asma ≥ 1 al mes. Limitación de la actividad física debido al asma. Si estas características están ausentes, se considera que el asma está controlada. Si presenta una o dos, está parcialmente controlada y si tiene tres o cuatro el asma no está controlada. Tratamiento del asma en edad pediátrica. Guía de Práctica Clínica: Evidencias y Recomendaciones. México, CENETEC; 2020.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 178,
@@ -6232,8 +6056,7 @@
       "correctAnswer": 0,
       "justificacion": "La paciente presenta incontinencia urinaria de esfuerzo. La prescripción inmediata de oxibutinina puede ofrecer a la mujer con hiperactividad vesical o incontinencia mixta (con predominio de urgencia) un tratamiento de primera línea si el entrenamiento vesical no ha sido efectivo. Guía de Práctica Clínica Detección, Diagnóstico y Tratamiento Inicial de Incontinencia Urinaria en la Mujer, México; Instituto Mexicano del Seguro Social, 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 179,
@@ -6267,8 +6090,7 @@
       "correctAnswer": 3,
       "justificacion": "La Taquipnea Transitoria del Recién Nacido es un proceso respiratorio no infeccioso que inicia en las primeras horas de vida y se resuelve entre las 24 y 72 horas posteriores al nacimiento, se presenta con más frecuencia en los recién nacidos de término o cercanos a término, que nacen por cesárea o en forma precipitada por vía vaginal, lo que favorece el exceso de líquido pulmonar. Se caracteriza por la presencia de taquipnea con frecuencia respiratoria > 60 respiraciones por minuto, aumento del requerimiento de oxígeno con niveles de CO2 normales o ligeramente aumentados. Guía de Práctica Clínica, Diagnóstico y Tratamiento de la Taquipnea Transitoria del Recién Nacido. Ciudad de México: Instituto Mexicano del Seguro Social; 03/11/2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 180,
@@ -6290,7 +6112,7 @@
           "id": "2",
           "text": "5",
           "isCorrect": true,
-          "rationale": "Aleteo nasal marcado 2 puntos, retracción esternal apenas visible 1 punto y quejido espiratorio audible con estetoscopio 1 punto. Total: 2+1+1 = 4 puntos. Guía de Práctica Clínica, Diagnóstico y Tratamiento de la Taquipnea Transitoria del Recién Nacido. Ciudad de México: Instituto Mexicano del Seguro Social; 03/11/2016."
+          "rationale": "Aleteo nasal marcado 2 puntos, retracción esternal apenas visible 1 punto y quejido espiratorio audible con estetoscopio 1 punto. Guía de Práctica Clínica, Diagnóstico y Tratamiento de la Taquipnea Transitoria del Recién Nacido. Ciudad de México: Instituto Mexicano del Seguro Social; 03/11/2016."
         },
         {
           "id": "3",
@@ -6300,10 +6122,9 @@
         }
       ],
       "correctAnswer": 2,
-      "justificacion": "Aleteo nasal marcado 2 puntos, retracción esternal apenas visible 1 punto y quejido espiratorio audible con estetoscopio 1 punto. Total: 2+1+1 = 4 puntos. Guía de Práctica Clínica, Diagnóstico y Tratamiento de la Taquipnea Transitoria del Recién Nacido. Ciudad de México: Instituto Mexicano del Seguro Social; 03/11/2016.",
+      "justificacion": "Aleteo nasal marcado 2 puntos, retracción esternal apenas visible 1 punto y quejido espiratorio audible con estetoscopio 1 punto. Guía de Práctica Clínica, Diagnóstico y Tratamiento de la Taquipnea Transitoria del Recién Nacido. Ciudad de México: Instituto Mexicano del Seguro Social; 03/11/2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 181,
@@ -6337,8 +6158,7 @@
       "correctAnswer": 2,
       "justificacion": "Se dejará en ayuno al recién nacido que durante la alimentación con sonda orogástrica presente: Frecuencia respiratoria mayor de 80 respiraciones por minuto. Cianosis. Manifestaciones de dificultad respiratoria. Saturaciones de O2 bajas. Guía de Práctica Clínica, Diagnóstico y Tratamiento de la Taquipnea Transitoria del Recién Nacido. Ciudad de México: Instituto Mexicano del Seguro Social; 03/11/2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 182,
@@ -6372,8 +6192,7 @@
       "correctAnswer": 1,
       "justificacion": "La medición de los niveles séricos de β-HCG se debe utilizar conjuntamente con la ecografía transvaginal para detectar embarazos ectópicos con una sensibilidad del 84% y una especificidad de 95%. Diagnóstico y tratamiento del embarazo ectópico en mujeres de edad reproductiva en segundo y tercer nivel de atención. México: Secretaría de Salud; 3 de octubre del 2013.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 183,
@@ -6407,8 +6226,7 @@
       "correctAnswer": 0,
       "justificacion": "Se ha demostrado la necesidad de realizar el tamiz o CTGO entre la semana 24 y 28 de gestación en mujeres de moderado riesgo, así como en las pacientes de alto riesgo que tuvieron resultado de glucosa normal en la primera visita prenatal. Diagnóstico y tratamiento de la diabetes en el embarazo. México: Instituto Mexicano del Seguro Social; 03/11/2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 184,
@@ -6441,9 +6259,8 @@
       ],
       "correctAnswer": 3,
       "justificacion": "El cuadro clínico típico es el de una neumonía de evolución subaguda, con hipoxemia progresiva y escasa tos sin expectoración. Radiológicamente, el cuadro sugestivo es el de infiltrados intersticiales bilaterales. Manual CTO de medicina y cirugía. Infectología, ENARM 6ª edición, México. Tratamiento Antirretroviral del Paciente Adulto con Infección por el VIH. Ciudad de México, Instituto Mexicano del Seguro Social. 16/03/2017.",
-      "serie": 7,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 185,
@@ -6476,9 +6293,8 @@
       ],
       "correctAnswer": 2,
       "justificacion": "Constituye una neoplasia que presenta una incidencia enorme en pacientes VIH positivos que en la población general. Son lesiones de proliferación vascular típicamente cutáneas y mucosas, si bien puede afectar a cualquier órgano. Se manifiesta como placas o nódulos de color violáceo. Manual CTO de medicina y cirugía. Infectología, ENARM 6ª edición, México. Tratamiento Antirretroviral del Paciente Adulto con Infección por el VIH. Ciudad de México, Instituto Mexicano del Seguro Social. 16/03/2017.",
-      "serie": 7,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 186,
@@ -6512,8 +6328,7 @@
       "correctAnswer": 0,
       "justificacion": "El recuento de linfocitos CD4+ absolutos y su porcentaje, es el principal indicador del estado inmunológico del paciente con afección por VIH. Tratamiento Antirretroviral del Paciente Adulto con Infección por el VIH. Ciudad de México, Instituto Mexicano del Seguro Social. 16/03/2017.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 187,
@@ -6534,21 +6349,20 @@
         {
           "id": "2",
           "text": "8",
-          "isCorrect": false,
-          "rationale": ""
+          "isCorrect": true,
+          "rationale": "APGAR: Apariencia: acrocianosis 1 punto. Pulso: >100 lpm, 2 puntos. Gesticulación: (tose) 2 puntos. Actividad: movimientos activos 2 puntos. Respiración: llanto activo 2 puntos. Total: 1+2+2+2+2 = 9 puntos."
         },
         {
           "id": "3",
           "text": "9",
-          "isCorrect": true,
-          "rationale": "APGAR: Apariencia: acrocianosis 1 punto. Pulso: >100 lpm, 2 puntos. Gesticulación: (tose) 2 puntos. Actividad: movimientos activos 2 puntos. Respiración: llanto activo 2 puntos. Total: 1+2+2+2+2 = 9 puntos."
+          "isCorrect": false,
+          "rationale": ""
         }
       ],
-      "correctAnswer": 3,
+      "correctAnswer": 2,
       "justificacion": "APGAR: Apariencia: acrocianosis 1 punto. Pulso: >100 lpm, 2 puntos. Gesticulación: (tose) 2 puntos. Actividad: movimientos activos 2 puntos. Respiración: llanto activo 2 puntos. Total: 1+2+2+2+2 = 9 puntos.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 188,
@@ -6582,8 +6396,7 @@
       "correctAnswer": 3,
       "justificacion": "Tríada clásica de endometriosis: dismenorrea, dispareunia e infertilidad. Diagnóstico y tratamiento de la endometriosis. México: Secretaría de Salud; 21/marzo/2013.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 189,
@@ -6617,8 +6430,7 @@
       "correctAnswer": 1,
       "justificacion": "Neuritis vestibular. Es la segunda causa más frecuente de vértigo periférico tras el VPPB. Vértigo retrolaberíntico por afectación de la primera neurona del nervio. Manual CTO de medicina y cirugía. Otorrinolaringología, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 190,
@@ -6652,8 +6464,7 @@
       "correctAnswer": 0,
       "justificacion": "El golpe de calor es un desorden sistémico que pone en peligro la vida e incluye: (1) temperatura corporal central elevada ≥ 40°C (104°F); (2) compromiso del sistema nervioso central, que da lugar a mareos, confusión, irritabilidad, agresividad, apatía, desorientación, convulsiones o coma, y (3) respuesta inflamatoria sistémica que puede conducir a disfunción multiorgánica e incluir encefalopatía, rabdomiólisis, insuficiencia renal aguda, síndrome de distrés respiratorio agudo, síndrome de lesión miocárdica, lesión hepatocelular, isquemia o infarto intestinal y complicaciones hematológicas como coagulación intravascular diseminada (CID) y trombocitopenia. MANUAL ATLS 10ª EDICIÓN.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 191,
@@ -6687,8 +6498,7 @@
       "correctAnswer": 3,
       "justificacion": "Rifampicina. Efectos adversos: Hepatotoxicidad. Es el más importante, puesto que potencia la de la H. Fenómenos de hipersensibilidad. Síndrome gripal. Nefrotoxicidad, frecuentemente de naturaleza inmunomediada (nefritis intersticial inmunoalérgica y glomerulonefritis). Tinción anaranjada de las secreciones corporales. Insuficiencia suprarrenal. Manual CTO de medicina y cirugía. Infectología, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 192,
@@ -6722,8 +6532,7 @@
       "correctAnswer": 3,
       "justificacion": "Caso confirmado epidemiológicamente: un caso probable que ocurre en la misma ubicación y tiempo que un caso confirmado por laboratorio. Manejo del dengue no grave y el dengue grave, México: Secretaría de Salud, 2008.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 193,
@@ -6757,8 +6566,7 @@
       "correctAnswer": 1,
       "justificacion": "Hipotermia se define como temperatura central menor de 35°C (95°F). En ausencia de lesión traumática concomitante, la hipotermia se puede clasificar como leve (35°C a 32°C, o 95°F a 89.6°F), moderada (32°C a 30°C, o 89.6°F a 86°F), o severa (menos de 30°C o de 86°F). MANUAL ATLS 10ª EDICIÓN.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 194,
@@ -6792,8 +6600,7 @@
       "correctAnswer": 0,
       "justificacion": "Aproximadamente el 50% de los pacientes con insuficiencia hepática crónica desarrollan várices esofágicas. Guía de práctica clínica Diagnóstico y tratamiento de la insuficiencia hepática crónica, Instituto Mexicano del Seguro Social, 2009.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 195,
@@ -6827,8 +6634,7 @@
       "correctAnswer": 1,
       "justificacion": "La papilomatosis laríngea es causada por el Virus del papiloma humano (VPH) transmitiéndose al feto durante su nacimiento principalmente en partos de madres infectadas. Diagnóstico y Tratamiento quirúrgico de Papiloma Laríngeo Juvenil. México: Instituto Mexicano del Seguro Social, 2010.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 196,
@@ -6862,8 +6668,7 @@
       "correctAnswer": 2,
       "justificacion": "S. haematobium produce parasitación de la vejiga urinaria, siendo responsable en ocasiones de la aparición de carcinoma vesical de células escamosas. Manual CTO de medicina y cirugía. Infectología, ENARM 6ª edición, México.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 197,
@@ -6897,8 +6702,7 @@
       "correctAnswer": 2,
       "justificacion": "Esferocitosis hereditaria moderada: Hemoglobina 8-12 g/dL. Cuenta de reticulocitos > 6%. Bilirrubina > 34 μmol/L. Espectrina por eritrocito 50-80%. Guía de Práctica Clínica Diagnóstico y Tratamiento de la Esferocitosis Hereditaria. México: Instituto Mexicano del Seguro Social; 2014.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 198,
@@ -6931,9 +6735,8 @@
       ],
       "correctAnswer": 0,
       "justificacion": "Criterios Prediabetes: Glucosa en ayuno entre 110 a 125 mg/dL (Ayuno al menos de 8 horas). Glucosa plasmática a las 2 horas entre 140 y 199 mg/dL. Hemoglobina glucosilada (HbA1c) entre 6.0% a 6.4%. En ausencia de hiperglucemia inequívoca, el diagnóstico requiere dos resultados de prueba anormales de la misma muestra o de dos muestras separadas. Diagnóstico y Tratamiento de la Diabetes Mellitus 2 en la Persona Adulta Mayor. Guía de Práctica Clínica: Guía de Evidencias y Recomendaciones. México, CENETEC; 2021.",
-      "serie": 8,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 199,
@@ -6966,9 +6769,8 @@
       ],
       "correctAnswer": 0,
       "justificacion": "En personas adultas mayores que cumplan con los criterios de prediabetes mediante glucosa en plasma en ayunas o HbA1c, se recomienda obtener una prueba de tolerancia oral a la glucosa para confirmar el diagnóstico. Diagnóstico y Tratamiento de la Diabetes Mellitus 2 en la Persona Adulta Mayor. Guía de Práctica Clínica: Guía de Evidencias y Recomendaciones. México, CENETEC; 2021.",
-      "serie": 8,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 200,
@@ -7002,8 +6804,7 @@
       "correctAnswer": 0,
       "justificacion": "Se recomienda en pacientes con hipotiroidismo sin embarazo, una meta de tratamiento de TSH entre 0.45-4.12 mUI/L en áreas geográficas suficientes de yodo. Diagnóstico y tratamiento de hipotiroidismo primario y subclínico en el adulto. México: Instituto Mexicano del Seguro Social; 03/11/2016.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 201,
@@ -7037,8 +6838,7 @@
       "correctAnswer": 3,
       "justificacion": "El diagnóstico de la hernia umbilical es clínico. No se recomienda realizar estudios de laboratorio o gabinete para su confirmación. GPC Diagnóstico y Reparación de la Hernia Umbilical.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 202,
@@ -7072,8 +6872,7 @@
       "correctAnswer": 2,
       "justificacion": "Se recomienda el cierre del defecto herniario con técnica de Mayo, utilizando material absorbible (ácido poliglucólico o poliglactina) o no absorbible (polipropileno). GPC Diagnóstico y Reparación de la Hernia Umbilical.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 203,
@@ -7107,8 +6906,7 @@
       "correctAnswer": 1,
       "justificacion": "La detección de la apnea se realizará durante la inspección del recién nacido o por medio del monitor de signos vitales al observar: ausencia de respiración por más de 20 segundos o ausencia de respiración menor de 20 segundos acompañada de bradicardia o cianosis. GPC Diagnóstico y Tratamiento de Apnea del Prematuro.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 204,
@@ -7142,8 +6940,7 @@
       "correctAnswer": 1,
       "justificacion": "La apnea se presenta en el 25% de los recién nacidos pretérmino con peso menor a 2,500 gramos y entre el 84-100% en los que pesan menos de 1000 gramos. GPC Diagnóstico y Tratamiento de Apnea del Prematuro.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 205,
@@ -7177,8 +6974,7 @@
       "correctAnswer": 0,
       "justificacion": "En recién nacidos prematuros con factores de riesgo neurológico y en los que se tenga duda si presentan o no eventos de apnea, se recomienda realizar estudio polisomnográfico durante el sueño para detectar apnea. GPC Diagnóstico y Tratamiento de Apnea del Prematuro.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 206,
@@ -7212,8 +7008,7 @@
       "correctAnswer": 1,
       "justificacion": "La artritis idiopática juvenil constituye la enfermedad reumática crónica más común en la edad pediátrica y es una de las principales causas de discapacidad adquirida en este grupo etario. Todas las articulaciones pueden afectarse; las grandes articulaciones comprometidas con mayor frecuencia son rodilla, carpos, tobillos, mientras que las pequeñas articulaciones de manos y pies se afectan particularmente en la forma poliarticular. GPC Tratamiento Farmacológico de la Artritis Idiopática Juvenil.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 207,
@@ -7247,8 +7042,7 @@
       "correctAnswer": 3,
       "justificacion": "Los subtipos principales de AIJ incluyen: oligoarticular del 27-52% mientras que en la artritis sistémica es de 4-17%, en la artritis psoriásica es del 2-11% y en la poliartritis con factor reumatoide positivo es del 2-7%. GPC Tratamiento Farmacológico de la Artritis Idiopática Juvenil.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 208,
@@ -7282,8 +7076,7 @@
       "correctAnswer": 2,
       "justificacion": "Los fármacos antiinflamatorios no esteroideos son considerados como terapia de primera línea para reducir la inflamación y el dolor asociado en el tratamiento de la AIJ. GPC Tratamiento Farmacológico de la Artritis Idiopática Juvenil.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 209,
@@ -7317,8 +7110,7 @@
       "correctAnswer": 0,
       "justificacion": "En la mononucleosis infecciosa los signos con mayor especificidad en orden decreciente son: esplenomegalia (99%), petequias en paladar (95%), adenopatía axilar (91%), adenopatía cervical posterior (87%), temperatura corporal > 37.5°C (84%), adenopatía inguinal (82%). GPC Diagnóstico y Tratamiento de la Mononucleosis Infecciosa.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 210,
@@ -7352,8 +7144,7 @@
       "correctAnswer": 0,
       "justificacion": "Los pacientes con mononucleosis infecciosa pueden presentar complicaciones agudas; entre ellas alteraciones hemolíticas en 25-50% de los casos (anemia hemolítica, trombocitopenia, púrpura trombocitopénica, síndrome urémico hemolítico y CID). GPC Diagnóstico y Tratamiento de la Mononucleosis Infecciosa.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 211,
@@ -7387,8 +7178,7 @@
       "correctAnswer": 2,
       "justificacion": "Para los jóvenes con DMT1, las metas de glucemia deseadas son: antes de los alimentos de 72 a 126 mg/dL, después de los alimentos de 90 a 180 mg/dL, a la hora de dormir de 108 a 180 mg/dL y a las 3 am de 90 a 144 mg/dL. GPC Diagnóstico y Tratamiento de la DM tipo 1 y tipo 2 en Paciente Pediátrico en los tres niveles de atención.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 212,
@@ -7422,8 +7212,7 @@
       "correctAnswer": 3,
       "justificacion": "La velocidad de absorción de la insulina varía en función de la zona de inyección siendo más rápida en el abdomen, intermedia en el brazo y más lenta en el muslo. GPC Diagnóstico y Tratamiento de la DM tipo 1 y tipo 2 en Paciente Pediátrico en los tres niveles de atención.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 213,
@@ -7457,8 +7246,7 @@
       "correctAnswer": 1,
       "justificacion": "El perfil lipídico se debe evaluar anualmente a partir de los 12 años de edad. GPC Diagnóstico y Tratamiento de la DM tipo 1 y tipo 2 en Paciente Pediátrico en los tres niveles de atención.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 214,
@@ -7492,12 +7280,11 @@
       "correctAnswer": 3,
       "justificacion": "Se describen en los pacientes con epiglotitis aguda los siguientes hallazgos a la exploración física: apariencia tóxica, irritabilidad y ansiedad, posición en trípode (cabeza hacia adelante, boca abierta, mandíbula protruida, lengua hacia afuera; adopción de sedestación con apoyo de sus manos hacia atrás), hipersensibilidad a la palpación del complejo laringotraqueal, dificultad respiratoria leve a grave. GPC Diagnóstico, Tratamiento y Prevención de la Epiglotitis Aguda en Edad Pediátrica.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 215,
-      "question": "En base a los hallazgos ¿qué nivel de gravedad presenta la paciente?",
+      "question": "En base a los hallazgos qué nivel de gravedad presenta la paciente:",
       "answerOptions": [
         {
           "id": "0",
@@ -7527,8 +7314,7 @@
       "correctAnswer": 1,
       "justificacion": "Gravedad moderada: estado mental ansioso, estridor audible en reposo, tiraje presente, FC aumentada, limitación para hablar y comer, SpO2 92-95%. GPC Diagnóstico, Tratamiento y Prevención de la Epiglotitis Aguda en Edad Pediátrica.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 216,
@@ -7562,8 +7348,7 @@
       "correctAnswer": 2,
       "justificacion": "La nasofibroscopia está indicada en pacientes con enfermedad leve a moderada con estabilidad de la vía aérea por obstrucción parcial. GPC Diagnóstico, Tratamiento y Prevención de la Epiglotitis Aguda en Edad Pediátrica.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 217,
@@ -7597,8 +7382,7 @@
       "correctAnswer": 0,
       "justificacion": "La dosis inicial de levotiroxina en el embarazo es de 1.2 mcg/kg/día. GPC Diagnóstico y Tratamiento del Hipotiroidismo Primario y Subclínico en el Adulto.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 218,
@@ -7632,8 +7416,7 @@
       "correctAnswer": 1,
       "justificacion": "Las metas de tratamiento que se recomiendan son en base a las concentraciones de TSH durante el embarazo y cambian de acuerdo a cada trimestre. Primer trimestre 0.1-2.5 mUI/L. Segundo trimestre 0.2-3.0 mUI/L. Tercer trimestre 0.3-3.0 mUI/L. GPC Diagnóstico y Tratamiento del Hipotiroidismo Primario y Subclínico en el Adulto.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 219,
@@ -7667,8 +7450,7 @@
       "correctAnswer": 0,
       "justificacion": "Posterior a la resolución del embarazo se debe realizar una determinación de TSH a las 6 semanas. GPC Diagnóstico y Tratamiento del Hipotiroidismo Primario y Subclínico en el Adulto.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 220,
@@ -7702,8 +7484,7 @@
       "correctAnswer": 2,
       "justificacion": "En la radiografía de cuello en la proyección AP el 50% de los pacientes muestran el signo clásico de la aguja o torre, este consiste en una disminución de la columna de aire subglótico. GPC Diagnóstico y Manejo de la Laringotraqueítis Aguda en Pacientes Mayores de 3 meses hasta 15 años de edad.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 221,
@@ -7737,8 +7518,7 @@
       "correctAnswer": 1,
       "justificacion": "Los glucocorticoides son considerados la piedra angular en el manejo de la laringotraqueítis aguda. GPC Diagnóstico y Manejo de la Laringotraqueítis Aguda en Pacientes Mayores de 3 meses hasta 15 años de edad.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 222,
@@ -7772,8 +7552,7 @@
       "correctAnswer": 2,
       "justificacion": "Se recomienda que se realicen procedimientos diagnósticos solamente en pacientes con dolor de origen obscuro o abultamiento dudoso de la región inguinal. La secuencia sería: 1. USG, 2. de ser negativo el USG realizar resonancia magnética, 3. de ser negativa la resonancia considerar herniografía. GPC Diagnóstico y Tratamiento de Hernias Inguinales y Femorales.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 223,
@@ -7807,8 +7586,7 @@
       "correctAnswer": 0,
       "justificacion": "El origen de las hernias inguinales está en el orificio músculo-pectíneo, sus límites son el arco transverso, el músculo recto del abdomen, la rama iliopubiana y el músculo iliopsoas, está tapizado en su superficie interna por la fascia transversalis y cruzado por el ligamento inguinal. GPC Diagnóstico y Tratamiento de Hernias Inguinales y Femorales.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 224,
@@ -7842,8 +7620,7 @@
       "correctAnswer": 2,
       "justificacion": "La reparación de la hernia inguinal primaria mediante la técnica Lichtenstein ha demostrado ser el procedimiento con el índice de recurrencia más bajo (o igual a los sistemas preformados), con morbilidad y mortalidad baja. GPC Diagnóstico y Tratamiento de Hernias Inguinales y Femorales.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 225,
@@ -7877,8 +7654,7 @@
       "correctAnswer": 2,
       "justificacion": "La embolia de líquido amniótico se presenta con paro cardiorrespiratorio o hipotensión súbita y compromiso respiratorio durante el trabajo de parto, nacimiento o a los 30 minutos posteriores al alumbramiento.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 226,
@@ -7912,8 +7688,7 @@
       "correctAnswer": 3,
       "justificacion": "Ante el paro cardiorrespiratorio se deberá iniciar inmediatamente la reanimación cardiopulmonar avanzada. GPC Diagnóstico y Tratamiento Inicial de las Emergencias Obstétricas.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 227,
@@ -7947,8 +7722,7 @@
       "correctAnswer": 0,
       "justificacion": "Los criterios para establecer el diagnóstico de embolia de líquido amniótico son: paro cardiorrespiratorio o hipotensión súbita (PAS < 90) y compromiso respiratorio (saturación de oxígeno < 90%), presencia de CID, que el cuadro clínico se presente durante el trabajo de parto, nacimiento o a los 30 minutos posteriores al alumbramiento, ausencia de fiebre durante el trabajo de parto. GPC Diagnóstico y Tratamiento Inicial de las Emergencias Obstétricas.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 228,
@@ -7981,9 +7755,8 @@
       ],
       "correctAnswer": 2,
       "justificacion": "Tomar electrocardiograma inicial a todo paciente con sospecha de enfermedad de Kawasaki. GPC Diagnóstico y Tratamiento de la Enfermedad de Kawasaki.",
-      "serie": 9,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 229,
@@ -8016,9 +7789,8 @@
       ],
       "correctAnswer": 3,
       "justificacion": "En enfermedad de Kawasaki los signos asociados a nivel cardiovascular son: aneurismas coronarios 25%, aneurismas en arterias sistémicas 2%, miocarditis > 50%, pericarditis 25%, enfermedad valvular < 1%. GPC Diagnóstico y Tratamiento de la Enfermedad de Kawasaki.",
-      "serie": 9,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 230,
@@ -8051,9 +7823,8 @@
       ],
       "correctAnswer": 2,
       "justificacion": "En pacientes con enfermedad de Kawasaki la terapia de primera línea es inmunoglobulina G IV combinada con ácido acetil salicílico. GPC Diagnóstico y Tratamiento de la Enfermedad de Kawasaki.",
-      "serie": 9,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 231,
@@ -8087,8 +7858,7 @@
       "correctAnswer": 1,
       "justificacion": "Torsión testicular: dolor escrotal intenso que se acompaña de náusea y vómito, de aparición brusca en cualquier momento del día incluso en el sueño, dolor irradiado a ingle y abdomen inferior, de aparición sin causa aparente, dolor escrotal extremadamente intenso a la palpación, provoca palidez e imposibilidad para caminar, se incrementa al elevar el testículo afectado (signo de Prehn negativo), en ocasiones antecedente de cuadros dolorosos breves y poco intensos con remisión. GPC Abordaje Diagnóstico del Escroto Agudo en el Niño y Adolescente.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 232,
@@ -8122,8 +7892,7 @@
       "correctAnswer": 3,
       "justificacion": "Signo de Angell: en caso de torsión existe una horizontalización del testículo contralateral sano. GPC Abordaje Diagnóstico del Escroto Agudo en el Niño y Adolescente.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 233,
@@ -8157,8 +7926,7 @@
       "correctAnswer": 1,
       "justificacion": "El signo del punto azul se presenta en los casos de apéndice testicular. Consiste en una lesión del escroto, redonda de 2-3 mm, indurada, sumamente dolorosa y localizada en el polo superior del testículo. GPC Abordaje Diagnóstico del Escroto Agudo en el Niño y Adolescente.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 234,
@@ -8192,8 +7960,7 @@
       "correctAnswer": 1,
       "justificacion": "En la torsión testicular el salvamento testicular es del 80% si el testículo se explora dentro de las primeras 5 horas del inicio del dolor. GPC Abordaje Diagnóstico del Escroto Agudo en el Niño y Adolescente.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 235,
@@ -8215,7 +7982,7 @@
           "id": "2",
           "text": "6",
           "isCorrect": true,
-          "rationale": "Apertura ocular: sin respuesta 1 punto. Respuesta verbal: sonidos incomprensibles 2 puntos. Respuesta motora: flexión anormal 3 puntos. Total: 1+2+3 = 6. GPC Detección y Manejo Inicial de la Lesión Craneal Traumática Aguda en el Adulto en el primer nivel de atención."
+          "rationale": "Apertura ocular: espontánea 4, al estímulo verbal 3, al estímulo doloroso 2, sin respuesta 1. Respuesta verbal: orientado 5, desorientado 4, palabras inapropiadas 3, sonidos incomprensibles 2, sin respuesta 1. Respuesta motora: cumple órdenes expresadas por voz 6, localiza estímulo doloroso 5, retira al estímulo doloroso 4, flexión anormal 3, extensión anormal 2, sin respuesta 1. Total: 1 (apertura) + 2 (verbal: sonidos incomprensibles) + 3 (flexión anormal) = 6. GPC Detección y Manejo Inicial de la Lesión Craneal Traumática Aguda en el Adulto en el primer nivel de atención."
         },
         {
           "id": "3",
@@ -8225,10 +7992,9 @@
         }
       ],
       "correctAnswer": 2,
-      "justificacion": "Apertura ocular: sin respuesta 1 punto. Respuesta verbal: sonidos incomprensibles 2 puntos. Respuesta motora: flexión anormal 3 puntos. Total: 1+2+3 = 6. GPC Detección y Manejo Inicial de la Lesión Craneal Traumática Aguda en el Adulto en el primer nivel de atención.",
+      "justificacion": "Apertura ocular: espontánea 4, al estímulo verbal 3, al estímulo doloroso 2, sin respuesta 1. Respuesta verbal: orientado 5, desorientado 4, palabras inapropiadas 3, sonidos incomprensibles 2, sin respuesta 1. Respuesta motora: cumple órdenes expresadas por voz 6, localiza estímulo doloroso 5, retira al estímulo doloroso 4, flexión anormal 3, extensión anormal 2, sin respuesta 1. Total: 1 (apertura) + 2 (verbal: sonidos incomprensibles) + 3 (flexión anormal) = 6. GPC Detección y Manejo Inicial de la Lesión Craneal Traumática Aguda en el Adulto en el primer nivel de atención.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 236,
@@ -8262,8 +8028,7 @@
       "correctAnswer": 2,
       "justificacion": "Decorticación: flexión anormal al estímulo doloroso. GPC Detección y Manejo Inicial de la Lesión Craneal Traumática Aguda en el Adulto en el primer nivel de atención.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 237,
@@ -8297,8 +8062,7 @@
       "correctAnswer": 1,
       "justificacion": "Riesgo moderado: únicamente DM con duración menor a 10 años sin otro factor de riesgo, jóvenes con DM1 menores de 35 años o DM2 menores de 50 años, < 10 años sin otro factor de riesgo. GPC Tratamiento de Dislipidemias en el Adulto.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 238,
@@ -8332,8 +8096,7 @@
       "correctAnswer": 2,
       "justificacion": "Se recomienda en pacientes con riesgo cardiovascular moderado llevar una meta de C-LDL < 100 mg/dL. GPC Tratamiento de Dislipidemias en el Adulto.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 239,
@@ -8367,8 +8130,7 @@
       "correctAnswer": 1,
       "justificacion": "Se recomienda el inicio de tratamiento con estatinas en pacientes con riesgo cardiovascular moderado y C-LDL > 100 mg/dL a pesar de cambios en el estilo de vida. GPC Tratamiento de Dislipidemias en el Adulto.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 240,
@@ -8402,8 +8164,7 @@
       "correctAnswer": 3,
       "justificacion": "No logra meta de C-LDL los siguientes 2 a 4 meses: incrementar la estatina hasta la dosis máxima o hasta la dosis máxima tolerada durante 3 meses. GPC Tratamiento de Dislipidemias en el Adulto.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 241,
@@ -8437,8 +8198,7 @@
       "correctAnswer": 3,
       "justificacion": "Considerar el diagnóstico de hidrocele no comunicante ante la presencia de aumento de volumen escrotal no doloroso, irreductible y con transiluminación positiva. GPC Diagnóstico y Tratamiento del Hidrocele en Niños.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 242,
@@ -8472,8 +8232,7 @@
       "correctAnswer": 0,
       "justificacion": "El diagnóstico de hidrocele se basa en la clínica fundamentándose en la detección de un aumento de volumen no doloroso y con transiluminación positiva. GPC Diagnóstico y Tratamiento del Hidrocele en Niños.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 243,
@@ -8507,8 +8266,7 @@
       "correctAnswer": 0,
       "justificacion": "Indicaciones de ultrasonido escrotal: dificultad en la exploración física para delimitar la anatomía testicular por palpación, masa testicular que no transilumina, sospecha de patología asociada, dolor testicular, hidrocele adquirido (secundario) y de presentación aguda. GPC Diagnóstico y Tratamiento del Hidrocele en Niños.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 244,
@@ -8542,8 +8300,7 @@
       "correctAnswer": 2,
       "justificacion": "La consecuencia más grave de las IVUS es el desarrollo de cicatrices renales. GPC Diagnóstico y Tratamiento de la Infección de Vías Urinarias no Complicada en Menores de 18 Años en el primer y segundo niveles de atención.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 245,
@@ -8577,8 +8334,7 @@
       "correctAnswer": 0,
       "justificacion": "La punción suprapúbica es el método más sensible para obtener una muestra de orina no contaminada, utilizando un ultrasonido guiado para la localización de la vejiga. La punción suprapúbica es una técnica muy fiable, especialmente en neonatos y lactantes pequeños. GPC Diagnóstico y Tratamiento de la Infección de Vías Urinarias no Complicada en Menores de 18 Años en el primer y segundo niveles de atención.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 246,
@@ -8612,8 +8368,7 @@
       "correctAnswer": 1,
       "justificacion": "El resultado es considerado positivo si: punción suprapúbica > 10,000 UFC. GPC Diagnóstico y Tratamiento de la Infección de Vías Urinarias no Complicada en Menores de 18 Años en el primer y segundo niveles de atención.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 247,
@@ -8647,8 +8402,7 @@
       "correctAnswer": 1,
       "justificacion": "El factor precipitante más común en el desarrollo de una CAD son los procesos infecciosos. GPC Diagnóstico y Tratamiento de la Cetoacidosis Diabética en Niños y Adultos.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 248,
@@ -8682,8 +8436,7 @@
       "correctAnswer": 2,
       "justificacion": "CAD moderada: glucemia > 250 mg/dL, pH 7.0 a 7.24, bicarbonato 10 a 15 mEq/L, alerta u obnubilado, cetonas urinarias y séricas positivas, brecha aniónica > 12. GPC Diagnóstico y Tratamiento de la Cetoacidosis Diabética en Niños y Adultos.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 249,
@@ -8717,8 +8470,7 @@
       "correctAnswer": 3,
       "justificacion": "En la primera hora de manejo se recomienda utilizar solución salina al 0.9% a una velocidad de infusión de 15 a 20 mL/kg/hora o bien 1000 mL de dicha solución. GPC Diagnóstico y Tratamiento de la Cetoacidosis Diabética en Niños y Adultos.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 250,
@@ -8752,8 +8504,7 @@
       "correctAnswer": 2,
       "justificacion": "Se considera que la resolución de la CAD se alcanza cuando la glucosa es < 250 mg/dL y se cumplen 2 de los siguientes criterios: nivel de bicarbonato sérico > 15-18 mg/dL, pH venoso mayor de 7.3 y brecha aniónica calculada < 12 mEq/L. GPC Diagnóstico y Tratamiento de la Cetoacidosis Diabética en Niños y Adultos.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 251,
@@ -8787,8 +8538,7 @@
       "correctAnswer": 3,
       "justificacion": "Una vez establecido el diagnóstico de hipotiroidismo debe iniciarse tratamiento, ya que es una condición permanente y se encuentra ligada a cambios metabólicos como dislipidemia, coagulopatía, disfunción endotelial, trastornos menstruales, hipertensión y otras alteraciones cardiovasculares. GPC Diagnóstico y Tratamiento de Hipotiroidismo Primario y Subclínico en el Adulto.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 252,
@@ -8822,8 +8572,7 @@
       "correctAnswer": 1,
       "justificacion": "Ante la presencia de las siguientes patologías se debe de investigar la presencia de hipotiroidismo ya que ocurren generalmente de manera simultánea: síndrome del túnel del carpo, síndrome de apnea obstructiva del sueño, hiperprolactinemia, hiponatremia. GPC Diagnóstico y Tratamiento de Hipotiroidismo Primario y Subclínico en el Adulto.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 253,
@@ -8857,8 +8606,7 @@
       "correctAnswer": 3,
       "justificacion": "Para llevar a cabo un adecuado seguimiento del tratamiento se recomienda: evaluar TSH en 6 a 8 semanas durante el ajuste de dosis hasta lograr la meta de tratamiento. GPC Diagnóstico y Tratamiento de Hipotiroidismo Primario y Subclínico en el Adulto.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 254,
@@ -8892,8 +8640,7 @@
       "correctAnswer": 1,
       "justificacion": "En un estudio de cohorte se demostró que los síntomas más comunes fueron: dolor abdominal 90%, leucorrea 70%, sangrado irregular 40%, 30% de los pacientes presentaba antecedentes de dispositivo intrauterino. GPC Diagnóstico y Tratamiento de la Enfermedad Inflamatoria Pélvica en Mujeres Mayores de 14 Años con Vida Sexual Activa.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 255,
@@ -8927,8 +8674,7 @@
       "correctAnswer": 1,
       "justificacion": "Grado II moderada: con masa anexial o absceso que involucra trompas y/o ovarios, con o sin signos de irritación peritoneal. GPC Diagnóstico y Tratamiento de la Enfermedad Inflamatoria Pélvica en Mujeres Mayores de 14 Años con Vida Sexual Activa.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 256,
@@ -8962,8 +8708,7 @@
       "correctAnswer": 0,
       "justificacion": "Se han descrito consideraciones especiales en mujeres con EPI: embarazo y EPI: hospitalizar a la paciente para manejo parenteral con antibióticos. En mujeres con EPI infectadas con VIH presentan cuadro clínico similar a las no infectadas y con respuesta terapéutica semejante por lo que no se consideran modificaciones para su manejo. Se reconoce que el riesgo de EPI asociado a DIU es infrecuente después de 3 semanas de colocación. La evidencia apoya el uso de tratamiento a la pareja. GPC Diagnóstico y Tratamiento de la Enfermedad Inflamatoria Pélvica en Mujeres Mayores de 14 Años con Vida Sexual Activa.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 257,
@@ -8997,8 +8742,7 @@
       "correctAnswer": 2,
       "justificacion": "Riesgo alto: niñas con antecedentes familiares positivos, niñas con presentación pélvica, niños con antecedentes familiares positivos y presentación pélvica. GPC Diagnóstico y Tratamiento Oportuno de la Displasia de Cadera.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 258,
@@ -9032,8 +8776,7 @@
       "correctAnswer": 2,
       "justificacion": "Tríada de Putti: desplazamiento lateral de la cabeza y la metáfisis femoral, displasia acetabular e hipoplasia de núcleo femoral. GPC Diagnóstico y Tratamiento Oportuno de la Displasia de Cadera.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 259,
@@ -9067,8 +8810,7 @@
       "correctAnswer": 0,
       "justificacion": "Debido a la alta resolución espontánea en los primeros 45 días de vida de la displasia de cadera congénita, el tiempo óptimo de intervención no necesariamente es al nacimiento. GPC Diagnóstico y Tratamiento Oportuno de la Displasia de Cadera.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 260,
@@ -9102,8 +8844,7 @@
       "correctAnswer": 2,
       "justificacion": "La reducción abierta es el tratamiento de elección en niños con diagnóstico tardío, así como en quienes han fallado el intento de reducción cerrada. GPC Diagnóstico y Tratamiento Oportuno de la Displasia de Cadera.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 261,
@@ -9137,8 +8878,7 @@
       "correctAnswer": 2,
       "justificacion": "Con una conmoción, el paciente tiene una alteración neurológica no focal que, a menudo, incluye pérdida de la conciencia. En estos casos, la TAC puede aparecer normal al inicio. ATLS 10ª edición.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 262,
@@ -9171,9 +8911,8 @@
       ],
       "correctAnswer": 1,
       "justificacion": "Los hematomas epidurales al separar la duramadre adherida a la tabla interna del cráneo toman forma típicamente biconvexa o lenticular. Se hallan más frecuentemente localizados en las regiones temporal o parietotemporal y habitualmente ocurren por desgarro de la arteria meníngea media debido a una fractura. ATLS 10ª edición.",
-      "serie": 10,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 263,
@@ -9206,9 +8945,8 @@
       ],
       "correctAnswer": 2,
       "justificacion": "Los hematomas epidurales al separar la duramadre adherida a la tabla interna del cráneo toman forma típicamente biconvexa o lenticular. Se hallan más frecuentemente localizados en las regiones temporal o parietotemporal y habitualmente ocurren por desgarro de la arteria meníngea media debido a una fractura. La presentación clásica del hematoma epidural es con un intervalo de lucidez entre el momento de la lesión y el deterioro neurológico. ATLS 10ª edición.",
-      "serie": 10,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "serie": null,
+      "type": "multiple-choice"
     },
     {
       "id": 264,
@@ -9242,8 +8980,7 @@
       "correctAnswer": 0,
       "justificacion": "Indicaciones para TAC en pacientes con TCE leve. En alto riesgo para intervención: Glasgow < 15 a las 2 horas, sospecha de fractura abierta o deprimida de cráneo, cualquier signo de fractura de base de cráneo, > 2 vómitos, > 65 años, uso de anticoagulantes. En riesgo moderado de lesión craneoencefálica en la TAC: pérdida de conciencia > 5 min, amnesia antes del trauma > 5 min, mecanismo peligroso (peatón golpeado por un vehículo, ocupante expulsado del vehículo, caída de una altura > 90 cm, 3 pies o 5 escalones). ATLS 10ª edición.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 265,
@@ -9277,8 +9014,7 @@
       "correctAnswer": 0,
       "justificacion": "La epilepsia postraumática ocurre en aproximadamente 5% de los pacientes hospitalizados con TCE cerrado y en 15% de pacientes con lesiones severas. ATLS 10ª edición.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 266,
@@ -9300,7 +9036,7 @@
           "id": "2",
           "text": "7",
           "isCorrect": true,
-          "rationale": "Apariencia: cianosis distal 1 punto. Pulso: < 100 lpm 1 punto. Gesticulación: muecas 1 punto. Actividad: leve flexión de extremidades 1 punto. Respiración: llanto fuerte 2 puntos. Total: 1+1+1+1+2 = 6 puntos. GPC Diagnóstico y Tratamiento de la Asfixia Neonatal."
+          "rationale": "Apariencia: cianosis distal 1 punto. Pulso: < 100 lpm 1 punto. Gesticulación: muecas 1 punto. Actividad: leve flexión de extremidades 1 punto. Respiración: llanto fuerte 2 puntos. Total: 1+1+1+1+2 = 6 puntos."
         },
         {
           "id": "3",
@@ -9310,10 +9046,9 @@
         }
       ],
       "correctAnswer": 2,
-      "justificacion": "Apariencia: cianosis distal 1 punto. Pulso: < 100 lpm 1 punto. Gesticulación: muecas 1 punto. Actividad: leve flexión de extremidades 1 punto. Respiración: llanto fuerte 2 puntos. Total: 1+1+1+1+2 = 6 puntos. GPC Diagnóstico y Tratamiento de la Asfixia Neonatal.",
+      "justificacion": "Apariencia: cianosis distal 1 punto. Pulso: < 100 lpm 1 punto. Gesticulación: muecas 1 punto. Actividad: leve flexión de extremidades 1 punto. Respiración: llanto fuerte 2 puntos. Total: 1+1+1+1+2 = 6 puntos.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 267,
@@ -9347,8 +9082,7 @@
       "correctAnswer": 2,
       "justificacion": "Apariencia: cianosis distal 1 punto. Pulso: > 100 lpm 2 puntos. Gesticulación: tose o estornuda 2 puntos. Actividad: flexión generalizada o movimientos activos 2 puntos. Respiración: respiración regular o llanto fuerte 2 puntos. Total: 1+2+2+2+2 = 9 puntos. GPC Diagnóstico y Tratamiento de la Asfixia Neonatal.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 268,
@@ -9382,8 +9116,7 @@
       "correctAnswer": 1,
       "justificacion": "Movimientos toracoabdominales: disociación 2 puntos. Tiraje intercostal: leve 1 punto. Retracción xifoidea: leve 1 punto. Aleteo nasal: intenso 2 puntos. Quejido espiratorio: leve 1 punto. Total: 2+1+1+2+1 = 7 puntos. GPC Diagnóstico y Tratamiento de la Asfixia Neonatal.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 269,
@@ -9417,8 +9150,7 @@
       "correctAnswer": 1,
       "justificacion": "Silverman-Anderson > 7 puntos: dificultad respiratoria severa. GPC Diagnóstico y Tratamiento de la Asfixia Neonatal.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 270,
@@ -9452,8 +9184,7 @@
       "correctAnswer": 3,
       "justificacion": "Enfermedad de Alzheimer leve, los síntomas de esta etapa pueden incluir los siguientes: pérdida de memoria reciente, confusión sobre la ubicación de lugares familiares, requieren más tiempo para llevar a cabo tareas diarias habituales, dificultad para manejar dinero y pagar cuentas, juicio comprometido que a menudo conduce a malas decisiones, pérdida de espontaneidad y del sentido de iniciativa, cambios de humor y personalidad, aumento de la ansiedad. GPC Diagnóstico y Tratamiento de la Enfermedad de Alzheimer.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 271,
@@ -9487,8 +9218,7 @@
       "correctAnswer": 1,
       "justificacion": "Se recomienda utilizar los criterios del NINCDS-ADRDA para el diagnóstico clínico de la enfermedad de Alzheimer. GPC Diagnóstico y Tratamiento de la Enfermedad de Alzheimer.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 272,
@@ -9522,8 +9252,7 @@
       "correctAnswer": 1,
       "justificacion": "Para evaluar la progresión o mejoría con el tratamiento farmacológico de la demencia leve a moderada se recomienda utilizar la escala GDS (Global Deterioration Scale). En caso de demencia moderada a grave se recomienda utilizar la escala FAST (Functional Assessment Staging). GPC Diagnóstico y Tratamiento de la Enfermedad de Alzheimer.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 273,
@@ -9557,8 +9286,7 @@
       "correctAnswer": 3,
       "justificacion": "La fractura más común de C1 es la fractura por estallido (de Jefferson). El típico mecanismo de lesión es la carga axial que se produce cuando una carga pesada golpea verticalmente la cabeza o el paciente cae sobre su cabeza en posición relativamente neutral. ATLS 10ª edición.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 274,
@@ -9592,8 +9320,7 @@
       "correctAnswer": 2,
       "justificacion": "El término de demencia vascular comprende a todas aquellas demencias secundarias a una o varias lesiones vasculares cerebrales, de cualquier etiología. El diagnóstico de la demencia vascular es predominantemente clínico y debe estar basado en 3 características principales: pérdida de función cognoscitiva, lesiones cerebrovasculares demostradas por algún método de imagen y relación temporal entre las lesiones vasculares y la demencia. GPC Diagnóstico y Tratamiento de la Demencia Vascular en el Adulto en los Tres Niveles de Atención.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 275,
@@ -9627,8 +9354,7 @@
       "correctAnswer": 2,
       "justificacion": "Es recomendable realizar la diferenciación entre demencia vascular, enfermedad de Alzheimer o la coexistencia de las dos entidades, para esto se recomienda utilizar la escala de isquemia de Hachinski, con el fin de identificar de mejor manera el tratamiento y la prevención. GPC Diagnóstico y Tratamiento de la Demencia Vascular en el Adulto en los Tres Niveles de Atención.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 276,
@@ -9662,8 +9388,7 @@
       "correctAnswer": 2,
       "justificacion": "El reflejo de Moro desaparece a los 6 meses de vida posnatal en los lactantes normales. GPC Prevención, Control y Detección en el Recién Nacido de Término Sano en el Primer Nivel.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 277,
@@ -9697,8 +9422,7 @@
       "correctAnswer": 1,
       "justificacion": "El reflejo de presión palmar desaparece entre el 3 y 4 mes de vida. GPC Prevención, Control y Detección en el Recién Nacido de Término Sano en el Primer Nivel.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 278,
@@ -9732,8 +9456,7 @@
       "correctAnswer": 2,
       "justificacion": "La terapia antiplaquetaria dual con aspirina más clopidogrel se recomienda durante 12 meses después de la ICP, a menos que haya contraindicaciones como un riesgo excesivo de sangrado. GPC Diagnóstico y Tratamiento del Infarto Agudo de Miocardio.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 279,
@@ -9767,8 +9490,7 @@
       "correctAnswer": 2,
       "justificacion": "Taponamiento cardíaco: tríada de ruidos cardíacos apagados, hipotensión y venas distendidas. ATLS 10ª edición.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     },
     {
       "id": 280,
@@ -9802,11 +9524,7 @@
       "correctAnswer": 0,
       "justificacion": "El FAST es preciso en un 90-95% de los casos para identificar la presencia de líquido pericárdico. ATLS 10ª edición.",
       "serie": null,
-      "type": "multiple-choice",
-      "difficulty": "moderado"
+      "type": "multiple-choice"
     }
-  ],
-  "total_questions": 280,
-  "is_hidden": false,
-  "created_date": "2026-08-24T05:10:10.115Z"
+  ]
 }

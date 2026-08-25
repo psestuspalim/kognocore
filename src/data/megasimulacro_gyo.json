@@ -1,7 +1,7 @@
 {
   "id": "quiz_megasimulacro_gyo_1",
-  "title": "1° MEGASIMULACRO: GYO",
-  "description": "Megasimulacro de Ginecología y Obstetricia con 53 reactivos clínicos y retroalimentación completa.",
+  "title": "1° MEGASIMULACRO: GYO. 2025",
+  "description": "1° MEGASIMULACRO: GYO. 2025 con 53 reactivos clínicos.",
   "subject_id": "subj_ginecologia_obs",
   "course_id": "course_enarm2026",
   "total_questions": 53,
@@ -10,10 +10,30 @@
       "id": 1,
       "question": "Paciente femenino de 27 años, acude a su segunda consulta de control prenatal con los resultados de los laboratorios encargados en la primera consulta. Que reportan Hb 11.2, leucos 7 mil, plaquetas 223 mil, grupo sanguíneo O-, glucosa 87, EGO sin datos patológicos. ¿Cuál es tu actitud por seguir en esta paciente, con respecto al tamizaje de diabetes en el embarazo?",
       "answerOptions": [
-        { "id": "0", "text": "Aplicar inmunoglobulina anti-D en la semana 28", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Realizar curva de tolerancia a la glucosa en un paso de forma inmediata", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Realizar curva de tolerancia en la semana 24", "isCorrect": true, "rationale": "A PESAR DE QUE LA RESPUESTA DE APLICAR LA INMUNOGLOBULINA ANTI-D ES CORRECTA, PRIMERO HABÍA QUE VIGILAR SI YA EXISTE UNA INMUNIZACIÓN PREVIA, SOLICITANDO UNA PRUEBA DE COOMBS, ADEMÁS LA PREGUNTA VA ENFOCADA AL TAMIZAJE DE DIABETES EN EL EMBARAZO. POR LO QUE LA OPCIÓN CORRECTA ES REALIZAR LA CURVA DE TOLERANCIA EN LA SEMANA 24." },
-        { "id": "3", "text": "Iniciar hierro de forma inmediata", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Aplicar inmunoglobulina anti-D en la semana 28",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Realizar curva de tolerancia a la glucosa en un paso de forma inmediata",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Realizar curva de tolerancia en la semana 24",
+          "isCorrect": true,
+          "rationale": "A PESAR DE QUE LA RESPUESTA DE APLICAR LA INMUNOGLOBULINA ANTI-D ES CORRECTA, PRIMERO HABÍA QUE VIGILAR SI YA EXISTE UNA INMUNIZACIÓN PREVIA, SOLICITANDO UNA PRUEBA DE COOMBS, ADEMÁS LA PREGUNTA VA ENFOCADA AL TAMIZAJE DE DIABETES EN EL EMBARAZO. POR LO QUE LA OPCIÓN CORRECTA ES REALIZAR LA CURVA DE TOLERANCIA EN LA SEMANA 24."
+        },
+        {
+          "id": "3",
+          "text": "Iniciar hierro de forma inmediata",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 2,
       "justificacion": "A PESAR DE QUE LA RESPUESTA DE APLICAR LA INMUNOGLOBULINA ANTI-D ES CORRECTA, PRIMERO HABÍA QUE VIGILAR SI YA EXISTE UNA INMUNIZACIÓN PREVIA, SOLICITANDO UNA PRUEBA DE COOMBS, ADEMÁS LA PREGUNTA VA ENFOCADA AL TAMIZAJE DE DIABETES EN EL EMBARAZO. POR LO QUE LA OPCIÓN CORRECTA ES REALIZAR LA CURVA DE TOLERANCIA EN LA SEMANA 24.",
@@ -24,10 +44,30 @@
       "id": 2,
       "question": "Nombre de los valores utilizados en esta prueba para la interpretación de los resultados:",
       "answerOptions": [
-        { "id": "0", "text": "Valores de MAC", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Valores de Carpenter", "isCorrect": true, "rationale": "AUNQUE EL NOMBRE DEL TEST ES DE O SULLIVAN, LOS VALORES QUE UTILIZAMOS PARA LA INTERPRETACIÓN DE LOS RESULTADOS SON LOS VALORES DE CARPENTER." },
-        { "id": "2", "text": "Prueba de Edimburgo", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Test de O Sullivan", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Valores de MAC",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Valores de Carpenter",
+          "isCorrect": true,
+          "rationale": "AUNQUE EL NOMBRE DEL TEST ES DE O SULLIVAN, LOS VALORES QUE UTILIZAMOS PARA LA INTERPRETACIÓN DE LOS RESULTADOS SON LOS VALORES DE CARPENTER."
+        },
+        {
+          "id": "2",
+          "text": "Prueba de Edimburgo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Test de O Sullivan",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 1,
       "justificacion": "AUNQUE EL NOMBRE DEL TEST ES DE O SULLIVAN, LOS VALORES QUE UTILIZAMOS PARA LA INTERPRETACIÓN DE LOS RESULTADOS SON LOS VALORES DE CARPENTER.",
@@ -38,10 +78,30 @@
       "id": 3,
       "question": "Malformación más característica en hijos de madres diabéticas:",
       "answerOptions": [
-        { "id": "0", "text": "Hipertrofia del tabique IV", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Hipoglucemia", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Macrosomía", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Regresión caudal", "isCorrect": true, "rationale": "LA HIPERTROFIA DEL TABIQUE ES LA MALFORMACIÓN MÁS FRECUENTE, LA HIPOGLUCEMIA ES LA MANIFESTACIÓN PATOLÓGICA MÁS FRECUENTE EN UN HIJO DE MADRE DIABÉTICA, LA MACROSOMÍA ES LA COMPLICACIÓN MÁS FRECUENTE Y LA MALFORMACIÓN CARACTERÍSTICA ES LA REGRESIÓN CAUDAL." }
+        {
+          "id": "0",
+          "text": "Hipertrofia del tabique IV",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Hipoglucemia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Macrosomía",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Regresión caudal",
+          "isCorrect": true,
+          "rationale": "LA HIPERTROFIA DEL TABIQUE ES LA MALFORMACIÓN MÁS FRECUENTE, LA HIPOGLUCEMIA ES LA MANIFESTACIÓN PATOLÓGICA MÁS FRECUENTE EN UN HIJO DE MADRE DIABÉTICA, LA MACROSOMÍA ES LA COMPLICACIÓN MÁS FRECUENTE Y LA MALFORMACIÓN CARACTERÍSTICA ES LA REGRESIÓN CAUDAL."
+        }
       ],
       "correctAnswer": 3,
       "justificacion": "LA HIPERTROFIA DEL TABIQUE ES LA MALFORMACIÓN MÁS FRECUENTE, LA HIPOGLUCEMIA ES LA MANIFESTACIÓN PATOLÓGICA MÁS FRECUENTE EN UN HIJO DE MADRE DIABÉTICA, LA MACROSOMÍA ES LA COMPLICACIÓN MÁS FRECUENTE Y LA MALFORMACIÓN CARACTERÍSTICA ES LA REGRESIÓN CAUDAL.",
@@ -52,10 +112,30 @@
       "id": 4,
       "question": "Femenino de 32 años G2 P1 cursa con embarazo de 15 SDG con adecuado control prenatal. Acude a urgencias debido a que presenta dolor pélvico bajo, actividad uterina y sangrado oscuro y escaso, niega síntomas vasovagales. A la EF cérvix cerrado, sin borramiento, salida de guante al TV con rastros hemáticos. Se realiza USG que reporta feto de 12 SDG con FCF. ¿Cuál es tu diagnóstico?",
       "answerOptions": [
-        { "id": "0", "text": "Aborto diferido", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Amenaza de aborto", "isCorrect": true, "rationale": "EL CÉRVIX CON AUSENCIA DE MODIFICACIONES CERVICALES ES EL DATO PIVOTE QUE DEBEMOS BUSCAR EN TODOS LOS CASOS CLÍNICOS DE AMENAZA DE ABORTO, ADEMÁS DE QUE EL SANGRADO ES MÍNIMO." },
-        { "id": "2", "text": "Aborto incompleto", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Aborto en evolución", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Aborto diferido",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Amenaza de aborto",
+          "isCorrect": true,
+          "rationale": "EL CÉRVIX CON AUSENCIA DE MODIFICACIONES CERVICALES ES EL DATO PIVOTE QUE DEBEMOS BUSCAR EN TODOS LOS CASOS CLÍNICOS DE AMENAZA DE ABORTO, ADEMÁS DE QUE EL SANGRADO ES MÍNIMO."
+        },
+        {
+          "id": "2",
+          "text": "Aborto incompleto",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Aborto en evolución",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 1,
       "justificacion": "EL CÉRVIX CON AUSENCIA DE MODIFICACIONES CERVICALES ES EL DATO PIVOTE QUE DEBEMOS BUSCAR EN TODOS LOS CASOS CLÍNICOS DE AMENAZA DE ABORTO, ADEMÁS DE QUE EL SANGRADO ES MÍNIMO.",
@@ -66,10 +146,30 @@
       "id": 5,
       "question": "¿Cuál es el tratamiento hormonal sugerido en esta paciente?",
       "answerOptions": [
-        { "id": "0", "text": "Análogos de GnRH", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Medroxiprogesterona", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Gonadotropina coriónica humana", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Hidroxiprogesterona", "isCorrect": true, "rationale": "EL TRATAMIENTO HORMONAL SUGERIDO EN MAYORES DE 12 SDG CON AMENAZA DE ABORTO ES 17-HIDROXIPROGESTERONA." }
+        {
+          "id": "0",
+          "text": "Análogos de GnRH",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Medroxiprogesterona",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Gonadotropina coriónica humana",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Hidroxiprogesterona",
+          "isCorrect": true,
+          "rationale": "EL TRATAMIENTO HORMONAL SUGERIDO EN MAYORES DE 12 SDG CON AMENAZA DE ABORTO ES 17-HIDROXIPROGESTERONA."
+        }
       ],
       "correctAnswer": 3,
       "justificacion": "EL TRATAMIENTO HORMONAL SUGERIDO EN MAYORES DE 12 SDG CON AMENAZA DE ABORTO ES 17-HIDROXIPROGESTERONA.",
@@ -80,10 +180,30 @@
       "id": 6,
       "question": "No se considera dentro de los marcadores ultrasonográficos de predicción de aborto:",
       "answerOptions": [
-        { "id": "0", "text": "Bradicardia fetal", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Hematoma intrauterino", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Imagen en panal de abeja", "isCorrect": true, "rationale": "LOS CRITERIOS USG PREDICTORES DE ABORTO SON: BRADICARDIA FETAL MENOR DE 110, HEMATOMA INTRAUTERINO, SACO DE YOLK DE FORMA IRREGULAR." },
-        { "id": "3", "text": "Saco de yolk irregular", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Bradicardia fetal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Hematoma intrauterino",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Imagen en panal de abeja",
+          "isCorrect": true,
+          "rationale": "LOS CRITERIOS USG PREDICTORES DE ABORTO SON: BRADICARDIA FETAL MENOR DE 110, HEMATOMA INTRAUTERINO, SACO DE YOLK DE FORMA IRREGULAR."
+        },
+        {
+          "id": "3",
+          "text": "Saco de yolk irregular",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 2,
       "justificacion": "LOS CRITERIOS USG PREDICTORES DE ABORTO SON: BRADICARDIA FETAL MENOR DE 110, HEMATOMA INTRAUTERINO, SACO DE YOLK DE FORMA IRREGULAR.",
@@ -94,10 +214,30 @@
       "id": 7,
       "question": "Paciente que cursa con 19 SDG, de profesión química bióloga, está preocupada porque su producto no tenga ninguna infección por lo que se realiza por cuenta propia estudios para identificar bacterias y hongos vaginales. En uno de estos estudios se encuentra Cándida albicans ++, la paciente acude con usted para que le dé tratamiento. Usted le pregunta sobre su sintomatología y la paciente le responde que se encuentra asintomática. ¿Cuál es el tratamiento, con base al hallazgo de laboratorio?",
       "answerOptions": [
-        { "id": "0", "text": "Clotrimazol", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Miconazol", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Nistatina", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "No se debe dar tratamiento", "isCorrect": true, "rationale": "DE ACUERDO CON GPC, LAS MUJERES EMBARAZADAS ASINTOMÁTICAS CON VAGINITIS CANDIÁSICA NO REQUIEREN TRATAMIENTO." }
+        {
+          "id": "0",
+          "text": "Clotrimazol",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Miconazol",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Nistatina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "No se debe dar tratamiento",
+          "isCorrect": true,
+          "rationale": "DE ACUERDO CON GPC, LAS MUJERES EMBARAZADAS ASINTOMÁTICAS CON VAGINITIS CANDIÁSICA NO REQUIEREN TRATAMIENTO."
+        }
       ],
       "correctAnswer": 3,
       "justificacion": "DE ACUERDO CON GPC, LAS MUJERES EMBARAZADAS ASINTOMÁTICAS CON VAGINITIS CANDIÁSICA NO REQUIEREN TRATAMIENTO.",
@@ -108,10 +248,30 @@
       "id": 8,
       "question": "Porcentaje de mujeres que presentarán algún cuadro de candidiasis a lo largo de su vida:",
       "answerOptions": [
-        { "id": "0", "text": "25%", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "50%", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "45%", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "75%", "isCorrect": true, "rationale": "EL 75% DE LAS PACIENTES PRESENTARÁ UN CUADRO DE CANDIDIASIS A LO LARGO DE SU VIDA." }
+        {
+          "id": "0",
+          "text": "25%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "50%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "45%",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "75%",
+          "isCorrect": true,
+          "rationale": "EL 75% DE LAS PACIENTES PRESENTARÁ UN CUADRO DE CANDIDIASIS A LO LARGO DE SU VIDA."
+        }
       ],
       "correctAnswer": 3,
       "justificacion": "EL 75% DE LAS PACIENTES PRESENTARÁ UN CUADRO DE CANDIDIASIS A LO LARGO DE SU VIDA.",
@@ -122,10 +282,30 @@
       "id": 9,
       "question": "Nivel de pH vaginal que esperaríamos encontrar en esta paciente:",
       "answerOptions": [
-        { "id": "0", "text": "Menor de 4.5", "isCorrect": true, "rationale": "EL pH EN CANDIDIASIS VAGINAL NO SUFRE MODIFICACIONES, LO PODEMOS ENCONTRAR CON VALORES ENTRE 4 Y 4.5." },
-        { "id": "1", "text": "Mayor de 4.5", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Menor de 3.5", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Mayor de 5.5", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Menor de 4.5",
+          "isCorrect": true,
+          "rationale": "EL pH EN CANDIDIASIS VAGINAL NO SUFRE MODIFICACIONES, LO PODEMOS ENCONTRAR CON VALORES ENTRE 4 Y 4.5."
+        },
+        {
+          "id": "1",
+          "text": "Mayor de 4.5",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Menor de 3.5",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Mayor de 5.5",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "EL pH EN CANDIDIASIS VAGINAL NO SUFRE MODIFICACIONES, LO PODEMOS ENCONTRAR CON VALORES ENTRE 4 Y 4.5.",
@@ -136,10 +316,30 @@
       "id": 10,
       "question": "La siguiente descripción se refiere al cuarto plano de Hodge:",
       "answerOptions": [
-        { "id": "0", "text": "Presentación móvil", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Producto profundamente encajado", "isCorrect": true, "rationale": "EL CUARTO PLANO DE HODGE CORRESPONDE A UN PRODUCTO QUE SE ENCUENTRA DESDE EL VÉRTICE DEL SACRO HASTA LA PUNTA DEL CÓCCIX." },
-        { "id": "2", "text": "Presentación fija", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Producto encajado", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Presentación móvil",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Producto profundamente encajado",
+          "isCorrect": true,
+          "rationale": "EL CUARTO PLANO DE HODGE CORRESPONDE A UN PRODUCTO QUE SE ENCUENTRA DESDE EL VÉRTICE DEL SACRO HASTA LA PUNTA DEL CÓCCIX."
+        },
+        {
+          "id": "2",
+          "text": "Presentación fija",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Producto encajado",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 1,
       "justificacion": "EL CUARTO PLANO DE HODGE CORRESPONDE A UN PRODUCTO QUE SE ENCUENTRA DESDE EL VÉRTICE DEL SACRO HASTA LA PUNTA DEL CÓCCIX.",
@@ -150,10 +350,30 @@
       "id": 11,
       "question": "Femenino de 22 años G2 P1 cursa con embarazo de 39 SDG con adecuado control prenatal. Acude debido a inicio de trabajo de parto, posterior de esto ingresa a sala de labor en donde usted indica el siguiente fármaco con el fin de prevenir una hemorragia uterina:",
       "answerOptions": [
-        { "id": "0", "text": "Misoprostol", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Oxitocina", "isCorrect": true, "rationale": "LA OXITOCINA ES EL FÁRMACO DE ELECCIÓN EN LA PREVENCIÓN DE HEMORRAGIAS OBSTÉTRICAS, SE APLICAN 10 UI EN DELTOIDES IZQUIERDO IM CARA ANTERIOR." },
-        { "id": "2", "text": "Carbetocina", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Ácido tranexámico", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Misoprostol",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Oxitocina",
+          "isCorrect": true,
+          "rationale": "LA OXITOCINA ES EL FÁRMACO DE ELECCIÓN EN LA PREVENCIÓN DE HEMORRAGIAS OBSTÉTRICAS, SE APLICAN 10 UI EN DELTOIDES IZQUIERDO IM CARA ANTERIOR."
+        },
+        {
+          "id": "2",
+          "text": "Carbetocina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Ácido tranexámico",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 1,
       "justificacion": "LA OXITOCINA ES EL FÁRMACO DE ELECCIÓN EN LA PREVENCIÓN DE HEMORRAGIAS OBSTÉTRICAS, SE APLICAN 10 UI EN DELTOIDES IZQUIERDO IM CARA ANTERIOR.",
@@ -164,10 +384,30 @@
       "id": 12,
       "question": "¿En qué momento del trabajo de parto se debe administrar este fármaco?",
       "answerOptions": [
-        { "id": "0", "text": "Fase activa", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Fase expulsiva al nacer la cabeza", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Fase expulsiva al nacer el hombro anterior", "isCorrect": true, "rationale": "LA ADMINISTRACIÓN DE ESTE FÁRMACO DEBE SER AL NACER EL HOMBRO ANTERIOR." },
-        { "id": "3", "text": "Alumbramiento", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Fase activa",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Fase expulsiva al nacer la cabeza",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Fase expulsiva al nacer el hombro anterior",
+          "isCorrect": true,
+          "rationale": "LA ADMINISTRACIÓN DE ESTE FÁRMACO DEBE SER AL NACER EL HOMBRO ANTERIOR."
+        },
+        {
+          "id": "3",
+          "text": "Alumbramiento",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 2,
       "justificacion": "LA ADMINISTRACIÓN DE ESTE FÁRMACO DEBE SER AL NACER EL HOMBRO ANTERIOR.",
@@ -178,10 +418,30 @@
       "id": 13,
       "question": "Vida media del fármaco utilizado en esta paciente:",
       "answerOptions": [
-        { "id": "0", "text": "5 minutos", "isCorrect": true, "rationale": "LA VIDA MEDIA DE LA OXITOCINA ES DE 5 MINUTOS, DEBE SER ADMINISTRADA CON SOLUCIÓN GLUCOSADA." },
-        { "id": "1", "text": "10 minutos", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "30 minutos", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "60 minutos", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "5 minutos",
+          "isCorrect": true,
+          "rationale": "LA VIDA MEDIA DE LA OXITOCINA ES DE 5 MINUTOS, DEBE SER ADMINISTRADA CON SOLUCIÓN GLUCOSADA."
+        },
+        {
+          "id": "1",
+          "text": "10 minutos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "30 minutos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "60 minutos",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "LA VIDA MEDIA DE LA OXITOCINA ES DE 5 MINUTOS, DEBE SER ADMINISTRADA CON SOLUCIÓN GLUCOSADA.",
@@ -192,10 +452,30 @@
       "id": 14,
       "question": "Femenino de 39 años, con antecedente de preeclampsia sin datos de severidad, da a luz a paciente femenino de 38 SDG. Se inicia la dosis de oxitocina profiláctica para evitar un sangrado activo, sin embargo, a pesar de esta acción la paciente continúa con el sangrado. ¿Cuál sería tu siguiente opción farmacológica para detener el sangrado?",
       "answerOptions": [
-        { "id": "0", "text": "Ergonovina", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Carbetocina", "isCorrect": true, "rationale": "DE LOS FÁRMACOS MENCIONADOS EN LAS OPCIONES, LA MEJOR RESPUESTA ES LA CARBETOCINA, YA QUE LA ERGONOVINA A PESAR DE SER EL FÁRMACO DE SEGUNDA OPCIÓN ESTÁ CONTRAINDICADA EN ESTA PACIENTE POR EL ANTECEDENTE DE PREECLAMPSIA." },
-        { "id": "2", "text": "Protamina", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Ácido tranexámico", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Ergonovina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Carbetocina",
+          "isCorrect": true,
+          "rationale": "DE LOS FÁRMACOS MENCIONADOS EN LAS OPCIONES, LA MEJOR RESPUESTA ES LA CARBETOCINA, YA QUE LA ERGONOVINA A PESAR DE SER EL FÁRMACO DE SEGUNDA OPCIÓN ESTÁ CONTRAINDICADA EN ESTA PACIENTE POR EL ANTECEDENTE DE PREECLAMPSIA."
+        },
+        {
+          "id": "2",
+          "text": "Protamina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Ácido tranexámico",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 1,
       "justificacion": "DE LOS FÁRMACOS MENCIONADOS EN LAS OPCIONES, LA MEJOR RESPUESTA ES LA CARBETOCINA, YA QUE LA ERGONOVINA A PESAR DE SER EL FÁRMACO DE SEGUNDA OPCIÓN ESTÁ CONTRAINDICADA EN ESTA PACIENTE POR EL ANTECEDENTE DE PREECLAMPSIA.",
@@ -206,10 +486,30 @@
       "id": 15,
       "question": "Además de la administración de oxitocina, ¿qué otras maniobras indicarías en esta paciente?",
       "answerOptions": [
-        { "id": "0", "text": "Pinzamiento de las arterias uterinas", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Colocación de balón hidrostático intrauterino", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Compresión uterina bimanual", "isCorrect": true, "rationale": "DE ACUERDO CON EL ALGORITMO, ADEMÁS DE LA ADMINISTRACIÓN DE UTEROTÓNICOS DEBEMOS ADMINISTRAR ÁCIDO TRANEXÁMICO Y DEBEMOS INICIAR CON EL MANEJO HEMOSTÁTICO MECÁNICO Y EL PRIMER PASO DE ESTE ÚLTIMO ES LA COMPRESIÓN UTERINA BIMANUAL. YA EN CASO DE QUE CONTINÚE LA HEMORRAGIA PODEMOS PINZAR LAS ARTERIAS UTERINAS O COLOCAR EL BALÓN HIDROSTÁTICO." },
-        { "id": "3", "text": "Ligadura uterina", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Pinzamiento de las arterias uterinas",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Colocación de balón hidrostático intrauterino",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Compresión uterina bimanual",
+          "isCorrect": true,
+          "rationale": "DE ACUERDO CON EL ALGORITMO, ADEMÁS DE LA ADMINISTRACIÓN DE UTEROTÓNICOS DEBEMOS ADMINISTRAR ÁCIDO TRANEXÁMICO Y DEBEMOS INICIAR CON EL MANEJO HEMOSTÁTICO MECÁNICO Y EL PRIMER PASO DE ESTE ÚLTIMO ES LA COMPRESIÓN UTERINA BIMANUAL. YA EN CASO DE QUE CONTINÚE LA HEMORRAGIA PODEMOS PINZAR LAS ARTERIAS UTERINAS O COLOCAR EL BALÓN HIDROSTÁTICO."
+        },
+        {
+          "id": "3",
+          "text": "Ligadura uterina",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 2,
       "justificacion": "DE ACUERDO CON EL ALGORITMO, ADEMÁS DE LA ADMINISTRACIÓN DE UTEROTÓNICOS DEBEMOS ADMINISTRAR ÁCIDO TRANEXÁMICO Y DEBEMOS INICIAR CON EL MANEJO HEMOSTÁTICO MECÁNICO Y EL PRIMER PASO DE ESTE ÚLTIMO ES LA COMPRESIÓN UTERINA BIMANUAL. YA EN CASO DE QUE CONTINÚE LA HEMORRAGIA PODEMOS PINZAR LAS ARTERIAS UTERINAS O COLOCAR EL BALÓN HIDROSTÁTICO.",
@@ -220,10 +520,30 @@
       "id": 16,
       "question": "En caso de que esta paciente tuviera datos de choque, ¿cuál sería el primer indicador que nos haría sospechar de esta entidad?",
       "answerOptions": [
-        { "id": "0", "text": "Aumento de FR", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Disminución de la TA", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Aumento de la FC de pulso", "isCorrect": true, "rationale": "EL PRIMER INDICADOR DE CHOQUE EN ESTAS PACIENTES ES UN AUMENTO DE LA FRECUENCIA CARDIACA." },
-        { "id": "3", "text": "Desorientación de la paciente", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Aumento de FR",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Disminución de la TA",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Aumento de la FC de pulso",
+          "isCorrect": true,
+          "rationale": "EL PRIMER INDICADOR DE CHOQUE EN ESTAS PACIENTES ES UN AUMENTO DE LA FRECUENCIA CARDIACA."
+        },
+        {
+          "id": "3",
+          "text": "Desorientación de la paciente",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 2,
       "justificacion": "EL PRIMER INDICADOR DE CHOQUE EN ESTAS PACIENTES ES UN AUMENTO DE LA FRECUENCIA CARDIACA.",
@@ -234,10 +554,30 @@
       "id": 17,
       "question": "En caso de falla al tratamiento, ¿cuál sería tu mejor opción como médico de primer contacto?",
       "answerOptions": [
-        { "id": "0", "text": "Tinidazol", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Derivar a segundo nivel", "isCorrect": true, "rationale": "EL FÁRMACO EN CASO DE FALLA AL TRATAMIENTO ES EL TINIDAZOL, SIN EMBARGO, COMO MÉDICOS DE PRIMER CONTACTO LA MEJOR ACTITUD A SEGUIR ES DERIVAR A TODAS LAS PACIENTES CON FALLA AL TRATAMIENTO DE PRIMERA ELECCIÓN." },
-        { "id": "2", "text": "Clindamicina", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Dicloxacilina", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Tinidazol",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Derivar a segundo nivel",
+          "isCorrect": true,
+          "rationale": "EL FÁRMACO EN CASO DE FALLA AL TRATAMIENTO ES EL TINIDAZOL, SIN EMBARGO, COMO MÉDICOS DE PRIMER CONTACTO LA MEJOR ACTITUD A SEGUIR ES DERIVAR A TODAS LAS PACIENTES CON FALLA AL TRATAMIENTO DE PRIMERA ELECCIÓN."
+        },
+        {
+          "id": "2",
+          "text": "Clindamicina",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Dicloxacilina",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 1,
       "justificacion": "EL FÁRMACO EN CASO DE FALLA AL TRATAMIENTO ES EL TINIDAZOL, SIN EMBARGO, COMO MÉDICOS DE PRIMER CONTACTO LA MEJOR ACTITUD A SEGUIR ES DERIVAR A TODAS LAS PACIENTES CON FALLA AL TRATAMIENTO DE PRIMERA ELECCIÓN.",
@@ -248,10 +588,30 @@
       "id": 18,
       "question": "Paciente acude a consulta para darle seguimiento a su embarazo. La paciente cursa con 22 SDG, con antecedentes G4 C2 P1, la paciente refiere que toma ácido fólico y hierro desde que sabe que está embarazada, además toma losartán 2 veces al día para control de su TA desde hace 3 años. A la exploración física paciente con TA 140/80, temp 36.2, IMC 32. ¿Cuál es el primer paso por seguir en esta paciente?",
       "answerOptions": [
-        { "id": "0", "text": "Iniciar ASA 100 mg para prevenir preeclampsia", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Suspender el ácido fólico", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Suspender losartán", "isCorrect": true, "rationale": "LA MEJOR RESPUESTA PARA ESTE CASO ES SUSPENDER EL LOSARTÁN DEBIDO A QUE ES UN FÁRMACO TERATOGÉNICO. YA NO PODEMOS INICIAR ASA DEBIDO A LAS SEMANAS DE GESTACIÓN. SUSPENDER EL ÁCIDO FÓLICO ES CORRECTO, PERO NO ES LA RESPUESTA MÁS CORRECTA. INICIAR ALFAMETILDOPA TAMBIÉN ES UNA OPCIÓN POR CONSIDERAR DEBIDO A QUE ES EL FÁRMACO DE PRIMERA LÍNEA EN ESTA ENTIDAD, SIN EMBARGO, LA PREGUNTA ES CUÁL ES EL PRIMER PASO. POR LO QUE LA OPCIÓN CORRECTA SERÁ SUSPENDER EL LOSARTÁN." },
-        { "id": "3", "text": "Iniciar con alfametildopa", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Iniciar ASA 100 mg para prevenir preeclampsia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Suspender el ácido fólico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Suspender losartán",
+          "isCorrect": true,
+          "rationale": "LA MEJOR RESPUESTA PARA ESTE CASO ES SUSPENDER EL LOSARTÁN DEBIDO A QUE ES UN FÁRMACO TERATOGÉNICO. YA NO PODEMOS INICIAR ASA DEBIDO A LAS SEMANAS DE GESTACIÓN. SUSPENDER EL ÁCIDO FÓLICO ES CORRECTO, PERO NO ES LA RESPUESTA MÁS CORRECTA. INICIAR ALFAMETILDOPA TAMBIÉN ES UNA OPCIÓN POR CONSIDERAR DEBIDO A QUE ES EL FÁRMACO DE PRIMERA LÍNEA EN ESTA ENTIDAD, SIN EMBARGO, LA PREGUNTA ES CUÁL ES EL PRIMER PASO. POR LO QUE LA OPCIÓN CORRECTA SERÁ SUSPENDER EL LOSARTÁN."
+        },
+        {
+          "id": "3",
+          "text": "Iniciar con alfametildopa",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 2,
       "justificacion": "LA MEJOR RESPUESTA PARA ESTE CASO ES SUSPENDER EL LOSARTÁN DEBIDO A QUE ES UN FÁRMACO TERATOGÉNICO. YA NO PODEMOS INICIAR ASA DEBIDO A LAS SEMANAS DE GESTACIÓN. SUSPENDER EL ÁCIDO FÓLICO ES CORRECTO, PERO NO ES LA RESPUESTA MÁS CORRECTA. INICIAR ALFAMETILDOPA TAMBIÉN ES UNA OPCIÓN POR CONSIDERAR DEBIDO A QUE ES EL FÁRMACO DE PRIMERA LÍNEA EN ESTA ENTIDAD, SIN EMBARGO, LA PREGUNTA ES CUÁL ES EL PRIMER PASO. POR LO QUE LA OPCIÓN CORRECTA SERÁ SUSPENDER EL LOSARTÁN.",
@@ -262,10 +622,30 @@
       "id": 19,
       "question": "¿Qué fármaco antihipertensivo se asocia a náusea, vómito y síndrome de lupus-like?",
       "answerOptions": [
-        { "id": "0", "text": "Labetalol", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Nifedipino", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Metoprolol", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Hidralazina", "isCorrect": true, "rationale": "EL FÁRMACO QUE CUMPLE CON LA DESCRIPCIÓN DEL CASO ES LA HIDRALAZINA." }
+        {
+          "id": "0",
+          "text": "Labetalol",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Nifedipino",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Metoprolol",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Hidralazina",
+          "isCorrect": true,
+          "rationale": "EL FÁRMACO QUE CUMPLE CON LA DESCRIPCIÓN DEL CASO ES LA HIDRALAZINA."
+        }
       ],
       "correctAnswer": 3,
       "justificacion": "EL FÁRMACO QUE CUMPLE CON LA DESCRIPCIÓN DEL CASO ES LA HIDRALAZINA.",
@@ -276,10 +656,30 @@
       "id": 20,
       "question": "El fármaco que estaba consumiendo la paciente para el control de su TA está contraindicado en el embarazo ya que se asocia a:",
       "answerOptions": [
-        { "id": "0", "text": "Nefrotoxicidad", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Alteraciones congénitas renales", "isCorrect": true, "rationale": "LOS ARA II Y LOS IECA SE ASOCIAN A ALTERACIONES CONGÉNITAS RENALES." },
-        { "id": "2", "text": "Parto pretérmino", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Óbito", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Nefrotoxicidad",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Alteraciones congénitas renales",
+          "isCorrect": true,
+          "rationale": "LOS ARA II Y LOS IECA SE ASOCIAN A ALTERACIONES CONGÉNITAS RENALES."
+        },
+        {
+          "id": "2",
+          "text": "Parto pretérmino",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Óbito",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 1,
       "justificacion": "LOS ARA II Y LOS IECA SE ASOCIAN A ALTERACIONES CONGÉNITAS RENALES.",
@@ -290,10 +690,30 @@
       "id": 21,
       "question": "De la siguiente lista, este se considera el principal tipo de insulina contraindicada en el embarazo:",
       "answerOptions": [
-        { "id": "0", "text": "Glargina", "isCorrect": true, "rationale": "LA GLARGINA ES UN FÁRMACO CATEGORÍA C, ES DECIR ALTO RIESGO TERATOGÉNICO POR LO QUE ESTÁ CONTRAINDICADO DURANTE EL EMBARAZO." },
-        { "id": "1", "text": "Regular", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Lispro", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "NPH", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Glargina",
+          "isCorrect": true,
+          "rationale": "LA GLARGINA ES UN FÁRMACO CATEGORÍA C, ES DECIR ALTO RIESGO TERATOGÉNICO POR LO QUE ESTÁ CONTRAINDICADO DURANTE EL EMBARAZO."
+        },
+        {
+          "id": "1",
+          "text": "Regular",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Lispro",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "NPH",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "LA GLARGINA ES UN FÁRMACO CATEGORÍA C, ES DECIR ALTO RIESGO TERATOGÉNICO POR LO QUE ESTÁ CONTRAINDICADO DURANTE EL EMBARAZO.",
@@ -304,10 +724,30 @@
       "id": 22,
       "question": "Paciente de 27 años es referida a su hospital debido a una preeclampsia con criterios de severidad. ¿Qué datos esperaría encontrar?",
       "answerOptions": [
-        { "id": "0", "text": "Proteinuria en 24 horas de 2 gramos", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Cefalea", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Edema", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Sospecha de desprendimiento placentario", "isCorrect": true, "rationale": "EL DPPNI ESTÁ ASOCIADO A ESTADOS HIPERTENSIVOS, Y QUE LA PREECLAMPSIA DESENCADENE ESTA ENTIDAD NOS HABLA DE UN DATO DE SEVERIDAD. OTROS DATOS SERÁN PROTEINURIA DE MÁS DE 3 GRAMOS, CEFALEA INTENSA, EDEMA GENERALIZADO (EL QUE NOS PONGAN CEFALEA Y EDEMA, COMO EN LAS OPCIONES DE ESTE CASO, NO LO PODEMOS CONSIDERAR COMO DATOS DE SEVERIDAD, PORQUE ESOS MISMOS SÍNTOMAS SE PUEDEN PRESENTAR EN UNA PREECLAMPSIA SIN DATOS DE SEVERIDAD)." }
+        {
+          "id": "0",
+          "text": "Proteinuria en 24 horas de 2 gramos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Cefalea",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Edema",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Sospecha de desprendimiento placentario",
+          "isCorrect": true,
+          "rationale": "EL DPPNI ESTÁ ASOCIADO A ESTADOS HIPERTENSIVOS, Y QUE LA PREECLAMPSIA DESENCADENE ESTA ENTIDAD NOS HABLA DE UN DATO DE SEVERIDAD. OTROS DATOS SERÁN PROTEINURIA DE MÁS DE 3 GRAMOS, CEFALEA INTENSA, EDEMA GENERALIZADO (EL QUE NOS PONGAN CEFALEA Y EDEMA, COMO EN LAS OPCIONES DE ESTE CASO, NO LO PODEMOS CONSIDERAR COMO DATOS DE SEVERIDAD, PORQUE ESOS MISMOS SÍNTOMAS SE PUEDEN PRESENTAR EN UNA PREECLAMPSIA SIN DATOS DE SEVERIDAD)."
+        }
       ],
       "correctAnswer": 3,
       "justificacion": "EL DPPNI ESTÁ ASOCIADO A ESTADOS HIPERTENSIVOS, Y QUE LA PREECLAMPSIA DESENCADENE ESTA ENTIDAD NOS HABLA DE UN DATO DE SEVERIDAD. OTROS DATOS SERÁN PROTEINURIA DE MÁS DE 3 GRAMOS, CEFALEA INTENSA, EDEMA GENERALIZADO (EL QUE NOS PONGAN CEFALEA Y EDEMA, COMO EN LAS OPCIONES DE ESTE CASO, NO LO PODEMOS CONSIDERAR COMO DATOS DE SEVERIDAD, PORQUE ESOS MISMOS SÍNTOMAS SE PUEDEN PRESENTAR EN UNA PREECLAMPSIA SIN DATOS DE SEVERIDAD).",
@@ -318,10 +758,30 @@
       "id": 23,
       "question": "Se decide iniciar neuroprotección en esta paciente. ¿Cuál es el esquema utilizado para administrar el fármaco?",
       "answerOptions": [
-        { "id": "0", "text": "4 g IV en 30 minutos + 1 g por hora", "isCorrect": true, "rationale": "EL ESQUEMA ZUSPAN ES EL ESQUEMA DE ELECCIÓN UTILIZADO PARA PREVENIR O TRATAR CONVULSIONES ASOCIADAS A ESTADOS HIPERTENSIVOS DEL EMBARAZO." },
-        { "id": "1", "text": "6 g IV en 30 minutos + 2 gramos por hora", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "4 mg IV en 30 minutos + 1 g por hora", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "6 mg IV en 30 minutos + 2 gramos por hora", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "4 g IV en 30 minutos + 1 g por hora",
+          "isCorrect": true,
+          "rationale": "EL ESQUEMA ZUSPAN ES EL ESQUEMA DE ELECCIÓN UTILIZADO PARA PREVENIR O TRATAR CONVULSIONES ASOCIADAS A ESTADOS HIPERTENSIVOS DEL EMBARAZO."
+        },
+        {
+          "id": "1",
+          "text": "6 g IV en 30 minutos + 2 gramos por hora",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "4 mg IV en 30 minutos + 1 g por hora",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "6 mg IV en 30 minutos + 2 gramos por hora",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "EL ESQUEMA ZUSPAN ES EL ESQUEMA DE ELECCIÓN UTILIZADO PARA PREVENIR O TRATAR CONVULSIONES ASOCIADAS A ESTADOS HIPERTENSIVOS DEL EMBARAZO.",
@@ -332,10 +792,30 @@
       "id": 24,
       "question": "Antídoto para la intoxicación con este fármaco:",
       "answerOptions": [
-        { "id": "0", "text": "Gluconato de sodio", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Flumazenil", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "N-acetil cisteína", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Gluconato de calcio", "isCorrect": true, "rationale": "El antídoto para la intoxicación por sulfato de magnesio es el gluconato de calcio." }
+        {
+          "id": "0",
+          "text": "Gluconato de sodio",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Flumazenil",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "N-acetil cisteína",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Gluconato de calcio",
+          "isCorrect": true,
+          "rationale": "El antídoto para la intoxicación por sulfato de magnesio es el gluconato de calcio."
+        }
       ],
       "correctAnswer": 3,
       "justificacion": "El antídoto para la intoxicación por sulfato de magnesio es el gluconato de calcio.",
@@ -346,10 +826,30 @@
       "id": 25,
       "question": "Femenino de 62 años, G0, menarca a los 9 años y menopausia a los 52 años, tabaquismo negado, antecedentes de diabetes mellitus en control con linagliptina y glimepirida, hace 2 años fue diagnosticada con hipertensión y dislipidemia por lo que la paciente toma de forma crónica captopril y ASA 100 por las noches. La paciente acude debido a que refiere sangrado en agua de lavar carne en cantidad moderada y dolor pélvico leve. Última citología hace 2 años con resultados negativos. Es el principal factor asociado a la aparición de esta patología:",
       "answerOptions": [
-        { "id": "0", "text": "Falta de agregación plaquetaria por ASA", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Infección por VIH", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Microtraumatismo ovárico", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Estados de hiperestrogenismo", "isCorrect": true, "rationale": "EL DIAGNÓSTICO DEL CASO CLÍNICO ES UN CÁNCER DE ENDOMETRIO, POR LO QUE EL PRINCIPAL FACTOR ASOCIADO A ESTA ENTIDAD SON LOS ESTADOS DE HIPERESTROGENISMO." }
+        {
+          "id": "0",
+          "text": "Falta de agregación plaquetaria por ASA",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Infección por VIH",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Microtraumatismo ovárico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Estados de hiperestrogenismo",
+          "isCorrect": true,
+          "rationale": "EL DIAGNÓSTICO DEL CASO CLÍNICO ES UN CÁNCER DE ENDOMETRIO, POR LO QUE EL PRINCIPAL FACTOR ASOCIADO A ESTA ENTIDAD SON LOS ESTADOS DE HIPERESTROGENISMO."
+        }
       ],
       "correctAnswer": 3,
       "justificacion": "EL DIAGNÓSTICO DEL CASO CLÍNICO ES UN CÁNCER DE ENDOMETRIO, POR LO QUE EL PRINCIPAL FACTOR ASOCIADO A ESTA ENTIDAD SON LOS ESTADOS DE HIPERESTROGENISMO.",
@@ -360,10 +860,30 @@
       "id": 26,
       "question": "Principal tipo histológico en esta patología:",
       "answerOptions": [
-        { "id": "0", "text": "Seroso", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Epitelial", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Adenocarcinoma", "isCorrect": true, "rationale": "EL PRINCIPAL TIPO HISTOLÓGICO EN UN CÁNCER DE ENDOMETRIO ES EL ADENOCARCINOMA." },
-        { "id": "3", "text": "Mucinoso", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Seroso",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Epitelial",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Adenocarcinoma",
+          "isCorrect": true,
+          "rationale": "EL PRINCIPAL TIPO HISTOLÓGICO EN UN CÁNCER DE ENDOMETRIO ES EL ADENOCARCINOMA."
+        },
+        {
+          "id": "3",
+          "text": "Mucinoso",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 2,
       "justificacion": "EL PRINCIPAL TIPO HISTOLÓGICO EN UN CÁNCER DE ENDOMETRIO ES EL ADENOCARCINOMA.",
@@ -374,10 +894,30 @@
       "id": 27,
       "question": "Estudio de elección para confirmar tu diagnóstico:",
       "answerOptions": [
-        { "id": "0", "text": "RM", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "USG", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "TAC", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Biopsia", "isCorrect": true, "rationale": "AL TRATARSE DE UN CÁNCER, EL ESTUDIO CONFIRMATORIO ES LA BIOPSIA." }
+        {
+          "id": "0",
+          "text": "RM",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "USG",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "TAC",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Biopsia",
+          "isCorrect": true,
+          "rationale": "AL TRATARSE DE UN CÁNCER, EL ESTUDIO CONFIRMATORIO ES LA BIOPSIA."
+        }
       ],
       "correctAnswer": 3,
       "justificacion": "AL TRATARSE DE UN CÁNCER, EL ESTUDIO CONFIRMATORIO ES LA BIOPSIA.",
@@ -388,10 +928,30 @@
       "id": 28,
       "question": "A 24-year-old sexually active woman reports increased vaginal discharge. Pelvic examination shows a green frothy discharge. Microscopic examination of a wet mount of the discharge shows motile unicellular organisms 10-30 micrometer. Diagnostic:",
       "answerOptions": [
-        { "id": "0", "text": "Trichomoniasis", "isCorrect": true, "rationale": "La tricomoniasis se caracteriza por flujo vaginal verdoso espumoso (frothy) y la visualización de organismos móviles unicelulares de 10-30 micrómetros en el examen en fresco." },
-        { "id": "1", "text": "Gardnerella", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Candidiasis", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Chlamydia", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Trichomoniasis",
+          "isCorrect": true,
+          "rationale": "La tricomoniasis se caracteriza por flujo vaginal verdoso espumoso (frothy) y la visualización de organismos móviles unicelulares de 10-30 micrómetros en el examen en fresco."
+        },
+        {
+          "id": "1",
+          "text": "Gardnerella",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Candidiasis",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Chlamydia",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "La tricomoniasis se caracteriza por flujo vaginal verdoso espumoso (frothy) y la visualización de organismos móviles unicelulares de 10-30 micrómetros en el examen en fresco.",
@@ -402,10 +962,30 @@
       "id": 29,
       "question": "¿Cómo esperaríamos encontrar el perfil hormonal de una paciente con falla ovárica prematura?",
       "answerOptions": [
-        { "id": "0", "text": "LH baja y FSH baja", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "LH baja y FSH alta", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "LH alta y FSH baja", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "LH alta y FSH alta", "isCorrect": true, "rationale": "ES UNA RESPUESTA A DISCUSIÓN DEBIDO A QUE EN ETAPAS INICIALES PODRÍAMOS ENCONTRAR UNA LH NORMAL, SIN EMBARGO, LA OPCIÓN MÁS CORRECTA YA QUE NO SE ESPECIFICA EN QUÉ ETAPA SE ENCUENTRA LA PACIENTE ES LH ALTA Y FSH ALTA." }
+        {
+          "id": "0",
+          "text": "LH baja y FSH baja",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "LH baja y FSH alta",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "LH alta y FSH baja",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "LH alta y FSH alta",
+          "isCorrect": true,
+          "rationale": "ES UNA RESPUESTA A DISCUSIÓN DEBIDO A QUE EN ETAPAS INICIALES PODRÍAMOS ENCONTRAR UNA LH NORMAL, SIN EMBARGO, LA OPCIÓN MÁS CORRECTA YA QUE NO SE ESPECIFICA EN QUÉ ETAPA SE ENCUENTRA LA PACIENTE ES LH ALTA Y FSH ALTA."
+        }
       ],
       "correctAnswer": 3,
       "justificacion": "ES UNA RESPUESTA A DISCUSIÓN DEBIDO A QUE EN ETAPAS INICIALES PODRÍAMOS ENCONTRAR UNA LH NORMAL, SIN EMBARGO, LA OPCIÓN MÁS CORRECTA YA QUE NO SE ESPECIFICA EN QUÉ ETAPA SE ENCUENTRA LA PACIENTE ES LH ALTA Y FSH ALTA.",
@@ -416,10 +996,30 @@
       "id": 30,
       "question": "Female patient 24 years old, G2 C1 with twin pregnancy of 35 SDG. She comes to the emergency service with 3 contractions in 1 hour with a 20 second duration each. During her arrival she presents transvaginal fluid leak, clear liquid, abundant. USG reports a 5 cm distant placenta from the internal cervical orifice, amniotic index < 5, one of the twins with bradycardia. It's prescribed urgent C-section. Which main indication in this case is:",
       "answerOptions": [
-        { "id": "0", "text": "Previous placenta", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Fetal suffer", "isCorrect": true, "rationale": "SIEMPRE QUE SE NOS PRESENTE UNA BRADICARDIA FETAL, DEBEMOS PENSAR EN UN SUFRIMIENTO FETAL, YA QUE ES UN CRITERIO MAYOR PARA ELLA." },
-        { "id": "2", "text": "Oligohydramnios", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "RPM", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Previous placenta",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Fetal suffer",
+          "isCorrect": true,
+          "rationale": "SIEMPRE QUE SE NOS PRESENTE UNA BRADICARDIA FETAL, DEBEMOS PENSAR EN UN SUFRIMIENTO FETAL, YA QUE ES UN CRITERIO MAYOR PARA ELLA."
+        },
+        {
+          "id": "2",
+          "text": "Oligohydramnios",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "RPM",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 1,
       "justificacion": "SIEMPRE QUE SE NOS PRESENTE UNA BRADICARDIA FETAL, DEBEMOS PENSAR EN UN SUFRIMIENTO FETAL, YA QUE ES UN CRITERIO MAYOR PARA ELLA.",
@@ -430,10 +1030,30 @@
       "id": 31,
       "question": "Paciente de cuatro años que presenta en la exploración física genitales externos masculinizados, vello púbico y axilar; refiere como antecedente en el nacimiento presencia de hiponatremia. ¿Cuál es el diagnóstico probable?",
       "answerOptions": [
-        { "id": "0", "text": "Carencia de 21-hidroxilasa", "isCorrect": true, "rationale": "EL PACIENTE CURSA CON UN CUADRO CLÍNICO COMPATIBLE A UNA HIPERPLASIA SUPRARRENAL POR LO QUE LA RESPUESTA CORRECTA ES QUE ENCONTRAMOS UNA CARENCIA DE 21-HIDROXILASA." },
-        { "id": "1", "text": "Deficiencia de P450", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Carencia de la 11βH", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Ausencia de cromosoma X", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Carencia de 21-hidroxilasa",
+          "isCorrect": true,
+          "rationale": "EL PACIENTE CURSA CON UN CUADRO CLÍNICO COMPATIBLE A UNA HIPERPLASIA SUPRARRENAL POR LO QUE LA RESPUESTA CORRECTA ES QUE ENCONTRAMOS UNA CARENCIA DE 21-HIDROXILASA."
+        },
+        {
+          "id": "1",
+          "text": "Deficiencia de P450",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Carencia de la 11βH",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Ausencia de cromosoma X",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "EL PACIENTE CURSA CON UN CUADRO CLÍNICO COMPATIBLE A UNA HIPERPLASIA SUPRARRENAL POR LO QUE LA RESPUESTA CORRECTA ES QUE ENCONTRAMOS UNA CARENCIA DE 21-HIDROXILASA.",
@@ -444,10 +1064,30 @@
       "id": 32,
       "question": "Case 2: 19 year old woman G2 P1 A1 treated for vaginal bleeding of two days of evolution which is accompanied by mild intensity stabbing pain, in lower quadrants. FUM 5 weeks ago. EF: normal vital signs, hard abdomen, mild palpation pain, not peritoneal irritation data, uterus slightly increased in size, no pain and the cervical orifice is closed. A quantification of HCG is reported in 986 UI. Transvaginal ultrasound is performed which shows an empty uterus, a simple cyst in the left ovary of 2 cm and there's no free liquid. In this patient the most probable diagnosis is:",
       "answerOptions": [
-        { "id": "0", "text": "Threatened abortion", "isCorrect": true, "rationale": "La presencia de sangrado vaginal con cérvix cerrado y embarazo intrauterino confirmado (aunque con HCG baja) corresponde a amenaza de aborto." },
-        { "id": "1", "text": "Ectopic pregnancy", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Normal pregnancy", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Abortion in progress", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Threatened abortion",
+          "isCorrect": true,
+          "rationale": "La presencia de sangrado vaginal con cérvix cerrado y embarazo intrauterino confirmado (aunque con HCG baja) corresponde a amenaza de aborto."
+        },
+        {
+          "id": "1",
+          "text": "Ectopic pregnancy",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Normal pregnancy",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Abortion in progress",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "La presencia de sangrado vaginal con cérvix cerrado y embarazo intrauterino confirmado (aunque con HCG baja) corresponde a amenaza de aborto.",
@@ -458,10 +1098,30 @@
       "id": 33,
       "question": "Decides ingresar a sala de labor a una paciente femenina de 40 años proveniente de la sierra, G5P4A0, se encuentra en primera etapa, fase activa de trabajo de parto. La paciente no llevó control prenatal. Tras unas horas del ingreso, tu médico interno acude a realizarle tacto vaginal pero observa que la paciente presenta sangrado transvaginal oscuro, por lo que omite el tacto y le toma registro cardiotocográfico, que reporta un registro categoría 2, desaceleración y línea basal anormal. La paciente niega dolor. El interno va a notificarte su hallazgo y tú para incentivar su aprendizaje le cuestionas acerca de los sangrados del tercer trimestre. Menciona lo cierto respecto a la placenta acreta:",
       "answerOptions": [
-        { "id": "0", "text": "La placenta acreta se presenta en todas las pacientes con placenta previa", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "La placenta acreta se presenta con poca frecuencia en pacientes con placenta previa", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Puede haber placenta acreta sin antecedentes de placenta previa", "isCorrect": true, "rationale": "POR LO GENERAL LA PLACENTA ACRETA SE PRESENTA EN PACIENTES CON PLACENTA PREVIA, SIN EMBARGO, LA AUSENCIA DE PLACENTA PREVIA NO EXCLUYE LA PRESENCIA DE ACRETISMO." },
-        { "id": "3", "text": "La placenta acreta y la placenta previa no están relacionadas", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "La placenta acreta se presenta en todas las pacientes con placenta previa",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "La placenta acreta se presenta con poca frecuencia en pacientes con placenta previa",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Puede haber placenta acreta sin antecedentes de placenta previa",
+          "isCorrect": true,
+          "rationale": "POR LO GENERAL LA PLACENTA ACRETA SE PRESENTA EN PACIENTES CON PLACENTA PREVIA, SIN EMBARGO, LA AUSENCIA DE PLACENTA PREVIA NO EXCLUYE LA PRESENCIA DE ACRETISMO."
+        },
+        {
+          "id": "3",
+          "text": "La placenta acreta y la placenta previa no están relacionadas",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 2,
       "justificacion": "POR LO GENERAL LA PLACENTA ACRETA SE PRESENTA EN PACIENTES CON PLACENTA PREVIA, SIN EMBARGO, LA AUSENCIA DE PLACENTA PREVIA NO EXCLUYE LA PRESENCIA DE ACRETISMO.",
@@ -472,10 +1132,30 @@
       "id": 34,
       "question": "¿Cuál es la principal manifestación clínica de vasa previa?",
       "answerOptions": [
-        { "id": "0", "text": "Sangrado transvaginal oscuro", "isCorrect": true, "rationale": "LA PRINCIPAL MANIFESTACIÓN CLÍNICA DE VASA PREVIA ES EL SANGRADO TRANSVAGINAL OSCURO, SIN PRESENCIA DE DOLOR, SEGUIDO DE ALTERACIONES SÚBITAS EN EL REGISTRO CARDIOTOCOGRÁFICO DEBIDO A EXANGUINACIÓN FETAL." },
-        { "id": "1", "text": "Sangrado transvaginal con coágulos", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Óbito fetal", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Choque séptico", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Sangrado transvaginal oscuro",
+          "isCorrect": true,
+          "rationale": "LA PRINCIPAL MANIFESTACIÓN CLÍNICA DE VASA PREVIA ES EL SANGRADO TRANSVAGINAL OSCURO, SIN PRESENCIA DE DOLOR, SEGUIDO DE ALTERACIONES SÚBITAS EN EL REGISTRO CARDIOTOCOGRÁFICO DEBIDO A EXANGUINACIÓN FETAL."
+        },
+        {
+          "id": "1",
+          "text": "Sangrado transvaginal con coágulos",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Óbito fetal",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Choque séptico",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "LA PRINCIPAL MANIFESTACIÓN CLÍNICA DE VASA PREVIA ES EL SANGRADO TRANSVAGINAL OSCURO, SIN PRESENCIA DE DOLOR, SEGUIDO DE ALTERACIONES SÚBITAS EN EL REGISTRO CARDIOTOCOGRÁFICO DEBIDO A EXANGUINACIÓN FETAL.",
@@ -486,10 +1166,30 @@
       "id": 35,
       "question": "¿Qué prueba diagnóstica prenatal hubiera sido adecuada?",
       "answerOptions": [
-        { "id": "0", "text": "Ultrasonido", "isCorrect": true, "rationale": "SE RECOMIENDA EL EMPLEO DEL ULTRASONIDO PARA ESTABLECER EL DIAGNÓSTICO PRENATAL DE VASA PREVIA, CONFIRMANDO LA PERSISTENCIA DE VASA PREVIA ENTRE LAS 30 Y 34 SEMANAS." },
-        { "id": "1", "text": "Resonancia magnética", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Grupo sanguíneo y Rh", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "TAC", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Ultrasonido",
+          "isCorrect": true,
+          "rationale": "SE RECOMIENDA EL EMPLEO DEL ULTRASONIDO PARA ESTABLECER EL DIAGNÓSTICO PRENATAL DE VASA PREVIA, CONFIRMANDO LA PERSISTENCIA DE VASA PREVIA ENTRE LAS 30 Y 34 SEMANAS."
+        },
+        {
+          "id": "1",
+          "text": "Resonancia magnética",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Grupo sanguíneo y Rh",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "TAC",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "SE RECOMIENDA EL EMPLEO DEL ULTRASONIDO PARA ESTABLECER EL DIAGNÓSTICO PRENATAL DE VASA PREVIA, CONFIRMANDO LA PERSISTENCIA DE VASA PREVIA ENTRE LAS 30 Y 34 SEMANAS.",
@@ -500,10 +1200,30 @@
       "id": 36,
       "question": "¿A partir de qué semana se puede confirmar el diagnóstico de placenta previa?",
       "answerOptions": [
-        { "id": "0", "text": "20 SDG", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "26 SDG", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "28 SDG", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "32 SDG", "isCorrect": true, "rationale": "SE RECOMIENDA QUE LA CONFIRMACIÓN DIAGNÓSTICA DE PLACENTA PREVIA O INSERCIÓN BAJA DE PLACENTA SEA A PARTIR DE LAS 32 SEMANAS DE GESTACIÓN." }
+        {
+          "id": "0",
+          "text": "20 SDG",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "26 SDG",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "28 SDG",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "32 SDG",
+          "isCorrect": true,
+          "rationale": "SE RECOMIENDA QUE LA CONFIRMACIÓN DIAGNÓSTICA DE PLACENTA PREVIA O INSERCIÓN BAJA DE PLACENTA SEA A PARTIR DE LAS 32 SEMANAS DE GESTACIÓN."
+        }
       ],
       "correctAnswer": 3,
       "justificacion": "SE RECOMIENDA QUE LA CONFIRMACIÓN DIAGNÓSTICA DE PLACENTA PREVIA O INSERCIÓN BAJA DE PLACENTA SEA A PARTIR DE LAS 32 SEMANAS DE GESTACIÓN.",
@@ -514,10 +1234,30 @@
       "id": 37,
       "question": "Se trata de una paciente femenina de 32 años, con embarazo de 34 semanas de gestación. Antecedente de 2 cesáreas en embarazos anteriores y sospecha de inserción anormal de la placenta. Se realiza cistoscopia con los siguientes hallazgos: neovascularización con pulsatilidad y abultamiento de la vejiga. Se diagnosticó con diabetes gestacional a la paciente a las 24 semanas de gestación, en adecuado control actualmente. Menciona lo cierto:",
       "answerOptions": [
-        { "id": "0", "text": "La resonancia magnética es esencial para el diagnóstico", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "La resonancia magnética es una prueba confirmatoria del diagnóstico", "isCorrect": true, "rationale": "EL USO DE RESONANCIA MAGNÉTICA NO ES ESENCIAL PARA EL DIAGNÓSTICO DE ACRETISMO, INCRETISMO O PERCRETISMO PLACENTARIO. LA RM Y LA CISTOSCOPIA SON PRUEBAS CONFIRMATORIAS EN CASO DE DUDA DIAGNÓSTICA TRAS UN ULTRASONIDO." },
-        { "id": "2", "text": "La cistoscopia es una prueba confirmatoria del diagnóstico", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "La biopsia no es de rutina", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "La resonancia magnética es esencial para el diagnóstico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "La resonancia magnética es una prueba confirmatoria del diagnóstico",
+          "isCorrect": true,
+          "rationale": "EL USO DE RESONANCIA MAGNÉTICA NO ES ESENCIAL PARA EL DIAGNÓSTICO DE ACRETISMO, INCRETISMO O PERCRETISMO PLACENTARIO. LA RM Y LA CISTOSCOPIA SON PRUEBAS CONFIRMATORIAS EN CASO DE DUDA DIAGNÓSTICA TRAS UN ULTRASONIDO."
+        },
+        {
+          "id": "2",
+          "text": "La cistoscopia es una prueba confirmatoria del diagnóstico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "La biopsia no es de rutina",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 1,
       "justificacion": "EL USO DE RESONANCIA MAGNÉTICA NO ES ESENCIAL PARA EL DIAGNÓSTICO DE ACRETISMO, INCRETISMO O PERCRETISMO PLACENTARIO. LA RM Y LA CISTOSCOPIA SON PRUEBAS CONFIRMATORIAS EN CASO DE DUDA DIAGNÓSTICA TRAS UN ULTRASONIDO.",
@@ -528,10 +1268,30 @@
       "id": 38,
       "question": "¿Cuál es el mejor manejo?",
       "answerOptions": [
-        { "id": "0", "text": "Programar nacimiento entre las 32-33 SDG", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Realizar una cesárea con histerectomía", "isCorrect": true, "rationale": "EN PACIENTES CON ACRETISMO PLACENTARIO SE RECOMIENDA REALIZAR CESÁREA CON HISTERECTOMÍA, DEJAR LA PLACENTA IN SITU Y EVITAR INTENTAR SEPARAR LA PLACENTA DE LAS PAREDES UTERINAS. SE RECOMIENDA PROGRAMAR NACIMIENTO ENTRE LAS 34 Y 36 SDG EN PACIENTES CON COMORBILIDADES. ADMINISTRAR UTEROTÓNICOS PODRÍA GENERAR UNA HEMORRAGIA MASIVA POR LO QUE NO SE RECOMIENDA." },
-        { "id": "2", "text": "Resolver a término el embarazo", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Administrar uterotónicos", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Programar nacimiento entre las 32-33 SDG",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Realizar una cesárea con histerectomía",
+          "isCorrect": true,
+          "rationale": "EN PACIENTES CON ACRETISMO PLACENTARIO SE RECOMIENDA REALIZAR CESÁREA CON HISTERECTOMÍA, DEJAR LA PLACENTA IN SITU Y EVITAR INTENTAR SEPARAR LA PLACENTA DE LAS PAREDES UTERINAS. SE RECOMIENDA PROGRAMAR NACIMIENTO ENTRE LAS 34 Y 36 SDG EN PACIENTES CON COMORBILIDADES. ADMINISTRAR UTEROTÓNICOS PODRÍA GENERAR UNA HEMORRAGIA MASIVA POR LO QUE NO SE RECOMIENDA."
+        },
+        {
+          "id": "2",
+          "text": "Resolver a término el embarazo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Administrar uterotónicos",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 1,
       "justificacion": "EN PACIENTES CON ACRETISMO PLACENTARIO SE RECOMIENDA REALIZAR CESÁREA CON HISTERECTOMÍA, DEJAR LA PLACENTA IN SITU Y EVITAR INTENTAR SEPARAR LA PLACENTA DE LAS PAREDES UTERINAS. SE RECOMIENDA PROGRAMAR NACIMIENTO ENTRE LAS 34 Y 36 SDG EN PACIENTES CON COMORBILIDADES. ADMINISTRAR UTEROTÓNICOS PODRÍA GENERAR UNA HEMORRAGIA MASIVA POR LO QUE NO SE RECOMIENDA.",
@@ -542,10 +1302,30 @@
       "id": 39,
       "question": "¿Cuál es la frecuencia cardiaca fetal normal?",
       "answerOptions": [
-        { "id": "0", "text": "120-160 lpm", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "80-110 lpm", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "110-160 lpm", "isCorrect": true, "rationale": "LA FRECUENCIA CARDIACA FETAL NORMAL ES DE 110 A 160 LATIDOS POR MINUTO." },
-        { "id": "3", "text": "160-200 lpm", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "120-160 lpm",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "80-110 lpm",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "110-160 lpm",
+          "isCorrect": true,
+          "rationale": "LA FRECUENCIA CARDIACA FETAL NORMAL ES DE 110 A 160 LATIDOS POR MINUTO."
+        },
+        {
+          "id": "3",
+          "text": "160-200 lpm",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 2,
       "justificacion": "LA FRECUENCIA CARDIACA FETAL NORMAL ES DE 110 A 160 LATIDOS POR MINUTO.",
@@ -556,10 +1336,30 @@
       "id": 40,
       "question": "¿Cuál de las siguientes no es una recomendación para la fase activa del trabajo de parto?",
       "answerOptions": [
-        { "id": "0", "text": "Acompañamiento por familiar o personal de salud", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Ingesta de líquidos claros", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Tacto vaginal cada 4 horas", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Oxitocina para abreviar el trabajo de parto", "isCorrect": true, "rationale": "NO SE RECOMIENDA EL USO RUTINARIO DE OXITOCINA PARA ABREVIAR EL TRABAJO DE PARTO." }
+        {
+          "id": "0",
+          "text": "Acompañamiento por familiar o personal de salud",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Ingesta de líquidos claros",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Tacto vaginal cada 4 horas",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Oxitocina para abreviar el trabajo de parto",
+          "isCorrect": true,
+          "rationale": "NO SE RECOMIENDA EL USO RUTINARIO DE OXITOCINA PARA ABREVIAR EL TRABAJO DE PARTO."
+        }
       ],
       "correctAnswer": 3,
       "justificacion": "NO SE RECOMIENDA EL USO RUTINARIO DE OXITOCINA PARA ABREVIAR EL TRABAJO DE PARTO.",
@@ -570,10 +1370,30 @@
       "id": 41,
       "question": "Se trata de una paciente femenina de 39 años, acude a hospital porque tiene 41 semanas de gestación y aún no ha iniciado su parto, está preocupada por el bienestar de su bebé. Refiere no sentir movimientos fetales desde ayer. Se realiza exploración, no hay actividad uterina, no hay borramiento ni dilatación cervical. Se detecta frecuencia cardiaca fetal normal y registro cardiotocográfico normal. ¿Cuál de las siguientes es una recomendación en la paciente?",
       "answerOptions": [
-        { "id": "0", "text": "Se recomienda inducción del trabajo de parto", "isCorrect": true, "rationale": "SE RECOMIENDA OFRECER INDUCCIÓN DE TRABAJO DE PARTO A MUJERES QUE CURSAN 41 A 42 SEMANAS DE GESTACIÓN, YA QUE LA EVIDENCIA ACTUAL PREVIA REVELA DISMINUCIÓN EN LA MORTALIDAD PERINATAL SIN AUMENTAR EL RIESGO DE CESÁREAS." },
-        { "id": "1", "text": "Se recomienda realizar cesárea", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Se recomienda manejo expectante", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Ninguna de las anteriores es recomendable", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Se recomienda inducción del trabajo de parto",
+          "isCorrect": true,
+          "rationale": "SE RECOMIENDA OFRECER INDUCCIÓN DE TRABAJO DE PARTO A MUJERES QUE CURSAN 41 A 42 SEMANAS DE GESTACIÓN, YA QUE LA EVIDENCIA ACTUAL PREVIA REVELA DISMINUCIÓN EN LA MORTALIDAD PERINATAL SIN AUMENTAR EL RIESGO DE CESÁREAS."
+        },
+        {
+          "id": "1",
+          "text": "Se recomienda realizar cesárea",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Se recomienda manejo expectante",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Ninguna de las anteriores es recomendable",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "SE RECOMIENDA OFRECER INDUCCIÓN DE TRABAJO DE PARTO A MUJERES QUE CURSAN 41 A 42 SEMANAS DE GESTACIÓN, YA QUE LA EVIDENCIA ACTUAL PREVIA REVELA DISMINUCIÓN EN LA MORTALIDAD PERINATAL SIN AUMENTAR EL RIESGO DE CESÁREAS.",
@@ -584,10 +1404,30 @@
       "id": 42,
       "question": "Menciona lo falso acerca de la inducción del trabajo de parto:",
       "answerOptions": [
-        { "id": "0", "text": "No debe iniciarse antes de la semana 34 cuando hay RPM", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Se recomienda en presentación pélvica del producto", "isCorrect": true, "rationale": "LA INDUCCIÓN DEL TRABAJO DE PARTO NO SE RECOMIENDA EN PRESENTACIÓN PÉLVICA." },
-        { "id": "2", "text": "Se recomienda en embarazos de más de 40 semanas de gestación", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Se recomienda considerar en caso de óbito", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "No debe iniciarse antes de la semana 34 cuando hay RPM",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Se recomienda en presentación pélvica del producto",
+          "isCorrect": true,
+          "rationale": "LA INDUCCIÓN DEL TRABAJO DE PARTO NO SE RECOMIENDA EN PRESENTACIÓN PÉLVICA."
+        },
+        {
+          "id": "2",
+          "text": "Se recomienda en embarazos de más de 40 semanas de gestación",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Se recomienda considerar en caso de óbito",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 1,
       "justificacion": "LA INDUCCIÓN DEL TRABAJO DE PARTO NO SE RECOMIENDA EN PRESENTACIÓN PÉLVICA.",
@@ -598,10 +1438,30 @@
       "id": 43,
       "question": "¿Cuál de los siguientes podría inducir el trabajo de parto?",
       "answerOptions": [
-        { "id": "0", "text": "Un ciclo de prostaglandinas vía vaginal en tabletas o gel, una dosis seguida de una segunda dosis después de 2 horas si el trabajo de parto no se ha establecido", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Dosis baja de ergonovina con dosis inicial de 10 mU con aumento gradual a 25 mU/min", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Un ciclo de prostaglandinas vía vaginal en pesarios de liberación prolongada, una dosis en 24 horas", "isCorrect": true, "rationale": "SE PUEDE UTILIZAR RÉGIMEN CON PROSTAGLANDINAS CON: UN CICLO DE PROSTAGLANDINAS VÍA VAGINAL EN PESARIOS DE LIBERACIÓN PROLONGADA, UNA DOSIS EN 24 HORAS O UN CICLO DE PROSTAGLANDINAS VÍA VAGINAL EN TABLETAS O GEL, UNA DOSIS SEGUIDA DE UNA SEGUNDA DOSIS DESPUÉS DE 2 HORAS SI EL TRABAJO DE PARTO NO SE HA ESTABLECIDO. TAMBIÉN SE PUEDE UTILIZAR OXITOCINA EN DOSIS BAJAS O ALTAS, SIENDO LAS DOSIS ALTAS DE 3-6 mU/min EN INTERVALOS DE DOSIFICACIÓN DE 15-40 MINUTOS." },
-        { "id": "3", "text": "Ninguna de las anteriores", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Un ciclo de prostaglandinas vía vaginal en tabletas o gel, una dosis seguida de una segunda dosis después de 2 horas si el trabajo de parto no se ha establecido",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Dosis baja de ergonovina con dosis inicial de 10 mU con aumento gradual a 25 mU/min",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Un ciclo de prostaglandinas vía vaginal en pesarios de liberación prolongada, una dosis en 24 horas",
+          "isCorrect": true,
+          "rationale": "SE PUEDE UTILIZAR RÉGIMEN CON PROSTAGLANDINAS CON: UN CICLO DE PROSTAGLANDINAS VÍA VAGINAL EN PESARIOS DE LIBERACIÓN PROLONGADA, UNA DOSIS EN 24 HORAS O UN CICLO DE PROSTAGLANDINAS VÍA VAGINAL EN TABLETAS O GEL, UNA DOSIS SEGUIDA DE UNA SEGUNDA DOSIS DESPUÉS DE 2 HORAS SI EL TRABAJO DE PARTO NO SE HA ESTABLECIDO. TAMBIÉN SE PUEDE UTILIZAR OXITOCINA EN DOSIS BAJAS O ALTAS, SIENDO LAS DOSIS ALTAS DE 3-6 mU/min EN INTERVALOS DE DOSIFICACIÓN DE 15-40 MINUTOS."
+        },
+        {
+          "id": "3",
+          "text": "Ninguna de las anteriores",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 2,
       "justificacion": "SE PUEDE UTILIZAR RÉGIMEN CON PROSTAGLANDINAS CON: UN CICLO DE PROSTAGLANDINAS VÍA VAGINAL EN PESARIOS DE LIBERACIÓN PROLONGADA, UNA DOSIS EN 24 HORAS O UN CICLO DE PROSTAGLANDINAS VÍA VAGINAL EN TABLETAS O GEL, UNA DOSIS SEGUIDA DE UNA SEGUNDA DOSIS DESPUÉS DE 2 HORAS SI EL TRABAJO DE PARTO NO SE HA ESTABLECIDO. TAMBIÉN SE PUEDE UTILIZAR OXITOCINA EN DOSIS BAJAS O ALTAS, SIENDO LAS DOSIS ALTAS DE 3-6 mU/min EN INTERVALOS DE DOSIFICACIÓN DE 15-40 MINUTOS.",
@@ -612,10 +1472,30 @@
       "id": 44,
       "question": "Una paciente de 39 años en tratamiento con inductores de ovulación acude a cita con ginecólogo tras una prueba de embarazo positiva. Se calculan 11 semanas de gestación por ultrasonido y se detectan dos embriones vivos que comparten placenta y saco de líquido amniótico. Antecedente de endometriosis diagnosticada hace 3 años. Tiene antecedente de 4 embarazos previos de su matrimonio anterior, el último hace 10 años, niega complicaciones, refiere que todos fueron resueltos vía vaginal a término. No tiene antecedente de enfermedades crónico-degenerativas, no alergias, no toxicomanías. En suplementación con ácido fólico. TA 120/80 mmHg, FC 75 lpm, FR 16 rpm, SpO2 96%, T 37°C, peso 110 kg, talla 1.65 m. ¿Qué tipo de embarazo múltiple es?",
       "answerOptions": [
-        { "id": "0", "text": "Monocorial biamniótico", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Monocorial monoamniótico", "isCorrect": true, "rationale": "LOS EMBARAZOS MONOCORIALES MONOAMNIÓTICOS SE REFIEREN A CUANDO AMBOS FETOS COMPARTEN PLACENTA Y SACO DE LÍQUIDO AMNIÓTICO." },
-        { "id": "2", "text": "Bicorial", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Bicorial biamniótico", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Monocorial biamniótico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Monocorial monoamniótico",
+          "isCorrect": true,
+          "rationale": "LOS EMBARAZOS MONOCORIALES MONOAMNIÓTICOS SE REFIEREN A CUANDO AMBOS FETOS COMPARTEN PLACENTA Y SACO DE LÍQUIDO AMNIÓTICO."
+        },
+        {
+          "id": "2",
+          "text": "Bicorial",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Bicorial biamniótico",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 1,
       "justificacion": "LOS EMBARAZOS MONOCORIALES MONOAMNIÓTICOS SE REFIEREN A CUANDO AMBOS FETOS COMPARTEN PLACENTA Y SACO DE LÍQUIDO AMNIÓTICO.",
@@ -626,10 +1506,30 @@
       "id": 45,
       "question": "Una paciente femenina de 23 años acude a cita de ginecología porque se detectó una masa en seno derecho. A la exploración física se palpa una masa tumoral de aproximadamente 3 cm, forma esférica, móvil y de consistencia elástica, presenta leve dolor a la movilización. ¿Cuál es el estudio más adecuado en este caso?",
       "answerOptions": [
-        { "id": "0", "text": "Mamografía", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Ultrasonido mamario", "isCorrect": true, "rationale": "EL ULTRASONIDO MAMARIO ES UN ESTUDIO RECOMENDADO EN MUJERES MENORES DE 35 AÑOS COMO ESTUDIO DE APOYO EN LA EVALUACIÓN CLÍNICA DE LA PATOLOGÍA MAMARIA BENIGNA." },
-        { "id": "2", "text": "Radiografía AP y lateral de tórax", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Marcadores tumorales", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Mamografía",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Ultrasonido mamario",
+          "isCorrect": true,
+          "rationale": "EL ULTRASONIDO MAMARIO ES UN ESTUDIO RECOMENDADO EN MUJERES MENORES DE 35 AÑOS COMO ESTUDIO DE APOYO EN LA EVALUACIÓN CLÍNICA DE LA PATOLOGÍA MAMARIA BENIGNA."
+        },
+        {
+          "id": "2",
+          "text": "Radiografía AP y lateral de tórax",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Marcadores tumorales",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 1,
       "justificacion": "EL ULTRASONIDO MAMARIO ES UN ESTUDIO RECOMENDADO EN MUJERES MENORES DE 35 AÑOS COMO ESTUDIO DE APOYO EN LA EVALUACIÓN CLÍNICA DE LA PATOLOGÍA MAMARIA BENIGNA.",
@@ -640,10 +1540,30 @@
       "id": 46,
       "question": "¿Qué característica ultrasonográfica son sugestivas de patología benigna de mama?",
       "answerOptions": [
-        { "id": "0", "text": "Ecogenicidad alta", "isCorrect": true, "rationale": "EN EL ULTRASONIDO Y LA MAMOGRAFÍA, LAS MAMAS NORMALES O CON PATOLOGÍA BENIGNA PUEDEN IDENTIFICARSE CON ECOGENICIDAD O DENSIDAD ALTA." },
-        { "id": "1", "text": "Ecogenicidad baja", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Aumento de vascularidad", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Microcalcificaciones", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Ecogenicidad alta",
+          "isCorrect": true,
+          "rationale": "EN EL ULTRASONIDO Y LA MAMOGRAFÍA, LAS MAMAS NORMALES O CON PATOLOGÍA BENIGNA PUEDEN IDENTIFICARSE CON ECOGENICIDAD O DENSIDAD ALTA."
+        },
+        {
+          "id": "1",
+          "text": "Ecogenicidad baja",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Aumento de vascularidad",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Microcalcificaciones",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "EN EL ULTRASONIDO Y LA MAMOGRAFÍA, LAS MAMAS NORMALES O CON PATOLOGÍA BENIGNA PUEDEN IDENTIFICARSE CON ECOGENICIDAD O DENSIDAD ALTA.",
@@ -654,10 +1574,30 @@
       "id": 47,
       "question": "La masa que se palpa en la paciente no es visible radiológicamente, ¿cuál es el paso por seguir?",
       "answerOptions": [
-        { "id": "0", "text": "Extirpar y estudio histopatológico", "isCorrect": true, "rationale": "SI UNA MASA PALPABLE NO ES VISUALIZADA RADIOLÓGICAMENTE, SE RECOMIENDA QUE SEA REMOVIDA Y ESTUDIADA HISTOPATOLÓGICAMENTE." },
-        { "id": "1", "text": "Dejar en observación", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Repetir estudio de imagen en 6 meses", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Repetir estudio de imagen en 1 año", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Extirpar y estudio histopatológico",
+          "isCorrect": true,
+          "rationale": "SI UNA MASA PALPABLE NO ES VISUALIZADA RADIOLÓGICAMENTE, SE RECOMIENDA QUE SEA REMOVIDA Y ESTUDIADA HISTOPATOLÓGICAMENTE."
+        },
+        {
+          "id": "1",
+          "text": "Dejar en observación",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Repetir estudio de imagen en 6 meses",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Repetir estudio de imagen en 1 año",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "SI UNA MASA PALPABLE NO ES VISUALIZADA RADIOLÓGICAMENTE, SE RECOMIENDA QUE SEA REMOVIDA Y ESTUDIADA HISTOPATOLÓGICAMENTE.",
@@ -668,10 +1608,30 @@
       "id": 48,
       "question": "Una madre de 37 años acude a su centro de salud con sus dos hijos mellizos (niña y niño) de 11 años y su sobrina de 8 años para que se les aplique la vacuna contra el VPH. La enfermera le comenta que solo hay indicación de aplicación para niñas de 9 a 13 años por lo que a la menor de 8 años no se le puede aplicar aún y para el niño no hay indicación. La madre se molesta y pide hablar con el director de la clínica y con el encargado de la jurisdicción, alegando que los hombres también se encuentran en riesgo de infección por VPH porque su pareja la contagió y teme que su niño pueda desarrollar el virus también. La enfermera solo le administra la vacuna tetravalente a la hija, ¿en cuánto tiempo deberá recibir su segunda dosis?",
       "answerOptions": [
-        { "id": "0", "text": "En 1 mes", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "En 2 meses", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "En 6 meses", "isCorrect": true, "rationale": "PARA LA VACUNA TETRAVALENTE, LA PAUTA DE VACUNACIÓN ENTRE LOS 9 Y LOS 13 AÑOS ES DE DOS DOSIS, ADMINISTRADAS EN LOS MESES 0 Y 6." },
-        { "id": "3", "text": "En 1 año", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "En 1 mes",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "En 2 meses",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "En 6 meses",
+          "isCorrect": true,
+          "rationale": "PARA LA VACUNA TETRAVALENTE, LA PAUTA DE VACUNACIÓN ENTRE LOS 9 Y LOS 13 AÑOS ES DE DOS DOSIS, ADMINISTRADAS EN LOS MESES 0 Y 6."
+        },
+        {
+          "id": "3",
+          "text": "En 1 año",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 2,
       "justificacion": "PARA LA VACUNA TETRAVALENTE, LA PAUTA DE VACUNACIÓN ENTRE LOS 9 Y LOS 13 AÑOS ES DE DOS DOSIS, ADMINISTRADAS EN LOS MESES 0 Y 6.",
@@ -682,10 +1642,30 @@
       "id": 49,
       "question": "El jefe de tu coordinación se entera de lo sucedido con esta paciente y te pide dar la siguiente plática en la reunión. Al finalizar tu ponencia te pregunta: ¿cuál es el factor de riesgo de mayor peso para el desarrollo de cáncer cervicouterino?",
       "answerOptions": [
-        { "id": "0", "text": "Tabaquismo", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Multiparidad", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Anticonceptivos hormonales", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Infección persistente por VPH", "isCorrect": true, "rationale": "LA CAUSA PRINCIPAL PARA EL DESARROLLO DE LESIONES INTRAEPITELIALES PREINVASORAS Y DE LA MAYORÍA DE LOS TIPOS DE CÁNCER DE CUELLO UTERINO ES LA INFECCIÓN PERSISTENTE POR VPH DE ALTO RIESGO ONCOGÉNICO." }
+        {
+          "id": "0",
+          "text": "Tabaquismo",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Multiparidad",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Anticonceptivos hormonales",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Infección persistente por VPH",
+          "isCorrect": true,
+          "rationale": "LA CAUSA PRINCIPAL PARA EL DESARROLLO DE LESIONES INTRAEPITELIALES PREINVASORAS Y DE LA MAYORÍA DE LOS TIPOS DE CÁNCER DE CUELLO UTERINO ES LA INFECCIÓN PERSISTENTE POR VPH DE ALTO RIESGO ONCOGÉNICO."
+        }
       ],
       "correctAnswer": 3,
       "justificacion": "LA CAUSA PRINCIPAL PARA EL DESARROLLO DE LESIONES INTRAEPITELIALES PREINVASORAS Y DE LA MAYORÍA DE LOS TIPOS DE CÁNCER DE CUELLO UTERINO ES LA INFECCIÓN PERSISTENTE POR VPH DE ALTO RIESGO ONCOGÉNICO.",
@@ -696,10 +1676,30 @@
       "id": 50,
       "question": "Menciona lo cierto respecto a la vacuna del VPH:",
       "answerOptions": [
-        { "id": "0", "text": "Se requiere tamizaje de VPH y VIH antes de administrar la vacuna", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "No es necesario tamizar para CCU a mujeres con esquema completo de vacunación contra VPH", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "La vacunación contra VPH protege de cáncer anogenital en hombres", "isCorrect": true, "rationale": "La vacuna contra VPH protege contra cáncer anogenital en hombres, incluyendo cáncer de pene, ano y verrugas genitales." },
-        { "id": "3", "text": "Se debe vacunar contra VPH a mujeres VIH positivas entre los 9 y 13 años", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Se requiere tamizaje de VPH y VIH antes de administrar la vacuna",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "No es necesario tamizar para CCU a mujeres con esquema completo de vacunación contra VPH",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "La vacunación contra VPH protege de cáncer anogenital en hombres",
+          "isCorrect": true,
+          "rationale": "La vacuna contra VPH protege contra cáncer anogenital en hombres, incluyendo cáncer de pene, ano y verrugas genitales."
+        },
+        {
+          "id": "3",
+          "text": "Se debe vacunar contra VPH a mujeres VIH positivas entre los 9 y 13 años",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 2,
       "justificacion": "La vacuna contra VPH protege contra cáncer anogenital en hombres, incluyendo cáncer de pene, ano y verrugas genitales.",
@@ -710,10 +1710,30 @@
       "id": 51,
       "question": "Una paciente femenina de 27 años acude a su primera consulta de ginecología para realizarse un Papanicolaou. La paciente se encuentra casada. Antecedentes heredofamiliares: madre con cáncer de mama y padre con EPOC. No presenta antecedentes personales patológicos ni alergias, esquema de vacunación completo. Antecedentes gineco-obstétricos: menarquia a los 10 años, FUM hace 9 días, ritmo regular 26x6, IVS a los 20 años, NPS 1, G0P0C0A0. La paciente refiere que desde la adolescencia presenta dolor menstrual intenso y flujo muy abundante que la incapacitan para sus actividades laborales, de características intermitentes. También refiere que en dos años que lleva de matrimonio no ha podido quedar embarazada y presenta dolor al tener relaciones sexuales. A la ecografía pélvica transvaginal se observa masa anexial en ovario derecho. ¿Cuál es el diagnóstico más probable?",
       "answerOptions": [
-        { "id": "0", "text": "Enfermedad pélvica inflamatoria", "isCorrect": false, "rationale": "" },
-        { "id": "1", "text": "Embarazo ectópico crónico", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Endometriosis", "isCorrect": true, "rationale": "LAS MANIFESTACIONES CLÍNICAS PRINCIPALES DE LA ENDOMETRIOSIS SON: DOLOR PÉLVICO CRÓNICO, INFERTILIDAD, MASA ANEXIAL. ENTRE OTROS SÍNTOMAS CLÁSICOS SE ENCUENTRAN: DOLOR ABDOMINOPÉLVICO, DISMENORREA, HIPERMENORREA Y DISPAREUNIA." },
-        { "id": "3", "text": "Síndrome de ovario poliquístico", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Enfermedad pélvica inflamatoria",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "1",
+          "text": "Embarazo ectópico crónico",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Endometriosis",
+          "isCorrect": true,
+          "rationale": "LAS MANIFESTACIONES CLÍNICAS PRINCIPALES DE LA ENDOMETRIOSIS SON: DOLOR PÉLVICO CRÓNICO, INFERTILIDAD, MASA ANEXIAL. ENTRE OTROS SÍNTOMAS CLÁSICOS SE ENCUENTRAN: DOLOR ABDOMINOPÉLVICO, DISMENORREA, HIPERMENORREA Y DISPAREUNIA."
+        },
+        {
+          "id": "3",
+          "text": "Síndrome de ovario poliquístico",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 2,
       "justificacion": "LAS MANIFESTACIONES CLÍNICAS PRINCIPALES DE LA ENDOMETRIOSIS SON: DOLOR PÉLVICO CRÓNICO, INFERTILIDAD, MASA ANEXIAL. ENTRE OTROS SÍNTOMAS CLÁSICOS SE ENCUENTRAN: DOLOR ABDOMINOPÉLVICO, DISMENORREA, HIPERMENORREA Y DISPAREUNIA.",
@@ -724,10 +1744,30 @@
       "id": 52,
       "question": "Tríada clásica de la endometriosis:",
       "answerOptions": [
-        { "id": "0", "text": "Dismenorrea, dispareunia e infertilidad", "isCorrect": true, "rationale": "LA TRIADA CLÁSICA DE LA ENDOMETRIOSIS ES DISMENORREA, DISPAREUNIA (71-87%) E INFERTILIDAD (30-50%)." },
-        { "id": "1", "text": "Hirsutismo, hipermenorrea e infertilidad", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "Infertilidad, irregularidad menstrual, dispareunia", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Hipermenorrea, irregularidad menstrual, hirsutismo", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "Dismenorrea, dispareunia e infertilidad",
+          "isCorrect": true,
+          "rationale": "LA TRIADA CLÁSICA DE LA ENDOMETRIOSIS ES DISMENORREA, DISPAREUNIA (71-87%) E INFERTILIDAD (30-50%)."
+        },
+        {
+          "id": "1",
+          "text": "Hirsutismo, hipermenorrea e infertilidad",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "Infertilidad, irregularidad menstrual, dispareunia",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Hipermenorrea, irregularidad menstrual, hirsutismo",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "LA TRIADA CLÁSICA DE LA ENDOMETRIOSIS ES DISMENORREA, DISPAREUNIA (71-87%) E INFERTILIDAD (30-50%).",
@@ -738,10 +1778,30 @@
       "id": 53,
       "question": "Una mujer nulípara de 25 años acude a cita de seguimiento por sospecha de endometriosis debido a que ha presentado dolor pélvico y dismenorrea severa e incapacitante desde que era adolescente. Como antecedente de importancia comenta que su madre fue diagnosticada con cáncer de mama hace 2 años. Se le realiza resonancia magnética que demuestra aparente endometrioma de 42 mm en fondo de saco de Douglas. Se decidió iniciar tratamiento con ácido mefenámico sin obtener respuesta, después se le prescribió danazol durante tres meses, sin obtener nuevamente respuesta al tratamiento. La paciente comenta haber sido estudiante de la carrera de medicina aunque no ha comenzado su internado y pregunta si puede ofrecérsele tratamiento quirúrgico por lo que usted y su equipo le mencionan sobre la ablación con láser de los endometriomas más la ablación laparoscópica del nervio uterino, antes de que ella se decida se le advierte que este procedimiento tiene un riesgo significativo de recurrencia a los 6 meses. ¿Qué hormona estimula la formación del cuerpo lúteo?",
       "answerOptions": [
-        { "id": "0", "text": "LH", "isCorrect": true, "rationale": "DESPUÉS DE LA OVULACIÓN, LA LH ESTIMULA LA LUTEINIZACIÓN DE LAS CÉLULAS DE LA GRANULOSA FOLICULAR Y DE LA TECA CIRCUNDANTE PARA FORMAR EL CUERPO LÚTEO." },
-        { "id": "1", "text": "FSH", "isCorrect": false, "rationale": "" },
-        { "id": "2", "text": "GnRH", "isCorrect": false, "rationale": "" },
-        { "id": "3", "text": "Inhibina", "isCorrect": false, "rationale": "" }
+        {
+          "id": "0",
+          "text": "LH",
+          "isCorrect": true,
+          "rationale": "DESPUÉS DE LA OVULACIÓN, LA LH ESTIMULA LA LUTEINIZACIÓN DE LAS CÉLULAS DE LA GRANULOSA FOLICULAR Y DE LA TECA CIRCUNDANTE PARA FORMAR EL CUERPO LÚTEO."
+        },
+        {
+          "id": "1",
+          "text": "FSH",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "2",
+          "text": "GnRH",
+          "isCorrect": false,
+          "rationale": ""
+        },
+        {
+          "id": "3",
+          "text": "Inhibina",
+          "isCorrect": false,
+          "rationale": ""
+        }
       ],
       "correctAnswer": 0,
       "justificacion": "DESPUÉS DE LA OVULACIÓN, LA LH ESTIMULA LA LUTEINIZACIÓN DE LAS CÉLULAS DE LA GRANULOSA FOLICULAR Y DE LA TECA CIRCUNDANTE PARA FORMAR EL CUERPO LÚTEO.",

@@ -8,7 +8,7 @@ export const mockUser = {
 };
 
 // Auto-load all JSON quiz files bundled in src/data/*.json
-const dataModules = import.meta.glob('@/data/*.json', { eager: true });
+const dataModules = import.meta.glob('../data/*.json', { eager: true });
 export const mockQuizzes = Object.values(dataModules)
     .map((mod) => (mod && mod.default ? mod.default : mod))
     .filter(Boolean);
