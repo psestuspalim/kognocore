@@ -234,26 +234,10 @@ export default function QuizzesPage() {
     } catch { return {}; }
   })();
 
-  const _initSavedSession = (() => {
-    try {
-      const session = getActiveQuizSession();
-      if (!session) return null;
-      const restored = restoreQuizFromSavedSession(session, []);
-      if (restored && Array.isArray(restored.questions) && restored.questions.length > 0) {
-        return { session, restoredQuiz: restored };
-      }
-      return null;
-    } catch {
-      return null;
-    }
-  })();
-
-  // Initialize view directly to 'quiz' if an active quiz session exists
+  // Initialize view directly to 'home' or restored navigation state (never auto-hijack into quiz on link load)
   const _restoredView = (() => {
-    if (_initSavedSession) return 'quiz';
     const v = _initNav.view;
-    if (!v) return 'home';
-    if (['quiz', 'results', 'swipe'].includes(v)) return _initNav.subjectId ? 'list' : 'home';
+    if (!v || ['quiz', 'results', 'swipe'].includes(v)) return _initNav.subjectId ? 'list' : 'home';
     return v;
   })();
 
@@ -261,17 +245,17 @@ export default function QuizzesPage() {
   const [selectedCourse, setSelectedCourse] = useState(null); // resolved after queries load
   const [selectedSubject, setSelectedSubject] = useState(null); // resolved after queries load
   const [_navRestored, _setNavRestored] = useState(false);
-  const [selectedQuiz, setSelectedQuiz] = useState(_initSavedSession?.restoredQuiz || null);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(_initSavedSession?.session?.currentQuestionIndex || 0);
-  const [score, setScore] = useState(_initSavedSession?.session?.score || 0);
-  const [deckType, setDeckType] = useState(_initSavedSession?.session?.deckType || 'all');
-  const [wrongAnswers, setWrongAnswers] = useState(_initSavedSession?.session?.wrongAnswers || []);
-  const [correctAnswers, setCorrectAnswers] = useState(_initSavedSession?.session?.correctAnswers || []);
-  const [answerLog, setAnswerLog] = useState(_initSavedSession?.session?.answerLog || []);
-  const [markedQuestions, setMarkedQuestions] = useState(new Set(_initSavedSession?.session?.markedQuestions || []));
-  const [responseTimes, setResponseTimes] = useState(_initSavedSession?.session?.responseTimes || []);
-  const [currentAttemptId, setCurrentAttemptId] = useState(_initSavedSession?.session?.attemptId || null);
-  const [currentSessionId, setCurrentSessionId] = useState(_initSavedSession?.session?.sessionId || null);
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [deckType, setDeckType] = useState('all');
+  const [wrongAnswers, setWrongAnswers] = useState([]);
+  const [correctAnswers, setCorrectAnswers] = useState([]);
+  const [answerLog, setAnswerLog] = useState([]);
+  const [markedQuestions, setMarkedQuestions] = useState(new Set());
+  const [responseTimes, setResponseTimes] = useState([]);
+  const [currentAttemptId, setCurrentAttemptId] = useState(null);
+  const [currentSessionId, setCurrentSessionId] = useState(null);
   const autoRestoreAttempted = useRef(false);
 
   const [resumeModalState, setResumeModalState] = useState({
@@ -401,91 +385,14 @@ export default function QuizzesPage() {
     loadUser();
   }, [authUser]);
 
-  // Restore active quiz session automatically ONCE when quizzes/attempts query finishes initial load
+  // Keep view clean on load
   useEffect(() => {
     if (autoRestoreAttempted.current) return;
     if (quizzes.length === 0 && attempts.length === 0) return;
-
     autoRestoreAttempted.current = true;
 
-    try {
-      const savedSession = getActiveQuizSession();
-      if (savedSession) {
-        const restoredQuiz = restoreQuizFromSavedSession(savedSession, quizzes);
-        if (restoredQuiz && Array.isArray(restoredQuiz.questions) && restoredQuiz.questions.length > 0) {
-          const qIdx = Math.min(savedSession.currentQuestionIndex || 0, restoredQuiz.questions.length - 1);
-          setSelectedQuiz(restoredQuiz);
-          setCurrentQuestionIndex(qIdx);
-          setScore(savedSession.score || 0);
-          setWrongAnswers(savedSession.wrongAnswers || []);
-          setCorrectAnswers(savedSession.correctAnswers || []);
-          setAnswerLog(savedSession.answerLog || []);
-          setMarkedQuestions(new Set(savedSession.markedQuestions || []));
-          setResponseTimes(savedSession.responseTimes || []);
-          setCurrentAttemptId(savedSession.attemptId || null);
-          setCurrentSessionId(savedSession.sessionId || null);
-          setDeckType(savedSession.deckType || 'all');
-          setView('quiz');
-          return;
-        }
-      }
-
-      // Fallback: If no valid localStorage session exists (e.g. after a new commit/cache refresh), check Supabase attempts
-      if (Array.isArray(attempts) && attempts.length > 0 && Array.isArray(quizzes) && quizzes.length > 0) {
-        const activeAttempt = attempts.find(a => !a.is_completed && (Number(a.answered_questions || 0) > 0 || (a.answer_log && a.answer_log.length > 0)));
-        if (activeAttempt) {
-          const baseQuiz = quizzes.find(q => sameId(q.id, activeAttempt.quiz_id));
-          if (baseQuiz) {
-            let expandedQuiz;
-            if (baseQuiz.q && Array.isArray(baseQuiz.q) && baseQuiz.q.length > 0) {
-              const parsedQ = baseQuiz.q.map(q => typeof q === 'string' ? JSON.parse(q) : q);
-              expandedQuiz = fromCompactFormat({ m: baseQuiz.m || { t: baseQuiz.title, s: baseQuiz.description, v: 'cQ-v2', c: parsedQ.length }, q: parsedQ });
-            } else if (baseQuiz.questions && baseQuiz.questions.length > 0) {
-              expandedQuiz = baseQuiz;
-            }
-
-            if (expandedQuiz?.questions?.length > 0) {
-              const orderedQuestions = expandedQuiz.questions.map(normalizeQuestionOptions);
-              const wrongAns = activeAttempt.wrong_questions || [];
-              const logAns = activeAttempt.answer_log || [];
-              const qIndex = Math.min(Math.max(0, Number(activeAttempt.answered_questions || logAns.length || 0)), orderedQuestions.length - 1);
-              const restoredState = { ...expandedQuiz, questions: orderedQuestions };
-
-              setCurrentAttemptId(activeAttempt.id);
-              setSelectedQuiz(restoredState);
-              setCurrentQuestionIndex(qIndex);
-              setScore(Number(activeAttempt.score || 0));
-              setWrongAnswers(wrongAns);
-              setAnswerLog(logAns);
-              setCorrectAnswers(logAns.filter(a => a.is_correct));
-              setMarkedQuestions(new Set());
-              setView('quiz');
-
-              saveActiveQuizSession({
-                selectedQuiz: restoredState,
-                currentQuestionIndex: qIndex,
-                score: Number(activeAttempt.score || 0),
-                wrongAnswers: wrongAns,
-                correctAnswers: logAns.filter(a => a.is_correct),
-                answerLog: logAns,
-                markedQuestions: new Set(),
-                responseTimes: [],
-                currentAttemptId: activeAttempt.id,
-                currentSessionId: null,
-                deckType: 'all'
-              });
-              return;
-            }
-          }
-        }
-      }
-
-      if (view === 'quiz' && !selectedQuiz) {
-        setView(_initNav.subjectId ? 'list' : 'home');
-      }
-    } catch (err) {
-      console.error('Error auto-restoring quiz session:', err);
-      if (view === 'quiz' && !selectedQuiz) setView('home');
+    if (view === 'quiz' && !selectedQuiz) {
+      setView(_initNav.subjectId ? 'list' : 'home');
     }
   }, [quizzes.length, attempts.length]);
 
