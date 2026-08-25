@@ -1188,17 +1188,24 @@ export default function QuizzesPage() {
       .map(normalizeQuestionOptions)
       .slice(0, Math.min(questionCount, filteredQuestions.length));
 
-    const attempt = await saveAttemptMutation.mutateAsync({
-      quiz_id: quiz.id,
-      subject_id: quiz.subject_id || expandedQuiz.subject_id,
-      ...buildAttemptIdentity(),
-      score: 0,
-      total_questions: orderedQuestions.length,
-      answered_questions: 0,
-      is_completed: false,
-      wrong_questions: [],
-      answer_log: []
-    });
+    let attemptId = null;
+    try {
+      const attempt = await saveAttemptMutation.mutateAsync({
+        quiz_id: quiz.id,
+        subject_id: quiz.subject_id || expandedQuiz.subject_id,
+        ...buildAttemptIdentity(),
+        score: 0,
+        total_questions: orderedQuestions.length,
+        answered_questions: 0,
+        is_completed: false,
+        wrong_questions: [],
+        answer_log: []
+      });
+      attemptId = attempt?.id || null;
+    } catch (e) {
+      console.error('⚠️ Error guardando intento inicial en backend:', e);
+      attemptId = `local_attempt_${Date.now()}`;
+    }
 
     let newSessionId = null;
     try {
@@ -1227,7 +1234,7 @@ export default function QuizzesPage() {
       questions: orderedQuestions
     };
 
-    setCurrentAttemptId(attempt.id);
+    setCurrentAttemptId(attemptId);
     setSelectedQuiz(newQuizState);
     setCurrentQuestionIndex(0);
     setScore(0);
@@ -1249,7 +1256,7 @@ export default function QuizzesPage() {
       answerLog: [],
       markedQuestions: new Set(),
       responseTimes: [],
-      currentAttemptId: attempt.id,
+      currentAttemptId: attemptId,
       currentSessionId: newSessionId,
       deckType: selectedDeck
     });
@@ -1400,18 +1407,24 @@ export default function QuizzesPage() {
     const isLastQuestion = currentQuestionIndex >= selectedQuiz.questions.length - 1;
     const answeredCount = currentQuestionIndex + 1;
 
-    await updateAttemptMutation.mutateAsync({
-      id: currentAttemptId,
-      data: {
-        score: newScore,
-        answered_questions: answeredCount,
-        wrong_questions: newWrongAnswers,
-        answer_log: newAnswerLog,
-        response_times: newResponseTimes,
-        is_completed: isLastQuestion,
-        completed_at: isLastQuestion ? new Date().toISOString() : undefined
+    if (currentAttemptId && !String(currentAttemptId).startsWith('local_')) {
+      try {
+        await updateAttemptMutation.mutateAsync({
+          id: currentAttemptId,
+          data: {
+            score: newScore,
+            answered_questions: answeredCount,
+            wrong_questions: newWrongAnswers,
+            answer_log: newAnswerLog,
+            response_times: newResponseTimes,
+            is_completed: isLastQuestion,
+            completed_at: isLastQuestion ? new Date().toISOString() : undefined
+          }
+        });
+      } catch (err) {
+        console.error('⚠️ Error actualizando intento en backend (modo local):', err);
       }
-    });
+    }
 
     if (!isLastQuestion) {
       const nextIndex = currentQuestionIndex + 1;
@@ -1455,19 +1468,25 @@ export default function QuizzesPage() {
       }))
     };
 
-    const attempt = await saveAttemptMutation.mutateAsync({
-      quiz_id: selectedQuiz.id,
-      subject_id: selectedQuiz.subject_id,
-      ...buildAttemptIdentity(),
-      score: 0,
-      total_questions: selectedQuiz.questions.length,
-      answered_questions: 0,
-      is_completed: false,
-      wrong_questions: [],
-      answer_log: []
-    });
+    let attemptId = null;
+    try {
+      const attempt = await saveAttemptMutation.mutateAsync({
+        quiz_id: selectedQuiz.id,
+        subject_id: selectedQuiz.subject_id,
+        ...buildAttemptIdentity(),
+        score: 0,
+        total_questions: selectedQuiz.questions.length,
+        answered_questions: 0,
+        is_completed: false,
+        wrong_questions: [],
+        answer_log: []
+      });
+      attemptId = attempt?.id || null;
+    } catch (e) {
+      attemptId = `local_attempt_${Date.now()}`;
+    }
 
-    setCurrentAttemptId(attempt.id);
+    setCurrentAttemptId(attemptId);
     setSelectedQuiz(shuffledQuiz);
     setCurrentQuestionIndex(0);
     setScore(0);
@@ -1493,19 +1512,25 @@ export default function QuizzesPage() {
       }))
     };
 
-    const attempt = await saveAttemptMutation.mutateAsync({
-      quiz_id: selectedQuiz.id,
-      subject_id: selectedQuiz.subject_id,
-      ...buildAttemptIdentity(),
-      score: 0,
-      total_questions: wrongQuestionsQuiz.questions.length,
-      answered_questions: 0,
-      is_completed: false,
-      wrong_questions: [],
-      answer_log: []
-    });
+    let attemptId = null;
+    try {
+      const attempt = await saveAttemptMutation.mutateAsync({
+        quiz_id: selectedQuiz.id,
+        subject_id: selectedQuiz.subject_id,
+        ...buildAttemptIdentity(),
+        score: 0,
+        total_questions: wrongQuestionsQuiz.questions.length,
+        answered_questions: 0,
+        is_completed: false,
+        wrong_questions: [],
+        answer_log: []
+      });
+      attemptId = attempt?.id || null;
+    } catch (e) {
+      attemptId = `local_attempt_${Date.now()}`;
+    }
 
-    setCurrentAttemptId(attempt.id);
+    setCurrentAttemptId(attemptId);
     setSelectedQuiz(wrongQuestionsQuiz);
     setCurrentQuestionIndex(0);
     setScore(0);
@@ -1516,12 +1541,14 @@ export default function QuizzesPage() {
   };
 
   const handleExitQuiz = async () => {
-    if (currentAttemptId) {
-      await updateAttemptMutation.mutateAsync({
-        id: currentAttemptId,
-        data: { is_completed: false }
-      });
-      queryClient.invalidateQueries({ queryKey: ['attempts'] });
+    if (currentAttemptId && !String(currentAttemptId).startsWith('local_')) {
+      try {
+        await updateAttemptMutation.mutateAsync({
+          id: currentAttemptId,
+          data: { is_completed: false }
+        });
+        queryClient.invalidateQueries({ queryKey: ['attempts'] });
+      } catch (e) { /* ignore */ }
     }
     // Marcar sesión como inactiva
     if (currentSessionId) {
