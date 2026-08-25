@@ -51,17 +51,19 @@ import CourseJoinModal from '../components/course/CourseJoinModal';
 import ResumeQuizModal from '../components/quiz/ResumeQuizModal';
 
 // --- Top-Level Helpers ---
-const normalizeId = (value) => (value === null || value === undefined ? null : String(value).trim());
+function normalizeId(value) {
+  return value === null || value === undefined ? null : String(value).trim();
+}
 
-const sameId = (left, right) => {
+function sameId(left, right) {
   const l = normalizeId(left);
   const r = normalizeId(right);
   return !!l && !!r && l === r;
-};
+}
 
 const LOCAL_STORAGE_SESSION_KEY = 'kc_active_quiz_session';
 
-const saveActiveQuizSession = (data, currentUser = null) => {
+function saveActiveQuizSession(data, currentUser = null) {
   try {
     if (!data?.selectedQuiz || !Array.isArray(data.selectedQuiz.questions)) return;
 
@@ -128,24 +130,24 @@ const saveActiveQuizSession = (data, currentUser = null) => {
   } catch (e) {
     console.error('⚠️ Error guardando sesión activa en localStorage:', e);
   }
-};
+}
 
-const clearActiveQuizSession = () => {
+function clearActiveQuizSession() {
   try {
     localStorage.removeItem(LOCAL_STORAGE_SESSION_KEY);
   } catch (e) { /* ignore */ }
-};
+}
 
-const getActiveQuizSession = () => {
+function getActiveQuizSession() {
   try {
     const raw = localStorage.getItem(LOCAL_STORAGE_SESSION_KEY);
     return raw ? JSON.parse(raw) : null;
   } catch {
     return null;
   }
-};
+}
 
-const restoreQuizFromSavedSession = (savedSession, availableQuizzes = []) => {
+function restoreQuizFromSavedSession(savedSession, availableQuizzes = []) {
   if (!savedSession) return null;
 
   let quizCandidate = null;
@@ -171,7 +173,7 @@ const restoreQuizFromSavedSession = (savedSession, availableQuizzes = []) => {
   }
 
   return null;
-};
+}
 
 export default function QuizzesPage() {
   const { user: authUser } = useAuth();
