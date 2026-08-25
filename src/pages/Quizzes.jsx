@@ -98,27 +98,70 @@ export default function QuizzesPage() {
 
   const saveActiveQuizSession = (data) => {
     try {
-      if (!data?.selectedQuiz) return;
+      if (!data?.selectedQuiz || !Array.isArray(data.selectedQuiz.questions)) return;
+
+      const lightweightQuestions = data.selectedQuiz.questions.map(q => ({
+        id: q.id,
+        question: q.question || q.text,
+        imageUrl: q.imageUrl,
+        hint: q.hint,
+        serie: q.serie,
+        type: q.type,
+        answerOptions: (q.answerOptions || q.options || []).map(opt => ({
+          id: opt.id,
+          text: typeof opt === 'string' ? opt : (opt.text || opt.value || ''),
+          isCorrect: Boolean(opt.isCorrect || opt.c),
+          rationale: opt.rationale || opt.r || ''
+        })),
+        justificacion: q.justificacion || q.justificación || q.feedback || q.explanation || q.rationale || ''
+      }));
+
       const payload = {
         userEmail: currentUser?.email || '',
         quizId: data.selectedQuiz.id,
-        quizTitle: data.selectedQuiz.title,
-        attemptId: data.currentAttemptId,
-        sessionId: data.currentSessionId,
-        selectedQuiz: data.selectedQuiz,
-        currentQuestionIndex: data.currentQuestionIndex,
-        score: data.score,
-        wrongAnswers: data.wrongAnswers,
-        correctAnswers: data.correctAnswers,
-        answerLog: data.answerLog,
+        quizTitle: data.selectedQuiz.title || data.selectedQuiz.m?.t || 'Cuestionario',
+        attemptId: data.currentAttemptId || null,
+        sessionId: data.currentSessionId || null,
+        currentQuestionIndex: data.currentQuestionIndex || 0,
+        score: data.score || 0,
+        wrongAnswers: (data.wrongAnswers || []).map(wa => ({
+          question: wa.question,
+          selected_answer: wa.selected_answer,
+          correct_answer: wa.correct_answer,
+          response_time: wa.response_time,
+          explanation: wa.explanation || wa.justificacion || wa.rationale || '',
+          difficulty: wa.difficulty
+        })),
+        correctAnswers: (data.correctAnswers || []).map(ca => ({
+          question: ca.question,
+          selected_answer: ca.selected_answer,
+          explanation: ca.explanation || ca.justificacion || ca.rationale || '',
+          difficulty: ca.difficulty
+        })),
+        answerLog: (data.answerLog || []).map(al => ({
+          question: al.question,
+          selected_answer: al.selected_answer,
+          correct_answer: al.correct_answer,
+          is_correct: al.is_correct,
+          response_time: al.response_time,
+          explanation: al.explanation || al.justificacion || al.rationale || '',
+          difficulty: al.difficulty
+        })),
         markedQuestions: Array.from(data.markedQuestions || []),
-        responseTimes: data.responseTimes,
-        deckType: data.deckType,
+        responseTimes: data.responseTimes || [],
+        deckType: data.deckType || 'all',
+        lightweightQuiz: {
+          id: data.selectedQuiz.id,
+          title: data.selectedQuiz.title || 'Cuestionario',
+          subject_id: data.selectedQuiz.subject_id,
+          questions: lightweightQuestions
+        },
         updatedAt: new Date().toISOString()
       };
+
       localStorage.setItem(LOCAL_STORAGE_SESSION_KEY, JSON.stringify(payload));
     } catch (e) {
-      console.error('Error saving quiz session to localStorage:', e);
+      console.error('⚠️ Error guardando sesión activa en localStorage:', e);
     }
   };
 
@@ -137,37 +180,61 @@ export default function QuizzesPage() {
     }
   };
 
+  const restoreQuizFromSavedSession = (savedSession, availableQuizzes = []) => {
+    if (!savedSession) return null;
+
+    if (savedSession.lightweightQuiz && Array.isArray(savedSession.lightweightQuiz.questions) && savedSession.lightweightQuiz.questions.length > 0) {
+      return savedSession.lightweightQuiz;
+    }
+
+    const baseQuiz = availableQuizzes.find(q => sameId(q.id, savedSession.quizId));
+    if (baseQuiz) {
+      let expandedQuiz;
+      if (baseQuiz.q && Array.isArray(baseQuiz.q) && baseQuiz.q.length > 0) {
+        const parsedQ = baseQuiz.q.map(q => typeof q === 'string' ? JSON.parse(q) : q);
+        expandedQuiz = fromCompactFormat({ m: baseQuiz.m || { t: baseQuiz.title, s: baseQuiz.description, v: 'cQ-v2', c: parsedQ.length }, q: parsedQ });
+      } else if (baseQuiz.questions && baseQuiz.questions.length > 0) {
+        expandedQuiz = baseQuiz;
+      }
+
+      if (expandedQuiz?.questions?.length > 0) {
+        return {
+          ...expandedQuiz,
+          questions: expandedQuiz.questions.map(normalizeQuestionOptions)
+        };
+      }
+    }
+
+    return null;
+  };
+
   // Restore active quiz session automatically on page reload
   useEffect(() => {
     try {
       const savedSession = getActiveQuizSession();
-      if (
-        savedSession &&
-        savedSession.selectedQuiz &&
-        Array.isArray(savedSession.selectedQuiz.questions) &&
-        savedSession.selectedQuiz.questions.length > 0
-      ) {
-        const qIdx = savedSession.currentQuestionIndex || 0;
-        if (qIdx < savedSession.selectedQuiz.questions.length) {
-          setSelectedQuiz(savedSession.selectedQuiz);
-          setCurrentQuestionIndex(qIdx);
-          setScore(savedSession.score || 0);
-          setWrongAnswers(savedSession.wrongAnswers || []);
-          setCorrectAnswers(savedSession.correctAnswers || []);
-          setAnswerLog(savedSession.answerLog || []);
-          setMarkedQuestions(new Set(savedSession.markedQuestions || []));
-          setResponseTimes(savedSession.responseTimes || []);
-          setCurrentAttemptId(savedSession.attemptId || null);
-          setCurrentSessionId(savedSession.sessionId || null);
-          setDeckType(savedSession.deckType || 'all');
-          setView('quiz');
-          toast.info(`Reanudando examen: Pregunta ${qIdx + 1} de ${savedSession.selectedQuiz.questions.length}`);
-        }
+      if (!savedSession) return;
+
+      const restoredQuiz = restoreQuizFromSavedSession(savedSession, quizzes);
+      if (restoredQuiz && Array.isArray(restoredQuiz.questions) && restoredQuiz.questions.length > 0) {
+        const qIdx = Math.min(savedSession.currentQuestionIndex || 0, restoredQuiz.questions.length - 1);
+        setSelectedQuiz(restoredQuiz);
+        setCurrentQuestionIndex(qIdx);
+        setScore(savedSession.score || 0);
+        setWrongAnswers(savedSession.wrongAnswers || []);
+        setCorrectAnswers(savedSession.correctAnswers || []);
+        setAnswerLog(savedSession.answerLog || []);
+        setMarkedQuestions(new Set(savedSession.markedQuestions || []));
+        setResponseTimes(savedSession.responseTimes || []);
+        setCurrentAttemptId(savedSession.attemptId || null);
+        setCurrentSessionId(savedSession.sessionId || null);
+        setDeckType(savedSession.deckType || 'all');
+        setView('quiz');
+        toast.info(`Reanudando examen: Pregunta ${qIdx + 1} de ${restoredQuiz.questions.length}`);
       }
     } catch (err) {
       console.error('Error auto-restoring quiz session:', err);
     }
-  }, []);
+  }, [quizzes.length]);
 
   const handleMarkForReview = (question, isMarked) => {
     let nextSet;
@@ -1101,21 +1168,25 @@ export default function QuizzesPage() {
     const { savedSession, activeAttempt, quiz } = resumeModalState;
     setResumeModalState(prev => ({ ...prev, open: false }));
 
-    if (savedSession && savedSession.selectedQuiz) {
-      setSelectedQuiz(savedSession.selectedQuiz);
-      setCurrentQuestionIndex(savedSession.currentQuestionIndex || 0);
-      setScore(savedSession.score || 0);
-      setWrongAnswers(savedSession.wrongAnswers || []);
-      setCorrectAnswers(savedSession.correctAnswers || []);
-      setAnswerLog(savedSession.answerLog || []);
-      setMarkedQuestions(new Set(savedSession.markedQuestions || []));
-      setResponseTimes(savedSession.responseTimes || []);
-      setCurrentAttemptId(savedSession.attemptId || null);
-      setCurrentSessionId(savedSession.sessionId || null);
-      setDeckType(savedSession.deckType || 'all');
-      setView('quiz');
-      toast.success(`Reanudado en pregunta ${(savedSession.currentQuestionIndex || 0) + 1}`);
-      return;
+    if (savedSession) {
+      const restoredQuiz = restoreQuizFromSavedSession(savedSession, quizzes) || savedSession.selectedQuiz;
+      if (restoredQuiz && Array.isArray(restoredQuiz.questions) && restoredQuiz.questions.length > 0) {
+        const qIdx = Math.min(savedSession.currentQuestionIndex || 0, restoredQuiz.questions.length - 1);
+        setSelectedQuiz(restoredQuiz);
+        setCurrentQuestionIndex(qIdx);
+        setScore(savedSession.score || 0);
+        setWrongAnswers(savedSession.wrongAnswers || []);
+        setCorrectAnswers(savedSession.correctAnswers || []);
+        setAnswerLog(savedSession.answerLog || []);
+        setMarkedQuestions(new Set(savedSession.markedQuestions || []));
+        setResponseTimes(savedSession.responseTimes || []);
+        setCurrentAttemptId(savedSession.attemptId || null);
+        setCurrentSessionId(savedSession.sessionId || null);
+        setDeckType(savedSession.deckType || 'all');
+        setView('quiz');
+        toast.success(`Reanudado en pregunta ${qIdx + 1}`);
+        return;
+      }
     }
 
     if (activeAttempt) {
