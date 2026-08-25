@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, Lightbulb, ChevronRight, ChevronLeft, Bookmark, ZoomIn, X, Sparkles } from 'lucide-react';
+import { CheckCircle2, Lightbulb, ChevronRight, ChevronLeft, Bookmark, ZoomIn, X } from 'lucide-react';
 import { client } from '@/api/client';
 import MathText from './MathText';
 import ImageQuestionView from './ImageQuestionView';
@@ -156,19 +156,19 @@ export default function QuestionView({
     const baseStyle = "group relative p-3 sm:p-4 rounded-xl border text-left transition-all duration-150 ease-out cursor-pointer select-none flex items-start gap-3 w-full";
 
     if (isCorrectlySelected) {
-      return `${baseStyle} border-emerald-500 bg-emerald-50 text-emerald-950 shadow-sm ring-2 ring-emerald-500 font-medium`;
+      return `${baseStyle} border-emerald-400 bg-emerald-50 text-emerald-950 ring-2 ring-emerald-400`;
     }
     if (isIncorrectlySelected) {
-      return `${baseStyle} border-rose-400 bg-rose-50 text-rose-950 shadow-sm ring-2 ring-rose-400 font-medium`;
+      return `${baseStyle} border-rose-300 bg-rose-50 text-rose-950 ring-2 ring-rose-300`;
     }
     if (isMissedCorrect) {
-      return `${baseStyle} border-emerald-500 bg-emerald-50/70 text-emerald-950 ring-1.5 ring-emerald-400 font-medium`;
+      return `${baseStyle} border-emerald-400 bg-emerald-50/60 text-emerald-950 ring-1 ring-emerald-300`;
     }
     if (isSelected && !isRevealed) {
-      return `${baseStyle} border-indigo-600 bg-indigo-50 shadow-sm text-indigo-950 ring-2 ring-indigo-500`;
+      return `${baseStyle} border-slate-900 bg-slate-50 text-slate-900 ring-2 ring-slate-900`;
     }
 
-    return `${baseStyle} border-slate-200 bg-white hover:border-indigo-300 hover:bg-slate-50/80 text-slate-800 shadow-2xs`;
+    return `${baseStyle} border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/80 text-slate-800`;
   };
 
   const getLetterPrefix = (index) => {
@@ -182,16 +182,16 @@ export default function QuestionView({
     const isCorrect = option?.isCorrect;
     const isRevealed = showFeedback;
 
-    let badgeClass = "text-slate-600 bg-slate-100 group-hover:bg-indigo-50 group-hover:text-indigo-600 border border-slate-200";
+    let badgeClass = "text-slate-500 bg-slate-100 group-hover:bg-slate-200 group-hover:text-slate-700 border border-slate-200/60";
 
     if (isRevealed) {
       if (isCorrect) {
-        badgeClass = "text-white bg-emerald-600 border-emerald-600 font-bold shadow-xs";
+        badgeClass = "text-white bg-emerald-500 border-emerald-500 font-bold";
       } else if (isSelected && !isCorrect) {
-        badgeClass = "text-white bg-rose-600 border-rose-600 font-bold shadow-xs";
+        badgeClass = "text-white bg-rose-500 border-rose-500 font-bold";
       }
     } else if (isSelected) {
-      badgeClass = "text-white bg-indigo-600 border-indigo-600 font-bold shadow-xs";
+      badgeClass = "text-white bg-slate-900 border-slate-900 font-bold";
     }
 
     return (
@@ -206,90 +206,74 @@ export default function QuestionView({
   const isLastQuestion = questionNumber === totalQuestions;
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-slate-100/90 overflow-hidden font-sans">
-      
-      {/* 1. Header Fijo Superior (shrink-0) */}
-      <header className="shrink-0 h-14 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 sm:px-6 flex items-center justify-between z-20 shadow-2xs">
-        {/* Botón Volver */}
-        <button
-          onClick={onBack}
-          className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-lg px-2.5 py-1.5 hover:bg-slate-100 transition-colors"
-        >
-          <ChevronLeft className="w-4 h-4" />
-          <span>Salir</span>
-        </button>
+    <div className="fixed inset-0 z-50 flex flex-col bg-slate-50 overflow-hidden font-sans">
 
-        {/* Título y Barra de Progreso */}
-        <div className="flex-1 max-w-md mx-4 text-center">
-          <div className="flex items-center justify-center gap-2">
-            <span className="text-xs sm:text-sm font-bold text-slate-800 truncate">
-              {quizTitle || 'Cuestionario'}
-            </span>
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 whitespace-nowrap">
-              {questionNumber} / {totalQuestions}
-            </span>
-          </div>
-          <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mt-1 border border-slate-200/50">
-            <div
-              className="h-full bg-indigo-600 rounded-full transition-all duration-300"
-              style={{ width: `${progressPercent}%` }}
-            />
-          </div>
-        </div>
+      {/* Header */}
+      <header className="shrink-0 bg-white border-b border-slate-200/80 px-4 sm:px-6 py-2.5 z-20">
+        <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
+          <button
+            onClick={onBack}
+            className="flex items-center gap-1 text-sm text-slate-500 hover:text-slate-800 transition-colors shrink-0"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            <span className="hidden sm:inline">Salir</span>
+          </button>
 
-        {/* Contadores y Marcador */}
-        <div className="flex items-center gap-2 shrink-0">
-          <div className="flex items-center gap-1.5 text-xs font-semibold">
-            <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
-              ✓ {correctAnswers}
-            </span>
-            <span className="text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200">
-              ✗ {wrongAnswers}
-            </span>
+          <div className="flex-1 max-w-sm">
+            <div className="flex items-center justify-center gap-2 mb-1">
+              <span className="text-xs font-semibold text-slate-600 truncate">
+                {questionNumber} de {totalQuestions}
+              </span>
+              <div className="flex items-center gap-1 text-xs">
+                <span className="text-emerald-600 font-semibold">{correctAnswers}</span>
+                <span className="text-slate-300">/</span>
+                <span className="text-rose-500 font-semibold">{wrongAnswers}</span>
+              </div>
+            </div>
+            <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-primary rounded-full transition-all duration-500 ease-out"
+                style={{ width: `${progressPercent}%` }}
+              />
+            </div>
           </div>
 
           <button
             onClick={handleToggleMark}
-            title={isMarked ? 'Pregunta marcada para revisión' : 'Marcar pregunta'}
-            className={`p-1.5 rounded-lg border transition-colors ${
+            title={isMarked ? 'Marcada para revisión' : 'Marcar para revisión'}
+            className={`p-1.5 rounded-lg transition-colors shrink-0 ${
               isMarked
-                ? 'bg-amber-50 text-amber-600 border-amber-300'
-                : 'text-slate-400 hover:text-slate-600 hover:bg-slate-100 border-transparent'
+                ? 'text-amber-500'
+                : 'text-slate-300 hover:text-slate-500'
             }`}
           >
-            <Bookmark className={`w-4 h-4 ${isMarked ? 'fill-amber-500 text-amber-500' : ''}`} />
+            <Bookmark className={`w-4 h-4 ${isMarked ? 'fill-amber-400' : ''}`} />
           </button>
         </div>
       </header>
 
-      {/* 2. Área de Contenido con Scroll Independiente (flex-1 overflow-y-auto) */}
+      {/* Content */}
       <main
         ref={scrollContainerRef}
-        className="flex-1 overflow-y-auto w-full p-3 sm:p-6 md:p-8 overscroll-contain"
+        className="flex-1 overflow-y-auto w-full overscroll-contain"
       >
-        <div className="max-w-3xl mx-auto space-y-4 pb-8">
-          
-          {/* Tarjeta Principal del Reactivo */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 md:p-8 shadow-sm space-y-5">
-            
-            {/* Meta tags: Número de pregunta y Serie */}
-            <div className="flex items-center justify-between gap-2 flex-wrap text-xs">
-              <span className="inline-flex items-center px-3 py-1 rounded-full font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 uppercase tracking-wide text-xs">
-                Pregunta #{questionNumber}
-              </span>
-              {question?.serie && (
-                <span className="inline-flex items-center px-3 py-1 rounded-full font-semibold bg-amber-50 text-amber-800 border border-amber-200 text-xs">
-                  Serie: {question.serie}
-                </span>
-              )}
-            </div>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-5 sm:py-8 space-y-5 pb-24">
 
-            {/* Enunciado / Caso Clínico */}
-            <div className="text-[16px] sm:text-[17.5px] font-semibold leading-relaxed text-slate-900 pt-1">
+          {/* Question card */}
+          <div className="space-y-5">
+
+            {question?.serie && (
+              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200/60">
+                Serie: {question.serie}
+              </span>
+            )}
+
+            {/* Question text */}
+            <div className="text-base sm:text-[17px] font-medium leading-[1.65] text-slate-900">
               <MathText text={question?.question || question?.text} />
             </div>
 
-            {/* Imagen médica con Zoom (si existe) */}
+            {/* Clinical image */}
             {question?.imageUrl && (
               <div className="relative group rounded-xl overflow-hidden border border-slate-200 bg-slate-50 max-h-[240px] flex items-center justify-center p-2">
                 <img
@@ -301,15 +285,15 @@ export default function QuestionView({
                 <button
                   type="button"
                   onClick={() => setIsImageZoomed(true)}
-                  className="absolute bottom-3 right-3 bg-slate-900/80 hover:bg-slate-900 text-white text-xs px-2.5 py-1 rounded-lg backdrop-blur-xs flex items-center gap-1 shadow-sm transition-opacity opacity-90 hover:opacity-100"
+                  className="absolute bottom-3 right-3 bg-slate-900/80 hover:bg-slate-900 text-white text-xs px-2.5 py-1 rounded-lg backdrop-blur-xs flex items-center gap-1 shadow-sm"
                 >
                   <ZoomIn className="w-3.5 h-3.5" />
-                  <span>Ampliar imagen</span>
+                  <span>Ampliar</span>
                 </button>
               </div>
             )}
 
-            {/* Modal de Imagen Ampliada */}
+            {/* Image zoom modal */}
             {isImageZoomed && question?.imageUrl && (
               <div
                 className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
@@ -331,26 +315,26 @@ export default function QuestionView({
               </div>
             )}
 
-            {/* Pista Médica Opcional */}
+            {/* Hint */}
             {question?.hint && !showFeedback && showHintSetting && (
               <div>
                 <button
                   onClick={() => setShowHint(!showHint)}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 hover:text-amber-800 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-amber-600 hover:text-amber-700 transition-colors"
                 >
-                  <Lightbulb className="w-4 h-4" />
-                  <span>{showHint ? 'Ocultar pista' : 'Ver pista clínica'}</span>
+                  <Lightbulb className="w-3.5 h-3.5" />
+                  <span>{showHint ? 'Ocultar pista' : 'Ver pista'}</span>
                 </button>
                 {showHint && (
-                  <div className="mt-2 p-3.5 bg-amber-50/90 border border-amber-200 rounded-xl text-xs text-amber-900 leading-relaxed">
+                  <div className="mt-2 p-3.5 bg-amber-50/80 border border-amber-200/60 rounded-xl text-sm text-amber-900 leading-relaxed">
                     <MathText text={question.hint} />
                   </div>
                 )}
               </div>
             )}
 
-            {/* Lista de Opciones */}
-            <div className="space-y-2.5 pt-1">
+            {/* Answer options */}
+            <div className="space-y-2 pt-1">
               {options.map((option, index) => (
                 <button
                   key={index}
@@ -366,31 +350,24 @@ export default function QuestionView({
               ))}
             </div>
 
-            {/* Cuadro de Justificación (Al Responder) */}
+            {/* Feedback / Justification */}
             {showFeedback && (
               <div
                 ref={feedbackRef}
-                className="mt-6 rounded-xl border border-emerald-300 bg-emerald-50/95 p-5 shadow-xs animate-in fade-in slide-in-from-bottom-3 duration-200"
+                className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-200"
               >
-                <div className="flex items-center gap-2 mb-2">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0" />
-                  <span className="font-bold text-xs sm:text-sm text-emerald-900 uppercase tracking-wide">
-                    Justificación Clínica
-                  </span>
-                </div>
-                <div className="text-sm sm:text-[15px] leading-relaxed text-emerald-950 font-normal">
-                  <MathText text={getJustificationText()} />
-                </div>
-
-                {/* Botón de Siguiente Reactivo Integrado al Final de la Justificación */}
-                <div className="mt-5 pt-4 border-t border-emerald-200 flex justify-end">
-                  <Button
-                    onClick={handleNext}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold h-11 px-6 sm:px-8 rounded-xl shadow-md flex items-center gap-2 transition-transform hover:scale-[1.02]"
-                  >
-                    <span>{isLastQuestion ? 'Finalizar y Ver Resultados' : 'Siguiente Reactivo'}</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </Button>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0 mt-0.5">
+                    <CheckCircle2 className="w-4.5 h-4.5 text-emerald-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                      Justificación
+                    </span>
+                    <div className="mt-2 text-sm sm:text-[15px] leading-relaxed text-slate-700">
+                      <MathText text={getJustificationText()} />
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
@@ -398,37 +375,26 @@ export default function QuestionView({
         </div>
       </main>
 
-      {/* 3. Footer Fijo Inferior (shrink-0) - Cero Empalmes Garantizado */}
-      <footer className="shrink-0 h-14 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 sm:px-6 flex items-center justify-between z-20 shadow-md">
-        <Button
-          variant="ghost"
-          onClick={onBack}
-          className="text-slate-600 hover:text-slate-900 text-xs sm:text-sm h-10 px-3.5 rounded-xl font-medium"
-        >
-          <ChevronLeft className="w-4 h-4 mr-1" />
-          <span>Salir</span>
-        </Button>
+      {/* Footer - single source of truth for navigation */}
+      <footer className="shrink-0 bg-white border-t border-slate-200/80 px-4 sm:px-6 py-3 z-20">
+        <div className="max-w-3xl mx-auto flex items-center justify-between">
+          <div className="text-xs text-slate-400 hidden md:block">
+            {showFeedback ? (
+              <span>[Enter] siguiente</span>
+            ) : (
+              <span>[A-D] seleccionar</span>
+            )}
+          </div>
 
-        <div className="text-xs text-slate-500 hidden md:block">
-          {showFeedback ? (
-            <span className="text-indigo-600 font-medium">Presiona [Enter] o [Espacio] para avanzar</span>
-          ) : (
-            <span>Selecciona con teclas [A, B, C, D] o haz clic en la opción</span>
-          )}
+          <Button
+            onClick={handleNext}
+            disabled={!showFeedback}
+            className="h-11 px-8 rounded-xl text-sm font-semibold ml-auto shadow-sm transition-all bg-slate-900 hover:bg-slate-800 text-white disabled:opacity-30 disabled:pointer-events-none"
+          >
+            <span>{isLastQuestion ? 'Ver resultados' : 'Siguiente'}</span>
+            <ChevronRight className="w-4 h-4 ml-1.5" />
+          </Button>
         </div>
-
-        <Button
-          onClick={handleNext}
-          disabled={!showFeedback && selectedAnswer === null}
-          className={`h-10 px-6 sm:px-7 rounded-xl text-xs sm:text-sm font-semibold text-white shadow-sm transition-all duration-150 ${
-            showFeedback
-              ? 'bg-indigo-600 hover:bg-indigo-700 hover:shadow-indigo-300/40'
-              : 'bg-slate-900 hover:bg-black opacity-90'
-          }`}
-        >
-          <span>{isLastQuestion ? 'Finalizar' : 'Siguiente Reactivo'}</span>
-          <ChevronRight className="w-4 h-4 ml-1.5" />
-        </Button>
       </footer>
     </div>
   );

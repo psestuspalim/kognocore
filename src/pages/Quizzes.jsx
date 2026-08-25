@@ -3,14 +3,8 @@ import { client } from '@/api/client';
 import { getFolderColor } from '@/utils/folderColors';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Link } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
 import { useAuth } from '@/lib/AuthContext';
-import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, ChevronRight, Upload, Home, Calculator } from 'lucide-react';
-import { Icon } from '@/components/ui/Icon';
-
+import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, ChevronRight, Upload, Home } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { buildContainers } from '../components/utils/contentTree';
@@ -47,9 +41,6 @@ import ResourceEditor from '../components/resources/ResourceEditor';
 import ResourceViewer from '../components/resources/ResourceViewer';
 
 
-import SessionTimer from '../components/ui/SessionTimer';
-import TaskProgressFloat from '../components/tasks/TaskProgressFloat';
-import ContentManager from '../components/admin/ContentManager';
 import AdminMenu from '../components/admin/AdminMenu';
 import useQuizSettings from '../components/quiz/useQuizSettings';
 import SwipeQuizMode from '../components/quiz/SwipeQuizMode';
@@ -57,9 +48,8 @@ import FileExplorer from '../components/explorer/FileExplorer';
 import MoveQuizModal from '../components/quiz/MoveQuizModal';
 import QuizExporter from '../components/admin/QuizExporter';
 import CourseJoinModal from '../components/course/CourseJoinModal';
-import FeatureAnalytics from '../components/admin/FeatureAnalytics';
-import FeatureTracker from '../components/admin/FeatureTracker';
-import ExamOverview from '../components/course/ExamOverview';
+
+
 
 export default function QuizzesPage() {
   const { user: authUser } = useAuth();
@@ -827,55 +817,46 @@ export default function QuizzesPage() {
     (currentSubject?.course_id ? courses.find(c => sameId(c.id, currentSubject.course_id)) : null) ||
     (currentFolder?.course_id ? courses.find(c => sameId(c.id, currentFolder.course_id)) : null);
 
-  const getSessionLabel = () => {
-    if (isAdmin) return 'Administrador';
-    if (isServerCodeSession) return 'Ingreso por código (servidor)';
-    if (isDirectCodeSession) return 'Ingreso por código (directo)';
-    if (hasApprovedEnrollments) return 'Inscripción aprobada';
-    return 'Acceso limitado';
-  };
 
-  const getViewLabel = () => {
-    if (view === 'home') return 'Inicio';
-    if (view === 'subjects') return 'Estructura del curso';
-    if (view === 'list') return 'Listado de cuestionarios';
-    if (view === 'quiz') return 'Resolviendo cuestionario';
-    if (view === 'results') return 'Resultados';
-    return 'Navegación';
-  };
-
-  const FlowStatusBar = () => (
-    <Card className="mb-5 border-white/70 bg-white/85 shadow-md">
-      <CardContent className="py-3">
-        <div className="flex flex-col gap-3">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge className="bg-slate-900 text-white">{isAdmin ? 'Admin' : 'Alumno'}</Badge>
-              <Badge variant="outline">{getSessionLabel()}</Badge>
-              <Badge variant="secondary">Vista: {getViewLabel()}</Badge>
-              {currentUser?.username && (
-                <Badge variant="secondary">{currentUser.username}</Badge>
-              )}
-            </div>
-            {isAdmin && <AdminMenu compact />}
-          </div>
-          <div className="flex flex-col gap-2 text-sm text-slate-600 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <span className="font-semibold text-slate-800">Ruta activa:</span>{' '}
-              <span>Inicio</span>
-              {currentCourse && <span> / {currentCourse.name}</span>}
-              {currentSubject && <span> / {currentSubject.name}</span>}
-              {currentFolder && <span> / {currentFolder.name}</span>}
-            </div>
-            <div className="flex items-center gap-3 text-xs font-medium text-slate-600">
-              <span>Cursos: {visibleCourses.length}</span>
-              <span>Materias: {subjects.length}</span>
-              <span>Quizzes: {quizzes.length}</span>
-            </div>
-          </div>
+  const TopBar = () => (
+    <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-200/60 mb-6">
+      <div className="container mx-auto px-3 sm:px-4 h-14 flex items-center justify-between">
+        <div className="flex items-center gap-3 min-w-0">
+          <button onClick={handleHome} className="font-bold text-lg tracking-tight text-slate-900 hover:text-primary transition-colors shrink-0">
+            Kognocore
+          </button>
+          {(selectedCourse || selectedSubject || currentFolderId) && (
+            <span className="text-slate-300 shrink-0">/</span>
+          )}
+          {selectedCourse && (
+            <button
+              onClick={() => { setSelectedSubject(null); setCurrentFolderId(null); setView('subjects'); }}
+              className="text-sm text-slate-500 hover:text-slate-800 transition-colors truncate max-w-[120px] sm:max-w-[200px]"
+            >
+              {selectedCourse.name}
+            </button>
+          )}
+          {selectedSubject && !currentFolderId && (
+            <>
+              <span className="text-slate-300 shrink-0">/</span>
+              <span className="text-sm font-medium text-slate-700 truncate max-w-[120px] sm:max-w-[200px]">{selectedSubject.name}</span>
+            </>
+          )}
+          {currentFolderId && (
+            <>
+              <span className="text-slate-300 shrink-0">/</span>
+              <span className="text-sm font-medium text-slate-700 truncate max-w-[120px] sm:max-w-[200px]">{folders.find(f => sameId(f.id, currentFolderId))?.name}</span>
+            </>
+          )}
         </div>
-      </CardContent>
-    </Card>
+        <div className="flex items-center gap-2 shrink-0">
+          {currentUser?.username && (
+            <span className="text-sm text-slate-500 hidden sm:block">{currentUser.username}</span>
+          )}
+          {isAdmin && <AdminMenu compact />}
+        </div>
+      </div>
+    </header>
   );
 
   // Quiz handlers
@@ -1346,72 +1327,41 @@ export default function QuizzesPage() {
     return <UsernamePrompt onSubmit={(username) => updateUsernameMutation.mutateAsync(username)} />;
   }
 
-  // Breadcrumb
-  const Breadcrumb = () => {
-    const currentFolder = currentFolderId ? folders.find(f => sameId(f.id, currentFolderId)) : null;
-    const folderParentSubject = currentFolder?.subject_id ? subjects.find(s => s.id === currentFolder.subject_id) : null;
-
+  // Back button for navigation
+  const BackNav = () => {
+    const getBackAction = () => {
+      if (view === 'list' && currentFolderId) {
+        const parentFolder = folders.find(f => sameId(f.id, currentFolderId));
+        if (parentFolder?.parent_id) return { label: folders.find(f => sameId(f.id, parentFolder.parent_id))?.name || 'Atrás', action: () => setCurrentFolderId(parentFolder.parent_id) };
+        return { label: selectedCourse?.name || 'Atrás', action: () => { setCurrentFolderId(null); setView('subjects'); } };
+      }
+      if (view === 'list') return { label: selectedCourse?.name || 'Cursos', action: () => { setSelectedSubject(null); setView('subjects'); } };
+      if (view === 'subjects' && currentFolderId) {
+        const parentFolder = folders.find(f => sameId(f.id, currentFolderId));
+        if (parentFolder?.parent_id) return { label: folders.find(f => sameId(f.id, parentFolder.parent_id))?.name || 'Atrás', action: () => setCurrentFolderId(parentFolder.parent_id) };
+        return { label: selectedCourse?.name || 'Cursos', action: () => { setCurrentFolderId(null); } };
+      }
+      if (view === 'subjects') return { label: 'Cursos', action: handleHome };
+      return null;
+    };
+    const back = getBackAction();
+    if (!back) return null;
     return (
-      <div className="flex items-center gap-2 text-sm flex-wrap mb-4">
-        <Button variant="ghost" size="sm" onClick={handleHome} className="text-gray-600 hover:text-gray-900 px-2">
-          <Home className="w-4 h-4 mr-1" />
-          Inicio
-        </Button>
-        {selectedCourse && (
-          <>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
-            <button onClick={() => { setView('course'); setSelectedSubject(null); setCurrentFolderId(null); }} className="hover:text-indigo-600 transition-colors flex items-center gap-1.5">
-              <Icon name={selectedCourse.icon} className="w-4 h-4" style={{ color: selectedCourse.color || '#6366f1' }} />
-              {selectedCourse.name}
-            </button>
-          </>
-        )}
-        {folderParentSubject && (
-          <>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => {
-                setSelectedSubject(folderParentSubject);
-                setCurrentFolderId(null);
-                setView('list');
-              }}
-              className="px-2 text-gray-600"
-            >
-              {folderParentSubject.name}
-            </Button>
-          </>
-        )}
-        {selectedSubject && !currentFolderId && (
-          <>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
-            <span className="font-medium text-gray-900">{selectedSubject.name}</span>
-          </>
-        )}
-        {currentFolderId && (
-          <>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
-            <span className="font-medium text-gray-900">
-              {currentFolder?.name}
-            </span>
-          </>
-        )}
-      </div>
+      <button onClick={back.action} className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-800 transition-colors mb-4 group">
+        <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
+        <span>{back.label}</span>
+      </button>
     );
   };
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
+    <div className="min-h-screen">
+      {view !== 'quiz' && <TopBar />}
 
-
-
-
-      {/* Quizzes List */}
       <div>
         <DragDropContext onDragEnd={handleDragEnd}>
-          <div className={view === 'quiz' ? "h-screen overflow-hidden" : "min-h-screen bg-gradient-to-br from-gray-50 to-gray-100"}>
-            <div className={view === 'quiz' ? "" : "container mx-auto px-3 sm:px-4 py-4 sm:py-8"}>
+          <div className={view === 'quiz' ? "h-screen overflow-hidden" : "min-h-screen"}>
+            <div className={view === 'quiz' ? "" : "container mx-auto px-3 sm:px-4 pb-8"}>
               <AnimatePresence mode="wait">
                 {/* Course Editor */}
                 {editingCourse && (
@@ -1476,29 +1426,29 @@ export default function QuizzesPage() {
                 {/* Home View - Courses + Unassigned Subjects */}
                 {view === 'home' && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !explorerMode && (
                   <motion.div key="courses" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-                    <FlowStatusBar />
 
 
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
                       <div>
-                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Cursos</h1>
-                        <p className="text-sm text-gray-600">Selecciona un curso para ver sus materias y cuestionarios</p>
+                        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Mis Cursos</h1>
+                        <p className="text-sm text-slate-500 mt-1">Selecciona un curso para comenzar</p>
                       </div>
                       <div className="flex flex-wrap gap-2">
                         {!canEdit && (
                           <Button
                             onClick={() => setShowJoinModal(true)}
-                            className="text-xs sm:text-sm h-9 bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm"
+                            variant="outline"
+                            className="text-xs sm:text-sm h-9"
                           >
                             <BookOpen className="w-4 h-4 mr-2" />
-                            Ingresar Código de Curso
+                            Ingresar código
                           </Button>
                         )}
 
                         {canEdit && (
                           <Dialog open={showCourseDialog} onOpenChange={setShowCourseDialog}>
                             <DialogTrigger asChild>
-                              <Button className="bg-indigo-600 hover:bg-indigo-700 text-xs sm:text-sm h-9">
+                              <Button className="bg-primary hover:bg-primary/90 text-xs sm:text-sm h-9">
                                 <Plus className="w-4 h-4 sm:mr-2" /><span className="hidden sm:inline">Nuevo curso</span>
                               </Button>
                             </DialogTrigger>
@@ -1514,7 +1464,7 @@ export default function QuizzesPage() {
                                   <Label>Color</Label>
                                   <input type="color" value={newItem.color} onChange={(e) => setNewItem({ ...newItem, color: e.target.value })} className="w-full h-10 rounded-md border cursor-pointer" />
                                 </div>
-                                <Button onClick={() => createCourseMutation.mutate(newItem)} className="w-full bg-indigo-600 hover:bg-indigo-700">
+                                <Button onClick={() => createCourseMutation.mutate(newItem)} className="w-full bg-primary hover:bg-primary/90">
                                   Crear curso
                                 </Button>
                               </div>
@@ -1571,25 +1521,25 @@ export default function QuizzesPage() {
                 )} */}
 
                     {visibleCourses.length === 0 && unassignedSubjects.length === 0 && (
-                      <div className="flex flex-col items-center justify-center py-16 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
-                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm ring-1 ring-gray-100">
-                          <BookOpen className="w-8 h-8 text-gray-400" />
+                      <div className="flex flex-col items-center justify-center py-20 px-4 rounded-2xl bg-white/60 border border-slate-200/50">
+                        <div className="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center mb-5">
+                          <BookOpen className="w-7 h-7 text-slate-400" />
                         </div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                          {isAdmin ? 'No hay contenido' : 'No tienes acceso a ningún curso'}
+                        <h3 className="text-lg font-bold text-slate-800 mb-1.5">
+                          {isAdmin ? 'Sin contenido aún' : 'Sin acceso a cursos'}
                         </h3>
-                        <p className="text-gray-500 mb-6 text-center max-w-md">
+                        <p className="text-sm text-slate-500 mb-6 text-center max-w-sm leading-relaxed">
                           {isAdmin
-                            ? 'Comienza creando tu primer curso o materia para organizar el contenido.'
-                            : 'Solicita unirte a un curso usando el botón "Unirse a Curso" o espera a que un administrador apruebe tu solicitud.'}
+                            ? 'Crea tu primer curso para comenzar a organizar el contenido.'
+                            : 'Ingresa un código de curso para acceder al contenido.'}
                         </p>
                         {!isAdmin && (
                           <Button
                             onClick={() => setShowJoinModal(true)}
-                            className="bg-green-600 hover:bg-green-700 shadow-sm"
+                            className="bg-primary hover:bg-primary/90"
                           >
                             <Plus className="w-4 h-4 mr-2" />
-                            Unirse a Curso
+                            Ingresar código
                           </Button>
                         )}
                       </div>
@@ -1602,8 +1552,8 @@ export default function QuizzesPage() {
                   <motion.div key="explorer-unified" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                     <div className="flex items-center justify-between mb-6">
                       <div>
-                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">🗂️ Explorador General</h1>
-                        <p className="text-gray-600">Arrastra elementos para organizarlos, expande contenedores y cambia tipos</p>
+                        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Explorador</h1>
+                        <p className="text-sm text-slate-500 mt-1">Arrastra elementos para organizarlos</p>
                       </div>
                       <Button
                         onClick={() => setExplorerMode(false)}
@@ -1684,22 +1634,19 @@ export default function QuizzesPage() {
                 {/* Subjects View (inside a course or folder) */}
                 {view === 'subjects' && (selectedCourse || currentFolderId) && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !showBulkUploader && !showAIGenerator && !showUploader && !explorerMode && (
                   <motion.div key="subjects" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-                    <Breadcrumb />
-                    <FlowStatusBar />
+                    <BackNav />
 
 
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
                       <div>
-                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
-                          {currentFolderId ? (
-                            <><Folder className="w-6 h-6" /> {folders.find(f => sameId(f.id, currentFolderId))?.name}</>
-                          ) : selectedSubject ? (
-                            <><BookOpen className="w-6 h-6" /> {selectedSubject.name}</>
-                          ) : selectedCourse ? (
-                            <><Icon name={selectedCourse.icon} className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: selectedCourse.color || '#6366f1' }} /> {selectedCourse.name}</>
-                          ) : null}
+                        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                          {currentFolderId
+                            ? folders.find(f => sameId(f.id, currentFolderId))?.name
+                            : selectedSubject
+                              ? selectedSubject.name
+                              : selectedCourse?.name
+                          }
                         </h1>
-
                       </div>
                       {isAdmin && (
                         <div className="flex flex-wrap gap-2">
@@ -1724,7 +1671,7 @@ export default function QuizzesPage() {
                                   <Label>Nombre</Label>
                                   <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Parcial 1" />
                                 </div>
-                                <Button onClick={() => createFolderMutation.mutate({ ...newItem, course_id: selectedCourse?.id, parent_id: currentFolderId })} className="w-full bg-amber-500 hover:bg-amber-600">
+                                <Button onClick={() => createFolderMutation.mutate({ ...newItem, course_id: selectedCourse?.id, parent_id: currentFolderId })} className="w-full bg-primary hover:bg-primary/90">
                                   Crear carpeta
                                 </Button>
                               </div>
@@ -1733,7 +1680,7 @@ export default function QuizzesPage() {
                           {!currentFolderId && (
                             <Dialog open={showSubjectDialog} onOpenChange={setShowSubjectDialog}>
                               <DialogTrigger asChild>
-                                <Button className="bg-indigo-600 hover:bg-indigo-700 text-xs sm:text-sm h-9">
+                                <Button className="bg-primary hover:bg-primary/90 text-xs sm:text-sm h-9">
                                   <Plus className="w-4 h-4 mr-2" /> Nueva materia
                                 </Button>
                               </DialogTrigger>
@@ -1749,7 +1696,7 @@ export default function QuizzesPage() {
                                     <Label>Color</Label>
                                     <input type="color" value={newItem.color} onChange={(e) => setNewItem({ ...newItem, color: e.target.value })} className="w-full h-10 rounded-md border cursor-pointer" />
                                   </div>
-                                  <Button onClick={() => createSubjectMutation.mutate({ ...newItem, course_id: selectedCourse?.id, folder_id: currentFolderId })} className="w-full bg-indigo-600 hover:bg-indigo-700">
+                                  <Button onClick={() => createSubjectMutation.mutate({ ...newItem, course_id: selectedCourse?.id, folder_id: currentFolderId })} className="w-full bg-primary hover:bg-primary/90">
                                     Crear materia
                                   </Button>
                                 </div>
@@ -1761,15 +1708,15 @@ export default function QuizzesPage() {
                     </div>
 
                     {/* Tabs for Quizzes/Resources - Folder Level */}
-                    <div className="flex gap-4 mb-6 border-b">
+                    <div className="flex gap-1 mb-6 bg-slate-100 rounded-lg p-1 w-fit">
                       <button
-                        className={`pb-2 px-1 ${activeTab === 'quizzes' ? 'border-b-2 border-indigo-600 font-semibold text-indigo-600' : 'text-gray-500'}`}
+                        className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${activeTab === 'quizzes' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                         onClick={() => setActiveTab('quizzes')}
                       >
                         Cuestionarios ({currentLevelQuizzes.length})
                       </button>
                       <button
-                        className={`pb-2 px-1 ${activeTab === 'resources' ? 'border-b-2 border-indigo-600 font-semibold text-indigo-600' : 'text-gray-500'}`}
+                        className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${activeTab === 'resources' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                         onClick={() => setActiveTab('resources')}
                       >
                         Recursos ({currentLevelResources.length})
@@ -1787,7 +1734,7 @@ export default function QuizzesPage() {
                                 setEditingResource(null);
                                 setShowResourceEditor(true);
                               }}
-                              className="bg-indigo-600 hover:bg-indigo-700"
+                              className="bg-primary hover:bg-primary/90"
                             >
                               <Upload className="w-4 h-4 mr-2" /> Subir Recurso
                             </Button>
@@ -1814,11 +1761,11 @@ export default function QuizzesPage() {
                             ))}
                           </div>
                         ) : (
-                          <div className="text-center py-12 bg-gray-50 rounded-lg border border-dashed border-gray-300">
-                            <p className="text-gray-500 mb-2">No hay recursos disponibles aún.</p>
+                          <div className="text-center py-12 rounded-2xl bg-white/60 border border-slate-200/50">
+                            <p className="text-sm text-slate-500 mb-3">Sin recursos disponibles.</p>
                             {canEdit && (
-                              <Button variant="outline" onClick={() => { setEditingResource(null); setShowResourceEditor(true); }}>
-                                Subir el primer recurso
+                              <Button variant="outline" size="sm" onClick={() => { setEditingResource(null); setShowResourceEditor(true); }}>
+                                Subir recurso
                               </Button>
                             )}
                           </div>
@@ -1878,21 +1825,21 @@ export default function QuizzesPage() {
                               <BookOpen className="w-5 h-5 text-indigo-600" /> Cuestionarios ({currentFolderQuizzes.length})
                             </h2>
                             {canEdit && (
-                              <Button onClick={() => setShowUploader(true)} size="sm" className="bg-indigo-600 hover:bg-indigo-700">
+                              <Button onClick={() => setShowUploader(true)} size="sm" className="bg-primary hover:bg-primary/90">
                                 <Upload className="w-4 h-4 mr-2" /> Subir Cuestionario (JSON)
                               </Button>
                             )}
                           </div>
                           {currentFolderQuizzes.length === 0 ? (
-                            <div className="flex flex-col items-center justify-center py-12 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
-                              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm ring-1 ring-gray-100">
-                                <BookOpen className="w-6 h-6 text-gray-400" />
+                            <div className="flex flex-col items-center justify-center py-12 px-4 rounded-2xl bg-white/60 border border-slate-200/50">
+                              <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center mb-4">
+                                <BookOpen className="w-6 h-6 text-slate-400" />
                               </div>
-                              <h3 className="text-lg font-semibold text-gray-900 mb-1">No hay cuestionarios en esta carpeta</h3>
-                              <p className="text-sm text-gray-500 mb-3">Sube un archivo JSON para agregar contenido.</p>
+                              <h3 className="text-base font-bold text-slate-800 mb-1">Sin cuestionarios</h3>
+                              <p className="text-sm text-slate-500 mb-4">Sube un archivo JSON para comenzar.</p>
                               {canEdit && (
-                                <Button onClick={() => setShowUploader(true)} className="bg-indigo-600 hover:bg-indigo-700">
-                                  <Upload className="w-4 h-4 mr-2" /> Subir Cuestionario (JSON)
+                                <Button onClick={() => setShowUploader(true)} size="sm" className="bg-primary hover:bg-primary/90">
+                                  <Upload className="w-4 h-4 mr-2" /> Subir JSON
                                 </Button>
                               )}
                             </div>
@@ -1918,12 +1865,12 @@ export default function QuizzesPage() {
                     )}
 
                     {!currentFolderId && currentCourseFolders.length === 0 && currentFolderSubjects.length === 0 && (
-                      <div className="flex flex-col items-center justify-center py-16 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
-                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm ring-1 ring-gray-100">
-                          <Folder className="w-8 h-8 text-gray-300" />
+                      <div className="flex flex-col items-center justify-center py-16 px-4 rounded-2xl bg-white/60 border border-slate-200/50">
+                        <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center mb-4">
+                          <Folder className="w-6 h-6 text-slate-400" />
                         </div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">Carpeta vacía</h3>
-                        <p className="text-gray-500 text-center max-w-sm">No hay carpetas ni materias aquí. Comienza creando una nueva estructura.</p>
+                        <h3 className="text-base font-bold text-slate-800 mb-1">Sin contenido</h3>
+                        <p className="text-sm text-slate-500 text-center max-w-xs">Crea carpetas o materias para organizar el contenido.</p>
                       </div>
                     )}
                   </motion.div>
@@ -1979,29 +1926,27 @@ export default function QuizzesPage() {
                 {view === 'list' && selectedSubject && !showUploader && !editingQuiz && !showAIGenerator && !explorerMode && (
                   <div>
                     <motion.div key="list" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-                      <Breadcrumb />
-                      <FlowStatusBar />
-
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                      <BackNav />
+  
+                      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
                         <div>
-                          <h1 className="text-xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
-                            <BookOpen className="w-6 h-6 text-indigo-600" /> {selectedSubject.name}
-                          </h1>
+                          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">{selectedSubject.name}</h1>
+                          <p className="text-sm text-slate-500 mt-1">{subjectQuizzes.length} {subjectQuizzes.length === 1 ? 'cuestionario' : 'cuestionarios'}</p>
                         </div>
                         {isAdmin && (
                           <div className="flex flex-wrap gap-2">
-                            <Button onClick={() => setShowUploader(true)} className="bg-indigo-600 hover:bg-indigo-700 text-xs sm:text-sm h-9">
-                              <Upload className="w-4 h-4 mr-2" /> Subir Cuestionario (JSON)
+                            <Button onClick={() => setShowUploader(true)} variant="outline" className="text-xs sm:text-sm h-9">
+                              <Upload className="w-4 h-4 mr-2" /> Subir JSON
                             </Button>
 
-                            <Button variant="outline" onClick={() => setEditingQuiz({ title: '', subject_id: selectedSubject.id, questions: [] })} className="text-xs sm:text-sm h-9">
-                              <Plus className="w-4 h-4 mr-2" /> Nuevo Cuestionario
+                            <Button onClick={() => setEditingQuiz({ title: '', subject_id: selectedSubject.id, questions: [] })} className="bg-primary hover:bg-primary/90 text-xs sm:text-sm h-9">
+                              <Plus className="w-4 h-4 mr-2" /> Nuevo
                             </Button>
 
                             <Dialog open={showFolderDialog} onOpenChange={setShowFolderDialog}>
                               <DialogTrigger asChild>
                                 <Button variant="outline" className="text-xs sm:text-sm h-9">
-                                  <FolderPlus className="w-4 h-4 mr-2" /> Nueva carpeta
+                                  <FolderPlus className="w-4 h-4 mr-2" /> Carpeta
                                 </Button>
                               </DialogTrigger>
                               <DialogContent>
@@ -2011,7 +1956,7 @@ export default function QuizzesPage() {
                                     <Label>Nombre</Label>
                                     <Input value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} placeholder="Ej: Módulo 1" />
                                   </div>
-                                  <Button onClick={() => createFolderMutation.mutate({ ...newItem, subject_id: selectedSubject.id })} className="w-full bg-amber-500 hover:bg-amber-600">
+                                  <Button onClick={() => createFolderMutation.mutate({ ...newItem, subject_id: selectedSubject.id })} className="w-full bg-primary hover:bg-primary/90">
                                     Crear carpeta
                                   </Button>
                                 </div>
@@ -2019,13 +1964,6 @@ export default function QuizzesPage() {
                             </Dialog>
                           </div>
                         )}
-                      </div>
-
-
-                      <div className="flex items-center justify-between mb-4 border-b pb-2">
-                        <span className="text-sm font-semibold text-indigo-700 uppercase tracking-wide">
-                          Cuestionarios ({subjectQuizzes.length})
-                        </span>
                       </div>
 
 
@@ -2061,21 +1999,21 @@ export default function QuizzesPage() {
                       )}
 
                       {subjectQuizzes.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center py-12 px-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
-                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm ring-1 ring-gray-100">
-                            <BookOpen className="w-6 h-6 text-indigo-500" />
+                        <div className="flex flex-col items-center justify-center py-16 px-4 rounded-2xl bg-white/60 border border-slate-200/50">
+                          <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center mb-4">
+                            <BookOpen className="w-6 h-6 text-slate-400" />
                           </div>
-                          <h3 className="text-lg font-semibold text-gray-900 mb-1">No hay cuestionarios en {selectedSubject.name}</h3>
-                          <p className="text-sm text-gray-500 mb-4 text-center max-w-md">
-                            Sube un archivo JSON o crea un cuestionario manualmente en esta materia.
+                          <h3 className="text-base font-bold text-slate-800 mb-1">Sin cuestionarios</h3>
+                          <p className="text-sm text-slate-500 mb-5 text-center max-w-xs">
+                            Sube un archivo JSON o crea uno manualmente.
                           </p>
                           {isAdmin && (
                             <div className="flex flex-wrap gap-2 justify-center">
-                              <Button onClick={() => setShowUploader(true)} className="bg-indigo-600 hover:bg-indigo-700">
-                                <Upload className="w-4 h-4 mr-2" /> Subir Cuestionario (JSON)
+                              <Button onClick={() => setShowUploader(true)} variant="outline" size="sm">
+                                <Upload className="w-4 h-4 mr-2" /> Subir JSON
                               </Button>
-                              <Button variant="outline" onClick={() => setEditingQuiz({ title: '', subject_id: selectedSubject.id, questions: [] })}>
-                                <Plus className="w-4 h-4 mr-2" /> Crear Manualmente
+                              <Button size="sm" className="bg-primary hover:bg-primary/90" onClick={() => setEditingQuiz({ title: '', subject_id: selectedSubject.id, questions: [] })}>
+                                <Plus className="w-4 h-4 mr-2" /> Crear
                               </Button>
                             </div>
                           )}
@@ -2168,10 +2106,6 @@ export default function QuizzesPage() {
                 )}
               </AnimatePresence>
 
-
-              {/* Extras desactivados para mantener la experiencia simple y enfocada */}
-              {/* <SessionTimer /> */}
-              {/* <TaskProgressFloat /> */}
 
               {/* Course Join Modal */}
               <CourseJoinModal

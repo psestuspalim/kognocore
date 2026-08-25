@@ -25,10 +25,10 @@ const AuthenticatedApp = () => {
   // Show loading spinner while checking app public settings or auth
   if (isLoadingPublicSettings || isLoadingAuth) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-[radial-gradient(circle_at_18%_12%,rgba(255,176,99,0.22)_0%,transparent_38%),radial-gradient(circle_at_82%_0%,rgba(54,158,168,0.2)_0%,transparent_36%),linear-gradient(180deg,rgba(255,253,248,0.95)_0%,rgba(248,245,238,0.95)_100%)]">
-        <div className="surface-panel flex items-center gap-3 px-5 py-3">
-          <div className="h-6 w-6 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
-          <span className="font-semibold text-slate-700">Cargando plataforma...</span>
+      <div className="fixed inset-0 flex items-center justify-center bg-background">
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-8 w-8 rounded-full border-2 border-slate-200 border-t-slate-900 animate-spin" />
+          <span className="text-sm text-slate-500">Cargando...</span>
         </div>
       </div>
     );
