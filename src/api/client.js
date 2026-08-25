@@ -34,54 +34,68 @@ const initializeStorage = () => {
     localStorage.setItem('structure_initialized', 'true');
   }
 
-  // Ensure app_quizzes exists and includes the full ENARM bank of 280 questions
-  if (!localStorage.getItem('app_quizzes')) {
-    localStorage.setItem('app_quizzes', JSON.stringify(mockQuizzes));
-  } else {
-    try {
-      let stored = JSON.parse(localStorage.getItem('app_quizzes') || '[]');
-      if (!Array.isArray(stored) || stored.length === 0) {
-        stored = [...mockQuizzes];
-        localStorage.setItem('app_quizzes', JSON.stringify(stored));
-      } else {
-        const megaIdx = stored.findIndex(q => q && q.id === 'quiz_enarm2026_mega');
-        if (megaIdx < 0) {
-          stored.unshift(mockQuizzes[0]);
-          localStorage.setItem('app_quizzes', JSON.stringify(stored));
-        } else if ((stored[megaIdx]?.questions?.length || 0) < 280) {
-          stored[megaIdx] = mockQuizzes[0];
-          localStorage.setItem('app_quizzes', JSON.stringify(stored));
-        }
-      }
+  // Ensure all bundled repository quizzes exist in app_quizzes and user-created quizzes are preserved
+  try {
+    let stored = JSON.parse(localStorage.getItem('app_quizzes') || '[]');
+    if (!Array.isArray(stored)) stored = [];
+    
+    let modified = false;
 
-      const validIds = ['subj_med_interna', 'subj_cirugia_gen', 'subj_pediatria', 'subj_ginecologia_obs', 'subj_simuladores'];
-      let updated = false;
-      const healed = stored.map(q => {
-        if (!q) return q;
-        let subj = q.subject_id;
-        if (!subj || subj === 'root' || !validIds.includes(subj)) {
-          const txt = `${q.title || ''} ${q.subject || ''} ${q.description || ''} ${JSON.stringify(q.questions || [])}`.toLowerCase();
-          if (txt.includes('pediatr') || txt.includes('niño') || txt.includes('neonato') || txt.includes('lactante') || txt.includes('gestación') || txt.includes('reneo')) {
-            subj = 'subj_pediatria';
-          } else if (txt.includes('cirug') || txt.includes('quirúrg') || txt.includes('apendic') || txt.includes('hernia')) {
-            subj = 'subj_cirugia_gen';
-          } else if (txt.includes('ginec') || txt.includes('obstet') || txt.includes('embaraz') || txt.includes('parto')) {
-            subj = 'subj_ginecologia_obs';
-          } else if (txt.includes('simulad') || txt.includes('examen')) {
-            subj = 'subj_simuladores';
-          } else {
-            subj = 'subj_med_interna';
-          }
-          updated = true;
-          return { ...q, subject_id: subj, course_id: 'course_enarm2026', folder_id: null };
+    // For every quiz packaged in the repository:
+    for (const repoQ of mockQuizzes) {
+      if (!repoQ) continue;
+      const repoId = String(repoQ.id || '');
+      const repoTitle = String(repoQ.title || '').trim().toLowerCase();
+
+      const existingIndex = stored.findIndex(q => q && (String(q.id) === repoId || (repoTitle && String(q.title || '').trim().toLowerCase() === repoTitle)));
+
+      if (existingIndex < 0) {
+        // New quiz from repository -> add it!
+        stored.push(repoQ);
+        modified = true;
+      } else {
+        // If repo quiz has more questions or was updated, update it while preserving custom fields
+        const existingQ = stored[existingIndex];
+        const existingCount = existingQ.questions?.length || existingQ.total_questions || 0;
+        const repoCount = repoQ.questions?.length || repoQ.total_questions || 0;
+        if (repoCount > existingCount) {
+          stored[existingIndex] = { ...existingQ, ...repoQ };
+          modified = true;
         }
-        return q;
-      });
-      if (updated) {
-        localStorage.setItem('app_quizzes', JSON.stringify(healed));
       }
-    } catch (e) {
-      console.error('Quiz migration error:', e);
+    }
+
+    // Auto-heal subjects and courses for any legacy or misrouted quizzes
+    const validIds = ['subj_med_interna', 'subj_cirugia_gen', 'subj_pediatria', 'subj_ginecologia_obs', 'subj_simuladores'];
+    stored = stored.map(q => {
+      if (!q) return q;
+      let subj = q.subject_id;
+      if (!subj || subj === 'root' || !validIds.includes(subj)) {
+        const txt = `${q.title || ''} ${q.subject || ''} ${q.description || ''} ${JSON.stringify(q.questions || [])}`.toLowerCase();
+        if (txt.includes('pediatr') || txt.includes('niño') || txt.includes('neonato') || txt.includes('lactante') || txt.includes('gestación') || txt.includes('reneo')) {
+          subj = 'subj_pediatria';
+        } else if (txt.includes('cirug') || txt.includes('quirúrg') || txt.includes('apendic') || txt.includes('hernia')) {
+          subj = 'subj_cirugia_gen';
+        } else if (txt.includes('ginec') || txt.includes('obstet') || txt.includes('embaraz') || txt.includes('parto') || txt.includes('gyo')) {
+          subj = 'subj_ginecologia_obs';
+        } else if (txt.includes('simulad') || txt.includes('examen')) {
+          subj = 'subj_simuladores';
+        } else {
+          subj = 'subj_med_interna';
+        }
+        modified = true;
+        return { ...q, subject_id: subj, course_id: 'course_enarm2026' };
+      }
+      return q;
+    });
+
+    if (modified || !localStorage.getItem('app_quizzes')) {
+      localStorage.setItem('app_quizzes', JSON.stringify(stored));
+    }
+  } catch (e) {
+    console.error('Quiz migration error:', e);
+    if (!localStorage.getItem('app_quizzes')) {
+      localStorage.setItem('app_quizzes', JSON.stringify(mockQuizzes));
     }
   }
 

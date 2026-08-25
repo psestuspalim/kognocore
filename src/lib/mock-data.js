@@ -7,9 +7,11 @@ export const mockUser = {
     username: 'jesus'
 };
 
-import defaultQuiz from '@/data/enarm_full_quiz.json';
-
-export const mockQuizzes = [defaultQuiz];
+// Auto-load all JSON quiz files bundled in src/data/*.json
+const dataModules = import.meta.glob('@/data/*.json', { eager: true });
+export const mockQuizzes = Object.values(dataModules)
+    .map((mod) => (mod && mod.default ? mod.default : mod))
+    .filter(Boolean);
 
 
 // ─── CURSO: ENARM 2026 ───────────────────────────────────────────────────────

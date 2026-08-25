@@ -67,8 +67,8 @@ export function fromSimplifiedFormat(data) {
   if (Array.isArray(data)) {
     list = data;
   } else if (data && typeof data === 'object') {
-    title = data.metadata?.fuente ? `Simulador ${data.metadata.fuente}` : (data.titulo || data.title || data.nombre || title);
-    description = data.metadata?.fecha ? `Fecha: ${data.metadata.fecha}` : (data.descripcion || data.description || '');
+    title = data.metadata?.titulo || data.metadata?.title || (data.metadata?.fuente ? `Simulador ${data.metadata.fuente}` : '') || data.titulo || data.title || data.nombre || title;
+    description = (data.metadata?.fecha ? `Fecha: ${data.metadata.fecha}. ` : '') + (data.metadata?.descripcion || data.descripcion || data.description || '');
     list = data.preguntas || data.questions || data.q || data.items || [data];
   }
 

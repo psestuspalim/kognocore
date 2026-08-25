@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { client } from '@/api/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -327,6 +327,24 @@ export default function AdminJsonManager() {
     }
   };
 
+  const handleDownloadAllQuizzes = async () => {
+    try {
+      const allQuizzes = await client.entities.Quiz.list();
+      const blob = new Blob([JSON.stringify(allQuizzes, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `kognocore_banco_quizzes_${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast.success(`${allQuizzes.length} cuestionario(s) exportado(s) exitosamente.`);
+    } catch (e) {
+      toast.error('Error al exportar quizzes: ' + e.message);
+    }
+  };
+
   return (
     <AdminShell>
       <AdminPageHeader
@@ -353,17 +371,26 @@ export default function AdminJsonManager() {
 
         <TabsContent value="import" className="space-y-6">
           <Card className="rounded-2xl">
-            <CardHeader>
+            <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-lg font-semibold">Subir Archivo JSON</CardTitle>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleDownloadAllQuizzes}
+                className="text-primary hover:bg-primary/10"
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Descargar Todo el Banco (JSON)
+              </Button>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
                 <div className="flex items-start gap-3">
                   <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-sm font-medium text-blue-900">Exportación de Quizzes</p>
+                    <p className="text-sm font-medium text-blue-900">Persistencia y Banco de Quizzes</p>
                     <p className="text-sm text-blue-700 mt-1">
-                      La funcionalidad de exportación ahora se encuentra en el <strong>Dashboard Admin</strong> con organización jerárquica mejorada (Curso → Materia → Carpeta).
+                      Los cuestionarios colocados en la carpeta <code>src/data/*.json</code> quedan <strong>guardados permanentemente en el repositorio</strong>. También puedes usar el botón <em>Descargar Todo el Banco</em> para respaldar tus quizzes locales.
                     </p>
                   </div>
                 </div>
