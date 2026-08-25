@@ -237,71 +237,6 @@ export default function QuizzesPage() {
     score: 0
   });
 
-  // Restore active quiz session automatically when quizzes query finishes loading
-  useEffect(() => {
-    try {
-      const savedSession = getActiveQuizSession();
-      if (!savedSession) {
-        if (view === 'quiz' && !selectedQuiz) setView('home');
-        return;
-      }
-
-      const restoredQuiz = restoreQuizFromSavedSession(savedSession, quizzes);
-      if (restoredQuiz && Array.isArray(restoredQuiz.questions) && restoredQuiz.questions.length > 0) {
-        const qIdx = Math.min(savedSession.currentQuestionIndex || 0, restoredQuiz.questions.length - 1);
-        setSelectedQuiz(restoredQuiz);
-        setCurrentQuestionIndex(qIdx);
-        setScore(savedSession.score || 0);
-        setWrongAnswers(savedSession.wrongAnswers || []);
-        setCorrectAnswers(savedSession.correctAnswers || []);
-        setAnswerLog(savedSession.answerLog || []);
-        setMarkedQuestions(new Set(savedSession.markedQuestions || []));
-        setResponseTimes(savedSession.responseTimes || []);
-        setCurrentAttemptId(savedSession.attemptId || null);
-        setCurrentSessionId(savedSession.sessionId || null);
-        setDeckType(savedSession.deckType || 'all');
-        setView('quiz');
-      } else if (view === 'quiz' && !selectedQuiz) {
-        setView(_initNav.subjectId ? 'list' : 'home');
-      }
-    } catch (err) {
-      console.error('Error auto-restoring quiz session:', err);
-      if (view === 'quiz' && !selectedQuiz) setView('home');
-    }
-  }, [quizzes.length]);
-
-  const handleMarkForReview = (question, isMarked) => {
-    let nextSet;
-    setMarkedQuestions(prev => {
-      nextSet = new Set(prev);
-      if (isMarked) {
-        nextSet.add(question.id || question.question);
-      } else {
-        nextSet.delete(question.id || question.question);
-      }
-      return nextSet;
-    });
-
-    if (selectedQuiz) {
-      saveActiveQuizSession({
-        selectedQuiz,
-        currentQuestionIndex,
-        score,
-        wrongAnswers,
-        correctAnswers,
-        answerLog,
-        markedQuestions: nextSet,
-        responseTimes,
-        currentAttemptId,
-        currentSessionId,
-        deckType
-      });
-    }
-
-    if (isMarked) {
-      toast.success("Pregunta marcada para revisar", { duration: 1500 });
-    }
-  };
   const [showUploader, setShowUploader] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -338,78 +273,7 @@ export default function QuizzesPage() {
 
   const queryClient = useQueryClient();
 
-  const normalizeOptionText = (option) => {
-    if (typeof option === 'string') return option.trim();
-    if (!option || typeof option !== 'object') return '';
-    return String(
-      option.text ??
-      option.answerText ??
-      option.value ??
-      option.v ??
-      option.t ??
-      option.label ??
-      ''
-    ).trim();
-  };
-
-  const normalizeQuestionOptions = (question) => {
-    let rawOptions = [];
-
-    if (Array.isArray(question?.answerOptions)) rawOptions = question.answerOptions;
-    else if (Array.isArray(question?.options)) rawOptions = question.options;
-    else if (question?.options && typeof question.options === 'object') {
-      rawOptions = Object.entries(question.options).map(([key, value]) => ({
-        label: key,
-        text: value
-      }));
-    }
-
-    const answerOptions = rawOptions
-      .map((opt, idx) => {
-        const text = normalizeOptionText(opt);
-        if (!text) return null;
-        return {
-          id: String(opt?.id ?? idx),
-          text,
-          isCorrect: Boolean(opt?.isCorrect ?? opt?.c),
-          rationale: opt?.rationale ?? opt?.r ?? '',
-          errorType: opt?.errorType ?? opt?.et ?? ''
-        };
-      })
-      .filter(Boolean);
-
-    return {
-      ...question,
-      answerOptions
-    };
-  };
-
-  // Quiz settings hook
-  const { settings: quizSettings } = useQuizSettings(
-    selectedQuiz?.id,
-    selectedSubject?.id,
-    currentFolderId,
-    selectedCourse?.id
-  );
-
-  useEffect(() => {
-    if (authUser) {
-      setCurrentUser(authUser);
-      return;
-    }
-
-    const loadUser = async () => {
-      try {
-        const user = await client.auth.me();
-        setCurrentUser(user);
-      } catch (error) {
-        console.error('Error loading user:', error);
-      }
-    };
-    loadUser();
-  }, [authUser]);
-
-  // Queries
+  // --- Queries (declared before effects) ---
   const { data: courses = [] } = useQuery({
     queryKey: ['courses'],
     queryFn: () => client.entities.Course.list('order'),
@@ -455,15 +319,70 @@ export default function QuizzesPage() {
     enabled: !!(currentUser?.learner_id || currentUser?.email),
   });
 
-
-
   const { data: allUsers = [] } = useQuery({
     queryKey: ['all-users'],
     queryFn: () => client.entities.User.list(),
     enabled: currentUser?.role === 'admin',
   });
 
+  // Quiz settings hook
+  const { settings: quizSettings } = useQuizSettings(
+    selectedQuiz?.id,
+    selectedSubject?.id,
+    currentFolderId,
+    selectedCourse?.id
+  );
 
+  // --- Effects ---
+  useEffect(() => {
+    if (authUser) {
+      setCurrentUser(authUser);
+      return;
+    }
+
+    const loadUser = async () => {
+      try {
+        const user = await client.auth.me();
+        setCurrentUser(user);
+      } catch (error) {
+        console.error('Error loading user:', error);
+      }
+    };
+    loadUser();
+  }, [authUser]);
+
+  // Restore active quiz session automatically when quizzes query finishes loading
+  useEffect(() => {
+    try {
+      const savedSession = getActiveQuizSession();
+      if (!savedSession) {
+        if (view === 'quiz' && !selectedQuiz) setView('home');
+        return;
+      }
+
+      const restoredQuiz = restoreQuizFromSavedSession(savedSession, quizzes);
+      if (restoredQuiz && Array.isArray(restoredQuiz.questions) && restoredQuiz.questions.length > 0) {
+        const qIdx = Math.min(savedSession.currentQuestionIndex || 0, restoredQuiz.questions.length - 1);
+        setSelectedQuiz(restoredQuiz);
+        setCurrentQuestionIndex(qIdx);
+        setScore(savedSession.score || 0);
+        setWrongAnswers(savedSession.wrongAnswers || []);
+        setCorrectAnswers(savedSession.correctAnswers || []);
+        setAnswerLog(savedSession.answerLog || []);
+        setMarkedQuestions(new Set(savedSession.markedQuestions || []));
+        setResponseTimes(savedSession.responseTimes || []);
+        setCurrentAttemptId(savedSession.attemptId || null);
+        setCurrentSessionId(savedSession.sessionId || null);
+        setDeckType(savedSession.deckType || 'all');
+        setView('quiz');
+      } else if (view === 'quiz' && !selectedQuiz) {
+        setView(_initNav.subjectId ? 'list' : 'home');
+      }
+    } catch (err) {
+      console.error('Error auto-restoring quiz session:', err);
+      if (view === 'quiz' && !selectedQuiz) setView('home');
+    }
+  }, [quizzes.length]);
 
   // --- Restore navigation objects from sessionStorage IDs (runs once after queries load) ---
   useEffect(() => {
@@ -507,6 +426,39 @@ export default function QuizzesPage() {
     } catch { /* ignore */ }
   }, [view, selectedCourse?.id, selectedSubject?.id, currentFolderId]);
 
+  const handleMarkForReview = (question, isMarked) => {
+    let nextSet;
+    setMarkedQuestions(prev => {
+      nextSet = new Set(prev);
+      if (isMarked) {
+        nextSet.add(question.id || question.question);
+      } else {
+        nextSet.delete(question.id || question.question);
+      }
+      return nextSet;
+    });
+
+    if (selectedQuiz) {
+      saveActiveQuizSession({
+        selectedQuiz,
+        currentQuestionIndex,
+        score,
+        wrongAnswers,
+        correctAnswers,
+        answerLog,
+        markedQuestions: nextSet,
+        responseTimes,
+        currentAttemptId,
+        currentSessionId,
+        deckType
+      });
+    }
+
+    if (isMarked) {
+      toast.success("Pregunta marcada para revisar", { duration: 1500 });
+    }
+  };
+
   const isAdmin = currentUser?.role === 'admin';
   const isProfessor = currentUser?.role === 'professor';
   const canEdit = isAdmin || isProfessor;
@@ -515,12 +467,6 @@ export default function QuizzesPage() {
   const isServerCodeSession = isLearnerRole && hasKcToken && !!currentUser?.courseId;
   const isDirectCodeSession = isLearnerRole && currentUser?.loginMode === 'direct-code';
   const hasApprovedEnrollments = enrollments.length > 0;
-  const normalizeId = (value) => (value === null || value === undefined ? null : String(value).trim());
-  const sameId = (left, right) => {
-    const l = normalizeId(left);
-    const r = normalizeId(right);
-    return !!l && !!r && l === r;
-  };
   const userCourseId = normalizeId(currentUser?.courseId);
   const hasCourseIdMatch = !!(userCourseId && courses.some(c => c?.id && sameId(c.id, userCourseId)));
   const fallbackCourseId = hasCourseIdMatch ? currentUser.courseId : null;
