@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { client } from '@/api/client';
 import { getFolderColor } from '@/utils/folderColors';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -272,6 +272,7 @@ export default function QuizzesPage() {
   const [responseTimes, setResponseTimes] = useState(_initSavedSession?.session?.responseTimes || []);
   const [currentAttemptId, setCurrentAttemptId] = useState(_initSavedSession?.session?.attemptId || null);
   const [currentSessionId, setCurrentSessionId] = useState(_initSavedSession?.session?.sessionId || null);
+  const autoRestoreAttempted = useRef(false);
 
   const [resumeModalState, setResumeModalState] = useState({
     open: false,
@@ -400,8 +401,13 @@ export default function QuizzesPage() {
     loadUser();
   }, [authUser]);
 
-  // Restore active quiz session automatically when quizzes/attempts query finishes loading
+  // Restore active quiz session automatically ONCE when quizzes/attempts query finishes initial load
   useEffect(() => {
+    if (autoRestoreAttempted.current) return;
+    if (quizzes.length === 0 && attempts.length === 0) return;
+
+    autoRestoreAttempted.current = true;
+
     try {
       const savedSession = getActiveQuizSession();
       if (savedSession) {
@@ -748,7 +754,17 @@ export default function QuizzesPage() {
 
   const deleteQuizMutation = useMutation({
     mutationFn: (id) => client.entities.Quiz.delete(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['quizzes'] }),
+    onSuccess: (_, deletedId) => {
+      queryClient.invalidateQueries({ queryKey: ['quizzes'] });
+      const savedSession = getActiveQuizSession();
+      if (savedSession && sameId(savedSession.quizId, deletedId)) {
+        clearActiveQuizSession();
+      }
+      if (selectedQuiz && sameId(selectedQuiz.id, deletedId)) {
+        setSelectedQuiz(null);
+        if (view === 'quiz') setView('home');
+      }
+    },
   });
 
   const createResourceMutation = useMutation({
