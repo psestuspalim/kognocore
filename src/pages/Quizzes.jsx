@@ -50,7 +50,128 @@ import QuizExporter from '../components/admin/QuizExporter';
 import CourseJoinModal from '../components/course/CourseJoinModal';
 import ResumeQuizModal from '../components/quiz/ResumeQuizModal';
 
+// --- Top-Level Helpers ---
+const normalizeId = (value) => (value === null || value === undefined ? null : String(value).trim());
 
+const sameId = (left, right) => {
+  const l = normalizeId(left);
+  const r = normalizeId(right);
+  return !!l && !!r && l === r;
+};
+
+const LOCAL_STORAGE_SESSION_KEY = 'kc_active_quiz_session';
+
+const saveActiveQuizSession = (data, currentUser = null) => {
+  try {
+    if (!data?.selectedQuiz || !Array.isArray(data.selectedQuiz.questions)) return;
+
+    const lightweightQuestions = data.selectedQuiz.questions.map(q => ({
+      id: q.id,
+      question: q.question || q.text,
+      imageUrl: q.imageUrl,
+      hint: q.hint,
+      serie: q.serie,
+      type: q.type,
+      answerOptions: (q.answerOptions || q.options || []).map(opt => ({
+        id: opt.id,
+        text: typeof opt === 'string' ? opt : (opt.text || opt.value || ''),
+        isCorrect: Boolean(opt.isCorrect || opt.c),
+        rationale: opt.rationale || opt.r || ''
+      })),
+      justificacion: q.justificacion || q.justificación || q.feedback || q.explanation || q.rationale || ''
+    }));
+
+    const payload = {
+      userEmail: currentUser?.email || '',
+      quizId: data.selectedQuiz.id,
+      quizTitle: data.selectedQuiz.title || data.selectedQuiz.m?.t || 'Cuestionario',
+      attemptId: data.currentAttemptId || null,
+      sessionId: data.currentSessionId || null,
+      currentQuestionIndex: data.currentQuestionIndex || 0,
+      score: data.score || 0,
+      wrongAnswers: (data.wrongAnswers || []).map(wa => ({
+        question: wa.question,
+        selected_answer: wa.selected_answer,
+        correct_answer: wa.correct_answer,
+        response_time: wa.response_time,
+        explanation: wa.explanation || wa.justificacion || wa.rationale || '',
+        difficulty: wa.difficulty
+      })),
+      correctAnswers: (data.correctAnswers || []).map(ca => ({
+        question: ca.question,
+        selected_answer: ca.selected_answer,
+        explanation: ca.explanation || ca.justificacion || ca.rationale || '',
+        difficulty: ca.difficulty
+      })),
+      answerLog: (data.answerLog || []).map(al => ({
+        question: al.question,
+        selected_answer: al.selected_answer,
+        correct_answer: al.correct_answer,
+        is_correct: al.is_correct,
+        response_time: al.response_time,
+        explanation: al.explanation || al.justificacion || al.rationale || '',
+        difficulty: al.difficulty
+      })),
+      markedQuestions: Array.from(data.markedQuestions || []),
+      responseTimes: data.responseTimes || [],
+      deckType: data.deckType || 'all',
+      lightweightQuiz: {
+        id: data.selectedQuiz.id,
+        title: data.selectedQuiz.title || 'Cuestionario',
+        subject_id: data.selectedQuiz.subject_id,
+        questions: lightweightQuestions
+      },
+      updatedAt: new Date().toISOString()
+    };
+
+    localStorage.setItem(LOCAL_STORAGE_SESSION_KEY, JSON.stringify(payload));
+  } catch (e) {
+    console.error('⚠️ Error guardando sesión activa en localStorage:', e);
+  }
+};
+
+const clearActiveQuizSession = () => {
+  try {
+    localStorage.removeItem(LOCAL_STORAGE_SESSION_KEY);
+  } catch (e) { /* ignore */ }
+};
+
+const getActiveQuizSession = () => {
+  try {
+    const raw = localStorage.getItem(LOCAL_STORAGE_SESSION_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+};
+
+const restoreQuizFromSavedSession = (savedSession, availableQuizzes = []) => {
+  if (!savedSession) return null;
+
+  if (savedSession.lightweightQuiz && Array.isArray(savedSession.lightweightQuiz.questions) && savedSession.lightweightQuiz.questions.length > 0) {
+    return savedSession.lightweightQuiz;
+  }
+
+  const baseQuiz = availableQuizzes.find(q => sameId(q.id, savedSession.quizId));
+  if (baseQuiz) {
+    let expandedQuiz;
+    if (baseQuiz.q && Array.isArray(baseQuiz.q) && baseQuiz.q.length > 0) {
+      const parsedQ = baseQuiz.q.map(q => typeof q === 'string' ? JSON.parse(q) : q);
+      expandedQuiz = fromCompactFormat({ m: baseQuiz.m || { t: baseQuiz.title, s: baseQuiz.description, v: 'cQ-v2', c: parsedQ.length }, q: parsedQ });
+    } else if (baseQuiz.questions && baseQuiz.questions.length > 0) {
+      expandedQuiz = baseQuiz;
+    }
+
+    if (expandedQuiz?.questions?.length > 0) {
+      return {
+        ...expandedQuiz,
+        questions: expandedQuiz.questions.map(q => typeof q === 'object' ? q : { text: q })
+      };
+    }
+  }
+
+  return null;
+};
 
 export default function QuizzesPage() {
   const { user: authUser } = useAuth();
@@ -61,13 +182,19 @@ export default function QuizzesPage() {
       return raw ? JSON.parse(raw) : {};
     } catch { return {}; }
   })();
-  // Don't restore to volatile views (quiz/results/swipe) since progress state would be lost
+  
+  // Initialize view directly to 'quiz' if an active quiz session exists
   const _restoredView = (() => {
+    const activeSession = getActiveQuizSession();
+    if (activeSession && activeSession.lightweightQuiz?.questions?.length > 0) {
+      return 'quiz';
+    }
     const v = _initNav.view;
     if (!v) return 'home';
     if (['quiz', 'results', 'swipe'].includes(v)) return _initNav.subjectId ? 'list' : 'home';
     return v;
   })();
+
   const [view, setView] = useState(_restoredView);
   const [selectedCourse, setSelectedCourse] = useState(null); // resolved after queries load
   const [selectedSubject, setSelectedSubject] = useState(null); // resolved after queries load
@@ -93,120 +220,6 @@ export default function QuizzesPage() {
     totalQuestions: 1,
     score: 0
   });
-
-  const LOCAL_STORAGE_SESSION_KEY = 'kc_active_quiz_session';
-
-  const saveActiveQuizSession = (data) => {
-    try {
-      if (!data?.selectedQuiz || !Array.isArray(data.selectedQuiz.questions)) return;
-
-      const lightweightQuestions = data.selectedQuiz.questions.map(q => ({
-        id: q.id,
-        question: q.question || q.text,
-        imageUrl: q.imageUrl,
-        hint: q.hint,
-        serie: q.serie,
-        type: q.type,
-        answerOptions: (q.answerOptions || q.options || []).map(opt => ({
-          id: opt.id,
-          text: typeof opt === 'string' ? opt : (opt.text || opt.value || ''),
-          isCorrect: Boolean(opt.isCorrect || opt.c),
-          rationale: opt.rationale || opt.r || ''
-        })),
-        justificacion: q.justificacion || q.justificación || q.feedback || q.explanation || q.rationale || ''
-      }));
-
-      const payload = {
-        userEmail: currentUser?.email || '',
-        quizId: data.selectedQuiz.id,
-        quizTitle: data.selectedQuiz.title || data.selectedQuiz.m?.t || 'Cuestionario',
-        attemptId: data.currentAttemptId || null,
-        sessionId: data.currentSessionId || null,
-        currentQuestionIndex: data.currentQuestionIndex || 0,
-        score: data.score || 0,
-        wrongAnswers: (data.wrongAnswers || []).map(wa => ({
-          question: wa.question,
-          selected_answer: wa.selected_answer,
-          correct_answer: wa.correct_answer,
-          response_time: wa.response_time,
-          explanation: wa.explanation || wa.justificacion || wa.rationale || '',
-          difficulty: wa.difficulty
-        })),
-        correctAnswers: (data.correctAnswers || []).map(ca => ({
-          question: ca.question,
-          selected_answer: ca.selected_answer,
-          explanation: ca.explanation || ca.justificacion || ca.rationale || '',
-          difficulty: ca.difficulty
-        })),
-        answerLog: (data.answerLog || []).map(al => ({
-          question: al.question,
-          selected_answer: al.selected_answer,
-          correct_answer: al.correct_answer,
-          is_correct: al.is_correct,
-          response_time: al.response_time,
-          explanation: al.explanation || al.justificacion || al.rationale || '',
-          difficulty: al.difficulty
-        })),
-        markedQuestions: Array.from(data.markedQuestions || []),
-        responseTimes: data.responseTimes || [],
-        deckType: data.deckType || 'all',
-        lightweightQuiz: {
-          id: data.selectedQuiz.id,
-          title: data.selectedQuiz.title || 'Cuestionario',
-          subject_id: data.selectedQuiz.subject_id,
-          questions: lightweightQuestions
-        },
-        updatedAt: new Date().toISOString()
-      };
-
-      localStorage.setItem(LOCAL_STORAGE_SESSION_KEY, JSON.stringify(payload));
-    } catch (e) {
-      console.error('⚠️ Error guardando sesión activa en localStorage:', e);
-    }
-  };
-
-  const clearActiveQuizSession = () => {
-    try {
-      localStorage.removeItem(LOCAL_STORAGE_SESSION_KEY);
-    } catch (e) { /* ignore */ }
-  };
-
-  const getActiveQuizSession = () => {
-    try {
-      const raw = localStorage.getItem(LOCAL_STORAGE_SESSION_KEY);
-      return raw ? JSON.parse(raw) : null;
-    } catch {
-      return null;
-    }
-  };
-
-  const restoreQuizFromSavedSession = (savedSession, availableQuizzes = []) => {
-    if (!savedSession) return null;
-
-    if (savedSession.lightweightQuiz && Array.isArray(savedSession.lightweightQuiz.questions) && savedSession.lightweightQuiz.questions.length > 0) {
-      return savedSession.lightweightQuiz;
-    }
-
-    const baseQuiz = availableQuizzes.find(q => sameId(q.id, savedSession.quizId));
-    if (baseQuiz) {
-      let expandedQuiz;
-      if (baseQuiz.q && Array.isArray(baseQuiz.q) && baseQuiz.q.length > 0) {
-        const parsedQ = baseQuiz.q.map(q => typeof q === 'string' ? JSON.parse(q) : q);
-        expandedQuiz = fromCompactFormat({ m: baseQuiz.m || { t: baseQuiz.title, s: baseQuiz.description, v: 'cQ-v2', c: parsedQ.length }, q: parsedQ });
-      } else if (baseQuiz.questions && baseQuiz.questions.length > 0) {
-        expandedQuiz = baseQuiz;
-      }
-
-      if (expandedQuiz?.questions?.length > 0) {
-        return {
-          ...expandedQuiz,
-          questions: expandedQuiz.questions.map(normalizeQuestionOptions)
-        };
-      }
-    }
-
-    return null;
-  };
 
   // Restore active quiz session automatically on page reload
   useEffect(() => {
