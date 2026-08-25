@@ -12,11 +12,12 @@ export default function SubjectCard({ subject, quizCount, stats, onClick, onDele
   return (
     <Card
       onClick={onClick}
-      className="cursor-pointer transition-all duration-150 overflow-hidden relative group rounded-xl border hover:-translate-y-0.5 hover:shadow-md"
+      className="cursor-pointer transition-all duration-150 overflow-hidden relative group rounded-xl border hover:-translate-y-0.5 hover:shadow-lg"
       style={{
         background: p.cardBg,
         borderColor: p.border,
         borderLeft: `4px solid ${subject.color || '#10b981'}`,
+        boxShadow: '0 1px 3px 0 rgba(0,0,0,0.06)',
       }}
     >
       <CardContent className="p-4">

@@ -10,35 +10,36 @@ export default function CourseCard({ course, subjectCount, isAdmin, onEdit, onDe
   return (
     <Card
       onClick={onClick}
-      className="cursor-pointer transition-all duration-150 overflow-hidden relative group rounded-xl border hover:-translate-y-0.5 hover:shadow-md"
+      className="cursor-pointer transition-all duration-150 overflow-hidden relative group rounded-xl border hover:-translate-y-0.5 hover:shadow-lg"
       style={{
         background: p.cardBg,
         borderColor: p.border,
+        boxShadow: '0 1px 3px 0 rgba(0,0,0,0.06)',
       }}
     >
-      <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: course.color || '#7c3aed' }} />
+      <div className="absolute top-0 left-0 right-0 h-1 rounded-t-xl" style={{ background: course.color || '#7c3aed' }} />
 
-      <CardContent className="p-4">
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-3 min-w-0">
+      <CardContent className="p-5">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-4 min-w-0">
             <div
-              className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+              className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
               style={{ background: p.iconBg }}
             >
               {course.icon
-                ? <Icon name={course.icon} className="w-5 h-5" style={{ color: p.iconColor }} />
-                : <GraduationCap className="w-5 h-5" style={{ color: p.iconColor }} />
+                ? <Icon name={course.icon} className="w-6 h-6" style={{ color: p.iconColor }} />
+                : <GraduationCap className="w-6 h-6" style={{ color: p.iconColor }} />
               }
             </div>
 
             <div className="min-w-0 flex-1">
-              <h3 className="font-bold text-slate-800 text-[15px] flex items-center gap-1.5 truncate">
+              <h3 className="font-bold text-slate-900 text-base flex items-center gap-1.5 truncate">
                 {course.name}
-                {course.is_hidden && <EyeOff className="w-3 h-3 text-slate-400" />}
+                {course.is_hidden && <EyeOff className="w-3.5 h-3.5 text-slate-400" />}
               </h3>
               <div className="flex items-center gap-2 mt-1">
-                <span className="text-xs text-slate-500 flex items-center gap-1">
-                  <BookOpen className="w-3 h-3" />
+                <span className="text-sm text-slate-500 flex items-center gap-1.5">
+                  <BookOpen className="w-3.5 h-3.5" />
                   {subjectCount} {subjectCount === 1 ? 'materia' : 'materias'}
                 </span>
                 {course.visibility === 'specific' && (

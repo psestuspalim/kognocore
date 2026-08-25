@@ -63,7 +63,7 @@ export default function QuizListItem({
   return (
     <div
       className={`group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-white border transition-all duration-150 hover:shadow-sm cursor-pointer ${
-        isSelected ? 'ring-2 ring-primary border-primary/30' : 'border-slate-200/60 hover:border-slate-300'
+        isSelected ? 'ring-2 ring-primary border-primary/30' : 'border-slate-200 hover:border-slate-300'
       }`}
       onClick={() => onStart(quiz, totalQuestions, 'all', attempts)}
     >
@@ -78,13 +78,13 @@ export default function QuizListItem({
       )}
 
       {/* Score or status indicator */}
-      <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 border border-slate-100 bg-slate-50">
+      <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 border ${hasAttempts ? 'border-slate-200 bg-slate-50' : 'border-primary/20 bg-primary/5'}`}>
         {inProgressAttempt ? (
           <span className="text-[10px] font-bold text-amber-600 bg-amber-50 rounded px-1 text-center">EN PROGRESO</span>
         ) : hasAttempts ? (
           <span className={`text-sm font-bold ${getScoreColor()}`}>{bestScore}%</span>
         ) : (
-          <span className="text-[10px] font-semibold text-slate-400 uppercase">Nuevo</span>
+          <span className="text-[10px] font-bold text-primary uppercase">Nuevo</span>
         )}
       </div>
 

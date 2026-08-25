@@ -13,10 +13,11 @@ export default function FolderCard({ folder, itemCount, isAdmin, onDelete, onEdi
   return (
     <Card
       onClick={onClick}
-      className="cursor-pointer transition-all duration-150 overflow-hidden relative group rounded-xl border hover:-translate-y-0.5 hover:shadow-md"
+      className="cursor-pointer transition-all duration-150 overflow-hidden relative group rounded-xl border hover:-translate-y-0.5 hover:shadow-lg"
       style={{
         background: p.cardBg,
         borderColor: p.border,
+        boxShadow: '0 1px 3px 0 rgba(0,0,0,0.06)',
       }}
     >
       <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: accent }} />

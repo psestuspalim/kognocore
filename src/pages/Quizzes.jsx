@@ -924,8 +924,8 @@ export default function QuizzesPage() {
 
 
   const TopBar = () => (
-    <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-200/60 mb-6">
-      <div className="container mx-auto px-3 sm:px-4 h-14 flex items-center justify-between">
+    <header className="sticky top-0 z-30 bg-white border-b border-slate-200">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between">
         <div className="flex items-center gap-3 min-w-0">
           <button onClick={handleHome} className="font-bold text-lg tracking-tight text-slate-900 hover:text-primary transition-colors shrink-0">
             Kognocore
@@ -1598,11 +1598,11 @@ export default function QuizzesPage() {
       <div>
         <DragDropContext onDragEnd={handleDragEnd}>
           <div className={view === 'quiz' ? "h-screen overflow-hidden" : "min-h-screen"}>
-            <div className={view === 'quiz' ? "" : "container mx-auto px-3 sm:px-4 pb-8"}>
+            <div className={view === 'quiz' ? "" : "max-w-6xl mx-auto px-5 sm:px-8 pt-5 pb-8"}>
               <AnimatePresence mode="wait">
                 {/* Course Editor */}
                 {editingCourse && (
-                  <motion.div key="course-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <motion.div key="course-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                     <Button onClick={() => setEditingCourse(null)} variant="ghost" className="mb-6">
                       <ArrowLeft className="w-4 h-4 mr-2" /> Volver
                     </Button>
@@ -1617,7 +1617,7 @@ export default function QuizzesPage() {
 
                 {/* Subject Editor */}
                 {editingSubject && !editingCourse && (
-                  <motion.div key="subject-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <motion.div key="subject-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                     <Button onClick={() => setEditingSubject(null)} variant="ghost" className="mb-6">
                       <ArrowLeft className="w-4 h-4 mr-2" /> Volver
                     </Button>
@@ -1632,7 +1632,7 @@ export default function QuizzesPage() {
 
                 {/* Folder Editor */}
                 {editingFolder && !editingSubject && !editingCourse && (
-                  <motion.div key="folder-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <motion.div key="folder-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                     <Button onClick={() => setEditingFolder(null)} variant="ghost" className="mb-6">
                       <ArrowLeft className="w-4 h-4 mr-2" /> Volver
                     </Button>
@@ -1647,7 +1647,7 @@ export default function QuizzesPage() {
 
                 {/* Quiz Editor */}
                 {editingQuiz && !editingFolder && !editingSubject && !editingCourse && (
-                  <motion.div key="quiz-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <motion.div key="quiz-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                     <Button onClick={() => setEditingQuiz(null)} variant="ghost" className="mb-6">
                       <ArrowLeft className="w-4 h-4 mr-2" /> Volver
                     </Button>
@@ -1662,13 +1662,13 @@ export default function QuizzesPage() {
 
                 {/* Home View - Courses + Unassigned Subjects */}
                 {view === 'home' && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !explorerMode && (
-                  <motion.div key="courses" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                  <motion.div key="courses" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
 
 
-                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-5">
                       <div>
-                        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Mis Cursos</h1>
-                        <p className="text-sm text-slate-500 mt-1">Selecciona un curso para comenzar</p>
+                        <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Mis Cursos</h1>
+                        <p className="text-sm text-slate-500 mt-0.5">Selecciona un curso para comenzar</p>
                       </div>
                       <div className="flex flex-wrap gap-2">
                         {!canEdit && (
@@ -1714,8 +1714,8 @@ export default function QuizzesPage() {
 
                     {/* Course Cards */}
                     {visibleCourses.length > 0 && (
-                      <div className="mb-8">
-                        <DroppableArea droppableId="root-courses" type="COURSE" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      <div className="mb-5">
+                        <DroppableArea droppableId="root-courses" type="COURSE" className="grid grid-cols-1 md:grid-cols-2 gap-3">
                           {visibleCourses.map((course, index) => (
                             <DraggableItem key={course.id} id={course.id} index={index} isAdmin={canEdit}>
                               <CourseCard
@@ -1734,11 +1734,11 @@ export default function QuizzesPage() {
 
                     {/* Materias sin curso (Oculto por requerimiento) */}
                     {/* {unassignedSubjects.length > 0 && (
-                  <div className="mb-8">
+                  <div className="mb-5">
                     <h2 className="text-lg font-semibold text-gray-700 mb-3 flex items-center gap-2">
                       <BookOpen className="w-5 h-5" /> Materias
                     </h2>
-                    <DroppableArea droppableId="root-subjects" type="SUBJECT" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <DroppableArea droppableId="root-subjects" type="SUBJECT" className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {unassignedSubjects.map((subject, index) => (
                         <DraggableItem key={subject.id} id={subject.id} index={index} isAdmin={canEdit}>
                           <SubjectCard
@@ -1758,7 +1758,7 @@ export default function QuizzesPage() {
                 )} */}
 
                     {visibleCourses.length === 0 && unassignedSubjects.length === 0 && (
-                      <div className="flex flex-col items-center justify-center py-20 px-4 rounded-2xl bg-white/60 border border-slate-200/50">
+                      <div className="flex flex-col items-center justify-center py-14 px-4 rounded-xl bg-white border border-slate-200">
                         <div className="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center mb-5">
                           <BookOpen className="w-7 h-7 text-slate-400" />
                         </div>
@@ -1786,10 +1786,10 @@ export default function QuizzesPage() {
 
                 {/* Explorer Mode - Unified */}
                 {explorerMode && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && (
-                  <motion.div key="explorer-unified" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                  <motion.div key="explorer-unified" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                     <div className="flex items-center justify-between mb-6">
                       <div>
-                        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Explorador</h1>
+                        <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Explorador</h1>
                         <p className="text-sm text-slate-500 mt-1">Arrastra elementos para organizarlos</p>
                       </div>
                       <Button
@@ -1870,13 +1870,12 @@ export default function QuizzesPage() {
 
                 {/* Subjects View (inside a course or folder) */}
                 {view === 'subjects' && (selectedCourse || currentFolderId) && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !showBulkUploader && !showAIGenerator && !showUploader && !explorerMode && (
-                  <motion.div key="subjects" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                  <motion.div key="subjects" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                     <BackNav />
 
-
-                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-5">
                       <div>
-                        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                        <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
                           {currentFolderId
                             ? folders.find(f => sameId(f.id, currentFolderId))?.name
                             : selectedSubject
@@ -1962,7 +1961,7 @@ export default function QuizzesPage() {
 
                     {/* Resources Grid - Folder Level */}
                     {activeTab === 'resources' && (
-                      <div className="mb-8">
+                      <div className="mb-5">
                         {canEdit && (
                           <div className="flex justify-end mb-4">
                             <Button
@@ -2016,7 +2015,7 @@ export default function QuizzesPage() {
                     <DroppableArea
                       droppableId={currentFolderId ? `folder-${currentFolderId}` : `course-${selectedCourse?.id}`}
                       type="FOLDER"
-                      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4"
+                      className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4"
                     >
                       {currentCourseFolders.map((folder, index) => (
                         <DraggableItem key={folder.id} id={folder.id} index={index} isAdmin={canEdit}>
@@ -2034,7 +2033,7 @@ export default function QuizzesPage() {
                     <DroppableArea
                       droppableId={currentFolderId ? `folder-${currentFolderId}` : `course-${selectedCourse?.id}`}
                       type="SUBJECT"
-                      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                      className="grid grid-cols-1 md:grid-cols-2 gap-3"
                     >
                       {currentFolderSubjects.map((subject, index) => (
                         <DraggableItem key={subject.id} id={subject.id} index={index} isAdmin={canEdit}>
@@ -2117,7 +2116,7 @@ export default function QuizzesPage() {
 
                 {/* File Uploader - Folder Level */}
                 {view === 'subjects' && (selectedCourse || currentFolderId) && showUploader && (
-                  <motion.div key="uploader-folder" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <motion.div key="uploader-folder" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                     <Button onClick={() => setShowUploader(false)} variant="ghost" className="mb-6">
                       <ArrowLeft className="w-4 h-4 mr-2" /> Volver
                     </Button>
@@ -2138,7 +2137,7 @@ export default function QuizzesPage() {
 
                 {/* File Uploader - Subject Level */}
                 {view === 'list' && selectedSubject && showUploader && (
-                  <motion.div key="uploader-subject" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <motion.div key="uploader-subject" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                     <Button onClick={() => setShowUploader(false)} variant="ghost" className="mb-6">
                       <ArrowLeft className="w-4 h-4 mr-2" /> Volver a {selectedSubject.name}
                     </Button>
@@ -2162,13 +2161,13 @@ export default function QuizzesPage() {
                 {/* Quiz List View */}
                 {view === 'list' && selectedSubject && !showUploader && !editingQuiz && !showAIGenerator && !explorerMode && (
                   <div>
-                    <motion.div key="list" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                    <motion.div key="list" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                       <BackNav />
   
-                      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+                      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-5">
                         <div>
-                          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">{selectedSubject.name}</h1>
-                          <p className="text-sm text-slate-500 mt-1">{subjectQuizzes.length} {subjectQuizzes.length === 1 ? 'cuestionario' : 'cuestionarios'}</p>
+                          <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">{selectedSubject.name}</h1>
+                          <p className="text-sm text-slate-500 mt-0.5">{subjectQuizzes.length} {subjectQuizzes.length === 1 ? 'cuestionario' : 'cuestionarios'}</p>
                         </div>
                         {isAdmin && (
                           <div className="flex flex-wrap gap-2">
@@ -2206,7 +2205,7 @@ export default function QuizzesPage() {
 
                       {/* Carpetas dentro de la materia con droppable */}
                       {folders.filter(f => sameId(f.subject_id, selectedSubject.id) && !f.parent_id).length > 0 && (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
                           {folders.filter(f => sameId(f.subject_id, selectedSubject.id) && !f.parent_id).map((folder) => (
                             <DroppableArea key={folder.id} droppableId={`folder-${folder.id}`} type="QUIZ" className="h-full">
                               <FolderCard
@@ -2291,7 +2290,7 @@ export default function QuizzesPage() {
 
                 {/* Quiz View */}
                 {view === 'quiz' && selectedQuiz && !swipeMode && (
-                  <motion.div key="quiz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <motion.div key="quiz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                     <QuestionView
                       key={currentQuestionIndex}
                       question={selectedQuiz.questions[currentQuestionIndex]}
@@ -2316,7 +2315,7 @@ export default function QuizzesPage() {
 
                 {/* Swipe Quiz Mode */}
                 {view === 'quiz' && selectedQuiz && swipeMode && (
-                  <motion.div key="swipe-quiz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <motion.div key="swipe-quiz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                     <SwipeQuizMode
                       questions={selectedQuiz.questions}
                       onComplete={handleSwipeComplete}
@@ -2327,7 +2326,7 @@ export default function QuizzesPage() {
 
                 {/* Results View */}
                 {view === 'results' && selectedQuiz && (
-                  <motion.div key="results" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}>
+                  <motion.div key="results" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                     <ResultsView
                       score={score}
                       totalQuestions={selectedQuiz.questions.length}
