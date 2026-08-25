@@ -148,26 +148,26 @@ const getActiveQuizSession = () => {
 const restoreQuizFromSavedSession = (savedSession, availableQuizzes = []) => {
   if (!savedSession) return null;
 
+  let quizCandidate = null;
+
   if (savedSession.lightweightQuiz && Array.isArray(savedSession.lightweightQuiz.questions) && savedSession.lightweightQuiz.questions.length > 0) {
-    return savedSession.lightweightQuiz;
+    quizCandidate = savedSession.lightweightQuiz;
+  } else if (savedSession.selectedQuiz && Array.isArray(savedSession.selectedQuiz.questions) && savedSession.selectedQuiz.questions.length > 0) {
+    quizCandidate = savedSession.selectedQuiz;
+  } else if (Array.isArray(availableQuizzes) && availableQuizzes.length > 0) {
+    const baseQuiz = availableQuizzes.find(q => sameId(q.id, savedSession.quizId));
+    if (baseQuiz) {
+      if (baseQuiz.q && Array.isArray(baseQuiz.q) && baseQuiz.q.length > 0) {
+        const parsedQ = baseQuiz.q.map(q => typeof q === 'string' ? JSON.parse(q) : q);
+        quizCandidate = fromCompactFormat({ m: baseQuiz.m || { t: baseQuiz.title, s: baseQuiz.description, v: 'cQ-v2', c: parsedQ.length }, q: parsedQ });
+      } else if (baseQuiz.questions && baseQuiz.questions.length > 0) {
+        quizCandidate = baseQuiz;
+      }
+    }
   }
 
-  const baseQuiz = availableQuizzes.find(q => sameId(q.id, savedSession.quizId));
-  if (baseQuiz) {
-    let expandedQuiz;
-    if (baseQuiz.q && Array.isArray(baseQuiz.q) && baseQuiz.q.length > 0) {
-      const parsedQ = baseQuiz.q.map(q => typeof q === 'string' ? JSON.parse(q) : q);
-      expandedQuiz = fromCompactFormat({ m: baseQuiz.m || { t: baseQuiz.title, s: baseQuiz.description, v: 'cQ-v2', c: parsedQ.length }, q: parsedQ });
-    } else if (baseQuiz.questions && baseQuiz.questions.length > 0) {
-      expandedQuiz = baseQuiz;
-    }
-
-    if (expandedQuiz?.questions?.length > 0) {
-      return {
-        ...expandedQuiz,
-        questions: expandedQuiz.questions.map(q => typeof q === 'object' ? q : { text: q })
-      };
-    }
+  if (quizCandidate && Array.isArray(quizCandidate.questions) && quizCandidate.questions.length > 0) {
+    return quizCandidate;
   }
 
   return null;
@@ -182,13 +182,24 @@ export default function QuizzesPage() {
       return raw ? JSON.parse(raw) : {};
     } catch { return {}; }
   })();
-  
+
+  const _initSavedSession = (() => {
+    try {
+      const session = getActiveQuizSession();
+      if (!session) return null;
+      const restored = restoreQuizFromSavedSession(session, []);
+      if (restored && Array.isArray(restored.questions) && restored.questions.length > 0) {
+        return { session, restoredQuiz: restored };
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  })();
+
   // Initialize view directly to 'quiz' if an active quiz session exists
   const _restoredView = (() => {
-    const activeSession = getActiveQuizSession();
-    if (activeSession && activeSession.lightweightQuiz?.questions?.length > 0) {
-      return 'quiz';
-    }
+    if (_initSavedSession) return 'quiz';
     const v = _initNav.view;
     if (!v) return 'home';
     if (['quiz', 'results', 'swipe'].includes(v)) return _initNav.subjectId ? 'list' : 'home';
@@ -199,14 +210,17 @@ export default function QuizzesPage() {
   const [selectedCourse, setSelectedCourse] = useState(null); // resolved after queries load
   const [selectedSubject, setSelectedSubject] = useState(null); // resolved after queries load
   const [_navRestored, _setNavRestored] = useState(false);
-  const [selectedQuiz, setSelectedQuiz] = useState(null);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [score, setScore] = useState(0);
-  const [deckType, setDeckType] = useState('all');
-  const [wrongAnswers, setWrongAnswers] = useState([]);
-  const [correctAnswers, setCorrectAnswers] = useState([]);
-  const [answerLog, setAnswerLog] = useState([]);
-  const [markedQuestions, setMarkedQuestions] = useState(new Set());
+  const [selectedQuiz, setSelectedQuiz] = useState(_initSavedSession?.restoredQuiz || null);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(_initSavedSession?.session?.currentQuestionIndex || 0);
+  const [score, setScore] = useState(_initSavedSession?.session?.score || 0);
+  const [deckType, setDeckType] = useState(_initSavedSession?.session?.deckType || 'all');
+  const [wrongAnswers, setWrongAnswers] = useState(_initSavedSession?.session?.wrongAnswers || []);
+  const [correctAnswers, setCorrectAnswers] = useState(_initSavedSession?.session?.correctAnswers || []);
+  const [answerLog, setAnswerLog] = useState(_initSavedSession?.session?.answerLog || []);
+  const [markedQuestions, setMarkedQuestions] = useState(new Set(_initSavedSession?.session?.markedQuestions || []));
+  const [responseTimes, setResponseTimes] = useState(_initSavedSession?.session?.responseTimes || []);
+  const [currentAttemptId, setCurrentAttemptId] = useState(_initSavedSession?.session?.attemptId || null);
+  const [currentSessionId, setCurrentSessionId] = useState(_initSavedSession?.session?.sessionId || null);
 
   const [resumeModalState, setResumeModalState] = useState({
     open: false,
@@ -221,11 +235,14 @@ export default function QuizzesPage() {
     score: 0
   });
 
-  // Restore active quiz session automatically on page reload
+  // Restore active quiz session automatically when quizzes query finishes loading
   useEffect(() => {
     try {
       const savedSession = getActiveQuizSession();
-      if (!savedSession) return;
+      if (!savedSession) {
+        if (view === 'quiz' && !selectedQuiz) setView('home');
+        return;
+      }
 
       const restoredQuiz = restoreQuizFromSavedSession(savedSession, quizzes);
       if (restoredQuiz && Array.isArray(restoredQuiz.questions) && restoredQuiz.questions.length > 0) {
@@ -242,10 +259,12 @@ export default function QuizzesPage() {
         setCurrentSessionId(savedSession.sessionId || null);
         setDeckType(savedSession.deckType || 'all');
         setView('quiz');
-        toast.info(`Reanudando examen: Pregunta ${qIdx + 1} de ${restoredQuiz.questions.length}`);
+      } else if (view === 'quiz' && !selectedQuiz) {
+        setView(_initNav.subjectId ? 'list' : 'home');
       }
     } catch (err) {
       console.error('Error auto-restoring quiz session:', err);
+      if (view === 'quiz' && !selectedQuiz) setView('home');
     }
   }, [quizzes.length]);
 
