@@ -147,6 +147,52 @@ function getActiveQuizSession() {
   }
 }
 
+function normalizeOptionText(option) {
+  if (typeof option === 'string') return option.trim();
+  if (!option || typeof option !== 'object') return '';
+  return String(
+    option.text ??
+    option.answerText ??
+    option.value ??
+    option.v ??
+    option.t ??
+    option.label ??
+    ''
+  ).trim();
+}
+
+function normalizeQuestionOptions(question) {
+  let rawOptions = [];
+
+  if (Array.isArray(question?.answerOptions)) rawOptions = question.answerOptions;
+  else if (Array.isArray(question?.options)) rawOptions = question.options;
+  else if (question?.options && typeof question.options === 'object') {
+    rawOptions = Object.entries(question.options).map(([key, value]) => ({
+      label: key,
+      text: value
+    }));
+  }
+
+  const answerOptions = rawOptions
+    .map((opt, idx) => {
+      const text = normalizeOptionText(opt);
+      if (!text) return null;
+      return {
+        id: String(opt?.id ?? idx),
+        text,
+        isCorrect: Boolean(opt?.isCorrect ?? opt?.c),
+        rationale: opt?.rationale ?? opt?.r ?? '',
+        errorType: opt?.errorType ?? opt?.et ?? ''
+      };
+    })
+    .filter(Boolean);
+
+  return {
+    ...question,
+    answerOptions
+  };
+}
+
 function restoreQuizFromSavedSession(savedSession, availableQuizzes = []) {
   if (!savedSession) return null;
 
@@ -169,7 +215,10 @@ function restoreQuizFromSavedSession(savedSession, availableQuizzes = []) {
   }
 
   if (quizCandidate && Array.isArray(quizCandidate.questions) && quizCandidate.questions.length > 0) {
-    return quizCandidate;
+    return {
+      ...quizCandidate,
+      questions: quizCandidate.questions.map(normalizeQuestionOptions)
+    };
   }
 
   return null;
