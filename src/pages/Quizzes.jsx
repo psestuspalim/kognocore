@@ -314,9 +314,7 @@ export default function QuizzesPage() {
   const [showBulkUploader, setShowBulkUploader] = useState(false);
   const [activeSubjectTab, setActiveSubjectTab] = useState('quizzes');
   const [swipeMode, setSwipeMode] = useState(false);
-  const [responseTimes, setResponseTimes] = useState([]);
   const [questionStartTime, setQuestionStartTime] = useState(Date.now());
-  const [currentSessionId, setCurrentSessionId] = useState(null);
 
   // Dialogs
   const [showCourseDialog, setShowCourseDialog] = useState(false);
@@ -1013,8 +1011,6 @@ export default function QuizzesPage() {
     : currentFolderId
       ? resources.filter(r => sameId(r.folder_id, currentFolderId) && (isAdmin || !r.is_hidden))
       : [];
-
-  const [currentAttemptId, setCurrentAttemptId] = useState(null);
 
   const currentFolder = currentFolderId ? folders.find(f => sameId(f.id, currentFolderId)) : null;
   const currentSubject = selectedSubject || (currentFolder?.subject_id ? subjects.find(s => sameId(s.id, currentFolder.subject_id)) : null);
