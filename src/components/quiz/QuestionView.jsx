@@ -213,10 +213,11 @@ export default function QuestionView({
         <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
           <button
             onClick={onBack}
-            className="flex items-center gap-1 text-sm text-slate-500 hover:text-slate-800 transition-colors shrink-0"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 active:scale-95 transition-all shrink-0 cursor-pointer"
+            title="Salir del cuestionario"
           >
             <ChevronLeft className="w-4 h-4" />
-            <span className="hidden sm:inline">Salir</span>
+            <span>Salir</span>
           </button>
 
           <div className="flex-1 max-w-sm">

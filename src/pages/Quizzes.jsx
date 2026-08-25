@@ -836,60 +836,22 @@ export default function QuizzesPage() {
 
   // Visibility helpers
   const canUserAccess = (item, parentItem = null) => {
-    if (isAdmin) return true;
+    if (!item) return false;
+    if (isAdmin || isProfessor) return true;
     if (item.is_hidden) return false;
 
-    // Server code session must be scoped strictly to one course, but without
-    // being blocked by per-user visibility lists.
-    if (isServerCodeSession && currentUser?.courseId) {
-      const inScopedCourse =
-        sameId(item.id, userCourseId) ||
-        sameId(item.course_id, userCourseId) ||
-        sameId(parentItem?.id, userCourseId) ||
-        sameId(parentItem?.course_id, userCourseId);
-
-      if (inScopedCourse) {
-        return true;
-      }
-    }
-
-    // Si es un curso y el usuario tiene enrollment aprobado, tiene acceso
-    if (
-      !parentItem &&
-      (
-        (isServerCodeSession && sameId(userCourseId, item.id)) ||
-        enrollments.some(e => sameId(e.course_id, item.id)) ||
-        (userCourseId && sameId(userCourseId, item.id)) ||
-        (isDirectCodeSession && !hasApprovedEnrollments && sameId(fallbackCourseId, item.id))
-      )
-    ) {
-      return true;
+    if (item.visibility === 'specific' && Array.isArray(item.allowed_users) && item.allowed_users.length > 0) {
+      return item.allowed_users.includes(currentUser?.email);
     }
 
     if (item.visibility === 'inherit' && parentItem) {
       return canUserAccess(parentItem);
     }
 
-    if (item.visibility === 'specific') {
-      return item.allowed_users?.includes(currentUser?.email);
-    }
-
     return true;
   };
-  const visibleCourses = isAdmin
-    ? courses.filter(c => c && c.id && canUserAccess(c))
-    : isServerCodeSession
-      ? courses.filter(c => c && c.id && sameId(c.id, userCourseId) && canUserAccess(c))
-      : courses.filter(c =>
-        c &&
-        c.id &&
-        canUserAccess(c) &&
-        (
-          enrollments.some(e => sameId(e.course_id, c.id)) ||
-          (userCourseId && sameId(userCourseId, c.id)) ||
-          (isDirectCodeSession && !hasApprovedEnrollments && sameId(fallbackCourseId, c.id))
-        )
-      );
+
+  const visibleCourses = courses.filter(c => c && c.id && canUserAccess(c));
 
 
   // Filtered data
@@ -944,25 +906,33 @@ export default function QuizzesPage() {
       return true;
     }
 
-    // 3. Keyword heuristic match (e.g. Pediatria, Cirugia, etc.)
-    const fullText = `${q.title || ''} ${q.description || ''} ${q.subject || ''}`.toLowerCase();
-    if (targetId === 'subj_pediatria' || targetName.includes('pediatr')) {
-      if (fullText.includes('pediatr') || fullText.includes('niño') || fullText.includes('neonato') || fullText.includes('reneo') || fullText.includes('gestación')) {
+    // 3. Keyword heuristic match (e.g. Pediatria, Cirugia, Ginecologia, Medicina Interna, Simuladores)
+    const fullText = `${q.title || ''} ${q.description || ''} ${q.subject || ''} ${q.subject_id || ''}`.toLowerCase();
+    if (targetId === 'subj_pediatria' || targetName.includes('pediatr') || targetCode === 'ped') {
+      if (fullText.includes('pediatr') || fullText.includes('niño') || fullText.includes('neonato') || fullText.includes('reneo') || fullText.includes('lactante')) {
         return true;
       }
-    } else if (targetId === 'subj_cirugia_gen' || targetName.includes('cirug')) {
-      if (fullText.includes('cirug') || fullText.includes('quirúrg') || fullText.includes('apendic')) {
+    } else if (targetId === 'subj_cirugia_gen' || targetName.includes('cirug') || targetCode === 'cg') {
+      if (fullText.includes('cirug') || fullText.includes('quirúrg') || fullText.includes('apendic') || fullText.includes('hernia')) {
         return true;
       }
-    } else if (targetId === 'subj_ginecologia_obs' || targetName.includes('ginec')) {
-      if (fullText.includes('ginec') || fullText.includes('obstet') || fullText.includes('embaraz') || fullText.includes('parto')) {
+    } else if (targetId === 'subj_ginecologia_obs' || targetName.includes('ginec') || targetName.includes('gyo') || targetCode === 'gyo') {
+      if (fullText.includes('ginec') || fullText.includes('obstet') || fullText.includes('embaraz') || fullText.includes('parto') || fullText.includes('gyo') || fullText.includes('aborto')) {
+        return true;
+      }
+    } else if (targetId === 'subj_simuladores' || targetName.includes('simulad') || targetCode === 'sim') {
+      if (fullText.includes('simulad') || fullText.includes('simulacro') || fullText.includes('examen') || fullText.includes('mega')) {
+        return true;
+      }
+    } else if (targetId === 'subj_med_interna' || targetName.includes('interna') || targetCode === 'mi') {
+      if (fullText.includes('interna') || fullText.includes('cardio') || fullText.includes('neuro') || fullText.includes('nefro') || fullText.includes('neumo')) {
         return true;
       }
     }
 
-    // 4. If there's only a single subject or fallback for legacy quizzes
-    if ((!q.subject_id || q.subject_id === 'root') && targetId === 'subj_pediatria') {
-      return true;
+    // 4. Fallback for legacy quizzes with no subject_id
+    if (!q.subject_id || q.subject_id === 'root') {
+      return targetId === 'subj_pediatria';
     }
 
     return false;
@@ -1468,11 +1438,15 @@ export default function QuizzesPage() {
     setSelectedQuiz(null);
     setSwipeMode(false);
     setCurrentSessionId(null);
-    // Volver a la vista anterior (carpeta o materia)
-    if (currentFolderId) {
+    clearActiveQuizSession();
+
+    // Volver a la vista adecuada
+    if (selectedSubject) {
+      setView('list');
+    } else if (currentFolderId || selectedCourse) {
       setView('subjects');
     } else {
-      setView('list');
+      setView('home');
     }
   };
 
