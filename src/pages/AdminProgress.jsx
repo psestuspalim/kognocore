@@ -88,12 +88,17 @@ export default function AdminProgress() {
     queryFn: () => client.entities.User.list('-created_date', 1000),
   });
 
-  const buildStudentKey = (payload) => payload?.learner_id || payload?.email || payload?.user_email || payload?.id;
+  const { data: enrollments = [] } = useQuery({
+    queryKey: ['admin-progress-enrollments'],
+    queryFn: () => client.entities.CourseEnrollment.list(),
+  });
 
-  // Crear índice de estudiantes usando usuarios y también intentos (si aún no existe el User).
+  const buildStudentKey = (payload) => payload?.learner_id ? `lid:${payload.learner_id}` : (payload?.email || payload?.user_email ? `email:${payload.email || payload.user_email}` : payload?.id);
+
+  // Crear índice de estudiantes usando usuarios, inscripciones y también intentos.
   const studentStats = {};
   users
-    .filter((u) => u?.role !== 'admin')
+    .filter((u) => u?.role !== 'admin' && !u?.is_admin)
     .forEach((user) => {
       const key = buildStudentKey(user);
       if (!key) return;
@@ -108,6 +113,25 @@ export default function AdminProgress() {
         totalQuestions: 0
       };
     });
+
+  enrollments.forEach((e) => {
+    const key = buildStudentKey({ learner_id: e.learner_id, user_email: e.user_email });
+    if (!key) return;
+    if (!studentStats[key]) {
+      studentStats[key] = {
+        key,
+        learner_id: e.learner_id || null,
+        email: e.user_email || null,
+        username: e.username || 'Sin nombre',
+        attempts: [],
+        totalQuizzes: 0,
+        totalCorrect: 0,
+        totalQuestions: 0
+      };
+    } else if ((!studentStats[key].username || studentStats[key].username === 'Sin nombre') && e.username) {
+      studentStats[key].username = e.username;
+    }
+  });
 
   validAttempts.forEach((attempt) => {
     const key = buildStudentKey({ learner_id: attempt.learner_id, user_email: attempt.user_email });

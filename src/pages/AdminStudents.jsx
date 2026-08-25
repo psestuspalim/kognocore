@@ -31,6 +31,12 @@ export default function AdminStudents() {
     enabled: currentUser?.role === 'admin'
   });
 
+  const { data: enrollments = [] } = useQuery({
+    queryKey: ['admin-students-enrollments'],
+    queryFn: () => client.entities.CourseEnrollment.list(),
+    enabled: currentUser?.role === 'admin'
+  });
+
   const { data: attempts = [] } = useQuery({
     queryKey: ['admin-students-attempts'],
     queryFn: () => client.entities.QuizAttempt.list('-created_date', 5000),
@@ -46,18 +52,50 @@ export default function AdminStudents() {
   }
 
   const usersByKey = new Map();
+
+  // 1. All non-admin users
   allUsers
-    .filter((u) => u.role === 'user')
+    .filter((u) => u.role !== 'admin' && !u.is_admin)
     .forEach((u) => {
-      const key = u.learner_id ? `lid:${u.learner_id}` : `email:${u.email}`;
+      const key = u.learner_id ? `lid:${u.learner_id}` : (u.email ? `email:${u.email}` : `user:${u.id}`);
       usersByKey.set(key, {
         ...u,
         key,
+        id: u.id || `user:${key}`,
+        role: u.role || 'user',
         learner_id: u.learner_id || null,
-        email: u.email || null
+        email: u.email || null,
+        username: u.username || u.full_name || 'Estudiante',
+        full_name: u.full_name || u.username || 'Estudiante'
       });
     });
 
+  // 2. Course Enrollments
+  enrollments.forEach((e) => {
+    const key = e.learner_id ? `lid:${e.learner_id}` : (e.user_email ? `email:${e.user_email}` : null);
+    if (!key) return;
+    if (!usersByKey.has(key)) {
+      usersByKey.set(key, {
+        id: `enrollment:${key}`,
+        key,
+        role: 'user',
+        learner_id: e.learner_id || null,
+        email: e.user_email || null,
+        username: e.username || 'Estudiante',
+        full_name: e.username || 'Estudiante',
+        created_date: e.created_date,
+        course_name: e.course_name
+      });
+    } else {
+      const existing = usersByKey.get(key);
+      if (e.username && (!existing.username || existing.username === 'Estudiante' || existing.username === 'Usuario')) {
+        existing.username = e.username;
+        existing.full_name = e.username;
+      }
+    }
+  });
+
+  // 3. Quiz Attempts
   attempts.forEach((a) => {
     const key = a.learner_id ? `lid:${a.learner_id}` : (a.user_email ? `email:${a.user_email}` : null);
     if (!key) return;
@@ -72,6 +110,15 @@ export default function AdminStudents() {
         full_name: a.username || 'Estudiante',
         created_date: a.created_date
       });
+    } else {
+      const existing = usersByKey.get(key);
+      if (a.username && (!existing.username || existing.username === 'Estudiante' || existing.username === 'Usuario')) {
+        existing.username = a.username;
+        existing.full_name = a.username;
+      }
+      if (!existing.created_date && a.created_date) {
+        existing.created_date = a.created_date;
+      }
     }
   });
 

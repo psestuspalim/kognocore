@@ -33,6 +33,8 @@ export default function AdminStudentDetail() {
     queryFn: async () => {
       const users = await client.entities.User.list();
       const attempts = await client.entities.QuizAttempt.list('-created_date', 5000);
+      const enrollments = await client.entities.CourseEnrollment.list();
+
       const fromUsers = users.find((u) =>
         u.id === studentId ||
         (learnerIdParam && u.learner_id === learnerIdParam) ||
@@ -46,17 +48,36 @@ export default function AdminStudentDetail() {
         (emailParam && a.user_email === emailParam)
       );
 
-      if (!fromAttempts) return null;
+      if (fromAttempts) {
+        return {
+          id: studentId || `virtual:${fromAttempts.learner_id || fromAttempts.user_email}`,
+          role: 'user',
+          learner_id: fromAttempts.learner_id || learnerIdParam || null,
+          email: fromAttempts.user_email || emailParam || null,
+          username: fromAttempts.username || 'Estudiante',
+          full_name: fromAttempts.username || 'Estudiante',
+          created_date: fromAttempts.created_date
+        };
+      }
 
-      return {
-        id: studentId || `virtual:${fromAttempts.learner_id || fromAttempts.user_email}`,
-        role: 'user',
-        learner_id: fromAttempts.learner_id || learnerIdParam || null,
-        email: fromAttempts.user_email || emailParam || null,
-        username: fromAttempts.username || 'Estudiante',
-        full_name: fromAttempts.username || 'Estudiante',
-        created_date: fromAttempts.created_date
-      };
+      const fromEnrollments = enrollments.find((e) =>
+        (learnerIdParam && e.learner_id === learnerIdParam) ||
+        (emailParam && e.user_email === emailParam)
+      );
+
+      if (fromEnrollments) {
+        return {
+          id: studentId || `enrollment:${fromEnrollments.learner_id || fromEnrollments.user_email}`,
+          role: 'user',
+          learner_id: fromEnrollments.learner_id || learnerIdParam || null,
+          email: fromEnrollments.user_email || emailParam || null,
+          username: fromEnrollments.username || 'Estudiante',
+          full_name: fromEnrollments.username || 'Estudiante',
+          created_date: fromEnrollments.created_date
+        };
+      }
+
+      return null;
     },
     enabled: (!!studentId || !!learnerIdParam || !!emailParam) && currentUser?.role === 'admin'
   });

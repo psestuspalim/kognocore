@@ -65,7 +65,7 @@ export default function AdminHome() {
 
   const { data: enrollments = [] } = useQuery({
     queryKey: ['all-enrollments'],
-    queryFn: () => client.entities.CourseEnrollment.filter({ status: 'pending' }),
+    queryFn: () => client.entities.CourseEnrollment.list(),
     enabled: currentUser?.role === 'admin'
   });
 
@@ -96,20 +96,27 @@ export default function AdminHome() {
   ];
 
   const uniqueStudentKeys = new Set();
-  allUsers.filter((u) => u.role === 'user').forEach((u) => {
+  allUsers.filter((u) => u?.role !== 'admin' && !u?.is_admin).forEach((u) => {
     if (u.learner_id) uniqueStudentKeys.add(`lid:${u.learner_id}`);
     else if (u.email) uniqueStudentKeys.add(`email:${u.email}`);
+    else if (u.id) uniqueStudentKeys.add(`id:${u.id}`);
   });
   attempts.forEach((a) => {
     if (a.learner_id) uniqueStudentKeys.add(`lid:${a.learner_id}`);
     else if (a.user_email) uniqueStudentKeys.add(`email:${a.user_email}`);
   });
+  enrollments.forEach((e) => {
+    if (e.learner_id) uniqueStudentKeys.add(`lid:${e.learner_id}`);
+    else if (e.user_email) uniqueStudentKeys.add(`email:${e.user_email}`);
+  });
   const totalStudents = uniqueStudentKeys.size;
+
+  const pendingRequests = enrollments.filter(e => e.status === 'pending').length;
 
   const studentStats = [
     { label: 'Total', value: totalStudents },
     { label: 'Admins', value: allUsers.filter(u => u.role === 'admin').length },
-    { label: 'Solicitudes', value: enrollments.length },
+    { label: 'Solicitudes', value: pendingRequests },
     { label: 'Activos', value: sessions.length }
   ];
 
