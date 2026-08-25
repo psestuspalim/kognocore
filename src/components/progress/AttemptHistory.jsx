@@ -175,11 +175,22 @@ export default function AttemptHistory({ attempts, quizzes, subjects }) {
                                 <p className="text-gray-800 font-medium mb-1 line-clamp-2">
                                   {wq.question}
                                 </p>
-                                <div className="flex gap-2 text-xs">
-                                  <span className="text-red-600">
-                                    Tu respuesta: {wq.selected_answer?.substring(0, 30)}...
+                                <div className="flex gap-2 text-xs flex-wrap">
+                                  <span className="text-red-600 font-medium">
+                                    Tu respuesta: {wq.selected_answer}
                                   </span>
+                                  {wq.correct_answer && (
+                                    <span className="text-green-600 font-medium">
+                                      ✓ Correcta: {wq.correct_answer}
+                                    </span>
+                                  )}
                                 </div>
+                                {(wq.explanation || wq.justificacion || wq.feedback || wq.rationale) && (
+                                  <p className="mt-1 text-emerald-800 bg-emerald-50 p-1.5 rounded border border-emerald-200 text-xs">
+                                    <span className="font-semibold">Retroalimentación: </span>
+                                    {wq.explanation || wq.justificacion || wq.feedback || wq.rationale}
+                                  </p>
+                                )}
                               </div>
                             ))}
                             {attempt.wrong_questions.length > 5 && (

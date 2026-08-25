@@ -54,32 +54,31 @@ const initializeStorage = () => {
         }
       }
 
-        const validIds = ['subj_med_interna', 'subj_cirugia_gen', 'subj_pediatria', 'subj_ginecologia_obs', 'subj_simuladores'];
-        let updated = false;
-        const healed = stored.map(q => {
-          if (!q) return q;
-          let subj = q.subject_id;
-          if (!subj || subj === 'root' || !validIds.includes(subj)) {
-            const txt = `${q.title || ''} ${q.subject || ''} ${q.description || ''} ${JSON.stringify(q.questions || [])}`.toLowerCase();
-            if (txt.includes('pediatr') || txt.includes('niño') || txt.includes('neonato') || txt.includes('lactante') || txt.includes('gestación') || txt.includes('reneo')) {
-              subj = 'subj_pediatria';
-            } else if (txt.includes('cirug') || txt.includes('quirúrg') || txt.includes('apendic') || txt.includes('hernia')) {
-              subj = 'subj_cirugia_gen';
-            } else if (txt.includes('ginec') || txt.includes('obstet') || txt.includes('embaraz') || txt.includes('parto')) {
-              subj = 'subj_ginecologia_obs';
-            } else if (txt.includes('simulad') || txt.includes('examen')) {
-              subj = 'subj_simuladores';
-            } else {
-              subj = 'subj_med_interna';
-            }
-            updated = true;
-            return { ...q, subject_id: subj, course_id: 'course_enarm2026', folder_id: null };
+      const validIds = ['subj_med_interna', 'subj_cirugia_gen', 'subj_pediatria', 'subj_ginecologia_obs', 'subj_simuladores'];
+      let updated = false;
+      const healed = stored.map(q => {
+        if (!q) return q;
+        let subj = q.subject_id;
+        if (!subj || subj === 'root' || !validIds.includes(subj)) {
+          const txt = `${q.title || ''} ${q.subject || ''} ${q.description || ''} ${JSON.stringify(q.questions || [])}`.toLowerCase();
+          if (txt.includes('pediatr') || txt.includes('niño') || txt.includes('neonato') || txt.includes('lactante') || txt.includes('gestación') || txt.includes('reneo')) {
+            subj = 'subj_pediatria';
+          } else if (txt.includes('cirug') || txt.includes('quirúrg') || txt.includes('apendic') || txt.includes('hernia')) {
+            subj = 'subj_cirugia_gen';
+          } else if (txt.includes('ginec') || txt.includes('obstet') || txt.includes('embaraz') || txt.includes('parto')) {
+            subj = 'subj_ginecologia_obs';
+          } else if (txt.includes('simulad') || txt.includes('examen')) {
+            subj = 'subj_simuladores';
+          } else {
+            subj = 'subj_med_interna';
           }
-          return q;
-        });
-        if (updated) {
-          localStorage.setItem('app_quizzes', JSON.stringify(healed));
+          updated = true;
+          return { ...q, subject_id: subj, course_id: 'course_enarm2026', folder_id: null };
         }
+        return q;
+      });
+      if (updated) {
+        localStorage.setItem('app_quizzes', JSON.stringify(healed));
       }
     } catch (e) {
       console.error('Quiz migration error:', e);
@@ -194,7 +193,15 @@ const mergeById = (primary, secondary) => {
     if (item?.id) {
       const existing = map.get(item.id);
       if (existing) {
-        map.set(item.id, { ...existing, ...item });
+        const existingTime = new Date(existing.updated_date || existing.created_date || 0).getTime();
+        const primaryTime = new Date(item.updated_date || item.created_date || 0).getTime();
+        const existingAnswered = Number(existing.answered_questions || 0);
+        const primaryAnswered = Number(item.answered_questions || 0);
+
+        // Keep local item if it has newer timestamp or more answered questions
+        if (primaryTime > existingTime || (primaryTime === existingTime && primaryAnswered >= existingAnswered)) {
+          map.set(item.id, { ...existing, ...item });
+        }
       } else {
         map.set(item.id, item);
       }
@@ -356,8 +363,23 @@ const mockClient = {
               }
             })();
 
+            const targetEmail = (criteria?.user_email || '').trim().toLowerCase();
+            const targetLearner = criteria?.learner_id;
+
             const filtered = all.filter(item => {
+              if (targetEmail || targetLearner) {
+                const itemEmail = (item.user_email || '').trim().toLowerCase();
+                const itemLearner = item.learner_id;
+                const isMatch =
+                  (!!targetEmail && !!itemEmail && targetEmail === itemEmail) ||
+                  (!!targetLearner && !!itemLearner && String(targetLearner) === String(itemLearner)) ||
+                  (!itemEmail && !itemLearner); // include local attempts without identity tag
+
+                if (!isMatch) return false;
+              }
+
               for (const key in criteria) {
+                if (key === 'user_email' || key === 'learner_id') continue;
                 if (item[key] !== criteria[key]) return false;
               }
               return true;

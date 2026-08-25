@@ -183,6 +183,12 @@ export default function ResultsView({
                           <p className="text-green-700">
                             ✓ Tu respuesta: <MathText text={q.selected_answer} />
                           </p>
+                          {(q.explanation || q.justificacion || q.feedback || q.rationale) && (
+                            <div className="mt-2 p-2.5 bg-emerald-50 rounded-lg text-emerald-950 text-xs border border-emerald-200">
+                              <span className="font-semibold text-emerald-800">Retroalimentación: </span>
+                              <MathText text={q.explanation || q.justificacion || q.feedback || q.rationale} />
+                            </div>
+                          )}
                         </div>
                       ))}
                     </CardContent>
@@ -213,6 +219,12 @@ export default function ResultsView({
                             <p className="text-green-700">
                               ✓ Correcta: <MathText text={wq.correct_answer} />
                             </p>
+                            {(wq.explanation || wq.justificacion || wq.feedback || wq.rationale) && (
+                              <div className="mt-2 p-2.5 bg-emerald-50 rounded-lg text-emerald-950 text-xs border border-emerald-200">
+                                <span className="font-semibold text-emerald-800">Retroalimentación: </span>
+                                <MathText text={wq.explanation || wq.justificacion || wq.feedback || wq.rationale} />
+                              </div>
+                            )}
                           </div>
                         </div>
                       ))}

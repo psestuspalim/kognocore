@@ -125,11 +125,11 @@ export default function AttemptDetailModal({ attempt, quizTitle, open, onClose, 
                       </div>
                     )}
 
-                    {/* Rationale */}
-                    {wq.answerOptions?.find(o => o.isCorrect)?.rationale && (
-                      <div className="bg-white rounded-lg p-3 text-sm text-gray-600 border">
-                        <span className="font-medium text-gray-700">Explicación: </span>
-                        <MathText text={wq.answerOptions.find(o => o.isCorrect).rationale} />
+                    {/* Rationale / Retroalimentación */}
+                    {(wq.explanation || wq.justificacion || wq.feedback || wq.rationale || wq.answerOptions?.find(o => o.isCorrect)?.rationale) && (
+                      <div className="bg-emerald-50/90 border border-emerald-200 rounded-lg p-3 text-sm text-emerald-950 mt-2">
+                        <span className="font-semibold text-emerald-800">Retroalimentación / Explicación: </span>
+                        <MathText text={wq.explanation || wq.justificacion || wq.feedback || wq.rationale || wq.answerOptions?.find(o => o.isCorrect)?.rationale} />
                       </div>
                     )}
 

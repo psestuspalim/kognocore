@@ -649,10 +649,12 @@ export default function QuizzesPage() {
 
   const saveAttemptMutation = useMutation({
     mutationFn: (data) => client.entities.QuizAttempt.create(data),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['attempts'] })
   });
 
   const updateAttemptMutation = useMutation({
     mutationFn: ({ id, data }) => client.entities.QuizAttempt.update(id, data),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['attempts'] })
   });
 
   const buildAttemptIdentity = () => ({
@@ -976,6 +978,16 @@ export default function QuizzesPage() {
     const newScore = isCorrect ? score + 1 : score;
     const options = question.answerOptions || question.options || [];
     const correctOption = options.find(opt => opt.isCorrect || opt.c);
+    const feedbackText =
+      question.justificacion ||
+      question.justificación ||
+      question.feedback ||
+      question.explanation ||
+      question.rationale ||
+      selectedOption?.rationale ||
+      correctOption?.rationale ||
+      "";
+
     const newWrongAnswers = !isCorrect ? [...wrongAnswers, {
       question: question.question,
       selected_answer: selectedOption.text,
@@ -983,7 +995,11 @@ export default function QuizzesPage() {
       response_time: responseTime,
       answerOptions: options,
       hint: question.hint,
-      difficulty: question.difficulty
+      difficulty: question.difficulty,
+      explanation: feedbackText,
+      justificacion: feedbackText,
+      feedback: feedbackText,
+      rationale: feedbackText
     }] : wrongAnswers;
     const answerEntry = {
       question: question.question,
@@ -993,7 +1009,11 @@ export default function QuizzesPage() {
       response_time: responseTime,
       answerOptions: options,
       hint: question.hint,
-      difficulty: question.difficulty
+      difficulty: question.difficulty,
+      explanation: feedbackText,
+      justificacion: feedbackText,
+      feedback: feedbackText,
+      rationale: feedbackText
     };
     const newAnswerLog = [...answerLog, answerEntry];
 
@@ -1002,7 +1022,11 @@ export default function QuizzesPage() {
       setCorrectAnswers([...correctAnswers, {
         question: question.question,
         difficulty: question.difficulty,
-        selected_answer: selectedOption.text
+        selected_answer: selectedOption.text,
+        explanation: feedbackText,
+        justificacion: feedbackText,
+        feedback: feedbackText,
+        rationale: feedbackText
       }]);
     } else {
       setWrongAnswers(newWrongAnswers);
@@ -1251,21 +1275,56 @@ export default function QuizzesPage() {
   };
 
   const getSubjectStats = (subjectId) => {
-    const subjectQuizzes = quizzes.filter(q => sameId(q.subject_id, subjectId));
-    const subjectQuizIds = subjectQuizzes.map(q => q.id);
-    const subjectAttempts = attempts.filter(a => subjectQuizIds.includes(a.quiz_id));
+    const subj = subjects.find(s => sameId(s.id, subjectId)) || { id: subjectId };
+    const subjectQuizzes = quizzes.filter(q => sameId(q.subject_id, subjectId) || matchesSubject(q, subj));
+    const subjectQuizIds = new Set(subjectQuizzes.map(q => q.id));
+
+    const subjectAttempts = attempts.filter(a =>
+      sameId(a.subject_id, subjectId) || (a.quiz_id && subjectQuizIds.has(a.quiz_id))
+    );
 
     if (subjectAttempts.length === 0) return { totalCorrect: 0, totalWrong: 0, totalAnswered: 0 };
 
-    const wrongQuestions = new Set();
-    subjectAttempts.forEach(attempt => {
-      attempt.wrong_questions?.forEach(wq => wrongQuestions.add(wq.question));
+    // Group attempts by quiz_id to use the best performance attempt per quiz
+    const attemptsByQuiz = new Map();
+    subjectAttempts.forEach(a => {
+      const key = a.quiz_id || a.id;
+      if (!attemptsByQuiz.has(key)) attemptsByQuiz.set(key, []);
+      attemptsByQuiz.get(key).push(a);
     });
 
-    const totalWrong = wrongQuestions.size;
-    const totalCorrect = subjectAttempts.reduce((sum, a) => sum + a.score, 0);
-    const totalAnswered = totalCorrect + totalWrong;
+    let totalCorrect = 0;
+    let totalWrong = 0;
 
+    attemptsByQuiz.forEach(quizAttempts => {
+      let best = quizAttempts[0];
+      let bestRatio = -1;
+
+      quizAttempts.forEach(a => {
+        const correct = Number(a.score || 0);
+        const answered = Math.max(
+          Number(a.answered_questions || 0),
+          correct + (Array.isArray(a.wrong_questions) ? a.wrong_questions.length : 0)
+        );
+        const ratio = answered > 0 ? correct / answered : 0;
+        if (ratio > bestRatio || (ratio === bestRatio && answered > (Number(best.answered_questions) || 0))) {
+          bestRatio = ratio;
+          best = a;
+        }
+      });
+
+      const correct = Number(best.score || 0);
+      const answered = Math.max(
+        Number(best.answered_questions || 0),
+        correct + (Array.isArray(best.wrong_questions) ? best.wrong_questions.length : 0)
+      );
+      const wrong = Math.max(0, answered - correct);
+
+      totalCorrect += correct;
+      totalWrong += wrong;
+    });
+
+    const totalAnswered = totalCorrect + totalWrong;
     return { totalCorrect, totalWrong, totalAnswered };
   };
 

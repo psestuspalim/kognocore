@@ -103,14 +103,55 @@ export default function ProgressPage() {
     const totalCorrect = attempts.reduce((sum, a) => sum + (a.score || 0), 0);
     const averageScore = totalQuestions > 0 ? Math.min((totalCorrect / totalQuestions) * 100, 100) : 0;
 
-    // Progreso por materia
+    // Progreso por materia (usando mejor intento por quiz)
     const subjectStats = subjects.map(subject => {
-      const subjectQuizIds = quizzes.filter(q => q.subject_id === subject.id).map(q => q.id);
-      const subjectAttempts = attempts.filter(a => subjectQuizIds.includes(a.quiz_id));
+      const subjName = (subject.name || '').toLowerCase();
+      const subjectQuizIds = quizzes
+        .filter(q => q.subject_id === subject.id || (q.title && q.title.toLowerCase().includes(subjName)) || (q.subject && q.subject.toLowerCase().includes(subjName)))
+        .map(q => q.id);
+      const subjectQuizSet = new Set(subjectQuizIds);
 
-      const total = subjectAttempts.reduce((sum, a) => sum + a.total_questions, 0);
-      const correct = subjectAttempts.reduce((sum, a) => sum + a.score, 0);
-      const wrong = total - correct;
+      const subjectAttempts = attempts.filter(a => a.subject_id === subject.id || (a.quiz_id && subjectQuizSet.has(a.quiz_id)));
+
+      if (subjectAttempts.length === 0) return null;
+
+      const attemptsByQuiz = new Map();
+      subjectAttempts.forEach(a => {
+        const key = a.quiz_id || a.id;
+        if (!attemptsByQuiz.has(key)) attemptsByQuiz.set(key, []);
+        attemptsByQuiz.get(key).push(a);
+      });
+
+      let total = 0;
+      let correct = 0;
+
+      attemptsByQuiz.forEach(qAttempts => {
+        let best = qAttempts[0];
+        let bestRatio = -1;
+        qAttempts.forEach(a => {
+          const c = Number(a.score || 0);
+          const ans = Math.max(
+            Number(a.answered_questions || 0),
+            c + (Array.isArray(a.wrong_questions) ? a.wrong_questions.length : 0),
+            Number(a.total_questions || 0)
+          );
+          const ratio = ans > 0 ? c / ans : 0;
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            best = a;
+          }
+        });
+        const bestCorrect = Number(best.score || 0);
+        const bestAns = Math.max(
+          Number(best.answered_questions || 0),
+          bestCorrect + (Array.isArray(best.wrong_questions) ? best.wrong_questions.length : 0),
+          Number(best.total_questions || 0)
+        );
+        correct += bestCorrect;
+        total += bestAns;
+      });
+
+      const wrong = Math.max(0, total - correct);
 
       return {
         ...subject,
@@ -120,7 +161,7 @@ export default function ProgressPage() {
         wrong,
         accuracy: total > 0 ? (correct / total) * 100 : 0
       };
-    }).filter(s => s.attempts > 0);
+    }).filter(Boolean);
 
     // Progreso por quiz
     const quizStats = quizzes.map(quiz => {
