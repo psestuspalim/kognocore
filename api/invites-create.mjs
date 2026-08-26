@@ -33,13 +33,17 @@ export async function POST(req) {
 
     const codeHash = sha256(`${code}|${process.env.CODE_PEPPER}`)
 
-    const { error } = await supabase.from('invites').insert({
+    const row = {
       code_hash: codeHash,
       course_id: courseId,
-      max_uses: hasMaxUses ? (maxUses > 0 ? maxUses : 1) : null,
       uses: 0,
       expires_at: expiresAt
-    })
+    }
+    if (hasMaxUses && maxUses > 0) {
+      row.max_uses = maxUses
+    }
+
+    const { error } = await supabase.from('invites').insert(row)
 
     if (error) {
       return new Response(JSON.stringify({ error: 'No se pudo crear invite', details: error.message }), { status: 500 })
