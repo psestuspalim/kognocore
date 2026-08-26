@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { Users, Search, ChevronRight, Mail, Clock } from 'lucide-react';
+import { Users, Search, ChevronRight, Mail, Clock, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
@@ -84,7 +84,8 @@ export default function AdminStudents() {
         username: e.username || 'Estudiante',
         full_name: e.username || 'Estudiante',
         created_date: e.created_date,
-        course_name: e.course_name
+        course_name: e.course_name,
+        access_code: e.access_code
       });
     } else {
       const existing = usersByKey.get(key);
@@ -92,6 +93,8 @@ export default function AdminStudents() {
         existing.username = e.username;
         existing.full_name = e.username;
       }
+      if (e.course_name && !existing.course_name) existing.course_name = e.course_name;
+      if (e.access_code && !existing.access_code) existing.access_code = e.access_code;
     }
   });
 
@@ -200,10 +203,23 @@ export default function AdminStudents() {
                             </Badge>
                           </div>
                           <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                            <span className="flex items-center gap-1 truncate">
-                              <Mail className="w-3 h-3" />
-                              {student.email}
-                            </span>
+                            {student.course_name && (
+                              <span className="flex items-center gap-1 truncate">
+                                <BookOpen className="w-3 h-3" />
+                                {student.course_name}
+                              </span>
+                            )}
+                            {student.email && !student.email.includes('@kognocore.local') && (
+                              <span className="flex items-center gap-1 truncate">
+                                <Mail className="w-3 h-3" />
+                                {student.email}
+                              </span>
+                            )}
+                            {student.access_code && (
+                              <span className="flex items-center gap-1 text-xs font-mono">
+                                {student.access_code}
+                              </span>
+                            )}
                             {student.created_date && (
                               <span className="hidden sm:flex items-center gap-1">
                                 <Clock className="w-3 h-3" />

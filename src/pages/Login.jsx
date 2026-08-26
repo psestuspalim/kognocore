@@ -104,6 +104,32 @@ const Login = () => {
             localStorage.setItem('kc_token', resolved.token);
             localStorage.setItem('kc_display_name', normalizedName || 'Estudiante');
             localStorage.removeItem('app_mock_token');
+
+            // Create enrollment so admin can see this student
+            try {
+                const existing = await client.entities.CourseEnrollment.filter({
+                    learner_id: learnerId,
+                    course_id: targetCourseId
+                });
+                if (existing.length === 0) {
+                    await client.entities.CourseEnrollment.create({
+                        user_email: `learner+${learnerId}@kognocore.local`,
+                        username: normalizedName || 'Estudiante',
+                        learner_id: learnerId,
+                        course_id: targetCourseId,
+                        course_name: targetCourseName,
+                        access_code: normalized,
+                        status: 'approved'
+                    });
+                } else if (normalizedName && existing[0].username !== normalizedName) {
+                    await client.entities.CourseEnrollment.update(existing[0].id, {
+                        username: normalizedName
+                    });
+                }
+            } catch (_err) {
+                // non-blocking
+            }
+
             await checkAppState();
             return;
         }
