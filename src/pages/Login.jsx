@@ -68,29 +68,7 @@ const Login = () => {
             // ignore
         }
 
-        // 3) Automatic Active Course Fallback:
-        // Any valid code format directly gives access to ENARM 2026
-        try {
-            const courses = await client.entities.Course.list();
-            const activeCourse = courses.find(c => c.id === 'course_enarm2026') || courses[0];
-            if (activeCourse) {
-                return {
-                    courseId: activeCourse.id,
-                    courseName: activeCourse.name,
-                    token: null,
-                    source: 'fallback-active'
-                };
-            }
-        } catch (_err) {
-            // ignore
-        }
-
-        return {
-            courseId: 'course_enarm2026',
-            courseName: 'ENARM 2026',
-            token: null,
-            source: 'fallback-direct'
-        };
+        return null;
     };
 
     const createLocalStudentSession = async (inputCode, inputName) => {
@@ -99,6 +77,9 @@ const Login = () => {
         const learnerId = getOrCreateLearnerId();
 
         const resolved = await resolveCourseByCode(normalized);
+        if (!resolved) {
+            throw new Error('INVALID_CODE');
+        }
         const targetCourseId = resolved.courseId || 'course_enarm2026';
         const targetCourseName = resolved.courseName || 'ENARM 2026';
 
@@ -139,6 +120,7 @@ const Login = () => {
                     await client.entities.CourseEnrollment.create({
                         user_email: mockStudent.email,
                         username: mockStudent.username,
+                        learner_id: learnerId,
                         course_id: targetCourseId,
                         course_name: targetCourseName,
                         access_code: normalized,
@@ -199,10 +181,12 @@ const Login = () => {
             await createLocalStudentSession(normalizedCode, normalizedName);
             navigate('/');
         } catch (err) {
-            if (String(err?.message || '').startsWith('SERVER_CONFIG:')) {
+            if (String(err?.message || '') === 'INVALID_CODE') {
+                setError('Código de acceso inválido. Verifica que el código sea correcto.');
+            } else if (String(err?.message || '').startsWith('SERVER_CONFIG:')) {
                 setError('Servidor de códigos no configurado en Vercel');
             } else {
-                setError('Código inválido o error de ingreso');
+                setError('Error de ingreso. Intenta de nuevo.');
             }
         } finally {
             setIsLoading(false);

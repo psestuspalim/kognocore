@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/dialog';
 import { Key, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
+import { getOrCreateLearnerId } from '@/lib/learner-id';
 
 export default function CourseJoinModal({ open, onClose, currentUser }) {
   const [code, setCode] = useState('');
@@ -29,9 +30,14 @@ export default function CourseJoinModal({ open, onClose, currentUser }) {
       const allCodes = await client.entities.CourseAccessCode.list();
       const accessCode = allCodes.find(c => (c.code || '').trim().toUpperCase() === normalized);
 
-      const allCourses = await client.entities.Course.list();
-      const targetCourseId = accessCode?.course_id || allCourses[0]?.id || 'course_enarm2026';
-      const targetCourseName = accessCode?.course_name || allCourses[0]?.name || 'ENARM 2026';
+      if (!accessCode) {
+        toast.error('Código de acceso inválido');
+        setLoading(false);
+        return;
+      }
+
+      const targetCourseId = accessCode.course_id || 'course_enarm2026';
+      const targetCourseName = accessCode.course_name || 'ENARM 2026';
 
       if (accessCode) {
         if (accessCode.is_active === false) {
@@ -71,10 +77,10 @@ export default function CourseJoinModal({ open, onClose, currentUser }) {
           });
         }
       } else {
-        // Crear inscripción directa y aprobada
         await client.entities.CourseEnrollment.create({
           user_email: currentUser.email,
           username: currentUser.username || 'Estudiante',
+          learner_id: currentUser.learner_id || getOrCreateLearnerId(),
           course_id: targetCourseId,
           course_name: targetCourseName,
           access_code: normalized,

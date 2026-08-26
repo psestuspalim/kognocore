@@ -239,6 +239,13 @@ const fetchRemoteAttempts = async () => {
   return Array.isArray(data?.attempts) ? data.attempts : [];
 };
 
+const fetchRemoteEnrollments = async () => {
+  const response = await fetch('/api/enrollments');
+  if (!response.ok) throw new Error('REMOTE_ENROLLMENT_LIST_FAILED');
+  const data = await response.json().catch(() => ({}));
+  return Array.isArray(data?.enrollments) ? data.enrollments : [];
+};
+
 /**
  * @type {{
  *   auth: { me: () => Promise<any>, logout: (redirectUrl?: string) => void, redirectToLogin: (redirectUrl?: string) => void, updateMe: (data: Object) => Promise<any> },
@@ -338,6 +345,18 @@ const mockClient = {
             }
           }
 
+          if (entityName === 'CourseEnrollment') {
+            const local = getItems('CourseEnrollment');
+            try {
+              const remote = await fetchRemoteEnrollments();
+              const merged = mergeById(remote, local);
+              saveItems('CourseEnrollment', merged);
+              return sortByField(merged, orderBy);
+            } catch (_err) {
+              return sortByField(local, orderBy);
+            }
+          }
+
           let items = getItems(entityName);
           // Simple sort if orderBy is provided (very basic implementation)
           return sortByField(items, orderBy);
@@ -395,6 +414,28 @@ const mockClient = {
 
               for (const key in criteria) {
                 if (key === 'user_email' || key === 'learner_id') continue;
+                if (item[key] !== criteria[key]) return false;
+              }
+              return true;
+            });
+            return sortByField(filtered, orderBy);
+          }
+
+          if (entityName === 'CourseEnrollment') {
+            const all = await (async () => {
+              try {
+                const remote = await fetchRemoteEnrollments();
+                const local = getItems('CourseEnrollment');
+                const merged = mergeById(remote, local);
+                saveItems('CourseEnrollment', merged);
+                return merged;
+              } catch (_err) {
+                return getItems('CourseEnrollment');
+              }
+            })();
+
+            let filtered = all.filter(item => {
+              for (const key in criteria) {
                 if (item[key] !== criteria[key]) return false;
               }
               return true;
@@ -484,6 +525,18 @@ const mockClient = {
             }
           }
 
+          if (entityName === 'CourseEnrollment') {
+            try {
+              await fetch('/api/enrollments', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ enrollment: newItem })
+              });
+            } catch (_err) {
+              // keep local create working
+            }
+          }
+
           return newItem;
         },
         update: async (id, data) => {
@@ -517,6 +570,18 @@ const mockClient = {
               }
             }
 
+            if (entityName === 'CourseEnrollment') {
+              try {
+                await fetch('/api/enrollments', {
+                  method: 'PATCH',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ id, data })
+                });
+              } catch (_err) {
+                // keep local update working
+              }
+            }
+
             return items[index];
           }
           throw new Error('Item not found');
@@ -539,6 +604,14 @@ const mockClient = {
             if (entityName === 'QuizAttempt') {
               try {
                 await fetch(`/api/attempts?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+              } catch (_err) {
+                // keep local delete working
+              }
+            }
+
+            if (entityName === 'CourseEnrollment') {
+              try {
+                await fetch(`/api/enrollments?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
               } catch (_err) {
                 // keep local delete working
               }
