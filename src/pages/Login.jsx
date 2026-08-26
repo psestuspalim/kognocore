@@ -22,9 +22,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const resolveCourseByCode = async (normalized) => {
-        let serverError = null;
-
-        // 1) Preferred source on deployed env: Vercel API (returns token + courseId)
+        // 1) Full auth: Vercel /api/redeem (returns token + courseId)
         try {
             const response = await fetch('/api/redeem', {
                 method: 'POST',
@@ -42,17 +40,35 @@ const Login = () => {
                         source: 'server'
                     };
                 }
-            } else {
-                const data = await response.json().catch(() => ({}));
-                if (response.status === 503) {
-                    serverError = data?.error || 'Server auth not configured';
+            }
+        } catch (_err) {
+            // continue to next fallback
+        }
+
+        // 2) Lighter server validation (no token, just validates code exists)
+        try {
+            const response = await fetch('/api/invites-validate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ code: normalized })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data?.valid && data?.courseId) {
+                    return {
+                        courseId: data.courseId,
+                        courseName: null,
+                        token: null,
+                        source: 'server-validated'
+                    };
                 }
             }
         } catch (_err) {
-            // ignore and continue with local fallback
+            // continue to local fallback
         }
 
-        // 2) Local fallback: CourseAccessCode in local storage
+        // 3) Local fallback: CourseAccessCode in local storage
         try {
             const allCodes = await client.entities.CourseAccessCode.list();
             const found = allCodes.find(c => (c.code || '').trim().toUpperCase() === normalized);
