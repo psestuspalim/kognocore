@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { client } from '@/api/client';
 import { appParams } from '@/lib/app-params';
-import { getOrCreateLearnerId } from '@/lib/learner-id';
+import { getOrCreateLearnerId, getOrCreateStudentAlias } from '@/lib/learner-id';
 
 const AuthContext = createContext();
 
@@ -164,13 +164,13 @@ export const AuthProvider = ({ children }) => {
         if (response.ok) {
           const data = await response.json();
           const learnerId = getOrCreateLearnerId();
-          const displayName = localStorage.getItem('kc_display_name') || 'Estudiante';
+          const studentAlias = getOrCreateStudentAlias();
           const resolvedUser = {
-            id: 'student_' + data.courseId,
+            id: `student_${learnerId.slice(0, 8)}`,
             email: `learner+${learnerId}@kognocore.local`,
             last_name: 'Usuario',
-            username: displayName,
-            full_name: displayName,
+            username: studentAlias,
+            full_name: studentAlias,
             is_admin: false,
             role: 'user',
             courseId: data.courseId,
@@ -191,9 +191,12 @@ export const AuthProvider = ({ children }) => {
         // Mock user based on token
         const parsed = JSON.parse(localToken);
         const learnerId = parsed.learner_id || getOrCreateLearnerId();
+        const studentAlias = parsed.role === 'admin' ? parsed.username : getOrCreateStudentAlias();
         const mockUser = {
           ...parsed,
           learner_id: learnerId,
+          username: parsed.role === 'admin' ? parsed.username : studentAlias,
+          full_name: parsed.role === 'admin' ? parsed.full_name : studentAlias,
           role: parsed.role === 'admin' ? 'admin' : 'user'
         };
         localStorage.setItem('app_mock_token', JSON.stringify(mockUser));

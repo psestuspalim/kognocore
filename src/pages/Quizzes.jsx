@@ -4,6 +4,7 @@ import { getFolderColor } from '@/utils/folderColors';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/AuthContext';
+import { getOrCreateStudentAlias } from '@/lib/learner-id';
 import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, ChevronRight, Upload, Home } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
@@ -939,8 +940,10 @@ export default function QuizzesPage() {
           )}
         </div>
         <div className="flex items-center gap-2 shrink-0">
-          {currentUser?.username && (
-            <span className="text-sm text-slate-500 hidden sm:block">{currentUser.username}</span>
+          {currentUser?.username && currentUser?.role !== 'admin' && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700 border border-slate-200">
+              {currentUser.username}
+            </span>
           )}
           {isAdmin && <AdminMenu compact />}
         </div>
@@ -1578,8 +1581,11 @@ export default function QuizzesPage() {
     return directCount + folderCount;
   };
 
-  // Username prompt
-  if (!currentUser || !currentUser.username) {
+  // Auto-assign alias if missing (students get a persistent random alias)
+  if (currentUser && !currentUser.username && currentUser.role !== 'admin') {
+    updateUsernameMutation.mutateAsync(getOrCreateStudentAlias());
+  }
+  if (!currentUser) {
     return <UsernamePrompt onSubmit={(username) => updateUsernameMutation.mutateAsync(username)} />;
   }
 

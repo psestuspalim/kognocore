@@ -7,15 +7,9 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useNavigate } from 'react-router-dom';
 import { KeyRound, ShieldCheck, Sparkles } from 'lucide-react';
+import { toast } from 'sonner';
 import { client } from '@/api/client';
-import { getOrCreateLearnerId } from '@/lib/learner-id';
-
-function generateRandomAlias() {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    let tag = '';
-    for (let i = 0; i < 4; i++) tag += chars[Math.floor(Math.random() * chars.length)];
-    return `Estudiante_${tag}`;
-}
+import { getOrCreateLearnerId, getOrCreateStudentAlias } from '@/lib/learner-id';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -96,7 +90,7 @@ const Login = () => {
     const createLocalStudentSession = async (inputCode) => {
         const normalized = (inputCode || '').trim().toUpperCase();
         const learnerId = getOrCreateLearnerId();
-        const randomAlias = generateRandomAlias();
+        const studentAlias = getOrCreateStudentAlias();
 
         const resolved = await resolveCourseByCode(normalized);
         if (!resolved) {
@@ -108,7 +102,7 @@ const Login = () => {
         // If we have a server token, use canonical auth path (courseId comes from /api/me)
         if (resolved.token) {
             localStorage.setItem('kc_token', resolved.token);
-            localStorage.setItem('kc_display_name', randomAlias);
+            localStorage.setItem('kc_display_name', studentAlias);
             localStorage.removeItem('app_mock_token');
 
             // Create enrollment so admin can see this student
@@ -120,16 +114,16 @@ const Login = () => {
                 if (existing.length === 0) {
                     await client.entities.CourseEnrollment.create({
                         user_email: `learner+${learnerId}@kognocore.local`,
-                        username: randomAlias,
+                        username: studentAlias,
                         learner_id: learnerId,
                         course_id: targetCourseId,
                         course_name: targetCourseName,
                         access_code: normalized,
                         status: 'approved'
                     });
-                } else if (existing[0].username !== randomAlias) {
+                } else if (existing[0].username !== studentAlias) {
                     await client.entities.CourseEnrollment.update(existing[0].id, {
-                        username: randomAlias
+                        username: studentAlias
                     });
                 }
             } catch (_err) {
@@ -144,8 +138,8 @@ const Login = () => {
             id: `student_${learnerId.slice(0, 8)}`,
             email: `learner+${learnerId}@kognocore.local`,
             last_name: 'Estudiante',
-            username: randomAlias,
-            full_name: randomAlias,
+            username: studentAlias,
+            full_name: studentAlias,
             is_admin: false,
             role: 'user',
             courseId: targetCourseId,
@@ -220,6 +214,8 @@ const Login = () => {
 
         try {
             await createLocalStudentSession(normalizedCode);
+            const alias = getOrCreateStudentAlias();
+            toast.success(`Bienvenido. Tu usuario es: ${alias}`, { duration: 6000 });
             navigate('/');
         } catch (err) {
             if (String(err?.message || '') === 'INVALID_CODE') {

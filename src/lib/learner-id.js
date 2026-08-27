@@ -10,3 +10,15 @@ export function getOrCreateLearnerId() {
   return id;
 }
 
+export function getOrCreateStudentAlias() {
+  const key = 'kc_student_alias';
+  const existing = localStorage.getItem(key);
+  if (existing) return existing;
+
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let tag = '';
+  for (let i = 0; i < 4; i++) tag += chars[Math.floor(Math.random() * chars.length)];
+  const alias = `Estudiante_${tag}`;
+  localStorage.setItem(key, alias);
+  return alias;
+}
