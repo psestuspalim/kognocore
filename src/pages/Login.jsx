@@ -318,7 +318,7 @@ const Login = () => {
                                             value={code}
                                             onChange={(e) => setCode(e.target.value.toUpperCase())}
                                             required
-                                            className="h-14 rounded-2xl border-slate-300 uppercase text-center font-mono text-2xl tracking-[0.35em] shadow-inner focus-visible:ring-2 focus-visible:ring-cyan-500"
+                                            className="h-14 rounded-2xl border-slate-300 uppercase text-center font-mono text-xl sm:text-2xl tracking-[0.2em] sm:tracking-[0.35em] shadow-inner focus-visible:ring-2 focus-visible:ring-cyan-500"
                                         />
                                         <p className="text-xs text-slate-500 text-center">Se te asignará un usuario anónimo automáticamente</p>
                                     </div>

@@ -80,7 +80,7 @@ export default function QuizListItem({
       {/* Score or status indicator */}
       <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 border ${hasAttempts ? 'border-slate-200 bg-slate-50' : 'border-primary/20 bg-primary/5'}`}>
         {inProgressAttempt ? (
-          <span className="text-[10px] font-bold text-amber-600 bg-amber-50 rounded px-1 text-center">EN PROGRESO</span>
+          <span className="text-[9px] font-bold text-amber-600 bg-amber-50 rounded px-0.5 text-center leading-tight">EN<br/>PROG.</span>
         ) : hasAttempts ? (
           <span className={`text-sm font-bold ${getScoreColor()}`}>{bestScore}%</span>
         ) : (
@@ -119,7 +119,7 @@ export default function QuizListItem({
           <Button
             variant="ghost" size="icon"
             onClick={() => onStartSwipe(quiz)}
-            className="h-8 w-8 text-slate-400 hover:text-primary hover:bg-primary/5"
+            className="h-11 w-11 text-slate-400 hover:text-primary hover:bg-primary/5"
             title="Modo V/F"
           >
             <Smartphone className="w-4 h-4" />

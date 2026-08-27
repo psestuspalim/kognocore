@@ -94,7 +94,7 @@ export default function ResultsView({
       </div>
 
       {/* Stats row */}
-      <div className="grid grid-cols-3 gap-3 mb-6">
+      <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
         <button
           onClick={() => setShowCorrect(!showCorrect)}
           className="rounded-xl bg-white border border-slate-200/60 p-3 text-center hover:border-emerald-300 transition-colors"
@@ -189,7 +189,7 @@ export default function ResultsView({
               <ChevronUp className="w-4 h-4" />
             </button>
           </div>
-          <div className="p-3 space-y-2">
+          <div className="p-3 space-y-2 max-h-[60vh] overflow-y-auto">
             {wrongAnswers.map((wq, idx) => {
               const justText = wq.justificacion || wq.explanation || wq.feedback || wq.rationale;
               return (
