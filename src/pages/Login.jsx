@@ -10,11 +10,17 @@ import { KeyRound, ShieldCheck, Sparkles } from 'lucide-react';
 import { client } from '@/api/client';
 import { getOrCreateLearnerId } from '@/lib/learner-id';
 
+function generateRandomAlias() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let tag = '';
+    for (let i = 0; i < 4; i++) tag += chars[Math.floor(Math.random() * chars.length)];
+    return `Estudiante_${tag}`;
+}
+
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [code, setCode] = useState('');
-    const [displayName, setDisplayName] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [activeTab, setActiveTab] = useState('code');
@@ -87,10 +93,10 @@ const Login = () => {
         return null;
     };
 
-    const createLocalStudentSession = async (inputCode, inputName) => {
+    const createLocalStudentSession = async (inputCode) => {
         const normalized = (inputCode || '').trim().toUpperCase();
-        const normalizedName = (inputName || '').trim();
         const learnerId = getOrCreateLearnerId();
+        const randomAlias = generateRandomAlias();
 
         const resolved = await resolveCourseByCode(normalized);
         if (!resolved) {
@@ -102,7 +108,7 @@ const Login = () => {
         // If we have a server token, use canonical auth path (courseId comes from /api/me)
         if (resolved.token) {
             localStorage.setItem('kc_token', resolved.token);
-            localStorage.setItem('kc_display_name', normalizedName || 'Estudiante');
+            localStorage.setItem('kc_display_name', randomAlias);
             localStorage.removeItem('app_mock_token');
 
             // Create enrollment so admin can see this student
@@ -114,16 +120,16 @@ const Login = () => {
                 if (existing.length === 0) {
                     await client.entities.CourseEnrollment.create({
                         user_email: `learner+${learnerId}@kognocore.local`,
-                        username: normalizedName || 'Estudiante',
+                        username: randomAlias,
                         learner_id: learnerId,
                         course_id: targetCourseId,
                         course_name: targetCourseName,
                         access_code: normalized,
                         status: 'approved'
                     });
-                } else if (normalizedName && existing[0].username !== normalizedName) {
+                } else if (existing[0].username !== randomAlias) {
                     await client.entities.CourseEnrollment.update(existing[0].id, {
-                        username: normalizedName
+                        username: randomAlias
                     });
                 }
             } catch (_err) {
@@ -138,8 +144,8 @@ const Login = () => {
             id: `student_${learnerId.slice(0, 8)}`,
             email: `learner+${learnerId}@kognocore.local`,
             last_name: 'Estudiante',
-            username: normalizedName || 'Estudiante',
-            full_name: normalizedName || 'Estudiante',
+            username: randomAlias,
+            full_name: randomAlias,
             is_admin: false,
             role: 'user',
             courseId: targetCourseId,
@@ -206,21 +212,14 @@ const Login = () => {
         setError('');
 
         const normalizedCode = code.trim().toUpperCase();
-        const normalizedName = displayName.trim();
         if (normalizedCode.length < 4) {
             setError('El código debe tener al menos 4 caracteres');
             setIsLoading(false);
             return;
         }
-        if (normalizedName.length < 2) {
-            setError('Ingresa tu nombre (mínimo 2 caracteres)');
-            setIsLoading(false);
-            return;
-        }
 
         try {
-            // Direct access by code: enroll directly without approval
-            await createLocalStudentSession(normalizedCode, normalizedName);
+            await createLocalStudentSession(normalizedCode);
             navigate('/');
         } catch (err) {
             if (String(err?.message || '') === 'INVALID_CODE') {
@@ -280,7 +279,7 @@ const Login = () => {
                     </div>
 
                     <div className="mt-5 rounded-2xl border border-white/70 bg-white/85 p-4 text-sm text-slate-700">
-                        Flujo: <strong>1)</strong> escribe tu nombre, <strong>2)</strong> ingresa código, <strong>3)</strong> abre tu curso y responde quizzes.
+                        Flujo: <strong>1)</strong> ingresa tu código de acceso, <strong>2)</strong> abre tu curso y responde quizzes.
                     </div>
                 </section>
 
@@ -315,18 +314,6 @@ const Login = () => {
                             <TabsContent value="code">
                                 <form onSubmit={handleCodeLogin} className="space-y-4">
                                     <div className="space-y-2">
-                                        <Label htmlFor="displayName" className="text-base font-semibold text-slate-800">Tu nombre</Label>
-                                        <Input
-                                            id="displayName"
-                                            type="text"
-                                            placeholder="Ej: Ana Martínez"
-                                            value={displayName}
-                                            onChange={(e) => setDisplayName(e.target.value)}
-                                            required
-                                            className="h-12 rounded-xl border-slate-300 text-base"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
                                         <Label htmlFor="code" className="text-base font-semibold text-slate-800">Código de Acceso</Label>
                                         <Input
                                             id="code"
@@ -337,13 +324,14 @@ const Login = () => {
                                             required
                                             className="h-14 rounded-2xl border-slate-300 uppercase text-center font-mono text-2xl tracking-[0.35em] shadow-inner focus-visible:ring-2 focus-visible:ring-cyan-500"
                                         />
+                                        <p className="text-xs text-slate-500 text-center">Se te asignará un usuario anónimo automáticamente</p>
                                     </div>
                                     {error && (
                                         <div className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
                                             {error}
                                         </div>
                                     )}
-                                    <Button type="submit" size="lg" className="h-14 w-full rounded-2xl bg-slate-900 text-lg font-semibold hover:bg-slate-800" disabled={isLoading || !code || !displayName.trim()}>
+                                    <Button type="submit" size="lg" className="h-14 w-full rounded-2xl bg-slate-900 text-lg font-semibold hover:bg-slate-800" disabled={isLoading || !code}>
                                         {isLoading ? 'Verificando...' : 'Ingresar al Curso'}
                                     </Button>
                                 </form>

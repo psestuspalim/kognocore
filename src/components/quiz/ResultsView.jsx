@@ -15,7 +15,7 @@ export default function ResultsView({
   onHome
 }) {
   const [showCorrect, setShowCorrect] = useState(false);
-  const [showWrong, setShowWrong] = useState(false);
+  const [showWrong, setShowWrong] = useState(true);
 
   const difficultyStats = (() => {
     const stats = {
@@ -156,26 +156,31 @@ export default function ResultsView({
             </button>
           </div>
           <div className="p-3 space-y-2">
-            {correctAnswers.map((q, idx) => (
-              <div key={idx} className="bg-white rounded-lg p-3 text-sm border border-emerald-100">
-                <p className="font-medium text-slate-800 mb-1.5 text-[13px] leading-relaxed">
-                  <MathText text={q.question} />
-                </p>
-                <p className="text-emerald-700 text-xs">Tu respuesta: <MathText text={q.selected_answer} /></p>
-                {(q.explanation || q.justificacion || q.feedback || q.rationale) && (
-                  <div className="mt-2 p-2 bg-slate-50 rounded-md text-xs text-slate-600 leading-relaxed">
-                    <MathText text={q.explanation || q.justificacion || q.feedback || q.rationale} />
-                  </div>
-                )}
-              </div>
-            ))}
+            {correctAnswers.map((q, idx) => {
+              const justText = q.justificacion || q.explanation || q.feedback || q.rationale;
+              return (
+                <div key={idx} className="bg-white rounded-lg p-3 text-sm border border-emerald-100">
+                  <p className="font-medium text-slate-800 mb-1.5 text-[13px] leading-relaxed">
+                    <span className="text-slate-400 mr-1">{idx + 1}.</span>
+                    <MathText text={q.question} />
+                  </p>
+                  <p className="text-emerald-700 text-xs">Tu respuesta: <MathText text={q.selected_answer} /></p>
+                  {justText && (
+                    <div className="mt-2 p-2.5 bg-blue-50 border border-blue-100 rounded-lg text-xs text-slate-700 leading-relaxed">
+                      <p className="font-semibold text-blue-800 mb-1">Justificación:</p>
+                      <MathText text={justText} />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
 
       {/* Expandable wrong answers */}
       {showWrong && wrongAnswers.length > 0 && (
-        <div className="mb-4 max-h-80 overflow-y-auto rounded-xl border border-rose-200/60 bg-rose-50/50">
+        <div className="mb-4 rounded-xl border border-rose-200/60 bg-rose-50/50">
           <div className="p-3 border-b border-rose-200/40 flex items-center justify-between sticky top-0 bg-rose-50/90 backdrop-blur-sm">
             <span className="text-xs font-bold text-rose-800 flex items-center gap-1.5">
               <XCircle className="w-3.5 h-3.5" /> Incorrectas
@@ -185,20 +190,25 @@ export default function ResultsView({
             </button>
           </div>
           <div className="p-3 space-y-2">
-            {wrongAnswers.map((wq, idx) => (
-              <div key={idx} className="bg-white rounded-lg p-3 text-sm border border-rose-100">
-                <p className="font-medium text-slate-800 mb-1.5 text-[13px] leading-relaxed">
-                  <MathText text={wq.question} />
-                </p>
-                <p className="text-rose-600 text-xs">Tu respuesta: <MathText text={wq.selected_answer} /></p>
-                <p className="text-emerald-700 text-xs mt-0.5">Correcta: <MathText text={wq.correct_answer} /></p>
-                {(wq.explanation || wq.justificacion || wq.feedback || wq.rationale) && (
-                  <div className="mt-2 p-2 bg-slate-50 rounded-md text-xs text-slate-600 leading-relaxed">
-                    <MathText text={wq.explanation || wq.justificacion || wq.feedback || wq.rationale} />
-                  </div>
-                )}
-              </div>
-            ))}
+            {wrongAnswers.map((wq, idx) => {
+              const justText = wq.justificacion || wq.explanation || wq.feedback || wq.rationale;
+              return (
+                <div key={idx} className="bg-white rounded-lg p-3 text-sm border border-rose-100">
+                  <p className="font-medium text-slate-800 mb-1.5 text-[13px] leading-relaxed">
+                    <span className="text-slate-400 mr-1">{idx + 1}.</span>
+                    <MathText text={wq.question} />
+                  </p>
+                  <p className="text-rose-600 text-xs">Tu respuesta: <MathText text={wq.selected_answer} /></p>
+                  <p className="text-emerald-700 text-xs mt-0.5">Correcta: <MathText text={wq.correct_answer} /></p>
+                  {justText && (
+                    <div className="mt-2 p-2.5 bg-blue-50 border border-blue-100 rounded-lg text-xs text-slate-700 leading-relaxed">
+                      <p className="font-semibold text-blue-800 mb-1">Justificación:</p>
+                      <MathText text={justText} />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
