@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import crypto from 'crypto'
+import { requireAdmin } from './_auth.mjs'
 
 function getSupabaseAdmin() {
   const url = process.env.SUPABASE_URL
@@ -14,6 +15,9 @@ function sha256(s) {
 
 export async function POST(req) {
   try {
+    const authorization = await requireAdmin(req)
+    if (authorization.response) return authorization.response
+
     const supabase = getSupabaseAdmin()
     if (!supabase || !process.env.CODE_PEPPER) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })

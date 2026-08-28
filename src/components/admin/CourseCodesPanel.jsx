@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { client } from '@/api/client';
+import { getAuthorizationHeaders } from '@/lib/supabase';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -37,7 +38,10 @@ export default function CourseCodesPanel({ courses }) {
       if (codes.length === 0) return {};
       const response = await fetch('/api/invites-usage', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(await getAuthorizationHeaders())
+        },
         body: JSON.stringify({ codes: codes.map(c => c.code) })
       });
       if (!response.ok) return {};
@@ -99,7 +103,10 @@ export default function CourseCodesPanel({ courses }) {
         try {
           const response = await fetch('/api/invites-create', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              ...(await getAuthorizationHeaders())
+            },
             body: JSON.stringify({
               code: payload.code,
               course_id: payload.course_id,

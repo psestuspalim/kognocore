@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { requireAdmin } from './_auth.mjs'
 
 function getSupabaseAdmin() {
   const url = process.env.SUPABASE_URL
@@ -37,6 +38,9 @@ export async function GET() {
 
 export async function POST(req) {
   try {
+    const authorization = await requireAdmin(req)
+    if (authorization.response) return authorization.response
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -69,6 +73,9 @@ export async function POST(req) {
 
 export async function PATCH(req) {
   try {
+    const authorization = await requireAdmin(req)
+    if (authorization.response) return authorization.response
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -118,6 +125,9 @@ export async function PATCH(req) {
 
 export async function DELETE(req) {
   try {
+    const authorization = await requireAdmin(req)
+    if (authorization.response) return authorization.response
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -139,4 +149,3 @@ export async function DELETE(req) {
     return new Response(JSON.stringify({ error: 'Bad request' }), { status: 400 })
   }
 }
-

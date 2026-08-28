@@ -1,5 +1,7 @@
 
 import { appParams } from '@/lib/app-params';
+import { getAuthorizationHeaders, supabase } from '@/lib/supabase';
+import { getOrCreateLearnerId, getOrCreateStudentAlias } from '@/lib/learner-id';
 
 const { appId, serverUrl, token, functionsVersion } = appParams;
 
@@ -12,6 +14,17 @@ const { appId, serverUrl, token, functionsVersion } = appParams;
 // requiresAuth: false
 //});
 const realClient = null;
+
+const authorizedFetch = async (input, init = {}) => {
+  const authorizationHeaders = await getAuthorizationHeaders();
+  return fetch(input, {
+    ...init,
+    headers: {
+      ...authorizationHeaders,
+      ...(init.headers || {})
+    }
+  });
+};
 
 // Mock client implementation
 // Mock client implementation with LocalStorage persistence
@@ -227,28 +240,28 @@ const mergeById = (primary, secondary) => {
 };
 
 const fetchRemoteQuizzes = async () => {
-  const response = await fetch('/api/quizzes');
+  const response = await authorizedFetch('/api/quizzes');
   if (!response.ok) throw new Error('REMOTE_QUIZ_LIST_FAILED');
   const data = await response.json().catch(() => ({}));
   return Array.isArray(data?.quizzes) ? data.quizzes : [];
 };
 
 const fetchRemoteAttempts = async () => {
-  const response = await fetch('/api/attempts');
+  const response = await authorizedFetch('/api/attempts');
   if (!response.ok) throw new Error('REMOTE_ATTEMPT_LIST_FAILED');
   const data = await response.json().catch(() => ({}));
   return Array.isArray(data?.attempts) ? data.attempts : [];
 };
 
 const fetchRemoteEnrollments = async () => {
-  const response = await fetch('/api/enrollments');
+  const response = await authorizedFetch('/api/enrollments');
   if (!response.ok) throw new Error('REMOTE_ENROLLMENT_LIST_FAILED');
   const data = await response.json().catch(() => ({}));
   return Array.isArray(data?.enrollments) ? data.enrollments : [];
 };
 
 const fetchRemoteAccessCodes = async () => {
-  const response = await fetch('/api/access-codes');
+  const response = await authorizedFetch('/api/access-codes');
   if (!response.ok) throw new Error('REMOTE_ACCESS_CODES_LIST_FAILED');
   const data = await response.json().catch(() => ({}));
   return Array.isArray(data?.codes) ? data.codes : [];
@@ -289,32 +302,77 @@ const mockClient = {
 
   auth: {
     me: async () => {
-      const localToken = localStorage.getItem('app_mock_token');
-      if (localToken) {
-        return JSON.parse(localToken);
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        const { data: profile, error } = await supabase
+          .from('profiles')
+          .select('id, email, full_name, username, role')
+          .eq('id', session.user.id)
+          .single();
+        if (error) throw error;
+        return {
+          ...profile,
+          is_admin: profile.role === 'admin',
+          auth_provider: 'supabase'
+        };
       }
-      return { ...mockUser, id: 'mock_guest', first_name: 'Guest', username: 'Guest' };
+
+      const codeToken = localStorage.getItem('kc_token');
+      if (codeToken) {
+        const response = await fetch('/api/me', {
+          headers: { Authorization: `Bearer ${codeToken}` }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          const learnerId = getOrCreateLearnerId();
+          const alias = getOrCreateStudentAlias();
+          return {
+            id: `student_${learnerId.slice(0, 8)}`,
+            email: `learner+${learnerId}@kognocore.local`,
+            full_name: alias,
+            username: alias,
+            role: 'user',
+            is_admin: false,
+            courseId: data.courseId,
+            learner_id: learnerId,
+            auth_provider: 'access_code'
+          };
+        }
+      }
+
+      const error = new Error('Authentication required');
+      error.status = 401;
+      throw error;
     },
-    logout: (redirectUrl) => {
+    logout: async (redirectUrl) => {
       localStorage.removeItem('app_mock_token');
+      localStorage.removeItem('kc_token');
+      await supabase.auth.signOut();
       if (redirectUrl) window.location.href = '/login';
     },
     redirectToLogin: (redirectUrl) => {
       window.location.href = '/login';
     },
     updateMe: async (data) => {
-      const currentUser = JSON.parse(localStorage.getItem('app_mock_token') || JSON.stringify(mockUser));
-      const updatedUser = { ...currentUser, ...data };
-      localStorage.setItem('app_mock_token', JSON.stringify(updatedUser)); // Update session
-
-      // Also update in users list if needed
-      const users = getItems('User');
-      const index = users.findIndex(u => u.id === currentUser.id);
-      if (index !== -1) {
-        users[index] = { ...users[index], ...data };
-        saveItems('User', users);
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        const allowed = {
+          full_name: data.full_name,
+          username: data.username
+        };
+        Object.keys(allowed).forEach((key) => allowed[key] === undefined && delete allowed[key]);
+        const { data: profile, error } = await supabase
+          .from('profiles')
+          .update(allowed)
+          .eq('id', session.user.id)
+          .select('id, email, full_name, username, role')
+          .single();
+        if (error) throw error;
+        return profile;
       }
-      return updatedUser;
+
+      if (data.username) localStorage.setItem('kc_display_name', data.username);
+      return { ...(await mockClient.auth.me()), ...data };
     }
   },
   analytics: {
@@ -545,7 +603,7 @@ const mockClient = {
 
           if (entityName === 'Quiz') {
             try {
-              await fetch('/api/quizzes', {
+              await authorizedFetch('/api/quizzes', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ quiz: newItem })
@@ -557,7 +615,7 @@ const mockClient = {
 
           if (entityName === 'QuizAttempt') {
             try {
-              await fetch('/api/attempts', {
+              await authorizedFetch('/api/attempts', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ attempt: newItem })
@@ -569,7 +627,7 @@ const mockClient = {
 
           if (entityName === 'CourseEnrollment') {
             try {
-              await fetch('/api/enrollments', {
+              await authorizedFetch('/api/enrollments', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ enrollment: newItem })
@@ -581,7 +639,7 @@ const mockClient = {
 
           if (entityName === 'CourseAccessCode') {
             try {
-              await fetch('/api/access-codes', {
+              await authorizedFetch('/api/access-codes', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ code: newItem })
@@ -602,7 +660,7 @@ const mockClient = {
 
             if (entityName === 'Quiz') {
               try {
-                await fetch('/api/quizzes', {
+                await authorizedFetch('/api/quizzes', {
                   method: 'PATCH',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ id, data })
@@ -614,7 +672,7 @@ const mockClient = {
 
             if (entityName === 'QuizAttempt') {
               try {
-                await fetch('/api/attempts', {
+                await authorizedFetch('/api/attempts', {
                   method: 'PATCH',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ id, data })
@@ -626,7 +684,7 @@ const mockClient = {
 
             if (entityName === 'CourseEnrollment') {
               try {
-                await fetch('/api/enrollments', {
+                await authorizedFetch('/api/enrollments', {
                   method: 'PATCH',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ id, data })
@@ -638,7 +696,7 @@ const mockClient = {
 
             if (entityName === 'CourseAccessCode') {
               try {
-                await fetch('/api/access-codes', {
+                await authorizedFetch('/api/access-codes', {
                   method: 'PATCH',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ id, data })
@@ -661,7 +719,7 @@ const mockClient = {
 
             if (entityName === 'Quiz') {
               try {
-                await fetch(`/api/quizzes?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+                await authorizedFetch(`/api/quizzes?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
               } catch (_err) {
                 // keep local delete working
               }
@@ -669,7 +727,7 @@ const mockClient = {
 
             if (entityName === 'QuizAttempt') {
               try {
-                await fetch(`/api/attempts?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+                await authorizedFetch(`/api/attempts?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
               } catch (_err) {
                 // keep local delete working
               }
@@ -677,7 +735,7 @@ const mockClient = {
 
             if (entityName === 'CourseEnrollment') {
               try {
-                await fetch(`/api/enrollments?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+                await authorizedFetch(`/api/enrollments?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
               } catch (_err) {
                 // keep local delete working
               }
@@ -685,7 +743,7 @@ const mockClient = {
 
             if (entityName === 'CourseAccessCode') {
               try {
-                await fetch(`/api/access-codes?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+                await authorizedFetch(`/api/access-codes?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
               } catch (_err) {
                 // keep local delete working
               }

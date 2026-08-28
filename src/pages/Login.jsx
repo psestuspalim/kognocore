@@ -17,8 +17,9 @@ const Login = () => {
     const [code, setCode] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [linkSent, setLinkSent] = useState(false);
     const [activeTab, setActiveTab] = useState('code');
-    const { login, checkAppState } = useAuth();
+    const { login, requestMagicLink, checkAppState } = useAuth();
     const navigate = useNavigate();
 
     const resolveCourseByCode = async (normalized) => {
@@ -45,45 +46,6 @@ const Login = () => {
             // continue to next fallback
         }
 
-        // 2) Lighter server validation (no token, just validates code exists)
-        try {
-            const response = await fetch('/api/invites-validate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ code: normalized })
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                if (data?.valid && data?.courseId) {
-                    return {
-                        courseId: data.courseId,
-                        courseName: null,
-                        token: null,
-                        source: 'server-validated'
-                    };
-                }
-            }
-        } catch (_err) {
-            // continue to local fallback
-        }
-
-        // 3) Local fallback: CourseAccessCode in local storage
-        try {
-            const allCodes = await client.entities.CourseAccessCode.list();
-            const found = allCodes.find(c => (c.code || '').trim().toUpperCase() === normalized);
-            if (found) {
-                return {
-                    courseId: found.course_id || 'course_enarm2026',
-                    courseName: found.course_name || 'ENARM 2026',
-                    token: null,
-                    source: 'local-code'
-                };
-            }
-        } catch (_err) {
-            // ignore
-        }
-
         return null;
     };
 
@@ -99,83 +61,32 @@ const Login = () => {
         const targetCourseId = resolved.courseId || 'course_enarm2026';
         const targetCourseName = resolved.courseName || 'ENARM 2026';
 
-        // If we have a server token, use canonical auth path (courseId comes from /api/me)
-        if (resolved.token) {
-            localStorage.setItem('kc_token', resolved.token);
-            localStorage.setItem('kc_display_name', studentAlias);
-            localStorage.removeItem('app_mock_token');
+        if (!resolved.token) throw new Error('INVALID_CODE');
 
-            // Create enrollment so admin can see this student
-            try {
-                const existing = await client.entities.CourseEnrollment.filter({
+        localStorage.setItem('kc_token', resolved.token);
+        localStorage.setItem('kc_display_name', studentAlias);
+        localStorage.removeItem('app_mock_token');
+
+        try {
+            const existing = await client.entities.CourseEnrollment.filter({
+                learner_id: learnerId,
+                course_id: targetCourseId
+            });
+            if (existing.length === 0) {
+                await client.entities.CourseEnrollment.create({
+                    user_email: `learner+${learnerId}@kognocore.local`,
+                    username: studentAlias,
                     learner_id: learnerId,
-                    course_id: targetCourseId
+                    course_id: targetCourseId,
+                    course_name: targetCourseName,
+                    access_code: normalized,
+                    status: 'approved'
                 });
-                if (existing.length === 0) {
-                    await client.entities.CourseEnrollment.create({
-                        user_email: `learner+${learnerId}@kognocore.local`,
-                        username: studentAlias,
-                        learner_id: learnerId,
-                        course_id: targetCourseId,
-                        course_name: targetCourseName,
-                        access_code: normalized,
-                        status: 'approved'
-                    });
-                } else if (existing[0].username !== studentAlias) {
-                    await client.entities.CourseEnrollment.update(existing[0].id, {
-                        username: studentAlias
-                    });
-                }
-            } catch (_err) {
-                // non-blocking
+            } else if (existing[0].username !== studentAlias) {
+                await client.entities.CourseEnrollment.update(existing[0].id, { username: studentAlias });
             }
-
-            await checkAppState();
-            return;
-        }
-
-        const mockStudent = {
-            id: `student_${learnerId.slice(0, 8)}`,
-            email: `learner+${learnerId}@kognocore.local`,
-            last_name: 'Estudiante',
-            username: studentAlias,
-            full_name: studentAlias,
-            is_admin: false,
-            role: 'user',
-            courseId: targetCourseId,
-            accessCode: normalized,
-            loginMode: 'direct-code',
-            learner_id: learnerId
-        };
-
-        localStorage.setItem('app_mock_token', JSON.stringify(mockStudent));
-        localStorage.removeItem('kc_token');
-
-        if (targetCourseId) {
-            try {
-                const existing = await client.entities.CourseEnrollment.filter({
-                    user_email: mockStudent.email,
-                    course_id: targetCourseId
-                });
-
-                if (existing.length === 0) {
-                    await client.entities.CourseEnrollment.create({
-                        user_email: mockStudent.email,
-                        username: mockStudent.username,
-                        learner_id: learnerId,
-                        course_id: targetCourseId,
-                        course_name: targetCourseName,
-                        access_code: normalized,
-                        status: 'approved'
-                    });
-                } else if (existing[0].status !== 'approved') {
-                    await client.entities.CourseEnrollment.update(existing[0].id, {
-                        status: 'approved'
-                    });
-                }
-            } catch (_err) {
-                // keep login successful even if enrollment persistence fails
-            }
+        } catch (_err) {
+            // The validated session remains usable if enrollment sync is temporarily unavailable.
         }
 
         await checkAppState();
@@ -189,12 +100,29 @@ const Login = () => {
         try {
             const success = await login(email, password);
             if (success) {
-                navigate('/');
+                navigate('/AdminHome');
             } else {
-                setError('Invalid credentials');
+                setError('Credenciales inválidas');
             }
+        } catch (err) {
+            setError(String(err?.message || '') === 'ADMIN_REQUIRED'
+                ? 'Esta cuenta no tiene permisos de administrador.'
+                : 'Correo o contraseña incorrectos.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleMagicLink = async () => {
+        setIsLoading(true);
+        setError('');
+        setLinkSent(false);
+
+        try {
+            await requestMagicLink(email);
+            setLinkSent(true);
         } catch (_err) {
-            setError('An error occurred during login');
+            setError('No se pudo enviar el enlace de acceso. Verifica el correo.');
         } finally {
             setIsLoading(false);
         }
@@ -336,11 +264,11 @@ const Login = () => {
                             <TabsContent value="admin">
                                 <form onSubmit={handleLogin} className="space-y-4">
                                     <div className="space-y-2">
-                                        <Label htmlFor="email">Usuario o Email</Label>
+                                        <Label htmlFor="email">Correo electrónico</Label>
                                         <Input
                                             id="email"
-                                            type="text"
-                                            placeholder="jesus o admin"
+                                            type="email"
+                                            placeholder="nombre@correo.com"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             required
@@ -364,8 +292,23 @@ const Login = () => {
                                             {error}
                                         </div>
                                     )}
+                                    {linkSent && (
+                                        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
+                                            Revisa tu correo y abre el enlace seguro para entrar.
+                                        </div>
+                                    )}
                                     <Button type="submit" size="lg" className="h-12 w-full rounded-xl bg-slate-900 hover:bg-slate-800" disabled={isLoading}>
                                         {isLoading ? 'Entrando...' : 'Entrar (Admin)'}
+                                    </Button>
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                        size="lg"
+                                        className="h-12 w-full rounded-xl"
+                                        onClick={handleMagicLink}
+                                        disabled={isLoading || !email}
+                                    >
+                                        Enviar enlace seguro
                                     </Button>
                                 </form>
                             </TabsContent>
