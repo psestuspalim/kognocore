@@ -25,12 +25,13 @@ const SEED_VERSION = 'v14_bundle_all_4_megasimulacros'; // bump this to force a 
 const initializeStorage = () => {
   if (typeof window === 'undefined') return;
 
-  // Always overwrite structural data so the curriculum stays in sync
+  // Always overwrite structural data so the curriculum stays in sync.
+  // Quizzes are NOT overwritten here — they use the merge logic below
+  // so user-created quizzes are never lost on a seed version bump.
   if (localStorage.getItem('app_seed_version') !== SEED_VERSION) {
     localStorage.setItem('app_courses', JSON.stringify(mockCourses));
     localStorage.setItem('app_subjects', JSON.stringify(mockSubjects));
     localStorage.setItem('app_folders', JSON.stringify(mockFolders));
-    localStorage.setItem('app_quizzes', JSON.stringify(mockQuizzes));
     localStorage.setItem('app_seed_version', SEED_VERSION);
     localStorage.setItem('structure_initialized', 'true');
   }
@@ -246,6 +247,13 @@ const fetchRemoteEnrollments = async () => {
   return Array.isArray(data?.enrollments) ? data.enrollments : [];
 };
 
+const fetchRemoteAccessCodes = async () => {
+  const response = await fetch('/api/access-codes');
+  if (!response.ok) throw new Error('REMOTE_ACCESS_CODES_LIST_FAILED');
+  const data = await response.json().catch(() => ({}));
+  return Array.isArray(data?.codes) ? data.codes : [];
+};
+
 /**
  * @type {{
  *   auth: { me: () => Promise<any>, logout: (redirectUrl?: string) => void, redirectToLogin: (redirectUrl?: string) => void, updateMe: (data: Object) => Promise<any> },
@@ -357,6 +365,18 @@ const mockClient = {
             }
           }
 
+          if (entityName === 'CourseAccessCode') {
+            const local = getItems('CourseAccessCode');
+            try {
+              const remote = await fetchRemoteAccessCodes();
+              const merged = mergeById(remote, local);
+              saveItems('CourseAccessCode', merged);
+              return sortByField(merged, orderBy);
+            } catch (_err) {
+              return sortByField(local, orderBy);
+            }
+          }
+
           let items = getItems(entityName);
           // Simple sort if orderBy is provided (very basic implementation)
           return sortByField(items, orderBy);
@@ -431,6 +451,28 @@ const mockClient = {
                 return merged;
               } catch (_err) {
                 return getItems('CourseEnrollment');
+              }
+            })();
+
+            let filtered = all.filter(item => {
+              for (const key in criteria) {
+                if (item[key] !== criteria[key]) return false;
+              }
+              return true;
+            });
+            return sortByField(filtered, orderBy);
+          }
+
+          if (entityName === 'CourseAccessCode') {
+            const all = await (async () => {
+              try {
+                const remote = await fetchRemoteAccessCodes();
+                const local = getItems('CourseAccessCode');
+                const merged = mergeById(remote, local);
+                saveItems('CourseAccessCode', merged);
+                return merged;
+              } catch (_err) {
+                return getItems('CourseAccessCode');
               }
             })();
 
@@ -537,6 +579,18 @@ const mockClient = {
             }
           }
 
+          if (entityName === 'CourseAccessCode') {
+            try {
+              await fetch('/api/access-codes', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ code: newItem })
+              });
+            } catch (_err) {
+              // keep local create working
+            }
+          }
+
           return newItem;
         },
         update: async (id, data) => {
@@ -582,6 +636,18 @@ const mockClient = {
               }
             }
 
+            if (entityName === 'CourseAccessCode') {
+              try {
+                await fetch('/api/access-codes', {
+                  method: 'PATCH',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ id, data })
+                });
+              } catch (_err) {
+                // keep local update working
+              }
+            }
+
             return items[index];
           }
           throw new Error('Item not found');
@@ -612,6 +678,14 @@ const mockClient = {
             if (entityName === 'CourseEnrollment') {
               try {
                 await fetch(`/api/enrollments?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+              } catch (_err) {
+                // keep local delete working
+              }
+            }
+
+            if (entityName === 'CourseAccessCode') {
+              try {
+                await fetch(`/api/access-codes?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
               } catch (_err) {
                 // keep local delete working
               }

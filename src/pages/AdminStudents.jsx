@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { client } from '@/api/client';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Users, Search, ChevronRight, Mail, Clock, BookOpen } from 'lucide-react';
+import { Users, Search, ChevronRight, Mail, Clock, BookOpen, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
@@ -12,10 +13,13 @@ import { formatDistanceToNow } from 'date-fns';
 import { es } from 'date-fns/locale';
 import AdminShell from '../components/admin/AdminShell';
 import AdminPageHeader from '../components/admin/AdminPageHeader';
+import { toast } from 'sonner';
 
 export default function AdminStudents() {
   const [currentUser, setCurrentUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isResetting, setIsResetting] = useState(false);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const loadUser = async () => {
@@ -127,6 +131,29 @@ export default function AdminStudents() {
 
   const students = Array.from(usersByKey.values());
 
+  const handleResetStudents = async () => {
+    if (!window.confirm('¿Estás seguro? Se eliminarán TODAS las inscripciones de estudiantes. Esta acción no se puede deshacer.')) return;
+    setIsResetting(true);
+    try {
+      // Clear remote enrollments
+      try {
+        await fetch('/api/enrollments?purge_all=true', { method: 'DELETE' });
+      } catch (_err) {
+        // remote may not be configured
+      }
+      // Clear local enrollments
+      localStorage.removeItem('app_course_enrollments');
+      queryClient.invalidateQueries(['admin-students-enrollments']);
+      queryClient.invalidateQueries(['all-enrollments']);
+      queryClient.invalidateQueries(['admin-shell-enrollments']);
+      toast.success('Todas las inscripciones han sido eliminadas');
+    } catch (_err) {
+      toast.error('Error al resetear estudiantes');
+    } finally {
+      setIsResetting(false);
+    }
+  };
+
   const filteredStudents = students.filter(student => {
     const search = searchTerm.toLowerCase();
     return (
@@ -144,15 +171,27 @@ export default function AdminStudents() {
         subtitle={`${filteredStudents.length} estudiantes registrados`}
         badge={<Badge variant="secondary">{filteredStudents.length}</Badge>}
         actions={
-          <div className="relative w-80">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input
-              type="text"
-              placeholder="Buscar por nombre o email..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 h-10"
-            />
+          <div className="flex items-center gap-3">
+            <div className="relative w-80">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Buscar por nombre o email..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 h-10"
+              />
+            </div>
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={handleResetStudents}
+              disabled={isResetting || filteredStudents.length === 0}
+              className="flex items-center gap-2 whitespace-nowrap"
+            >
+              <Trash2 className="w-4 h-4" />
+              {isResetting ? 'Eliminando...' : 'Resetear Estudiantes'}
+            </Button>
           </div>
         }
       />

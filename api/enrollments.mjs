@@ -136,6 +136,16 @@ export async function DELETE(req) {
 
     const url = new URL(req.url)
     const id = url.searchParams.get('id')
+    const purgeAll = url.searchParams.get('purge_all')
+
+    if (purgeAll === 'true') {
+      const { error } = await supabase.from('enrollments').delete().neq('id', '')
+      if (error) {
+        return new Response(JSON.stringify({ error: 'No se pudo purgar inscripciones', details: error.message }), { status: 500 })
+      }
+      return new Response(JSON.stringify({ ok: true, purged: true }), { status: 200 })
+    }
+
     if (!id) {
       return new Response(JSON.stringify({ error: 'id requerido' }), { status: 400 })
     }

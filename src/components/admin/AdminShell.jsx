@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import {
-  LayoutDashboard, BookOpen, Users, FileJson, Menu, X, ArrowLeft, Shield, FolderTree, Trash2, TrendingUp
+  LayoutDashboard, BookOpen, Users, FileJson, Menu, X, ArrowLeft, Shield, FolderTree, Trash2, TrendingUp, UserPlus
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useQuery } from '@tanstack/react-query';
+import { client } from '@/api/client';
+import { toast } from 'sonner';
 
 const sidebarItems = [
   {
@@ -31,6 +34,35 @@ const sidebarItems = [
 export default function AdminShell({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
+  const knownEnrollmentIds = useRef(null);
+
+  const { data: enrollments } = useQuery({
+    queryKey: ['admin-shell-enrollments'],
+    queryFn: () => client.entities.CourseEnrollment.list('-created_date'),
+    refetchInterval: 15000,
+  });
+
+  useEffect(() => {
+    if (!enrollments) return;
+    const currentIds = new Set(enrollments.map(e => e.id));
+
+    if (knownEnrollmentIds.current === null) {
+      knownEnrollmentIds.current = currentIds;
+      return;
+    }
+
+    for (const enrollment of enrollments) {
+      if (!knownEnrollmentIds.current.has(enrollment.id)) {
+        const name = enrollment.username || enrollment.user_email || 'Nuevo estudiante';
+        const course = enrollment.course_name || '';
+        toast(`${name} se ha inscrito${course ? ` a ${course}` : ''}`, {
+          icon: <UserPlus className="w-4 h-4 text-green-600" />,
+          duration: 8000,
+        });
+      }
+    }
+    knownEnrollmentIds.current = currentIds;
+  }, [enrollments]);
 
   const isActive = (href) => {
     const currentPath = location.pathname.split('/').pop();
