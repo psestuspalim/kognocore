@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { client } from '@/api/client';
+import { getAuthorizationHeaders } from '@/lib/supabase';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -137,7 +138,10 @@ export default function AdminStudents() {
     try {
       // Clear remote enrollments
       try {
-        await fetch('/api/enrollments?purge_all=true', { method: 'DELETE' });
+        await fetch('/api/enrollments?purge_all=true', {
+          method: 'DELETE',
+          headers: await getAuthorizationHeaders()
+        });
       } catch (_err) {
         // remote may not be configured
       }

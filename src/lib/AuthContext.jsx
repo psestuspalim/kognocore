@@ -1,317 +1,186 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { client } from '@/api/client';
-import { appParams } from '@/lib/app-params';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabase';
 import { getOrCreateLearnerId, getOrCreateStudentAlias } from '@/lib/learner-id';
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
+
+function buildStudentUser(courseId) {
+  const learnerId = getOrCreateLearnerId();
+  const studentAlias = getOrCreateStudentAlias();
+
+  return {
+    id: `student_${learnerId.slice(0, 8)}`,
+    email: `learner+${learnerId}@kognocore.local`,
+    last_name: 'Estudiante',
+    username: studentAlias,
+    full_name: studentAlias,
+    is_admin: false,
+    role: 'user',
+    courseId,
+    learner_id: learnerId,
+    auth_provider: 'access_code'
+  };
+}
+
+async function loadAdminProfile(session) {
+  if (!session?.user) return null;
+
+  const { data: profile, error } = await supabase
+    .from('profiles')
+    .select('id, email, full_name, username, role')
+    .eq('id', session.user.id)
+    .single();
+
+  if (error) throw error;
+
+  return {
+    id: profile.id,
+    email: profile.email || session.user.email,
+    full_name: profile.full_name || profile.username || session.user.email,
+    username: profile.username || profile.full_name || session.user.email,
+    role: profile.role,
+    is_admin: profile.role === 'admin',
+    auth_provider: 'supabase'
+  };
+}
+
+async function loadCodeSession() {
+  const token = localStorage.getItem('kc_token');
+  if (!token) return null;
+
+  const response = await fetch('/api/me', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+
+  if (!response.ok) {
+    localStorage.removeItem('kc_token');
+    return null;
+  }
+
+  const data = await response.json();
+  return buildStudentUser(data.courseId);
+}
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
-  const [isLoadingPublicSettings, setIsLoadingPublicSettings] = useState(true);
   const [authError, setAuthError] = useState(null);
-  const [appPublicSettings, setAppPublicSettings] = useState(null); // Contains only { id, public_settings }
 
-  useEffect(() => {
-    checkAppState();
+  const applySupabaseSession = useCallback(async (session) => {
+    if (!session) return false;
+
+    try {
+      const profile = await loadAdminProfile(session);
+      if (profile?.role !== 'admin') {
+        await supabase.auth.signOut();
+        setAuthError({ type: 'forbidden', message: 'Esta cuenta no tiene acceso administrativo.' });
+        setUser(null);
+        return false;
+      }
+
+      localStorage.removeItem('kc_token');
+      setUser(profile);
+      setAuthError(null);
+      return true;
+    } catch (error) {
+      setAuthError({ type: 'profile_error', message: error.message });
+      setUser(null);
+      return false;
+    }
   }, []);
 
-  const syncUserRecord = async (userData) => {
-    try {
-      if (!userData?.email) return;
-      const allUsers = await client.entities.User.list();
-      const existing = allUsers.find(
-        (u) => u.email === userData.email || (userData.learner_id && u.learner_id === userData.learner_id)
-      );
-
-      const payload = {
-        email: userData.email,
-        username: userData.username || userData.full_name || 'Usuario',
-        full_name: userData.full_name || userData.username || 'Usuario',
-        role: userData.role || 'user',
-        learner_id: userData.learner_id || null
-      };
-
-      if (!existing) {
-        await client.entities.User.create(payload);
-      } else {
-        await client.entities.User.update(existing.id, payload);
-      }
-    } catch (_err) {
-      // keep auth flow resilient
-    }
-  };
-
-  const checkAppState = async () => {
-    const safeJson = async (response) => {
-      const text = await response.text();
-      try {
-        return text ? JSON.parse(text) : {};
-      } catch (_e) {
-        return { raw: text };
-      }
-    };
-
-    try {
-      setIsLoadingPublicSettings(true);
-      setAuthError(null);
-
-      const localToken = localStorage.getItem('app_mock_token');
-      const kcToken = localStorage.getItem('kc_token');
-
-      if (localToken || kcToken) {
-        // If we have a local mock token or Vercel token, skip public settings check and go straight to auth
-        await checkUserAuth();
-        setIsLoadingPublicSettings(false);
-        return;
-      }
-
-      // First, check app public settings (with token if available)
-      // This will tell us if auth is required, user not registered, etc.
-      try {
-        const headers = {
-          'Content-Type': 'application/json',
-          'X-App-Id': appParams.appId
-        };
-        if (appParams.token) {
-          headers['Authorization'] = `Bearer ${appParams.token}`;
-        }
-
-        const response = await fetch(`${appParams.serverUrl}/api/apps/public/prod/public-settings/by-id/${appParams.appId}`, {
-          method: 'GET',
-          headers: headers
-        });
-
-        if (!response.ok) {
-          const errorData = await safeJson(response);
-          const error = new Error(errorData.message || response.statusText);
-          error.status = response.status;
-          error.data = errorData;
-          throw error;
-        }
-
-        const publicSettings = await safeJson(response);
-        setAppPublicSettings(publicSettings);
-
-        // If we got the app public settings successfully, check if user is authenticated
-        // Check for local mock token or Vercel token first
-        const localToken = localStorage.getItem('app_mock_token');
-        const kcToken = localStorage.getItem('kc_token');
-        if (appParams.token || localToken || kcToken) {
-          await checkUserAuth();
-        } else {
-          setIsLoadingAuth(false);
-          setIsAuthenticated(false);
-        }
-        setIsLoadingPublicSettings(false);
-      } catch (appError) {
-        console.error('App state check failed:', appError);
-
-        // Handle app-level errors
-        if (appError.status === 403 && appError.data?.extra_data?.reason) {
-          const reason = appError.data.extra_data.reason;
-          if (reason === 'auth_required') {
-            setAuthError({
-              type: 'auth_required',
-              message: 'Authentication required'
-            });
-          } else if (reason === 'user_not_registered') {
-            setAuthError({
-              type: 'user_not_registered',
-              message: 'User not registered for this app'
-            });
-          } else {
-            setAuthError({
-              type: reason,
-              message: appError.message
-            });
-          }
-        } else {
-          setAuthError({
-            type: 'unknown',
-            message: appError.message || 'Failed to load app'
-          });
-        }
-        setIsLoadingPublicSettings(false);
-        setIsLoadingAuth(false);
-      }
-    } catch (error) {
-      console.error('Unexpected error:', error);
-      setAuthError({
-        type: 'unknown',
-        message: error.message || 'An unexpected error occurred'
-      });
-      setIsLoadingPublicSettings(false);
-      setIsLoadingAuth(false);
-    }
-  };
-
-  const checkUserAuth = async () => {
-    try {
-      // Now check if the user is authenticated
-      setIsLoadingAuth(true);
-
-      const localToken = localStorage.getItem('app_mock_token');
-      const kcToken = localStorage.getItem('kc_token');
-
-      if (kcToken) {
-        // Validation using Vercel backend
-        const response = await fetch('/api/me', {
-          headers: { Authorization: `Bearer ${kcToken}` }
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          const learnerId = getOrCreateLearnerId();
-          const studentAlias = getOrCreateStudentAlias();
-          const resolvedUser = {
-            id: `student_${learnerId.slice(0, 8)}`,
-            email: `learner+${learnerId}@kognocore.local`,
-            last_name: 'Usuario',
-            username: studentAlias,
-            full_name: studentAlias,
-            is_admin: false,
-            role: 'user',
-            courseId: data.courseId,
-            learner_id: learnerId
-          };
-          setUser(resolvedUser);
-          await syncUserRecord(resolvedUser);
-          setIsAuthenticated(true);
-          setIsLoadingAuth(false);
-          return;
-        } else {
-          // Invalid token, remove it
-          localStorage.removeItem('kc_token');
-        }
-      }
-
-      if (localToken) {
-        // Mock user based on token
-        const parsed = JSON.parse(localToken);
-        const learnerId = parsed.learner_id || getOrCreateLearnerId();
-        const studentAlias = parsed.role === 'admin' ? parsed.username : getOrCreateStudentAlias();
-        const mockUser = {
-          ...parsed,
-          learner_id: learnerId,
-          username: parsed.role === 'admin' ? parsed.username : studentAlias,
-          full_name: parsed.role === 'admin' ? parsed.full_name : studentAlias,
-          role: parsed.role === 'admin' ? 'admin' : 'user'
-        };
-        localStorage.setItem('app_mock_token', JSON.stringify(mockUser));
-        setUser(mockUser);
-        await syncUserRecord(mockUser);
-        setIsAuthenticated(true);
-      } else {
-        const currentUser = await client.auth.me();
-        setUser(currentUser);
-        await syncUserRecord(currentUser);
-        setIsAuthenticated(true);
-      }
-      setIsLoadingAuth(false);
-    } catch (error) {
-      console.error('User auth check failed:', error);
-      setIsLoadingAuth(false);
-      setIsAuthenticated(false);
-
-      // If user auth fails, it might be an expired token
-      if (error.status === 401 || error.status === 403) {
-        setAuthError({
-          type: 'auth_required',
-          message: 'Authentication required'
-        });
-      }
-    }
-  };
-
-  const login = async (email, password) => {
-    console.log('Login Attempt:', { email, password });
+  const checkAppState = useCallback(async () => {
     setIsLoadingAuth(true);
 
-    const rawId = (email || '').trim().toLowerCase();
-    const identifier = rawId.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    const cleanPassword = (password || '').trim();
+    try {
+      const { data: { session }, error } = await supabase.auth.getSession();
+      if (error) throw error;
 
-    const isJesus = identifier === 'jesus' || identifier === 'jesus@kognocore.com' || identifier === 'admin' || identifier === 'admin@kognocore.com' || identifier === 'admin@client.com';
-    const isPassValid = cleanPassword === '112358*' || cleanPassword === '112358' || cleanPassword === 'admin';
+      if (session && await applySupabaseSession(session)) return;
 
-    if (isJesus && isPassValid) {
-      const adminUser = {
-        id: 'admin_jesus',
-        email: identifier.includes('@') ? identifier : 'jesus@kognocore.com',
-        last_name: 'Admin',
-        full_name: 'Jesús',
-        is_admin: true,
-        username: 'jesus',
-        role: 'admin'
-      };
-      localStorage.setItem('app_mock_token', JSON.stringify(adminUser));
-      setUser(adminUser);
-      setIsAuthenticated(true);
-      setAuthError(null);
+      const codeUser = await loadCodeSession();
+      setUser(codeUser);
+      if (codeUser) setAuthError(null);
+    } catch (error) {
+      setAuthError({ type: 'auth_error', message: error.message });
+      setUser(null);
+    } finally {
       setIsLoadingAuth(false);
-      return true;
-    } else if (email === 'student' && password === 'student') {
-      const learnerId = getOrCreateLearnerId();
-      const studentUser = {
-        id: `student_${learnerId.slice(0, 8)}`,
-        email: `learner+${learnerId}@kognocore.local`,
-        last_name: 'User',
-        is_admin: false,
-        username: 'student',
-        role: 'user',
-        learner_id: learnerId
-      };
-      localStorage.setItem('app_mock_token', JSON.stringify(studentUser));
-      setUser(studentUser);
-      syncUserRecord(studentUser);
-      setIsAuthenticated(true);
-      setAuthError(null);
-      setIsLoadingAuth(false);
-      return true;
     }
+  }, [applySupabaseSession]);
 
-    setIsLoadingAuth(false);
-    return false;
+  useEffect(() => {
+    void checkAppState();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      window.setTimeout(() => {
+        if (session) {
+          void applySupabaseSession(session).finally(() => setIsLoadingAuth(false));
+        } else if (!localStorage.getItem('kc_token')) {
+          setUser(null);
+          setIsLoadingAuth(false);
+        }
+      }, 0);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [applySupabaseSession, checkAppState]);
+
+  const login = async (email, password) => {
+    setIsLoadingAuth(true);
+    setAuthError(null);
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.trim().toLowerCase(),
+        password
+      });
+      if (error) throw error;
+
+      const accepted = await applySupabaseSession(data.session);
+      if (!accepted) throw new Error('ADMIN_REQUIRED');
+      return true;
+    } finally {
+      setIsLoadingAuth(false);
+    }
   };
 
-  const logout = (shouldRedirect = true) => {
-    setUser(null);
-    setIsAuthenticated(false);
-    localStorage.removeItem('app_mock_token');
+  const requestMagicLink = async (email) => {
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!normalizedEmail) throw new Error('EMAIL_REQUIRED');
+
+    const { error } = await supabase.auth.signInWithOtp({
+      email: normalizedEmail,
+      options: { emailRedirectTo: `${window.location.origin}/` }
+    });
+    if (error) throw error;
+  };
+
+  const logout = async (shouldRedirect = true) => {
     localStorage.removeItem('kc_token');
+    localStorage.removeItem('app_mock_token');
+    await supabase.auth.signOut();
+    setUser(null);
+    setAuthError(null);
 
-    if (shouldRedirect) {
-      // If we are using mock auth, just reload to clear state and show login
-      window.location.href = '/login';
-      // Use the SDK's logout method which handles token cleanup and redirect
-      // client.auth.logout(window.location.href);
-    } else {
-      // Just remove the token without redirect
-      client.auth.logout();
-    }
+    if (shouldRedirect) window.location.assign('/login');
   };
 
-  const navigateToLogin = () => {
-    // Redirect to local login page
-    window.location.href = '/login';
-    // Use the SDK's redirectToLogin method
-    // client.auth.redirectToLogin(window.location.href);
-  };
+  const navigateToLogin = () => window.location.assign('/login');
 
   return (
     <AuthContext.Provider value={{
       user,
-      isAuthenticated,
+      isAuthenticated: Boolean(user),
       isLoadingAuth,
-      isLoadingPublicSettings,
+      isLoadingPublicSettings: false,
       authError,
-      appPublicSettings,
+      appPublicSettings: null,
       logout,
       navigateToLogin,
       checkAppState,
-      login
+      login,
+      requestMagicLink
     }}>
       {children}
     </AuthContext.Provider>
@@ -320,8 +189,6 @@ export const AuthProvider = ({ children }) => {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
+  if (!context) throw new Error('useAuth must be used within an AuthProvider');
   return context;
 };

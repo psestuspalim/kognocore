@@ -5,10 +5,10 @@ import { queryClientInstance } from '@/lib/query-client'
 import VisualEditAgent from '@/lib/VisualEditAgent'
 import NavigationTracker from '@/lib/NavigationTracker'
 import { pagesConfig } from './pages.config'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
-import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import Login from '@/pages/Login';
 
 const { Pages, Layout, mainPage } = pagesConfig;
@@ -19,8 +19,20 @@ const LayoutWrapper = ({ children, currentPageName }) => Layout ?
   <Layout currentPageName={currentPageName}>{children}</Layout>
   : <>{children}</>;
 
+const ADMIN_PAGES = new Set([
+  'AdminContent',
+  'AdminHome',
+  'AdminJsonManager',
+  'AdminProgress',
+  'AdminStudentDetail',
+  'AdminStudents',
+  'AdminTasks',
+  'AdminTrash',
+  'CourseManagement'
+]);
+
 const AuthenticatedApp = () => {
-  const { isLoadingAuth, isLoadingPublicSettings, authError, isAuthenticated, navigateToLogin } = useAuth();
+  const { isLoadingAuth, isLoadingPublicSettings, isAuthenticated, user } = useAuth();
 
   // Show loading spinner while checking app public settings or auth
   if (isLoadingPublicSettings || isLoadingAuth) {
@@ -34,44 +46,30 @@ const AuthenticatedApp = () => {
     );
   }
 
-  // Handle authentication errors
-  /* if (authError) {
-    if (authError.type === 'user_not_registered') {
-      return <UserNotRegisteredError />;
-    } else if (authError.type === 'auth_required') {
-      // Redirect to login automatically
-      navigateToLogin();
-      return null;
-    }
-  } */
-
-  // Render the main app
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route
+        path="/login"
+        element={isAuthenticated ? <Navigate to={user?.role === 'admin' ? '/AdminHome' : '/'} replace /> : <Login />}
+      />
       <Route path="/" element={
-        isAuthenticated ? (
+        <ProtectedRoute>
           <LayoutWrapper currentPageName={mainPageKey}>
             <MainPage />
           </LayoutWrapper>
-        ) : (
-          <Login />
-        )
+        </ProtectedRoute>
       } />
       {Object.entries(Pages)
-        .filter(([path]) => !['TournamentLobby', 'TournamentPlay', 'ChallengePlay', 'Leaderboard', 'Progress', 'LiveSessions', 'GameLobby', 'GamePlay', 'MyTasks'].includes(path))
         .map(([path, Page]) => (
           <Route
             key={path}
             path={`/${path}`}
             element={
-              isAuthenticated ? (
+              <ProtectedRoute allowedRoles={ADMIN_PAGES.has(path) ? ['admin'] : undefined}>
                 <LayoutWrapper currentPageName={path}>
                   <Page />
                 </LayoutWrapper>
-              ) : (
-                <Login />
-              )
+              </ProtectedRoute>
             }
           />
         ))}
