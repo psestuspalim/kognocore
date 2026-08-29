@@ -74,17 +74,6 @@ export default function QuestionView({
   // Normalize options
   const options = question?.answerOptions || question?.options || [];
 
-  if (question?.type === 'image' && options.length === 0) {
-    return (
-      <ImageQuestionView
-        question={question}
-        questionNumber={questionNumber}
-        totalQuestions={totalQuestions}
-        onAnswer={(isCorrect, details) => onAnswer(isCorrect, details, question)}
-      />
-    );
-  }
-
   const handleSelectAnswer = useCallback((index) => {
     if (showFeedback || index < 0 || index >= options.length) return;
     setSelectedAnswer(index);
@@ -143,6 +132,17 @@ export default function QuestionView({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showFeedback, handleSelectAnswer, handleNext]);
 
+  if (question?.type === 'image' && options.length === 0) {
+    return (
+      <ImageQuestionView
+        question={question}
+        questionNumber={questionNumber}
+        totalQuestions={totalQuestions}
+        onAnswer={(isCorrect, details) => onAnswer(isCorrect, details, question)}
+      />
+    );
+  }
+
   const getOptionStyle = (index) => {
     const isSelected = selectedAnswer === index;
     const option = options[index];
@@ -168,7 +168,7 @@ export default function QuestionView({
       return `${baseStyle} border-slate-900 bg-slate-50 text-slate-900 ring-2 ring-slate-900`;
     }
 
-    return `${baseStyle} border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/80 text-slate-800`;
+    return `${baseStyle} border-slate-300 bg-white hover:border-slate-400 hover:bg-slate-50 text-slate-900`;
   };
 
   const getLetterPrefix = (index) => {
@@ -206,10 +206,10 @@ export default function QuestionView({
   const isLastQuestion = questionNumber === totalQuestions;
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-slate-50 overflow-hidden font-sans">
+    <div className="fixed inset-0 z-50 flex h-[100dvh] flex-col overflow-hidden bg-slate-100 font-sans">
 
       {/* Header */}
-      <header className="shrink-0 bg-white border-b border-slate-200/80 px-4 sm:px-6 py-2.5 z-20">
+      <header className="z-20 shrink-0 border-b border-slate-300/80 bg-white px-3 pb-2.5 pt-[max(0.625rem,env(safe-area-inset-top))] sm:px-6">
         <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
           <button
             onClick={onBack}
@@ -258,7 +258,7 @@ export default function QuestionView({
         ref={scrollContainerRef}
         className="flex-1 overflow-y-auto w-full overscroll-contain"
       >
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-5 sm:py-8 space-y-5 pb-24">
+        <div className="mx-auto max-w-3xl space-y-5 px-3 py-5 pb-8 sm:px-6 sm:py-8">
 
           {/* Question card */}
           <div className="space-y-5">
@@ -377,7 +377,7 @@ export default function QuestionView({
       </main>
 
       {/* Footer - single source of truth for navigation */}
-      <footer className="shrink-0 bg-white border-t border-slate-200/80 px-4 sm:px-6 py-3 z-20">
+      <footer className="z-20 shrink-0 border-t border-slate-300/80 bg-white px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 sm:px-6">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <div className="text-xs text-slate-400 hidden md:block">
             {showFeedback ? (
@@ -390,7 +390,7 @@ export default function QuestionView({
           <Button
             onClick={handleNext}
             disabled={!showFeedback}
-            className="h-11 px-8 rounded-xl text-sm font-semibold ml-auto shadow-sm transition-all bg-slate-900 hover:bg-slate-800 text-white disabled:opacity-30 disabled:pointer-events-none"
+            className="ml-auto h-11 w-full rounded-xl bg-slate-900 px-8 text-sm font-semibold text-white shadow-sm transition-all hover:bg-slate-800 disabled:pointer-events-none disabled:opacity-30 sm:w-auto"
           >
             <span>{isLastQuestion ? 'Ver resultados' : 'Siguiente'}</span>
             <ChevronRight className="w-4 h-4 ml-1.5" />

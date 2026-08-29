@@ -25,7 +25,7 @@ const sidebarItems = [
   {
     section: 'Operaciones',
     items: [
-      { label: 'Cursos', icon: BookOpen, href: 'CourseManagement' },
+      { label: 'Cursos y códigos', icon: BookOpen, href: 'CourseManagement' },
 
     ]
   }
@@ -86,7 +86,7 @@ export default function AdminShell({ children }) {
       </div>
 
       {/* Sidebar - Desktop */}
-      <aside className="hidden lg:block fixed left-0 top-0 h-screen w-72 border-r border-white/70 bg-white/80 backdrop-blur-md">
+      <aside className="hidden lg:block fixed left-0 top-0 h-screen w-64 border-r border-slate-200/80 bg-white/90 backdrop-blur-md">
         <div className="flex flex-col h-full">
           {/* Logo/Brand */}
           <div className="h-20 flex items-center px-6 border-b border-white/70">
@@ -150,7 +150,7 @@ export default function AdminShell({ children }) {
             className="lg:hidden fixed inset-0 bg-black/50 z-40"
             onClick={() => setSidebarOpen(false)}
           />
-          <aside className="lg:hidden fixed left-0 top-16 bottom-0 w-72 border-r border-white/70 bg-white/90 backdrop-blur-md z-40 overflow-y-auto">
+          <aside className="lg:hidden fixed left-0 top-16 bottom-0 w-[min(20rem,calc(100vw-2rem))] border-r border-slate-200/80 bg-white/95 backdrop-blur-md z-40 overflow-y-auto">
             <nav className="py-4">
               {sidebarItems.map((section, idx) => (
                 <div key={idx} className="mb-6">
@@ -190,8 +190,8 @@ export default function AdminShell({ children }) {
       )}
 
       {/* Main Content */}
-      <main className="lg:ml-72 pt-16 lg:pt-0">
-        <div className="max-w-[1400px] mx-auto p-6 lg:p-8">
+      <main className="lg:ml-64 pt-16 lg:pt-0">
+        <div className="max-w-[1400px] mx-auto p-4 sm:p-6 lg:p-8">
           {children}
         </div>
       </main>

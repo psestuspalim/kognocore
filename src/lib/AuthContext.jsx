@@ -65,6 +65,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
   const [authError, setAuthError] = useState(null);
+  const [passwordRecovery, setPasswordRecovery] = useState(false);
 
   const applySupabaseSession = useCallback(async (session) => {
     if (!session) return false;
@@ -93,6 +94,12 @@ export const AuthProvider = ({ children }) => {
     setIsLoadingAuth(true);
 
     try {
+      if (window.location.hash.includes('type=recovery')) {
+        setPasswordRecovery(true);
+        setUser(null);
+        return;
+      }
+
       const { data: { session }, error } = await supabase.auth.getSession();
       if (error) throw error;
 
@@ -112,9 +119,13 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     void checkAppState();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       window.setTimeout(() => {
-        if (session) {
+        if (event === 'PASSWORD_RECOVERY') {
+          setPasswordRecovery(true);
+          setUser(null);
+          setIsLoadingAuth(false);
+        } else if (session) {
           void applySupabaseSession(session).finally(() => setIsLoadingAuth(false));
         } else if (!localStorage.getItem('kc_token')) {
           setUser(null);
@@ -149,11 +160,24 @@ export const AuthProvider = ({ children }) => {
     const normalizedEmail = email.trim().toLowerCase();
     if (!normalizedEmail) throw new Error('EMAIL_REQUIRED');
 
-    const { error } = await supabase.auth.signInWithOtp({
-      email: normalizedEmail,
-      options: { emailRedirectTo: `${window.location.origin}/` }
+    const { error } = await supabase.auth.resetPasswordForEmail(normalizedEmail, {
+      redirectTo: `${window.location.origin}/login`
     });
     if (error) throw error;
+  };
+
+  const updatePassword = async (password) => {
+    if (!password || password.length < 10) throw new Error('PASSWORD_TOO_SHORT');
+
+    const { error } = await supabase.auth.updateUser({ password });
+    if (error) throw error;
+
+    const { data: { session } } = await supabase.auth.getSession();
+    const accepted = await applySupabaseSession(session);
+    if (!accepted) throw new Error('ADMIN_REQUIRED');
+
+    setPasswordRecovery(false);
+    return true;
   };
 
   const logout = async (shouldRedirect = true) => {
@@ -162,6 +186,7 @@ export const AuthProvider = ({ children }) => {
     await supabase.auth.signOut();
     setUser(null);
     setAuthError(null);
+    setPasswordRecovery(false);
 
     if (shouldRedirect) window.location.assign('/login');
   };
@@ -181,6 +206,8 @@ export const AuthProvider = ({ children }) => {
       checkAppState,
       login,
       requestMagicLink
+      ,passwordRecovery
+      ,updatePassword
     }}>
       {children}
     </AuthContext.Provider>

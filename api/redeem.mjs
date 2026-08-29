@@ -45,7 +45,8 @@ export async function POST(req) {
             return new Response(JSON.stringify({ error: 'Código inválido' }), { status: 400 })
         }
 
-        const codeHash = sha256(`${code.trim()}|${process.env.CODE_PEPPER}`)
+        const normalizedCode = code.trim().toUpperCase()
+        const codeHash = sha256(`${normalizedCode}|${process.env.CODE_PEPPER}`)
 
         // Busca invite válido
         const now = new Date().toISOString()
@@ -57,6 +58,17 @@ export async function POST(req) {
 
         if (error || !invite) return new Response(JSON.stringify({ error: 'Código no encontrado' }), { status: 401 })
         if (invite.expires_at && invite.expires_at <= now) return new Response(JSON.stringify({ error: 'Código expirado' }), { status: 401 })
+
+        const { data: codeMetadata, error: metadataError } = await supabase
+            .from('access_codes')
+            .select('is_active')
+            .ilike('code', normalizedCode)
+            .maybeSingle()
+
+        if (metadataError) return new Response(JSON.stringify({ error: 'No se pudo validar el código' }), { status: 500 })
+        if (codeMetadata && codeMetadata.is_active === false) {
+            return new Response(JSON.stringify({ error: 'Código inactivo' }), { status: 401 })
+        }
 
         const uses = invite.uses ?? 0
         const maxUses = invite.max_uses

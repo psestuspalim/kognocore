@@ -95,7 +95,7 @@ export default function QuizListItem({
             {quiz.title}
           </h4>
           {inProgressAttempt && (
-            <span className="inline-flex items-center text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200/80 shrink-0">
+            <span className="hidden items-center text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200/80 shrink-0 sm:inline-flex">
               ⚡ Pregunta {inProgressAnswered + 1}/{totalQuestions}
             </span>
           )}
@@ -132,7 +132,7 @@ export default function QuizListItem({
               <Button
                 variant="ghost" size="icon"
                 onClick={() => onMove(quiz)}
-                className="h-8 w-8 opacity-0 group-hover:opacity-100 text-slate-400 hover:text-amber-600"
+                className="h-9 w-9 text-slate-500 hover:text-amber-700 md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100"
                 title="Mover"
               >
                 <FolderInput className="w-4 h-4" />
@@ -141,14 +141,16 @@ export default function QuizListItem({
             <Button
               variant="ghost" size="icon"
               onClick={() => onEdit(quiz)}
-              className="h-8 w-8 opacity-0 group-hover:opacity-100 text-slate-400 hover:text-slate-700"
+              className="h-9 w-9 text-slate-500 hover:text-slate-800 md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100"
+              title="Editar"
             >
               <Pencil className="w-4 h-4" />
             </Button>
             <Button
               variant="ghost" size="icon"
               onClick={() => onDelete(quiz.id)}
-              className="h-8 w-8 opacity-0 group-hover:opacity-100 text-slate-400 hover:text-red-500"
+              className="h-9 w-9 text-slate-500 hover:text-red-600 md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100"
+              title="Eliminar"
             >
               <Trash2 className="w-4 h-4" />
             </Button>

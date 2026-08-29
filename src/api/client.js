@@ -1,7 +1,7 @@
 
 import { appParams } from '@/lib/app-params';
 import { getAuthorizationHeaders, supabase } from '@/lib/supabase';
-import { getOrCreateLearnerId, getOrCreateStudentAlias } from '@/lib/learner-id';
+import { getOrCreateLearnerId, getOrCreateStudentAlias, saveStudentAlias } from '@/lib/learner-id';
 
 const { appId, serverUrl, token, functionsVersion } = appParams;
 
@@ -24,6 +24,54 @@ const authorizedFetch = async (input, init = {}) => {
       ...(init.headers || {})
     }
   });
+};
+
+const REMOTE_ENTITIES = {
+  Quiz: { endpoint: '/api/quizzes', bodyKey: 'quiz', updateMethod: 'POST' },
+  QuizAttempt: { endpoint: '/api/attempts', bodyKey: 'attempt', updateMethod: 'POST', offline: true },
+  CourseEnrollment: { endpoint: '/api/enrollments', bodyKey: 'enrollment', updateMethod: 'POST', offline: true },
+  CourseAccessCode: { endpoint: '/api/access-codes', bodyKey: 'code', updateMethod: 'PATCH' }
+};
+
+const PENDING_DELETES_KEY = 'kc_pending_remote_deletes_v1';
+
+const cleanRemoteItem = (item) => {
+  if (!item || typeof item !== 'object') return item;
+  const { _sync_status, _sync_operation, _sync_error, ...clean } = item;
+  return clean;
+};
+
+const requestJson = async (input, init = {}) => {
+  const response = await authorizedFetch(input, init);
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const error = new Error(data?.error || `REMOTE_REQUEST_FAILED_${response.status}`);
+    error.status = response.status;
+    error.details = data?.details;
+    throw error;
+  }
+  return data;
+};
+
+const persistRemoteEntity = async (entityName, item, operation = 'create') => {
+  const config = REMOTE_ENTITIES[entityName];
+  if (!config) return null;
+
+  const cleanItem = cleanRemoteItem(item);
+  const isPatch = operation === 'update' && config.updateMethod === 'PATCH';
+  return requestJson(config.endpoint, {
+    method: isPatch ? 'PATCH' : 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(isPatch
+      ? { id: cleanItem.id, data: cleanItem }
+      : { [config.bodyKey]: cleanItem })
+  });
+};
+
+const deleteRemoteEntity = (entityName, id) => {
+  const config = REMOTE_ENTITIES[entityName];
+  if (!config) return Promise.resolve(null);
+  return requestJson(`${config.endpoint}?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
 };
 
 // Mock client implementation
@@ -198,8 +246,76 @@ const saveItems = (entityName, items) => {
 
   const key = keyMap[entityName];
   if (key) {
-    localStorage.setItem(key, JSON.stringify(items));
+    try {
+      localStorage.setItem(key, JSON.stringify(items));
+    } catch (error) {
+      if (!REMOTE_ENTITIES[entityName]) throw error;
+      console.warn(`No se pudo actualizar la copia local de ${entityName}; la copia remota conserva los datos.`, error);
+    }
   }
+};
+
+const getPendingDeletes = () => {
+  try {
+    const stored = JSON.parse(localStorage.getItem(PENDING_DELETES_KEY) || '[]');
+    return Array.isArray(stored) ? stored : [];
+  } catch (_error) {
+    return [];
+  }
+};
+
+const savePendingDeletes = (items) => {
+  localStorage.setItem(PENDING_DELETES_KEY, JSON.stringify(items));
+};
+
+const queuePendingDelete = (entityName, id) => {
+  const pending = getPendingDeletes().filter((item) => !(item.entityName === entityName && item.id === id));
+  pending.push({ entityName, id, queued_at: new Date().toISOString() });
+  savePendingDeletes(pending);
+};
+
+const flushPendingSync = async (entityName) => {
+  const config = REMOTE_ENTITIES[entityName];
+  if (!config?.offline) return;
+
+  const items = getItems(entityName);
+  let itemsChanged = false;
+  const nextItems = [];
+
+  for (const item of items) {
+    if (item?._sync_status !== 'pending') {
+      nextItems.push(item);
+      continue;
+    }
+
+    try {
+      await persistRemoteEntity(entityName, item, item._sync_operation || 'update');
+      nextItems.push(cleanRemoteItem(item));
+      itemsChanged = true;
+    } catch (error) {
+      nextItems.push({ ...item, _sync_error: error.message });
+      if (item._sync_error !== error.message) itemsChanged = true;
+    }
+  }
+
+  if (itemsChanged) saveItems(entityName, nextItems);
+
+  const pendingDeletes = getPendingDeletes();
+  const remainingDeletes = [];
+  for (const pending of pendingDeletes) {
+    if (pending.entityName !== entityName) {
+      remainingDeletes.push(pending);
+      continue;
+    }
+
+    try {
+      await deleteRemoteEntity(entityName, pending.id);
+    } catch (_error) {
+      remainingDeletes.push(pending);
+    }
+  }
+
+  if (remainingDeletes.length !== pendingDeletes.length) savePendingDeletes(remainingDeletes);
 };
 
 const sortByField = (items, orderBy) => {
@@ -240,30 +356,35 @@ const mergeById = (primary, secondary) => {
 };
 
 const fetchRemoteQuizzes = async () => {
-  const response = await authorizedFetch('/api/quizzes');
-  if (!response.ok) throw new Error('REMOTE_QUIZ_LIST_FAILED');
-  const data = await response.json().catch(() => ({}));
+  const data = await requestJson('/api/quizzes');
   return Array.isArray(data?.quizzes) ? data.quizzes : [];
 };
 
-const fetchRemoteAttempts = async () => {
-  const response = await authorizedFetch('/api/attempts');
-  if (!response.ok) throw new Error('REMOTE_ATTEMPT_LIST_FAILED');
-  const data = await response.json().catch(() => ({}));
+const buildRemoteQuery = (criteria = {}, fields = []) => {
+  const params = new URLSearchParams();
+  fields.forEach((field) => {
+    if (criteria?.[field] !== undefined && criteria?.[field] !== null && criteria[field] !== '') {
+      params.set(field, String(criteria[field]));
+    }
+  });
+  const query = params.toString();
+  return query ? `?${query}` : '';
+};
+
+const fetchRemoteAttempts = async (criteria = {}) => {
+  await flushPendingSync('QuizAttempt');
+  const data = await requestJson(`/api/attempts${buildRemoteQuery(criteria, ['learner_id', 'user_email'])}`);
   return Array.isArray(data?.attempts) ? data.attempts : [];
 };
 
-const fetchRemoteEnrollments = async () => {
-  const response = await authorizedFetch('/api/enrollments');
-  if (!response.ok) throw new Error('REMOTE_ENROLLMENT_LIST_FAILED');
-  const data = await response.json().catch(() => ({}));
+const fetchRemoteEnrollments = async (criteria = {}) => {
+  await flushPendingSync('CourseEnrollment');
+  const data = await requestJson(`/api/enrollments${buildRemoteQuery(criteria, ['learner_id', 'user_email', 'course_id'])}`);
   return Array.isArray(data?.enrollments) ? data.enrollments : [];
 };
 
 const fetchRemoteAccessCodes = async () => {
-  const response = await authorizedFetch('/api/access-codes');
-  if (!response.ok) throw new Error('REMOTE_ACCESS_CODES_LIST_FAILED');
-  const data = await response.json().catch(() => ({}));
+  const data = await requestJson('/api/access-codes');
   return Array.isArray(data?.codes) ? data.codes : [];
 };
 
@@ -371,7 +492,7 @@ const mockClient = {
         return profile;
       }
 
-      if (data.username) localStorage.setItem('kc_display_name', data.username);
+      if (data.username) saveStudentAlias(data.username);
       return { ...(await mockClient.auth.me()), ...data };
     }
   },
@@ -465,7 +586,7 @@ const mockClient = {
           if (entityName === 'QuizAttempt') {
             const all = await (async () => {
               try {
-                const remote = await fetchRemoteAttempts();
+                const remote = await fetchRemoteAttempts(criteria);
                 const local = getItems('QuizAttempt');
                 const merged = mergeById(remote, local);
                 saveItems('QuizAttempt', merged);
@@ -502,7 +623,7 @@ const mockClient = {
           if (entityName === 'CourseEnrollment') {
             const all = await (async () => {
               try {
-                const remote = await fetchRemoteEnrollments();
+                const remote = await fetchRemoteEnrollments(criteria);
                 const local = getItems('CourseEnrollment');
                 const merged = mergeById(remote, local);
                 saveItems('CourseEnrollment', merged);
@@ -598,115 +719,60 @@ const mockClient = {
             created_date: new Date().toISOString(),
             ...data
           };
+
+          const config = REMOTE_ENTITIES[entityName];
+          if (config) {
+            try {
+              await persistRemoteEntity(entityName, newItem, 'create');
+            } catch (error) {
+              if (!config.offline) throw error;
+              const pendingItem = {
+                ...newItem,
+                _sync_status: 'pending',
+                _sync_operation: 'create',
+                _sync_error: error.message
+              };
+              items.push(pendingItem);
+              saveItems(entityName, items);
+              return pendingItem;
+            }
+          }
+
           items.push(newItem);
           saveItems(entityName, items);
-
-          if (entityName === 'Quiz') {
-            try {
-              await authorizedFetch('/api/quizzes', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ quiz: newItem })
-              });
-            } catch (_err) {
-              // keep local create working
-            }
-          }
-
-          if (entityName === 'QuizAttempt') {
-            try {
-              await authorizedFetch('/api/attempts', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ attempt: newItem })
-              });
-            } catch (_err) {
-              // keep local create working
-            }
-          }
-
-          if (entityName === 'CourseEnrollment') {
-            try {
-              await authorizedFetch('/api/enrollments', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ enrollment: newItem })
-              });
-            } catch (_err) {
-              // keep local create working
-            }
-          }
-
-          if (entityName === 'CourseAccessCode') {
-            try {
-              await authorizedFetch('/api/access-codes', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ code: newItem })
-              });
-            } catch (_err) {
-              // keep local create working
-            }
-          }
-
           return newItem;
         },
         update: async (id, data) => {
           const items = getItems(entityName);
           const index = items.findIndex(item => item.id === id);
           if (index !== -1) {
-            items[index] = { ...items[index], ...data, updated_date: new Date().toISOString() };
+            const nextItem = cleanRemoteItem({
+              ...items[index],
+              ...data,
+              id,
+              updated_date: new Date().toISOString()
+            });
+            const config = REMOTE_ENTITIES[entityName];
+
+            if (config) {
+              try {
+                await persistRemoteEntity(entityName, nextItem, 'update');
+              } catch (error) {
+                if (!config.offline) throw error;
+                items[index] = {
+                  ...nextItem,
+                  _sync_status: 'pending',
+                  _sync_operation: 'update',
+                  _sync_error: error.message
+                };
+                saveItems(entityName, items);
+                return items[index];
+              }
+            }
+
+            items[index] = nextItem;
             saveItems(entityName, items);
-
-            if (entityName === 'Quiz') {
-              try {
-                await authorizedFetch('/api/quizzes', {
-                  method: 'PATCH',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ id, data })
-                });
-              } catch (_err) {
-                // keep local update working
-              }
-            }
-
-            if (entityName === 'QuizAttempt') {
-              try {
-                await authorizedFetch('/api/attempts', {
-                  method: 'PATCH',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ id, data })
-                });
-              } catch (_err) {
-                // keep local update working
-              }
-            }
-
-            if (entityName === 'CourseEnrollment') {
-              try {
-                await authorizedFetch('/api/enrollments', {
-                  method: 'PATCH',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ id, data })
-                });
-              } catch (_err) {
-                // keep local update working
-              }
-            }
-
-            if (entityName === 'CourseAccessCode') {
-              try {
-                await authorizedFetch('/api/access-codes', {
-                  method: 'PATCH',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ id, data })
-                });
-              } catch (_err) {
-                // keep local update working
-              }
-            }
-
-            return items[index];
+            return nextItem;
           }
           throw new Error('Item not found');
         },
@@ -715,40 +781,17 @@ const mockClient = {
           const initialLength = items.length;
           items = items.filter(item => item.id !== id);
           if (items.length !== initialLength) {
+            const config = REMOTE_ENTITIES[entityName];
+            if (config) {
+              try {
+                await deleteRemoteEntity(entityName, id);
+              } catch (error) {
+                if (!config.offline) throw error;
+                queuePendingDelete(entityName, id);
+              }
+            }
+
             saveItems(entityName, items);
-
-            if (entityName === 'Quiz') {
-              try {
-                await authorizedFetch(`/api/quizzes?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
-              } catch (_err) {
-                // keep local delete working
-              }
-            }
-
-            if (entityName === 'QuizAttempt') {
-              try {
-                await authorizedFetch(`/api/attempts?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
-              } catch (_err) {
-                // keep local delete working
-              }
-            }
-
-            if (entityName === 'CourseEnrollment') {
-              try {
-                await authorizedFetch(`/api/enrollments?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
-              } catch (_err) {
-                // keep local delete working
-              }
-            }
-
-            if (entityName === 'CourseAccessCode') {
-              try {
-                await authorizedFetch(`/api/access-codes?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
-              } catch (_err) {
-                // keep local delete working
-              }
-            }
-
             return { success: true };
           }
           throw new Error('Item not found');

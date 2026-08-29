@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Trophy, Home, RotateCcw, TrendingUp, CheckCircle2, XCircle, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Home, RotateCcw, TrendingUp, CheckCircle2, XCircle, AlertCircle, ChevronUp } from 'lucide-react';
 import MathText from './MathText';
 
 export default function ResultsView({

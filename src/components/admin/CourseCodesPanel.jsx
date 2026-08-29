@@ -54,24 +54,27 @@ export default function CourseCodesPanel({ courses }) {
   const createCodeMutation = useMutation({
     mutationFn: (data) => client.entities.CourseAccessCode.create(data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['course-codes']);
+      queryClient.invalidateQueries({ queryKey: ['course-codes'] });
       setShowDialog(false);
       setNewCode({ course_id: '', max_uses: '', expires_at: '' });
-      toast.success('Código creado exitosamente');
-    }
+      toast.success('Código creado y activado');
+    },
+    onError: (error) => toast.error(error?.message || 'No se pudo crear el código')
   });
 
   const deleteCodeMutation = useMutation({
     mutationFn: (id) => client.entities.CourseAccessCode.delete(id),
     onSuccess: () => {
-      queryClient.invalidateQueries(['course-codes']);
+      queryClient.invalidateQueries({ queryKey: ['course-codes'] });
       toast.success('Código eliminado');
-    }
+    },
+    onError: (error) => toast.error(error?.message || 'No se pudo eliminar el código')
   });
 
   const toggleCodeMutation = useMutation({
     mutationFn: ({ id, is_active }) => client.entities.CourseAccessCode.update(id, { is_active }),
-    onSuccess: () => queryClient.invalidateQueries(['course-codes'])
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['course-codes'] }),
+    onError: (error) => toast.error(error?.message || 'No se pudo actualizar el código')
   });
 
   const generateRandomCode = () => {
@@ -98,34 +101,7 @@ export default function CourseCodesPanel({ courses }) {
       expires_at: newCode.expires_at || null
     };
 
-    createCodeMutation.mutate(payload, {
-      onSuccess: async () => {
-        try {
-          const response = await fetch('/api/invites-create', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              ...(await getAuthorizationHeaders())
-            },
-            body: JSON.stringify({
-              code: payload.code,
-              course_id: payload.course_id,
-              max_uses: payload.max_uses,
-              expires_at: payload.expires_at
-            })
-          });
-
-          if (!response.ok) {
-            const data = await response.json().catch(() => ({}));
-            toast.warning(`Código creado solo localmente. Backend: ${data.error || 'error'}`);
-          } else {
-            toast.success('Código sincronizado con backend');
-          }
-        } catch (_err) {
-          toast.warning('Código creado solo localmente (sin conexión al backend)');
-        }
-      }
-    });
+    createCodeMutation.mutate(payload);
   };
 
   const copyToClipboard = (code) => {
@@ -135,17 +111,17 @@ export default function CourseCodesPanel({ courses }) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <Key className="w-6 h-6 text-indigo-600" />
+          <h2 className="flex items-center gap-2 text-xl font-bold text-slate-950 sm:text-2xl">
+            <Key className="h-6 w-6 text-primary" />
             Códigos de Acceso
           </h2>
-          <p className="text-gray-600">Genera códigos para que los usuarios se inscriban a cursos</p>
+          <p className="mt-1 text-sm text-slate-600">Genera códigos persistentes y controla su vigencia desde un solo lugar.</p>
         </div>
         <Dialog open={showDialog} onOpenChange={setShowDialog}>
           <DialogTrigger asChild>
-            <Button className="bg-indigo-600 hover:bg-indigo-700">
+            <Button className="w-full bg-primary hover:bg-primary/90 sm:w-auto">
               <Plus className="w-4 h-4 mr-2" />
               Generar Código
             </Button>
@@ -169,12 +145,12 @@ export default function CourseCodesPanel({ courses }) {
                 </select>
               </div>
               <div>
-                <Label>Máximo de usos (opcional)</Label>
+                <Label>Máximo de usos</Label>
                 <Input
                   type="number"
                   value={newCode.max_uses}
                   onChange={(e) => setNewCode({...newCode, max_uses: e.target.value})}
-                  placeholder="Ilimitado"
+                  placeholder="1 si se deja vacío"
                 />
               </div>
               <div>
@@ -188,7 +164,7 @@ export default function CourseCodesPanel({ courses }) {
               <Button 
                 onClick={handleCreate} 
                 disabled={!newCode.course_id}
-                className="w-full bg-indigo-600 hover:bg-indigo-700"
+                className="w-full bg-primary hover:bg-primary/90"
               >
                 Generar Código
               </Button>
@@ -197,7 +173,15 @@ export default function CourseCodesPanel({ courses }) {
         </Dialog>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {codes.length === 0 && (
+        <div className="rounded-2xl border border-dashed border-slate-300 bg-white/80 px-5 py-10 text-center">
+          <Key className="mx-auto h-8 w-8 text-slate-400" />
+          <p className="mt-3 font-semibold text-slate-800">Aún no hay códigos registrados</p>
+          <p className="mt-1 text-sm text-slate-600">Genera el primero para habilitar el acceso de estudiantes.</p>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
         {codes.map((code) => {
           const usage = usageByCode[code.code] || null;
           const currentUses = usage?.uses ?? code.current_uses ?? 0;
@@ -208,13 +192,13 @@ export default function CourseCodesPanel({ courses }) {
           const isUsable = code.is_active && !isExpired && !isMaxed;
 
           return (
-            <Card key={code.id} className={`border-2 ${isUsable ? 'border-green-200' : 'border-gray-200'}`}>
+            <Card key={code.id} className={`overflow-hidden border ${isUsable ? 'border-emerald-300' : 'border-slate-300'}`}>
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <CardTitle className="text-lg mb-1">{code.course_name}</CardTitle>
-                    <div className="flex items-center gap-2">
-                      <code className="bg-gray-100 px-3 py-1 rounded text-lg font-mono font-bold text-indigo-700">
+                    <div className="flex min-w-0 items-center gap-2">
+                      <code className="min-w-0 break-all rounded-lg bg-slate-100 px-3 py-1.5 font-mono text-base font-bold tracking-wide text-primary sm:text-lg">
                         {code.code}
                       </code>
                       <Button

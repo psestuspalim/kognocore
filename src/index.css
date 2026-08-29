@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 38 46% 97%;
+    --background: 42 38% 97%;
     --foreground: 210 36% 14%;
     --card: 0 0% 100%;
     --card-foreground: 210 36% 14%;
@@ -17,13 +17,13 @@
     --secondary: 180 29% 92%;
     --secondary-foreground: 210 36% 14%;
     --muted: 44 38% 93%;
-    --muted-foreground: 211 17% 38%;
+    --muted-foreground: 211 20% 32%;
     --accent: 28 88% 55%;
     --accent-foreground: 42 100% 97%;
     --destructive: 0 80% 58%;
     --destructive-foreground: 42 100% 97%;
-    --border: 210 21% 84%;
-    --input: 210 25% 90%;
+    --border: 210 24% 80%;
+    --input: 210 25% 83%;
     --ring: 28 88% 55%;
     --chart-1: 15 83% 58%;
     --chart-2: 196 72% 34%;
@@ -88,7 +88,7 @@
     font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
     font-weight: 500;
     line-height: 1.6;
-    background-color: hsl(220 14% 96%);
+    background-color: hsl(var(--background));
     background-image:
       radial-gradient(ellipse at 0% 0%, rgba(37, 164, 179, 0.07) 0%, transparent 45%),
       radial-gradient(ellipse at 100% 100%, rgba(255, 166, 80, 0.05) 0%, transparent 45%);
@@ -116,7 +116,7 @@
 
 @layer components {
   .surface-panel {
-    @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+    @apply rounded-2xl border border-slate-300/80 bg-white shadow-sm;
   }
 
   .hero-glow {

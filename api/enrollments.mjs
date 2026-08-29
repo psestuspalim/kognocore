@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import { requireAdmin } from './_auth.mjs'
+import { requireAdmin, requireDataActor } from './_auth.mjs'
 
 function getSupabaseAdmin() {
   const url = process.env.SUPABASE_URL
@@ -10,7 +10,7 @@ function getSupabaseAdmin() {
 
 export async function GET(req) {
   try {
-    const authorization = await requireAdmin(req)
+    const authorization = await requireDataActor(req)
     if (authorization.response) return authorization.response
 
     const supabase = getSupabaseAdmin()
@@ -23,14 +23,22 @@ export async function GET(req) {
     const userEmail = url.searchParams.get('user_email')
     const courseId = url.searchParams.get('course_id')
 
+    if (authorization.actor.kind === 'student' && !learnerId) {
+      return new Response(JSON.stringify({ error: 'learner_id requerido' }), { status: 400 })
+    }
+
     let query = supabase
       .from('enrollments')
       .select('id, payload, created_date, updated_date')
       .order('created_date', { ascending: false })
 
     if (learnerId) query = query.eq('payload->>learner_id', learnerId)
-    if (userEmail) query = query.eq('payload->>user_email', userEmail)
-    if (courseId) query = query.eq('payload->>course_id', courseId)
+    if (authorization.actor.kind === 'admin' && userEmail) query = query.eq('payload->>user_email', userEmail)
+    if (authorization.actor.kind === 'student') {
+      query = query.eq('payload->>course_id', authorization.actor.courseId)
+    } else if (courseId) {
+      query = query.eq('payload->>course_id', courseId)
+    }
 
     const { data, error } = await query
     if (error) {
@@ -52,6 +60,9 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
+    const authorization = await requireDataActor(req)
+    if (authorization.response) return authorization.response
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -63,12 +74,45 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'Inscripción inválida' }), { status: 400 })
     }
 
+    if (authorization.actor.kind === 'student') {
+      if (!enrollment.learner_id || String(enrollment.course_id) !== String(authorization.actor.courseId)) {
+        return new Response(JSON.stringify({ error: 'La inscripción no corresponde a esta sesión' }), { status: 403 })
+      }
+    }
+
+    const safeEnrollment = authorization.actor.kind === 'student'
+      ? {
+          ...enrollment,
+          learner_id: String(enrollment.learner_id),
+          user_email: `learner+${enrollment.learner_id}@kognocore.local`,
+          course_id: authorization.actor.courseId,
+          status: 'approved'
+        }
+      : enrollment
+
+    const { data: existing, error: existingError } = await supabase
+      .from('enrollments')
+      .select('payload')
+      .eq('id', enrollment.id)
+      .maybeSingle()
+
+    if (existingError) {
+      return new Response(JSON.stringify({ error: 'No se pudo validar la inscripción', details: existingError.message }), { status: 500 })
+    }
+    if (
+      authorization.actor.kind === 'student' &&
+      existing?.payload?.learner_id &&
+      String(existing.payload.learner_id) !== String(safeEnrollment.learner_id)
+    ) {
+      return new Response(JSON.stringify({ error: 'No puedes modificar esta inscripción' }), { status: 403 })
+    }
+
     const now = new Date().toISOString()
     const row = {
       id: enrollment.id,
-      payload: enrollment,
-      created_date: enrollment.created_date || now,
-      updated_date: enrollment.updated_date || now
+      payload: safeEnrollment,
+      created_date: safeEnrollment.created_date || now,
+      updated_date: safeEnrollment.updated_date || now
     }
 
     const { error } = await supabase.from('enrollments').upsert(row, { onConflict: 'id' })
@@ -76,7 +120,7 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'No se pudo guardar inscripción', details: error.message }), { status: 500 })
     }
 
-    return new Response(JSON.stringify({ ok: true }), { status: 200 })
+    return new Response(JSON.stringify({ ok: true, enrollment: safeEnrollment }), { status: 200 })
   } catch (_err) {
     return new Response(JSON.stringify({ error: 'Bad request' }), { status: 400 })
   }
