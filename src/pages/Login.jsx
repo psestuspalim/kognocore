@@ -18,8 +18,10 @@ const Login = () => {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [linkSent, setLinkSent] = useState(false);
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [activeTab, setActiveTab] = useState('code');
-    const { login, requestMagicLink, checkAppState } = useAuth();
+    const { login, requestMagicLink, checkAppState, passwordRecovery, updatePassword } = useAuth();
     const navigate = useNavigate();
 
     const resolveCourseByCode = async (normalized) => {
@@ -121,7 +123,34 @@ const Login = () => {
             await requestMagicLink(email);
             setLinkSent(true);
         } catch (_err) {
-            setError('No se pudo enviar el enlace de acceso. Verifica el correo.');
+            setError('No se pudo enviar el enlace para restablecer la contraseña. Verifica el correo.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handlePasswordUpdate = async (e) => {
+        e.preventDefault();
+        setError('');
+
+        if (newPassword.length < 10) {
+            setError('La contraseña debe tener al menos 10 caracteres.');
+            return;
+        }
+        if (newPassword !== confirmPassword) {
+            setError('Las contraseñas no coinciden.');
+            return;
+        }
+
+        setIsLoading(true);
+        try {
+            await updatePassword(newPassword);
+            toast.success('Contraseña actualizada.');
+            navigate('/AdminHome');
+        } catch (err) {
+            setError(String(err?.message || '') === 'ADMIN_REQUIRED'
+                ? 'Esta cuenta no tiene permisos de administrador.'
+                : 'No se pudo actualizar la contraseña. Solicita un enlace nuevo e inténtalo otra vez.');
         } finally {
             setIsLoading(false);
         }
@@ -261,6 +290,45 @@ const Login = () => {
                             </TabsContent>
 
                             <TabsContent value="admin">
+                                {passwordRecovery ? (
+                                    <form onSubmit={handlePasswordUpdate} className="space-y-4">
+                                        <div className="rounded-xl border border-cyan-200 bg-cyan-50 px-3 py-2 text-sm text-cyan-900">
+                                            Define una contraseña nueva para tu cuenta de administrador.
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="new-password">Nueva contraseña</Label>
+                                            <Input
+                                                id="new-password"
+                                                type="password"
+                                                value={newPassword}
+                                                onChange={(e) => setNewPassword(e.target.value)}
+                                                required
+                                                minLength={10}
+                                                className="h-12 rounded-xl"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="confirm-password">Confirmar contraseña</Label>
+                                            <Input
+                                                id="confirm-password"
+                                                type="password"
+                                                value={confirmPassword}
+                                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                                required
+                                                minLength={10}
+                                                className="h-12 rounded-xl"
+                                            />
+                                        </div>
+                                        {error && (
+                                            <div className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                                                {error}
+                                            </div>
+                                        )}
+                                        <Button type="submit" size="lg" className="h-12 w-full rounded-xl bg-slate-900 hover:bg-slate-800" disabled={isLoading}>
+                                            {isLoading ? 'Actualizando...' : 'Guardar contraseña'}
+                                        </Button>
+                                    </form>
+                                ) : (
                                 <form onSubmit={handleLogin} className="space-y-4">
                                     <div className="space-y-2">
                                         <Label htmlFor="email">Correo electrónico</Label>
@@ -293,7 +361,7 @@ const Login = () => {
                                     )}
                                     {linkSent && (
                                         <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
-                                            Revisa tu correo y abre el enlace seguro para entrar.
+                                            Revisa tu correo y abre el enlace más reciente para definir una contraseña nueva.
                                         </div>
                                     )}
                                     <Button type="submit" size="lg" className="h-12 w-full rounded-xl bg-slate-900 hover:bg-slate-800" disabled={isLoading}>
@@ -307,9 +375,10 @@ const Login = () => {
                                         onClick={handleMagicLink}
                                         disabled={isLoading || !email}
                                     >
-                                        Enviar enlace seguro
+                                        Restablecer contraseña
                                     </Button>
                                 </form>
+                                )}
                             </TabsContent>
                         </Tabs>
                     </CardContent>
