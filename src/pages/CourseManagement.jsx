@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { KeyRound } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import CourseCodesPanel from '../components/admin/CourseCodesPanel';
 import EnrollmentRequests from '../components/admin/EnrollmentRequests';
-import { Link } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
+import AdminShell from '../components/admin/AdminShell';
+import AdminPageHeader from '../components/admin/AdminPageHeader';
 
 export default function CourseManagementPage() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -39,18 +38,17 @@ export default function CourseManagementPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-4 sm:p-6">
-      <Link to={createPageUrl('Quizzes')}>
-        <Button variant="ghost" className="mb-6">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Volver
-        </Button>
-      </Link>
+    <AdminShell>
+      <AdminPageHeader
+        icon={KeyRound}
+        title="Cursos y códigos"
+        subtitle="Administra accesos e inscripciones desde un solo lugar."
+      />
 
       <Tabs defaultValue="codes" className="w-full">
-        <TabsList className="mb-6">
-          <TabsTrigger value="codes">Códigos de Acceso</TabsTrigger>
-          <TabsTrigger value="requests">Solicitudes de Inscripción</TabsTrigger>
+        <TabsList className="mb-6 grid h-auto w-full grid-cols-2 p-1 sm:inline-grid sm:w-auto">
+          <TabsTrigger value="codes" className="px-3 py-2 text-xs sm:text-sm">Códigos</TabsTrigger>
+          <TabsTrigger value="requests" className="px-3 py-2 text-xs sm:text-sm">Inscripciones</TabsTrigger>
         </TabsList>
 
         <TabsContent value="codes">
@@ -61,6 +59,6 @@ export default function CourseManagementPage() {
           <EnrollmentRequests currentUser={currentUser} />
         </TabsContent>
       </Tabs>
-    </div>
+    </AdminShell>
   );
 }

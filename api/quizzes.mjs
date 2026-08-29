@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import { requireAdmin } from './_auth.mjs'
+import { requireAdmin, requireDataActor } from './_auth.mjs'
 
 function getSupabaseAdmin() {
   const url = process.env.SUPABASE_URL
@@ -8,16 +8,25 @@ function getSupabaseAdmin() {
   return createClient(url, key)
 }
 
-export async function GET() {
+export async function GET(req) {
   try {
+    const authorization = await requireDataActor(req)
+    if (authorization.response) return authorization.response
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
     }
 
-    const { data, error } = await supabase
+    let query = supabase
       .from('quizzes')
       .select('id, payload, created_date, updated_date')
+
+    if (authorization.actor.kind === 'student') {
+      query = query.eq('payload->>course_id', authorization.actor.courseId)
+    }
+
+    const { data, error } = await query
 
     if (error) {
       return new Response(JSON.stringify({ error: 'No se pudo listar quizzes', details: error.message }), { status: 500 })

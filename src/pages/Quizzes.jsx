@@ -5,7 +5,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/AuthContext';
 import { getOrCreateStudentAlias } from '@/lib/learner-id';
-import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, ChevronRight, Upload, Home } from 'lucide-react';
+import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, Upload } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { buildContainers } from '../components/utils/contentTree';
@@ -46,8 +46,6 @@ import AdminMenu from '../components/admin/AdminMenu';
 import useQuizSettings from '../components/quiz/useQuizSettings';
 import SwipeQuizMode from '../components/quiz/SwipeQuizMode';
 import FileExplorer from '../components/explorer/FileExplorer';
-import MoveQuizModal from '../components/quiz/MoveQuizModal';
-import QuizExporter from '../components/admin/QuizExporter';
 import CourseJoinModal from '../components/course/CourseJoinModal';
 import ResumeQuizModal from '../components/quiz/ResumeQuizModal';
 
@@ -86,6 +84,7 @@ function saveActiveQuizSession(data, currentUser = null) {
 
     const payload = {
       userEmail: currentUser?.email || '',
+      learnerId: currentUser?.learner_id || '',
       quizId: data.selectedQuiz.id,
       quizTitle: data.selectedQuiz.title || data.selectedQuiz.m?.t || 'Cuestionario',
       attemptId: data.currentAttemptId || null,
@@ -292,6 +291,7 @@ export default function QuizzesPage() {
   const [activeTab, setActiveTab] = useState('quizzes'); // 'quizzes' or 'resources'
 
   const queryClient = useQueryClient();
+  const startingQuizRef = useRef(false);
 
   // --- Queries (declared before effects) ---
   const { data: courses = [] } = useQuery({
@@ -398,7 +398,7 @@ export default function QuizzesPage() {
         currentAttemptId,
         currentSessionId,
         deckType
-      });
+      }, currentUser);
     }
 
     if (isMarked) {
@@ -910,7 +910,7 @@ export default function QuizzesPage() {
 
   const TopBar = () => (
     <header className="sticky top-0 z-30 bg-white border-b border-slate-200">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         <div className="flex items-center gap-3 min-w-0">
           <button onClick={handleHome} className="font-bold text-lg tracking-tight text-slate-900 hover:text-primary transition-colors shrink-0">
             Kognocore
@@ -941,7 +941,7 @@ export default function QuizzesPage() {
         </div>
         <div className="flex items-center gap-2 shrink-0">
           {currentUser?.username && currentUser?.role !== 'admin' && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700 border border-slate-200">
+            <span className="hidden max-w-36 truncate items-center gap-1 rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-800 min-[390px]:inline-flex">
               {currentUser.username}
             </span>
           )}
@@ -953,9 +953,19 @@ export default function QuizzesPage() {
 
   // Quiz handlers
   const handleStartQuiz = async (quiz, questionCount, selectedDeck = 'all', quizAttempts = [], forceRestart = false) => {
+    if (startingQuizRef.current) return;
+    startingQuizRef.current = true;
+    window.setTimeout(() => { startingQuizRef.current = false; }, 1500);
+
     // Check if there is an active session or incomplete attempt for this quiz
     if (!forceRestart) {
-      const savedSession = getActiveQuizSession();
+      const storedSession = getActiveQuizSession();
+      const currentIdentity = currentUser?.learner_id || currentUser?.email || '';
+      const storedIdentity = storedSession?.learnerId || storedSession?.userEmail || '';
+      const savedSession = storedSession && (!storedIdentity || storedIdentity === currentIdentity)
+        ? storedSession
+        : null;
+      if (storedSession && !savedSession) clearActiveQuizSession();
       const hasSavedSessionForQuiz = savedSession && sameId(savedSession.quizId, quiz.id);
       const activeAttempt = quizAttempts.find(a => sameId(a.quiz_id, quiz.id) && !a.is_completed && (Number(a.answered_questions || 0) > 0 || (a.answer_log && a.answer_log.length > 0)));
 
@@ -977,6 +987,7 @@ export default function QuizzesPage() {
           totalQuestions: totalQs,
           score: savedScore
         });
+        startingQuizRef.current = false;
         return;
       }
     }
@@ -1088,7 +1099,7 @@ export default function QuizzesPage() {
       currentAttemptId: attemptId,
       currentSessionId: newSessionId,
       deckType: selectedDeck
-    });
+    }, currentUser);
   };
 
   const handleResumeFromModal = () => {
@@ -1156,7 +1167,7 @@ export default function QuizzesPage() {
         currentAttemptId: activeAttempt.id,
         currentSessionId: null,
         deckType: 'all'
-      });
+      }, currentUser);
 
       toast.success(`Reanudado en pregunta ${qIndex + 1}`);
       return;
@@ -1272,7 +1283,7 @@ export default function QuizzesPage() {
         currentAttemptId,
         currentSessionId,
         deckType
-      });
+      }, currentUser);
     } else {
       clearActiveQuizSession();
       // Marcar sesión como completa
@@ -1623,7 +1634,7 @@ export default function QuizzesPage() {
       <div>
         <DragDropContext onDragEnd={handleDragEnd}>
           <div className={view === 'quiz' ? "h-screen overflow-hidden" : "min-h-screen"}>
-            <div className={view === 'quiz' ? "" : "max-w-6xl mx-auto px-5 sm:px-8 pt-5 pb-8"}>
+            <div className={view === 'quiz' ? "" : "max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 pt-5 pb-8"}>
               <AnimatePresence mode="wait">
                 {/* Course Editor */}
                 {editingCourse && (
@@ -2034,7 +2045,6 @@ export default function QuizzesPage() {
                       </div>
                     )}
 
-                    {/* Content: Folders, Subjects, Quizzes */}
                     {/* Content: Folders, Subjects, Quizzes */}
 
                     <DroppableArea

@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { requireAdmin, requireDataActor } from './_auth.mjs'
 
 function getSupabaseAdmin() {
   const url = process.env.SUPABASE_URL
@@ -9,6 +10,9 @@ function getSupabaseAdmin() {
 
 export async function GET(req) {
   try {
+    const authorization = await requireDataActor(req)
+    if (authorization.response) return authorization.response
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -18,13 +22,17 @@ export async function GET(req) {
     const learnerId = url.searchParams.get('learner_id')
     const userEmail = url.searchParams.get('user_email')
 
+    if (authorization.actor.kind === 'student' && !learnerId) {
+      return new Response(JSON.stringify({ error: 'learner_id requerido' }), { status: 400 })
+    }
+
     let query = supabase
       .from('quiz_attempts')
       .select('id, payload, created_date, updated_date')
       .order('created_date', { ascending: false })
 
     if (learnerId) query = query.eq('payload->>learner_id', learnerId)
-    if (userEmail) query = query.eq('payload->>user_email', userEmail)
+    if (authorization.actor.kind === 'admin' && userEmail) query = query.eq('payload->>user_email', userEmail)
 
     const { data, error } = await query
     if (error) {
@@ -46,6 +54,9 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
+    const authorization = await requireDataActor(req)
+    if (authorization.response) return authorization.response
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -57,12 +68,42 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'Intento inválido' }), { status: 400 })
     }
 
+    if (authorization.actor.kind === 'student' && !attempt.learner_id) {
+      return new Response(JSON.stringify({ error: 'learner_id requerido' }), { status: 400 })
+    }
+
+    const safeAttempt = authorization.actor.kind === 'student'
+      ? {
+          ...attempt,
+          learner_id: String(attempt.learner_id),
+          user_email: `learner+${attempt.learner_id}@kognocore.local`,
+          course_id: authorization.actor.courseId
+        }
+      : attempt
+
+    const { data: existing, error: existingError } = await supabase
+      .from('quiz_attempts')
+      .select('payload')
+      .eq('id', attempt.id)
+      .maybeSingle()
+
+    if (existingError) {
+      return new Response(JSON.stringify({ error: 'No se pudo validar el intento', details: existingError.message }), { status: 500 })
+    }
+    if (
+      authorization.actor.kind === 'student' &&
+      existing?.payload?.learner_id &&
+      String(existing.payload.learner_id) !== String(safeAttempt.learner_id)
+    ) {
+      return new Response(JSON.stringify({ error: 'No puedes modificar este intento' }), { status: 403 })
+    }
+
     const now = new Date().toISOString()
     const row = {
       id: attempt.id,
-      payload: attempt,
-      created_date: attempt.created_date || now,
-      updated_date: attempt.updated_date || now
+      payload: safeAttempt,
+      created_date: safeAttempt.created_date || now,
+      updated_date: safeAttempt.updated_date || now
     }
 
     const { error } = await supabase.from('quiz_attempts').upsert(row, { onConflict: 'id' })
@@ -70,7 +111,7 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'No se pudo guardar intento', details: error.message }), { status: 500 })
     }
 
-    return new Response(JSON.stringify({ ok: true }), { status: 200 })
+    return new Response(JSON.stringify({ ok: true, attempt: safeAttempt }), { status: 200 })
   } catch (_err) {
     return new Response(JSON.stringify({ error: 'Bad request' }), { status: 400 })
   }
@@ -78,6 +119,9 @@ export async function POST(req) {
 
 export async function PATCH(req) {
   try {
+    const authorization = await requireAdmin(req)
+    if (authorization.response) return authorization.response
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -127,6 +171,9 @@ export async function PATCH(req) {
 
 export async function DELETE(req) {
   try {
+    const authorization = await requireAdmin(req)
+    if (authorization.response) return authorization.response
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })

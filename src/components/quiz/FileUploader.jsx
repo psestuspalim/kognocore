@@ -1,8 +1,7 @@
 import { useState, useRef } from 'react';
-import { AlertCircle, Loader2, Search, ArrowRight, CornerDownRight } from 'lucide-react';
+import { AlertCircle, Loader2, Search, CornerDownRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Textarea } from '@/components/ui/textarea';
 import { fromCompactFormat, isSimplifiedFormat, fromSimplifiedFormat } from '../utils/quizFormats';
 

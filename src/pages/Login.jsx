@@ -64,7 +64,6 @@ const Login = () => {
         if (!resolved.token) throw new Error('INVALID_CODE');
 
         localStorage.setItem('kc_token', resolved.token);
-        localStorage.setItem('kc_display_name', studentAlias);
         localStorage.removeItem('app_mock_token');
 
         try {
