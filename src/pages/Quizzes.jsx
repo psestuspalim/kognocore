@@ -1206,6 +1206,11 @@ export default function QuizzesPage() {
     const newScore = isCorrect ? score + 1 : score;
     const options = question.answerOptions || question.options || [];
     const correctOption = options.find(opt => opt.isCorrect || opt.c);
+    const selectedAnswerText = selectedOption?.text
+      || selectedOption?.t
+      || (typeof selectedOption?.score === 'number'
+        ? `${selectedOption.score}/${selectedOption.total || 0} elementos correctos`
+        : 'Respuesta registrada');
     const feedbackText =
       question.justificacion ||
       question.justificación ||
@@ -1218,7 +1223,7 @@ export default function QuizzesPage() {
 
     const newWrongAnswers = !isCorrect ? [...wrongAnswers, {
       question: question.question,
-      selected_answer: selectedOption.text,
+      selected_answer: selectedAnswerText,
       correct_answer: correctOption?.text,
       response_time: responseTime,
       answerOptions: options,
@@ -1231,7 +1236,7 @@ export default function QuizzesPage() {
     }] : wrongAnswers;
     const answerEntry = {
       question: question.question,
-      selected_answer: selectedOption.text,
+      selected_answer: selectedAnswerText,
       correct_answer: correctOption?.text,
       is_correct: isCorrect,
       response_time: responseTime,
@@ -1250,7 +1255,7 @@ export default function QuizzesPage() {
       setCorrectAnswers([...correctAnswers, {
         question: question.question,
         difficulty: question.difficulty,
-        selected_answer: selectedOption.text,
+        selected_answer: selectedAnswerText,
         explanation: feedbackText,
         justificacion: feedbackText,
         feedback: feedbackText,
@@ -1413,7 +1418,7 @@ export default function QuizzesPage() {
       const exitData = {
         is_completed: false,
         score,
-        answered_questions: currentQuestionIndex,
+        answered_questions: Math.max(currentQuestionIndex, answerLog.length),
         wrong_questions: wrongAnswers,
         answer_log: answerLog
       };

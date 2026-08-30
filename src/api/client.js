@@ -780,6 +780,11 @@ const mockClient = {
             const config = REMOTE_ENTITIES[entityName];
 
             if (config) {
+              // Persist the new state locally before waiting for the network. A
+              // student can close or reload the page immediately after answering,
+              // and the remote request must not be the only copy of that progress.
+              items[index] = nextItem;
+              saveItems(entityName, items);
               try {
                 await persistRemoteEntity(entityName, nextItem, 'update');
               } catch (error) {
