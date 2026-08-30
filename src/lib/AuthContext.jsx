@@ -174,20 +174,51 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     setAuthError(null);
 
-    const response = await fetch('/api/admin-login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: username.trim(), password })
-    });
+    const normalizedUsername = username.trim();
+    let localLoginUnavailable = false;
 
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || 'Error al iniciar sesión');
+    try {
+      const response = await fetch('/api/admin-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: normalizedUsername, password })
+      });
+      const data = await response.json().catch(() => ({}));
 
-    localStorage.setItem('kc_admin_token', data.token);
-    localStorage.removeItem('kc_token');
-    setUser(data.user);
-    setAuthError(null);
-    return true;
+      if (response.ok) {
+        localStorage.setItem('kc_admin_token', data.token);
+        localStorage.removeItem('kc_token');
+        setUser(data.user);
+        setAuthError(null);
+        return true;
+      }
+
+      localLoginUnavailable = response.status === 404 || response.status === 503;
+      if (!localLoginUnavailable) {
+        throw new Error(data.error || 'Usuario o contraseña incorrectos');
+      }
+    } catch (error) {
+      if (!localLoginUnavailable && error instanceof Error && error.message !== 'Failed to fetch') {
+        throw error;
+      }
+      localLoginUnavailable = true;
+    }
+
+    // Keep existing Supabase administrator accounts usable while deployments
+    // transition to the server-managed username/password configuration.
+    if (localLoginUnavailable && normalizedUsername.includes('@')) {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: normalizedUsername.toLowerCase(),
+        password
+      });
+      if (error) throw new Error('Usuario o contraseña incorrectos');
+
+      const accepted = await applySupabaseSession(data.session);
+      if (!accepted) throw new Error('Esta cuenta no tiene acceso administrativo.');
+      return true;
+    }
+
+    throw new Error('El acceso administrativo no está configurado en el servidor.');
   };
 
   const requestMagicLink = async (email) => {

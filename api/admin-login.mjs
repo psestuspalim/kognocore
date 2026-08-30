@@ -16,13 +16,13 @@ export async function POST(req) {
   try {
     const { username, password } = await req.json();
     if (!username || !password) {
-      return new Response(JSON.stringify({ error: 'Campos requeridos' }), { status: 400 });
+      return Response.json({ error: 'Campos requeridos' }, { status: 400 });
     }
 
     const expectedUser = process.env.ADMIN_USERNAME;
     const expectedPass = process.env.ADMIN_PASSWORD;
     if (!expectedUser || !expectedPass || !process.env.TOKEN_SIGNING_SECRET) {
-      return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 });
+      return Response.json({ error: 'El acceso administrativo no está configurado en el servidor.' }, { status: 503 });
     }
 
     const uHash = crypto.createHash('sha256').update(username.trim().toLowerCase()).digest();
@@ -33,7 +33,7 @@ export async function POST(req) {
     const passMatch = crypto.timingSafeEqual(pHash, pExpected);
 
     if (!userMatch || !passMatch) {
-      return new Response(JSON.stringify({ error: 'Usuario o contraseña incorrectos' }), { status: 401 });
+      return Response.json({ error: 'Usuario o contraseña incorrectos' }, { status: 401 });
     }
 
     const expiresAt = new Date(Date.now() + 24 * 3600 * 1000).toISOString();
@@ -42,7 +42,7 @@ export async function POST(req) {
     const signature = hmac(payloadB64);
     const token = `adm.${payloadB64}.${signature}`;
 
-    return new Response(JSON.stringify({
+    return Response.json({
       token,
       expiresAt,
       user: {
@@ -53,8 +53,8 @@ export async function POST(req) {
         is_admin: true,
         auth_provider: 'local'
       }
-    }), { status: 200 });
+    }, { status: 200 });
   } catch (e) {
-    return new Response(JSON.stringify({ error: 'Bad request' }), { status: 400 });
+    return Response.json({ error: 'Solicitud inválida' }, { status: 400 });
   }
 }

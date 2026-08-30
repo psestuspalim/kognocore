@@ -436,6 +436,35 @@ const mockClient = {
         };
       }
 
+      const adminToken = localStorage.getItem('kc_admin_token');
+      if (adminToken) {
+        try {
+          const [prefix, encodedPayload, signature] = adminToken.split('.');
+          if (prefix !== 'adm' || !encodedPayload || !signature) throw new Error('INVALID_ADMIN_TOKEN');
+
+          const paddedPayload = encodedPayload
+            .replace(/-/g, '+')
+            .replace(/_/g, '/')
+            .padEnd(Math.ceil(encodedPayload.length / 4) * 4, '=');
+          const payload = JSON.parse(atob(paddedPayload));
+          if (payload.sub !== 'admin' || !payload.user || Date.parse(payload.exp) <= Date.now()) {
+            throw new Error('EXPIRED_ADMIN_TOKEN');
+          }
+
+          return {
+            id: 'admin_local',
+            email: `${payload.user}@kognocore.local`,
+            full_name: payload.user,
+            username: payload.user,
+            role: 'admin',
+            is_admin: true,
+            auth_provider: 'local'
+          };
+        } catch (_error) {
+          localStorage.removeItem('kc_admin_token');
+        }
+      }
+
       const codeToken = localStorage.getItem('kc_token');
       if (codeToken) {
         const response = await fetch('/api/me', {
@@ -466,6 +495,7 @@ const mockClient = {
     logout: async (redirectUrl) => {
       localStorage.removeItem('app_mock_token');
       localStorage.removeItem('kc_token');
+      localStorage.removeItem('kc_admin_token');
       await supabase.auth.signOut();
       if (redirectUrl) window.location.href = '/login';
     },
