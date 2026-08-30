@@ -86,6 +86,7 @@ export async function requireDataActor(req, { adminOnly = false } = {}) {
       .maybeSingle();
 
     if (profile?.role === 'admin') return { actor: { kind: 'admin', user }, supabase };
+    if (!adminOnly) return { actor: { kind: 'student', user }, supabase };
     return { response: jsonError('Administrator access required', 403) };
   }
 

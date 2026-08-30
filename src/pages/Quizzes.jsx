@@ -772,7 +772,7 @@ export default function QuizzesPage() {
   const buildAttemptIdentity = () => ({
     user_email: currentUser?.email || '',
     username: currentUser?.username || 'Estudiante',
-    learner_id: currentUser?.learner_id || null
+    learner_id: currentUser?.learner_id || getOrCreateLearnerId()
   });
 
 

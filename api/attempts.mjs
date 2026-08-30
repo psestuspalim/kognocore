@@ -22,8 +22,8 @@ export async function GET(req) {
     const learnerId = url.searchParams.get('learner_id')
     const userEmail = url.searchParams.get('user_email')
 
-    if (authorization.actor.kind === 'student' && !learnerId) {
-      return new Response(JSON.stringify({ error: 'learner_id requerido' }), { status: 400 })
+    if (authorization.actor.kind === 'student' && !learnerId && !userEmail) {
+      return new Response(JSON.stringify({ error: 'learner_id o user_email requerido' }), { status: 400 })
     }
 
     let query = supabase
@@ -32,6 +32,7 @@ export async function GET(req) {
       .order('created_date', { ascending: false })
 
     if (learnerId) query = query.eq('payload->>learner_id', learnerId)
+    else if (userEmail) query = query.eq('payload->>user_email', userEmail)
     if (authorization.actor.kind === 'admin' && userEmail) query = query.eq('payload->>user_email', userEmail)
 
     const { data, error } = await query
@@ -68,16 +69,17 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'Intento inválido' }), { status: 400 })
     }
 
-    if (authorization.actor.kind === 'student' && !attempt.learner_id) {
+    const effectiveLearnerId = attempt.learner_id || (authorization.actor.user?.id ? `user_${authorization.actor.user.id}` : null)
+    if (authorization.actor.kind === 'student' && !effectiveLearnerId) {
       return new Response(JSON.stringify({ error: 'learner_id requerido' }), { status: 400 })
     }
 
     const safeAttempt = authorization.actor.kind === 'student'
       ? {
           ...attempt,
-          learner_id: String(attempt.learner_id),
-          user_email: `learner+${attempt.learner_id}@kognocore.local`,
-          course_id: authorization.actor.courseId
+          learner_id: String(effectiveLearnerId),
+          user_email: attempt.user_email || (authorization.actor.user?.email ? authorization.actor.user.email : `learner+${effectiveLearnerId}@kognocore.local`),
+          course_id: authorization.actor.courseId || attempt.course_id
         }
       : attempt
 
