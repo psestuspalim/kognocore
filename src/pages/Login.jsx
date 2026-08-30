@@ -12,16 +12,15 @@ import { client } from '@/api/client';
 import { getOrCreateLearnerId, getOrCreateStudentAlias } from '@/lib/learner-id';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [code, setCode] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [linkSent, setLinkSent] = useState(false);
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [activeTab, setActiveTab] = useState('code');
-    const { login, requestMagicLink, checkAppState, passwordRecovery, updatePassword } = useAuth();
+    const { login, checkAppState, passwordRecovery, updatePassword } = useAuth();
     const navigate = useNavigate();
 
     const resolveCourseByCode = async (normalized) => {
@@ -98,36 +97,10 @@ const Login = () => {
         setIsLoading(true);
         setError('');
 
-        const form = e.currentTarget;
-        const submittedEmail = email || form.querySelector('#email')?.value || '';
-        const submittedPassword = password || form.querySelector('#password')?.value || '';
-
         try {
-            await login(submittedEmail, submittedPassword);
+            await login(username, password);
         } catch (err) {
-            const msg = String(err?.message || '');
-            if (msg === 'ADMIN_REQUIRED') {
-                setError('Esta cuenta no tiene permisos de administrador.');
-            } else if (msg.includes('Invalid login credentials')) {
-                setError('Correo o contraseña incorrectos.');
-            } else {
-                setError(msg || 'Error al iniciar sesión. Intenta de nuevo.');
-            }
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const handleMagicLink = async () => {
-        setIsLoading(true);
-        setError('');
-        setLinkSent(false);
-
-        try {
-            await requestMagicLink(email);
-            setLinkSent(true);
-        } catch (_err) {
-            setError('No se pudo enviar el enlace para restablecer la contraseña. Verifica el correo.');
+            setError(String(err?.message || '') || 'Error al iniciar sesión. Intenta de nuevo.');
         } finally {
             setIsLoading(false);
         }
@@ -334,15 +307,15 @@ const Login = () => {
                                 ) : (
                                 <form onSubmit={handleLogin} className="space-y-4">
                                     <div className="space-y-2">
-                                        <Label htmlFor="email">Correo electrónico</Label>
+                                        <Label htmlFor="username">Usuario</Label>
                                         <Input
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            autoComplete="email"
-                                            placeholder="nombre@correo.com"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
+                                            id="username"
+                                            name="username"
+                                            type="text"
+                                            autoComplete="username"
+                                            placeholder="Usuario"
+                                            value={username}
+                                            onChange={(e) => setUsername(e.target.value)}
                                             required
                                             className="h-12 rounded-xl"
                                         />
@@ -366,23 +339,8 @@ const Login = () => {
                                             {error}
                                         </div>
                                     )}
-                                    {linkSent && (
-                                        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
-                                            Revisa tu correo y abre el enlace más reciente para definir una contraseña nueva.
-                                        </div>
-                                    )}
-                                    <Button type="submit" size="lg" className="h-12 w-full rounded-xl bg-slate-900 hover:bg-slate-800" disabled={isLoading}>
+                                    <Button type="submit" size="lg" className="h-12 w-full rounded-xl bg-slate-900 hover:bg-slate-800" disabled={isLoading || !username}>
                                         {isLoading ? 'Entrando...' : 'Entrar (Admin)'}
-                                    </Button>
-                                    <Button
-                                        type="button"
-                                        variant="outline"
-                                        size="lg"
-                                        className="h-12 w-full rounded-xl"
-                                        onClick={handleMagicLink}
-                                        disabled={isLoading || !email}
-                                    >
-                                        Restablecer contraseña
                                     </Button>
                                 </form>
                                 )}

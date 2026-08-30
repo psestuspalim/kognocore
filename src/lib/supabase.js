@@ -12,6 +12,8 @@ export const supabase = createClient(supabaseUrl, supabasePublishableKey, {
 });
 
 export async function getAuthorizationHeaders() {
+  const adminToken = localStorage.getItem('kc_admin_token');
+  if (adminToken) return { Authorization: `Bearer ${adminToken}` };
   const { data: { session } } = await supabase.auth.getSession();
   const token = session?.access_token || localStorage.getItem('kc_token');
   return token ? { Authorization: `Bearer ${token}` } : {};

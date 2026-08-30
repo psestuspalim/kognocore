@@ -112,6 +112,32 @@ export const AuthProvider = ({ children }) => {
 
       if (session && await applySupabaseSession(session)) return;
 
+      const adminToken = localStorage.getItem('kc_admin_token');
+      if (adminToken) {
+        try {
+          const parts = adminToken.split('.');
+          if (parts.length === 3 && parts[0] === 'adm') {
+            const raw = atob(parts[1].replace(/-/g, '+').replace(/_/g, '/'));
+            const payload = JSON.parse(raw);
+            if (payload.exp > new Date().toISOString()) {
+              setUser({
+                id: 'admin_local',
+                username: payload.user,
+                full_name: payload.user,
+                role: 'admin',
+                is_admin: true,
+                auth_provider: 'local'
+              });
+              setAuthError(null);
+              return;
+            }
+          }
+          localStorage.removeItem('kc_admin_token');
+        } catch (_e) {
+          localStorage.removeItem('kc_admin_token');
+        }
+      }
+
       const codeUser = await loadCodeSession();
       setUser(codeUser);
       if (codeUser) setAuthError(null);
@@ -145,17 +171,22 @@ export const AuthProvider = ({ children }) => {
     return () => subscription.unsubscribe();
   }, [applySupabaseSession, checkAppState]);
 
-  const login = async (email, password) => {
+  const login = async (username, password) => {
     setAuthError(null);
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email.trim().toLowerCase(),
-      password
+    const response = await fetch('/api/admin-login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: username.trim(), password })
     });
-    if (error) throw error;
 
-    const accepted = await applySupabaseSession(data.session);
-    if (!accepted) throw new Error('ADMIN_REQUIRED');
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Error al iniciar sesión');
+
+    localStorage.setItem('kc_admin_token', data.token);
+    localStorage.removeItem('kc_token');
+    setUser(data.user);
+    setAuthError(null);
     return true;
   };
 
@@ -185,6 +216,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async (shouldRedirect = true) => {
     localStorage.removeItem('kc_token');
+    localStorage.removeItem('kc_admin_token');
     localStorage.removeItem('app_mock_token');
     appliedSessionUser.current = null;
     await supabase.auth.signOut();

@@ -24,6 +24,19 @@ function fromBase64Url(input) {
   return Buffer.from(padded, 'base64').toString('utf8');
 }
 
+function validateAdminToken(token) {
+  if (!token.startsWith('adm.') || !process.env.TOKEN_SIGNING_SECRET) return null;
+  const parts = token.split('.');
+  if (parts.length !== 3 || hmac(parts[1]) !== parts[2]) return null;
+  try {
+    const payload = JSON.parse(fromBase64Url(parts[1]));
+    if (payload?.sub !== 'admin' || !payload?.exp || payload.exp <= new Date().toISOString()) return null;
+    return { kind: 'admin', user: { id: 'admin_local', email: `${payload.user}@kognocore.local` } };
+  } catch (_error) {
+    return null;
+  }
+}
+
 async function validateCodeSession(supabase, token) {
   if (!process.env.CODE_PEPPER || !process.env.TOKEN_SIGNING_SECRET) return null;
 
@@ -60,6 +73,9 @@ export async function requireDataActor(req, { adminOnly = false } = {}) {
   const authorization = req.headers.get('authorization') || '';
   const token = authorization.startsWith('Bearer ') ? authorization.slice(7) : null;
   if (!token) return { response: jsonError('Authentication required', 401) };
+
+  const adminActor = validateAdminToken(token);
+  if (adminActor) return { actor: adminActor, supabase };
 
   const { data: { user } } = await supabase.auth.getUser(token);
   if (user) {
