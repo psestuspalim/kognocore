@@ -1045,6 +1045,23 @@ export default function QuizzesPage() {
     } catch (e) {
       console.error('⚠️ Error guardando intento inicial en backend:', e);
       attemptId = `local_attempt_${Date.now()}`;
+      try {
+        const stored = JSON.parse(localStorage.getItem('app_quiz_attempts') || '[]');
+        stored.push({
+          id: attemptId,
+          quiz_id: quiz.id,
+          subject_id: quiz.subject_id || expandedQuiz.subject_id,
+          ...buildAttemptIdentity(),
+          score: 0,
+          total_questions: orderedQuestions.length,
+          answered_questions: 0,
+          is_completed: false,
+          wrong_questions: [],
+          answer_log: [],
+          created_date: new Date().toISOString()
+        });
+        localStorage.setItem('app_quiz_attempts', JSON.stringify(stored));
+      } catch (_) { /* localStorage full or unavailable */ }
     }
 
     let newSessionId = null;
@@ -1247,22 +1264,33 @@ export default function QuizzesPage() {
     const isLastQuestion = currentQuestionIndex >= selectedQuiz.questions.length - 1;
     const answeredCount = currentQuestionIndex + 1;
 
-    if (currentAttemptId && !String(currentAttemptId).startsWith('local_')) {
+    if (currentAttemptId) {
+      const attemptData = {
+        score: newScore,
+        answered_questions: answeredCount,
+        wrong_questions: newWrongAnswers,
+        answer_log: newAnswerLog,
+        response_times: newResponseTimes,
+        is_completed: isLastQuestion,
+        completed_at: isLastQuestion ? new Date().toISOString() : undefined
+      };
       try {
         await updateAttemptMutation.mutateAsync({
           id: currentAttemptId,
-          data: {
-            score: newScore,
-            answered_questions: answeredCount,
-            wrong_questions: newWrongAnswers,
-            answer_log: newAnswerLog,
-            response_times: newResponseTimes,
-            is_completed: isLastQuestion,
-            completed_at: isLastQuestion ? new Date().toISOString() : undefined
-          }
+          data: attemptData
         });
       } catch (err) {
         console.error('⚠️ Error actualizando intento en backend (modo local):', err);
+        try {
+          const stored = JSON.parse(localStorage.getItem('app_quiz_attempts') || '[]');
+          const idx = stored.findIndex(a => a?.id === currentAttemptId);
+          if (idx >= 0) {
+            stored[idx] = { ...stored[idx], ...attemptData };
+          } else {
+            stored.push({ id: currentAttemptId, ...attemptData, created_date: new Date().toISOString() });
+          }
+          localStorage.setItem('app_quiz_attempts', JSON.stringify(stored));
+        } catch (_) { /* localStorage full or unavailable */ }
       }
     }
 
@@ -1381,14 +1409,28 @@ export default function QuizzesPage() {
   };
 
   const handleExitQuiz = async () => {
-    if (currentAttemptId && !String(currentAttemptId).startsWith('local_')) {
+    if (currentAttemptId) {
+      const exitData = {
+        is_completed: false,
+        score,
+        answered_questions: currentQuestionIndex,
+        wrong_questions: wrongAnswers,
+        answer_log: answerLog
+      };
       try {
         await updateAttemptMutation.mutateAsync({
           id: currentAttemptId,
-          data: { is_completed: false }
+          data: exitData
         });
         queryClient.invalidateQueries({ queryKey: ['attempts'] });
-      } catch (e) { /* ignore */ }
+      } catch (e) {
+        try {
+          const stored = JSON.parse(localStorage.getItem('app_quiz_attempts') || '[]');
+          const idx = stored.findIndex(a => a?.id === currentAttemptId);
+          if (idx >= 0) stored[idx] = { ...stored[idx], ...exitData };
+          localStorage.setItem('app_quiz_attempts', JSON.stringify(stored));
+        } catch (_) { /* ignore */ }
+      }
     }
     // Marcar sesión como inactiva
     if (currentSessionId) {

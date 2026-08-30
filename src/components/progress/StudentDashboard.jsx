@@ -45,7 +45,7 @@ export default function StudentDashboard({ analytics, attempts = [], subjects = 
     
     let streak = 0;
     let currentDate = today.getTime();
-    
+
     for (const date of dates) {
       const diff = (currentDate - date) / (1000 * 60 * 60 * 24);
       if (diff <= 1) {
@@ -55,7 +55,7 @@ export default function StudentDashboard({ analytics, attempts = [], subjects = 
         break;
       }
     }
-    
+
     return streak;
   };
 

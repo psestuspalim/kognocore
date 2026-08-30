@@ -110,19 +110,17 @@ const initializeStorage = () => {
       const repoId = String(repoQ.id || '');
       const repoTitle = String(repoQ.title || '').trim().toLowerCase();
 
-      const existingIndex = stored.findIndex(q => q && (String(q.id) === repoId || (repoTitle && String(q.title || '').trim().toLowerCase() === repoTitle)));
+      const existingIndex = stored.findIndex(q => q && String(q.id) === repoId);
 
       if (existingIndex < 0) {
-        // New quiz from repository -> add it!
         stored.push(repoQ);
         modified = true;
       } else {
-        // If repo quiz has more questions or was updated, update it while preserving custom fields
         const existingQ = stored[existingIndex];
         const existingCount = existingQ.questions?.length || existingQ.total_questions || 0;
         const repoCount = repoQ.questions?.length || repoQ.total_questions || 0;
         if (repoCount > existingCount) {
-          stored[existingIndex] = { ...existingQ, ...repoQ };
+          stored[existingIndex] = { ...repoQ, ...existingQ, questions: repoQ.questions, total_questions: repoQ.total_questions };
           modified = true;
         }
       }
@@ -679,12 +677,9 @@ const mockClient = {
             const localItem = local.find(item => item.id === id);
             try {
               const remote = await fetchRemoteQuizzes();
-              const remoteItem = remote.find(item => item.id === id);
-              if (remoteItem) {
-                const merged = mergeById(remote, local);
-                saveItems('Quiz', merged);
-                return remoteItem;
-              }
+              const merged = mergeById(remote, local);
+              saveItems('Quiz', merged);
+              return merged.find(item => item.id === id) || localItem;
             } catch (_err) {
               // ignore
             }
