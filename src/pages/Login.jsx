@@ -98,17 +98,21 @@ const Login = () => {
         setIsLoading(true);
         setError('');
 
+        const form = e.currentTarget;
+        const submittedEmail = email || form.querySelector('#email')?.value || '';
+        const submittedPassword = password || form.querySelector('#password')?.value || '';
+
         try {
-            const success = await login(email, password);
-            if (success) {
-                navigate('/AdminHome');
-            } else {
-                setError('Credenciales inválidas');
-            }
+            await login(submittedEmail, submittedPassword);
         } catch (err) {
-            setError(String(err?.message || '') === 'ADMIN_REQUIRED'
-                ? 'Esta cuenta no tiene permisos de administrador.'
-                : 'Correo o contraseña incorrectos.');
+            const msg = String(err?.message || '');
+            if (msg === 'ADMIN_REQUIRED') {
+                setError('Esta cuenta no tiene permisos de administrador.');
+            } else if (msg.includes('Invalid login credentials')) {
+                setError('Correo o contraseña incorrectos.');
+            } else {
+                setError(msg || 'Error al iniciar sesión. Intenta de nuevo.');
+            }
         } finally {
             setIsLoading(false);
         }
@@ -146,7 +150,6 @@ const Login = () => {
         try {
             await updatePassword(newPassword);
             toast.success('Contraseña actualizada.');
-            navigate('/AdminHome');
         } catch (err) {
             setError(String(err?.message || '') === 'ADMIN_REQUIRED'
                 ? 'Esta cuenta no tiene permisos de administrador.'
@@ -334,7 +337,9 @@ const Login = () => {
                                         <Label htmlFor="email">Correo electrónico</Label>
                                         <Input
                                             id="email"
+                                            name="email"
                                             type="email"
+                                            autoComplete="email"
                                             placeholder="nombre@correo.com"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
@@ -346,7 +351,9 @@ const Login = () => {
                                         <Label htmlFor="password">Contraseña</Label>
                                         <Input
                                             id="password"
+                                            name="password"
                                             type="password"
+                                            autoComplete="current-password"
                                             placeholder="••••••••"
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}

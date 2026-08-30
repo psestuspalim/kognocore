@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { getOrCreateLearnerId, getOrCreateStudentAlias } from '@/lib/learner-id';
 
@@ -66,6 +66,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
   const [authError, setAuthError] = useState(null);
   const [passwordRecovery, setPasswordRecovery] = useState(false);
+  const appliedSessionUser = useRef(null);
 
   const applySupabaseSession = useCallback(async (session) => {
     if (!session) return false;
@@ -80,6 +81,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       localStorage.removeItem('kc_token');
+      appliedSessionUser.current = session.user.id;
       setUser(profile);
       setAuthError(null);
       return true;
@@ -126,8 +128,10 @@ export const AuthProvider = ({ children }) => {
           setUser(null);
           setIsLoadingAuth(false);
         } else if (session) {
+          if (appliedSessionUser.current === session.user.id) return;
           void applySupabaseSession(session).finally(() => setIsLoadingAuth(false));
         } else if (!localStorage.getItem('kc_token')) {
+          appliedSessionUser.current = null;
           setUser(null);
           setIsLoadingAuth(false);
         }
@@ -138,22 +142,17 @@ export const AuthProvider = ({ children }) => {
   }, [applySupabaseSession, checkAppState]);
 
   const login = async (email, password) => {
-    setIsLoadingAuth(true);
     setAuthError(null);
 
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email.trim().toLowerCase(),
-        password
-      });
-      if (error) throw error;
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email.trim().toLowerCase(),
+      password
+    });
+    if (error) throw error;
 
-      const accepted = await applySupabaseSession(data.session);
-      if (!accepted) throw new Error('ADMIN_REQUIRED');
-      return true;
-    } finally {
-      setIsLoadingAuth(false);
-    }
+    const accepted = await applySupabaseSession(data.session);
+    if (!accepted) throw new Error('ADMIN_REQUIRED');
+    return true;
   };
 
   const requestMagicLink = async (email) => {
@@ -183,6 +182,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async (shouldRedirect = true) => {
     localStorage.removeItem('kc_token');
     localStorage.removeItem('app_mock_token');
+    appliedSessionUser.current = null;
     await supabase.auth.signOut();
     setUser(null);
     setAuthError(null);
