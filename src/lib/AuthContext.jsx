@@ -71,9 +71,14 @@ export const AuthProvider = ({ children }) => {
   const applySupabaseSession = useCallback(async (session) => {
     if (!session) return false;
 
+    const uid = session.user.id;
+    if (appliedSessionUser.current === uid) return true;
+    appliedSessionUser.current = uid;
+
     try {
       const profile = await loadAdminProfile(session);
       if (profile?.role !== 'admin') {
+        appliedSessionUser.current = null;
         await supabase.auth.signOut();
         setAuthError({ type: 'forbidden', message: 'Esta cuenta no tiene acceso administrativo.' });
         setUser(null);
@@ -81,11 +86,11 @@ export const AuthProvider = ({ children }) => {
       }
 
       localStorage.removeItem('kc_token');
-      appliedSessionUser.current = session.user.id;
       setUser(profile);
       setAuthError(null);
       return true;
     } catch (error) {
+      appliedSessionUser.current = null;
       setAuthError({ type: 'profile_error', message: error.message });
       setUser(null);
       return false;
@@ -128,7 +133,6 @@ export const AuthProvider = ({ children }) => {
           setUser(null);
           setIsLoadingAuth(false);
         } else if (session) {
-          if (appliedSessionUser.current === session.user.id) return;
           void applySupabaseSession(session).finally(() => setIsLoadingAuth(false));
         } else if (!localStorage.getItem('kc_token')) {
           appliedSessionUser.current = null;
