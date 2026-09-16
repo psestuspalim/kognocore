@@ -33,20 +33,26 @@ export default function QuestionView({
   const [isImageZoomed, setIsImageZoomed] = useState(false);
   const answerLock = useRef(false);
   const scrollContainerRef = useRef(null);
+  const feedbackContainerRef = useRef(null);
 
-  // Reiniciar estado y hacer scroll al inicio de la pregunta
+  // Restoring an answer must not move the question or collapse its hint.
   useEffect(() => {
     const savedIndex = (question?.answerOptions || question?.options || []).findIndex(o => o.text === savedAnswer?.selected_answer);
     setSelectedAnswer(savedIndex >= 0 ? savedIndex : null);
     setShowFeedback(savedIndex >= 0);
     answerLock.current = savedIndex >= 0;
+  }, [questionNumber, question, savedAnswer]);
+
+  useEffect(() => {
     setIsMarked(initialIsMarked);
+  }, [initialIsMarked, questionNumber]);
+
+  useEffect(() => {
     setShowHint(false);
     setIsImageZoomed(false);
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }, [questionNumber, question, savedAnswer, initialIsMarked]);
+    scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'instant' });
+    feedbackContainerRef.current?.scrollTo({ top: 0, behavior: 'instant' });
+  }, [questionNumber, question]);
 
   // Actualizar sesión en vivo
   useEffect(() => {
@@ -153,7 +159,7 @@ export default function QuestionView({
     const isIncorrectlySelected = isRevealed && isSelected && !isCorrect;
     const isMissedCorrect = isRevealed && !isSelected && isCorrect;
 
-    const baseStyle = "group relative p-2 sm:p-3 rounded-xl border text-left transition-all duration-150 ease-out cursor-pointer select-none flex items-start gap-3 w-full";
+    const baseStyle = "group relative p-2 sm:p-3 rounded-xl border text-left transition-colors duration-150 motion-reduce:transition-none cursor-pointer select-none flex items-start gap-3 w-full";
 
     if (isCorrectlySelected) {
       return `${baseStyle} border-emerald-400 bg-emerald-50 text-emerald-950 ring-2 ring-emerald-400`;
@@ -213,7 +219,7 @@ export default function QuestionView({
         <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
           <button
             onClick={onBack}
-            className="flex items-center gap-1.5 px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 active:scale-95 transition-all shrink-0 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
             title="Salir del cuestionario"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -233,7 +239,7 @@ export default function QuestionView({
             </div>
             <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
               <div
-                className="h-full bg-primary rounded-full transition-all duration-500 ease-out"
+                className="h-full bg-primary rounded-full"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
@@ -255,10 +261,9 @@ export default function QuestionView({
 
       {/* Content */}
       <main
-        ref={scrollContainerRef}
-        className={`min-h-0 flex-1 w-full grid overflow-hidden ${showFeedback ? 'grid-rows-[minmax(0,1fr)_minmax(0,0.7fr)] lg:grid-rows-1 lg:grid-cols-2' : 'grid-cols-1'}`}
+        className="min-h-0 flex-1 w-full max-w-6xl mx-auto grid overflow-hidden grid-rows-[minmax(0,1fr)_minmax(0,0.7fr)] lg:grid-rows-1 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]"
       >
-        <div className="mx-auto w-full max-w-3xl min-h-0 overflow-y-auto px-3 py-3 sm:px-5">
+        <div ref={scrollContainerRef} className="mx-auto w-full max-w-3xl min-h-0 overflow-y-auto [scrollbar-gutter:stable] px-3 py-3 sm:px-5">
 
           {/* Question card */}
           <div className="space-y-2">
@@ -280,7 +285,7 @@ export default function QuestionView({
                 <img
                   src={question.imageUrl}
                   alt="Imagen clínica"
-                  className="max-h-[16dvh] w-auto object-contain mx-auto rounded-lg cursor-pointer transition-transform hover:scale-[1.02]"
+                  className="max-h-[16dvh] w-auto object-contain mx-auto rounded-lg cursor-pointer"
                   onClick={() => setIsImageZoomed(true)}
                 />
                 <button
@@ -317,7 +322,7 @@ export default function QuestionView({
             )}
 
             {/* Hint */}
-            {question?.hint && !showFeedback && showHintSetting && (
+            {question?.hint && showHintSetting && (
               <div>
                 <button
                   onClick={() => setShowHint(!showHint)}
@@ -353,8 +358,8 @@ export default function QuestionView({
 
           </div>
         </div>
-        {showFeedback && (
-          <section aria-live="polite" className="min-h-0 overflow-y-auto border-t lg:border-t-0 lg:border-l border-slate-300 bg-white p-3 sm:p-5">
+          <section ref={feedbackContainerRef} aria-label="Explicación de la respuesta" aria-live="polite" className="min-h-0 overflow-y-auto [scrollbar-gutter:stable] border-t lg:border-t-0 lg:border-l border-slate-200 bg-white p-3 sm:p-5">
+            {showFeedback ? (
             <div className="mx-auto max-w-3xl space-y-3 text-sm leading-snug">
               <h2 className={`font-bold ${selectedOption?.isCorrect ? 'text-emerald-700' : 'text-rose-700'}`}>
                 {selectedOption?.isCorrect ? 'Respuesta correcta' : 'Por qué tu respuesta es incorrecta'}
@@ -366,8 +371,14 @@ export default function QuestionView({
               </div>
               <MathText text={getJustificationText()} />
             </div>
+            ) : (
+              <div className="flex h-full flex-col items-center justify-center gap-2 text-center text-slate-400">
+                <Lightbulb className="h-5 w-5" aria-hidden="true" />
+                <p className="text-sm font-medium text-slate-500">Elige tu respuesta</p>
+                <p className="max-w-xs text-xs leading-relaxed">Aquí verás la explicación al contestar.</p>
+              </div>
+            )}
           </section>
-        )}
       </main>
 
       {/* Footer - single source of truth for navigation */}
@@ -384,7 +395,7 @@ export default function QuestionView({
           <Button
             onClick={handleNext}
             disabled={!showFeedback}
-            className="ml-auto h-11 w-full rounded-xl bg-slate-900 px-8 text-sm font-semibold text-white shadow-sm transition-all hover:bg-slate-800 disabled:pointer-events-none disabled:opacity-30 sm:w-auto"
+            className="ml-auto h-11 w-full rounded-xl bg-slate-900 px-8 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-slate-800 disabled:pointer-events-none disabled:opacity-30 sm:w-auto"
           >
             <span>{isLastQuestion ? 'Ver resultados' : 'Siguiente'}</span>
             <ChevronRight className="w-4 h-4 ml-1.5" />
