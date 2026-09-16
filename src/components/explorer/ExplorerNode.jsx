@@ -30,6 +30,7 @@ const ExplorerNode = memo(function ExplorerNode({
   isExpanded,
   isDragOver,
   hasChildren,
+  quizCount,
   children,
   onToggleSelect,
   onToggleExpand,
@@ -131,6 +132,7 @@ const ExplorerNode = memo(function ExplorerNode({
                 )}
               </div>
 
+              {type !== 'quiz' && <Badge variant="outline">{quizCount} {quizCount === 1 ? 'quiz' : 'quizzes'}</Badge>}
               {item.is_hidden && (
                 <Badge variant="outline" className="text-xs">Oculto</Badge>
               )}
@@ -213,6 +215,7 @@ const ExplorerNode = memo(function ExplorerNode({
     prevProps.isExpanded === nextProps.isExpanded &&
     prevProps.isDragOver === nextProps.isDragOver &&
     prevProps.hasChildren === nextProps.hasChildren &&
+    prevProps.quizCount === nextProps.quizCount &&
     prevProps.children?.length === nextProps.children?.length
   );
 });

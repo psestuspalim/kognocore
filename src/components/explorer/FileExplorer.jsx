@@ -1,3 +1,4 @@
+import { countDescendantQuizzes } from '@/lib/quiz-progress';
 import { useState, useMemo, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -55,13 +56,13 @@ export default function FileExplorer({
 
     // Index quizzes by subject_id
     quizzes.forEach(q => {
-      const subjectId = q.subject_id || 'root';
+      const subjectId = q.folder_id || q.subject_id || q.course_id || 'root';
       if (!quizzesBySubject.has(subjectId)) {
         quizzesBySubject.set(subjectId, []);
       }
       quizzesBySubject.get(subjectId).push(q);
 
-      if (!q.subject_id) {
+      if (!q.folder_id && !q.subject_id && !q.course_id) {
         rootQuizzes.push(q);
       }
     });
@@ -220,7 +221,7 @@ export default function FileExplorer({
 
     // O(1) check for children
     const childContainers = indices.childrenByParent.get(item.id) || [];
-    const childQuizzes = type === 'subject' ? (indices.quizzesBySubject.get(item.id) || []) : [];
+    const childQuizzes = type !== 'quiz' ? (indices.quizzesBySubject.get(item.id) || []) : [];
     const hasChildren = childContainers.length > 0 || childQuizzes.length > 0;
 
     return (
@@ -234,6 +235,7 @@ export default function FileExplorer({
         isExpanded={isExp}
         isDragOver={isDragOver}
         hasChildren={hasChildren}
+        quizCount={countDescendantQuizzes(item.id, containers, quizzes)}
         onToggleSelect={toggleSelect}
         onToggleExpand={toggleExpand}
         onItemClick={onItemClick}
@@ -248,7 +250,7 @@ export default function FileExplorer({
         )}
       </ExplorerNode>
     );
-  }, [expandedContainers, dragOverContainer, indices, isAdmin, isSelected, toggleSelect, toggleExpand, onItemClick, onChangeType]);
+  }, [containers, quizzes, expandedContainers, dragOverContainer, indices, isAdmin, isSelected, toggleSelect, toggleExpand, onItemClick, onChangeType]);
 
   return (
     <DragDropContext onDragEnd={handleDragEnd} onDragUpdate={handleDragUpdate}>

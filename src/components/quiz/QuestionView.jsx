@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, Lightbulb, ChevronRight, ChevronLeft, Bookmark, ZoomIn, X } from 'lucide-react';
+import { Lightbulb, ChevronRight, ChevronLeft, Bookmark, ZoomIn, X } from 'lucide-react';
 import { client } from '@/api/client';
 import MathText from './MathText';
 import ImageQuestionView from './ImageQuestionView';
@@ -12,6 +12,8 @@ export default function QuestionView({
   correctAnswers = 0,
   wrongAnswers = 0,
   onAnswer,
+  onNext,
+  savedAnswer,
   onBack,
   onMarkForReview,
   previousAttempts = [],
@@ -29,28 +31,22 @@ export default function QuestionView({
   const [showHint, setShowHint] = useState(false);
   const [isMarked, setIsMarked] = useState(initialIsMarked);
   const [isImageZoomed, setIsImageZoomed] = useState(false);
-  const feedbackRef = useRef(null);
+  const answerLock = useRef(false);
   const scrollContainerRef = useRef(null);
 
   // Reiniciar estado y hacer scroll al inicio de la pregunta
   useEffect(() => {
-    setSelectedAnswer(null);
-    setShowFeedback(false);
+    const savedIndex = (question?.answerOptions || question?.options || []).findIndex(o => o.text === savedAnswer?.selected_answer);
+    setSelectedAnswer(savedIndex >= 0 ? savedIndex : null);
+    setShowFeedback(savedIndex >= 0);
+    answerLock.current = savedIndex >= 0;
+    setIsMarked(initialIsMarked);
     setShowHint(false);
     setIsImageZoomed(false);
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [questionNumber]);
-
-  // Al responder, hacer scroll suave dentro del contenedor para mostrar la justificación completa
-  useEffect(() => {
-    if (showFeedback && feedbackRef.current) {
-      setTimeout(() => {
-        feedbackRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 100);
-    }
-  }, [showFeedback]);
+  }, [questionNumber, question, savedAnswer, initialIsMarked]);
 
   // Actualizar sesión en vivo
   useEffect(() => {
@@ -75,10 +71,12 @@ export default function QuestionView({
   const options = question?.answerOptions || question?.options || [];
 
   const handleSelectAnswer = useCallback((index) => {
-    if (showFeedback || index < 0 || index >= options.length) return;
+    if (answerLock.current || showFeedback || index < 0 || index >= options.length) return;
+    answerLock.current = true;
     setSelectedAnswer(index);
     setShowFeedback(true);
-  }, [showFeedback, options.length]);
+    if (onNext) onAnswer(Boolean(options[index].isCorrect), options[index], question);
+  }, [showFeedback, options, onAnswer, onNext, question]);
 
   const selectedOption = selectedAnswer !== null ? options[selectedAnswer] : null;
   const correctOption = options.find(o => o.isCorrect) || null;
@@ -90,14 +88,15 @@ export default function QuestionView({
       question?.feedback ||
       question?.explanation ||
       correctOption?.rationale ||
-      "Opción correcta según los criterios clínicos establecidos."
+      "El archivo no incluye una justificación general para esta pregunta."
     );
   };
 
   const handleNext = useCallback(() => {
-    const isCorrect = selectedOption?.isCorrect;
-    onAnswer(isCorrect, selectedOption, question);
-  }, [selectedOption, onAnswer, question]);
+    if (!showFeedback) return;
+    if (onNext) onNext();
+    else onAnswer(Boolean(selectedOption?.isCorrect), selectedOption, question);
+  }, [showFeedback, onNext, onAnswer, selectedOption, question]);
 
   const handleToggleMark = () => {
     const nextState = !isMarked;
@@ -138,6 +137,7 @@ export default function QuestionView({
         question={question}
         questionNumber={questionNumber}
         totalQuestions={totalQuestions}
+        onNext={onNext}
         onAnswer={(isCorrect, details) => onAnswer(isCorrect, details, question)}
       />
     );
@@ -153,7 +153,7 @@ export default function QuestionView({
     const isIncorrectlySelected = isRevealed && isSelected && !isCorrect;
     const isMissedCorrect = isRevealed && !isSelected && isCorrect;
 
-    const baseStyle = "group relative p-3 sm:p-4 rounded-xl border text-left transition-all duration-150 ease-out cursor-pointer select-none flex items-start gap-3 w-full";
+    const baseStyle = "group relative p-2 sm:p-3 rounded-xl border text-left transition-all duration-150 ease-out cursor-pointer select-none flex items-start gap-3 w-full";
 
     if (isCorrectlySelected) {
       return `${baseStyle} border-emerald-400 bg-emerald-50 text-emerald-950 ring-2 ring-emerald-400`;
@@ -256,12 +256,12 @@ export default function QuestionView({
       {/* Content */}
       <main
         ref={scrollContainerRef}
-        className="flex-1 overflow-y-auto w-full overscroll-contain"
+        className={`min-h-0 flex-1 w-full grid overflow-hidden ${showFeedback ? 'grid-rows-[minmax(0,1fr)_minmax(0,0.7fr)] lg:grid-rows-1 lg:grid-cols-2' : 'grid-cols-1'}`}
       >
-        <div className="mx-auto max-w-3xl space-y-5 px-3 py-5 pb-8 sm:px-6 sm:py-8">
+        <div className="mx-auto w-full max-w-3xl min-h-0 overflow-y-auto px-3 py-3 sm:px-5">
 
           {/* Question card */}
-          <div className="space-y-5">
+          <div className="space-y-2">
 
             {question?.serie && (
               <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200/60">
@@ -270,17 +270,17 @@ export default function QuestionView({
             )}
 
             {/* Question text */}
-            <div className="text-base sm:text-[17px] font-medium leading-[1.65] text-slate-900">
+            <div className="text-sm sm:text-base font-medium leading-snug text-slate-900">
               <MathText text={question?.question || question?.text} />
             </div>
 
             {/* Clinical image */}
             {question?.imageUrl && (
-              <div className="relative group rounded-xl overflow-hidden border border-slate-200 bg-slate-50 max-h-[240px] flex items-center justify-center p-2">
+              <div className="relative group rounded-xl overflow-hidden border border-slate-200 bg-slate-50 max-h-[18dvh] flex items-center justify-center p-2">
                 <img
                   src={question.imageUrl}
                   alt="Imagen clínica"
-                  className="max-h-[220px] w-auto object-contain mx-auto rounded-lg cursor-pointer transition-transform hover:scale-[1.02]"
+                  className="max-h-[16dvh] w-auto object-contain mx-auto rounded-lg cursor-pointer transition-transform hover:scale-[1.02]"
                   onClick={() => setIsImageZoomed(true)}
                 />
                 <button
@@ -351,29 +351,23 @@ export default function QuestionView({
               ))}
             </div>
 
-            {/* Feedback / Justification */}
-            {showFeedback && (
-              <div
-                ref={feedbackRef}
-                className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-200"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0 mt-0.5">
-                    <CheckCircle2 className="w-4.5 h-4.5 text-emerald-600" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                      Justificación
-                    </span>
-                    <div className="mt-2 text-sm sm:text-[15px] leading-relaxed text-slate-700">
-                      <MathText text={getJustificationText()} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
+        {showFeedback && (
+          <section aria-live="polite" className="min-h-0 overflow-y-auto border-t lg:border-t-0 lg:border-l border-slate-300 bg-white p-3 sm:p-5">
+            <div className="mx-auto max-w-3xl space-y-3 text-sm leading-snug">
+              <h2 className={`font-bold ${selectedOption?.isCorrect ? 'text-emerald-700' : 'text-rose-700'}`}>
+                {selectedOption?.isCorrect ? 'Respuesta correcta' : 'Por qué tu respuesta es incorrecta'}
+              </h2>
+              {!selectedOption?.isCorrect && <MathText text={selectedOption?.rationale || selectedOption?.r || 'El archivo no incluye una explicación específica para esta opción.'} />}
+              <div className="rounded-lg bg-emerald-50 p-3 text-emerald-950">
+                <p className="font-semibold mb-1">Respuesta correcta</p>
+                <MathText text={correctOption?.text || ''} />
+              </div>
+              <MathText text={getJustificationText()} />
+            </div>
+          </section>
+        )}
       </main>
 
       {/* Footer - single source of truth for navigation */}

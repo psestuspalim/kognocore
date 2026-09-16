@@ -1,3 +1,4 @@
+import { sessionKey, countDescendantQuizzes } from '@/lib/quiz-progress';
 import { useState, useEffect, useRef } from 'react';
 import { client } from '@/api/client';
 import { getFolderColor } from '@/utils/folderColors';
@@ -67,6 +68,7 @@ function saveActiveQuizSession(data, currentUser = null) {
     if (!data?.selectedQuiz || !Array.isArray(data.selectedQuiz.questions)) return;
 
     const lightweightQuestions = data.selectedQuiz.questions.map(q => ({
+      ...q,
       id: q.id,
       question: q.question || q.text,
       imageUrl: q.imageUrl,
@@ -92,6 +94,7 @@ function saveActiveQuizSession(data, currentUser = null) {
       currentQuestionIndex: data.currentQuestionIndex || 0,
       score: data.score || 0,
       wrongAnswers: (data.wrongAnswers || []).map(wa => ({
+        ...wa,
         question: wa.question,
         selected_answer: wa.selected_answer,
         correct_answer: wa.correct_answer,
@@ -100,12 +103,14 @@ function saveActiveQuizSession(data, currentUser = null) {
         difficulty: wa.difficulty
       })),
       correctAnswers: (data.correctAnswers || []).map(ca => ({
+        ...ca,
         question: ca.question,
         selected_answer: ca.selected_answer,
         explanation: ca.explanation || ca.justificacion || ca.rationale || '',
         difficulty: ca.difficulty
       })),
       answerLog: (data.answerLog || []).map(al => ({
+        ...al,
         question: al.question,
         selected_answer: al.selected_answer,
         correct_answer: al.correct_answer,
@@ -126,22 +131,27 @@ function saveActiveQuizSession(data, currentUser = null) {
       updatedAt: new Date().toISOString()
     };
 
-    localStorage.setItem(LOCAL_STORAGE_SESSION_KEY, JSON.stringify(payload));
+    localStorage.setItem(sessionKey(currentUser, payload.quizId), JSON.stringify(payload));
   } catch (e) {
     console.error('⚠️ Error guardando sesión activa en localStorage:', e);
   }
 }
 
-function clearActiveQuizSession() {
+function clearActiveQuizSession(user, quizId) {
   try {
-    localStorage.removeItem(LOCAL_STORAGE_SESSION_KEY);
+    localStorage.removeItem(sessionKey(user, quizId));
+    const legacy = JSON.parse(localStorage.getItem(LOCAL_STORAGE_SESSION_KEY) || 'null');
+    if (legacy && String(legacy.quizId) === String(quizId)) localStorage.removeItem(LOCAL_STORAGE_SESSION_KEY);
   } catch (e) { /* ignore */ }
 }
 
-function getActiveQuizSession() {
+function getActiveQuizSession(user, quizId) {
   try {
-    const raw = localStorage.getItem(LOCAL_STORAGE_SESSION_KEY);
-    return raw ? JSON.parse(raw) : null;
+    const raw = localStorage.getItem(sessionKey(user, quizId));
+    if (raw) return JSON.parse(raw);
+    const legacy = JSON.parse(localStorage.getItem(LOCAL_STORAGE_SESSION_KEY) || 'null');
+    const identity = user?.learner_id || user?.email;
+    return legacy && (legacy.learnerId || legacy.userEmail) === identity && sameId(legacy.quizId, quizId) ? legacy : null;
   } catch {
     return null;
   }
@@ -613,9 +623,9 @@ export default function QuizzesPage() {
     mutationFn: (id) => client.entities.Quiz.delete(id),
     onSuccess: (_, deletedId) => {
       queryClient.invalidateQueries({ queryKey: ['quizzes'] });
-      const savedSession = getActiveQuizSession();
+      const savedSession = getActiveQuizSession(currentUser, deletedId);
       if (savedSession && sameId(savedSession.quizId, deletedId)) {
-        clearActiveQuizSession();
+        clearActiveQuizSession(currentUser, deletedId);
       }
       if (selectedQuiz && sameId(selectedQuiz.id, deletedId)) {
         setSelectedQuiz(null);
@@ -959,13 +969,13 @@ export default function QuizzesPage() {
 
     // Check if there is an active session or incomplete attempt for this quiz
     if (!forceRestart) {
-      const storedSession = getActiveQuizSession();
+      const storedSession = getActiveQuizSession(currentUser, quiz.id);
       const currentIdentity = currentUser?.learner_id || currentUser?.email || '';
       const storedIdentity = storedSession?.learnerId || storedSession?.userEmail || '';
       const savedSession = storedSession && (!storedIdentity || storedIdentity === currentIdentity)
         ? storedSession
         : null;
-      if (storedSession && !savedSession) clearActiveQuizSession();
+
       const hasSavedSessionForQuiz = savedSession && sameId(savedSession.quizId, quiz.id);
       const activeAttempt = quizAttempts.find(a => sameId(a.quiz_id, quiz.id) && !a.is_completed && (Number(a.answered_questions || 0) > 0 || (a.answer_log && a.answer_log.length > 0)));
 
@@ -1036,6 +1046,7 @@ export default function QuizzesPage() {
         ...buildAttemptIdentity(),
         score: 0,
         total_questions: orderedQuestions.length,
+        quiz_snapshot: { ...expandedQuiz, id: quiz.id, questions: orderedQuestions },
         answered_questions: 0,
         is_completed: false,
         wrong_questions: [],
@@ -1088,6 +1099,8 @@ export default function QuizzesPage() {
 
     const newQuizState = {
       ...expandedQuiz,
+      id: quiz.id,
+      subject_id: quiz.subject_id,
       questions: orderedQuestions
     };
 
@@ -1151,16 +1164,18 @@ export default function QuizzesPage() {
         const parsedQ = quiz.q.map(q => typeof q === 'string' ? JSON.parse(q) : q);
         expandedQuiz = fromCompactFormat({ m: quiz.m || { t: quiz.title, s: quiz.description, v: 'cQ-v2', c: parsedQ.length }, q: parsedQ });
       }
-      const orderedQuestions = (expandedQuiz.questions || []).map(normalizeQuestionOptions);
+      const orderedQuestions = (activeAttempt.quiz_snapshot?.questions || expandedQuiz.questions || []).map(normalizeQuestionOptions).slice(0, activeAttempt.total_questions);
       const wrongAns = activeAttempt.wrong_questions || [];
       const logAns = activeAttempt.answer_log || [];
 
       const resumedState = {
         ...expandedQuiz,
+        id: quiz.id,
+        subject_id: quiz.subject_id,
         questions: orderedQuestions
       };
 
-      const qIndex = Math.min(answeredCount, Math.max(0, orderedQuestions.length - 1));
+      const qIndex = Math.min(Math.max(0, answeredCount - 1), Math.max(0, orderedQuestions.length - 1));
 
       setCurrentAttemptId(activeAttempt.id);
       setSelectedQuiz(resumedState);
@@ -1194,11 +1209,12 @@ export default function QuizzesPage() {
   const handleRestartFromModal = () => {
     const { quiz, questionCount, selectedDeck, quizAttempts } = resumeModalState;
     setResumeModalState(prev => ({ ...prev, open: false }));
-    clearActiveQuizSession();
+    clearActiveQuizSession(currentUser, quiz.id);
     handleStartQuiz(quiz, questionCount, selectedDeck, quizAttempts, true);
   };
 
   const handleAnswer = async (isCorrect, selectedOption, question) => {
+    if (answerLog.length > currentQuestionIndex) return;
     const responseTime = Math.round((Date.now() - questionStartTime) / 1000);
     const newResponseTimes = [...responseTimes, responseTime];
     setResponseTimes(newResponseTimes);
@@ -1212,6 +1228,7 @@ export default function QuizzesPage() {
         ? `${selectedOption.score}/${selectedOption.total || 0} elementos correctos`
         : 'Respuesta registrada');
     const feedbackText =
+      (!isCorrect && (selectedOption?.rationale || selectedOption?.r)) ||
       question.justificacion ||
       question.justificación ||
       question.feedback ||
@@ -1269,8 +1286,14 @@ export default function QuizzesPage() {
     const isLastQuestion = currentQuestionIndex >= selectedQuiz.questions.length - 1;
     const answeredCount = currentQuestionIndex + 1;
 
+    saveActiveQuizSession({ selectedQuiz, currentQuestionIndex, score: newScore,
+      wrongAnswers: newWrongAnswers, correctAnswers: isCorrect ? [...correctAnswers, answerEntry] : correctAnswers,
+      answerLog: newAnswerLog, markedQuestions, responseTimes: newResponseTimes,
+      currentAttemptId, currentSessionId, deckType }, currentUser);
+
     if (currentAttemptId) {
       const attemptData = {
+        quiz_snapshot: selectedQuiz,
         score: newScore,
         answered_questions: answeredCount,
         wrong_questions: newWrongAnswers,
@@ -1299,34 +1322,19 @@ export default function QuizzesPage() {
       }
     }
 
-    if (!isLastQuestion) {
+  };
+
+  const handleNextQuestion = () => {
+    if (answerLog.length <= currentQuestionIndex) return;
+    if (currentQuestionIndex < selectedQuiz.questions.length - 1) {
       const nextIndex = currentQuestionIndex + 1;
       setCurrentQuestionIndex(nextIndex);
       setQuestionStartTime(Date.now());
-
-      saveActiveQuizSession({
-        selectedQuiz,
-        currentQuestionIndex: nextIndex,
-        score: newScore,
-        wrongAnswers: newWrongAnswers,
-        correctAnswers: isCorrect ? [...correctAnswers, answerEntry] : correctAnswers,
-        answerLog: newAnswerLog,
-        markedQuestions,
-        responseTimes: newResponseTimes,
-        currentAttemptId,
-        currentSessionId,
-        deckType
-      }, currentUser);
+      saveActiveQuizSession({ selectedQuiz, currentQuestionIndex: nextIndex, score, wrongAnswers,
+        correctAnswers, answerLog, markedQuestions, responseTimes, currentAttemptId, currentSessionId, deckType }, currentUser);
     } else {
-      clearActiveQuizSession();
-      // Marcar sesión como completa
-      if (currentSessionId) {
-        try {
-          await client.entities.QuizSession.update(currentSessionId, { is_active: false });
-        } catch (error) {
-          console.error('Error marking session complete:', error);
-        }
-      }
+      clearActiveQuizSession(currentUser, selectedQuiz.id);
+      if (currentSessionId) client.entities.QuizSession.update(currentSessionId, { is_active: false }).catch(console.error);
       queryClient.invalidateQueries({ queryKey: ['attempts'] });
       setView('results');
     }
@@ -1376,6 +1384,7 @@ export default function QuizzesPage() {
       ...selectedQuiz,
       title: `Repaso: ${selectedQuiz.title}`,
       questions: wrongAnswers.map(wa => ({
+        ...wa,
         question: wa.question,
         answerOptions: [...(wa.answerOptions || [])].map((opt) => ({
           ...opt,
@@ -1416,7 +1425,7 @@ export default function QuizzesPage() {
   const handleExitQuiz = async () => {
     if (currentAttemptId) {
       const exitData = {
-        is_completed: false,
+        is_completed: answerLog.length >= selectedQuiz.questions.length,
         score,
         answered_questions: Math.max(currentQuestionIndex, answerLog.length),
         wrong_questions: wrongAnswers,
@@ -1448,7 +1457,6 @@ export default function QuizzesPage() {
     setSelectedQuiz(null);
     setSwipeMode(false);
     setCurrentSessionId(null);
-    clearActiveQuizSession();
 
     // Volver a la vista adecuada
     if (selectedSubject) {
@@ -1626,18 +1634,8 @@ export default function QuizzesPage() {
     return { totalCorrect, totalWrong, totalAnswered };
   };
 
-  const getRecursiveQuizCount = (subjectId) => {
-    const subj = subjects.find(s => sameId(s.id, subjectId)) || { id: subjectId };
-    // 1. Direct quizzes
-    const directCount = quizzes.filter(q => matchesSubject(q, subj)).length;
-
-    // 2. Quizzes in folders belonging to this subject
-    const subjectFolders = folders.filter(f => sameId(f.subject_id, subjectId));
-    const folderIds = subjectFolders.map(f => f.id);
-    const folderCount = quizzes.filter(q => folderIds.some(fid => sameId(q.folder_id, fid))).length;
-
-    return directCount + folderCount;
-  };
+  const getRecursiveQuizCount = (id) => countDescendantQuizzes(id,
+    buildContainers(courses, folders, subjects), quizzes.filter(q => isAdmin || !q.is_hidden));
 
   // Auto-assign alias if missing (students get a persistent random alias)
   if (currentUser && !currentUser.username && currentUser.role !== 'admin') {
@@ -1803,6 +1801,7 @@ export default function QuizzesPage() {
                             <DraggableItem key={course.id} id={course.id} index={index} isAdmin={canEdit}>
                               <CourseCard
                                 course={course}
+                                quizCount={getRecursiveQuizCount(course.id)}
                                 subjectCount={subjects.filter(s => sameId(s.course_id, course.id)).length}
                                 isAdmin={canEdit}
                                 onEdit={setEditingCourse}
@@ -1826,7 +1825,7 @@ export default function QuizzesPage() {
                         <DraggableItem key={subject.id} id={subject.id} index={index} isAdmin={canEdit}>
                           <SubjectCard
                             subject={subject}
-                            quizCount={quizzes.filter(q => sameId(q.subject_id, subject.id)).length}
+                            quizCount={getRecursiveQuizCount(subject.id)}
                             stats={getSubjectStats(subject.id)}
                             isAdmin={canEdit}
                             onDelete={(id) => deleteSubjectMutation.mutate(id)}
@@ -2103,7 +2102,7 @@ export default function QuizzesPage() {
                         <DraggableItem key={folder.id} id={folder.id} index={index} isAdmin={canEdit}>
                           <FolderCard
                             folder={folder}
-                            itemCount={subjects.filter(s => sameId(s.folder_id, folder.id)).length}
+                            itemCount={getRecursiveQuizCount(folder.id)}
                             isAdmin={canEdit}
                             onDelete={(id) => deleteFolderMutation.mutate(id)}
                             onEdit={setEditingFolder}
@@ -2245,7 +2244,7 @@ export default function QuizzesPage() {
                   <div>
                     <motion.div key="list" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                       <BackNav />
-  
+
                       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-5">
                         <div>
                           <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">{selectedSubject.name}</h1>
@@ -2292,7 +2291,7 @@ export default function QuizzesPage() {
                             <DroppableArea key={folder.id} droppableId={`folder-${folder.id}`} type="QUIZ" className="h-full">
                               <FolderCard
                                 folder={folder}
-                                itemCount={quizzes.filter(q => sameId(q.folder_id, folder.id)).length}
+                                itemCount={getRecursiveQuizCount(folder.id)}
                                 isAdmin={isAdmin}
                                 onDelete={(id) => deleteFolderMutation.mutate(id)}
                                 onEdit={setEditingFolder}
@@ -2381,6 +2380,8 @@ export default function QuizzesPage() {
                       correctAnswers={score}
                       wrongAnswers={wrongAnswers.length}
                       onAnswer={handleAnswer}
+                      onNext={handleNextQuestion}
+                      savedAnswer={answerLog[currentQuestionIndex]}
                       onBack={handleExitQuiz}
                       previousAttempts={attempts.filter(a => a.quiz_id === selectedQuiz.id)}
                       quizId={selectedQuiz.id}

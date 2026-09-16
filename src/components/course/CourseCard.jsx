@@ -4,7 +4,7 @@ import { Pencil, Trash2, GraduationCap, Users, EyeOff, BookOpen, ChevronRight } 
 import { Icon } from '@/components/ui/Icon';
 import { buildPalette } from '@/utils/theme';
 
-export default function CourseCard({ course, subjectCount, isAdmin, onEdit, onDelete, onClick }) {
+export default function CourseCard({ course, subjectCount, quizCount = 0, isAdmin, onEdit, onDelete, onClick }) {
   const p = buildPalette(course.color || '#7c3aed');
 
   return (
@@ -40,7 +40,7 @@ export default function CourseCard({ course, subjectCount, isAdmin, onEdit, onDe
               <div className="flex items-center gap-2 mt-1">
                 <span className="text-sm text-slate-500 flex items-center gap-1.5">
                   <BookOpen className="w-3.5 h-3.5" />
-                  {subjectCount} {subjectCount === 1 ? 'materia' : 'materias'}
+                  {subjectCount} {subjectCount === 1 ? 'materia' : 'materias'} · {quizCount} {quizCount === 1 ? 'quiz' : 'quizzes'}
                 </span>
                 {course.visibility === 'specific' && (
                   <span className="text-xs text-slate-400 flex items-center gap-1">

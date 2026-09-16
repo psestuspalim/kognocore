@@ -41,7 +41,7 @@ export default function FolderCard({ folder, itemCount, isAdmin, onDelete, onEdi
                 <p className="text-xs text-slate-500 line-clamp-1 mt-0.5">{folder.description}</p>
               )}
               <span className="text-xs text-slate-400 mt-1 block">
-                {itemCount} {itemCount === 1 ? 'elemento' : 'elementos'}
+                {itemCount} {itemCount === 1 ? 'quiz' : 'quizzes'}
               </span>
             </div>
           </div>

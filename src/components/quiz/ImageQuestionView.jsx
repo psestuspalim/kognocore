@@ -47,9 +47,10 @@ export default function ImageQuestionView({
     // Revelar todos los marcadores correctos
     const allMarkers = correctOptions.flatMap(o => o.markers || []);
     setRevealedMarkers(allMarkers);
+    if (onNext) recordAnswer();
   };
 
-  const handleNext = () => {
+  const recordAnswer = () => {
     const correctCount = selectedOptions.filter(id => 
       correctOptions.find(o => o.id === id)
     ).length;
@@ -270,7 +271,7 @@ export default function ImageQuestionView({
               </Button>
             ) : (
               <Button
-                onClick={handleNext}
+                onClick={onNext || recordAnswer}
                 className="bg-indigo-600 hover:bg-indigo-700"
               >
                 Siguiente

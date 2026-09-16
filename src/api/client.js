@@ -53,7 +53,22 @@ const requestJson = async (input, init = {}) => {
   return data;
 };
 
-const persistRemoteEntity = async (entityName, item, operation = 'create') => {
+const remoteWrites = new Map();
+const persistRemoteEntity = (entityName, item, operation = 'create') => {
+  const key = `${entityName}:${item.id}`;
+  const write = (remoteWrites.get(key) || Promise.resolve()).catch(() => {}).then(async () => {
+    const current = REMOTE_ENTITIES[entityName]?.offline
+      ? getItems(entityName).find(value => value.id === item.id)
+      : null;
+    return sendRemoteEntity(entityName, current || item, operation);
+  });
+  remoteWrites.set(key, write);
+  const release = () => { if (remoteWrites.get(key) === write) remoteWrites.delete(key); };
+  write.then(release, release);
+  return write;
+};
+
+const sendRemoteEntity = async (entityName, item, operation = 'create') => {
   const config = REMOTE_ENTITIES[entityName];
   if (!config) return null;
 
@@ -296,7 +311,12 @@ const flushPendingSync = async (entityName) => {
     }
   }
 
-  if (itemsChanged) saveItems(entityName, nextItems);
+  if (itemsChanged) saveItems(entityName, getItems(entityName).map(current => {
+    const original = items.find(item => item.id === current.id);
+    return JSON.stringify(current) === JSON.stringify(original)
+      ? (nextItems.find(item => item.id === current.id) || current)
+      : current;
+  }));
 
   const pendingDeletes = getPendingDeletes();
   const remainingDeletes = [];
@@ -746,6 +766,15 @@ const mockClient = {
           };
 
           const config = REMOTE_ENTITIES[entityName];
+          if (config?.offline) {
+            const pendingItem = { ...newItem, _sync_status: 'pending', _sync_operation: 'create' };
+            saveItems(entityName, [...getItems(entityName), pendingItem]);
+            persistRemoteEntity(entityName, newItem, 'create').then(() => {
+              saveItems(entityName, getItems(entityName).map(item =>
+                JSON.stringify(item) === JSON.stringify(pendingItem) ? newItem : item));
+            }).catch(() => { /* The pending record is retried on the next sync. */ });
+            return pendingItem;
+          }
           if (config) {
             try {
               await persistRemoteEntity(entityName, newItem, 'create');
@@ -783,25 +812,30 @@ const mockClient = {
               // Persist the new state locally before waiting for the network. A
               // student can close or reload the page immediately after answering,
               // and the remote request must not be the only copy of that progress.
-              items[index] = nextItem;
+              items[index] = config.offline ? { ...nextItem, _sync_status: 'pending', _sync_operation: 'update' } : nextItem;
               saveItems(entityName, items);
               try {
                 await persistRemoteEntity(entityName, nextItem, 'update');
               } catch (error) {
                 if (!config.offline) throw error;
-                items[index] = {
+                const pendingItem = {
                   ...nextItem,
                   _sync_status: 'pending',
                   _sync_operation: 'update',
                   _sync_error: error.message
                 };
-                saveItems(entityName, items);
-                return items[index];
+                saveItems(entityName, getItems(entityName).map(item =>
+                  item.id === id && JSON.stringify(cleanRemoteItem(item)) === JSON.stringify(nextItem) ? pendingItem : item));
+                return pendingItem;
               }
             }
 
-            items[index] = nextItem;
-            saveItems(entityName, items);
+            const latest = getItems(entityName);
+            const latestIndex = latest.findIndex(item => item.id === id);
+            if (latestIndex >= 0 && JSON.stringify(cleanRemoteItem(latest[latestIndex])) === JSON.stringify(nextItem)) {
+              latest[latestIndex] = nextItem;
+              saveItems(entityName, latest);
+            }
             return nextItem;
           }
           throw new Error('Item not found');

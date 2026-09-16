@@ -101,7 +101,7 @@ export function fromSimplifiedFormat(data) {
           label: key.trim().toUpperCase(),
           text: text,
           isCorrect: isCorrect,
-          rationale: isCorrect ? justificacion : '',
+          rationale: val?.rationale || val?.r || val?.justificacion || val?.explanation || (isCorrect ? justificacion : ''),
           errorType: isCorrect ? '' : 'conceptual'
         };
       });
@@ -123,7 +123,7 @@ export function fromSimplifiedFormat(data) {
           label: label,
           text: text,
           isCorrect: isCorrect,
-          rationale: isCorrect ? justificacion : (opt.rationale || opt.r || ''),
+          rationale: opt?.rationale || opt?.r || opt?.justificacion || opt?.explanation || (isCorrect ? justificacion : ''),
           errorType: isCorrect ? '' : (opt.errorType || opt.et || 'conceptual')
         };
       });
