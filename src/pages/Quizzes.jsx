@@ -1,4 +1,4 @@
-import { sessionKey, countDescendantQuizzes } from '@/lib/quiz-progress';
+import { sessionKey, countDescendantQuizzes, shuffleAnswerOptions } from '@/lib/quiz-progress';
 import { useState, useEffect, useRef } from 'react';
 import { client } from '@/api/client';
 import { getFolderColor } from '@/utils/folderColors';
@@ -1036,7 +1036,8 @@ export default function QuizzesPage() {
 
     const orderedQuestions = [...filteredQuestions]
       .map(normalizeQuestionOptions)
-      .slice(0, Math.min(questionCount, filteredQuestions.length));
+      .slice(0, Math.min(questionCount, filteredQuestions.length))
+      .map(question => ({ ...question, answerOptions: shuffleAnswerOptions(question.answerOptions) }));
 
     let attemptId = null;
     try {
@@ -1345,7 +1346,7 @@ export default function QuizzesPage() {
       ...selectedQuiz,
       questions: selectedQuiz.questions.map(q => ({
         ...normalizeQuestionOptions(q),
-        answerOptions: [...normalizeQuestionOptions(q).answerOptions].sort(() => Math.random() - 0.5)
+        answerOptions: shuffleAnswerOptions(normalizeQuestionOptions(q).answerOptions)
       }))
     };
 
@@ -1386,10 +1387,10 @@ export default function QuizzesPage() {
       questions: wrongAnswers.map(wa => ({
         ...wa,
         question: wa.question,
-        answerOptions: [...(wa.answerOptions || [])].map((opt) => ({
+        answerOptions: shuffleAnswerOptions([...(wa.answerOptions || [])].map((opt) => ({
           ...opt,
           text: normalizeOptionText(opt)
-        })).filter((opt) => !!opt.text).sort(() => Math.random() - 0.5),
+        })).filter((opt) => !!opt.text)),
         hint: wa.hint
       }))
     };
@@ -1551,7 +1552,7 @@ export default function QuizzesPage() {
       subject_id: subjectId,
       questions: wrongQuestions.map(q => ({
         ...normalizeQuestionOptions(q),
-        answerOptions: [...normalizeQuestionOptions(q).answerOptions].sort(() => Math.random() - 0.5)
+        answerOptions: shuffleAnswerOptions(normalizeQuestionOptions(q).answerOptions)
       }))
     };
 

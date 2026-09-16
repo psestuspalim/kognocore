@@ -1,5 +1,16 @@
 export const sessionKey = (user, quizId) => `kc_quiz_session_v2:${encodeURIComponent(user?.learner_id || user?.email || 'anonymous')}:${encodeURIComponent(quizId)}`;
 
+// Shuffle whole options so correctness, identity and rationale stay together.
+// Only call when creating an attempt; saved attempts retain their exact order.
+export function shuffleAnswerOptions(options, random = Math.random) {
+  const shuffled = options.map(option => ({ ...option }));
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.map((option, index) => ({ ...option, label: String.fromCharCode(65 + index) }));
+}
+
 export function countDescendantQuizzes(containerId, containers, quizzes) {
   const ids = new Set([String(containerId)]);
   let changed = true;

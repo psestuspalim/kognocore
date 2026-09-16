@@ -2,7 +2,29 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
-import { sessionKey, countDescendantQuizzes } from '../src/lib/quiz-progress.js';
+import { sessionKey, countDescendantQuizzes, shuffleAnswerOptions } from '../src/lib/quiz-progress.js';
+
+test('a correct answer originally in B can occupy every position without changing its explanation', () => {
+  const options = ['a', 'b', 'c', 'd'].map(id => ({ id, text: id, isCorrect: id === 'b', rationale: `reason-${id}` }));
+  const original = JSON.stringify(options);
+  const positions = new Set();
+  // Enumerate every possible Fisher–Yates swap sequence for four options.
+  for (let a = 0; a < 4; a++) for (let b = 0; b < 3; b++) for (let c = 0; c < 2; c++) {
+    const draws = [a / 4, b / 3, c / 2];
+    const shuffled = shuffleAnswerOptions(options, () => draws.shift());
+    positions.add(shuffled.findIndex(option => option.isCorrect));
+    assert.equal(shuffled.filter(option => option.isCorrect).length, 1);
+    assert.equal(new Set(shuffled.map(option => option.id)).size, 4);
+    shuffled.forEach((option, index) => {
+      assert.equal(option.rationale, `reason-${option.id}`);
+      assert.equal(option.label, String.fromCharCode(65 + index));
+    });
+    // A persisted attempt restores the same permutation, without reshuffling.
+    assert.deepEqual(JSON.parse(JSON.stringify(shuffled)), shuffled);
+  }
+  assert.deepEqual([...positions].sort(), [0, 1, 2, 3]);
+  assert.equal(JSON.stringify(options), original);
+});
 
 test('counts quizzes at every level once, including deeply nested folders and cycles', () => {
   const containers = [{ id: 'course' }, { id: 'subject', parent_id: 'course' },
