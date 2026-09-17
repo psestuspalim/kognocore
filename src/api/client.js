@@ -141,30 +141,7 @@ const initializeStorage = () => {
       }
     }
 
-    // Auto-heal subjects and courses for any legacy or misrouted quizzes
-    const validIds = ['subj_med_interna', 'subj_cirugia_gen', 'subj_pediatria', 'subj_ginecologia_obs', 'subj_simuladores'];
-    stored = stored.map(q => {
-      if (!q) return q;
-      let subj = q.subject_id;
-      if (!subj || subj === 'root' || !validIds.includes(subj)) {
-        const txt = `${q.title || ''} ${q.subject || ''} ${q.description || ''} ${JSON.stringify(q.questions || [])}`.toLowerCase();
-        if (txt.includes('pediatr') || txt.includes('niño') || txt.includes('neonato') || txt.includes('lactante') || txt.includes('gestación') || txt.includes('reneo')) {
-          subj = 'subj_pediatria';
-        } else if (txt.includes('cirug') || txt.includes('quirúrg') || txt.includes('apendic') || txt.includes('hernia')) {
-          subj = 'subj_cirugia_gen';
-        } else if (txt.includes('ginec') || txt.includes('obstet') || txt.includes('embaraz') || txt.includes('parto') || txt.includes('gyo')) {
-          subj = 'subj_ginecologia_obs';
-        } else if (txt.includes('simulad') || txt.includes('examen')) {
-          subj = 'subj_simuladores';
-        } else {
-          subj = 'subj_med_interna';
-        }
-        modified = true;
-        return { ...q, subject_id: subj, course_id: 'course_enarm2026' };
-      }
-      return q;
-    });
-
+    // Preserve explicit subject/course/folder assignments, including custom subjects.
     if (modified || !localStorage.getItem('app_quizzes')) {
       localStorage.setItem('app_quizzes', JSON.stringify(stored));
     }

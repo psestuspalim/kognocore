@@ -1,3 +1,4 @@
+import { quizBelongsToSubject } from '@/lib/quiz-membership';
 import { sessionKey, countDescendantQuizzes, shuffleAnswerOptions, summarizeQuizProgress } from '@/lib/quiz-progress';
 import { useState, useEffect, useRef } from 'react';
 import { client } from '@/api/client';
@@ -840,63 +841,7 @@ export default function QuizzesPage() {
     ? subjects.filter(s => s && s.id && sameId(s.folder_id, currentFolderId) && canUserAccess(s))
     : currentCourseSubjects.filter(s => s && s.id && !s.folder_id);
 
-  const matchesSubject = (q, subject) => {
-    if (!q || !subject) return false;
-    const targetId = normalizeId(subject.id);
-    const targetName = (subject.name || '').trim().toLowerCase();
-    const targetCode = (subject.code || '').trim().toLowerCase();
-
-    const qSubjId = normalizeId(q.subject_id);
-    const qSubj = (q.subject || q.subject_name || '').trim().toLowerCase();
-    const qSubjIdStr = (q.subject_id ? String(q.subject_id) : '').trim().toLowerCase();
-
-    // 1. Direct ID, code, or name match
-    if (
-      sameId(qSubjId, targetId) ||
-      qSubjIdStr === targetName ||
-      qSubjIdStr === targetCode ||
-      qSubj === targetName ||
-      qSubj === targetCode
-    ) {
-      return true;
-    }
-
-    // 2. Partial name match
-    if (targetName && (qSubj.includes(targetName) || qSubjIdStr.includes(targetName))) {
-      return true;
-    }
-
-    // 3. Keyword heuristic match (e.g. Pediatria, Cirugia, Ginecologia, Medicina Interna, Simuladores)
-    const fullText = `${q.title || ''} ${q.description || ''} ${q.subject || ''} ${q.subject_id || ''}`.toLowerCase();
-    if (targetId === 'subj_pediatria' || targetName.includes('pediatr') || targetCode === 'ped') {
-      if (fullText.includes('pediatr') || fullText.includes('niño') || fullText.includes('neonato') || fullText.includes('reneo') || fullText.includes('lactante')) {
-        return true;
-      }
-    } else if (targetId === 'subj_cirugia_gen' || targetName.includes('cirug') || targetCode === 'cg') {
-      if (fullText.includes('cirug') || fullText.includes('quirúrg') || fullText.includes('apendic') || fullText.includes('hernia')) {
-        return true;
-      }
-    } else if (targetId === 'subj_ginecologia_obs' || targetName.includes('ginec') || targetName.includes('gyo') || targetCode === 'gyo') {
-      if (fullText.includes('ginec') || fullText.includes('obstet') || fullText.includes('embaraz') || fullText.includes('parto') || fullText.includes('gyo') || fullText.includes('aborto')) {
-        return true;
-      }
-    } else if (targetId === 'subj_simuladores' || targetName.includes('simulad') || targetCode === 'sim') {
-      if (fullText.includes('simulad') || fullText.includes('simulacro') || fullText.includes('examen') || fullText.includes('mega')) {
-        return true;
-      }
-    } else if (targetId === 'subj_med_interna' || targetName.includes('interna') || targetCode === 'mi') {
-      if (fullText.includes('interna') || fullText.includes('cardio') || fullText.includes('neuro') || fullText.includes('nefro') || fullText.includes('neumo')) {
-        return true;
-      }
-    }
-
-    // 4. Fallback for legacy quizzes with no subject_id
-    if (!q.subject_id || q.subject_id === 'root') {
-      return targetId === 'subj_pediatria';
-    }
-
-    return false;
-  };
+  const matchesSubject = quizBelongsToSubject;
 
   const subjectQuizzes = selectedSubject
     ? quizzes.filter(q => q && q.id && matchesSubject(q, selectedSubject) && (isAdmin || !q.is_hidden))
