@@ -2,7 +2,37 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
-import { sessionKey, countDescendantQuizzes, shuffleAnswerOptions } from '../src/lib/quiz-progress.js';
+import { sessionKey, countDescendantQuizzes, shuffleAnswerOptions, summarizeQuizProgress } from '../src/lib/quiz-progress.js';
+
+test('quiz list shows zero-answer starts, partial progress, completion and a fresh retry consistently', () => {
+  const quiz = { id: 7, total_questions: 30 };
+  assert.equal(summarizeQuizProgress(quiz).label, 'Sin iniciar');
+  const started = { id: 'a', quiz_id: '7', total_questions: 30, created_date: '2026-09-01' };
+  assert.equal(summarizeQuizProgress(quiz, [started]).label, 'En progreso');
+  const partial = { ...started, answered_questions: 6 };
+  assert.equal(summarizeQuizProgress(quiz, [partial]).percent, 20);
+  const completed = { ...partial, answered_questions: 30, is_completed: true };
+  assert.equal(summarizeQuizProgress(quiz, [completed]).label, 'Completado');
+  const retry = { ...started, id: 'b', created_date: '2026-09-02', answered_questions: 3 };
+  const result = summarizeQuizProgress(quiz, [completed, retry]);
+  assert.equal(result.label, 'En progreso');
+  assert.equal(result.percent, 10);
+  assert.equal(result.attemptCount, 2);
+});
+
+test('saved progress remains visible before the server responds and is not counted twice', () => {
+  const quiz = { id: 'quiz', total_questions: 30 };
+  const session = { quizId: 'quiz', attemptId: 'attempt', answerLog: [{}, {}, {}],
+    currentQuestionIndex: 2, score: 1, updatedAt: '2026-09-16T12:00:00Z' };
+  assert.equal(summarizeQuizProgress(quiz, [], session).answered, 3);
+  const previous = { id: 'attempt', quiz_id: 'quiz', answered_questions: 1, created_date: '2026-09-16T11:00:00Z' };
+  const progress = summarizeQuizProgress(quiz, [previous], session);
+  assert.equal(progress.answered, 3);
+  assert.equal(progress.attemptCount, 1);
+  assert.equal(summarizeQuizProgress({ id: 'other' }, [previous], session).label, 'Sin iniciar');
+  const newer = { ...previous, answered_questions: 30, is_completed: true, updated_date: '2026-09-16T13:00:00Z' };
+  assert.equal(summarizeQuizProgress(quiz, [newer], session).label, 'Completado');
+});
 
 test('a correct answer originally in B can occupy every position without changing its explanation', () => {
   const options = ['a', 'b', 'c', 'd'].map(id => ({ id, text: id, isCorrect: id === 'b', rationale: `reason-${id}` }));
@@ -106,4 +136,11 @@ test('pending writes survive reload, slow writes do not erase newer answers or o
   assert.equal(stored.find(item => item.id === a.id).answered_questions, 2);
   assert.equal(stored.find(item => item.id === a.id)._sync_status, undefined);
   assert.equal(requests.at(-1).body.attempt.answered_questions, 2);
+  const recovery = entity.update('legacy-session-attempt', { quiz_id: 'quiz', learner_id: 'student-a',
+    total_questions: 30, answered_questions: 4 });
+  assert.equal(stored.find(item => item.id === 'legacy-session-attempt').answered_questions, 4);
+  await new Promise(resolve => setImmediate(resolve));
+  requests.at(-1).resolve({ ok: true });
+  await recovery;
+  assert.equal(stored.find(item => item.id === 'legacy-session-attempt').learner_id, 'student-a');
 });

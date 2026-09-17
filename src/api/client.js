@@ -798,7 +798,13 @@ const mockClient = {
         },
         update: async (id, data) => {
           const items = getItems(entityName);
-          const index = items.findIndex(item => item.id === id);
+          let index = items.findIndex(item => item.id === id);
+          // Recover an attempt that only has a saved quiz session, for example
+          // after an older client failed while creating its identity record.
+          if (index === -1 && entityName === 'QuizAttempt' && data.quiz_id && (data.learner_id || data.user_email)) {
+            items.push({ id, created_date: new Date().toISOString() });
+            index = items.length - 1;
+          }
           if (index !== -1) {
             const nextItem = cleanRemoteItem({
               ...items[index],

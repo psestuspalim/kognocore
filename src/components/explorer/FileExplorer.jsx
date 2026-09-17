@@ -11,6 +11,7 @@ import ExplorerNode from './ExplorerNode';
 export default function FileExplorer({
   containers = [],
   quizzes = [],
+  quizProgressById = {},
   onMoveItems,
   onCopyItems,
   onItemClick,
@@ -236,6 +237,7 @@ export default function FileExplorer({
         isDragOver={isDragOver}
         hasChildren={hasChildren}
         quizCount={countDescendantQuizzes(item.id, containers, quizzes)}
+        quizProgress={quizProgressById[item.id]}
         onToggleSelect={toggleSelect}
         onToggleExpand={toggleExpand}
         onItemClick={onItemClick}
@@ -250,7 +252,7 @@ export default function FileExplorer({
         )}
       </ExplorerNode>
     );
-  }, [containers, quizzes, expandedContainers, dragOverContainer, indices, isAdmin, isSelected, toggleSelect, toggleExpand, onItemClick, onChangeType]);
+  }, [containers, quizzes, quizProgressById, expandedContainers, dragOverContainer, indices, isAdmin, isSelected, toggleSelect, toggleExpand, onItemClick, onChangeType]);
 
   return (
     <DragDropContext onDragEnd={handleDragEnd} onDragUpdate={handleDragUpdate}>

@@ -1,11 +1,11 @@
-import { sessionKey, countDescendantQuizzes, shuffleAnswerOptions } from '@/lib/quiz-progress';
+import { sessionKey, countDescendantQuizzes, shuffleAnswerOptions, summarizeQuizProgress } from '@/lib/quiz-progress';
 import { useState, useEffect, useRef } from 'react';
 import { client } from '@/api/client';
 import { getFolderColor } from '@/utils/folderColors';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/AuthContext';
-import { getOrCreateStudentAlias } from '@/lib/learner-id';
+import { getOrCreateStudentAlias, getOrCreateLearnerId } from '@/lib/learner-id';
 import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, Upload } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
@@ -1294,6 +1294,10 @@ export default function QuizzesPage() {
 
     if (currentAttemptId) {
       const attemptData = {
+        ...buildAttemptIdentity(),
+        quiz_id: selectedQuiz.id,
+        subject_id: selectedQuiz.subject_id,
+        total_questions: selectedQuiz.questions.length,
         quiz_snapshot: selectedQuiz,
         score: newScore,
         answered_questions: answeredCount,
@@ -1426,6 +1430,11 @@ export default function QuizzesPage() {
   const handleExitQuiz = async () => {
     if (currentAttemptId) {
       const exitData = {
+        ...buildAttemptIdentity(),
+        quiz_id: selectedQuiz.id,
+        subject_id: selectedQuiz.subject_id,
+        total_questions: selectedQuiz.questions.length,
+        quiz_snapshot: selectedQuiz,
         is_completed: answerLog.length >= selectedQuiz.questions.length,
         score,
         answered_questions: Math.max(currentQuestionIndex, answerLog.length),
@@ -1637,6 +1646,9 @@ export default function QuizzesPage() {
 
   const getRecursiveQuizCount = (id) => countDescendantQuizzes(id,
     buildContainers(courses, folders, subjects), quizzes.filter(q => isAdmin || !q.is_hidden));
+
+  const quizProgressById = Object.fromEntries(quizzes.map(quiz => [quiz.id,
+    summarizeQuizProgress(quiz, attempts, getActiveQuizSession(currentUser, quiz.id))]));
 
   // Auto-assign alias if missing (students get a persistent random alias)
   if (currentUser && !currentUser.username && currentUser.role !== 'admin') {
@@ -1885,6 +1897,7 @@ export default function QuizzesPage() {
                     </div>
 
                     <FileExplorer
+                      quizProgressById={quizProgressById}
                       containers={buildContainers(courses, folders, subjects)}
                       quizzes={quizzes}
                       isAdmin={isAdmin}
@@ -2167,7 +2180,8 @@ export default function QuizzesPage() {
                                 <QuizListItem
                                   key={quiz.id}
                                   quiz={quiz}
-                                  attempts={attempts.filter(a => a.quiz_id === quiz.id)}
+                                  attempts={attempts.filter(a => sameId(a.quiz_id, quiz.id))}
+                                  progress={quizProgressById[quiz.id]}
                                   isAdmin={canEdit}
                                   onStart={handleStartQuiz}
                                   onEdit={setEditingQuiz}
@@ -2342,7 +2356,8 @@ export default function QuizzesPage() {
                             <DraggableItem key={quiz.id} id={quiz.id} index={index} isAdmin={isAdmin}>
                               <QuizListItem
                                 quiz={quiz}
-                                attempts={attempts.filter(a => a.quiz_id === quiz.id)}
+                                attempts={attempts.filter(a => sameId(a.quiz_id, quiz.id))}
+                                progress={quizProgressById[quiz.id]}
                                 isAdmin={isAdmin}
                                 onStart={handleStartQuiz}
                                 onEdit={setEditingQuiz}

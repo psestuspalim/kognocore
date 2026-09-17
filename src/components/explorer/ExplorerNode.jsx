@@ -1,4 +1,5 @@
 import { memo, useCallback } from 'react';
+import QuizProgressIndicator from '../quiz/QuizProgressIndicator';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -31,6 +32,7 @@ const ExplorerNode = memo(function ExplorerNode({
   isDragOver,
   hasChildren,
   quizCount,
+  quizProgress,
   children,
   onToggleSelect,
   onToggleExpand,
@@ -127,6 +129,7 @@ const ExplorerNode = memo(function ExplorerNode({
 
               <div className="flex-1 min-w-0">
                 <p className="font-medium text-gray-900 truncate">{item.name || item.title}</p>
+                {type === 'quiz' && quizProgress && <QuizProgressIndicator progress={quizProgress} />}
                 {item.description && (
                   <p className="text-xs text-gray-500 truncate">{item.description}</p>
                 )}
@@ -216,7 +219,8 @@ const ExplorerNode = memo(function ExplorerNode({
     prevProps.isDragOver === nextProps.isDragOver &&
     prevProps.hasChildren === nextProps.hasChildren &&
     prevProps.quizCount === nextProps.quizCount &&
-    prevProps.children?.length === nextProps.children?.length
+    prevProps.quizProgress === nextProps.quizProgress &&
+    prevProps.children === nextProps.children
   );
 });
 
