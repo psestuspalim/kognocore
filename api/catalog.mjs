@@ -15,7 +15,7 @@ export async function GET(req) {
     query = query.in('course_id', ids);
   }
   const { data, error } = await query;
-  return error ? reply({ error: 'No se pudo cargar el catálogo.', details: error.message }, 500) : reply({ items: data.map(row => row.payload) });
+  return error ? reply({ error: 'No se pudo cargar el catálogo.', code: error.code }, 500) : reply({ items: data.map(row => row.payload) });
 }
 
 export async function POST(req) {
