@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import { requireAdmin, requireDataActor } from './_auth.mjs'
+import { canAccessCourse } from './_students.mjs'
 
 function getSupabaseAdmin() {
   const url = process.env.SUPABASE_URL
@@ -19,8 +20,9 @@ export async function GET(req) {
     }
 
     const url = new URL(req.url)
-    const learnerId = url.searchParams.get('learner_id')
-    const userEmail = url.searchParams.get('user_email')
+    const learnerId = authorization.actor.learnerId || url.searchParams.get('learner_id')
+    const userEmail = authorization.actor.student?.email || url.searchParams.get('user_email')
+    if (authorization.actor.kind === 'student' && !authorization.actor.student && (learnerId?.startsWith('user_') || userEmail?.endsWith('@students.kognocore.local'))) return Response.json({ error: 'Acceso denegado.' }, { status: 403 })
 
     if (authorization.actor.kind === 'student' && !learnerId && !userEmail) {
       return new Response(JSON.stringify({ error: 'learner_id o user_email requerido' }), { status: 400 })
@@ -69,7 +71,17 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'Intento inválido' }), { status: 400 })
     }
 
-    const effectiveLearnerId = attempt.learner_id || (authorization.actor.user?.id ? `user_${authorization.actor.user.id}` : null)
+    const effectiveLearnerId = authorization.actor.learnerId || attempt.learner_id || (authorization.actor.user?.id ? `user_${authorization.actor.user.id}` : null)
+    if (authorization.actor.kind === 'student' && !authorization.actor.student && (String(effectiveLearnerId).startsWith('user_') || attempt.user_email?.endsWith('@students.kognocore.local'))) return Response.json({ error: 'Acceso denegado.' }, { status: 403 })
+    if (authorization.actor.student) {
+      const { data: quiz, error } = await supabase.from('quizzes').select('payload').eq('id', attempt.quiz_id).maybeSingle()
+      if (error) return Response.json({ error: 'No se pudo validar el cuestionario.' }, { status: 500 })
+      const courseId = quiz?.payload?.course_id
+      if (!quiz || !canAccessCourse(authorization.actor, courseId)) return Response.json({ error: 'No tienes acceso a este cuestionario.' }, { status: 403 })
+      attempt.course_id = courseId
+      attempt.user_email = authorization.actor.student.email
+      attempt.username = authorization.actor.student.username
+    }
     if (authorization.actor.kind === 'student' && !effectiveLearnerId) {
       return new Response(JSON.stringify({ error: 'learner_id requerido' }), { status: 400 })
     }

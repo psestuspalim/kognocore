@@ -15,6 +15,7 @@ import { es } from 'date-fns/locale';
 import AdminShell from '../components/admin/AdminShell';
 import AdminPageHeader from '../components/admin/AdminPageHeader';
 import { toast } from 'sonner';
+import StudentAccounts from '@/components/admin/StudentAccounts';
 
 export default function AdminStudents() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -201,6 +202,7 @@ export default function AdminStudents() {
       />
 
       {/* Students List */}
+      <StudentAccounts />
       <div className="space-y-3">
         {filteredStudents.length === 0 ? (
           <Card className="rounded-2xl">

@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
+import { studentFromAuth } from './_students.mjs';
 
 function getSupabaseAdmin() {
   const url = process.env.SUPABASE_URL;
@@ -79,6 +80,12 @@ export async function requireDataActor(req, { adminOnly = false } = {}) {
 
   const { data: { user } } = await supabase.auth.getUser(token);
   if (user) {
+    const student = studentFromAuth(user);
+    if (student) {
+      if (adminOnly) return { response: jsonError('Administrator access required', 403) };
+      if (!student.is_active) return { response: jsonError('Cuenta suspendida', 403) };
+      return { actor: { kind: 'student', user, student, learnerId: student.learner_id, courseIds: student.course_ids }, supabase };
+    }
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
@@ -86,7 +93,6 @@ export async function requireDataActor(req, { adminOnly = false } = {}) {
       .maybeSingle();
 
     if (profile?.role === 'admin') return { actor: { kind: 'admin', user }, supabase };
-    if (!adminOnly) return { actor: { kind: 'student', user }, supabase };
     return { response: jsonError('Administrator access required', 403) };
   }
 

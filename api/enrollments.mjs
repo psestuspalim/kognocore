@@ -13,6 +13,14 @@ export async function GET(req) {
     const authorization = await requireDataActor(req)
     if (authorization.response) return authorization.response
 
+    if (authorization.actor.student) {
+      const student = authorization.actor.student
+      if (!student.course_ids.length) return Response.json({ enrollments: [] })
+      const { data, error } = await authorization.supabase.from('learning_catalog').select('id, payload').eq('kind', 'Course').in('id', student.course_ids)
+      if (error) return Response.json({ error: 'No se pudieron cargar los cursos.' }, { status: 500 })
+      return Response.json({ enrollments: data.map(row => ({ id: `managed_${student.id}_${row.id}`, learner_id: student.learner_id, user_email: student.email, username: student.username, course_id: row.id, course_name: row.payload.name, status: 'approved' })) })
+    }
+
     const supabase = getSupabaseAdmin()
     if (!supabase) {
       return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
@@ -69,6 +77,7 @@ export async function POST(req) {
     }
 
     const body = await req.json()
+    if (authorization.actor.student) return Response.json({ error: 'Solo el administrador puede asignar cursos.' }, { status: 403 })
     const enrollment = body?.enrollment
     if (!enrollment || !enrollment.id) {
       return new Response(JSON.stringify({ error: 'Inscripción inválida' }), { status: 400 })

@@ -26,6 +26,8 @@ const authorizedFetch = async (input, init = {}) => {
   });
 };
 
+const CATALOG_ENTITIES = ['Course', 'Subject', 'Folder'];
+const catalogImported = new Set();
 const REMOTE_ENTITIES = {
   Quiz: { endpoint: '/api/quizzes', bodyKey: 'quiz', updateMethod: 'POST' },
   QuizAttempt: { endpoint: '/api/attempts', bodyKey: 'attempt', updateMethod: 'POST', offline: true },
@@ -69,6 +71,13 @@ const persistRemoteEntity = (entityName, item, operation = 'create') => {
 };
 
 const sendRemoteEntity = async (entityName, item, operation = 'create') => {
+  if (CATALOG_ENTITIES.includes(entityName)) {
+    return requestJson('/api/catalog', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ kind: entityName, items: [cleanRemoteItem(item)] })
+    });
+  }
   const config = REMOTE_ENTITIES[entityName];
   if (!config) return null;
 
@@ -84,6 +93,9 @@ const sendRemoteEntity = async (entityName, item, operation = 'create') => {
 };
 
 const deleteRemoteEntity = (entityName, id) => {
+  if (CATALOG_ENTITIES.includes(entityName)) {
+    return requestJson(`/api/catalog?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+  }
   const config = REMOTE_ENTITIES[entityName];
   if (!config) return Promise.resolve(null);
   return requestJson(`${config.endpoint}?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
@@ -419,6 +431,10 @@ const mockClient = {
   auth: {
     me: async () => {
       const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user?.app_metadata?.managed_student) {
+        const data = await requestJson('/api/me');
+        return data.user;
+      }
       if (session?.user) {
         const { data: profile, error } = await supabase
           .from('profiles')
@@ -533,6 +549,31 @@ const mockClient = {
       return {
 
         list: async (orderBy) => {
+          if (entityName === 'User') return sortByField((await requestJson('/api/students')).students, orderBy);
+          if (CATALOG_ENTITIES.includes(entityName)) {
+            const user = await mockClient.auth.me();
+            const local = getItems(entityName);
+            if (user.is_admin && !catalogImported.has(entityName)) {
+              const subjects = getItems('Subject');
+              const folders = getItems('Folder');
+              const resolveCourse = (item, seen = new Set()) => {
+                if (!item || seen.has(item.id)) return null;
+                seen.add(item.id);
+                return item.course_id || subjects.find(subject => subject.id === item.subject_id)?.course_id || resolveCourse(folders.find(folder => folder.id === item.parent_id), seen);
+              };
+              const items = local.map(item => entityName === 'Course' ? item : { ...item, course_id: resolveCourse(item) }).filter(item => entityName === 'Course' || item.course_id);
+              await requestJson('/api/catalog', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ kind: entityName, items, importOnly: true }) });
+              catalogImported.add(entityName);
+            }
+            const { items } = await requestJson('/api/catalog?kind=' + entityName);
+            if (user.is_admin) saveItems(entityName, items);
+            return sortByField(items, orderBy);
+          }
+          const viewer = await mockClient.auth.me();
+          if (viewer.managed_student && ['Quiz', 'QuizAttempt', 'CourseEnrollment'].includes(entityName)) {
+            const items = entityName === 'Quiz' ? await fetchRemoteQuizzes() : entityName === 'QuizAttempt' ? await fetchRemoteAttempts({ learner_id: viewer.learner_id }) : await fetchRemoteEnrollments();
+            return sortByField(items, orderBy);
+          }
           if (entityName === 'Quiz') {
             const local = getItems('Quiz');
             try {
@@ -586,6 +627,11 @@ const mockClient = {
           return sortByField(items, orderBy);
         },
         filter: async (criteria, orderBy) => {
+          const viewer = await mockClient.auth.me();
+          if (entityName === 'User' || CATALOG_ENTITIES.includes(entityName) || (viewer.managed_student && ['Quiz', 'QuizAttempt', 'CourseEnrollment'].includes(entityName))) {
+            const items = await mockClient.entities[entityName].list(orderBy);
+            return items.filter(item => Object.entries(criteria || {}).every(([key, value]) => item[key] === value));
+          }
           if (entityName === 'Quiz') {
             const all = await (async () => {
               try {
@@ -699,6 +745,8 @@ const mockClient = {
           return sortByField(items, orderBy);
         },
         get: async (id) => {
+          const viewer = await mockClient.auth.me();
+          if (entityName === 'User' || CATALOG_ENTITIES.includes(entityName) || (viewer.managed_student && ['Quiz', 'QuizAttempt', 'CourseEnrollment'].includes(entityName))) return (await mockClient.entities[entityName].list()).find(item => item.id === id);
           if (entityName === 'Quiz') {
             const local = getItems('Quiz');
             const localItem = local.find(item => item.id === id);
@@ -742,7 +790,7 @@ const mockClient = {
             ...data
           };
 
-          const config = REMOTE_ENTITIES[entityName];
+          const config = REMOTE_ENTITIES[entityName] || (CATALOG_ENTITIES.includes(entityName) ? { offline: false } : null);
           if (config?.offline) {
             const pendingItem = { ...newItem, _sync_status: 'pending', _sync_operation: 'create' };
             saveItems(entityName, [...getItems(entityName), pendingItem]);
@@ -789,7 +837,7 @@ const mockClient = {
               id,
               updated_date: new Date().toISOString()
             });
-            const config = REMOTE_ENTITIES[entityName];
+            const config = REMOTE_ENTITIES[entityName] || (CATALOG_ENTITIES.includes(entityName) ? { offline: false } : null);
 
             if (config) {
               // Persist the new state locally before waiting for the network. A
@@ -828,7 +876,7 @@ const mockClient = {
           const initialLength = items.length;
           items = items.filter(item => item.id !== id);
           if (items.length !== initialLength) {
-            const config = REMOTE_ENTITIES[entityName];
+            const config = REMOTE_ENTITIES[entityName] || (CATALOG_ENTITIES.includes(entityName) ? { offline: false } : null);
             if (config) {
               try {
                 await deleteRemoteEntity(entityName, id);

@@ -24,6 +24,12 @@ function buildStudentUser(courseId) {
 
 async function loadAdminProfile(session) {
   if (!session?.user) return null;
+  if (session.user.app_metadata?.managed_student) {
+    const response = await fetch('/api/me', { headers: { Authorization: 'Bearer ' + session.access_token } });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'No se pudo validar tu cuenta.');
+    return data.user;
+  }
 
   const { data: profile, error } = await supabase
     .from('profiles')
@@ -72,12 +78,11 @@ export const AuthProvider = ({ children }) => {
     if (!session) return false;
 
     const uid = session.user.id;
-    if (appliedSessionUser.current === uid) return true;
     appliedSessionUser.current = uid;
 
     try {
       const profile = await loadAdminProfile(session);
-      if (profile?.role !== 'admin') {
+      if (profile?.role !== 'admin' && !profile?.managed_student) {
         appliedSessionUser.current = null;
         await supabase.auth.signOut();
         setAuthError({ type: 'forbidden', message: 'Esta cuenta no tiene acceso administrativo.' });
@@ -219,6 +224,19 @@ export const AuthProvider = ({ children }) => {
     }
 
     throw new Error('El acceso administrativo no está configurado en el servidor.');
+  };
+
+  const loginStudent = async (username, password) => {
+    const normalized = username.trim().toLowerCase();
+    if (!/^[a-z0-9][a-z0-9._-]{2,39}$/.test(normalized)) throw new Error('Usuario o contraseña incorrectos.');
+    const { data, error } = await supabase.auth.signInWithPassword({ email: normalized + '@students.kognocore.local', password });
+    if (error) throw new Error('Usuario o contraseña incorrectos, o cuenta suspendida.');
+    const accepted = await applySupabaseSession(data.session);
+    if (!accepted) {
+      await supabase.auth.signOut();
+      throw new Error('No se pudo acceder a esta cuenta. Contacta al administrador.');
+    }
+    return true;
   };
 
   const requestMagicLink = async (email) => {

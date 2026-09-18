@@ -19,8 +19,8 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [activeTab, setActiveTab] = useState('code');
-    const { login, checkAppState, passwordRecovery, updatePassword } = useAuth();
+    const [activeTab, setActiveTab] = useState('student');
+    const { login, loginStudent, checkAppState, passwordRecovery, updatePassword } = useAuth();
     const navigate = useNavigate();
 
     const resolveCourseByCode = async (normalized) => {
@@ -98,7 +98,8 @@ const Login = () => {
         setError('');
 
         try {
-            await login(username, password);
+            await (activeTab === 'student' ? loginStudent(username, password) : login(username, password));
+            window.location.assign('/Quizzes');
         } catch (err) {
             setError(String(err?.message || '') || 'Error al iniciar sesión. Intenta de nuevo.');
         } finally {
@@ -207,7 +208,7 @@ const Login = () => {
                     </div>
 
                     <div className="mt-5 rounded-2xl border border-white/70 bg-white/85 p-4 text-sm text-slate-700">
-                        Flujo: <strong>1)</strong> ingresa tu código de acceso, <strong>2)</strong> abre tu curso y responde quizzes.
+                        Flujo: <strong>1)</strong> ingresa con tu usuario o código de acceso, <strong>2)</strong> abre tu curso y responde quizzes.
                     </div>
                 </section>
 
@@ -228,7 +229,8 @@ const Login = () => {
                             }}
                             className="w-full"
                         >
-                            <TabsList className="mb-6 grid h-14 w-full grid-cols-2 rounded-2xl bg-slate-100 p-1">
+                            <TabsList className="mb-6 grid h-14 w-full grid-cols-3 rounded-2xl bg-slate-100 p-1">
+                                <TabsTrigger value="student" className="rounded-xl font-semibold">Alumno</TabsTrigger>
                                 <TabsTrigger value="code" className="gap-2 rounded-xl text-base font-semibold data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-lg">
                                     <KeyRound className="h-4 w-4" />
                                     Código
@@ -239,6 +241,46 @@ const Login = () => {
                                 </TabsTrigger>
                             </TabsList>
 
+                            <TabsContent value="student">
+                                <form onSubmit={handleLogin} className="space-y-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="student-username">Usuario</Label>
+                                        <Input
+                                            id="student-username"
+                                            name="student-username"
+                                            type="text"
+                                            autoComplete="username"
+                                            placeholder="Usuario"
+                                            value={username}
+                                            onChange={(e) => setUsername(e.target.value)}
+                                            required
+                                            className="h-12 rounded-xl"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="student-password">Contraseña</Label>
+                                        <Input
+                                            id="student-password"
+                                            name="student-password"
+                                            type="password"
+                                            autoComplete="current-password"
+                                            placeholder="••••••••"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
+                                            className="h-12 rounded-xl"
+                                        />
+                                    </div>
+                                    {error && (
+                                        <div className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                                            {error}
+                                        </div>
+                                    )}
+                                    <Button type="submit" size="lg" className="h-12 w-full rounded-xl bg-slate-900 hover:bg-slate-800" disabled={isLoading || !username}>
+                                        {isLoading ? 'Entrando...' : 'Entrar como alumno'}
+                                    </Button>
+                                </form>
+                            </TabsContent>
                             <TabsContent value="code">
                                 <form onSubmit={handleCodeLogin} className="space-y-4">
                                     <div className="space-y-2">

@@ -23,7 +23,9 @@ export async function GET(req) {
       .select('id, payload, created_date, updated_date')
 
     if (authorization.actor.kind === 'student') {
-      query = query.eq('payload->>course_id', authorization.actor.courseId)
+      const courseIds = authorization.actor.courseIds || [authorization.actor.courseId]
+      if (!courseIds.length) return Response.json({ quizzes: [] })
+      query = query.in('payload->>course_id', courseIds)
     }
 
     const { data, error } = await query
