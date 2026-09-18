@@ -290,6 +290,7 @@ export const AuthProvider = ({ children }) => {
       navigateToLogin,
       checkAppState,
       login,
+      loginStudent,
       requestMagicLink
       ,passwordRecovery
       ,updatePassword
