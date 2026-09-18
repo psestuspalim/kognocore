@@ -25,10 +25,22 @@ function buildStudentUser(courseId) {
 async function loadAdminProfile(session) {
   if (!session?.user) return null;
   if (session.user.app_metadata?.managed_student) {
-    const response = await fetch('/api/me', { headers: { Authorization: 'Bearer ' + session.access_token } });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || 'No se pudo validar tu cuenta.');
-    return data.user;
+    const metadata = session.user.app_metadata;
+    if (metadata.is_active === false) return null;
+
+    const username = metadata.username || session.user.email?.split('@')[0] || 'alumno';
+    return {
+      id: session.user.id,
+      email: session.user.email,
+      username,
+      full_name: metadata.full_name || username,
+      last_name: 'Estudiante',
+      is_admin: false,
+      role: 'user',
+      managed_student: true,
+      course_ids: Array.isArray(metadata.course_ids) ? metadata.course_ids : [],
+      auth_provider: 'supabase'
+    };
   }
 
   const { data: profile, error } = await supabase
