@@ -1,7 +1,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.97.0';
 
 const STUDENT_DOMAIN = 'students.kognocore.local';
-const ADMIN_VERIFY_URL = 'https://kognocore.vercel.app/api/admin-verify';
+const ADMIN_VERIFY_URL = 'https://kognocore.vercel.app/api/access-codes';
 const reply = (body: unknown, status = 200) => new Response(JSON.stringify(body), {
   status,
   headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
