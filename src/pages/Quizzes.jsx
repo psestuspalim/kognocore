@@ -303,6 +303,8 @@ export default function QuizzesPage() {
 
   const queryClient = useQueryClient();
   const startingQuizRef = useRef(false);
+  const quizRunRef = useRef(0);
+  const pendingQuizExitRef = useRef(null);
 
   // --- Queries (declared before effects) ---
   const { data: courses = [] } = useQuery({
@@ -984,73 +986,18 @@ export default function QuizzesPage() {
       .slice(0, Math.min(questionCount, filteredQuestions.length))
       .map(question => ({ ...question, answerOptions: shuffleAnswerOptions(question.answerOptions) }));
 
-    let attemptId = null;
-    try {
-      const attempt = await saveAttemptMutation.mutateAsync({
-        quiz_id: quiz.id,
-        subject_id: quiz.subject_id || expandedQuiz.subject_id,
-        ...buildAttemptIdentity(),
-        score: 0,
-        total_questions: orderedQuestions.length,
-        quiz_snapshot: { ...expandedQuiz, id: quiz.id, questions: orderedQuestions },
-        answered_questions: 0,
-        is_completed: false,
-        wrong_questions: [],
-        answer_log: []
-      });
-      attemptId = attempt?.id || null;
-    } catch (e) {
-      console.error('⚠️ Error guardando intento inicial en backend:', e);
-      attemptId = `local_attempt_${Date.now()}`;
-      try {
-        const stored = JSON.parse(localStorage.getItem('app_quiz_attempts') || '[]');
-        stored.push({
-          id: attemptId,
-          quiz_id: quiz.id,
-          subject_id: quiz.subject_id || expandedQuiz.subject_id,
-          ...buildAttemptIdentity(),
-          score: 0,
-          total_questions: orderedQuestions.length,
-          answered_questions: 0,
-          is_completed: false,
-          wrong_questions: [],
-          answer_log: [],
-          created_date: new Date().toISOString()
-        });
-        localStorage.setItem('app_quiz_attempts', JSON.stringify(stored));
-      } catch (_) { /* localStorage full or unavailable */ }
-    }
-
-    let newSessionId = null;
-    try {
-      const session = await client.entities.QuizSession.create({
-        user_email: currentUser?.email || '',
-        username: currentUser?.username || 'Estudiante',
-        quiz_id: quiz.id,
-        quiz_title: expandedQuiz.title,
-        subject_id: quiz.subject_id || expandedQuiz.subject_id,
-        current_question: 0,
-        total_questions: orderedQuestions.length,
-        score: 0,
-        wrong_count: 0,
-        started_at: new Date().toISOString(),
-        last_activity: new Date().toISOString(),
-        is_active: true
-      });
-      newSessionId = session.id;
-      setCurrentSessionId(session.id);
-    } catch (error) {
-      console.error('❌ Error creando sesión:', error);
-    }
-
     const newQuizState = {
       ...expandedQuiz,
       id: quiz.id,
       subject_id: quiz.subject_id,
       questions: orderedQuestions
     };
+    const runId = ++quizRunRef.current;
+    const provisionalAttemptId = `local_attempt_${Date.now()}`;
 
-    setCurrentAttemptId(attemptId);
+    // Open the quiz immediately. Remote persistence must never block navigation.
+    setCurrentAttemptId(provisionalAttemptId);
+    setCurrentSessionId(null);
     setSelectedQuiz(newQuizState);
     setCurrentQuestionIndex(0);
     setScore(0);
@@ -1072,10 +1019,80 @@ export default function QuizzesPage() {
       answerLog: [],
       markedQuestions: new Set(),
       responseTimes: [],
-      currentAttemptId: attemptId,
-      currentSessionId: newSessionId,
+      currentAttemptId: provisionalAttemptId,
+      currentSessionId: null,
       deckType: selectedDeck
     }, currentUser);
+
+    void (async () => {
+      let attemptId = provisionalAttemptId;
+      try {
+        const attempt = await saveAttemptMutation.mutateAsync({
+          quiz_id: quiz.id,
+          subject_id: quiz.subject_id || expandedQuiz.subject_id,
+          ...buildAttemptIdentity(),
+          score: 0,
+          total_questions: orderedQuestions.length,
+          quiz_snapshot: newQuizState,
+          answered_questions: 0,
+          is_completed: false,
+          wrong_questions: [],
+          answer_log: []
+        });
+        attemptId = attempt?.id || provisionalAttemptId;
+        if (quizRunRef.current === runId) {
+          setCurrentAttemptId(attemptId);
+        } else {
+          const pendingExit = pendingQuizExitRef.current;
+          if (pendingExit?.runId === runId && attempt?.id) {
+            await updateAttemptMutation.mutateAsync({ id: attempt.id, data: pendingExit.exitData });
+            pendingQuizExitRef.current = null;
+            queryClient.invalidateQueries({ queryKey: ['attempts'] });
+          }
+          return;
+        }
+      } catch (error) {
+        console.error('⚠️ Error guardando intento inicial en backend:', error);
+        try {
+          const stored = JSON.parse(localStorage.getItem('app_quiz_attempts') || '[]');
+          stored.push({
+            id: provisionalAttemptId,
+            quiz_id: quiz.id,
+            subject_id: quiz.subject_id || expandedQuiz.subject_id,
+            ...buildAttemptIdentity(),
+            score: 0,
+            total_questions: orderedQuestions.length,
+            answered_questions: 0,
+            is_completed: false,
+            wrong_questions: [],
+            answer_log: [],
+            created_date: new Date().toISOString()
+          });
+          localStorage.setItem('app_quiz_attempts', JSON.stringify(stored));
+        } catch (_) { /* localStorage full or unavailable */ }
+      }
+
+      try {
+        const session = await client.entities.QuizSession.create({
+          user_email: currentUser?.email || '',
+          username: currentUser?.username || 'Estudiante',
+          quiz_id: quiz.id,
+          quiz_title: expandedQuiz.title,
+          subject_id: quiz.subject_id || expandedQuiz.subject_id,
+          current_question: 0,
+          total_questions: orderedQuestions.length,
+          score: 0,
+          wrong_count: 0,
+          started_at: new Date().toISOString(),
+          last_activity: new Date().toISOString(),
+          is_active: true
+        });
+        if (quizRunRef.current === runId) setCurrentSessionId(session.id);
+        else await client.entities.QuizSession.update(session.id, { is_active: false });
+      } catch (error) {
+        console.error('❌ Error creando sesión:', error);
+      }
+    })();
   };
 
   const handleResumeFromModal = () => {
@@ -1372,55 +1389,67 @@ export default function QuizzesPage() {
     setView('quiz');
   };
 
-  const handleExitQuiz = async () => {
-    if (currentAttemptId) {
-      const exitData = {
-        ...buildAttemptIdentity(),
-        quiz_id: selectedQuiz.id,
-        subject_id: selectedQuiz.subject_id,
-        total_questions: selectedQuiz.questions.length,
-        quiz_snapshot: selectedQuiz,
-        is_completed: answerLog.length >= selectedQuiz.questions.length,
-        score,
-        answered_questions: Math.max(currentQuestionIndex, answerLog.length),
-        wrong_questions: wrongAnswers,
-        answer_log: answerLog
-      };
-      try {
-        await updateAttemptMutation.mutateAsync({
-          id: currentAttemptId,
-          data: exitData
-        });
-        queryClient.invalidateQueries({ queryKey: ['attempts'] });
-      } catch (e) {
-        try {
-          const stored = JSON.parse(localStorage.getItem('app_quiz_attempts') || '[]');
-          const idx = stored.findIndex(a => a?.id === currentAttemptId);
-          if (idx >= 0) stored[idx] = { ...stored[idx], ...exitData };
-          localStorage.setItem('app_quiz_attempts', JSON.stringify(stored));
-        } catch (_) { /* ignore */ }
-      }
+  const handleExitQuiz = () => {
+    const quizAtExit = selectedQuiz;
+    if (!quizAtExit) return;
+
+    const attemptIdAtExit = currentAttemptId;
+    const sessionIdAtExit = currentSessionId;
+    const exitData = {
+      ...buildAttemptIdentity(),
+      quiz_id: quizAtExit.id,
+      subject_id: quizAtExit.subject_id,
+      total_questions: quizAtExit.questions.length,
+      quiz_snapshot: quizAtExit,
+      is_completed: answerLog.length >= quizAtExit.questions.length,
+      score,
+      answered_questions: Math.max(currentQuestionIndex, answerLog.length),
+      wrong_questions: wrongAnswers,
+      answer_log: answerLog
+    };
+
+    // Leave immediately; persistence continues without holding the learner in the exam.
+    const exitingRunId = quizRunRef.current;
+    if (String(attemptIdAtExit || '').startsWith('local_attempt_')) {
+      pendingQuizExitRef.current = { runId: exitingRunId, exitData };
     }
-    // Marcar sesión como inactiva
-    if (currentSessionId) {
-      try {
-        await client.entities.QuizSession.update(currentSessionId, { is_active: false });
-      } catch (error) {
-        console.error('Error marking session inactive:', error);
-      }
-    }
+    quizRunRef.current += 1;
     setSelectedQuiz(null);
     setSwipeMode(false);
+    setCurrentAttemptId(null);
     setCurrentSessionId(null);
+    if (selectedSubject) setView('list');
+    else if (currentFolderId || selectedCourse) setView('subjects');
+    else setView('home');
 
-    // Volver a la vista adecuada
-    if (selectedSubject) {
-      setView('list');
-    } else if (currentFolderId || selectedCourse) {
-      setView('subjects');
-    } else {
-      setView('home');
-    }
+    void (async () => {
+      if (attemptIdAtExit) {
+        if (String(attemptIdAtExit).startsWith('local_attempt_')) {
+          try {
+            const stored = JSON.parse(localStorage.getItem('app_quiz_attempts') || '[]');
+            const idx = stored.findIndex(a => a?.id === attemptIdAtExit);
+            if (idx >= 0) stored[idx] = { ...stored[idx], ...exitData };
+            else stored.push({ id: attemptIdAtExit, ...exitData, created_date: new Date().toISOString() });
+            localStorage.setItem('app_quiz_attempts', JSON.stringify(stored));
+          } catch (_) { /* ignore */ }
+        } else {
+          try {
+            await updateAttemptMutation.mutateAsync({ id: attemptIdAtExit, data: exitData });
+            queryClient.invalidateQueries({ queryKey: ['attempts'] });
+          } catch (error) {
+            console.error('Error guardando el intento al salir:', error);
+          }
+        }
+      }
+
+      if (sessionIdAtExit) {
+        try {
+          await client.entities.QuizSession.update(sessionIdAtExit, { is_active: false });
+        } catch (error) {
+          console.error('Error marking session inactive:', error);
+        }
+      }
+    })();
   };
 
   const handleStartSwipeMode = (quiz) => {

@@ -38,6 +38,8 @@ async function loadAdminProfile(session) {
       is_admin: false,
       role: 'user',
       managed_student: true,
+      is_active: true,
+      learner_id: `user_${session.user.id}`,
       course_ids: Array.isArray(metadata.course_ids) ? metadata.course_ids : [],
       auth_provider: 'supabase'
     };
