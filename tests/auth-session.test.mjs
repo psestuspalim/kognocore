@@ -49,25 +49,13 @@ test('Supabase initial and stale student events cannot log out or replace a loca
   assert.equal(states[1], false);
 });
 
-test('catalog returns only assigned courses and surfaces database failures', async () => {
-  const source = readFileSync(new URL('../api/catalog.mjs', import.meta.url), 'utf8').replace(/^import .*;\n/, '').replaceAll('export async function', 'async function');
+test('catalog uses the privileged backend for every operation', async () => {
+  const source = readFileSync(new URL('../api/catalog.mjs', import.meta.url), 'utf8').replace(/^import .*;\r?\n/, '').replaceAll('export async function', 'async function');
   const calls = [];
-  let failure = false;
-  const query = {
-    select: () => query, eq: () => query,
-    in: (column, ids) => { calls.push([column, ids]); return query; },
-    then: resolve => resolve(failure ? { error: {} } : { data: [{ id: 'assigned', payload: { name: 'Curso' } }] })
-  };
-  const actor = { kind: 'student', courseIds: ['assigned'] };
-  const context = vm.createContext({ Response, URL, requireDataActor: async () => ({ actor, supabase: { from: () => query } }) });
+  const context = vm.createContext({ forwardToAdminEdge: async (req, route) => { calls.push([req.method, route]); return Response.json({ ok: true }); } });
   vm.runInContext(source, context);
-  const req = new Request('https://example.test/api/catalog?kind=Course');
-  const response = await context.GET(req);
-  assert.deepEqual(await response.json(), { items: [{ id: 'assigned', name: 'Curso' }] });
-  assert.deepEqual(calls[0], ['id', ['assigned']]);
-  actor.courseIds = [];
-  assert.deepEqual(await (await context.GET(req)).json(), { items: [] });
-  actor.courseIds = ['assigned'];
-  failure = true;
-  assert.equal((await context.GET(req)).status, 500);
+  for (const method of ['GET', 'POST', 'DELETE']) {
+    assert.equal((await context[method](new Request('https://example.test/api/catalog?kind=Course', { method }))).status, 200);
+  }
+  assert.deepEqual(calls, [['GET', 'catalog'], ['POST', 'catalog'], ['DELETE', 'catalog']]);
 });

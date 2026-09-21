@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import { requireAdmin, requireDataActor } from './_auth.mjs'
+import { requireAdmin, requireDataActor, forwardToAdminEdge } from './_auth.mjs'
 
 function getSupabaseAdmin() {
   const url = process.env.SUPABASE_URL
@@ -14,11 +14,7 @@ export async function GET(req) {
     if (authorization.response) return authorization.response
 
     if (authorization.actor.student) {
-      const student = authorization.actor.student
-      if (!student.course_ids.length) return Response.json({ enrollments: [] })
-      const { data, error } = await authorization.supabase.from('learning_catalog').select('id, payload').eq('kind', 'Course').in('id', student.course_ids)
-      if (error) return Response.json({ error: 'No se pudieron cargar los cursos.' }, { status: 500 })
-      return Response.json({ enrollments: data.map(row => ({ id: `managed_${student.id}_${row.id}`, learner_id: student.learner_id, user_email: student.email, username: student.username, course_id: row.id, course_name: row.payload.name, status: 'approved' })) })
+      return forwardToAdminEdge(req, 'enrollments')
     }
 
     const supabase = getSupabaseAdmin()

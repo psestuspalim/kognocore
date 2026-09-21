@@ -15,22 +15,17 @@ const supabase = createClient(
 
 const bearer = (req: Request) => req.headers.get('authorization') || '';
 
-async function isAdmin(req: Request) {
+async function verifiedIdentity(req: Request) {
   const authorization = bearer(req);
-  if (!authorization) return false;
+  if (!authorization) return null;
   const response = await fetch(ADMIN_VERIFY_URL, { headers: { Authorization: authorization } });
-  if (!response.ok) return false;
-  const data = await response.json();
-  return data?.user?.role === 'admin';
+  if (!response.ok) return null;
+  return response.json();
 }
 
-async function managedStudent(req: Request) {
-  const token = bearer(req).replace(/^Bearer\s+/i, '');
-  if (!token) return null;
-  const { data: { user } } = await supabase.auth.getUser(token);
-  const metadata = user?.app_metadata;
-  if (!user || !metadata?.managed_student || metadata.is_active !== true) return null;
-  return { user, metadata };
+async function isAdmin(req: Request) {
+  const identity = await verifiedIdentity(req);
+  return identity?.user?.role === 'admin';
 }
 
 function studentFromAuth(user: any) {
@@ -69,17 +64,18 @@ async function catalog(req: Request, url: URL) {
   const kinds = ['Course', 'Subject', 'Folder'];
   if (req.method === 'GET') {
     if (!kinds.includes(kind || '')) return reply({ error: 'Tipo inválido.' }, 400);
-    const student = await managedStudent(req);
-    const admin = student ? false : await isAdmin(req);
-    if (!student && !admin) return reply({ error: 'Authentication required' }, 401);
-    let query = supabase.from('learning_catalog').select('payload').eq('kind', kind!);
-    if (student) {
-      const ids = Array.isArray(student.metadata.course_ids) ? student.metadata.course_ids : [];
+    const identity = await verifiedIdentity(req);
+    const admin = identity?.user?.role === 'admin';
+    const student = identity?.user?.managed_student && identity.user.is_active === true;
+    if (!admin && !student && !identity?.courseId) return reply({ error: 'Authentication required' }, 401);
+    let query = supabase.from('learning_catalog').select('id, payload').eq('kind', kind!);
+    if (!admin) {
+      const ids = student ? (Array.isArray(identity.user.course_ids) ? identity.user.course_ids : []) : [identity.courseId];
       if (!ids.length) return reply({ items: [] });
-      query = query.in('course_id', ids);
+      query = query.in(kind === 'Course' ? 'id' : 'course_id', ids);
     }
     const { data, error } = await query;
-    return error ? reply({ error: 'No se pudo cargar el catálogo.' }, 500) : reply({ items: data.map(row => row.payload) });
+    return error ? reply({ error: 'No se pudo cargar el catálogo.' }, 500) : reply({ items: data.map(row => ({ ...row.payload, id: row.id })) });
   }
 
   if (!await isAdmin(req)) return reply({ error: 'Administrator access required' }, 403);
@@ -156,12 +152,29 @@ async function students(req: Request) {
   return error ? reply({ error: 'No se pudo guardar el alumno.' }, 400) : reply({ student: studentFromAuth(data.user) });
 }
 
+async function enrollments(req: Request) {
+  if (req.method !== 'GET') return reply({ error: 'Method not allowed' }, 405);
+  const identity = await verifiedIdentity(req);
+  const student = identity?.user;
+  if (!student?.managed_student || student.is_active !== true) return reply({ error: 'Acceso denegado.' }, 403);
+  const ids = Array.isArray(student.course_ids) ? student.course_ids : [];
+  if (!ids.length) return reply({ enrollments: [] });
+  const { data, error } = await supabase.from('learning_catalog').select('id, payload').eq('kind', 'Course').in('id', ids);
+  if (error) return reply({ error: 'No se pudieron cargar las inscripciones.' }, 500);
+  return reply({ enrollments: data.map(row => ({
+    id: `managed_${student.id}_${row.id}`, learner_id: student.learner_id,
+    user_email: student.email, username: student.username, course_id: row.id,
+    course_name: row.payload.name, status: 'approved'
+  })) });
+}
+
 Deno.serve(async req => {
   try {
     const url = new URL(req.url);
     const route = url.searchParams.get('route');
     if (route === 'catalog') return await catalog(req, url);
     if (route === 'students') return await students(req);
+    if (route === 'enrollments') return await enrollments(req);
     return reply({ error: 'Route not found' }, 404);
   } catch (error) {
     console.error(error);

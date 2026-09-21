@@ -46,3 +46,44 @@ test('edge administrator checks use verified identity, never an unrelated data l
   assert.ok(calls.every(url => url.endsWith('/api/me')));
   assert.equal((await handler(new Request('https://example.test?route=students'))).status, 403);
 });
+
+test('privileged catalog scopes students, supports code sessions and rejects expired or suspended access', async () => {
+  let handler;
+  let identity;
+  let dbFailure = false;
+  const filters = [];
+  const query = {
+    select: () => query, eq: () => query,
+    in: (column, ids) => { filters.push([column, [...ids]]); return query; },
+    then: resolve => resolve(dbFailure ? { error: { code: '42501' } } : { data: [{ id: 'course-a', payload: { name: 'Curso' } }] })
+  };
+  const source = readFileSync(new URL('../supabase/functions/kognocore-admin/index.ts', import.meta.url), 'utf8').replace(/^import .*;\r?\n/, '');
+  const code = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.None } }).outputText;
+  vm.runInNewContext(code, {
+    Response, URL, console,
+    Deno: { env: { get: () => 'configured' }, serve: fn => { handler = fn; } },
+    createClient: () => ({ from: () => query }),
+    fetch: async () => identity ? Response.json(identity) : Response.json({ error: 'expired' }, { status: 401 })
+  });
+  const request = (route = 'catalog&kind=Course') => new Request(`https://example.test?route=${route}`, { headers: { Authorization: 'Bearer test' } });
+  identity = { user: { role: 'admin' } };
+  assert.equal((await handler(request())).status, 200);
+  assert.equal(filters.length, 0);
+  identity = { user: { managed_student: true, is_active: true, course_ids: ['course-a'], id: 'student', learner_id: 'user_student' } };
+  assert.equal((await handler(request())).status, 200);
+  assert.deepEqual(filters.at(-1), ['id', ['course-a']]);
+  const enrolled = await (await handler(request('enrollments'))).json();
+  assert.equal(enrolled.enrollments[0].learner_id, 'user_student');
+  identity.user.course_ids = [];
+  assert.deepEqual(await (await handler(request())).json(), { items: [] });
+  identity.user.is_active = false;
+  assert.equal((await handler(request())).status, 401);
+  assert.equal((await handler(request('enrollments'))).status, 403);
+  identity = { courseId: 'course-a' };
+  assert.equal((await handler(request('catalog&kind=Subject'))).status, 200);
+  assert.deepEqual(filters.at(-1), ['course_id', ['course-a']]);
+  dbFailure = true;
+  assert.equal((await handler(request())).status, 500);
+  identity = null;
+  assert.equal((await handler(request())).status, 401);
+});
