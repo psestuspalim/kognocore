@@ -4,6 +4,9 @@ import { Lightbulb, ChevronRight, ChevronLeft, Bookmark, ZoomIn, X } from 'lucid
 import { client } from '@/api/client';
 import MathText from './MathText';
 import ImageQuestionView from './ImageQuestionView';
+import OpenEndedQuestionView from './OpenEndedQuestionView';
+
+const OPEN_ENDED_TYPES = new Set(['enumeracion', 'numerico', 'respuesta_corta', 'cloze', 'relacion', 'secuencia']);
 
 export default function QuestionView({
   question,
@@ -136,6 +139,20 @@ export default function QuestionView({
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showFeedback, handleSelectAnswer, handleNext]);
+
+  const qType = String(question?.tipo || question?.type || '').toLowerCase();
+  if (OPEN_ENDED_TYPES.has(qType)) {
+    return (
+      <OpenEndedQuestionView
+        question={question}
+        questionNumber={questionNumber}
+        totalQuestions={totalQuestions}
+        onNext={onNext}
+        onAnswer={onAnswer}
+        savedAnswer={savedAnswer}
+      />
+    );
+  }
 
   if (question?.type === 'image' && options.length === 0) {
     return (

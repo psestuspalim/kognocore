@@ -109,7 +109,7 @@ import { mockCourses, mockFolders, mockSubjects, mockQuizzes, mockQuizSettings, 
 // Helper to initialize storage
 // Courses, subjects, and folders are ALWAYS seeded from mock-data to keep the
 // medicine curriculum up to date. Other entities only initialize if absent.
-const SEED_VERSION = 'v14_bundle_all_4_megasimulacros'; // bump this to force a re-seed
+const SEED_VERSION = 'v15_bundle_capitulos_cortados_P1-B04'; // bump this to force a re-seed
 
 const initializeStorage = () => {
   if (typeof window === 'undefined') return;
@@ -549,14 +549,21 @@ const mockClient = {
             }
             const { items } = await requestJson('/api/catalog?kind=' + entityName);
             if (!Array.isArray(items)) throw new Error('El servidor no devolvió un catálogo válido.');
-            if (user.is_admin && catalogImported.has(entityName)) saveItems(entityName, items);
-            return sortByField(items, orderBy);
+            const mergedCatalog = mergeById(items, local);
+            if (user.is_admin && catalogImported.has(entityName)) saveItems(entityName, mergedCatalog);
+            return sortByField(mergedCatalog, orderBy);
           }
+
           const viewer = await mockClient.auth.me();
           if (viewer.managed_student && ['Quiz', 'QuizAttempt', 'CourseEnrollment'].includes(entityName)) {
-            const items = entityName === 'Quiz' ? await fetchRemoteQuizzes() : entityName === 'QuizAttempt' ? await fetchRemoteAttempts({ learner_id: viewer.learner_id }) : await fetchRemoteEnrollments();
+            const items = entityName === 'Quiz'
+              ? mergeById(await fetchRemoteQuizzes(), getItems('Quiz'))
+              : entityName === 'QuizAttempt'
+                ? await fetchRemoteAttempts({ learner_id: viewer.learner_id })
+                : await fetchRemoteEnrollments();
             return sortByField(items, orderBy);
           }
+
           if (entityName === 'Quiz') {
             const local = getItems('Quiz');
             try {
@@ -606,7 +613,6 @@ const mockClient = {
           }
 
           let items = getItems(entityName);
-          // Simple sort if orderBy is provided (very basic implementation)
           return sortByField(items, orderBy);
         },
         filter: async (criteria, orderBy) => {

@@ -32,3 +32,7 @@ dist-ssr
 *.backup
 .local-node
 package-lock 2.json
+supabase/.temp/
+*.pdf
+
+

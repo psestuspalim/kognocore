@@ -15,30 +15,40 @@ import AdminShell from '../components/admin/AdminShell';
 import AdminPageHeader from '../components/admin/AdminPageHeader';
 import { z } from 'zod';
 
-// Define Zod Schema for Quiz Validation
 const questionSchema = z.object({
   text: z.string().optional(),
   question: z.string().optional(),
+  prompt: z.string().optional(),
+  enunciado: z.string().optional(),
   type: z.string().optional(),
+  tipo: z.string().optional(),
   options: z.any().optional(),
   answerOptions: z.any().optional(),
   correctAnswer: z.any().optional(),
+  respuesta: z.any().optional(),
+  blancos: z.any().optional(),
   explanation: z.string().optional(),
   justificacion: z.string().optional(),
   feedback: z.string().optional(),
   serie: z.any().optional(),
-  difficulty: z.string().optional()
-}).refine(data => Boolean(data.text || data.question), {
-  message: "Question text is required"
+  difficulty: z.string().optional(),
+  dificultad: z.any().optional()
+}).refine(data => Boolean(data.text || data.question || data.prompt || data.enunciado || data.texto), {
+  message: "Falta el enunciado o prompt de la pregunta"
 });
 
 const quizSchema = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
-  questions: z.array(questionSchema).min(1, "Must contain at least 1 question"),
+  bloque: z.any().optional(),
+  questions: z.array(questionSchema).optional(),
+  items: z.array(questionSchema).optional(),
   subject_id: z.string().optional(),
+  folder_id: z.string().optional(),
   is_hidden: z.boolean().optional(),
   metadata: z.any().optional()
+}).refine(data => Boolean((data.questions && data.questions.length > 0) || (data.items && data.items.length > 0)), {
+  message: "El cuestionario debe contener al menos 1 pregunta o ítem."
 });
 
 export default function AdminJsonManager() {

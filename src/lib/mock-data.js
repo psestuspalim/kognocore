@@ -1,3 +1,5 @@
+import { normalizeExpandedQuiz } from './quiz-normalization';
+
 export const mockUser = {
     id: 'admin_jesus',
     email: 'jesus@kognocore.com',
@@ -11,7 +13,8 @@ export const mockUser = {
 const dataModules = import.meta.glob('../data/*.json', { eager: true });
 export const mockQuizzes = Object.values(dataModules)
     .map((mod) => (mod && mod.default ? mod.default : mod))
-    .filter(Boolean);
+    .filter(Boolean)
+    .map((q) => normalizeExpandedQuiz(q));
 
 
 // ─── CURSO: ENARM 2026 ───────────────────────────────────────────────────────
@@ -31,10 +34,13 @@ export const mockSubjects = [
     { id: 'subj_cirugia_gen', name: 'Cirugía General', order: 2, course_id: 'course_enarm2026', code: 'CG', color: '#e11d48' },
     { id: 'subj_pediatria', name: 'Pediatría', order: 3, course_id: 'course_enarm2026', code: 'PED', color: '#f59e0b' },
     { id: 'subj_ginecologia_obs', name: 'Ginecología y Obstetricia', order: 4, course_id: 'course_enarm2026', code: 'GYO', color: '#ec4899' },
-    { id: 'subj_simuladores', name: 'Simuladores', order: 5, course_id: 'course_enarm2026', code: 'SIM', color: '#7c3aed' }
+    { id: 'subj_simuladores', name: 'Simuladores', order: 5, course_id: 'course_enarm2026', code: 'SIM', color: '#7c3aed' },
+    { id: 'subj_anatomia', name: 'Anatomía Humana', order: 6, course_id: 'course_enarm2026', code: 'ANA', color: '#6366f1' }
 ];
 
-export const mockFolders = [];
+export const mockFolders = [
+    { id: 'folder_capitulos_cortados', name: 'Capítulos cortados', order: 1, course_id: 'course_enarm2026', subject_id: 'subj_anatomia', color: '#6366f1', description: 'Bloques de examen de respuesta abierta (Moore 9.ª ed.)' }
+];
 
 export const mockResources = [];
 

@@ -1,0 +1,788 @@
+{
+  "id": "P1-B04",
+  "title": "P1-B04: Dorso y columna: vértebras, estructura y función",
+  "folder_id": "folder_capitulos_cortados",
+  "subject_id": "subj_anatomia",
+  "bloque": {
+    "id": "P1-B04",
+    "titulo": "Dorso y columna: vértebras, estructura y función, características regionales",
+    "parcial": 1,
+    "sesion": "30 de enero",
+    "paginas": "72-86",
+    "semana_estudio": 2
+  },
+  "items": [
+    {
+      "id": "P1-B04-001",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 5 grupos o regiones en que se clasifican las 33 vértebras del adulto en sentido craneocaudal:",
+      "categoria": "vertebra",
+      "dificultad": 1,
+      "etiquetas": [
+        "vertebras",
+        "clasificacion",
+        "regiones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 72,
+        "fig": "2-2"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "7 vértebras cervicales",
+            "acepta": [
+              "7 cervicales",
+              "cervicales"
+            ]
+          },
+          {
+            "canonico": "12 vértebras torácicas",
+            "acepta": [
+              "12 toracicas",
+              "toracicas",
+              "dorsales"
+            ]
+          },
+          {
+            "canonico": "5 vértebras lumbares",
+            "acepta": [
+              "5 lumbares",
+              "lumbares"
+            ]
+          },
+          {
+            "canonico": "5 vértebras sacras",
+            "acepta": [
+              "5 sacras",
+              "sacras",
+              "sacro"
+            ]
+          },
+          {
+            "canonico": "4 vértebras coccígeas",
+            "acepta": [
+              "4 coccigeas",
+              "coccigeas",
+              "coccix"
+            ]
+          }
+        ]
+      },
+      "feedback": "Las 33 vértebras se distribuyen en 5 regiones: 7 cervicales, 12 torácicas, 5 lumbares, 5 sacras y 4 coccígeas. Las 25 superiores poseen movilidad significativa."
+    },
+    {
+      "id": "P1-B04-002",
+      "tipo": "numerico",
+      "prompt": "¿Cuál es la longitud aproximada (en cm) de la columna vertebral en un adulto?",
+      "dificultad": 1,
+      "etiquetas": [
+        "columna-vertebral",
+        "longitud"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 72
+      },
+      "respuesta": {
+        "rango": [
+          72,
+          75
+        ],
+        "unidad": "cm"
+      },
+      "feedback": "La columna vertebral en el adulto se extiende desde el cráneo hasta el ápice del cóccix y mide aproximadamente entre 72 y 75 cm, de los cuales una cuarta parte está formada por los discos intervertebrales."
+    },
+    {
+      "id": "P1-B04-003",
+      "tipo": "numerico",
+      "prompt": "¿Qué número de vértebras superiores comprende el segmento móvil presacro de la columna vertebral?",
+      "dificultad": 1,
+      "etiquetas": [
+        "vertebras",
+        "movilidad"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 72
+      },
+      "respuesta": {
+        "valor": 25,
+        "unidad": "vértebras",
+        "tol": 0
+      },
+      "feedback": "Solo se producen movimientos significativos entre las 25 vértebras superiores (7 cervicales, 12 torácicas, 5 lumbares y S1 respecto a L5)."
+    },
+    {
+      "id": "P1-B04-004",
+      "tipo": "relacion",
+      "prompt": "Relaciona cada punto de referencia palpable del dorso con el proceso espinoso o nivel vertebral al que corresponde:",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomia-superficie",
+        "puntos-referencia"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 73
+      },
+      "respuesta": {
+        "pares": [
+          {
+            "clave": "Vértebra prominente",
+            "canonico": "proceso espinoso de C7",
+            "acepta": [
+              "c7"
+            ]
+          },
+          {
+            "clave": "Espina de la escápula",
+            "canonico": "proceso espinoso de T3",
+            "acepta": [
+              "t3"
+            ]
+          },
+          {
+            "clave": "Ángulo inferior de la escápula",
+            "canonico": "proceso espinoso de T7",
+            "acepta": [
+              "t7"
+            ]
+          },
+          {
+            "clave": "Puntas de la 12.ª costilla",
+            "canonico": "proceso espinoso de L2",
+            "acepta": [
+              "l2"
+            ]
+          },
+          {
+            "clave": "Cresta ilíaca (punto más elevado)",
+            "canonico": "proceso espinoso de L4",
+            "acepta": [
+              "l4"
+            ]
+          },
+          {
+            "clave": "Hoyuelo sobre la espina ilíaca posterosuperior (EIPS)",
+            "canonico": "proceso espinoso de S2",
+            "acepta": [
+              "s2"
+            ]
+          }
+        ]
+      },
+      "feedback": "Los puntos de referencia palpables permiten estimar el nivel de estructuras profundas: C7 marca los ápices pulmonares e istmo tiroideo, T4 el plano torácico transversal, L2 el extremo inferior de la médula espinal, L4 la bifurcación aórtica y el nivel de punción lumbar, y S2 el límite inferior del saco dural."
+    },
+    {
+      "id": "P1-B04-005",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 5 componentes funcionales (partes o procesos) de una vértebra típica:",
+      "dificultad": 1,
+      "etiquetas": [
+        "vertebra-tipica",
+        "componentes"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 75,
+        "fig": "2-3"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "cuerpo vertebral",
+            "acepta": [
+              "cuerpo"
+            ]
+          },
+          {
+            "canonico": "arco vertebral",
+            "acepta": [
+              "arco"
+            ]
+          },
+          {
+            "canonico": "proceso espinoso"
+          },
+          {
+            "canonico": "procesos transversos"
+          },
+          {
+            "canonico": "procesos articulares",
+            "acepta": [
+              "cigapofisis"
+            ]
+          }
+        ]
+      },
+      "feedback": "Una vértebra típica consta de un cuerpo vertebral (soporte de peso), un arco vertebral (protección medular) y 7 procesos: 1 espinoso, 2 transversos y 4 articulares."
+    },
+    {
+      "id": "P1-B04-006",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado referente a la constitución del arco vertebral:",
+      "dificultad": 1,
+      "etiquetas": [
+        "arco-vertebral",
+        "pediculos",
+        "laminas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 76
+      },
+      "texto": "El arco vertebral está formado por dos {{c1}}, que son procesos cilíndricos cortos y robustos que se proyectan posteriormente desde el cuerpo vertebral, y dos {{c2}}, que son láminas óseas planas que confluyen en la línea media.",
+      "blancos": {
+        "c1": {
+          "canonico": "pedículos"
+        },
+        "c2": {
+          "canonico": "láminas"
+        }
+      },
+      "feedback": "Los pedículos y las láminas forman las paredes lateral y posterior del foramen vertebral, cuya sucesión en la columna articulada constituye el conducto vertebral."
+    },
+    {
+      "id": "P1-B04-007",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denominan las venas que ocupan los forámenes grandes en la superficie posterior del cuerpo vertebral para drenar la médula ósea roja?",
+      "categoria": "vena",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuerpo-vertebral",
+        "venas-basivertebrales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 75,
+        "fig": "2-4"
+      },
+      "respuesta": {
+        "canonico": "venas basivertebrales",
+        "acepta": [
+          "vena basivertebral"
+        ]
+      },
+      "feedback": "Las venas basivertebrales discurren por el hueso esponjoso y emergen por los forámenes basivertebrales de la superficie posterior del cuerpo vertebral hacia el plexo venoso vertebral interno."
+    },
+    {
+      "id": "P1-B04-008",
+      "tipo": "numerico",
+      "prompt": "¿A qué edad aproximada (en años) suelen unirse las epífisis anulares superior e inferior con el centrum del cuerpo vertebral?",
+      "dificultad": 2,
+      "etiquetas": [
+        "epifisis-anular",
+        "osificacion"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 76
+      },
+      "respuesta": {
+        "valor": 25,
+        "unidad": "años",
+        "tol": 0
+      },
+      "feedback": "Las epífisis anulares aportan zonas de crecimiento al cuerpo vertebral y se fusionan con el centrum en el adulto joven, alrededor de los 25 años."
+    },
+    {
+      "id": "P1-B04-009",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué estructura se forma por la sucesión ordenada de forámenes vertebrales en la columna articulada?",
+      "dificultad": 1,
+      "etiquetas": [
+        "conducto-vertebral",
+        "foramen-vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 76
+      },
+      "respuesta": {
+        "canonico": "conducto vertebral",
+        "acepta": [
+          "conducto raquideo",
+          "conducto espinal"
+        ]
+      },
+      "feedback": "El conducto vertebral contiene la médula espinal, las meninges, raíces de nervios espinales y vasos sanguíneos."
+    },
+    {
+      "id": "P1-B04-010",
+      "tipo": "cloze",
+      "prompt": "Completa la oración sobre los forámenes intervertebrales y su contenido principal:",
+      "dificultad": 1,
+      "etiquetas": [
+        "foramen-intervertebral",
+        "nervios-espinales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 76
+      },
+      "texto": "Las incisuras vertebrales superior e inferior de vértebras adyacentes junto con los discos intervertebrales constituyen los {{c1}}, a través de los cuales emergen los {{c2}} y se localizan los ganglios espinales.",
+      "blancos": {
+        "c1": {
+          "canonico": "forámenes intervertebrales",
+          "acepta": [
+            "agujeros de conjuncion"
+          ]
+        },
+        "c2": {
+          "canonico": "nervios espinales",
+          "acepta": [
+            "nervios raquideos"
+          ]
+        }
+      },
+      "feedback": "Los forámenes intervertebrales dan paso a las raíces y troncos de los nervios espinales con sus arterias vertebrales correspondientes y alojan a los ganglios sensitivos de la raíz posterior."
+    },
+    {
+      "id": "P1-B04-011",
+      "tipo": "relacion",
+      "prompt": "Relaciona cada región vertebral presacra con la forma típica de su foramen vertebral:",
+      "dificultad": 2,
+      "etiquetas": [
+        "foramen-vertebral",
+        "caracteristicas-regionales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 77,
+        "fig": "2-6"
+      },
+      "respuesta": {
+        "pares": [
+          {
+            "clave": "Vértebras cervicales",
+            "canonico": "grande y triangular"
+          },
+          {
+            "clave": "Vértebras torácicas",
+            "canonico": "circular y pequeño",
+            "acepta": [
+              "circular"
+            ]
+          },
+          {
+            "clave": "Vértebras lumbares",
+            "canonico": "triangular de tamaño intermedio",
+            "acepta": [
+              "triangular"
+            ]
+          }
+        ]
+      },
+      "feedback": "El tamaño y forma del foramen reflejan el grosor de la médula espinal: es más amplio en las intumescencias cervical y lumbosacra (triangular) y estrecho en la región torácica (circular)."
+    },
+    {
+      "id": "P1-B04-012",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se llama el labio o cresta en el borde posterolateral de la cara superior del cuerpo de una vértebra cervical típica?",
+      "categoria": "proceso",
+      "dificultad": 2,
+      "etiquetas": [
+        "vertebras-cervicales",
+        "proceso-unciforme"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 77,
+        "fig": "2-7"
+      },
+      "respuesta": {
+        "canonico": "proceso unciforme",
+        "acepta": [
+          "uncus",
+          "apofisis uncinada",
+          "gancho del cuerpo vertebral"
+        ]
+      },
+      "feedback": "El proceso unciforme (uncus) de la cara superior de C3-C7 se articula con el cuerpo de la vértebra suprayacente formando las articulaciones uncovertebrales (de Luschka)."
+    },
+    {
+      "id": "P1-B04-013",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué denominación recibe el tubérculo anterior del proceso transverso de C6 por ser el sitio de compresión de la arteria carótida común?",
+      "dificultad": 2,
+      "etiquetas": [
+        "c6",
+        "tuberculo-carotideo",
+        "chassaignac"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 78,
+        "fig": "2-7"
+      },
+      "respuesta": {
+        "canonico": "tubérculo carotídeo",
+        "acepta": [
+          "tuberculo de chassaignac",
+          "tuberculo carotideo de c6"
+        ]
+      },
+      "feedback": "El tubérculo anterior de C6 es especialmente grande y prominente; la arteria carótida común puede comprimirse contra él con el dedo para controlar hemorragias."
+    },
+    {
+      "id": "P1-B04-014",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 3 estructuras vasculonerviosas que atraviesan los forámenes transversos de las vértebras C1 a C6:",
+      "dificultad": 2,
+      "etiquetas": [
+        "foramen-transverso",
+        "arteria-vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 79,
+        "tabla": "2-2"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "arterias vertebrales"
+          },
+          {
+            "canonico": "plexos venosos vertebrales",
+            "acepta": [
+              "venas vertebrales",
+              "plexo venoso"
+            ]
+          },
+          {
+            "canonico": "plexo simpático",
+            "acepta": [
+              "plexo simpatico vertebral",
+              "nervios simpaticos"
+            ]
+          }
+        ]
+      },
+      "feedback": "Los forámenes transversos de C1-C6 trasmiten la arteria vertebral y sus venas y plexo simpático acompañantes. C7 posee forámenes transversos más pequeños que transmiten solo pequeñas venas vertebrales accesorias."
+    },
+    {
+      "id": "P1-B04-015",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 2 componentes estructurales propios de una vértebra típica de los cuales carece la vértebra C1 (atlas):",
+      "dificultad": 1,
+      "etiquetas": [
+        "c1",
+        "atlas",
+        "caracteristicas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 79,
+        "fig": "2-8"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "cuerpo vertebral",
+            "acepta": [
+              "cuerpo"
+            ]
+          },
+          {
+            "canonico": "proceso espinoso"
+          }
+        ]
+      },
+      "feedback": "C1 (atlas) es un anillo óseo en forma de cuñón compuesto por dos masas laterales unidas por arcos anterior y posterior; carece de cuerpo y de proceso espinoso."
+    },
+    {
+      "id": "P1-B04-016",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Con qué prominencias de la base del cráneo se articulan las caras articulares superiores cóncavas y reniformes de las masas laterales del atlas?",
+      "dificultad": 1,
+      "etiquetas": [
+        "atlas",
+        "condilos-occipitales",
+        "articulacion-atlantoccipital"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 79,
+        "fig": "2-8"
+      },
+      "respuesta": {
+        "canonico": "cóndilos occipitales"
+      },
+      "feedback": "Las caras articulares superiores del atlas reciben a los dos cóndilos occipitales a los lados del foramen magno para formar las articulaciones atlantooccipitales (permiten el movimiento de asentimiento o «sí»)."
+    },
+    {
+      "id": "P1-B04-017",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué proceso vertical en forma de pivote sobresale superiormente desde el cuerpo de C2 (axis) para permitir la rotación de la cabeza?",
+      "categoria": "proceso",
+      "dificultad": 1,
+      "etiquetas": [
+        "c2",
+        "axis",
+        "diente"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 79,
+        "fig": "2-8"
+      },
+      "respuesta": {
+        "canonico": "diente del axis",
+        "acepta": [
+          "diente"
+        ]
+      },
+      "feedback": "El diente (proceso odontoides) del axis asciende por detrás del arco anterior del atlas y proporciona un pivote en torno al cual rota el atlas con el cráneo."
+    },
+    {
+      "id": "P1-B04-018",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué ligamento se extiende entre ambas masas laterales del atlas para mantener al diente del axis adosado al arco anterior?",
+      "categoria": "ligamento",
+      "dificultad": 1,
+      "etiquetas": [
+        "ligamento-transverso",
+        "atlas",
+        "diente"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 80,
+        "fig": "2-8"
+      },
+      "respuesta": {
+        "canonico": "ligamento transverso del atlas"
+      },
+      "feedback": "El ligamento transverso del atlas forma un anillo óseofibroso con el arco anterior del atlas que abraza al diente del axis e impide la luxación posterior del diente hacia la médula espinal."
+    },
+    {
+      "id": "P1-B04-019",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cuál es el rasgo diagnóstico distintivo presente en los cuerpos y procesos transversos de las vértebras torácicas?",
+      "dificultad": 1,
+      "etiquetas": [
+        "vertebras-toracicas",
+        "fositas-costales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 81,
+        "tabla": "2-3"
+      },
+      "respuesta": {
+        "canonico": "fositas costales",
+        "acepta": [
+          "carillas costales",
+          "hemifositas costales",
+          "fositas articulares para las costillas"
+        ]
+      },
+      "feedback": "La presencia de fositas costales (superiores, inferiores y transversas) para articularse con la cabeza y el tubérculo de las costillas es la característica patognomónica de las vértebras torácicas."
+    },
+    {
+      "id": "P1-B04-020",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 2 vértebras torácicas cuyos procesos transversos carecen de fositas costales:",
+      "categoria": "vertebra",
+      "dificultad": 2,
+      "etiquetas": [
+        "vertebras-toracicas",
+        "t11",
+        "t12"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 81,
+        "tabla": "2-3"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "vértebra T11"
+          },
+          {
+            "canonico": "vértebra T12"
+          }
+        ]
+      },
+      "feedback": "Los procesos transversos de T1 a T10 poseen fositas costales para articularse con los tubérculos costales. T11 y T12 solo poseen una fosita costal única en el cuerpo y carecen de fosita en sus procesos transversos."
+    },
+    {
+      "id": "P1-B04-021",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cuál es la vértebra que se fractura con mayor frecuencia en la columna vertebral por estar sometida a intensas fuerzas de transición?",
+      "categoria": "vertebra",
+      "dificultad": 2,
+      "etiquetas": [
+        "t12",
+        "fractura-vertebral",
+        "transicion"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 82
+      },
+      "respuesta": {
+        "canonico": "vértebra T12"
+      },
+      "feedback": "T12 sufre la transición entre la mitad superior torácica (rotatoria) y la mitad inferior lumbar (flexoextensora), lo que la convierte en la vértebra fracturada con mayor frecuencia."
+    },
+    {
+      "id": "P1-B04-022",
+      "tipo": "relacion",
+      "prompt": "Relaciona los dos procesos adicionales de las vértebras lumbares con su localización ósea exacta:",
+      "dificultad": 2,
+      "etiquetas": [
+        "vertebras-lumbares",
+        "proceso-mamilar",
+        "proceso-accesorio"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 83,
+        "tabla": "2-4",
+        "fig": "2-11"
+      },
+      "respuesta": {
+        "pares": [
+          {
+            "clave": "Proceso mamilar",
+            "canonico": "cara posterior del proceso articular superior",
+            "acepta": [
+              "proceso articular superior"
+            ]
+          },
+          {
+            "clave": "Proceso accesorio",
+            "canonico": "cara posterior de la base del proceso transverso",
+            "acepta": [
+              "base del proceso transverso"
+            ]
+          }
+        ]
+      },
+      "feedback": "En las vértebras lumbares, los procesos mamilares se ubican en el borde posterior del proceso articular superior (dan inserción al multífido) y los procesos accesorios en la cara posterior de la base del proceso transverso (para los intertransversos)."
+    },
+    {
+      "id": "P1-B04-023",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cuál es la más grande de todas las vértebras móviles de la columna vertebral?",
+      "categoria": "vertebra",
+      "dificultad": 1,
+      "etiquetas": [
+        "l5",
+        "vertebra-l5",
+        "tamaño"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 84
+      },
+      "respuesta": {
+        "canonico": "vértebra L5"
+      },
+      "feedback": "L5 se distingue por el gran tamaño de su cuerpo y procesos transversos; es la mayor de las 25 vértebras móviles y transmite todo el peso del tronco hacia la base del sacro."
+    },
+    {
+      "id": "P1-B04-024",
+      "tipo": "numerico",
+      "prompt": "¿Cuántos pares de forámenes sacros (anteriores y posteriores) existen típicamente en el sacro del adulto?",
+      "dificultad": 1,
+      "etiquetas": [
+        "sacro",
+        "foramenes-sacros"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 85
+      },
+      "respuesta": {
+        "valor": 4,
+        "unidad": "pares",
+        "tol": 0
+      },
+      "feedback": "Entre los componentes de las 5 vértebras sacras fusionadas se disponen habitualmente 4 pares de forámenes sacros (pélvicos y dorsales) para la salida de los ramos anteriores y posteriores de los nervios S1-S4."
+    },
+    {
+      "id": "P1-B04-025",
+      "tipo": "cloze",
+      "prompt": "Completa el texto sobre el hiato del sacro y los cuernos del sacro:",
+      "dificultad": 2,
+      "etiquetas": [
+        "hiato-sacro",
+        "cuernos-sacro",
+        "sacro"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 85
+      },
+      "texto": "El hiato del sacro se produce por la ausencia de las láminas y procesos espinosos de las vértebras {{c1}}, mientras que los {{c2}}, proyectados a los lados del hiato, representan los procesos articulares inferiores de S5 y sirven de guía para su localización.",
+      "blancos": {
+        "c1": {
+          "canonico": "S5 y S4"
+        },
+        "c2": {
+          "canonico": "cuernos del sacro",
+          "acepta": [
+            "astas del sacro"
+          ]
+        }
+      },
+      "feedback": "El hiato del sacro conduce al conducto sacro. Los cuernos del sacro a sus lados son estructuras palpables clave para guiar la anestesia epidural caudal."
+    },
+    {
+      "id": "P1-B04-026",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se llama la proyección anterior prominente del borde superior del cuerpo de la vértebra S1 que constituye una referencia obstétrica clave?",
+      "dificultad": 1,
+      "etiquetas": [
+        "promontorio-sacro",
+        "sacro",
+        "s1"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 85
+      },
+      "respuesta": {
+        "canonico": "promontorio sacro",
+        "acepta": [
+          "promontorio de s1"
+        ]
+      },
+      "feedback": "El promontorio sacro es el borde anterior sobresaliente del cuerpo de S1 que delimita posteriormente el plano del estrecho superior de la pelvis."
+    },
+    {
+      "id": "P1-B04-027",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué plano horizontal imaginario que conecta los puntos más elevados de las crestas ilíacas cruza el proceso espinoso de L4 y el disco L4-L5 para guiar la punción lumbar?",
+      "dificultad": 1,
+      "etiquetas": [
+        "plano-supracrestal",
+        "puncion-lumbar",
+        "l4"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 86
+      },
+      "respuesta": {
+        "canonico": "plano supracrestal",
+        "acepta": [
+          "linea supracrestal",
+          "linea de jacoby"
+        ]
+      },
+      "feedback": "El plano supracrestal atraviesa la cresta ilíaca en su punto más alto e intersecta el proceso espinoso de L4 y el espacio intervetebral L4-L5, sirviendo como referencia anatómica para la punción lumbar."
+    }
+  ]
+}

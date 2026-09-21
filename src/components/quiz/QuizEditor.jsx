@@ -10,13 +10,16 @@ import { Trash2, Plus, Save, X, ChevronDown, ChevronUp, GripVertical, Settings }
 import { motion, AnimatePresence } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import QuizSettingsPanel from '../admin/QuizSettingsPanel';
+import { normalizeExpandedQuiz, validateNormalizedQuiz } from '@/lib/quiz-normalization';
 
 export default function QuizEditor({ quiz, subjects = [], onSave, onCancel }) {
   const [editedQuiz, setEditedQuiz] = useState({
     ...quiz,
+    questions: Array.isArray(quiz?.questions) ? quiz.questions : [],
     is_hidden: quiz.is_hidden || false
   });
   const [expandedQuestion, setExpandedQuestion] = useState(null);
+  const [validationError, setValidationError] = useState('');
 
   const updateQuestion = (index, field, value) => {
     const newQuestions = [...editedQuiz.questions];
@@ -27,7 +30,13 @@ export default function QuizEditor({ quiz, subjects = [], onSave, onCancel }) {
   const updateAnswerOption = (qIndex, aIndex, field, value) => {
     const newQuestions = [...editedQuiz.questions];
     const newOptions = [...newQuestions[qIndex].answerOptions];
-    newOptions[aIndex] = { ...newOptions[aIndex], [field]: value };
+    if (field === 'isCorrect' && value === true && newQuestions[qIndex].type !== 'image-multiple') {
+      newOptions.forEach((option, index) => {
+        newOptions[index] = { ...option, isCorrect: index === aIndex };
+      });
+    } else {
+      newOptions[aIndex] = { ...newOptions[aIndex], [field]: value };
+    }
     newQuestions[qIndex] = { ...newQuestions[qIndex], answerOptions: newOptions };
     setEditedQuiz({ ...editedQuiz, questions: newQuestions });
   };
@@ -68,10 +77,18 @@ export default function QuizEditor({ quiz, subjects = [], onSave, onCancel }) {
   };
 
   const handleSave = () => {
-    onSave({
+    const normalized = normalizeExpandedQuiz({
       ...editedQuiz,
       total_questions: editedQuiz.questions.length
     });
+    const errors = validateNormalizedQuiz(normalized);
+    if (errors.length > 0) {
+      setValidationError(errors.map((item) => item.text).join(' '));
+      if (errors[0].qIndex) setExpandedQuestion(errors[0].qIndex - 1);
+      return;
+    }
+    setValidationError('');
+    onSave(normalized);
   };
 
   return (
@@ -301,6 +318,11 @@ export default function QuizEditor({ quiz, subjects = [], onSave, onCancel }) {
         </CardContent>
       </Card>
 
+      {validationError && (
+        <div role="alert" className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-800">
+          {validationError}
+        </div>
+      )}
       <div className="flex gap-3">
         <Button variant="outline" onClick={onCancel} className="flex-1">
           Cancelar

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { fromCompactFormat, isSimplifiedFormat, fromSimplifiedFormat } from '../utils/quizFormats';
+import { normalizeExpandedQuiz, normalizeQuizQuestion, validateNormalizedQuiz } from '@/lib/quiz-normalization';
 
 export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -13,35 +14,7 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
   const [jsonErrors, setJsonErrors] = useState([]);
   const textareaRef = useRef(null);
 
-  // Helper para normalizar opciones
-  const normalizeOptionText = (opt) => {
-    if (typeof opt === 'string') return opt.trim();
-    if (!opt || typeof opt !== 'object') return '';
-    return String(opt.text ?? opt.answerText ?? opt.value ?? opt.v ?? opt.t ?? opt.label ?? '').trim();
-  };
-
-  const normalizeAnswerOptions = (input) => {
-    let raw = [];
-    if (Array.isArray(input)) raw = input;
-    else if (input && typeof input === 'object') {
-      raw = Object.entries(input).map(([label, text]) => ({ label, text }));
-    }
-
-    return raw
-      .map((opt, idx) => {
-        const text = normalizeOptionText(opt);
-        if (!text) return null;
-        return {
-          id: String(opt?.id ?? idx),
-          text,
-          isCorrect: Boolean(opt?.isCorrect ?? opt?.c),
-          rationale: opt?.rationale ?? opt?.r ?? ''
-        };
-      })
-      .filter(Boolean);
-  };
-
-  const processJsonData = async (data, fileName = 'Quiz') => {
+  const processJsonData = (data, fileName = 'Quiz') => {
     let questions = [];
     let title = fileName.replace('.json', '');
     let description = '';
@@ -52,11 +25,10 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
       title = simplified.title !== 'Cuestionario' ? simplified.title : title;
       description = simplified.description || '';
       questions = simplified.questions;
-      return { title, description, questions };
     }
 
     // FORMATO NUEVO {t, q} con estructura compacta
-    if (data.t && data.q && Array.isArray(data.q) && !data.m) {
+    else if (data.t && data.q && Array.isArray(data.q) && !data.m) {
       const expanded = fromCompactFormat(data);
       title = expanded.title || title;
       description = expanded.description || '';
@@ -64,16 +36,7 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
     }
     // FORMATO ARRAY DIRECTO
     else if (Array.isArray(data)) {
-      questions = data.map(q => ({
-        question: q.question,
-        answerOptions: normalizeAnswerOptions(q.answerOptions || q.options),
-        correctAnswer: normalizeAnswerOptions(q.answerOptions || q.options).findIndex(o => o.isCorrect),
-        type: 'multiple-choice',
-        difficulty: 'moderado',
-        bloomLevel: 'Comprender',
-        tags: [],
-        hint: q.hint || ''
-      }));
+      questions = data.map(normalizeQuizQuestion);
     }
     // FORMATO METADATA NUEVO {metadata, q}
     else if (data.metadata && data.q && Array.isArray(data.q)) {
@@ -81,42 +44,38 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
       description = `Tema: ${data.metadata.tp || ''} (${data.metadata.total} preguntas)`;
       const difMap = { 1: 'fácil', 2: 'moderado', 3: 'difícil' };
 
-      questions = data.q.map(q => ({
+      questions = data.q.map((q, index) => normalizeQuizQuestion({
+        ...q,
         question: q.x,
-        type: 'multiple-choice',
+        type: q.qt || 'multiple-choice',
         difficulty: difMap[q.dif] || 'moderado',
         bloomLevel: 'Comprender',
         tags: [data.metadata.sj, data.metadata.tp, q.sb].filter(Boolean),
-        hint: '',
-        answerOptions: normalizeAnswerOptions(q.o),
-        correctAnswer: q.o.findIndex(o => o.c)
-      }));
+        answerOptions: q.o
+      }, index));
     }
     // FORMATO CON WRAPPER 'quiz'
     else if (data.quiz && Array.isArray(data.quiz)) {
       title = data.title || title;
-      questions = data.quiz.map(q => ({
-        question: q.question,
-        answerOptions: normalizeAnswerOptions(q.answerOptions || q.options),
-        correctAnswer: normalizeAnswerOptions(q.answerOptions || q.options).findIndex(o => o.isCorrect),
-        type: 'multiple-choice',
-        difficulty: 'moderado',
-        bloomLevel: 'Comprender',
-        tags: [],
-        hint: q.hint || ''
-      }));
+      description = data.description || '';
+      questions = data.quiz.map(normalizeQuizQuestion);
     }
     // FORMATO COMPLETO ESTÁNDAR
     else if (data.questions && Array.isArray(data.questions)) {
       title = data.title || title;
       description = data.description || '';
-      questions = data.questions;
+      questions = data.questions.map(normalizeQuizQuestion);
     }
     else {
       throw new Error('Formato JSON no reconocido');
     }
 
-    return { title, description, questions };
+    const normalized = normalizeExpandedQuiz({ title, description, questions }, title);
+    const validationErrors = validateNormalizedQuiz(normalized);
+    if (validationErrors.length > 0) {
+      throw new Error(validationErrors.map((item) => item.text).join(' '));
+    }
+    return normalized;
   };
 
   const parseSyntaxError = (errMessage, text) => {

@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local/anatomia/schema-banco.json",
+  "title": "Bloque de banco de preguntas de anatomia",
+  "type": "object",
+  "required": ["bloque", "items"],
+  "properties": {
+    "bloque": {
+      "type": "object",
+      "required": ["id", "titulo", "parcial", "sesion", "paginas"],
+      "properties": {
+        "id":       { "type": "string", "pattern": "^P[1-3]-B[0-9]{2}$" },
+        "titulo":   { "type": "string" },
+        "parcial":  { "type": "integer", "minimum": 1, "maximum": 3 },
+        "sesion":   { "type": "string", "description": "Fecha de la sesion en el temario original" },
+        "paginas":  { "type": "string", "description": "Rango de paginas en Moore 9e" },
+        "semana_estudio": { "type": "integer", "description": "Semana del plan Sep 2026 - Ene 2027" }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/item" }
+    }
+  },
+
+  "$defs": {
+    "elemento": {
+      "type": "object",
+      "required": ["canonico"],
+      "properties": {
+        "canonico": { "type": "string", "description": "Forma que se muestra en el feedback" },
+        "acepta":   { "type": "array", "items": { "type": "string" },
+                      "description": "Variantes NO cubiertas por el diccionario global. No repetir sinonimias globales aqui." }
+      }
+    },
+
+    "base": {
+      "type": "object",
+      "required": ["id", "tipo", "prompt", "fuente", "dificultad"],
+      "properties": {
+        "id":         { "type": "string", "pattern": "^P[1-3]-B[0-9]{2}-[0-9]{3}$" },
+        "tipo":       { "enum": ["enumeracion", "secuencia", "respuesta_corta", "numerico", "cloze", "relacion"] },
+        "prompt":     { "type": "string" },
+        "categoria":  { "type": "string",
+                        "description": "Clave de prefijos_categoria en sinonimos.json. Permite que 'musculo temporal' == 'temporal'." },
+        "dificultad": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "etiquetas":  { "type": "array", "items": { "type": "string" } },
+        "feedback":   { "type": "string", "description": "Explicacion breve tras responder" },
+        "fuente": {
+          "type": "object",
+          "required": ["pag"],
+          "properties": {
+            "obra": { "type": "string", "default": "Moore 9e" },
+            "pag":  { "type": ["integer", "string"] },
+            "fig":  { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "item": {
+      "allOf": [{ "$ref": "#/$defs/base" }],
+      "oneOf": [
+        {
+          "properties": {
+            "tipo": { "const": "enumeracion" },
+            "respuesta": {
+              "type": "object",
+              "required": ["elementos"],
+              "properties": {
+                "elementos":          { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/elemento" } },
+                "credito_parcial":    { "type": "boolean", "default": true },
+                "penaliza_sobrantes": { "type": "boolean", "default": false,
+                                        "description": "Activar solo cuando el set es cerrado y el profesor castiga el disparo al aire" }
+              }
+            }
+          },
+          "required": ["respuesta"]
+        },
+        {
+          "properties": {
+            "tipo": { "const": "secuencia" },
+            "respuesta": {
+              "type": "object",
+              "required": ["elementos"],
+              "properties": {
+                "elementos": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/elemento" } }
+              }
+            }
+          },
+          "required": ["respuesta"]
+        },
+        {
+          "properties": {
+            "tipo": { "const": "respuesta_corta" },
+            "respuesta": { "$ref": "#/$defs/elemento" }
+          },
+          "required": ["respuesta"]
+        },
+        {
+          "properties": {
+            "tipo": { "const": "numerico" },
+            "respuesta": {
+              "type": "object",
+              "properties": {
+                "valor":  { "type": "number" },
+                "rango":  { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } },
+                "unidad": { "type": "string" },
+                "tol":    { "type": "number", "default": 0 }
+              },
+              "oneOf": [{ "required": ["valor"] }, { "required": ["rango"] }]
+            }
+          },
+          "required": ["respuesta"]
+        },
+        {
+          "properties": {
+            "tipo": { "const": "cloze" },
+            "texto": { "type": "string",
+                       "description": "Texto con marcadores {{c1}}, {{c2}}... en los huecos" },
+            "blancos": {
+              "type": "object",
+              "minProperties": 1,
+              "patternProperties": {
+                "^c[0-9]+$": {
+                  "allOf": [{ "$ref": "#/$defs/elemento" }],
+                  "properties": { "categoria": { "type": "string" } }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": ["texto", "blancos"]
+        },
+        {
+          "properties": {
+            "tipo": { "const": "relacion" },
+            "respuesta": {
+              "type": "object",
+              "required": ["pares"],
+              "properties": {
+                "pares": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "allOf": [{ "$ref": "#/$defs/elemento" }],
+                    "properties": { "clave": { "type": "string", "description": "Columna A: el estimulo" } },
+                    "required": ["clave"]
+                  }
+                }
+              }
+            }
+          },
+          "required": ["respuesta"]
+        }
+      ]
+    }
+  }
+}

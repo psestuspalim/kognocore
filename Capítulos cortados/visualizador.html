@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizador & Verificador — Banco de Preguntas de Anatomía (Moore 9.ª ed.)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: #131b2e;
+      --bg-card-hover: #19243d;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-highlight: rgba(99, 102, 241, 0.3);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-primary: #6366f1;
+      --accent-primary-hover: #4f46e5;
+      
+      --badge-enum: #8b5cf6;
+      --badge-num: #06b6d4;
+      --badge-corta: #10b981;
+      --badge-cloze: #f59e0b;
+      --badge-rel: #ec4899;
+      --badge-sec: #3b82f6;
+
+      --diff-1: #10b981;
+      --diff-2: #f59e0b;
+      --diff-3: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .title-group h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .title-group p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-top: 4px;
+    }
+
+    .header-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .meta-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-chip strong {
+      color: var(--accent-primary);
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .stat-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px 14px;
+      text-align: center;
+    }
+
+    .stat-card .value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .stat-card .label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Controls Bar */
+    .controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 4px;
+      gap: 4px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-primary);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .search-input, .select-input {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-main);
+      padding: 8px 14px;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus, .select-input:focus {
+      border-color: var(--accent-primary);
+    }
+
+    .search-input {
+      width: 240px;
+    }
+
+    .btn-upload {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px dashed var(--border-color);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-upload:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--accent-primary);
+    }
+
+    /* Item Grid / Cards */
+    .items-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 22px 26px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .item-card:hover {
+      border-color: var(--border-highlight);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .item-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #cbd5e1;
+    }
+
+    .badges-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-enumeracion { background: rgba(139, 92, 246, 0.18); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.4); }
+    .badge-numerico { background: rgba(6, 182, 212, 0.18); color: #67e8f9; border: 1px solid rgba(6, 182, 212, 0.4); }
+    .badge-respuesta_corta { background: rgba(16, 185, 129, 0.18); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-cloze { background: rgba(245, 158, 11, 0.18); color: #fde68a; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge-relacion { background: rgba(236, 72, 153, 0.18); color: #fbcfe8; border: 1px solid rgba(236, 72, 153, 0.4); }
+    .badge-secuencia { background: rgba(59, 130, 246, 0.18); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.4); }
+
+    .badge-diff-1 { background: rgba(16, 185, 129, 0.12); color: #10b981; }
+    .badge-diff-2 { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+    .badge-diff-3 { background: rgba(239, 68, 68, 0.12); color: #ef4444; }
+
+    .source-tag {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .item-prompt {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    /* Cloze text styling */
+    .cloze-text-block {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 0.98rem;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .cloze-mark {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      color: #fbbf24;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+    }
+
+    /* Answer section */
+    .answer-section {
+      background: rgba(15, 23, 42, 0.5);
+      border-left: 3px solid var(--accent-primary);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+    }
+
+    .answer-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .canonical-val {
+      font-weight: 700;
+      color: #4ade80;
+      font-size: 1rem;
+    }
+
+    .accepted-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .accepted-tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+    }
+
+    .pairs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.88rem;
+    }
+
+    .pairs-table th, .pairs-table td {
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    .pairs-table th {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Feedback Box */
+    .feedback-box {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      color: #bfdbfe;
+      margin-bottom: 14px;
+    }
+
+    .feedback-box strong {
+      color: #60a5fa;
+    }
+
+    /* Tags */
+    .tags-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag-pill {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    /* Practice Inputs */
+    .practice-box {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .practice-textarea {
+      width: 100%;
+      min-height: 80px;
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: #fff;
+      padding: 10px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      margin-bottom: 10px;
+      outline: none;
+    }
+
+    .practice-textarea:focus, .practice-input:focus {
+      border-color: var(--accent-primary);
+    }
+
+    .practice-input {
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: #fff;
+      padding: 8px 12px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      width: 100%;
+      outline: none;
+    }
+
+    .btn-grade {
+      background: var(--accent-primary);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-grade:hover {
+      background: var(--accent-primary-hover);
+    }
+
+    /* Result Box */
+    .result-box {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+    }
+
+    .result-correct {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+
+    .result-incorrect {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+
+    .spelling-warning {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fde68a;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-top: 8px;
+      font-size: 0.82rem;
+    }
+
+    /* Hidden input for file upload */
+    #file-input { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-top">
+        <div class="title-group">
+          <h1>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+            Banco de Anatomía — Visualizador & Validador
+          </h1>
+          <p id="block-description">Moore, Anatomía con orientación clínica (9.ª ed. en español)</p>
+        </div>
+        <div class="header-meta">
+          <span class="meta-chip">ID: <strong id="meta-id">P1-B04</strong></span>
+          <span class="meta-chip">Sesión: <strong id="meta-sesion">30 ene</strong></span>
+          <span class="meta-chip">Páginas: <strong id="meta-paginas">72-86</strong></span>
+          <span class="meta-chip">Parcial: <strong id="meta-parcial">1</strong></span>
+        </div>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="stats-bar">
+        <div class="stat-card">
+          <div class="value" id="stat-total-items">27</div>
+          <div class="label">Ítems Totales</div>
+        </div>
+        <div class="stat-card">
+          <div class="value" id="stat-total-points">50</div>
+          <div class="label">Puntos Totales</div>
+        </div>
+        <div class="stat-card">
+          <div class="value" id="stat-enum-count">5</div>
+          <div class="label">Enumeración</div>
+        </div>
+        <div class="stat-card">
+          <div class="value" id="stat-num-count">4</div>
+          <div class="label">Numérico</div>
+        </div>
+        <div class="stat-card">
+          <div class="value" id="stat-corta-count">12</div>
+          <div class="label">Resp. Corta</div>
+        </div>
+        <div class="stat-card">
+          <div class="value" id="stat-cloze-count">3</div>
+          <div class="label">Cloze</div>
+        </div>
+        <div class="stat-card">
+          <div class="value" id="stat-rel-count">3</div>
+          <div class="label">Relación</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+      <div class="nav-tabs">
+        <button class="tab-btn active" id="tab-banco" onclick="setMode('banco')">📖 Modo Banco (Verificación)</button>
+        <button class="tab-btn" id="tab-practica" onclick="setMode('practica')">✏️ Modo Práctica / Examen</button>
+      </div>
+
+      <div class="filter-group">
+        <input type="text" id="search-box" class="search-input" placeholder="🔍 Buscar término o ID..." oninput="renderApp()">
+        
+        <select id="filter-type" class="select-input" onchange="renderApp()">
+          <option value="all">Todos los tipos</option>
+          <option value="enumeracion">Enumeración</option>
+          <option value="numerico">Numérico</option>
+          <option value="respuesta_corta">Respuesta Corta</option>
+          <option value="cloze">Cloze (Completar)</option>
+          <option value="relacion">Relación</option>
+        </select>
+
+        <select id="filter-diff" class="select-input" onchange="renderApp()">
+          <option value="all">Todas las dificultades</option>
+          <option value="1">Dificultad 1 (Básica)</option>
+          <option value="2">Dificultad 2 (Media)</option>
+          <option value="3">Dificultad 3 (Avanzada)</option>
+        </select>
+
+        <button class="btn-upload" onclick="document.getElementById('file-input').click()">📁 Cargar otro JSON</button>
+        <input type="file" id="file-input" accept=".json" onchange="loadJSONFile(event)">
+      </div>
+    </div>
+
+    <!-- Items Container -->
+    <div id="items-container" class="items-grid"></div>
+  </div>
+
+  <!-- Embedded Normalizer & Data -->
+  <script>
+    // -------------------------------------------------------------------------
+    // DICCIONARIO DE SINÓNIMOS GLOBAL (sinonimos.json embebido)
+    // -------------------------------------------------------------------------
+    const DIC_EMBEDDED = {
+      "palabras_vacias": ["el", "la", "los", "las", "un", "una", "unos", "unas", "de", "del", "al", "a", "y", "e", "o", "u", "en", "con", "por", "para", "sobre", "entre", "su", "sus", "lo", "que", "se"],
+      "excepciones_plural": ["torax", "analisis", "crisis", "dosis", "hipotesis", "sintesis", "atlas", "axis", "psoas", "biceps", "triceps", "cuadriceps", "menos", "mas", "tras", "hueso", "seno", "pubis", "fibras"],
+      "palabras_protegidas": {
+        "lista": ["superior", "inferior", "anterior", "posterior", "medial", "lateral", "medio", "intermedio", "derecho", "izquierdo", "interno", "externo", "proximal", "distal", "superficial", "profundo", "ascendente", "descendente", "primario", "secundario", "dorsal", "ventral", "craneal", "caudal", "palmar", "plantar", "mayor", "menor", "aductor", "abductor", "flexor", "extensor", "supinador", "pronador"]
+      },
+      "prefijos_categoria": {
+        "musculo": ["musculo", "m", "mm"],
+        "nervio": ["nervio", "n", "nn"],
+        "arteria": ["arteria", "a", "aa"],
+        "vena": ["vena", "v", "vv"],
+        "ligamento": ["ligamento", "lig"],
+        "hueso": ["hueso"],
+        "articulacion": ["articulacion", "art"],
+        "proceso": ["proceso", "apofisis"],
+        "foramen": ["foramen", "agujero", "orificio"],
+        "nodulo": ["nodulo linfatico", "ganglio linfatico", "nodulo", "ganglio"],
+        "vertebra": ["vertebra", "la vertebra"],
+        "centro": ["centro", "centro de osificacion"]
+      },
+      "adjetivos_genero": {
+        "derecha": "derecho", "izquierda": "izquierdo", "superficiales": "superficial", "espinosa": "espinoso", "transversa": "transverso", "accesoria": "accesorio", "mamilar": "mamilar", "oblicua": "oblicuo", "media": "medio", "interna": "interno", "externa": "externo", "profunda": "profundo", "larga": "largo", "corta": "corto", "ancha": "ancho", "cervicales": "cervical", "toracica": "toracico", "lumbares": "lumbar", "sacra": "sacro", "coccigea": "coccigeo"
+      },
+      "equivalencias": [
+        ["apofisis espinosa", "proceso espinoso"],
+        ["apofisis transversa", "proceso transverso"],
+        ["apofisis articular", "proceso articular"],
+        ["apofisis mamilar", "proceso mamilar"],
+        ["apofisis accesoria", "proceso accesorio"],
+        ["apofisis odontoides", "diente axis"],
+        ["proceso odontoides", "diente axis"],
+        ["odontoides", "diente axis"],
+        ["agujero", "foramen"],
+        ["canal vertebral", "conducto vertebral"],
+        ["canal raquideo", "conducto vertebral"],
+        ["interapofisaria", "cigapofisaria"],
+        ["facetaria", "cigapofisaria"],
+        ["c1", "atlas"],
+        ["c2", "axis"],
+        ["coxis", "coccix"],
+        ["disco iv", "disco intervertebral"]
+      ]
+    };
+
+    // -------------------------------------------------------------------------
+    // MOTOR DE NORMALIZACIÓN EMBEDDED
+    // -------------------------------------------------------------------------
+    function sinAcentos(s) {
+      return String(s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').normalize('NFC');
+    }
+
+    function limpiar(s) {
+      return sinAcentos(String(s ?? ''))
+        .toLowerCase()
+        .replace(/[\u2010-\u2015]/g, '-')
+        .replace(/[^\p{L}\p{N}\s\-\/%.,]/gu, ' ')
+        .replace(/[\-\/_.,]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function levenshtein(a, b, corte = Infinity) {
+      if (a === b) return 0;
+      if (Math.abs(a.length - b.length) > corte) return corte + 1;
+      const m = a.length, n = b.length;
+      let prev = Array.from({ length: n + 1 }, (_, j) => j);
+      let cur = new Array(n + 1);
+      for (let i = 1; i <= m; i++) {
+        cur[0] = i;
+        let minFila = cur[0];
+        for (let j = 1; j <= n; j++) {
+          const costo = a[i - 1] === b[j - 1] ? 0 : 1;
+          cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + costo);
+          if (cur[j] < minFila) minFila = cur[j];
+        }
+        if (minFila > corte) return corte + 1;
+        [prev, cur] = [cur, prev];
+      }
+      return prev[n];
+    }
+
+    function toleranciaOrtografica(termino) {
+      const L = termino.length;
+      if (L <= 5) return 0;
+      if (L <= 9) return 1;
+      if (L <= 15) return 2;
+      return 3;
+    }
+
+    function crearMotor(DIC) {
+      const VACIAS = new Set(DIC.palabras_vacias);
+      const EXC_PLURAL = new Set(DIC.excepciones_plural);
+      const GENERO = DIC.adjetivos_genero || {};
+      const PROTEGIDAS = new Set((DIC.palabras_protegidas?.lista || []).map(limpiar));
+
+      function firmaProtegida(norm) {
+        return norm.split(' ').filter(t => /\d/.test(t) || PROTEGIDAS.has(t)).sort().join(' ');
+      }
+
+      const EQUIV = [...DIC.equivalencias]
+        .map(([de, a]) => [limpiar(de), limpiar(a)])
+        .sort((x, y) => y[0].split(' ').length - x[0].split(' ').length);
+
+      const PREFIJOS = {};
+      for (const [cat, lista] of Object.entries(DIC.prefijos_categoria || {})) {
+        PREFIJOS[cat] = [...lista].map(limpiar).sort((a, b) => b.split(' ').length - a.split(' ').length);
+      }
+
+      function singular(w) {
+        if (EXC_PLURAL.has(w) || w.length <= 4) return w;
+        if (w.endsWith('ces')) return w.slice(0, -3) + 'z';
+        if (w.endsWith('es') && w.length > 5) return w.slice(0, -2);
+        if (w.endsWith('s') && /[aeiou]/.test(w[w.length - 2])) return w.slice(0, -1);
+        return w;
+      }
+
+      function aplicarEquivalencias(s) {
+        let out = ` ${s} `;
+        for (const [de, a] of EQUIV) {
+          const patron = new RegExp(`(?<=\\s)${de.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?=\\s)`, 'g');
+          out = out.replace(patron, a);
+        }
+        return out.trim().replace(/\s+/g, ' ');
+      }
+
+      function quitarPrefijo(s, categoria) {
+        if (!categoria || !PREFIJOS[categoria]) return s;
+        for (const p of PREFIJOS[categoria]) {
+          if (s === p) return s;
+          if (s.startsWith(p + ' ')) return s.slice(p.length + 1);
+        }
+        return s;
+      }
+
+      function normalizar(txt, opts = {}) {
+        let s = limpiar(txt);
+        if (!s) return '';
+        s = aplicarEquivalencias(s);
+        s = quitarPrefijo(s, opts.categoria);
+
+        let toks = s.split(' ').filter(t => t && !VACIAS.has(t));
+        if (opts.agresivo !== false) {
+          toks = toks.map(t => GENERO[t] || t);
+          toks = toks.map(singular);
+          toks = toks.map(t => GENERO[t] || t);
+        }
+        if (opts.ordenLibre !== false) toks = toks.sort();
+        if (opts.ordenLibre !== false) toks = toks.filter((t, i) => t !== toks[i - 1]);
+        return toks.join(' ');
+      }
+
+      function coincide(respuesta, aceptadas, opts = {}) {
+        const rLimpia = limpiar(respuesta);
+        if (!rLimpia) return { ok: false, via: null, distancia: Infinity };
+
+        for (const a of aceptadas) {
+          if (rLimpia === limpiar(a)) return { ok: true, via: 'exacto', distancia: 0 };
+        }
+
+        const rNorm = normalizar(respuesta, opts);
+        const aNorms = aceptadas.map(a => normalizar(a, opts));
+        for (const a of aNorms) {
+          if (rNorm === a) return { ok: true, via: 'normalizado', distancia: 0 };
+        }
+
+        let mejor = Infinity;
+        const rFirma = firmaProtegida(rNorm);
+        for (const a of aNorms) {
+          if (firmaProtegida(a) !== rFirma) continue;
+          const tol = opts.tolerancia ?? toleranciaOrtografica(a);
+          if (tol === 0) continue;
+          const d = levenshtein(rNorm, a, tol);
+          if (d < mejor) mejor = d;
+          if (d <= tol) return { ok: true, via: 'ortografia', distancia: d };
+        }
+
+        return { ok: false, via: null, distancia: mejor };
+      }
+
+      function formasDe(el) {
+        return [el.canonico, ...(el.acepta || [])];
+      }
+
+      function trocear(entrada) {
+        if (Array.isArray(entrada)) return entrada.map(s => String(s).trim()).filter(Boolean);
+        return String(entrada ?? '').split(/\r?\n|[;,]|(?:^|\s)\d+[.)]\s*/g).map(s => s.trim()).filter(Boolean);
+      }
+
+      function calificarEnumeracion(item, entrada) {
+        const dadas = trocear(entrada);
+        const usados = new Set();
+        const detalle = [];
+        let aciertos = 0;
+
+        for (const el of item.respuesta.elementos) {
+          let hit = null;
+          for (let i = 0; i < dadas.length; i++) {
+            if (usados.has(i)) continue;
+            const r = coincide(dadas[i], formasDe(el), { categoria: item.categoria });
+            if (r.ok) { hit = { indice: i, ...r }; break; }
+          }
+          if (hit) {
+            usados.add(hit.indice);
+            aciertos++;
+            detalle.push({ esperado: el.canonico, dado: dadas[hit.indice], ok: true, via: hit.via });
+          } else {
+            detalle.push({ esperado: el.canonico, dado: null, ok: false, via: null });
+          }
+        }
+
+        const max = item.respuesta.elementos.length;
+        let puntos = item.respuesta.credito_parcial === false ? (aciertos === max ? max : 0) : aciertos;
+        return { tipo: 'enumeracion', puntos, max, correcto: puntos === max, detalle };
+      }
+
+      function calificarCorta(item, entrada) {
+        const r = coincide(entrada, formasDe(item.respuesta), { categoria: item.categoria });
+        return {
+          tipo: 'respuesta_corta', puntos: r.ok ? 1 : 0, max: 1, correcto: r.ok, via: r.via,
+          detalle: [{ esperado: item.respuesta.canonico, dado: String(entrada ?? '').trim(), ok: r.ok, via: r.via }]
+        };
+      }
+
+      function calificarNumerico(item, entrada) {
+        const t = limpiar(entrada).replace(',', '.');
+        const m = t.match(/-?\d+(?:\.\d+)?/g);
+        const nums = m ? m.map(Number) : [];
+        const R = item.respuesta;
+        let ok = false;
+        if (nums.length) {
+          if (R.rango) {
+            const [lo, hi] = R.rango;
+            ok = nums.every(n => n >= lo - (R.tol ?? 0) && n <= hi + (R.tol ?? 0));
+          } else {
+            ok = nums.some(n => Math.abs(n - R.valor) <= (R.tol ?? 0));
+          }
+        }
+        const esperado = R.rango ? `${R.rango[0]}-${R.rango[1]} ${R.unidad ?? ''}` : `${R.valor} ${R.unidad ?? ''}`;
+        return { tipo: 'numerico', puntos: ok ? 1 : 0, max: 1, correcto: ok, detalle: [{ esperado, dado: entrada, ok }] };
+      }
+
+      function calificarCloze(item, entrada) {
+        const resp = entrada && typeof entrada === 'object' ? entrada : {};
+        const claves = Object.keys(item.blancos);
+        const detalle = [];
+        let aciertos = 0;
+        for (const k of claves) {
+          const b = item.blancos[k];
+          const r = coincide(resp[k], [b.canonico, ...(b.acepta || [])], { categoria: b.categoria });
+          if (r.ok) aciertos++;
+          detalle.push({ blanco: k, esperado: b.canonico, dado: resp[k] ?? null, ok: r.ok, via: r.via });
+        }
+        return { tipo: 'cloze', puntos: aciertos, max: claves.length, correcto: aciertos === claves.length, detalle };
+      }
+
+      function calificarRelacion(item, entrada) {
+        const resp = entrada && typeof entrada === 'object' ? entrada : {};
+        const detalle = [];
+        let aciertos = 0;
+        for (const par of item.respuesta.pares) {
+          const r = coincide(resp[par.clave], [par.canonico, ...(par.acepta || [])], { categoria: item.categoria });
+          if (r.ok) aciertos++;
+          detalle.push({ clave: par.clave, esperado: par.canonico, dado: resp[par.clave] ?? null, ok: r.ok, via: r.via });
+        }
+        const max = item.respuesta.pares.length;
+        return { tipo: 'relacion', puntos: aciertos, max, correcto: aciertos === max, detalle };
+      }
+
+      const DESPACHO = {
+        enumeracion: calificarEnumeracion,
+        respuesta_corta: calificarCorta,
+        numerico: calificarNumerico,
+        cloze: calificarCloze,
+        relacion: calificarRelacion
+      };
+
+      function calificar(item, entrada) {
+        const fn = DESPACHO[item.tipo];
+        if (!fn) return { tipo: item.tipo, puntos: 0, max: 1, correcto: false, detalle: [] };
+        const res = fn(item, entrada);
+        res.avisoOrtografia = (res.detalle || []).some(d => d.ok && d.via === 'ortografia');
+        return res;
+      }
+
+      return { calificar };
+    }
+
+    const motor = crearMotor(DIC_EMBEDDED);
+
+    // -------------------------------------------------------------------------
+    // DATOS INICIALES (P1-B04_dorso_vision_general_vertebras.json)
+    // -------------------------------------------------------------------------
+    let currentData = {
+      "bloque": {
+        "id": "P1-B04",
+        "titulo": "Dorso y columna: vértebras, estructura y función, características regionales",
+        "parcial": 1,
+        "sesion": "30 de enero",
+        "paginas": "72-86",
+        "semana_estudio": 2
+      },
+      "items": [
+        {
+          "id": "P1-B04-001",
+          "tipo": "enumeracion",
+          "prompt": "Menciona los 5 grupos o regiones en que se clasifican las 33 vértebras del adulto en sentido craneocaudal:",
+          "categoria": "vertebra",
+          "dificultad": 1,
+          "etiquetas": ["vertebras", "clasificacion", "regiones"],
+          "fuente": { "obra": "Moore 9e", "pag": 72, "fig": "2-2" },
+          "respuesta": {
+            "credito_parcial": true,
+            "elementos": [
+              { "canonico": "7 vértebras cervicales", "acepta": ["7 cervicales"] },
+              { "canonico": "12 vértebras torácicas", "acepta": ["12 toracicas", "dorsales"] },
+              { "canonico": "5 vértebras lumbares", "acepta": ["5 lumbares"] },
+              { "canonico": "5 vértebras sacras", "acepta": ["5 sacras", "sacro"] },
+              { "canonico": "4 vértebras coccígeas", "acepta": ["4 coccigeas", "coccix"] }
+            ]
+          },
+          "feedback": "Las 33 vértebras se distribuyen en 5 regiones: 7 cervicales, 12 torácicas, 5 lumbares, 5 sacras y 4 coccígeas. Las 25 superiores poseen movilidad significativa."
+        },
+        {
+          "id": "P1-B04-002",
+          "tipo": "numerico",
+          "prompt": "¿Cuál es la longitud aproximada (en cm) de la columna vertebral en un adulto?",
+          "dificultad": 1,
+          "etiquetas": ["columna-vertebral", "longitud"],
+          "fuente": { "obra": "Moore 9e", "pag": 72 },
+          "respuesta": { "rango": [72, 75], "unidad": "cm" },
+          "feedback": "La columna vertebral en el adulto se extiende desde el cráneo hasta el ápice del cóccix y mide aproximadamente entre 72 y 75 cm, de los cuales una cuarta parte está formada por los discos intervertebrales."
+        },
+        {
+          "id": "P1-B04-003",
+          "tipo": "numerico",
+          "prompt": "¿Qué número de vértebras superiores comprende el segmento móvil presacro de la columna vertebral?",
+          "dificultad": 1,
+          "etiquetas": ["vertebras", "movilidad"],
+          "fuente": { "obra": "Moore 9e", "pag": 72 },
+          "respuesta": { "valor": 25, "unidad": "vertebras", "tol": 0 },
+          "feedback": "Solo se producen movimientos significativos entre las 25 vértebras superiores (7 cervicales, 12 torácicas, 5 lumbares y S1 respecto a L5)."
+        },
+        {
+          "id": "P1-B04-004",
+          "tipo": "relacion",
+          "prompt": "Relaciona cada punto de referencia palpable del dorso con el proceso espinoso o nivel vertebral al que corresponde:",
+          "dificultad": 2,
+          "etiquetas": ["anatomia-superficie", "puntos-referencia"],
+          "fuente": { "obra": "Moore 9e", "pag": 73 },
+          "respuesta": {
+            "pares": [
+              { "clave": "Vértebra prominente", "canonico": "proceso espinoso de C7" },
+              { "clave": "Espina de la escápula", "canonico": "proceso espinoso de T3" },
+              { "clave": "Ángulo inferior de la escápula", "canonico": "proceso espinoso de T7" },
+              { "clave": "Puntas de la 12.ª costilla", "canonico": "proceso espinoso de L2" },
+              { "clave": "Cresta ilíaca (punto más elevado)", "canonico": "proceso espinoso de L4" },
+              { "clave": "Hoyuelo sobre la espina ilíaca posterosuperior (EIPS)", "canonico": "proceso espinoso de S2" }
+            ]
+          },
+          "feedback": "Los puntos de referencia palpables permiten estimar el nivel de estructuras profundas: C7 marca los ápices pulmonares, T4 el plano torácico transversal, L2 el extremo inferior de la médula espinal, L4 la punción lumbar y S2 el saco dural."
+        },
+        {
+          "id": "P1-B04-005",
+          "tipo": "enumeracion",
+          "prompt": "Menciona los 5 componentes funcionales (partes o procesos) de una vértebra típica:",
+          "dificultad": 1,
+          "etiquetas": ["vertebra-tipica", "componentes"],
+          "fuente": { "obra": "Moore 9e", "pag": 75, "fig": "2-3" },
+          "respuesta": {
+            "credito_parcial": true,
+            "elementos": [
+              { "canonico": "cuerpo vertebral" },
+              { "canonico": "arco vertebral" },
+              { "canonico": "proceso espinoso" },
+              { "canonico": "procesos transversos" },
+              { "canonico": "procesos articulares" }
+            ]
+          },
+          "feedback": "Una vértebra típica consta de un cuerpo vertebral (soporte de peso), un arco vertebral (protección medular) y 7 procesos: 1 espinoso, 2 transversos y 4 articulares."
+        },
+        {
+          "id": "P1-B04-006",
+          "tipo": "cloze",
+          "prompt": "Completa el enunciado referente a la constitución del arco vertebral:",
+          "dificultad": 1,
+          "etiquetas": ["arco-vertebral", "pediculos", "laminas"],
+          "fuente": { "obra": "Moore 9e", "pag": 76 },
+          "texto": "El arco vertebral está formado por dos {{c1}}, que son procesos cilíndricos cortos y robustos que se proyectan posteriormente desde el cuerpo vertebral, y dos {{c2}}, que son láminas óseas planas que confluyen en la línea media.",
+          "blancos": {
+            "c1": { "canonico": "pedículos" },
+            "c2": { "canonico": "láminas" }
+          },
+          "feedback": "Los pedículos y las láminas forman las paredes lateral y posterior del foramen vertebral, cuya sucesión constituye el conducto vertebral."
+        },
+        {
+          "id": "P1-B04-007",
+          "tipo": "respuesta_corta",
+          "prompt": "¿Cómo se denominan las venas que ocupan los forámenes grandes en la superficie posterior del cuerpo vertebral para drenar la médula ósea roja?",
+          "categoria": "vena",
+          "dificultad": 2,
+          "etiquetas": ["cuerpo-vertebral", "venas-basivertebrales"],
+          "fuente": { "obra": "Moore 9e", "pag": 75, "fig": "2-4" },
+          "respuesta": { "canonico": "venas basivertebrales" },
+          "feedback": "Las venas basivertebrales discurren por el hueso esponjoso y emergen por los forámenes basivertebrales de la superficie posterior del cuerpo vertebral hacia el plexo venoso vertebral interno."
+        },
+        {
+          "id": "P1-B04-008",
+          "tipo": "numerico",
+          "prompt": "¿A qué edad aproximada (en años) suelen unirse las epífisis anulares superior e inferior con el centrum del cuerpo vertebral?",
+          "dificultad": 2,
+          "etiquetas": ["epifisis-anular", "osificacion"],
+          "fuente": { "obra": "Moore 9e", "pag": 76 },
+          "respuesta": { "valor": 25, "unidad": "años", "tol": 0 },
+          "feedback": "Las epífisis anulares aportan zonas de crecimiento al cuerpo vertebral y se fusionan con el centrum en el adulto joven, alrededor de los 25 años."
+        },
+        {
+          "id": "P1-B04-009",
+          "tipo": "respuesta_corta",
+          "prompt": "¿Qué estructura se forma por la sucesión ordenada de forámenes vertebrales en la columna articulada?",
+          "dificultad": 1,
+          "etiquetas": ["conducto-vertebral", "foramen-vertebral"],
+          "fuente": { "obra": "Moore 9e", "pag": 76 },
+          "respuesta": { "canonico": "conducto vertebral" },
+          "feedback": "El conducto vertebral contiene la médula espinal, las meninges, raíces de nervios espinales y vasos sanguíneos."
+        },
+        {
+          "id": "P1-B04-010",
+          "tipo": "cloze",
+          "prompt": "Completa la oración sobre los forámenes intervertebrales y su contenido principal:",
+          "dificultad": 1,
+          "etiquetas": ["foramen-intervertebral", "nervios-espinales"],
+          "fuente": { "obra": "Moore 9e", "pag": 76 },
+          "texto": "Las incisuras vertebrales superior e inferior de vértebras adyacentes junto con los discos intervertebrales constituyen los {{c1}}, a través de los cuales emergen los {{c2}} y se localizan los ganglios espinales.",
+          "blancos": {
+            "c1": { "canonico": "forámenes intervertebrales" },
+            "c2": { "canonico": "nervios espinales" }
+          },
+          "feedback": "Los forámenes intervertebrales dan paso a los nervios espinales y alojan a los ganglios sensitivos de la raíz posterior."
+        },
+        {
+          "id": "P1-B04-011",
+          "tipo": "relacion",
+          "prompt": "Relaciona cada región vertebral presacra con la forma típica de su foramen vertebral:",
+          "dificultad": 2,
+          "etiquetas": ["foramen-vertebral", "caracteristicas-regionales"],
+          "fuente": { "obra": "Moore 9e", "pag": 77, "fig": "2-6" },
+          "respuesta": {
+            "pares": [
+              { "clave": "Vértebras cervicales", "canonico": "grande y triangular" },
+              { "clave": "Vértebras torácicas", "canonico": "circular y pequeño" },
+              { "clave": "Vértebras lumbares", "canonico": "triangular de tamaño intermedio" }
+            ]
+          },
+          "feedback": "El tamaño y forma del foramen reflejan el grosor de la médula espinal: es más amplio en las intumescencias cervical y lumbosacra y estrecho en la región torácica."
+        },
+        {
+          "id": "P1-B04-012",
+          "tipo": "respuesta_corta",
+          "prompt": "¿Cómo se llama el labio o cresta en el borde posterolateral de la cara superior del cuerpo de una vértebra cervical típica?",
+          "categoria": "proceso",
+          "dificultad": 2,
+          "etiquetas": ["vertebras-cervicales", "proceso-unciforme"],
+          "fuente": { "obra": "Moore 9e", "pag": 77, "fig": "2-7" },
+          "respuesta": { "canonico": "proceso unciforme" },
+          "feedback": "El proceso unciforme (uncus) de C3-C7 se articula con el cuerpo de la vértebra suprayacente formando las articulaciones uncovertebrales."
+        },
+        {
+          "id": "P1-B04-013",
+          "tipo": "respuesta_corta",
+          "prompt": "¿Qué denominación recibe el tubérculo anterior del proceso transverso de C6 por ser el sitio de compresión de la arteria carótida común?",
+          "dificultad": 2,
+          "etiquetas": ["c6", "tuberculo-carotideo"],
+          "fuente": { "obra": "Moore 9e", "pag": 78, "fig": "2-7" },
+          "respuesta": { "canonico": "tubérculo carotídeo" },
+          "feedback": "El tubérculo anterior de C6 es prominente; la arteria carótida común puede comprimirse contra él con el dedo para controlar hemorragias."
+        },
+        {
+          "id": "P1-B04-014",
+          "tipo": "enumeracion",
+          "prompt": "Menciona las 3 estructuras vasculonerviosas que atraviesan los forámenes transversos de las vértebras C1 a C6:",
+          "dificultad": 2,
+          "etiquetas": ["foramen-transverso", "arteria-vertebral"],
+          "fuente": { "obra": "Moore 9e", "pag": 79 },
+          "respuesta": {
+            "credito_parcial": true,
+            "elementos": [
+              { "canonico": "arterias vertebrales" },
+              { "canonico": "plexos venosos vertebrales" },
+              { "canonico": "plexo simpático" }
+            ]
+          },
+          "feedback": "Los forámenes transversos de C1-C6 transmiten la arteria vertebral con sus venas y plexo simpático. C7 solo transmite pequeñas venas accesorias."
+        },
+        {
+          "id": "P1-B04-015",
+          "tipo": "enumeracion",
+          "prompt": "Menciona los 2 componentes estructurales propios de una vértebra típica de los cuales carece la vértebra C1 (atlas):",
+          "dificultad": 1,
+          "etiquetas": ["c1", "atlas", "caracteristicas"],
+          "fuente": { "obra": "Moore 9e", "pag": 79, "fig": "2-8" },
+          "respuesta": {
+            "credito_parcial": true,
+            "elementos": [
+              { "canonico": "cuerpo vertebral" },
+              { "canonico": "proceso espinoso" }
+            ]
+          },
+          "feedback": "C1 (atlas) es un anillo óseo compuesto por dos masas laterales unidas por arcos anterior y posterior; carece de cuerpo y de proceso espinoso."
+        },
+        {
+          "id": "P1-B04-016",
+          "tipo": "respuesta_corta",
+          "prompt": "¿Con qué prominencias de la base del cráneo se articulan las caras articulares superiores cóncavas y reniformes de las masas laterales del atlas?",
+          "dificultad": 1,
+          "etiquetas": ["atlas", "condilos-occipitales"],
+          "fuente": { "obra": "Moore 9e", "pag": 79, "fig": "2-8" },
+          "respuesta": { "canonico": "cóndilos occipitales" },
+          "feedback": "Las caras articulares superiores del atlas reciben a los dos cóndilos occipitales para formar las articulaciones atlantooccipitales."
+        },
+        {
+          "id": "P1-B04-017",
+          "tipo": "respuesta_corta",
+          "prompt": "¿Qué proceso vertical en forma de pivote sobresale superiormente desde el cuerpo de C2 (axis) para permitir la rotación de la cabeza?",
+          "categoria": "proceso",
+          "dificultad": 1,
+          "etiquetas": ["c2", "axis", "diente"],
+          "fuente": { "obra": "Moore 9e", "pag": 79, "fig": "2-8" },
+          "respuesta": { "canonico": "diente del axis" },
+          "feedback": "El diente (proceso odontoides) del axis asciende por detrás del arco anterior del atlas y proporciona un pivote en torno al cual rota el atlas."
+        },
+        {
+          "id": "P1-B04-018",
+          "tipo": "respuesta_corta",
+          "prompt": "¿Qué ligamento se extiende entre ambas masas laterales del atlas para mantener al diente del axis adosado al arco anterior?",
+          "categoria": "ligamento",
+          "dificultad": 1,
+          "etiquetas": ["ligamento-transverso", "atlas", "diente"],
+          "fuente": { "obra": "Moore 9e", "pag": 80, "fig": "2-8" },
+          "respuesta": { "canonico": "ligamento transverso del atlas" },
+          "feedback": "El ligamento transverso del atlas abarca al diente del axis e impide su luxación posterior hacia la médula espinal."
+        },
+        {
+          "id": "P1-B04-019",
+          "tipo": "respuesta_corta",
+          "prompt": "¿Cuál es el rasgo diagnóstico distintivo presente en los cuerpos y procesos transversos de las vértebras torácicas?",
+          "dificultad": 1,
+          "etiquetas": ["vertebras-toracicas", "fositas-costales"],
+          "fuente": { "obra": "Moore 9e", "pag": 81 },
+          "respuesta": { "canonico": "fositas costales" },
+          "feedback": "La presencia de fositas costales para articularse con la cabeza y el tubérculo costales es la característica patognomónica torácica."
+        },
+        {
+          "id": "P1-B04-020",
+          "tipo": "enumeracion",
+          "prompt": "Menciona las 2 vértebras torácicas cuyos procesos transversos carecen de fositas costales:",
+          "categoria": "vertebra",
+          "dificultad": 2,
+          "etiquetas": ["vertebras-toracicas", "t11", "t12"],
+          "fuente": { "obra": "Moore 9e", "pag": 81 },
+          "respuesta": {
+            "credito_parcial": true,
+            "elementos": [
+              { "canonico": "vértebra T11" },
+              { "canonico": "vértebra T12" }
+            ]
+          },
+          "feedback": "T1 a T10 poseen fositas costales en los procesos transversos. T11 y T12 solo poseen una fosita única en el cuerpo y carecen de fosita en sus procesos transversos."
+        },
+        {
+          "id": "P1-B04-021",
+          "tipo": "respuesta_corta",
+          "prompt": "¿Cuál es la vértebra que se fractura con mayor frecuencia en la columna vertebral por estar sometida a intensas fuerzas de transición?",
+          "categoria": "vertebra",
+          "dificultad": 2,
+          "etiquetas": ["t12", "fractura-vertebral"],
+          "fuente": { "obra": "Moore 9e", "pag": 82 },
+          "respuesta": { "canonico": "vértebra T12" },
+          "feedback": "T12 sufre la transición entre la mitad superior torácica (rotatoria) y la mitad inferior lumbar (flexoextensora), siendo la vértebra fracturada con mayor frecuencia."
+        },
+        {
+          "id": "P1-B04-022",
+          "tipo": "relacion",
+          "prompt": "Relaciona los dos procesos adicionales de las vértebras lumbares con su localización ósea exacta:",
+          "dificultad": 2,
+          "etiquetas": ["vertebras-lumbares", "proceso-mamilar", "proceso-accesorio"],
+          "fuente": { "obra": "Moore 9e", "pag": 83, "fig": "2-11" },
+          "respuesta": {
+            "pares": [
+              { "clave": "Proceso mamilar", "canonico": "cara posterior del proceso articular superior" },
+              { "clave": "Proceso accesorio", "canonico": "cara posterior de la base del proceso transverso" }
+            ]
+          },
+          "feedback": "Los procesos mamilares se ubican en el borde posterior del proceso articular superior (multífido) y los procesos accesorios en la cara posterior de la base del proceso transverso (intertransversos)."
+        },
+        {
+          "id": "P1-B04-023",
+          "tipo": "respuesta_corta",
+          "prompt": "¿Cuál es la más grande de todas las vértebras móviles de la columna vertebral?",
+          "categoria": "vertebra",
+          "dificultad": 1,
+          "etiquetas": ["l5", "vertebra-l5"],
+          "fuente": { "obra": "Moore 9e", "pag": 84 },
+          "respuesta": { "canonico": "vértebra L5" },
+          "feedback": "L5 es la mayor de las 25 vértebras móviles y transmite todo el peso del tronco hacia la base del sacro."
+        },
+        {
+          "id": "P1-B04-024",
+          "tipo": "numerico",
+          "prompt": "¿Cuántos pares de forámenes sacros (anteriores y posteriores) existen típicamente en el sacro del adulto?",
+          "dificultad": 1,
+          "etiquetas": ["sacro", "foramenes-sacros"],
+          "fuente": { "obra": "Moore 9e", "pag": 85 },
+          "respuesta": { "valor": 4, "unidad": "pares", "tol": 0 },
+          "feedback": "En el sacro se disponen 4 pares de forámenes sacros (pélvicos y dorsales) para la salida de los ramos de los nervios S1-S4."
+        },
+        {
+          "id": "P1-B04-025",
+          "tipo": "cloze",
+          "prompt": "Completa el texto sobre el hiato del sacro y los cuernos del sacro:",
+          "dificultad": 2,
+          "etiquetas": ["hiato-sacro", "cuernos-sacro"],
+          "fuente": { "obra": "Moore 9e", "pag": 85 },
+          "texto": "El hiato del sacro se produce por la ausencia de las láminas y procesos espinosos de las vértebras {{c1}}, mientras que los {{c2}}, proyectados a los lados del hiato, representan los procesos articulares inferiores de S5.",
+          "blancos": {
+            "c1": { "canonico": "S5 y S4" },
+            "c2": { "canonico": "cuernos del sacro" }
+          },
+          "feedback": "El hiato del sacro conduce al conducto sacro. Los cuernos del sacro a sus lados son referencias para la anestesia epidural caudal."
+        },
+        {
+          "id": "P1-B04-026",
+          "tipo": "respuesta_corta",
+          "prompt": "¿Cómo se llama la proyección anterior prominente del borde superior del cuerpo de la vértebra S1 que constituye una referencia obstétrica clave?",
+          "dificultad": 1,
+          "etiquetas": ["promontorio-sacro", "sacro"],
+          "fuente": { "obra": "Moore 9e", "pag": 85 },
+          "respuesta": { "canonico": "promontorio sacro" },
+          "feedback": "El promontorio sacro es el borde anterior sobresaliente del cuerpo de S1 que delimita el plano del estrecho superior de la pelvis."
+        },
+        {
+          "id": "P1-B04-027",
+          "tipo": "respuesta_corta",
+          "prompt": "¿Qué plano horizontal imaginario que conecta los puntos más elevados de las crestas ilíacas cruza el proceso espinoso de L4 y el disco L4-L5 para guiar la punción lumbar?",
+          "dificultad": 1,
+          "etiquetas": ["plano-supracrestal", "puncion-lumbar"],
+          "fuente": { "obra": "Moore 9e", "pag": 86 },
+          "respuesta": { "canonico": "plano supracrestal" },
+          "feedback": "El plano supracrestal atraviesa la cresta ilíaca en su punto más alto e intersecta el proceso espinoso de L4 y el espacio L4-L5, sirviendo como guía para la punción lumbar."
+        }
+      ]
+    };
+
+    let currentMode = 'banco'; // 'banco' | 'practica'
+
+    function setMode(mode) {
+      currentMode = mode;
+      document.getElementById('tab-banco').classList.toggle('active', mode === 'banco');
+      document.getElementById('tab-practica').classList.toggle('active', mode === 'practica');
+      renderApp();
+    }
+
+    function loadJSONFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (parsed.bloque && parsed.items) {
+            currentData = parsed;
+            renderApp();
+          } else {
+            alert('El archivo JSON no coincide con el schema de bloque de anatomía.');
+          }
+        } catch(err) {
+          alert('Error al leer el archivo JSON: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function updateHeaderStats() {
+      const b = currentData.bloque || {};
+      document.getElementById('meta-id').innerText = b.id || 'P1-B04';
+      document.getElementById('meta-sesion').innerText = b.sesion || '-';
+      document.getElementById('meta-paginas').innerText = b.paginas || '-';
+      document.getElementById('meta-parcial').innerText = b.parcial || '-';
+      document.getElementById('block-description').innerText = b.titulo || 'Banco de Preguntas de Anatomía';
+
+      const items = currentData.items || [];
+      document.getElementById('stat-total-items').innerText = items.length;
+
+      let pts = 0;
+      let enumC = 0, numC = 0, cortaC = 0, clozeC = 0, relC = 0;
+
+      items.forEach(it => {
+        if (it.tipo === 'enumeracion') { enumC++; pts += (it.respuesta?.elementos?.length || 1); }
+        else if (it.tipo === 'numerico') { numC++; pts += 1; }
+        else if (it.tipo === 'respuesta_corta') { cortaC++; pts += 1; }
+        else if (it.tipo === 'cloze') { clozeC++; pts += Object.keys(it.blancos || {}).length; }
+        else if (it.tipo === 'relacion') { relC++; pts += (it.respuesta?.pares?.length || 1); }
+        else { pts += 1; }
+      });
+
+      document.getElementById('stat-total-points').innerText = pts;
+      document.getElementById('stat-enum-count').innerText = enumC;
+      document.getElementById('stat-num-count').innerText = numC;
+      document.getElementById('stat-corta-count').innerText = cortaC;
+      document.getElementById('stat-cloze-count').innerText = clozeC;
+      document.getElementById('stat-rel-count').innerText = relC;
+    }
+
+    function renderApp() {
+      updateHeaderStats();
+
+      const container = document.getElementById('items-container');
+      container.innerHTML = '';
+
+      const search = document.getElementById('search-box').value.toLowerCase().trim();
+      const filterType = document.getElementById('filter-type').value;
+      const filterDiff = document.getElementById('filter-diff').value;
+
+      const filteredItems = (currentData.items || []).filter(item => {
+        if (filterType !== 'all' && item.tipo !== filterType) return false;
+        if (filterDiff !== 'all' && String(item.dificultad) !== filterDiff) return false;
+        if (search) {
+          const haystack = (item.id + ' ' + item.prompt + ' ' + (item.etiquetas || []).join(' ') + ' ' + JSON.stringify(item.respuesta || {})).toLowerCase();
+          if (!haystack.includes(search)) return false;
+        }
+        return true;
+      });
+
+      if (filteredItems.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding: 40px; color: var(--text-muted);">No se encontraron ítems con los filtros seleccionados.</div>';
+        return;
+      }
+
+      filteredItems.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'item-card';
+
+        const typeBadge = `<span class="badge badge-${item.tipo}">${item.tipo.replace('_', ' ')}</span>`;
+        const diffBadge = `<span class="badge badge-diff-${item.dificultad}">Dificultad ${item.dificultad}</span>`;
+        const categoryTag = item.categoria ? `<span class="source-tag">categoría: ${item.categoria}</span>` : '';
+        const fuenteTag = item.fuente ? `<span class="source-tag">${item.fuente.obra || 'Moore'} p. ${item.fuente.pag}${item.fuente.fig ? ', fig. ' + item.fuente.fig : ''}</span>` : '';
+
+        let answerContentHtml = '';
+
+        if (currentMode === 'banco') {
+          // Render answer details in Bank mode
+          if (item.tipo === 'respuesta_corta') {
+            answerContentHtml = `
+              <div class="answer-section">
+                <div class="answer-title">Respuesta Canónica:</div>
+                <div class="canonical-val">${item.respuesta.canonico}</div>
+                ${item.respuesta.acepta && item.respuesta.acepta.length ? `
+                  <div class="accepted-list">
+                    <span style="font-size:0.75rem; color: var(--text-muted);">Variantes secundarias:</span>
+                    ${item.respuesta.acepta.map(a => `<span class="accepted-tag">${a}</span>`).join('')}
+                  </div>` : ''}
+              </div>`;
+          } else if (item.tipo === 'enumeracion') {
+            answerContentHtml = `
+              <div class="answer-section">
+                <div class="answer-title">Elementos Requeridos (${item.respuesta.elementos.length}):</div>
+                <ol style="margin-left: 20px; color: #4ade80; font-weight:600;">
+                  ${item.respuesta.elementos.map(el => `
+                    <li style="margin-bottom: 4px;">
+                      ${el.canonico}
+                      ${el.acepta && el.acepta.length ? `<span class="accepted-list" style="display:inline-flex; margin-left:8px;">${el.acepta.map(a => `<span class="accepted-tag">${a}</span>`).join('')}</span>` : ''}
+                    </li>`).join('')}
+                </ol>
+              </div>`;
+          } else if (item.tipo === 'numerico') {
+            const R = item.respuesta;
+            const valStr = R.rango ? `${R.rango[0]} a ${R.rango[1]} ${R.unidad || ''}` : `${R.valor} ${R.unidad || ''} (tol: ±${R.tol || 0})`;
+            answerContentHtml = `
+              <div class="answer-section">
+                <div class="answer-title">Valor Esperado:</div>
+                <div class="canonical-val">${valStr}</div>
+              </div>`;
+          } else if (item.tipo === 'cloze') {
+            answerContentHtml = `
+              <div class="answer-section">
+                <div class="answer-title">Respuestas a los huecos:</div>
+                ${Object.entries(item.blancos).map(([k, b]) => `
+                  <div style="margin-bottom: 4px;">
+                    <strong style="color: #fbbf24;">${k}:</strong> <span class="canonical-val">${b.canonico}</span>
+                  </div>`).join('')}
+              </div>`;
+          } else if (item.tipo === 'relacion') {
+            answerContentHtml = `
+              <div class="answer-section">
+                <div class="answer-title">Pares de Correspondencia:</div>
+                <table class="pairs-table">
+                  <thead><tr><th>Estímulo (Columna A)</th><th>Respuesta Canónica</th></tr></thead>
+                  <tbody>
+                    ${item.respuesta.pares.map(p => `<tr><td>${p.clave}</td><td class="canonical-val">${p.canonico}</td></tr>`).join('')}
+                  </tbody>
+                </table>
+              </div>`;
+          }
+        } else {
+          // Practice mode interactive inputs
+          answerContentHtml = `<div class="practice-box" id="practice-box-${item.id}">`;
+          if (item.tipo === 'enumeracion') {
+            answerContentHtml += `
+              <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:8px;">Escribe un elemento por línea o separados por comas:</p>
+              <textarea class="practice-textarea" id="input-${item.id}" placeholder="1. elemento uno&#10;2. elemento dos..."></textarea>`;
+          } else if (item.tipo === 'cloze') {
+            answerContentHtml += `<div style="display:flex; flex-direction:column; gap:8px;">`;
+            Object.keys(item.blancos).forEach(k => {
+              answerContentHtml += `
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span style="font-weight:700; color:#fbbf24; min-width:30px;">${k}:</span>
+                  <input type="text" class="practice-input" id="input-${item.id}-${k}" placeholder="Escribe el texto del blanco ${k}...">
+                </div>`;
+            });
+            answerContentHtml += `</div>`;
+          } else if (item.tipo === 'relacion') {
+            answerContentHtml += `<div style="display:flex; flex-direction:column; gap:10px;">`;
+            item.respuesta.pares.forEach((p, idx) => {
+              answerContentHtml += `
+                <div>
+                  <label style="font-size:0.85rem; color:#cbd5e1; display:block; margin-bottom:4px;">${p.clave}:</label>
+                  <input type="text" class="practice-input" id="input-${item.id}-pair-${idx}" placeholder="Respuesta...">
+                </div>`;
+            });
+            answerContentHtml += `</div>`;
+          } else {
+            answerContentHtml += `<input type="text" class="practice-input" id="input-${item.id}" placeholder="Escribe tu respuesta aquí...">`;
+          }
+          answerContentHtml += `
+            <div style="margin-top: 12px; display:flex; justify-content:space-between; align-items:center;">
+              <button class="btn-grade" onclick="gradeItem('${item.id}')">Calificar Respuesta</button>
+            </div>
+            <div id="result-${item.id}"></div>
+          </div>`;
+        }
+
+        // Render Cloze text if item is Cloze
+        let clozeTextHtml = '';
+        if (item.tipo === 'cloze' && item.texto) {
+          let formattedText = item.texto;
+          Object.keys(item.blancos || {}).forEach(k => {
+            formattedText = formattedText.replace(`{{${k}}}`, `<span class="cloze-mark">{{${k}}}</span>`);
+          });
+          clozeTextHtml = `<div class="cloze-text-block">${formattedText}</div>`;
+        }
+
+        card.innerHTML = `
+          <div class="item-header">
+            <span class="item-id">${item.id}</span>
+            <div class="badges-group">
+              ${typeBadge}
+              ${diffBadge}
+              ${categoryTag}
+              ${fuenteTag}
+            </div>
+          </div>
+
+          <div class="item-prompt">${item.prompt}</div>
+          ${clozeTextHtml}
+          ${answerContentHtml}
+
+          ${item.feedback ? `
+            <div class="feedback-box">
+              <strong>💡 Contexto / Feedback:</strong> ${item.feedback}
+            </div>` : ''}
+
+          <div class="tags-group">
+            ${(item.etiquetas || []).map(t => `<span class="tag-pill">#${t}</span>`).join('')}
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // Grade item live in practice mode
+    function gradeItem(itemId) {
+      const item = currentData.items.find(i => i.id === itemId);
+      if (!item) return;
+
+      let userAns = null;
+      if (item.tipo === 'cloze') {
+        userAns = {};
+        Object.keys(item.blancos).forEach(k => {
+          const el = document.getElementById(`input-${item.id}-${k}`);
+          if (el) userAns[k] = el.value;
+        });
+      } else if (item.tipo === 'relacion') {
+        userAns = {};
+        item.respuesta.pares.forEach((p, idx) => {
+          const el = document.getElementById(`input-${item.id}-pair-${idx}`);
+          if (el) userAns[p.clave] = el.value;
+        });
+      } else {
+        const el = document.getElementById(`input-${item.id}`);
+        if (el) userAns = el.value;
+      }
+
+      const res = motor.calificar(item, userAns);
+      const resContainer = document.getElementById(`result-${itemId}`);
+
+      const isWin = res.correcto;
+      const boxClass = isWin ? 'result-correct' : 'result-incorrect';
+
+      let detailHtml = '';
+      if (res.detalle && res.detalle.length) {
+        detailHtml = '<ul style="margin-top:8px; margin-left:18px;">' + res.detalle.map(d => `
+          <li>
+            ${d.ok ? '✅' : '❌'} <strong>Esperado:</strong> ${d.esperado} | <strong>Tu respuesta:</strong> ${d.dado || '(en blanco)'}
+          </li>`).join('') + '</ul>';
+      }
+
+      let spellingNotice = '';
+      if (res.avisoOrtografia) {
+        spellingNotice = `<div class="spelling-warning">⚠️ ¡Correcto! Pero cuida la ortografía (tildes/grafía estándar).</div>`;
+      }
+
+      resContainer.innerHTML = `
+        <div class="result-box ${boxClass}">
+          <div style="font-weight:700; font-size:1rem;">
+            ${isWin ? '¡Respuesta Correcta!' : 'Respuesta Incompleta o Incorrecta'} (${res.puntos} / ${res.max} pts)
+          </div>
+          ${detailHtml}
+          ${spellingNotice}
+        </div>
+      `;
+    }
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderApp();
+    });
+  </script>
+</body>
+</html>
