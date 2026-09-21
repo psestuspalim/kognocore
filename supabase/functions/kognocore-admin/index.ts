@@ -1,7 +1,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.97.0';
 
 const STUDENT_DOMAIN = 'students.kognocore.local';
-const ADMIN_VERIFY_URL = 'https://kognocore.vercel.app/api/access-codes';
+const ADMIN_VERIFY_URL = 'https://kognocore.vercel.app/api/me';
 const reply = (body: unknown, status = 200) => new Response(JSON.stringify(body), {
   status,
   headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
@@ -19,7 +19,9 @@ async function isAdmin(req: Request) {
   const authorization = bearer(req);
   if (!authorization) return false;
   const response = await fetch(ADMIN_VERIFY_URL, { headers: { Authorization: authorization } });
-  return response.ok;
+  if (!response.ok) return false;
+  const data = await response.json();
+  return data?.user?.role === 'admin';
 }
 
 async function managedStudent(req: Request) {

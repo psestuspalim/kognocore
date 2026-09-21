@@ -14,7 +14,10 @@ export async function GET(req) {
     query = query.in(kind === 'Course' ? 'id' : 'course_id', ids);
   }
   const { data, error } = await query;
-  if (error) return Response.json({ error: 'No se pudo cargar el catálogo.' }, { status: 500 });
+  if (error) {
+    console.error('catalog_read_failed', { code: error.code, message: error.message });
+    return Response.json({ error: `No se pudo cargar el catálogo (${error.code || 'database'}).` }, { status: 500 });
+  }
   return Response.json({ items: data.map(row => ({ ...row.payload, id: row.id })) }, {
     headers: { 'Cache-Control': 'no-store' }
   });

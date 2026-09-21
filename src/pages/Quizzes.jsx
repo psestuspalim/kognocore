@@ -1836,7 +1836,7 @@ export default function QuizzesPage() {
                           {coursesLoading ? 'Cargando cursos…' : coursesError ? 'No se pudieron cargar los cursos' : isAdmin ? 'Sin contenido aún' : 'Sin cursos asignados'}
                         </h3>
                         <p className="text-sm text-slate-500 mb-6 text-center max-w-sm leading-relaxed">
-                          {coursesLoading ? 'Espera mientras consultamos tus cursos.' : coursesError ? 'La consulta falló. Intenta cargar los cursos de nuevo.' : currentUser?.managed_student ? 'Tu cuenta no tiene cursos asignados. Contacta al administrador para que revise tu acceso.' : isAdmin
+                          {coursesLoading ? 'Espera mientras consultamos tus cursos.' : coursesError ? coursesError.message : currentUser?.managed_student ? 'Tu cuenta no tiene cursos asignados. Contacta al administrador para que revise tu acceso.' : isAdmin
                             ? 'Crea tu primer curso para comenzar a organizar el contenido.'
                             : 'Ingresa un código de curso para acceder al contenido.'}
                         </p>

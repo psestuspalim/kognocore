@@ -536,11 +536,20 @@ const mockClient = {
                 return item.course_id || subjects.find(subject => subject.id === item.subject_id)?.course_id || resolveCourse(folders.find(folder => folder.id === item.parent_id), seen);
               };
               const items = local.map(item => entityName === 'Course' ? item : { ...item, course_id: resolveCourse(item) }).filter(item => entityName === 'Course' || item.course_id);
-              await requestJson('/api/catalog', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ kind: entityName, items, importOnly: true }) });
-              catalogImported.add(entityName);
+              try {
+                for (let offset = 0; offset < items.length; offset += 500) {
+                  await requestJson('/api/catalog', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ kind: entityName, items: items.slice(offset, offset + 500), importOnly: true }) });
+                }
+                catalogImported.add(entityName);
+              } catch (error) {
+                // A failed legacy import must not prevent reading existing server data.
+                // Keep the local copy so the next attempt can retry without losing it.
+                console.error('No se pudo sincronizar el catálogo local:', error.message);
+              }
             }
             const { items } = await requestJson('/api/catalog?kind=' + entityName);
-            if (user.is_admin) saveItems(entityName, items);
+            if (!Array.isArray(items)) throw new Error('El servidor no devolvió un catálogo válido.');
+            if (user.is_admin && catalogImported.has(entityName)) saveItems(entityName, items);
             return sortByField(items, orderBy);
           }
           const viewer = await mockClient.auth.me();
