@@ -2,6 +2,8 @@ import React, { createContext, useCallback, useContext, useEffect, useRef, useSt
 import { supabase } from '@/lib/supabase';
 import { getOrCreateLearnerId, getOrCreateStudentAlias } from '@/lib/learner-id';
 
+import { readAdminSession } from '@/lib/admin-session';
+
 const AuthContext = createContext(null);
 
 function buildStudentUser(courseId) {
@@ -89,13 +91,14 @@ export const AuthProvider = ({ children }) => {
   const appliedSessionUser = useRef(null);
 
   const applySupabaseSession = useCallback(async (session) => {
-    if (!session) return false;
+    if (!session || readAdminSession()) return false;
 
     const uid = session.user.id;
     appliedSessionUser.current = uid;
 
     try {
       const profile = await loadAdminProfile(session);
+      if (readAdminSession()) return false;
       if (profile?.role !== 'admin' && !profile?.managed_student) {
         appliedSessionUser.current = null;
         await supabase.auth.signOut();
@@ -109,6 +112,7 @@ export const AuthProvider = ({ children }) => {
       setAuthError(null);
       return true;
     } catch (error) {
+      if (readAdminSession()) return false;
       appliedSessionUser.current = null;
       setAuthError({ type: 'profile_error', message: error.message });
       setUser(null);
@@ -126,36 +130,16 @@ export const AuthProvider = ({ children }) => {
         return;
       }
 
+      const adminUser = readAdminSession();
+      if (adminUser) {
+        setUser(adminUser);
+        setAuthError(null);
+        return;
+      }
+
       const { data: { session }, error } = await supabase.auth.getSession();
       if (error) throw error;
-
       if (session && await applySupabaseSession(session)) return;
-
-      const adminToken = localStorage.getItem('kc_admin_token');
-      if (adminToken) {
-        try {
-          const parts = adminToken.split('.');
-          if (parts.length === 3 && parts[0] === 'adm') {
-            const raw = atob(parts[1].replace(/-/g, '+').replace(/_/g, '/'));
-            const payload = JSON.parse(raw);
-            if (payload.exp > new Date().toISOString()) {
-              setUser({
-                id: 'admin_local',
-                username: payload.user,
-                full_name: payload.user,
-                role: 'admin',
-                is_admin: true,
-                auth_provider: 'local'
-              });
-              setAuthError(null);
-              return;
-            }
-          }
-          localStorage.removeItem('kc_admin_token');
-        } catch (_e) {
-          localStorage.removeItem('kc_admin_token');
-        }
-      }
 
       const codeUser = await loadCodeSession();
       setUser(codeUser);
@@ -173,6 +157,7 @@ export const AuthProvider = ({ children }) => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       window.setTimeout(() => {
+        if (readAdminSession()) return;
         if (event === 'PASSWORD_RECOVERY') {
           setPasswordRecovery(true);
           setUser(null);
@@ -245,6 +230,7 @@ export const AuthProvider = ({ children }) => {
     if (!/^[a-z0-9][a-z0-9._-]{2,39}$/.test(normalized)) throw new Error('Usuario o contraseña incorrectos.');
     const { data, error } = await supabase.auth.signInWithPassword({ email: normalized + '@students.kognocore.local', password });
     if (error) throw new Error('Usuario o contraseña incorrectos, o cuenta suspendida.');
+    localStorage.removeItem('kc_admin_token');
     const accepted = await applySupabaseSession(data.session);
     if (!accepted) {
       await supabase.auth.signOut();

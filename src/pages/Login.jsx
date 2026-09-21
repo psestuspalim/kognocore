@@ -99,7 +99,7 @@ const Login = () => {
 
         try {
             await (activeTab === 'student' ? loginStudent(username, password) : login(username, password));
-            window.location.assign('/Quizzes');
+            window.location.assign(activeTab === 'admin' ? '/AdminHome' : '/Quizzes');
         } catch (err) {
             setError(String(err?.message || '') || 'Error al iniciar sesión. Intenta de nuevo.');
         } finally {

@@ -307,9 +307,10 @@ export default function QuizzesPage() {
   const pendingQuizExitRef = useRef(null);
 
   // --- Queries (declared before effects) ---
-  const { data: courses = [] } = useQuery({
-    queryKey: ['courses'],
+  const { data: courses = [], isPending: coursesLoading, error: coursesError, refetch: reloadCourses } = useQuery({
+    queryKey: ['courses', authUser?.id],
     queryFn: () => client.entities.Course.list('order'),
+    enabled: !!authUser,
   });
 
   const { data: enrollments = [] } = useQuery({
@@ -1832,14 +1833,15 @@ export default function QuizzesPage() {
                           <BookOpen className="w-7 h-7 text-slate-400" />
                         </div>
                         <h3 className="text-lg font-bold text-slate-800 mb-1.5">
-                          {isAdmin ? 'Sin contenido aún' : 'Sin acceso a cursos'}
+                          {coursesLoading ? 'Cargando cursos…' : coursesError ? 'No se pudieron cargar los cursos' : isAdmin ? 'Sin contenido aún' : 'Sin cursos asignados'}
                         </h3>
                         <p className="text-sm text-slate-500 mb-6 text-center max-w-sm leading-relaxed">
-                          {isAdmin
+                          {coursesLoading ? 'Espera mientras consultamos tus cursos.' : coursesError ? 'La consulta falló. Intenta cargar los cursos de nuevo.' : currentUser?.managed_student ? 'Tu cuenta no tiene cursos asignados. Contacta al administrador para que revise tu acceso.' : isAdmin
                             ? 'Crea tu primer curso para comenzar a organizar el contenido.'
                             : 'Ingresa un código de curso para acceder al contenido.'}
                         </p>
-                        {!isAdmin && (
+                        {coursesError && <Button onClick={() => reloadCourses()}>Reintentar</Button>}
+                        {!coursesLoading && !coursesError && !isAdmin && !currentUser?.managed_student && (
                           <Button
                             onClick={() => setShowJoinModal(true)}
                             className="bg-primary hover:bg-primary/90"

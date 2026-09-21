@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { readAdminSession } from './admin-session';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://dtverrtjnivamclkmhei.supabase.co';
 const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_qac2iillZekd2eFvVgIE3g_fxM-zOeM';
@@ -12,7 +13,7 @@ export const supabase = createClient(supabaseUrl, supabasePublishableKey, {
 });
 
 export async function getAuthorizationHeaders() {
-  const adminToken = localStorage.getItem('kc_admin_token');
+  const adminToken = readAdminSession() && localStorage.getItem('kc_admin_token');
   if (adminToken) return { Authorization: `Bearer ${adminToken}` };
   const { data: { session } } = await supabase.auth.getSession();
   const token = session?.access_token || localStorage.getItem('kc_token');

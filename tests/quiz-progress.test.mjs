@@ -115,7 +115,7 @@ test('pending writes survive reload, slow writes do not erase newer answers or o
     getItems: () => structuredClone(stored), saveItems: (_, items) => { stored = structuredClone(items); },
     requestJson: (_, init) => new Promise((resolve, reject) => requests.push({ resolve, reject, body: JSON.parse(init.body) }))
   });
-  vm.runInContext(source.slice(source.indexOf('const REMOTE_ENTITIES'), source.indexOf('const requestJson')), context);
+  vm.runInContext(source.slice(source.indexOf('const CATALOG_ENTITIES'), source.indexOf('const requestJson')), context);
   vm.runInContext(source.slice(source.indexOf('const remoteWrites'), source.indexOf('const deleteRemoteEntity')), context);
   const entity = vm.runInContext(`({${source.slice(source.indexOf('create: async (data)'), source.indexOf('        delete: async (id)'))}})`, context);
   const a = await entity.create({ learner_id: 'student-a', answered_questions: 0 });

@@ -1,3 +1,4 @@
+import { readAdminSession } from '@/lib/admin-session';
 
 import { appParams } from '@/lib/app-params';
 import { getAuthorizationHeaders, supabase } from '@/lib/supabase';
@@ -430,6 +431,8 @@ const mockClient = {
 
   auth: {
     me: async () => {
+      const adminUser = readAdminSession();
+      if (adminUser) return adminUser;
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user?.app_metadata?.managed_student) {
         const data = await requestJson('/api/me');
@@ -447,35 +450,6 @@ const mockClient = {
           is_admin: profile.role === 'admin',
           auth_provider: 'supabase'
         };
-      }
-
-      const adminToken = localStorage.getItem('kc_admin_token');
-      if (adminToken) {
-        try {
-          const [prefix, encodedPayload, signature] = adminToken.split('.');
-          if (prefix !== 'adm' || !encodedPayload || !signature) throw new Error('INVALID_ADMIN_TOKEN');
-
-          const paddedPayload = encodedPayload
-            .replace(/-/g, '+')
-            .replace(/_/g, '/')
-            .padEnd(Math.ceil(encodedPayload.length / 4) * 4, '=');
-          const payload = JSON.parse(atob(paddedPayload));
-          if (payload.sub !== 'admin' || !payload.user || Date.parse(payload.exp) <= Date.now()) {
-            throw new Error('EXPIRED_ADMIN_TOKEN');
-          }
-
-          return {
-            id: 'admin_local',
-            email: `${payload.user}@kognocore.local`,
-            full_name: payload.user,
-            username: payload.user,
-            role: 'admin',
-            is_admin: true,
-            auth_provider: 'local'
-          };
-        } catch (_error) {
-          localStorage.removeItem('kc_admin_token');
-        }
       }
 
       const codeToken = localStorage.getItem('kc_token');
