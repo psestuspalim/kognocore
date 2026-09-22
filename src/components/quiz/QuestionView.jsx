@@ -147,9 +147,14 @@ export default function QuestionView({
         question={question}
         questionNumber={questionNumber}
         totalQuestions={totalQuestions}
+        correctAnswers={correctAnswers}
+        wrongAnswers={wrongAnswers}
         onNext={onNext}
         onAnswer={onAnswer}
         savedAnswer={savedAnswer}
+        onBack={onBack}
+        onMarkForReview={onMarkForReview}
+        initialIsMarked={initialIsMarked}
       />
     );
   }
@@ -160,8 +165,13 @@ export default function QuestionView({
         question={question}
         questionNumber={questionNumber}
         totalQuestions={totalQuestions}
+        correctAnswers={correctAnswers}
+        wrongAnswers={wrongAnswers}
         onNext={onNext}
         onAnswer={(isCorrect, details) => onAnswer(isCorrect, details, question)}
+        onBack={onBack}
+        onMarkForReview={onMarkForReview}
+        initialIsMarked={initialIsMarked}
       />
     );
   }
