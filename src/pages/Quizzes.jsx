@@ -295,6 +295,7 @@ export default function QuizzesPage() {
   const [showFeatureAnalytics, setShowFeatureAnalytics] = useState(false);
   const [showContentManager, setShowContentManager] = useState(false);
   const [showQuizExporter, setShowQuizExporter] = useState(false);
+  const [showGlobalUploaderDialog, setShowGlobalUploaderDialog] = useState(false);
 
   // Resource states
   const [showResourceEditor, setShowResourceEditor] = useState(false);
@@ -1742,6 +1743,14 @@ export default function QuizzesPage() {
                         <p className="text-sm text-slate-500 mt-0.5">Selecciona un curso para comenzar</p>
                       </div>
                       <div className="flex flex-wrap gap-2">
+                        <Button
+                          onClick={() => setShowGlobalUploaderDialog(true)}
+                          variant="outline"
+                          className="text-xs sm:text-sm h-9 border-indigo-200 text-indigo-700 bg-indigo-50/50 hover:bg-indigo-100/80"
+                        >
+                          <Upload className="w-4 h-4 mr-2" />
+                          Importar JSON
+                        </Button>
                         {!canEdit && (
                           <Button
                             onClick={() => setShowJoinModal(true)}
@@ -2475,6 +2484,31 @@ export default function QuizzesPage() {
             />
           )
         }
+        {/* Global Import JSON Dialog */}
+        <Dialog open={showGlobalUploaderDialog} onOpenChange={setShowGlobalUploaderDialog}>
+          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                <Upload className="w-5 h-5 text-indigo-600" />
+                Importar / Cargar Cuestionario desde JSON
+              </DialogTitle>
+            </DialogHeader>
+            <div className="mt-2">
+              <FileUploader
+                onUploadSuccess={async (data) => {
+                  await createQuizMutation.mutateAsync({
+                    ...data,
+                    course_id: selectedCourse?.id || 'course_enarm2026'
+                  });
+                  setShowGlobalUploaderDialog(false);
+                  queryClient.invalidateQueries({ queryKey: ['quizzes'] });
+                  toast.success('Cuestionario importado con éxito');
+                }}
+                jsonOnly={true}
+              />
+            </div>
+          </DialogContent>
+        </Dialog>
       </div >
     </div >
   );
