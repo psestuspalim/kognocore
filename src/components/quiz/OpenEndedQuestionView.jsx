@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { motorAnatomia } from '@/lib/normalizador';
+import { normalizeQuizQuestion } from '@/lib/quiz-normalization';
 import MathText from './MathText';
 import OpenEndedAnswerComparison from './OpenEndedAnswerComparison';
 import {
@@ -12,7 +13,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function OpenEndedQuestionView({
-  question,
+  question: rawQuestion,
   questionNumber,
   totalQuestions,
   correctAnswers = 0,
@@ -25,6 +26,7 @@ export default function OpenEndedQuestionView({
   onMarkForReview,
   initialIsMarked = false
 }) {
+  const question = useMemo(() => normalizeQuizQuestion(rawQuestion), [rawQuestion]);
   const [userInputs, setUserInputs] = useState({});
   const [result, setResult] = useState(null);
   const [submitted, setSubmitted] = useState(false);
@@ -103,7 +105,7 @@ export default function OpenEndedQuestionView({
     if (tipo === 'cloze' || tipo === 'relacion') {
       payload = userInputs;
     } else if (tipo === 'enumeracion' || tipo === 'secuencia') {
-      payload = Object.values(userInputs).filter(Boolean);
+      payload = Object.values(userInputs);
     } else {
       payload = userInputs.text || '';
     }
@@ -296,7 +298,7 @@ export default function OpenEndedQuestionView({
               {(tipo === 'enumeracion' || tipo === 'secuencia') && (
                 <div className="space-y-3">
                   <p className="text-xs text-slate-500 font-medium">
-                    {tipo === 'secuencia' ? 'Ingresa los elementos en el orden correcto:' : 'Menciona los elementos correspondientes:'}
+                    {tipo === 'secuencia' ? 'Ingresa los elementos en el orden correcto:' : 'Escribe un elemento por campo o separa varios con comas, punto y coma o saltos de línea.'}
                   </p>
                   {Object.keys(userInputs).map((idx) => (
                     <div key={idx} className="flex items-center gap-2">

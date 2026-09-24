@@ -204,7 +204,7 @@ export function crearMotor(dic = DIC) {
 
   /** Divide un textarea en entradas: saltos de linea, comas, punto y coma, numeracion. */
   function trocear(entrada) {
-    if (Array.isArray(entrada)) return entrada.map(s => String(s).trim()).filter(Boolean);
+    if (Array.isArray(entrada)) return entrada.flatMap(s => trocear(s));
     return String(entrada ?? '')
       .split(/\r?\n|[;,]|(?:^|\s)\d+[.)]\s*/g)
       .map(s => s.trim())
@@ -248,7 +248,7 @@ export function crearMotor(dic = DIC) {
   }
 
   function calificarSecuencia(item, entrada) {
-    const dadas = trocear(entrada);
+    const dadas = Array.isArray(entrada) ? entrada.map(s => String(s ?? '').trim()) : trocear(entrada);
     const els = item.respuesta?.elementos || item.respuesta?.pasos || [];
     const detalle = [];
     let aciertos = 0;
@@ -273,7 +273,7 @@ export function crearMotor(dic = DIC) {
   }
 
   function parseNumero(s) {
-    const t = limpiar(s).replace(',', '.');
+    const t = String(s ?? '').normalize('NFKC').replace(/[\u2010-\u2015\u2212]/g, '-').replace(/,/g, '.');
     const m = t.match(/-?\d+(?:\.\d+)?/g);
     return m ? m.map(Number) : [];
   }

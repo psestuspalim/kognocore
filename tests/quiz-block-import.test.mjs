@@ -62,3 +62,46 @@ test('keeps canonical formats and rejects missing open-ended answers', () => {
     assert.equal(validateNormalizedQuiz({ title: 'Quiz', questions: [question] }).length, 1, type);
   }
 });
+
+test('grades decimal and negative numbers without changing their value', () => {
+  for (const [value, input] of [[4.5, '4.5'], [4.5, '4,5 %'], [-2.5, '-2,5'], [-2, '−2']]) {
+    const question = { tipo: 'numerico', respuesta: { valor: value, tol: 0 } };
+    assert.equal(motorAnatomia.calificar(question, input).correcto, true, input);
+  }
+  assert.equal(motorAnatomia.calificar({ tipo: 'numerico', respuesta: { valor: 4, tol: 0 } }, '4.5').correcto, false);
+});
+
+test('accepts an enumeration entered together in one field or in separate fields', () => {
+  const item = { tipo: 'enumeracion', respuesta: { elementos: [
+    { canonico: 'Colores claros', acepta: ['color claro'] },
+    { canonico: 'Colores oscuros' },
+    { canonico: 'Colores vivos' },
+    { canonico: 'Colores neutros' }
+  ] } };
+  const answers = ['color oscuro', 'color claro', 'color neutro', 'color vivo'];
+  for (const input of [answers, [answers.join(', '), '', '', ''], [answers.join('; ')], [answers.join('\n')]]) {
+    assert.equal(motorAnatomia.calificar(item, input).correcto, true);
+  }
+  assert.equal(motorAnatomia.calificar(item, ['color claro', 'color claro', 'color claro', 'color claro']).correcto, false);
+});
+
+test('an empty sequence slot does not shift later correct answers', () => {
+  const question = { tipo: 'secuencia', respuesta: { elementos: [{ canonico: 'uno' }, { canonico: 'dos' }, { canonico: 'tres' }] } };
+  const result = motorAnatomia.calificar(question, ['', 'dos', 'tres']);
+  assert.equal(result.puntos, 2);
+  assert.deepEqual(result.detalle.map((item) => item.ok), [false, true, true]);
+});
+
+test('the answer log preserves open-ended inputs and grading when the parent rerenders', async () => {
+  const source = await readFile(new URL('../src/pages/Quizzes.jsx', import.meta.url), 'utf8');
+  const start = source.indexOf('    const options = question.answerOptions', source.indexOf('  const handleAnswer ='));
+  const end = source.indexOf('    const newAnswerLog =', start);
+  const question = normalizeQuizQuestion(fixture.items[0]);
+  const result = motorAnatomia.calificar(question, 'azul');
+  const selectedOption = { selected_answer: '"azul"', inputs: { text: 'azul' }, result, score: 1, max_score: 1 };
+  const context = vm.createContext({ question, selectedOption, isCorrect: true, wrongAnswers: [], responseTime: 2 });
+  const entry = vm.runInContext(`${source.slice(start, end)}\nanswerEntry;`, context);
+  assert.deepEqual(entry.inputs, selectedOption.inputs);
+  assert.deepEqual(entry.result, result);
+  assert.equal(entry.selected_answer, selectedOption.selected_answer);
+});

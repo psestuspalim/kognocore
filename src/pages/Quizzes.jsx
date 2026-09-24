@@ -1212,8 +1212,9 @@ export default function QuizzesPage() {
     const correctOption = options.find(opt => opt.isCorrect || opt.c);
     const selectedAnswerText = selectedOption?.text
       || selectedOption?.t
+      || selectedOption?.selected_answer
       || (typeof selectedOption?.score === 'number'
-        ? `${selectedOption.score}/${selectedOption.total || 0} elementos correctos`
+        ? `${selectedOption.score}/${selectedOption.max_score ?? selectedOption.total ?? 0} elementos correctos`
         : 'Respuesta registrada');
     const feedbackText =
       (!isCorrect && (selectedOption?.rationale || selectedOption?.r)) ||
@@ -1227,6 +1228,7 @@ export default function QuizzesPage() {
       "";
 
     const newWrongAnswers = !isCorrect ? [...wrongAnswers, {
+      ...(selectedOption?.result ? { inputs: selectedOption.inputs, result: selectedOption.result } : {}),
       question: question.question,
       selected_answer: selectedAnswerText,
       correct_answer: correctOption?.text,
@@ -1240,6 +1242,7 @@ export default function QuizzesPage() {
       rationale: feedbackText
     }] : wrongAnswers;
     const answerEntry = {
+      ...(selectedOption?.result ? { inputs: selectedOption.inputs, result: selectedOption.result } : {}),
       question: question.question,
       selected_answer: selectedAnswerText,
       correct_answer: correctOption?.text,
