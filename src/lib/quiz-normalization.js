@@ -28,8 +28,26 @@ export function normalizeQuizQuestion(question = {}, index = 0) {
   const explanation = question.feedback ?? question.justificacion ?? question.justificación ?? question.explanation ?? question.rationale ?? '';
 
   if (isOpenEnded) {
+    const respuesta = { ...question.respuesta };
+    let blancos = question.blancos ?? respuesta.blancos;
+    if (type === 'cloze' && Array.isArray(blancos)) {
+      blancos = Object.assign({}, ...blancos);
+    }
+    if (type === 'cloze') respuesta.blancos = blancos;
+    if (type === 'relacion' && Array.isArray(respuesta.pares)) {
+      respuesta.pares = respuesta.pares.map((par) => ({
+        ...par,
+        clave: par.clave ?? par.izq,
+        canonico: par.canonico ?? par.der
+      }));
+    }
     return {
       ...question,
+      respuesta,
+      ...(type === 'cloze' ? {
+        blancos,
+        texto: String(question.texto ?? question.prompt ?? question.question ?? '').replace(/\[(c\d+)\]/g, '{{$1}}')
+      } : {}),
       type,
       question: question.prompt ?? question.question ?? question.enunciado ?? question.texto ?? `Pregunta ${index + 1}`,
       questionId: question.questionId ?? question.id ?? `Q${index + 1}`,
@@ -100,7 +118,27 @@ export function validateNormalizedQuiz(quiz = {}) {
     const prompt = question.question || question.prompt || question.enunciado || question.texto;
     if (!String(prompt || '').trim()) errors.push({ text: `${prefix}: falta el enunciado.`, qIndex: index + 1 });
 
-    if (!OPEN_ENDED_TYPES.has(type)) {
+    if (OPEN_ENDED_TYPES.has(type)) {
+      const answer = question.respuesta || {};
+      const hasText = (value) => typeof value === 'string' && value.trim().length > 0;
+      const hasCanonical = (value) => hasText(value?.canonico);
+      const hasElements = (value) => Array.isArray(value) && value.length > 0 && value.every(hasCanonical);
+      let valid = true;
+      if (type === 'respuesta_corta') valid = hasCanonical(answer);
+      if (type === 'numerico') valid = Number.isFinite(answer.valor) ||
+        (Array.isArray(answer.rango) && answer.rango.length === 2 && answer.rango.every(Number.isFinite) && answer.rango[0] <= answer.rango[1]);
+      if (type === 'enumeracion' || type === 'secuencia') valid = hasElements(answer.elementos ?? answer.pasos);
+      if (type === 'relacion') valid = hasElements(answer.pares) && answer.pares.every((pair) => hasText(pair.clave)) &&
+        new Set(answer.pares.map((pair) => pair.clave)).size === answer.pares.length;
+      if (type === 'cloze') {
+        const blanks = question.blancos ?? answer.blancos ?? {};
+        const keys = Object.keys(blanks);
+        const markers = [...String(question.texto ?? prompt).matchAll(/\{\{(c\d+)\}\}/g)].map((match) => match[1]);
+        valid = !Array.isArray(blanks) && keys.length > 0 && keys.every((key) => hasCanonical(blanks[key]) && markers.includes(key)) &&
+          markers.every((key) => keys.includes(key));
+      }
+      if (!valid) errors.push({ text: `${prefix}: respuesta incompleta o inválida para ${type}.`, qIndex: index + 1 });
+    } else {
       const options = Array.isArray(question.answerOptions) ? question.answerOptions : (question.options || []);
       if (options.length < 2) errors.push({ text: `${prefix}: necesita al menos dos opciones.`, qIndex: index + 1 });
       const correctCount = options.filter((option) => option.isCorrect || option.correct).length;
@@ -117,9 +155,9 @@ export function normalizeExpandedQuiz(quiz = {}, fallbackTitle = 'Cuestionario')
     ? quiz.questions
     : Array.isArray(quiz.items)
       ? quiz.items
-      : [];
+      : Array.isArray(quiz.preguntas) ? quiz.preguntas : [];
   const questions = rawQuestions.map(normalizeQuizQuestion);
-  const title = String(quiz.title || quiz.bloque?.titulo || fallbackTitle).trim();
+  const title = String(quiz.title || quiz.titulo || quiz.bloque?.titulo || fallbackTitle).trim();
   const description = quiz.description || (quiz.bloque ? `Sesión: ${quiz.bloque.sesion || ''} | Páginas: ${quiz.bloque.paginas || ''}` : '');
 
   return {
@@ -133,4 +171,3 @@ export function normalizeExpandedQuiz(quiz = {}, fallbackTitle = 'Cuestionario')
     total_questions: questions.length
   };
 }
-

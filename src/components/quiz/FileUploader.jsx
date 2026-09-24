@@ -15,8 +15,9 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
   const textareaRef = useRef(null);
 
   const processJsonData = (data, fileName = 'Quiz') => {
+    if (!data || typeof data !== 'object') throw new Error('El JSON debe contener un cuestionario.');
     let questions = [];
-    let title = fileName.replace('.json', '');
+    let title = fileName.replace(/\.(json|txt)$/i, '');
     let description = '';
 
     // FORMATO SIMPLIFICADO ESPAÑOL { id, pregunta, opciones, correcta, justificacion, serie }
@@ -62,9 +63,10 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
     }
     // FORMATO COMPLETO ESTÁNDAR
     else if (data.bloque || data.items || data.preguntas) {
-      title = data.title || data.bloque?.titulo || title;
+      title = data.title || data.titulo || data.bloque?.titulo || title;
       description = data.description || (data.bloque ? `Sesión: ${data.bloque.sesion || ''} | Páginas: ${data.bloque.paginas || ''}` : '');
       const raw = data.items || data.preguntas || data.questions || [];
+      if (!Array.isArray(raw)) throw new Error('Las preguntas deben estar en un array.');
       questions = raw.map((q, idx) => normalizeQuizQuestion(q, idx));
     }
     else if (data.questions && Array.isArray(data.questions)) {
@@ -77,9 +79,12 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
     }
 
     const normalized = normalizeExpandedQuiz({ title, description, questions }, title);
+    if (data.bloque) normalized.bloque = data.bloque;
     const validationErrors = validateNormalizedQuiz(normalized);
     if (validationErrors.length > 0) {
-      throw new Error(validationErrors.map((item) => item.text).join(' '));
+      const error = new Error(validationErrors.map((item) => item.text).join(' '));
+      error.validationErrors = validationErrors;
+      throw error;
     }
     return normalized;
   };
@@ -120,66 +125,34 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
   };
 
   const validateJsonSchema = (data) => {
-    const errors = [];
-    const warnings = [];
-    const info = [];
-
-    // Validar estructura base
-    if (!isSimplifiedFormat(data) && !Array.isArray(data) && !data.quiz && !data.questions && (!data.t || !data.q) && (!data.metadata || !data.q)) {
-      errors.push({
-        text: "❌ Estructura raíz inválida. Se espera array de preguntas o formato simplificado {id, pregunta, opciones, correcta}",
-        qIndex: null
-      });
-      return { errors, warnings, info };
+    try {
+      const quiz = processJsonData(data);
+      return { errors: [], warnings: [], info: [{ text: `ℹ️ ${quiz.questions.length} preguntas encontradas` }] };
+    } catch (error) {
+      return {
+        errors: (error.validationErrors || [{ text: error.message, qIndex: null }]).map((item) => ({ ...item, text: `❌ ${item.text}` })),
+        warnings: [], info: []
+      };
     }
+  };
 
-    // Identificar formato simplificado
-    if (isSimplifiedFormat(data)) {
-      info.push({ text: "ℹ️ Formato simplificado (ENARM / Médico) detectado" });
-      try {
-        const expanded = fromSimplifiedFormat(data);
-        info.push({ text: `ℹ️ ${expanded.questions.length} preguntas encontradas` });
-        expanded.questions.forEach((q, idx) => {
-          if (!q.question) {
-            errors.push({ text: `❌ P${idx + 1}: Falta el enunciado 'pregunta'`, qIndex: idx + 1 });
-          }
-          if (!q.answerOptions || q.answerOptions.length === 0) {
-            errors.push({ text: `❌ P${idx + 1}: Faltan 'opciones' de respuesta`, qIndex: idx + 1 });
-          } else {
-            const correct = q.answerOptions.filter(o => o.isCorrect);
-            if (correct.length === 0) {
-              warnings.push({ text: `⚠️ P${idx + 1}: La clave 'correcta' no coincide con ninguna opción`, qIndex: idx + 1 });
-            }
-          }
-        });
-      } catch (err) {
-        errors.push({ text: "❌ Error al procesar formato simplificado: " + err.message, qIndex: null });
+  const updateJsonText = (text) => {
+    setJsonText(text);
+    setJsonErrors([]);
+    setError(null);
+    setErrorDetails(null);
+    if (!text.trim()) return;
+    try {
+      const validation = validateJsonSchema(JSON.parse(text));
+      setJsonErrors([...validation.errors, ...validation.info]);
+      if (validation.errors.length) {
+        setError(`${validation.errors.length} error(es) encontrado(s) en la estructura`);
+        setErrorDetails({ qIndex: validation.errors[0].qIndex });
       }
-      return { errors, warnings, info };
+    } catch (error) {
+      setErrorDetails(parseSyntaxError(error.message, text));
+      setError(`Error de sintaxis: ${error.message}`);
     }
-
-    // Otros formatos
-    if (data.t && data.q) {
-      info.push({ text: "ℹ️ Formato compacto detectado" });
-      if (!Array.isArray(data.q)) errors.push({ text: "❌ 'q' (preguntas) debe ser un array", qIndex: null });
-      else info.push({ text: `ℹ️ ${data.q.length} preguntas encontradas` });
-    } else {
-      let qs = Array.isArray(data) ? data : (data.quiz || data.questions);
-      info.push({ text: `ℹ️ ${qs.length} preguntas encontradas` });
-
-      qs.forEach((q, idx) => {
-        if (!q.question) errors.push({ text: `❌ P${idx + 1}: Falta el texto de la pregunta`, qIndex: idx + 1 });
-        if (!q.answerOptions || !Array.isArray(q.answerOptions)) {
-          errors.push({ text: `❌ P${idx + 1}: Faltan opciones de respuesta`, qIndex: idx + 1 });
-        } else {
-          const correct = q.answerOptions.filter(o => o.isCorrect);
-          if (correct.length === 0) warnings.push({ text: `⚠️ P${idx + 1}: No tiene respuesta correcta marcada`, qIndex: idx + 1 });
-          if (correct.length > 1) warnings.push({ text: `⚠️ P${idx + 1}: Tiene múltiples respuestas correctas`, qIndex: idx + 1 });
-        }
-      });
-    }
-
-    return { errors, warnings, info };
   };
 
   const jumpToErrorPosition = (target) => {
@@ -255,7 +228,7 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
       const parsed = JSON.parse(jsonText);
       const processed = await processJsonData(parsed);
 
-      onUploadSuccess(processed);
+      await onUploadSuccess(processed);
       setJsonText('');
       setJsonErrors([]);
       setErrorDetails(null);
@@ -272,12 +245,35 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
       <Card className="p-6 shadow-sm border border-slate-200">
         <div className="mb-4">
           <h3 className="text-lg font-semibold text-gray-900 mb-1">
-            Pegar JSON del cuestionario
+            Importar cuestionario
           </h3>
           <p className="text-xs text-slate-500 mb-3">
-            Pega tu archivo JSON. El detector validará la sintaxis y estructura en tiempo real.
+            Sube un archivo o pega su contenido. Acepta opción múltiple y preguntas abiertas: respuesta corta, numéricas, enumeración, secuencia, completar y relación.
           </p>
         </div>
+
+        <label className="block mb-4 text-sm font-medium text-slate-700">
+          Seleccionar archivo JSON o TXT
+          <input
+            type="file"
+            accept=".json,.txt,application/json,text/plain"
+            disabled={isProcessing}
+            className="block mt-2 w-full text-sm"
+            onChange={async (event) => {
+              const file = event.target.files?.[0];
+              if (!file) return;
+              setIsProcessing(true);
+              try {
+                updateJsonText((await file.text()).replace(/^\uFEFF/, ''));
+              } catch {
+                setError('No se pudo leer el archivo. Vuelve a seleccionarlo.');
+              } finally {
+                setIsProcessing(false);
+                event.target.value = '';
+              }
+            }}
+          />
+        </label>
 
         {/* Textarea con selector directo */}
         <div className="relative">
@@ -286,35 +282,7 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
             id="quiz-json-input"
             name="quiz-json"
             value={jsonText}
-            onChange={(e) => {
-              const text = e.target.value;
-              setJsonText(text);
-              setJsonErrors([]);
-              setError(null);
-              setErrorDetails(null);
-
-              if (text.trim()) {
-                try {
-                  const parsed = JSON.parse(text);
-                  const validation = validateJsonSchema(parsed);
-                  if (validation.errors.length > 0) {
-                    setJsonErrors([...validation.errors, ...validation.warnings, ...validation.info]);
-                    setError(`${validation.errors.length} error(es) encontrado(s) en la estructura`);
-                    if (validation.errors[0].qIndex) {
-                      setErrorDetails({ qIndex: validation.errors[0].qIndex });
-                    }
-                  } else if (validation.warnings.length > 0 || validation.info.length > 0) {
-                    setJsonErrors([...validation.info, ...validation.warnings]);
-                  }
-                } catch (err) {
-                  if (err instanceof SyntaxError) {
-                    const parsedError = parseSyntaxError(err.message, text);
-                    setErrorDetails(parsedError);
-                    setError(`Error de sintaxis: ${err.message}`);
-                  }
-                }
-              }
-            }}
+            onChange={(e) => updateJsonText(e.target.value)}
             placeholder='Pega aquí tu archivo JSON...'
             className="min-h-[320px] max-h-[500px] font-mono text-xs mb-4 resize-y leading-relaxed bg-slate-50/50 focus:bg-white transition-colors"
             rows={16}
