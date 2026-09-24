@@ -1,0 +1,747 @@
+{
+  "bloque": {
+    "id": "P1-B02",
+    "titulo": "Capítulo 2: Dorso y Columna Vertebral",
+    "parcial": 1,
+    "sesion": "Osteología y Miología del Dorso",
+    "paginas": "72-117",
+    "semana_estudio": 2
+  },
+  "items": [
+    {
+      "id": "P1-B02-001",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 5 regiones bilaterales en las que se divide anatómicamente el dorso basándose en la presencia de los huesos subyacentes.",
+      "categoria": "región",
+      "dificultad": 2,
+      "etiquetas": [
+        "topografía",
+        "dorso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 72
+      },
+      "feedback": "Estas regiones son esenciales para la evaluación clínica y se delimitan por puntos de referencia óseos como las escápulas y la pelvis.",
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "Región escapular",
+            "acepta": []
+          },
+          {
+            "canonico": "Región supraescapular",
+            "acepta": []
+          },
+          {
+            "canonico": "Región interescapular",
+            "acepta": []
+          },
+          {
+            "canonico": "Región infraescapular",
+            "acepta": []
+          },
+          {
+            "canonico": "Región lumbar",
+            "acepta": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "P1-B02-002",
+      "tipo": "numerico",
+      "prompt": "¿Cuántas vértebras presacras móviles existen típicamente en la columna vertebral humana antes de la fusión de los segmentos pélvicos?",
+      "categoria": "vértebras",
+      "dificultad": 1,
+      "etiquetas": [
+        "osteología",
+        "columna vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 72
+      },
+      "feedback": "Consta de 7 cervicales, 12 torácicas y 5 lumbares, que en conjunto suman las 24 vértebras móviles.",
+      "respuesta": {
+        "valor": 24,
+        "unidad": "vértebras",
+        "tol": 0
+      }
+    },
+    {
+      "id": "P1-B02-003",
+      "tipo": "numerico",
+      "prompt": "¿Cuántas vértebras torácicas posee típicamente la columna vertebral humana?",
+      "categoria": "vértebras",
+      "dificultad": 1,
+      "etiquetas": [
+        "osteología",
+        "tórax"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 72
+      },
+      "feedback": "Estas vértebras se articulan con las costillas y forman la pared posterior de la cavidad torácica.",
+      "respuesta": {
+        "valor": 12,
+        "unidad": "vértebras",
+        "tol": 0
+      }
+    },
+    {
+      "id": "P1-B02-004",
+      "tipo": "secuencia",
+      "prompt": "Ordena de craneal a caudal las 4 curvaturas principales de la columna vertebral en el adulto.",
+      "categoria": "curvatura",
+      "dificultad": 1,
+      "etiquetas": [
+        "columna vertebral",
+        "biomecánica"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 104,
+        "fig": "2-27"
+      },
+      "feedback": "Alternan entre lordosis y cifosis para conferir resistencia elástica a la columna.",
+      "respuesta": {
+        "elementos": [
+          {
+            "canonico": "Cervical",
+            "acepta": [
+              "Lordosis cervical"
+            ]
+          },
+          {
+            "canonico": "Torácica",
+            "acepta": [
+              "Cifosis torácica"
+            ]
+          },
+          {
+            "canonico": "Lumbar",
+            "acepta": [
+              "Lordosis lumbar"
+            ]
+          },
+          {
+            "canonico": "Sacra",
+            "acepta": [
+              "Cifosis sacra"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "P1-B02-005",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 3 componentes funcionales y estructurales principales de los que se compone una vértebra típica.",
+      "categoria": "estructura",
+      "dificultad": 1,
+      "etiquetas": [
+        "osteología",
+        "vértebra"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 75,
+        "fig": "2-3"
+      },
+      "feedback": "Estos tres componentes garantizan el soporte del peso, la protección neural y el anclaje de palancas musculares.",
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "Cuerpo vertebral",
+            "acepta": [
+              "Cuerpo"
+            ]
+          },
+          {
+            "canonico": "Arco vertebral",
+            "acepta": [
+              "Arco neural"
+            ]
+          },
+          {
+            "canonico": "Siete procesos",
+            "acepta": [
+              "Procesos",
+              "Apófisis"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "P1-B02-006",
+      "tipo": "cloze",
+      "prompt": "El [c1] es la continuación del conducto vertebral en la pelvis, y la abertura posterior inferior producida por la ausencia de láminas y procesos espinosos de S5 es el [c2].",
+      "categoria": "accidente óseo",
+      "dificultad": 2,
+      "etiquetas": [
+        "sacro",
+        "osteología"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 84,
+        "fig": "2-12"
+      },
+      "feedback": "El hiato es una importante vía de acceso clínico para la anestesia epidural caudal.",
+      "respuesta": {
+        "blancos": [
+          {
+            "c1": {
+              "canonico": "conducto sacro",
+              "acepta": [
+                "conducto del sacro"
+              ]
+            }
+          },
+          {
+            "c2": {
+              "canonico": "hiato del sacro",
+              "acepta": [
+                "hiato sacro"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P1-B02-007",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué importante punto de referencia obstétrico forma el borde anterior sobresaliente del cuerpo de la vértebra S1 en la base de la pelvis?",
+      "categoria": "accidente óseo",
+      "dificultad": 1,
+      "etiquetas": [
+        "sacro",
+        "pelvis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 85
+      },
+      "feedback": "Este borde es clave para delimitar el estrecho superior de la pelvis en el canal de parto.",
+      "respuesta": {
+        "canonico": "Promontorio sacro",
+        "acepta": [
+          "Promontorio",
+          "Promontorio del sacro"
+        ]
+      }
+    },
+    {
+      "id": "P1-B02-008",
+      "tipo": "numerico",
+      "prompt": "¿A qué edad promedio (en años) comienza a fusionarse el tejido cartilaginoso para consolidar las vértebras sacras en un solo hueso adulto?",
+      "categoria": "edad",
+      "dificultad": 3,
+      "etiquetas": [
+        "osificación",
+        "sacro"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 85
+      },
+      "feedback": "La fusión finaliza en épocas posteriores, pero su inicio se da después de la segunda década.",
+      "respuesta": {
+        "valor": 20,
+        "unidad": "años",
+        "tol": 2
+      }
+    },
+    {
+      "id": "P1-B02-009",
+      "tipo": "relacion",
+      "prompt": "Relaciona la vértebra cervical con su característica anatómica distintiva o atípica.",
+      "categoria": "vértebra",
+      "dificultad": 2,
+      "etiquetas": [
+        "cervicales",
+        "osteología"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 79
+      },
+      "feedback": "C1 y C2 son atípicas para permitir la movilidad craneal, mientras C7 sirve de transición anatómica y referencia palpable.",
+      "respuesta": {
+        "pares": [
+          {
+            "izq": "Atlas (C1)",
+            "der": "Carece de cuerpo vertebral y proceso espinoso"
+          },
+          {
+            "izq": "Axis (C2)",
+            "der": "Posee el diente o proceso odontoideo"
+          },
+          {
+            "izq": "C7",
+            "der": "Posee el proceso espinoso más largo, no bífido"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P1-B02-010",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué término clínico se utiliza para describir la fractura de la porción ósea que conecta los procesos articulares superior e inferior (la parte interarticular) en las vértebras?",
+      "categoria": "lesión",
+      "dificultad": 2,
+      "etiquetas": [
+        "clínica",
+        "fracturas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 113
+      },
+      "feedback": "El signo radiológico se conoce como 'el cuello fracturado del terrier escocés'.",
+      "respuesta": {
+        "canonico": "Espondilólisis",
+        "acepta": []
+      }
+    },
+    {
+      "id": "P1-B02-011",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué término clínico describe el desplazamiento o luxación anterior de un cuerpo vertebral sobre el subyacente, frecuentemente como consecuencia de una espondilólisis previa?",
+      "categoria": "lesión",
+      "dificultad": 2,
+      "etiquetas": [
+        "clínica",
+        "luxaciones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 113
+      },
+      "feedback": "Suele ocurrir en el nivel L5-S1 comprimiendo estructuras nerviosas.",
+      "respuesta": {
+        "canonico": "Espondilolistesis",
+        "acepta": []
+      }
+    },
+    {
+      "id": "P1-B02-012",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina la masa central gelatinosa del disco intervertebral responsable de absorber los choques y conferir flexibilidad a la columna?",
+      "categoria": "tejido",
+      "dificultad": 1,
+      "etiquetas": [
+        "articulaciones",
+        "columna vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 98
+      },
+      "feedback": "El núcleo se aplana y expande al aplicar compresión vertical y es propenso a hernias posterolaterales.",
+      "respuesta": {
+        "canonico": "Núcleo pulposo",
+        "acepta": []
+      }
+    },
+    {
+      "id": "P1-B02-013",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 3 ligamentos específicos que conforman el complejo ligamento cruciforme del atlas.",
+      "categoria": "ligamento",
+      "dificultad": 3,
+      "etiquetas": [
+        "articulaciones",
+        "craneovertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 101,
+        "fig": "2-23"
+      },
+      "feedback": "Toma forma de cruz y es vital para la estabilización del diente del axis contra el arco anterior del atlas.",
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "Ligamento transverso del atlas",
+            "acepta": [
+              "Ligamento transverso"
+            ]
+          },
+          {
+            "canonico": "Fascículo longitudinal superior",
+            "acepta": []
+          },
+          {
+            "canonico": "Fascículo longitudinal inferior",
+            "acepta": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "P1-B02-014",
+      "tipo": "numerico",
+      "prompt": "¿Cuántas vértebras coccígeas rudimentarias se fusionan típicamente para formar el hueso del cóccix en el adulto?",
+      "categoria": "hueso",
+      "dificultad": 1,
+      "etiquetas": [
+        "osteología",
+        "cóccix"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 85
+      },
+      "feedback": "Representan el residuo esquelético de la eminencia caudal embrionaria.",
+      "respuesta": {
+        "valor": 4,
+        "unidad": "vértebras",
+        "tol": 1
+      }
+    },
+    {
+      "id": "P1-B02-015",
+      "tipo": "cloze",
+      "prompt": "La [c1] torácica excesiva se caracteriza por un aumento anómalo de la curvatura de concavidad anterior, mientras que la [c2] lumbar excesiva se acompaña de inclinación anterior de la pelvis.",
+      "categoria": "curvatura",
+      "dificultad": 2,
+      "etiquetas": [
+        "clínica",
+        "postura"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 115,
+        "fig": "C2-22"
+      },
+      "feedback": "Ambos representan alteraciones secundarias a debilidad muscular, degeneración ósea o variaciones del centro de gravedad.",
+      "respuesta": {
+        "blancos": [
+          {
+            "c1": {
+              "canonico": "cifosis",
+              "acepta": [
+                "cifosis torácica"
+              ]
+            }
+          },
+          {
+            "c2": {
+              "canonico": "lordosis",
+              "acepta": [
+                "lordosis lumbar",
+                "hiperlordosis"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P1-B02-016",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué procedimiento quirúrgico consiste en la extirpación de uno o más procesos espinosos y las láminas de sostén adyacentes para acceder al conducto vertebral o aliviar la compresión nerviosa?",
+      "categoria": "cirugía",
+      "dificultad": 1,
+      "etiquetas": [
+        "clínica",
+        "columna vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 90,
+        "fig": "C2-3"
+      },
+      "feedback": "Puede realizarse como laminectomía descompresiva en estenosis espinales graves.",
+      "respuesta": {
+        "canonico": "Laminectomía",
+        "acepta": []
+      }
+    },
+    {
+      "id": "P1-B02-017",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué potente ligamento de la columna vertebral se ubica en la cara anterolateral de los cuerpos vertebrales y es el único que limita la extensión?",
+      "categoria": "ligamento",
+      "dificultad": 2,
+      "etiquetas": [
+        "ligamentos",
+        "articulaciones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 98
+      },
+      "feedback": "Este ligamento impide la hiperextensión del raquis; todos los demás limitan la flexión.",
+      "respuesta": {
+        "canonico": "Ligamento longitudinal anterior",
+        "acepta": []
+      }
+    },
+    {
+      "id": "P1-B02-018",
+      "tipo": "cloze",
+      "prompt": "Dentro de las articulaciones craneovertebrales, las [c1] permiten los movimientos de afirmación gestual (flexión/extensión), mientras que las [c2] permiten el movimiento de negación rotando la cabeza en bloque.",
+      "categoria": "articulación",
+      "dificultad": 2,
+      "etiquetas": [
+        "craneovertebral",
+        "movimientos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 101
+      },
+      "feedback": "Ambos complejos articulares carecen de discos intervertebrales y logran alta movilidad bajo contención de membranas.",
+      "respuesta": {
+        "blancos": [
+          {
+            "c1": {
+              "canonico": "atlantooccipitales",
+              "acepta": [
+                "articulaciones atlantooccipitales"
+              ]
+            }
+          },
+          {
+            "c2": {
+              "canonico": "atlantoaxiales",
+              "acepta": [
+                "articulaciones atlantoaxiales"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P1-B02-019",
+      "tipo": "numerico",
+      "prompt": "¿Qué porcentaje aproximado de agua contiene el núcleo pulposo al nacer, otorgándole su extrema flexibilidad y turgencia hidrostática?",
+      "categoria": "porcentaje",
+      "dificultad": 3,
+      "etiquetas": [
+        "disco intervertebral",
+        "fisiología"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 98
+      },
+      "feedback": "Con la edad, el núcleo se deshidrata volviéndose progresivamente fibroso y susceptible al desgaste.",
+      "respuesta": {
+        "valor": 88,
+        "unidad": "%",
+        "tol": 2
+      }
+    },
+    {
+      "id": "P1-B02-020",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué estructura ligamentosa fibrosa se encuentra dentro del conducto vertebral cubriendo la cara posterior de los cuerpos vertebrales y se opone débilmente a la hiperflexión?",
+      "categoria": "ligamento",
+      "dificultad": 2,
+      "etiquetas": [
+        "ligamentos",
+        "columna vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 99
+      },
+      "feedback": "Ayuda a evitar o redirigir la hernia posterior del núcleo pulposo y tiene abundantes terminaciones nociceptivas.",
+      "respuesta": {
+        "canonico": "Ligamento longitudinal posterior",
+        "acepta": []
+      }
+    },
+    {
+      "id": "P1-B02-021",
+      "tipo": "numerico",
+      "prompt": "¿A qué nivel vertebral lumbar cruza el plano supracrestal, sirviendo de referencia clínica principal para la punción lumbar (ej. proceso espinoso)?",
+      "categoria": "nivel",
+      "dificultad": 1,
+      "etiquetas": [
+        "clínica",
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 86,
+        "fig": "2-13"
+      },
+      "feedback": "El plano cruza por el proceso espinoso de L4 y el disco intervertebral L4-L5.",
+      "respuesta": {
+        "valor": 4,
+        "unidad": "L",
+        "tol": 0
+      }
+    },
+    {
+      "id": "P1-B02-022",
+      "tipo": "relacion",
+      "prompt": "Relaciona los siguientes puntos de referencia anatómicos palpables en el dorso con su nivel vertebral correspondiente profundo.",
+      "categoria": "referencia",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomía de superficie",
+        "clínica"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 73,
+        "fig": "Tabla 2-1"
+      },
+      "feedback": "La palpación de estos hitos de superficie es indispensable en intervenciones guiadas y examen físico general.",
+      "respuesta": {
+        "pares": [
+          {
+            "izq": "Ángulo inferior de la escápula",
+            "der": "T7"
+          },
+          {
+            "izq": "Puntas de la 12.ª costilla",
+            "der": "L2"
+          },
+          {
+            "izq": "Punto más elevado de la cresta ilíaca",
+            "der": "L4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P1-B02-023",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 3 columnas musculares longitudinales que componen al músculo erector de la columna, dispuestas de lateral a medial.",
+      "categoria": "músculo",
+      "dificultad": 2,
+      "etiquetas": [
+        "miología",
+        "dorso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 120,
+        "fig": "2-36"
+      },
+      "feedback": "Son los principales extensores de la columna y se insertan a través de un tendón ancho y común.",
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "Iliocostal",
+            "acepta": [
+              "Músculo iliocostal"
+            ]
+          },
+          {
+            "canonico": "Longísimo",
+            "acepta": [
+              "Músculo longísimo"
+            ]
+          },
+          {
+            "canonico": "Espinoso",
+            "acepta": [
+              "Músculo espinoso"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "P1-B02-024",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 3 músculos que componen la capa profunda principal (grupo transversoespinoso) de los músculos intrínsecos del dorso.",
+      "categoria": "músculo",
+      "dificultad": 2,
+      "etiquetas": [
+        "miología",
+        "dorso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 120
+      },
+      "feedback": "Se originan en procesos transversos y pasan a los procesos espinosos de las vértebras más superiores.",
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "Semiespinoso",
+            "acepta": [
+              "Semiespinosos"
+            ]
+          },
+          {
+            "canonico": "Multífido",
+            "acepta": [
+              "Multífidos"
+            ]
+          },
+          {
+            "canonico": "Rotadores",
+            "acepta": [
+              "Rotador"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "P1-B02-025",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 4 músculos pequeños que componen la región suboccipital.",
+      "categoria": "músculo",
+      "dificultad": 2,
+      "etiquetas": [
+        "miología",
+        "cuello"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 127,
+        "fig": "Tabla 2-10"
+      },
+      "feedback": "Estos músculos actúan sobre la articulación craneovertebral y son los límites del triángulo suboccipital inervado por C1.",
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "Recto posterior mayor de la cabeza",
+            "acepta": [
+              "Recto posterior mayor"
+            ]
+          },
+          {
+            "canonico": "Recto posterior menor de la cabeza",
+            "acepta": [
+              "Recto posterior menor"
+            ]
+          },
+          {
+            "canonico": "Oblicuo superior de la cabeza",
+            "acepta": [
+              "Oblicuo superior"
+            ]
+          },
+          {
+            "canonico": "Oblicuo inferior de la cabeza",
+            "acepta": [
+              "Oblicuo inferior"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

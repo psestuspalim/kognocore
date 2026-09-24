@@ -61,6 +61,12 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
       questions = data.quiz.map(normalizeQuizQuestion);
     }
     // FORMATO COMPLETO ESTÁNDAR
+    else if (data.bloque || data.items || data.preguntas) {
+      title = data.title || data.bloque?.titulo || title;
+      description = data.description || (data.bloque ? `Sesión: ${data.bloque.sesion || ''} | Páginas: ${data.bloque.paginas || ''}` : '');
+      const raw = data.items || data.preguntas || data.questions || [];
+      questions = raw.map((q, idx) => normalizeQuizQuestion(q, idx));
+    }
     else if (data.questions && Array.isArray(data.questions)) {
       title = data.title || title;
       description = data.description || '';
