@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { motorAnatomia } from '@/lib/normalizador';
 import { normalizeQuizQuestion } from '@/lib/quiz-normalization';
+import { cleanQuizDisplayText } from '@/lib/quiz-display-text';
 import MathText from './MathText';
 import OpenEndedAnswerComparison from './OpenEndedAnswerComparison';
 import {
@@ -130,11 +131,14 @@ export default function OpenEndedQuestionView({
     }
   }, [submitted, tipo, userInputs, question, onAnswer]);
 
-  const promptText = question?.prompt || question?.question || question?.enunciado || question?.texto || '';
+  const promptText = cleanQuizDisplayText(question?.prompt || question?.question || question?.enunciado || question?.texto || '');
+  const headingText = tipo === 'cloze' && /\{\{c\d+\}\}|\[c\d+\]/i.test(promptText)
+    ? 'Completa los espacios en blanco'
+    : promptText;
 
   // Render text for 'cloze' questions with embedded input fields
   const renderClozeText = () => {
-    const rawText = question?.texto || promptText;
+    const rawText = cleanQuizDisplayText(question?.texto || promptText);
     const parts = rawText.split(/(\{\{c\d+\}\})/g);
 
     return (
@@ -158,7 +162,7 @@ export default function OpenEndedQuestionView({
                 disabled={submitted}
                 value={val}
                 onChange={(e) => setUserInputs(prev => ({ ...prev, [blankKey]: e.target.value }))}
-                placeholder={`[${blankKey}]`}
+                aria-label={`Espacio ${blankKey.slice(1)} para completar`}
                 className={`px-3 py-1 text-sm sm:text-base font-medium rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 ${
                   submitted
                     ? isBlankOk
@@ -253,7 +257,7 @@ export default function OpenEndedQuestionView({
           <Card className="p-5 sm:p-7 rounded-3xl border border-slate-200/80 shadow-xl bg-white">
             <div className="mb-4">
               <h2 className="text-lg sm:text-xl font-bold text-slate-900 leading-snug break-words">
-                <MathText text={promptText} />
+                <MathText text={headingText} />
               </h2>
             </div>
 
@@ -414,18 +418,18 @@ export default function OpenEndedQuestionView({
                 {/* Justification & Book Source Card */}
                 <Card className="p-5 sm:p-6 rounded-3xl border border-slate-200 bg-white shadow-md">
                   <div className="flex items-center gap-2 mb-2 font-bold text-slate-800 text-sm sm:text-base">
-                    <BookOpen className="w-4 h-4 text-indigo-600 shrink-0" /> Justificación (Moore 9.ª ed.)
+                    <BookOpen className="w-4 h-4 text-indigo-600 shrink-0" /> Justificación
                   </div>
                   <p className="text-slate-700 text-sm leading-relaxed mb-3 break-words">
-                    {result.feedback || question?.feedback || question?.justificacion || 'Sin justificación adicional.'}
+                    {cleanQuizDisplayText(result.feedback || question?.feedback || question?.justificacion) || 'Sin justificación adicional.'}
                   </p>
 
                   {question?.fuente && (
                     <div className="text-xs text-slate-500 pt-2 border-t border-slate-100 flex items-center gap-3 flex-wrap">
-                      <span><strong>Obra:</strong> {question.fuente.obra || 'Moore 9e'}</span>
-                      <span><strong>Pág:</strong> {question.fuente.pag}</span>
+                      {cleanQuizDisplayText(question.fuente.obra) && <span><strong>Obra:</strong> {cleanQuizDisplayText(question.fuente.obra)}</span>}
+                      {cleanQuizDisplayText(question.fuente.pag) && <span><strong>Pág:</strong> {cleanQuizDisplayText(question.fuente.pag)}</span>}
                       {(question.fuente.fig || question.fuente.tabla) && (
-                        <span><strong>Ref:</strong> {question.fuente.fig ? `Fig. ${question.fuente.fig}` : `Tabla ${question.fuente.tabla}`}</span>
+                        <span><strong>Ref:</strong> {cleanQuizDisplayText(question.fuente.fig) ? `Fig. ${cleanQuizDisplayText(question.fuente.fig)}` : cleanQuizDisplayText(question.fuente.tabla) ? `Tabla ${cleanQuizDisplayText(question.fuente.tabla)}` : 'No especificada'}</span>
                       )}
                     </div>
                   )}

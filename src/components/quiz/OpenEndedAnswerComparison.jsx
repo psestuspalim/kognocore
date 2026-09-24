@@ -5,7 +5,7 @@ export default function OpenEndedAnswerComparison({ inputs = {}, result, type })
   const details = result.detalle || [];
   const labelFor = (key, index) => {
     if (type === 'relacion') return key;
-    if (type === 'cloze') return `Espacio ${key}`;
+    if (type === 'cloze') return `Espacio ${String(key).replace(/^c/i, '')}`;
     if (type === 'secuencia') return `Paso ${index + 1}`;
     return null;
   };
