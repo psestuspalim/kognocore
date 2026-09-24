@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { motorAnatomia } from '@/lib/normalizador';
 import MathText from './MathText';
+import OpenEndedAnswerComparison from './OpenEndedAnswerComparison';
 import {
   CheckCircle2, XCircle, AlertCircle, Sparkles,
   BookOpen, ArrowRight, CornerDownLeft, ChevronLeft, Bookmark
@@ -405,34 +406,7 @@ export default function OpenEndedQuestionView({
                     </div>
                   )}
 
-                  {/* Items Detail Breakdown */}
-                  <div className="mt-3 space-y-2 border-t border-black/10 pt-3">
-                    {(result.detalle || []).map((det, i) => (
-                      <div key={i} className="text-xs sm:text-sm flex items-start justify-between gap-2 bg-white/60 p-2.5 rounded-xl border border-black/5">
-                        <div className="space-y-0.5 break-words">
-                          <span className="font-semibold text-slate-900 block">
-                            Esperado: {det.esperado || det.clave}
-                          </span>
-                          {det.dado && (
-                            <span className="text-slate-600 block">
-                              Ingresado: <span className={det.ok ? 'text-emerald-700 font-medium' : 'text-rose-700 font-medium'}>{det.dado}</span>
-                            </span>
-                          )}
-                        </div>
-                        <div className="shrink-0">
-                          {det.ok ? (
-                            <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">
-                              ✓ Correcto ({det.via || 'validador'})
-                            </span>
-                          ) : (
-                            <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-800">
-                              ✗ Incorrecto
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  <OpenEndedAnswerComparison inputs={userInputs} result={result} type={tipo} />
                 </div>
 
                 {/* Justification & Book Source Card */}
@@ -473,4 +447,3 @@ export default function OpenEndedQuestionView({
     </div>
   );
 }
-
