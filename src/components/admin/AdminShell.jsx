@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { client } from '@/api/client';
 import { toast } from 'sonner';
+import LogoutButton from '@/components/auth/LogoutButton';
 
 const sidebarItems = [
   {
@@ -80,9 +81,12 @@ export default function AdminShell({ children }) {
           </div>
           <span className="font-display text-sm font-semibold tracking-tight text-slate-800">Admin</span>
         </div>
+        <div className="flex items-center gap-2">
+        <LogoutButton />
         <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(!sidebarOpen)}>
           {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </Button>
+        </div>
       </div>
 
       {/* Sidebar - Desktop */}
@@ -133,6 +137,7 @@ export default function AdminShell({ children }) {
 
           {/* Bottom Actions */}
           <div className="border-t border-white/70 p-4">
+            <div className="mb-2"><LogoutButton className="w-full justify-start" /></div>
             <Link to={createPageUrl('Quizzes')}>
               <Button variant="outline" size="sm" className="w-full justify-start bg-white/70">
                 <ArrowLeft className="w-4 h-4 mr-2" />

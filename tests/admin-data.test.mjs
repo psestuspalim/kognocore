@@ -19,10 +19,15 @@ test('a failed legacy import does not hide server courses or overwrite unsynced 
       return { items: [{ id: 'server-course', name: 'Existing' }] };
     }
   });
+  vm.runInContext(source.slice(source.indexOf('const mergeById ='), source.indexOf('const fetchRemoteQuizzes =')), context);
   const fragment = source.slice(source.indexOf('        list: async (orderBy)'), source.indexOf('        filter: async (criteria'));
   const entity = vm.runInContext(`(() => { const entityName = 'Course'; return { ${fragment} }; })()`, context);
-  assert.equal((await entity.list())[0].id, 'server-course');
+  const items = await entity.list();
+  assert.deepEqual(Array.from(items, item => item.id).sort(), ['local-only', 'server-course']);
+  assert.equal(items.find(item => item.id === 'local-only').name, 'Local');
+  assert.equal(calls[0][1], 'POST');
   assert.equal(calls.at(-1)[1], 'GET');
+  assert.equal(context.catalogImported.has('Course'), false);
   assert.equal(saved.length, 0);
 });
 

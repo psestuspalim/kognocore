@@ -6,6 +6,7 @@ import { getFolderColor } from '@/utils/folderColors';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/AuthContext';
+import LogoutButton from '@/components/auth/LogoutButton';
 import { getOrCreateStudentAlias, getOrCreateLearnerId } from '@/lib/learner-id';
 import { Plus, ArrowLeft, BookOpen, FolderPlus, Folder, Upload } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -904,6 +905,7 @@ export default function QuizzesPage() {
             </span>
           )}
           {isAdmin && <AdminMenu compact />}
+          <LogoutButton />
         </div>
       </div>
     </header>
