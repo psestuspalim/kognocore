@@ -296,6 +296,7 @@ export default function QuizzesPage() {
   const [showContentManager, setShowContentManager] = useState(false);
   const [showQuizExporter, setShowQuizExporter] = useState(false);
   const [showGlobalUploaderDialog, setShowGlobalUploaderDialog] = useState(false);
+  const [importDestination, setImportDestination] = useState(null);
 
   // Resource states
   const [showResourceEditor, setShowResourceEditor] = useState(false);
@@ -532,6 +533,21 @@ export default function QuizzesPage() {
     }
     payload.course_id = payload.course_id || selectedCourse?.id || 'course_enarm2026';
     return payload;
+  };
+
+  const openQuizImporter = (type, item) => {
+    if (!isAdmin) return;
+    const folderId = type === 'folder' ? item.id : type ? null : currentFolderId;
+    const subject = type === 'subject' ? item : type ? null : selectedSubject;
+    const course = type === 'course' ? item : type ? null : selectedCourse;
+    const context = getFolderHierarchyContext(folderId);
+    setImportDestination({
+      name: item?.name || folders.find((folder) => sameId(folder.id, folderId))?.name || subject?.name || course?.name || 'Directorio general',
+      folder_id: folderId || null,
+      subject_id: folderId ? context.subject_id : subject?.id || null,
+      course_id: context.course_id || subject?.course_id || course?.id || null
+    });
+    setShowGlobalUploaderDialog(true);
   };
 
   // Mutations
@@ -900,6 +916,11 @@ export default function QuizzesPage() {
           )}
         </div>
         <div className="flex items-center gap-2 shrink-0">
+          {isAdmin && !explorerMode && (currentFolderId || selectedSubject) && (view === 'subjects' || view === 'list') && (
+            <Button variant="outline" size="sm" onClick={() => openQuizImporter()}>
+              <Upload className="w-4 h-4 mr-2" /> Importar JSON
+            </Button>
+          )}
           {currentUser?.username && currentUser?.role !== 'admin' && (
             <span className="hidden max-w-36 truncate items-center gap-1 rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-800 min-[390px]:inline-flex">
               {currentUser.username}
@@ -1744,7 +1765,7 @@ export default function QuizzesPage() {
                       </div>
                       <div className="flex flex-wrap gap-2">
                         <Button
-                          onClick={() => setShowGlobalUploaderDialog(true)}
+                          onClick={() => openQuizImporter()}
                           variant="outline"
                           className="text-xs sm:text-sm h-9 border-indigo-200 text-indigo-700 bg-indigo-50/50 hover:bg-indigo-100/80"
                         >
@@ -1884,6 +1905,7 @@ export default function QuizzesPage() {
                     </div>
 
                     <FileExplorer
+                      onImportQuiz={openQuizImporter}
                       quizProgressById={quizProgressById}
                       containers={buildContainers(courses, folders, subjects)}
                       quizzes={quizzes}
@@ -1972,10 +1994,10 @@ export default function QuizzesPage() {
                           <Button
                             variant="outline"
                             className="text-xs sm:text-sm h-9"
-                            onClick={() => setShowUploader(true)}
+                            onClick={() => openQuizImporter()}
                           >
                             <Upload className="w-4 h-4 mr-2" />
-                            Subir JSON
+                            Importar JSON
                           </Button>
                           <Dialog open={showFolderDialog} onOpenChange={setShowFolderDialog}>
                             <DialogTrigger asChild>
@@ -2143,7 +2165,7 @@ export default function QuizzesPage() {
                               <BookOpen className="w-5 h-5 text-indigo-600" /> Cuestionarios ({currentFolderQuizzes.length})
                             </h2>
                             {canEdit && (
-                              <Button onClick={() => setShowUploader(true)} size="sm" className="bg-primary hover:bg-primary/90">
+                              <Button onClick={() => openQuizImporter()} size="sm" className="bg-primary hover:bg-primary/90">
                                 <Upload className="w-4 h-4 mr-2" /> Subir Cuestionario (JSON)
                               </Button>
                             )}
@@ -2156,8 +2178,8 @@ export default function QuizzesPage() {
                               <h3 className="text-base font-bold text-slate-800 mb-1">Sin cuestionarios</h3>
                               <p className="text-sm text-slate-500 mb-4">Sube un archivo JSON para comenzar.</p>
                               {canEdit && (
-                                <Button onClick={() => setShowUploader(true)} size="sm" className="bg-primary hover:bg-primary/90">
-                                  <Upload className="w-4 h-4 mr-2" /> Subir JSON
+                                <Button onClick={() => openQuizImporter()} size="sm" className="bg-primary hover:bg-primary/90">
+                                  <Upload className="w-4 h-4 mr-2" /> Importar JSON
                                 </Button>
                               )}
                             </div>
@@ -2197,50 +2219,6 @@ export default function QuizzesPage() {
 
 
 
-                {/* File Uploader - Folder Level */}
-                {view === 'subjects' && (selectedCourse || currentFolderId) && showUploader && (
-                  <motion.div key="uploader-folder" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
-                    <Button onClick={() => setShowUploader(false)} variant="ghost" className="mb-6">
-                      <ArrowLeft className="w-4 h-4 mr-2" /> Volver
-                    </Button>
-                    <FileUploader
-                      onUploadSuccess={async (data) => {
-                        await createQuizMutation.mutateAsync({
-                          ...data,
-                          folder_id: currentFolderId || null,
-                          course_id: selectedCourse?.id || 'course_enarm2026'
-                        });
-                        setShowUploader(false);
-                        queryClient.invalidateQueries({ queryKey: ['quizzes'] });
-                      }}
-                      jsonOnly={true}
-                    />
-                  </motion.div>
-                )}
-
-                {/* File Uploader - Subject Level */}
-                {view === 'list' && selectedSubject && showUploader && (
-                  <motion.div key="uploader-subject" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
-                    <Button onClick={() => setShowUploader(false)} variant="ghost" className="mb-6">
-                      <ArrowLeft className="w-4 h-4 mr-2" /> Volver a {selectedSubject.name}
-                    </Button>
-                    <FileUploader
-                      onUploadSuccess={async (data) => {
-                        await createQuizMutation.mutateAsync({
-                          ...data,
-                          subject_id: selectedSubject.id,
-                          course_id: selectedSubject.course_id || selectedCourse?.id || 'course_enarm2026',
-                          folder_id: currentFolderId || null
-                        });
-                        setShowUploader(false);
-                        queryClient.invalidateQueries({ queryKey: ['quizzes'] });
-                        toast.success('Cuestionario agregado a ' + selectedSubject.name);
-                      }}
-                      jsonOnly={true}
-                    />
-                  </motion.div>
-                )}
-
                 {/* Quiz List View */}
                 {view === 'list' && selectedSubject && !showUploader && !editingQuiz && !showAIGenerator && !explorerMode && (
                   <div>
@@ -2254,8 +2232,8 @@ export default function QuizzesPage() {
                         </div>
                         {isAdmin && (
                           <div className="flex flex-wrap gap-2">
-                            <Button onClick={() => setShowUploader(true)} variant="outline" className="text-xs sm:text-sm h-9">
-                              <Upload className="w-4 h-4 mr-2" /> Subir JSON
+                            <Button onClick={() => openQuizImporter()} variant="outline" className="text-xs sm:text-sm h-9">
+                              <Upload className="w-4 h-4 mr-2" /> Importar JSON
                             </Button>
 
                             <Button onClick={() => setEditingQuiz({ title: '', subject_id: selectedSubject.id, questions: [] })} className="bg-primary hover:bg-primary/90 text-xs sm:text-sm h-9">
@@ -2328,8 +2306,8 @@ export default function QuizzesPage() {
                           </p>
                           {isAdmin && (
                             <div className="flex flex-wrap gap-2 justify-center">
-                              <Button onClick={() => setShowUploader(true)} variant="outline" size="sm">
-                                <Upload className="w-4 h-4 mr-2" /> Subir JSON
+                              <Button onClick={() => openQuizImporter()} variant="outline" size="sm">
+                                <Upload className="w-4 h-4 mr-2" /> Importar JSON
                               </Button>
                               <Button size="sm" className="bg-primary hover:bg-primary/90" onClick={() => setEditingQuiz({ title: '', subject_id: selectedSubject.id, questions: [] })}>
                                 <Plus className="w-4 h-4 mr-2" /> Crear
@@ -2493,16 +2471,19 @@ export default function QuizzesPage() {
                 Importar / Cargar Cuestionario desde JSON
               </DialogTitle>
             </DialogHeader>
+            <p className="text-sm text-slate-600">Destino: {importDestination?.name || 'Directorio general'}</p>
             <div className="mt-2">
               <FileUploader
                 onUploadSuccess={async (data) => {
-                  await createQuizMutation.mutateAsync({
-                    ...data,
-                    course_id: selectedCourse?.id || 'course_enarm2026'
-                  });
+                  if (!isAdmin || !importDestination) return;
+                  const { name, ...destination } = importDestination;
+                  const payload = destination.folder_id || destination.subject_id || destination.course_id
+                    ? { ...data, ...destination }
+                    : buildQuizPayload(data);
+                  await client.entities.Quiz.create(payload);
                   setShowGlobalUploaderDialog(false);
                   queryClient.invalidateQueries({ queryKey: ['quizzes'] });
-                  toast.success('Cuestionario importado con éxito');
+                  toast.success('Cuestionario importado en ' + name);
                 }}
                 jsonOnly={true}
               />

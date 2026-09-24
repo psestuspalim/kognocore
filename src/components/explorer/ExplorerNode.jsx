@@ -6,7 +6,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Draggable, Droppable } from '@hello-pangea/dnd';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Folder, BookOpen, FileText, Book, ChevronDown, MoreVertical
+  Folder, BookOpen, FileText, Book, ChevronDown, MoreVertical, Upload
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -37,6 +37,7 @@ const ExplorerNode = memo(function ExplorerNode({
   onToggleSelect,
   onToggleExpand,
   onItemClick,
+  onImportQuiz,
   onChangeType
 }) {
   const Icon = typeIcons[type] || FileText;
@@ -147,6 +148,15 @@ const ExplorerNode = memo(function ExplorerNode({
               )}
             </div>
 
+            {isAdmin && type !== 'quiz' && onImportQuiz && (
+              <Button variant="outline" size="sm" aria-label={`Importar JSON en ${item.name}`} onClick={(event) => {
+                event.stopPropagation();
+                onImportQuiz(type, item);
+              }}>
+                <Upload className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">Importar JSON</span>
+              </Button>
+            )}
             {isAdmin && type !== 'quiz' && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -214,6 +224,8 @@ const ExplorerNode = memo(function ExplorerNode({
 }, (prevProps, nextProps) => {
   return (
     prevProps.item.id === nextProps.item.id &&
+    prevProps.isAdmin === nextProps.isAdmin &&
+    prevProps.onImportQuiz === nextProps.onImportQuiz &&
     prevProps.isSelected === nextProps.isSelected &&
     prevProps.isExpanded === nextProps.isExpanded &&
     prevProps.isDragOver === nextProps.isDragOver &&

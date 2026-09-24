@@ -15,6 +15,7 @@ export default function FileExplorer({
   onMoveItems,
   onCopyItems,
   onItemClick,
+  onImportQuiz,
   onChangeType,
   onDeleteItems,
   isAdmin = false,
@@ -241,6 +242,7 @@ export default function FileExplorer({
         onToggleSelect={toggleSelect}
         onToggleExpand={toggleExpand}
         onItemClick={onItemClick}
+        onImportQuiz={onImportQuiz}
         onChangeType={onChangeType}
       >
         {/* Render children only if expanded */}
@@ -252,7 +254,7 @@ export default function FileExplorer({
         )}
       </ExplorerNode>
     );
-  }, [containers, quizzes, quizProgressById, expandedContainers, dragOverContainer, indices, isAdmin, isSelected, toggleSelect, toggleExpand, onItemClick, onChangeType]);
+  }, [containers, quizzes, quizProgressById, expandedContainers, dragOverContainer, indices, isAdmin, isSelected, toggleSelect, toggleExpand, onItemClick, onImportQuiz, onChangeType]);
 
   return (
     <DragDropContext onDragEnd={handleDragEnd} onDragUpdate={handleDragUpdate}>
