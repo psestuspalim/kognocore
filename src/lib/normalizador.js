@@ -17,6 +17,8 @@
 
 import DIC from './sinonimos.json' with { type: 'json' };
 
+export const VERSION = '1.3.1';
+
 // ---------------------------------------------------------------------------
 // 1. Primitivas de texto
 // ---------------------------------------------------------------------------
@@ -76,6 +78,25 @@ export function crearMotor(dic = DIC) {
   const EXC_PLURAL = new Set(dic.excepciones_plural || []);
   const GENERO = dic.adjetivos_genero || {};
   const PROTEGIDAS = new Set((dic.palabras_protegidas?.lista || []).map(limpiar));
+  const NUCLEOS = new Set((dic.nucleos_opcionales?.lista || []).map(limpiar));
+
+  function sinNucleo(norm) {
+    const toks = norm.split(' ').filter(t => t && !NUCLEOS.has(t));
+    return toks.length ? toks.join(' ') : norm;
+  }
+
+  // Elimina un sustantivo genérico sólo del lado donde el otro lo omitió.
+  // Así "escapular" equivale a "región escapular", pero "ligamento" no
+  // equivale a "ligamento nucal".
+  function reducirPar(a, b) {
+    const ta = a.split(' ').filter(Boolean);
+    const tb = b.split(' ').filter(Boolean);
+    const sa = new Set(ta), sb = new Set(tb);
+    const ra = ta.filter(t => !(NUCLEOS.has(t) && !sb.has(t)));
+    const rb = tb.filter(t => !(NUCLEOS.has(t) && !sa.has(t)));
+    if (!ra.length || !rb.length) return [a, b];
+    return [ra.join(' '), rb.join(' ')];
+  }
 
   /**
    * Firma de tokens protegidos: todo token con digitos (L4, C7, 25%) y todo
@@ -120,8 +141,9 @@ export function crearMotor(dic = DIC) {
 
   /** Quita el prefijo generico de categoria si el item declara una. */
   function quitarPrefijo(s, categoria) {
-    if (!categoria || !PREFIJOS[categoria]) return s;
-    for (const p of PREFIJOS[categoria]) {
+    const clave = limpiar(categoria);
+    if (!clave || !PREFIJOS[clave]) return s;
+    for (const p of PREFIJOS[clave]) {
       if (s === p) return s;                       // no vaciar la respuesta
       if (s.startsWith(p + ' ')) return s.slice(p.length + 1);
     }
@@ -177,14 +199,23 @@ export function crearMotor(dic = DIC) {
       if (rNorm === a) return { ok: true, via: 'normalizado', distancia: 0 };
     }
 
+    // Paso 2b: permite omitir sustantivos genéricos como "región" o
+    // "músculo", salvo cuando distinguirían dos respuestas del mismo item.
+    if (opts.nucleo !== false) {
+      for (const a of aNorms) {
+        const [rCore, aCore] = reducirPar(rNorm, a);
+        if (rCore === aCore) return { ok: true, via: 'nucleo', distancia: 0 };
+      }
+    }
+
     // Paso 3: tolerancia ortografica sobre la forma normalizada
     let mejor = Infinity;
-    const rFirma = firmaProtegida(rNorm);
     for (const a of aNorms) {
-      if (firmaProtegida(a) !== rFirma) continue;
-      const tol = opts.tolerancia ?? toleranciaOrtografica(a);
+      const [rCore, aCore] = opts.nucleo === false ? [rNorm, a] : reducirPar(rNorm, a);
+      if (firmaProtegida(aCore) !== firmaProtegida(rCore)) continue;
+      const tol = opts.tolerancia ?? toleranciaOrtografica(aCore);
       if (tol === 0) continue;
-      const d = levenshtein(rNorm, a, tol);
+      const d = levenshtein(rCore, aCore, tol);
       if (d < mejor) mejor = d;
       if (d <= tol) return { ok: true, via: 'ortografia', distancia: d };
     }
@@ -202,6 +233,20 @@ export function crearMotor(dic = DIC) {
     return [el.canonico, ...(el.acepta || [])].filter(Boolean);
   }
 
+  function opcionesDe(item, grupos = null) {
+    const opts = { categoria: limpiar(item.categoria) };
+    const respuestas = grupos || item.respuesta?.elementos || item.respuesta?.pares
+      || (item.blancos ? Object.values(item.blancos) : null);
+    if (respuestas && respuestas.length > 1) {
+      const nucleos = respuestas.map(respuesta => {
+        const canonico = typeof respuesta === 'string' ? respuesta : respuesta.canonico;
+        return sinNucleo(normalizar(canonico, opts));
+      });
+      if (new Set(nucleos).size !== nucleos.length) opts.nucleo = false;
+    }
+    return opts;
+  }
+
   /** Divide un textarea en entradas: saltos de linea, comas, punto y coma, numeracion. */
   function trocear(entrada) {
     if (Array.isArray(entrada)) return entrada.flatMap(s => trocear(s));
@@ -217,20 +262,47 @@ export function crearMotor(dic = DIC) {
     const detalle = [];
     let aciertos = 0;
     const elementos = item.respuesta?.elementos || [];
-
-    for (const el of elementos) {
-      let hit = null;
+    // Infer only a known category shared by every reference answer. Never
+    // discard arbitrary shared words (they may identify a distinct structure).
+    const categoria = item.categoria || (elementos.length > 1
+      ? Object.keys(PREFIJOS).find(cat => elementos.every(el => {
+        const canonico = limpiar(typeof el === 'string' ? el : el.canonico);
+        return PREFIJOS[cat].some(prefix => canonico.startsWith(prefix + ' '));
+      })) : undefined);
+    // Alternatives are distinct valid concepts declared by the question author,
+    // not global synonyms of an unrelated reference answer.
+    const candidatos = [...elementos, ...(item.respuesta?.alternativas || [])];
+    const opts = opcionesDe(item, candidatos);
+    const opciones = candidatos.map(el => dadas.map(dada =>
+      coincide(dada, formasDe(el), { ...opts, categoria: categoria || opts.categoria })));
+    const asignados = new Map();
+    function asignar(candidato, visitados = new Set()) {
       for (let i = 0; i < dadas.length; i++) {
-        if (usados.has(i)) continue;
-        const r = coincide(dadas[i], formasDe(el), { categoria: item.categoria });
-        if (r.ok) { hit = { indice: i, ...r }; break; }
+        if (!opciones[candidato][i].ok || visitados.has(i)) continue;
+        visitados.add(i);
+        if (!asignados.has(i) || asignar(asignados.get(i), visitados)) {
+          asignados.set(i, candidato);
+          return true;
+        }
       }
+      return false;
+    }
+    for (let i = 0; i < candidatos.length && asignados.size < elementos.length; i++) asignar(i);
+    const coincidencias = new Map([...asignados].map(([indice, candidato]) =>
+      [candidato, { indice, ...opciones[candidato][indice] }]));
+    const alternativas = [...coincidencias.keys()].filter(i => i >= elementos.length);
+
+    for (let j = 0; j < elementos.length; j++) {
+      const candidato = coincidencias.has(j) ? j : alternativas.shift();
+      const hit = coincidencias.get(candidato);
+      const el = hit ? candidatos[candidato] : elementos[j];
+      const esperado = typeof el === 'string' ? el : el.canonico;
       if (hit) {
         usados.add(hit.indice);
         aciertos++;
-        detalle.push({ esperado: el.canonico, dado: dadas[hit.indice], ok: true, via: hit.via });
+        detalle.push({ esperado, dado: dadas[hit.indice], ok: true, via: hit.via });
       } else {
-        detalle.push({ esperado: el.canonico, dado: null, ok: false, via: null });
+        detalle.push({ esperado, dado: null, ok: false, via: null });
       }
     }
 
@@ -253,7 +325,7 @@ export function crearMotor(dic = DIC) {
     const detalle = [];
     let aciertos = 0;
     for (let i = 0; i < els.length; i++) {
-      const r = dadas[i] ? coincide(dadas[i], formasDe(els[i]), { categoria: item.categoria })
+      const r = dadas[i] ? coincide(dadas[i], formasDe(els[i]), opcionesDe(item))
                          : { ok: false, via: null };
       if (r.ok) aciertos++;
       detalle.push({ posicion: i + 1, esperado: els[i].canonico, dado: dadas[i] ?? null, ok: r.ok, via: r.via });
@@ -264,7 +336,7 @@ export function crearMotor(dic = DIC) {
 
   function calificarCorta(item, entrada) {
     const respObj = item.respuesta || {};
-    const r = coincide(entrada, formasDe(respObj), { categoria: item.categoria });
+    const r = coincide(entrada, formasDe(respObj), opcionesDe(item));
     return {
       tipo: 'respuesta_corta',
       puntos: r.ok ? 1 : 0, max: 1, correcto: r.ok, via: r.via,
@@ -321,7 +393,7 @@ export function crearMotor(dic = DIC) {
     const detalle = [];
     let aciertos = 0;
     for (const par of pares) {
-      const r = coincide(resp[par.clave], [par.canonico, ...(par.acepta || [])], { categoria: item.categoria });
+      const r = coincide(resp[par.clave], [par.canonico, ...(par.acepta || [])], opcionesDe(item));
       if (r.ok) aciertos++;
       detalle.push({ clave: par.clave, esperado: par.canonico, dado: resp[par.clave] ?? null, ok: r.ok, via: r.via });
     }
@@ -351,7 +423,16 @@ export function crearMotor(dic = DIC) {
     return res;
   }
 
-  return { normalizar, coincide, calificar, limpiar, trocear };
+  function autodiagnostico() {
+    const casos = [
+      { desc: 'omite núcleo región', ok: coincide('escapular', ['región escapular']).ok },
+      { desc: 'conserva términos distintivos', ok: !coincide('ligamento', ['ligamento nucal']).ok },
+      { desc: 'protege términos opuestos', ok: !coincide('epífisis anular superior', ['epífisis anular inferior']).ok }
+    ];
+    return { version: VERSION, ok: casos.every(caso => caso.ok), casos };
+  }
+
+  return { normalizar, coincide, calificar, limpiar, trocear, sinNucleo, opcionesDe, autodiagnostico, VERSION };
 }
 
 // Export singleton instance for immediate use

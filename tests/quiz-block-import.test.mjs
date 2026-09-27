@@ -93,6 +93,72 @@ test('an empty sequence slot does not shift later correct answers', () => {
   assert.deepEqual(result.detalle.map((item) => item.ok), [false, true, true]);
 });
 
+const anatomyBranches = {
+  tipo: 'enumeracion',
+  respuesta: { elementos: [
+    { canonico: 'anatomía regional' },
+    { canonico: 'anatomía por sistemas' },
+    { canonico: 'anatomía clínica' }
+  ] }
+};
+
+test('accepts omitted shared category without treating distinct branches as synonyms', () => {
+  assert.equal(motorAnatomia.calificar(anatomyBranches, ['regional', 'por sistemas', 'clínica']).puntos, 3);
+  assert.equal(motorAnatomia.calificar(anatomyBranches, ['regional', 'superficie', 'clínica']).puntos, 2);
+  assert.equal(motorAnatomia.calificar(anatomyBranches, ['regional', 'regional', 'regional']).puntos, 1);
+  assert.equal(motorAnatomia.calificar(anatomyBranches, ['anatomía', '', '']).puntos, 0);
+});
+
+test('credits question-scoped alternatives and displays the accepted concept', () => {
+  const question = normalizeQuizQuestion({ ...anatomyBranches, respuesta: {
+    ...anatomyBranches.respuesta,
+    alternativas: [{ canonico: 'anatomía de superficie', acepta: ['de superficie'] }]
+  } });
+  const result = motorAnatomia.calificar(question, ['regional', 'superficie', 'clínica']);
+  assert.equal(result.puntos, 3);
+  assert.equal(result.correcto, true);
+  assert.equal(result.detalle[1].esperado, 'anatomía de superficie');
+  assert.deepEqual(result.sobrantes, []);
+  assert.equal(motorAnatomia.calificar(question, ['superficie', 'de superficie', 'anatomía de superficie']).puntos, 1);
+});
+
+test('matches overlapping accepted forms without consuming a later unique answer', () => {
+  const question = { tipo: 'enumeracion', respuesta: { elementos: [
+    { canonico: 'rojo', acepta: ['azul'] }, { canonico: 'azul' }
+  ] } };
+  assert.equal(motorAnatomia.calificar(question, ['azul', 'rojo']).puntos, 2);
+});
+
+test('keeps anatomical qualifiers when inferring a shared category', () => {
+  const question = { tipo: 'enumeracion', respuesta: { elementos: [
+    { canonico: 'arteria cerebral anterior' }, { canonico: 'arteria cerebral posterior' }
+  ] } };
+  assert.equal(motorAnatomia.calificar(question, ['anterior', 'posterior']).puntos, 0);
+  assert.equal(motorAnatomia.calificar(question, ['cerebral anterior', 'cerebral posterior']).puntos, 2);
+});
+
+test('accepts omitted generic region names without crediting unrelated regions', () => {
+  const question = {
+    id: 'P1-B02-001',
+    tipo: 'enumeracion',
+    categoria: 'región',
+    respuesta: { elementos: [
+      { canonico: 'Región escapular' },
+      { canonico: 'Región supraescapular' },
+      { canonico: 'Región interescapular' },
+      { canonico: 'Región infraescapular' },
+      { canonico: 'Región lumbar' }
+    ] }
+  };
+  const result = motorAnatomia.calificar(question, [
+    'escapular', 'costal', 'interescapular', 'supraesternal', 'supraclavicular'
+  ]);
+  assert.equal(result.puntos, 2);
+  assert.deepEqual(result.detalle.filter(item => item.ok).map(item => item.dado).sort(),
+    ['escapular', 'interescapular']);
+  assert.deepEqual(result.sobrantes.sort(), ['costal', 'supraclavicular', 'supraesternal']);
+});
+
 test('the answer log preserves open-ended inputs and grading when the parent rerenders', async () => {
   const source = await readFile(new URL('../src/pages/Quizzes.jsx', import.meta.url), 'utf8');
   const start = source.indexOf('    const options = question.answerOptions', source.indexOf('  const handleAnswer ='));

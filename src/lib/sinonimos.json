@@ -26,6 +26,10 @@
       "derecho", "izquierdo",
       "interno", "externo", "proximal", "distal",
       "superficial", "profundo", "ascendente", "descendente",
+      "bilateral", "unilateral", "ipsilateral", "homolateral", "contralateral",
+      "isotonico", "isometrico", "concentrico", "excentrico", "tonico", "fasico",
+      "intramembranoso", "endocondral", "compacto", "esponjoso",
+      "sistemico", "regional", "clinico", "topografico",
       "primario", "secundario", "dorsal", "ventral", "craneal", "caudal",
       "palmar", "plantar", "mayor", "menor",
       "aductor", "abductor", "flexor", "extensor", "supinador", "pronador",
@@ -36,7 +40,26 @@
     ]
   },
 
+  "nucleos_opcionales": {
+    "_nota": "Sustantivos genericos que pueden omitirse si no vuelven ambiguas dos respuestas del mismo item.",
+    "lista": [
+      "anatomia", "esqueleto", "sistema", "aparato", "metodo", "tecnica", "termino",
+      "plano", "eje", "linea", "cuadro",
+      "contraccion", "movimiento", "osificacion", "unidad", "tejido", "celula", "fibra",
+      "musculo", "nervio", "arteria", "vena", "ligamento", "tendon", "vaina",
+      "hueso", "cartilago", "medula", "articulacion", "disco", "arco", "proceso",
+      "foramen", "conducto", "hiato", "incisura", "pliegue", "membrana",
+      "seno", "celdilla", "glandula", "region", "fosa", "fosita", "espacio",
+      "centro", "nucleo", "vertebra", "costilla", "nodulo", "ganglio", "capa", "lamina",
+      "fascia", "bolsa", "cavidad", "surco", "cresta", "tuberculo", "tuberosidad",
+      "espina", "cara", "borde", "cuerno", "asta", "rama", "tronco", "plexo",
+      "cisterna", "triangulo", "compartimento", "epifisis", "signo", "sindrome",
+      "fractura", "luxacion", "quemadura", "maniobra", "reflejo", "factor", "estructura"
+    ]
+  },
+
   "prefijos_categoria": {
+    "anatomia":    ["anatomia"],
     "musculo":     ["musculo", "m", "mm", "el musculo"],
     "nervio":      ["nervio", "n", "nn"],
     "arteria":     ["arteria", "a", "aa"],
@@ -116,6 +139,16 @@
   },
 
   "equivalencias": [
+    ["plano medio sagital", "plano medio"],
+    ["plano sagital medio", "plano medio"],
+    ["medio sagital", "medio"],
+    ["sagital medio", "medio"],
+    ["mediosagital", "medio"],
+    ["mediano", "medio"],
+    ["coronal", "frontal"],
+    ["axial", "transversal"],
+    ["transaxial", "transversal"],
+    ["horizontal", "transversal"],
     ["apofisis espinosa",        "proceso espinoso"],
     ["apofisis transversa",      "proceso transverso"],
     ["apofisis articular",       "proceso articular"],
