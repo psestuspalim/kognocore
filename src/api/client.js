@@ -1,3 +1,4 @@
+import { applyQuestionCorrections, applySessionCorrections } from '@/lib/question-review';
 import { readAdminSession } from '@/lib/admin-session';
 
 import { appParams } from '@/lib/app-params';
@@ -351,6 +352,11 @@ const mergeById = (primary, secondary) => {
         const existingAnswered = Number(existing.answered_questions || 0);
         const primaryAnswered = Number(item.answered_questions || 0);
 
+        if (Number(item.review_revision || 0) > Number(existing.review_revision || 0) &&
+            primaryAnswered >= existingAnswered) {
+          map.set(item.id, { ...existing, ...item });
+          return;
+        }
         // Keep local item if it has newer timestamp or more answered questions
         if (primaryTime > existingTime || (primaryTime === existingTime && primaryAnswered >= existingAnswered)) {
           map.set(item.id, { ...existing, ...item });
@@ -365,7 +371,19 @@ const mergeById = (primary, secondary) => {
 
 const fetchRemoteQuizzes = async () => {
   const data = await requestJson('/api/quizzes');
-  return Array.isArray(data?.quizzes) ? data.quizzes : [];
+  const quizzes = Array.isArray(data?.quizzes) ? data.quizzes : [];
+  for (const quiz of quizzes) {
+    if (!quiz.question_corrections?.length) continue;
+    saveItems('QuizAttempt', getItems('QuizAttempt').map(a => a.quiz_id === quiz.id ? applyQuestionCorrections(a, quiz) : a));
+    for (const key of Object.keys(localStorage)) {
+      if (key !== 'kc_active_quiz_session' && !key.startsWith('kc_quiz_session_v2:')) continue;
+      try {
+        const session = JSON.parse(localStorage.getItem(key));
+        if (session?.quizId === quiz.id) localStorage.setItem(key, JSON.stringify(applySessionCorrections(session, quiz)));
+      } catch { /* Ignore obsolete session formats. */ }
+    }
+  }
+  return quizzes;
 };
 
 const buildRemoteQuery = (criteria = {}, fields = []) => {

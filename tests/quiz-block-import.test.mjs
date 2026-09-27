@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { questionIdentity } from '../src/lib/question-review.js';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
@@ -17,7 +18,7 @@ const fixture = {
 };
 const engineSource = await readFile(new URL('../src/lib/normalizador.js', import.meta.url), 'utf8');
 const dictionary = await readFile(new URL('../src/lib/sinonimos.json', import.meta.url), 'utf8');
-const { motorAnatomia } = await import(`data:text/javascript;base64,${Buffer.from(engineSource.replace(/^import DIC from '\.\/sinonimos\.json';/m, `const DIC = ${dictionary};`)).toString('base64')}`);
+const { motorAnatomia } = await import(`data:text/javascript;base64,${Buffer.from(engineSource.replace(/^import DIC from '\.\/sinonimos\.json'(?: with \{ type: 'json' \})?;/m, `const DIC = ${dictionary};`)).toString('base64')}`);
 
 test('imports a block through the uploader and validates every question', async () => {
   const source = await readFile(new URL('../src/components/quiz/FileUploader.jsx', import.meta.url), 'utf8');
@@ -99,7 +100,7 @@ test('the answer log preserves open-ended inputs and grading when the parent rer
   const question = normalizeQuizQuestion(fixture.items[0]);
   const result = motorAnatomia.calificar(question, 'azul');
   const selectedOption = { selected_answer: '"azul"', inputs: { text: 'azul' }, result, score: 1, max_score: 1 };
-  const context = vm.createContext({ question, selectedOption, isCorrect: true, wrongAnswers: [], responseTime: 2 });
+  const context = vm.createContext({ questionIdentity, question, selectedOption, isCorrect: true, wrongAnswers: [], responseTime: 2 });
   const entry = vm.runInContext(`${source.slice(start, end)}\nanswerEntry;`, context);
   assert.deepEqual(entry.inputs, selectedOption.inputs);
   assert.deepEqual(entry.result, result);

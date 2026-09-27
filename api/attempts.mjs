@@ -1,3 +1,4 @@
+import { applyQuestionCorrections } from '../src/lib/question-review.js';
 import { createClient } from '@supabase/supabase-js'
 import { requireAdmin, requireDataActor } from './_auth.mjs'
 import { canAccessCourse } from './_students.mjs'
@@ -42,11 +43,19 @@ export async function GET(req) {
       return new Response(JSON.stringify({ error: 'No se pudo listar intentos', details: error.message }), { status: 500 })
     }
 
+    const ids = [...new Set((data || []).map(row => row.payload?.quiz_id).filter(Boolean))];
+    const corrections = new Map();
+    for (let offset = 0; offset < ids.length; offset += 100) {
+      const result = await supabase.from('quizzes').select('id, payload').in('id', ids.slice(offset, offset + 100));
+      if (result.error) throw result.error;
+      for (const quiz of result.data || []) corrections.set(quiz.id, quiz.payload);
+    }
     const attempts = (data || []).map((row) => ({
+
       id: row.id,
       created_date: row.created_date || row.payload?.created_date,
       updated_date: row.updated_date || row.payload?.updated_date,
-      ...(row.payload || {})
+      ...applyQuestionCorrections(row.payload || {}, corrections.get(row.payload?.quiz_id))
     }))
 
     return new Response(JSON.stringify({ attempts }), { status: 200 })
@@ -86,7 +95,7 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'learner_id requerido' }), { status: 400 })
     }
 
-    const safeAttempt = authorization.actor.kind === 'student'
+    let safeAttempt = authorization.actor.kind === 'student'
       ? {
           ...attempt,
           learner_id: String(effectiveLearnerId),
@@ -112,6 +121,9 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'No puedes modificar este intento' }), { status: 403 })
     }
 
+    const { data: gradingQuiz, error: gradingError } = await supabase.from('quizzes').select('payload').eq('id', attempt.quiz_id).maybeSingle()
+    if (gradingError) throw gradingError
+    safeAttempt = applyQuestionCorrections(safeAttempt, gradingQuiz?.payload)
     const now = new Date().toISOString()
     const row = {
       id: attempt.id,

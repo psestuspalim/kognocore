@@ -1,4 +1,7 @@
 import './App.css'
+import { useEffect, useRef } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { client } from '@/api/client';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
@@ -10,6 +13,7 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import Login from '@/pages/Login';
+import AdminQuestionReviews from '@/pages/AdminQuestionReviews';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -33,6 +37,21 @@ const ADMIN_PAGES = new Set([
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, isAuthenticated, user } = useAuth();
+
+  const queryClient = useQueryClient();
+  const lastRevisions = useRef('');
+  const { data: correctionQuizzes } = useQuery({
+    queryKey: ['quizzes'], queryFn: () => client.entities.Quiz.list('-created_date'),
+    enabled: isAuthenticated, refetchInterval: 15000, refetchOnWindowFocus: true
+  });
+  useEffect(() => {
+    if (!correctionQuizzes) return;
+    const revisions = correctionQuizzes.filter(q => q.review_revision).map(q => q.id + ':' + q.review_revision).sort().join('|');
+    if (revisions !== lastRevisions.current) {
+      lastRevisions.current = revisions;
+      queryClient.invalidateQueries({ predicate: query => query.queryKey[0] !== 'quizzes' });
+    }
+  }, [correctionQuizzes, queryClient]);
 
   // Show loading spinner while checking app public settings or auth
   if (isLoadingPublicSettings || isLoadingAuth) {
@@ -73,6 +92,7 @@ const AuthenticatedApp = () => {
             }
           />
         ))}
+      <Route path="/AdminQuestionReviews" element={<ProtectedRoute allowedRoles={['admin']}><AdminQuestionReviews /></ProtectedRoute>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

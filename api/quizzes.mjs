@@ -1,3 +1,6 @@
+import * as questionReviews from './_question-reviews.mjs'
+import { withQuestionIdentities } from '../src/lib/question-review.js'
+import { changeQuiz } from './_question-review.mjs'
 import { createClient } from '@supabase/supabase-js'
 import { requireAdmin, requireDataActor } from './_auth.mjs'
 
@@ -9,6 +12,7 @@ function getSupabaseAdmin() {
 }
 
 export async function GET(req) {
+  if (new URL(req.url).searchParams.get('resource') === 'question-reviews') return questionReviews.GET(req)
   try {
     const authorization = await requireDataActor(req)
     if (authorization.response) return authorization.response
@@ -41,6 +45,13 @@ export async function GET(req) {
       ...(row.payload || {})
     }))
 
+    quizzes.forEach(quiz => { if (quiz.questions) quiz.questions = quiz.questions.map(withQuestionIdentities) })
+    if (authorization.actor.kind !== 'admin') {
+      quizzes.forEach(quiz => {
+        delete quiz.question_reviews;
+        quiz.question_corrections = (quiz.question_corrections || []).map(({ admin, ...correction }) => correction);
+      });
+    }
     return new Response(JSON.stringify({ quizzes }), { status: 200 })
   } catch (_err) {
     return new Response(JSON.stringify({ error: 'Bad request' }), { status: 400 })
@@ -48,6 +59,7 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
+  if (new URL(req.url).searchParams.get('resource') === 'question-reviews') return questionReviews.POST(req)
   try {
     const authorization = await requireAdmin(req)
     if (authorization.response) return authorization.response
@@ -63,6 +75,18 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'Quiz inválido' }), { status: 400 })
     }
 
+    const { data: existing, error: readError } = await supabase.from('quizzes').select('id').eq('id', quiz.id).maybeSingle()
+    if (readError) throw readError
+    if (existing) {
+      const updated = await changeQuiz(supabase, quiz.id, current => {
+        if (Number(current.review_revision || 0) > Number(quiz.review_revision || 0)) throw new Error('El cuestionario tiene correcciones recientes. Actualiza antes de editar.')
+        return { ...current, ...quiz, question_reviews: current.question_reviews || [], question_corrections: current.question_corrections || [], review_revision: current.review_revision || 0 }
+      })
+      return Response.json({ ok: true, quiz: updated })
+    }
+    delete quiz.question_reviews
+    delete quiz.question_corrections
+    delete quiz.review_revision
     const now = new Date().toISOString()
     const row = {
       id: quiz.id,
@@ -83,6 +107,7 @@ export async function POST(req) {
 }
 
 export async function PATCH(req) {
+  if (new URL(req.url).searchParams.get('resource') === 'question-reviews') return questionReviews.PATCH(req)
   try {
     const authorization = await requireAdmin(req)
     if (authorization.response) return authorization.response
@@ -112,21 +137,10 @@ export async function PATCH(req) {
       return new Response(JSON.stringify({ error: 'Quiz no encontrado' }), { status: 404 })
     }
 
-    const merged = {
-      ...(current.payload || {}),
-      ...data,
-      id,
-      updated_date: new Date().toISOString()
-    }
-
-    const { error } = await supabase.from('quizzes').update({
-      payload: merged,
-      updated_date: merged.updated_date
-    }).eq('id', id)
-
-    if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo actualizar quiz', details: error.message }), { status: 500 })
-    }
+    const merged = await changeQuiz(supabase, id, latest => {
+      if (data.questions && Number(latest.review_revision || 0) > Number(data.review_revision || 0)) throw new Error('Actualiza el cuestionario antes de editarlo.')
+      return { ...latest, ...data, id, question_reviews: latest.question_reviews || [], question_corrections: latest.question_corrections || [], review_revision: latest.review_revision || 0 }
+    })
 
     return new Response(JSON.stringify({ ok: true, quiz: merged }), { status: 200 })
   } catch (_err) {

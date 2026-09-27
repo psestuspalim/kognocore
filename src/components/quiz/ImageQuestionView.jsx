@@ -61,7 +61,7 @@ export default function ImageQuestionView({
     const score = Math.max(0, correctCount - wrongCount);
     const isFullyCorrect = correctCount === correctOptions.length && wrongCount === 0;
     
-    onAnswer(isFullyCorrect, { score, total: correctOptions.length });
+    onAnswer(isFullyCorrect, { score, total: correctOptions.length, selected_option_ids: selectedOptions });
   };
 
   const getOptionStatus = (option) => {

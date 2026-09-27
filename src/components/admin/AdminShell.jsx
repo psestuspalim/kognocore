@@ -17,6 +17,7 @@ const sidebarItems = [
     items: [
       { label: 'Dashboard', icon: LayoutDashboard, href: 'AdminHome' },
       { label: 'Contenido', icon: FolderTree, href: 'AdminContent' },
+      { label: 'Revisión de preguntas', icon: BookOpen, href: 'AdminQuestionReviews' },
       { label: 'Progreso', icon: TrendingUp, href: 'AdminProgress' },
       { label: 'Papelera', icon: Trash2, href: 'AdminTrash' },
       { label: 'Estudiantes', icon: Users, href: 'AdminStudents' },

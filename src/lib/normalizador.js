@@ -9,13 +9,13 @@
  * confianza del alumno en la herramienta.
  *
  * Uso (Vite / ESM):
- *   import DIC from './sinonimos.json';
+ *   import DIC from './sinonimos.json' with { type: 'json' };
  *   import { crearMotor } from './normalizador.js';
  *   const motor = crearMotor(DIC);
  *   motor.calificar(item, respuestaDelAlumno);
  */
 
-import DIC from './sinonimos.json';
+import DIC from './sinonimos.json' with { type: 'json' };
 
 // ---------------------------------------------------------------------------
 // 1. Primitivas de texto

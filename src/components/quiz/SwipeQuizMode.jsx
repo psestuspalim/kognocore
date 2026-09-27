@@ -5,9 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle2, XCircle, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import MathText from './MathText';
+import ReportQuestionButton from './ReportQuestionButton';
+import { questionIdentity } from '@/lib/question-review';
 
 export default function SwipeQuizMode({ 
-  questions, 
+  questions,
+  quizId,
   onComplete,
   onExit 
 }) {
@@ -16,6 +19,7 @@ export default function SwipeQuizMode({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [wrongAnswers, setWrongAnswers] = useState([]);
+  const [answerLog, setAnswerLog] = useState([]);
   const [showFeedback, setShowFeedback] = useState(null);
   const [isComplete, setIsComplete] = useState(false);
 
@@ -28,6 +32,7 @@ export default function SwipeQuizMode({
           id: `${qIdx}-${optIdx}`,
           questionContext: q.question,
           statement: opt.text,
+          optionId: opt.id,
           isTrue: opt.isCorrect,
           rationale: opt.rationale || q.hint || q.feedback,
           originalQuestion: q
@@ -45,6 +50,12 @@ export default function SwipeQuizMode({
     const userAnswer = direction === 'right'; // Derecha = Verdadero
     const isCorrect = userAnswer === card.isTrue;
 
+    setAnswerLog(prev => [...prev, {
+      question_id: questionIdentity(card.originalQuestion), question: card.originalQuestion.question,
+      selected_option_id: card.optionId, swipe_answer: userAnswer,
+      selected_answer: userAnswer ? 'Verdadero' : 'Falso', statement: card.statement,
+      correct_answer: card.isTrue ? 'Verdadero' : 'Falso', is_correct: isCorrect
+    }]);
     setShowFeedback({ isCorrect, card, userAnswer });
 
     setTimeout(() => {
@@ -112,7 +123,7 @@ export default function SwipeQuizMode({
               Salir
             </Button>
             <Button 
-              onClick={() => onComplete(score, cards.length, wrongAnswers)}
+              onClick={() => onComplete(score, cards.length, wrongAnswers, answerLog)}
               className="flex-1 bg-indigo-600 hover:bg-indigo-700"
             >
               Guardar resultado
@@ -149,6 +160,7 @@ export default function SwipeQuizMode({
 
   return (
     <div className="max-w-md mx-auto px-4">
+      <div className="mb-4"><ReportQuestionButton key={currentCard.id} quizId={quizId} question={currentCard.originalQuestion} /></div>
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <Button variant="ghost" size="sm" onClick={onExit}>

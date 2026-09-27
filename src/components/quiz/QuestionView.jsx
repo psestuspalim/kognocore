@@ -40,7 +40,7 @@ export default function QuestionView({
 
   // Restoring an answer must not move the question or collapse its hint.
   useEffect(() => {
-    const savedIndex = (question?.answerOptions || question?.options || []).findIndex(o => o.text === savedAnswer?.selected_answer);
+    const savedIndex = (question?.answerOptions || question?.options || []).findIndex(o => savedAnswer?.selected_option_id != null ? String(o.id) === String(savedAnswer.selected_option_id) : o.text === savedAnswer?.selected_answer);
     setSelectedAnswer(savedIndex >= 0 ? savedIndex : null);
     setShowFeedback(savedIndex >= 0);
     answerLock.current = savedIndex >= 0;
@@ -118,7 +118,7 @@ export default function QuestionView({
   // Soporte para atajos de teclado (A, B, C, D, 1, 2, 3, 4, Enter, Espacio, Flecha)
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+      if (document.querySelector('[role="dialog"]') || ['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
 
       const key = e.key.toLowerCase();
 
