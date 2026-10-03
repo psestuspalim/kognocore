@@ -1,3 +1,5 @@
+import { selfCorrectAnswer } from '@/lib/answer-correction';
+import { correctAnswerText } from '@/lib/answer-report';
 import { quizBelongsToSubject } from '@/lib/quiz-membership';
 import { sessionKey, countDescendantQuizzes, shuffleAnswerOptions, summarizeQuizProgress } from '@/lib/quiz-progress';
 import { useState, useEffect, useRef } from 'react';
@@ -818,6 +820,7 @@ export default function QuizzesPage() {
   });
 
   const updateAttemptMutation = useMutation({
+    scope: { id: 'quiz-attempt-writes' },
     mutationFn: ({ id, data }) => client.entities.QuizAttempt.update(id, data),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['attempts'] })
   });
@@ -1231,6 +1234,7 @@ export default function QuizzesPage() {
     const newScore = isCorrect ? score + 1 : score;
     const options = question.answerOptions || question.options || [];
     const correctOption = options.find(opt => opt.isCorrect || opt.c);
+    const correctAnswer = correctAnswerText({ result: selectedOption?.result }, question);
     const selectedAnswerText = selectedOption?.text
       || selectedOption?.t
       || selectedOption?.selected_answer
@@ -1251,11 +1255,13 @@ export default function QuizzesPage() {
     const answerIdentity = { question_id: questionIdentity(question), selected_option_id: selectedOption?.id,
       ...(selectedOption?.selected_option_ids ? { selected_option_ids: selectedOption.selected_option_ids } : {}) };
     const newWrongAnswers = !isCorrect ? [...wrongAnswers, {
+      answer_index: currentQuestionIndex,
+      is_correct: false,
       ...answerIdentity,
       ...(selectedOption?.result ? { inputs: selectedOption.inputs, result: selectedOption.result } : {}),
       question: question.question,
       selected_answer: selectedAnswerText,
-      correct_answer: correctOption?.text,
+      correct_answer: correctAnswer,
       response_time: responseTime,
       answerOptions: options,
       hint: question.hint,
@@ -1266,11 +1272,12 @@ export default function QuizzesPage() {
       rationale: feedbackText
     }] : wrongAnswers;
     const answerEntry = {
+      answer_index: currentQuestionIndex,
       ...answerIdentity,
       ...(selectedOption?.result ? { inputs: selectedOption.inputs, result: selectedOption.result } : {}),
       question: question.question,
       selected_answer: selectedAnswerText,
-      correct_answer: correctOption?.text,
+      correct_answer: correctAnswer,
       is_correct: isCorrect,
       response_time: responseTime,
       answerOptions: options,
@@ -1285,15 +1292,7 @@ export default function QuizzesPage() {
 
     if (isCorrect) {
       setScore(newScore);
-      setCorrectAnswers([...correctAnswers, {
-        question: question.question,
-        difficulty: question.difficulty,
-        selected_answer: selectedAnswerText,
-        explanation: feedbackText,
-        justificacion: feedbackText,
-        feedback: feedbackText,
-        rationale: feedbackText
-      }]);
+      setCorrectAnswers([...correctAnswers, answerEntry]);
     } else {
       setWrongAnswers(newWrongAnswers);
     }
@@ -1343,6 +1342,52 @@ export default function QuizzesPage() {
       }
     }
 
+  };
+
+  const correctionLock = useRef(false);
+  const handleCorrectAnswer = async (answerOrIndex) => {
+    if (correctionLock.current) return;
+    const index = Number.isInteger(answerOrIndex) ? answerOrIndex
+      : Number.isInteger(answerOrIndex?.answer_index) ? answerOrIndex.answer_index
+      : answerLog.findIndex(entry => !entry.is_correct && entry.question === answerOrIndex?.question
+        && entry.selected_answer === answerOrIndex?.selected_answer);
+    const corrected = selfCorrectAnswer(answerLog, index);
+    if (!corrected || !selectedQuiz) return;
+    correctionLock.current = true;
+    setScore(corrected.score);
+    setAnswerLog(corrected.answerLog);
+    setWrongAnswers(corrected.wrongAnswers);
+    setCorrectAnswers(corrected.correctAnswers);
+    const data = {
+      ...buildAttemptIdentity(), quiz_id: selectedQuiz.id, subject_id: selectedQuiz.subject_id,
+      total_questions: selectedQuiz.questions.length, quiz_snapshot: selectedQuiz,
+      review_revision: selectedQuiz.review_revision || 0,
+      score: corrected.score, answered_questions: corrected.answerLog.length,
+      wrong_questions: corrected.wrongAnswers, answer_log: corrected.answerLog,
+      response_times: responseTimes, is_completed: corrected.answerLog.length >= selectedQuiz.questions.length
+    };
+    if (view === 'quiz') saveActiveQuizSession({ selectedQuiz, currentQuestionIndex, ...corrected,
+      markedQuestions, responseTimes, currentAttemptId, currentSessionId, deckType }, currentUser);
+    try {
+      const saved = currentAttemptId
+        ? await updateAttemptMutation.mutateAsync({ id: currentAttemptId, data })
+        : await saveAttemptMutation.mutateAsync(data);
+      if (!currentAttemptId && saved?.id) setCurrentAttemptId(saved.id);
+      if (saved?._sync_status === 'pending') toast.info('Respuesta corregida en este dispositivo. Se sincronizará cuando haya conexión.');
+      else toast.success('Respuesta marcada como correcta. Resultado actualizado.');
+    } catch {
+      // Preserve the correction for offline recovery, including completed attempts.
+      try {
+        const stored = JSON.parse(localStorage.getItem('app_quiz_attempts') || '[]');
+        const item = { ...stored.find(a => a.id === currentAttemptId), ...data, id: currentAttemptId,
+          updated_date: new Date().toISOString(), _sync_status: 'pending', _sync_operation: 'update' };
+        localStorage.setItem('app_quiz_attempts', JSON.stringify([...stored.filter(a => a.id !== currentAttemptId), item]));
+        toast.info('Respuesta corregida en este dispositivo. Pendiente de sincronización.');
+      } catch { toast.error('No se pudo guardar la corrección. Mantén esta página abierta.'); }
+    } finally {
+      correctionLock.current = false;
+      queryClient.invalidateQueries({ queryKey: ['attempts'] });
+    }
   };
 
   const handleNextQuestion = () => {
@@ -2386,6 +2431,7 @@ export default function QuizzesPage() {
                       correctAnswers={score}
                       wrongAnswers={wrongAnswers.length}
                       onAnswer={handleAnswer}
+                      onCorrectAnswer={() => handleCorrectAnswer(currentQuestionIndex)}
                       onNext={handleNextQuestion}
                       savedAnswer={answerLog[currentQuestionIndex]}
                       onBack={handleExitQuiz}
@@ -2421,6 +2467,7 @@ export default function QuizzesPage() {
                       score={score}
                       totalQuestions={selectedQuiz.questions.length}
                       wrongAnswers={wrongAnswers}
+                      onCorrectAnswer={handleCorrectAnswer}
                       correctAnswers={correctAnswers}
                       answeredQuestions={score + wrongAnswers.length}
                       isPartial={score + wrongAnswers.length < selectedQuiz.questions.length}

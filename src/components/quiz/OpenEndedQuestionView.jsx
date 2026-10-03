@@ -7,6 +7,7 @@ import { normalizeQuizQuestion } from '@/lib/quiz-normalization';
 import { cleanQuizDisplayText } from '@/lib/quiz-display-text';
 import MathText from './MathText';
 import OpenEndedAnswerComparison from './OpenEndedAnswerComparison';
+import SelfCorrectionButton from './SelfCorrectionButton';
 import {
   CheckCircle2, XCircle, AlertCircle, Sparkles,
   BookOpen, ArrowRight, CornerDownLeft, ChevronLeft, Bookmark
@@ -20,6 +21,7 @@ export default function OpenEndedQuestionView({
   correctAnswers = 0,
   wrongAnswers = 0,
   onAnswer,
+  onCorrectAnswer,
   onNext,
   showFeedback: externalShowFeedback = false,
   savedAnswer = null,
@@ -413,6 +415,10 @@ export default function OpenEndedQuestionView({
                   )}
 
                   <OpenEndedAnswerComparison inputs={userInputs} result={result} type={tipo} />
+                  <SelfCorrectionButton
+                    corrected={Boolean(savedAnswer?.self_correction)}
+                    onCorrect={!result.correcto && savedAnswer ? onCorrectAnswer : undefined}
+                  />
                 </div>
 
                 {/* Justification & Book Source Card */}

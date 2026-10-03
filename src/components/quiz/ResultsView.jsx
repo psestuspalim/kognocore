@@ -1,7 +1,10 @@
+import { correctAnswerText } from '@/lib/answer-report';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Home, RotateCcw, TrendingUp, CheckCircle2, XCircle, AlertCircle, ChevronUp } from 'lucide-react';
 import MathText from './MathText';
+import SelfCorrectionButton from './SelfCorrectionButton';
+import { canSelfCorrect } from '@/lib/answer-correction';
 
 export default function ResultsView({
   score,
@@ -11,6 +14,7 @@ export default function ResultsView({
   answeredQuestions = 0,
   isPartial = false,
   onRetry,
+  onCorrectAnswer,
   onRetryWrong,
   onHome
 }) {
@@ -165,6 +169,8 @@ export default function ResultsView({
                     <MathText text={q.question} />
                   </p>
                   <p className="text-emerald-700 text-xs">Tu respuesta: <MathText text={q.selected_answer} /></p>
+                  {q.self_correction && <SelfCorrectionButton corrected />}
+                  <p className="text-emerald-700 text-xs mt-0.5">Respuesta correcta: <MathText text={correctAnswerText(q) || 'No disponible en este registro'} /></p>
                   {justText && (
                     <div className="mt-2 p-2.5 bg-blue-50 border border-blue-100 rounded-lg text-xs text-slate-700 leading-relaxed">
                       <p className="font-semibold text-blue-800 mb-1">Justificación:</p>
@@ -199,7 +205,8 @@ export default function ResultsView({
                     <MathText text={wq.question} />
                   </p>
                   <p className="text-rose-600 text-xs">Tu respuesta: <MathText text={wq.selected_answer} /></p>
-                  <p className="text-emerald-700 text-xs mt-0.5">Correcta: <MathText text={wq.correct_answer} /></p>
+                  {onCorrectAnswer && canSelfCorrect(wq) && <SelfCorrectionButton onCorrect={() => onCorrectAnswer(wq)} />}
+                  <p className="text-emerald-700 text-xs mt-0.5">Respuesta correcta: <MathText text={correctAnswerText(wq) || 'No disponible en este registro'} /></p>
                   {justText && (
                     <div className="mt-2 p-2.5 bg-blue-50 border border-blue-100 rounded-lg text-xs text-slate-700 leading-relaxed">
                       <p className="font-semibold text-blue-800 mb-1">Justificación:</p>

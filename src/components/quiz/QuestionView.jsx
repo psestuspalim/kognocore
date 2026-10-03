@@ -15,6 +15,7 @@ export default function QuestionView({
   correctAnswers = 0,
   wrongAnswers = 0,
   onAnswer,
+  onCorrectAnswer,
   onNext,
   savedAnswer,
   onBack,
@@ -152,6 +153,7 @@ export default function QuestionView({
         onNext={onNext}
         onAnswer={onAnswer}
         savedAnswer={savedAnswer}
+        onCorrectAnswer={onCorrectAnswer}
         onBack={onBack}
         onMarkForReview={onMarkForReview}
         initialIsMarked={initialIsMarked}

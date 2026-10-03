@@ -1,3 +1,4 @@
+import { correctAnswerText } from '@/lib/answer-report';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -68,6 +69,18 @@ export default function AttemptDetailModal({ attempt, quizTitle, open, onClose, 
           </div>
 
           {/* Wrong Questions */}
+          {(attempt.answer_log || []).some(answer => answer.self_correction) && (
+            <div className="mb-5 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+              <h3 className="font-semibold text-emerald-800 mb-2">Autocorrecciones del alumno</h3>
+              {(attempt.answer_log || []).filter(answer => answer.self_correction).map((answer, index) => (
+                <div key={index} className="mt-2 text-sm text-slate-700">
+                  <MathText text={answer.question} />
+                  <p className="text-xs mt-1">Respuesta original: <MathText text={answer.selected_answer} /></p>
+                  <p className="text-xs text-emerald-700">Marcada como correcta por el alumno.</p>
+                </div>
+              ))}
+            </div>
+          )}
           {attempt.wrong_questions?.length > 0 && (
             <div>
               <h3 className="font-semibold text-red-700 mb-3 flex items-center gap-2">
@@ -112,7 +125,7 @@ export default function AttemptDetailModal({ attempt, quizTitle, open, onClose, 
                     )}
 
                     {/* Fallback if no options */}
-                    {!wq.answerOptions && (
+                    {!wq.answerOptions?.length && (
                       <div className="space-y-2 mb-3">
                         <div className="flex items-start gap-2 p-2 rounded-lg bg-red-100 border border-red-300 text-sm">
                           <XCircle className="w-4 h-4 text-red-600 mt-0.5 shrink-0" />
@@ -120,7 +133,7 @@ export default function AttemptDetailModal({ attempt, quizTitle, open, onClose, 
                         </div>
                         <div className="flex items-start gap-2 p-2 rounded-lg bg-green-100 border border-green-300 text-sm">
                           <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 shrink-0" />
-                          <span className="text-green-800"><MathText text={wq.correct_answer} /></span>
+                          <span className="text-green-800"><MathText text={correctAnswerText(wq) || 'No disponible en este registro'} /></span>
                         </div>
                       </div>
                     )}
