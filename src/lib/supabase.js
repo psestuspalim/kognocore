@@ -1,11 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 import { readAdminSession } from './admin-session';
+import { browserAuthStorage } from './auth-storage';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://dtverrtjnivamclkmhei.supabase.co';
 const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_qac2iillZekd2eFvVgIE3g_fxM-zOeM';
 
 export const supabase = createClient(supabaseUrl, supabasePublishableKey, {
   auth: {
+    storage: browserAuthStorage(),
     persistSession: true,
     autoRefreshToken: true,
     detectSessionInUrl: true
