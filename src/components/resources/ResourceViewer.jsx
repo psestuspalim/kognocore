@@ -13,7 +13,7 @@ export default function ResourceViewer({ open, onOpenChange, resource }) {
 
     useEffect(() => {
         if (open && resource?.type === 'mermaid') {
-            mermaid.initialize({ startOnLoad: true });
+            mermaid.initialize({ startOnLoad: true, securityLevel: 'strict' });
             setTimeout(() => {
                 mermaid.contentLoaded();
             }, 100);
@@ -56,7 +56,7 @@ export default function ResourceViewer({ open, onOpenChange, resource }) {
             case 'html':
                 return (
                     <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[70vh]">
-                        <div dangerouslySetInnerHTML={{ __html: resource.content }} />
+                        <iframe title={resource.title || "Recurso HTML"} srcDoc={resource.content} sandbox="" referrerPolicy="no-referrer" className="w-full h-[60vh] border-0" />
                     </div>
                 );
             case 'mermaid':

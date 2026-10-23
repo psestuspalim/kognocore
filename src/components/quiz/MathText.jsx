@@ -63,7 +63,12 @@ export default function MathText({ text }) {
 
   // Formatear expresiones matemáticas a HTML
   const formatMath = (latex) => {
-    let formatted = latex;
+    let formatted = latex
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
 
     // Símbolos griegos comunes
     const greekLetters = {
