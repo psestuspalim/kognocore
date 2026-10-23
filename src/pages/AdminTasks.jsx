@@ -155,7 +155,7 @@ export default function AdminTasksPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
       <div className="container mx-auto px-4 py-8">
         <Link to={createPageUrl('Quizzes')}>
           <Button variant="ghost" className="mb-6">
@@ -264,7 +264,7 @@ export default function AdminTasksPage() {
                               }
                             }}
                           >
-                            <div className={`w-4 h-4 rounded border flex-shrink-0 flex items-center justify-center ${isSelected ? 'bg-indigo-600 border-indigo-600' : 'border-gray-300'
+                            <div className={`w-4 h-4 rounded border shrink-0 flex items-center justify-center ${isSelected ? 'bg-indigo-600 border-indigo-600' : 'border-gray-300'
                               }`}>
                               {isSelected && <CheckCircle2 className="w-3 h-3 text-white" />}
                             </div>

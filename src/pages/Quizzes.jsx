@@ -2118,13 +2118,13 @@ export default function QuizzesPage() {
                     {/* Tabs for Quizzes/Resources - Folder Level */}
                     <div className="flex gap-1 mb-6 bg-slate-100 rounded-lg p-1 w-fit">
                       <button
-                        className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${activeTab === 'quizzes' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                        className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${activeTab === 'quizzes' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-700'}`}
                         onClick={() => setActiveTab('quizzes')}
                       >
                         Cuestionarios ({currentLevelQuizzes.length})
                       </button>
                       <button
-                        className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${activeTab === 'resources' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                        className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${activeTab === 'resources' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-700'}`}
                         onClick={() => setActiveTab('resources')}
                       >
                         Recursos ({currentLevelResources.length})

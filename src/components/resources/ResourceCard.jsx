@@ -30,7 +30,7 @@ const ResourceCard = ({ resource, onClick, onEdit, onDelete, canEdit }) => {
         <Card className="hover:shadow-md transition-shadow group relative flex flex-col h-full">
             <div
                 onClick={() => onClick(resource)}
-                className="cursor-pointer flex-grow"
+                className="cursor-pointer grow"
             >
                 <CardHeader className="pb-2">
                     <div className="flex justify-between items-start gap-2">

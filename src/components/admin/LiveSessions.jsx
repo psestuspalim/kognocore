@@ -114,7 +114,7 @@ export default function LiveSessions() {
                 animate={{ opacity: 1, y: 0 }}
                 layout
               >
-                <Card className="border-2 border-green-200 bg-gradient-to-br from-green-50 to-white">
+                <Card className="border-2 border-green-200 bg-linear-to-br from-green-50 to-white">
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-3">
@@ -155,7 +155,7 @@ export default function LiveSessions() {
                       </div>
                       <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
                         <motion.div
-                          className="h-full bg-gradient-to-r from-indigo-500 to-purple-500"
+                          className="h-full bg-linear-to-r from-indigo-500 to-purple-500"
                           initial={{ width: 0 }}
                           animate={{ width: `${progress}%` }}
                           transition={{ duration: 0.5 }}

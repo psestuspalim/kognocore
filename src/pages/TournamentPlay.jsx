@@ -224,7 +224,7 @@ export default function TournamentPlay() {
 
   if (!tournament) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-purple-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Cargando torneo...</p>
@@ -239,7 +239,7 @@ export default function TournamentPlay() {
   // Sala de espera
   if (tournament.status === 'waiting') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 p-4">
+      <div className="min-h-screen bg-linear-to-br from-purple-50 to-indigo-100 p-4">
         <div className="max-w-md mx-auto">
           <Card className="text-center">
             <CardContent className="p-8">
@@ -281,7 +281,7 @@ export default function TournamentPlay() {
                 <Button
                   onClick={() => startTournamentMutation.mutate()}
                   disabled={tournament.players?.length < 2 || startTournamentMutation.isPending}
-                  className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                  className="w-full bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
                 >
                   <Play className="w-5 h-5 mr-2" />
                   {tournament.players?.length < 2 ? 'Esperando más jugadores...' : 'Iniciar torneo'}
@@ -299,7 +299,7 @@ export default function TournamentPlay() {
   // Countdown
   if (tournament.status === 'countdown') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 to-indigo-900 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-purple-900 to-indigo-900 flex items-center justify-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={countdown}
@@ -319,7 +319,7 @@ export default function TournamentPlay() {
   // Resultados finales
   if (tournament.status === 'completed') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 p-4">
+      <div className="min-h-screen bg-linear-to-br from-purple-50 to-indigo-100 p-4">
         <div className="max-w-md mx-auto">
           <Card>
             <CardContent className="p-8 text-center">
@@ -369,7 +369,7 @@ export default function TournamentPlay() {
 
   // Juego en progreso
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 to-indigo-900 p-4">
+    <div className="min-h-screen bg-linear-to-br from-purple-900 to-indigo-900 p-4">
       <div className="max-w-2xl mx-auto">
         {/* Header con scores */}
         <div className="flex justify-between items-center mb-4">

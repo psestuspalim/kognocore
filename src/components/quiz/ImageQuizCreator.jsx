@@ -468,7 +468,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
             {blockImages.map((img, idx) => (
               <div
                 key={idx}
-                className={`relative flex-shrink-0 cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${idx === currentIndex ? 'border-indigo-600 ring-2 ring-indigo-200 scale-105' : 'border-gray-200 hover:border-gray-400'
+                className={`relative shrink-0 cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${idx === currentIndex ? 'border-indigo-600 ring-2 ring-indigo-200 scale-105' : 'border-gray-200 hover:border-gray-400'
                   }`}
                 onClick={() => { markCurrentAsComplete(); setCurrentIndex(idx); setSelectedOption(null); setHoveredOption(null); }}
               >
@@ -561,7 +561,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
                 <div className="flex gap-1">
                   <Button
                     size="sm"
-                    variant={selectionMode === 'option' ? 'default' : 'outline'}
+                    variant={selectionMode === 'option' ? 'default' : 'outline-solid'}
                     onClick={() => setSelectionMode('option')}
                     className="h-6 text-xs px-2"
                   >
@@ -569,7 +569,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
                   </Button>
                   <Button
                     size="sm"
-                    variant={selectionMode === 'title' ? 'default' : 'outline'}
+                    variant={selectionMode === 'title' ? 'default' : 'outline-solid'}
                     onClick={() => setSelectionMode('title')}
                     className="h-6 text-xs px-2"
                   >
@@ -663,7 +663,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
                     <span className="text-xs text-indigo-700">Marcador:</span>
                     <Button
                       size="sm"
-                      variant={markerType === 'circle' ? 'default' : 'outline'}
+                      variant={markerType === 'circle' ? 'default' : 'outline-solid'}
                       onClick={() => setMarkerType('circle')}
                       className="h-7 text-xs"
                     >
@@ -672,7 +672,7 @@ export default function ImageQuizCreator({ onSave, onCancel }) {
                     </Button>
                     <Button
                       size="sm"
-                      variant={markerType === 'arrow' ? 'default' : 'outline'}
+                      variant={markerType === 'arrow' ? 'default' : 'outline-solid'}
                       onClick={() => setMarkerType('arrow')}
                       className="h-7 text-xs"
                     >

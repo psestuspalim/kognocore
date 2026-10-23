@@ -185,7 +185,7 @@ export default function Recommendations({ analytics, quizzes, subjects }) {
         })}
       </div>
 
-      <Card className="border-0 shadow-lg bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
+      <Card className="border-0 shadow-lg bg-linear-to-br from-indigo-500 to-purple-600 text-white">
         <CardContent className="p-8 text-center">
           <Award className="w-12 h-12 mx-auto mb-4 opacity-80" />
           <h3 className="text-2xl font-bold mb-2">¡Sigue así!</h3>

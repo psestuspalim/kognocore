@@ -69,7 +69,7 @@ export default function StudentDashboard({ analytics, attempts = [], subjects = 
     <div className="space-y-6">
       {/* Tarjetas principales */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
+        <Card className="bg-linear-to-br from-indigo-500 to-purple-600 text-white">
           <CardContent className="p-4">
             <div className="flex items-center justify-between mb-2">
               <Target className="w-8 h-8 opacity-80" />
@@ -80,7 +80,7 @@ export default function StudentDashboard({ analytics, attempts = [], subjects = 
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-emerald-500 to-green-600 text-white">
+        <Card className="bg-linear-to-br from-emerald-500 to-green-600 text-white">
           <CardContent className="p-4">
             <div className="flex items-center justify-between mb-2">
               <CheckCircle2 className="w-8 h-8 opacity-80" />
@@ -90,7 +90,7 @@ export default function StudentDashboard({ analytics, attempts = [], subjects = 
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-amber-500 to-orange-600 text-white">
+        <Card className="bg-linear-to-br from-amber-500 to-orange-600 text-white">
           <CardContent className="p-4">
             <div className="flex items-center justify-between mb-2">
               <Flame className="w-8 h-8 opacity-80" />
@@ -101,7 +101,7 @@ export default function StudentDashboard({ analytics, attempts = [], subjects = 
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-blue-500 to-cyan-600 text-white">
+        <Card className="bg-linear-to-br from-blue-500 to-cyan-600 text-white">
           <CardContent className="p-4">
             <div className="flex items-center justify-between mb-2">
               <Trophy className="w-8 h-8 opacity-80" />

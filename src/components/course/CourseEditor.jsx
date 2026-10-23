@@ -121,7 +121,7 @@ export default function CourseEditor({ course, users = [], onSave, onCancel }) {
                 <div className="flex gap-2">
                   <Button
                     type="button"
-                    variant={editedCourse.visibility === 'all' ? 'default' : 'outline'}
+                    variant={editedCourse.visibility === 'all' ? 'default' : 'outline-solid'}
                     size="sm"
                     onClick={() => setEditedCourse({ ...editedCourse, visibility: 'all' })}
                   >
@@ -129,7 +129,7 @@ export default function CourseEditor({ course, users = [], onSave, onCancel }) {
                   </Button>
                   <Button
                     type="button"
-                    variant={editedCourse.visibility === 'specific' ? 'default' : 'outline'}
+                    variant={editedCourse.visibility === 'specific' ? 'default' : 'outline-solid'}
                     size="sm"
                     onClick={() => setEditedCourse({ ...editedCourse, visibility: 'specific' })}
                   >

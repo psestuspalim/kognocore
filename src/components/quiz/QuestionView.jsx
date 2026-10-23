@@ -241,7 +241,7 @@ export default function QuestionView({
   const isLastQuestion = questionNumber === totalQuestions;
 
   return (
-    <div className="fixed inset-0 z-50 flex h-[100dvh] flex-col overflow-hidden bg-slate-100 font-sans">
+    <div className="fixed inset-0 z-50 flex h-dvh flex-col overflow-hidden bg-slate-100 font-sans">
 
       {/* Header */}
       <header className="z-20 shrink-0 border-b border-slate-300/80 bg-white px-3 pb-2.5 pt-[max(0.625rem,env(safe-area-inset-top))] sm:px-6">
@@ -292,7 +292,7 @@ export default function QuestionView({
       <main
         className="min-h-0 flex-1 w-full max-w-6xl mx-auto grid overflow-hidden grid-rows-[minmax(0,1fr)_minmax(0,0.7fr)] lg:grid-rows-1 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]"
       >
-        <div ref={scrollContainerRef} className="mx-auto w-full max-w-3xl min-h-0 overflow-y-auto [scrollbar-gutter:stable] px-3 py-3 sm:px-5">
+        <div ref={scrollContainerRef} className="mx-auto w-full max-w-3xl min-h-0 overflow-y-auto scrollbar-gutter-stable px-3 py-3 sm:px-5">
 
           {/* Question card */}
           <div className="space-y-2">
@@ -320,7 +320,7 @@ export default function QuestionView({
                 <button
                   type="button"
                   onClick={() => setIsImageZoomed(true)}
-                  className="absolute bottom-3 right-3 bg-slate-900/80 hover:bg-slate-900 text-white text-xs px-2.5 py-1 rounded-lg backdrop-blur-xs flex items-center gap-1 shadow-sm"
+                  className="absolute bottom-3 right-3 bg-slate-900/80 hover:bg-slate-900 text-white text-xs px-2.5 py-1 rounded-lg backdrop-blur-xs flex items-center gap-1 shadow-xs"
                 >
                   <ZoomIn className="w-3.5 h-3.5" />
                   <span>Ampliar</span>
@@ -331,7 +331,7 @@ export default function QuestionView({
             {/* Image zoom modal */}
             {isImageZoomed && question?.imageUrl && (
               <div
-                className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+                className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-4"
                 onClick={() => setIsImageZoomed(false)}
               >
                 <div className="relative max-w-4xl max-h-[90vh] bg-white rounded-2xl p-2 shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
@@ -387,7 +387,7 @@ export default function QuestionView({
 
           </div>
         </div>
-          <section ref={feedbackContainerRef} aria-label="Explicación de la respuesta" aria-live="polite" className="min-h-0 overflow-y-auto [scrollbar-gutter:stable] border-t lg:border-t-0 lg:border-l border-slate-200 bg-white p-3 sm:p-5">
+          <section ref={feedbackContainerRef} aria-label="Explicación de la respuesta" aria-live="polite" className="min-h-0 overflow-y-auto scrollbar-gutter-stable border-t lg:border-t-0 lg:border-l border-slate-200 bg-white p-3 sm:p-5">
             {showFeedback ? (
             <div className="mx-auto max-w-3xl space-y-3 text-sm leading-snug">
               <h2 className={`font-bold ${selectedOption?.isCorrect ? 'text-emerald-700' : 'text-rose-700'}`}>
@@ -424,7 +424,7 @@ export default function QuestionView({
           <Button
             onClick={handleNext}
             disabled={!showFeedback}
-            className="ml-auto h-11 w-full rounded-xl bg-slate-900 px-8 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-slate-800 disabled:pointer-events-none disabled:opacity-30 sm:w-auto"
+            className="ml-auto h-11 w-full rounded-xl bg-slate-900 px-8 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-slate-800 disabled:pointer-events-none disabled:opacity-30 sm:w-auto"
           >
             <span>{isLastQuestion ? 'Ver resultados' : 'Siguiente'}</span>
             <ChevronRight className="w-4 h-4 ml-1.5" />

@@ -146,7 +146,7 @@ export default function AdminStudentDetail() {
       <Card className="mb-8 rounded-2xl">
         <CardContent className="p-6">
           <div className="flex items-start gap-6 mb-6">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-primary-foreground font-bold text-3xl flex-shrink-0">
+            <div className="w-20 h-20 rounded-2xl bg-linear-to-br from-primary to-primary/70 flex items-center justify-center text-primary-foreground font-bold text-3xl shrink-0">
               {(student.username || student.full_name || student.email)[0].toUpperCase()}
             </div>
             <div className="flex-1">

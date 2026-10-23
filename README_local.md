@@ -1,28 +1,23 @@
-# How to run Axayak locally
+# Run Kognocore locally
 
-This project uses a local version of Node.js (v20.11.0) installed in the `.local-node` directory to avoid conflicts with system configurations.
+Install Node.js 24 and npm. The old `.local-node` Node.js 20 bundle is no longer supported.
 
-## Prerequisites
+From the project directory:
 
-- None! Node.js is included locally.
-
-## Running the project
-
-Simply run the helper script:
-
-```bash
-./start_project.sh
+```sh
+npm ci
+npm run dev
 ```
 
-This script will:
-1. Add the local Node.js to your PATH.
-2. Start the development server.
+On Bash, `./start_project.sh` checks the Node.js version and starts the application.
 
-## Troubleshooting
+Validation:
 
-If you see "command not found" errors, ensure you are running the command from the project root:
-
-```bash
-cd /Users/axayakl/Desktop/PARA/Protectos/axayak
-./start_project.sh
+```sh
+npm test
+npm run build
+npm audit
 ```
+
+Tailwind CSS 4 is configured in `src/index.css` and `postcss.config.js`.
+Mermaid 12 requires modern browsers, including Safari 17.4 or newer.

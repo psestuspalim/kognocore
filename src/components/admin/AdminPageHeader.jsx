@@ -12,7 +12,7 @@ export default function AdminPageHeader({
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex items-start gap-4">
           {Icon && (
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 border border-white/70 flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-primary/20 to-accent/20 border border-white/70 flex items-center justify-center shrink-0">
               <Icon className="w-6 h-6 text-primary" />
             </div>
           )}

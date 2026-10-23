@@ -81,7 +81,7 @@ export default function StudentAttemptsList({ attempts = [], quizzes = [] }) {
         </div>
         <div className="flex gap-1">
           <Button
-            variant={filterType === 'all' ? 'default' : 'outline'}
+            variant={filterType === 'all' ? 'default' : 'outline-solid'}
             size="sm"
             onClick={() => setFilterType('all')}
             className="h-8 text-xs"
@@ -89,7 +89,7 @@ export default function StudentAttemptsList({ attempts = [], quizzes = [] }) {
             Todas
           </Button>
           <Button
-            variant={filterType === 'correct' ? 'default' : 'outline'}
+            variant={filterType === 'correct' ? 'default' : 'outline-solid'}
             size="sm"
             onClick={() => setFilterType('correct')}
             className="h-8 text-xs text-green-600 border-green-200 hover:bg-green-50"
@@ -98,7 +98,7 @@ export default function StudentAttemptsList({ attempts = [], quizzes = [] }) {
             Correctas
           </Button>
           <Button
-            variant={filterType === 'wrong' ? 'default' : 'outline'}
+            variant={filterType === 'wrong' ? 'default' : 'outline-solid'}
             size="sm"
             onClick={() => setFilterType('wrong')}
             className="h-8 text-xs text-red-600 border-red-200 hover:bg-red-50"

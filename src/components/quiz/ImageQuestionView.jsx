@@ -235,7 +235,7 @@ export default function ImageQuestionView({
               <div className="flex items-start gap-3">
                 {allCorrectSelected && selectedOptions.length === correctOptions.length ? (
                   <>
-                    <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0" />
+                    <CheckCircle2 className="w-6 h-6 text-green-600 shrink-0" />
                     <div>
                       <h4 className="font-semibold text-green-900">¡Excelente!</h4>
                       <p className="text-sm text-green-800">
@@ -245,7 +245,7 @@ export default function ImageQuestionView({
                   </>
                 ) : (
                   <>
-                    <XCircle className="w-6 h-6 text-orange-600 flex-shrink-0" />
+                    <XCircle className="w-6 h-6 text-orange-600 shrink-0" />
                     <div>
                       <h4 className="font-semibold text-orange-900">Casi lo logras</h4>
                       <p className="text-sm text-orange-800">

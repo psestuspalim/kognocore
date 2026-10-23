@@ -92,7 +92,7 @@ export default function ExamOverview({ courseId, subjects, currentUser, isAdmin 
   if (sortedExams.length === 0 && !isAdmin) return null;
 
   return (
-    <Card className="mb-6 overflow-hidden border-2 border-indigo-100 bg-gradient-to-br from-indigo-50 to-purple-50">
+    <Card className="mb-6 overflow-hidden border-2 border-indigo-100 bg-linear-to-br from-indigo-50 to-purple-50">
       <div className="p-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">

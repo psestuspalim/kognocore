@@ -331,7 +331,7 @@ La IA lo convertirá automáticamente al formato correcto.`}
           <Button 
             onClick={handleGenerate} 
             disabled={isGenerating || (mode === 'topic' ? !topic.trim() : !jsonContent.trim()) || (shouldShowSelector && !selectedSubjectId)}
-            className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+            className="flex-1 bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
           >
             {isGenerating ? (
               <>

@@ -33,7 +33,7 @@ export default function BadgeCard({ badge, earned = false, size = 'md' }) {
     >
       <div className={`${s.container} rounded-full flex items-center justify-center ${
         earned 
-          ? 'bg-gradient-to-br from-yellow-400 to-orange-500 shadow-lg' 
+          ? 'bg-linear-to-br from-yellow-400 to-orange-500 shadow-lg'
           : 'bg-gray-200'
       }`}>
         <Icon className={`${s.icon} ${earned ? 'text-white' : 'text-gray-400'}`} />

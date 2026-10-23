@@ -23,7 +23,7 @@ export default function CourseCard({ course, subjectCount, quizCount = 0, isAdmi
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-4 min-w-0">
             <div
-              className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+              className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
               style={{ background: p.iconBg }}
             >
               {course.icon

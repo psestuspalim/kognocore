@@ -8,7 +8,7 @@ export default function AIErrorFeedback({ isLoading, analysis }) {
     if (isLoading) {
         return (
             <Card className="border-indigo-100 bg-indigo-50/30 overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent w-full h-full animate-shimmer" style={{ backgroundSize: '200% 100%' }} />
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/50 to-transparent w-full h-full animate-shimmer" style={{ backgroundSize: '200% 100%' }} />
                 <CardContent className="p-6 flex flex-col items-center justify-center min-h-[160px] text-center space-y-3">
                     <div className="relative">
                         <Bot className="w-8 h-8 text-indigo-400 animate-bounce" />
@@ -30,7 +30,7 @@ export default function AIErrorFeedback({ isLoading, analysis }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
         >
-            <Card className="border-indigo-200 bg-gradient-to-br from-indigo-50 to-white shadow-lg overflow-hidden relative">
+            <Card className="border-indigo-200 bg-linear-to-br from-indigo-50 to-white shadow-lg overflow-hidden relative">
                 <div className="absolute top-0 right-0 p-3 opacity-10">
                     <Bot className="w-24 h-24 text-indigo-600" />
                 </div>
@@ -54,7 +54,7 @@ export default function AIErrorFeedback({ isLoading, analysis }) {
                 <CardContent className="p-4 space-y-4">
                     <div className="space-y-3">
                         <div className="flex gap-3 items-start">
-                            <AlertCircle className="w-5 h-5 text-rose-500 flex-shrink-0 mt-0.5" />
+                            <AlertCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
                             <div className="space-y-1">
                                 <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
                                     El Problema
@@ -66,7 +66,7 @@ export default function AIErrorFeedback({ isLoading, analysis }) {
                         </div>
 
                         <div className="bg-amber-50 rounded-lg p-3 border border-amber-100 flex gap-3 items-start">
-                            <Lightbulb className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                            <Lightbulb className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
                             <div className="space-y-1">
                                 <p className="text-xs font-semibold text-amber-600/80 uppercase tracking-wider">
                                     Recomendación

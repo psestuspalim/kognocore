@@ -79,25 +79,25 @@ export default function WeakPoints({ weakPoints }) {
         </CardContent>
       </Card>
 
-      <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-50 to-red-50">
+      <Card className="border-0 shadow-lg bg-linear-to-br from-orange-50 to-red-50">
         <CardHeader>
           <CardTitle className="text-orange-900">💡 Consejos para Mejorar</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3 text-sm text-orange-900">
           <div className="flex gap-3">
-            <div className="w-6 h-6 rounded-full bg-orange-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <div className="w-6 h-6 rounded-full bg-orange-200 flex items-center justify-center shrink-0 mt-0.5">
               1
             </div>
             <p>Revisa el material de estudio relacionado con estas preguntas</p>
           </div>
           <div className="flex gap-3">
-            <div className="w-6 h-6 rounded-full bg-orange-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <div className="w-6 h-6 rounded-full bg-orange-200 flex items-center justify-center shrink-0 mt-0.5">
               2
             </div>
             <p>Practica estas preguntas específicas usando el deck de "Incorrectas"</p>
           </div>
           <div className="flex gap-3">
-            <div className="w-6 h-6 rounded-full bg-orange-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <div className="w-6 h-6 rounded-full bg-orange-200 flex items-center justify-center shrink-0 mt-0.5">
               3
             </div>
             <p>Toma descansos entre intentos para consolidar el aprendizaje</p>

@@ -46,7 +46,7 @@ export function ColorPopover({ color, onChange, className = "" }) {
                             <button
                                 key={preset}
                                 className={cn(
-                                    "w-8 h-8 rounded-full border border-black/10 flex items-center justify-center transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+                                    "w-8 h-8 rounded-full border border-black/10 flex items-center justify-center transition-all hover:scale-110 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2",
                                     color === preset && "ring-2 ring-ring ring-offset-2"
                                 )}
                                 style={{ backgroundColor: preset }}

@@ -43,7 +43,7 @@ export default function AttemptHistory({ attempts, quizzes, subjects }) {
           <div className="flex gap-2">
             <Button
               size="sm"
-              variant={filter === 'all' ? 'default' : 'outline'}
+              variant={filter === 'all' ? 'default' : 'outline-solid'}
               onClick={() => setFilter('all')}
               className="text-xs"
             >
@@ -51,7 +51,7 @@ export default function AttemptHistory({ attempts, quizzes, subjects }) {
             </Button>
             <Button
               size="sm"
-              variant={filter === 'completed' ? 'default' : 'outline'}
+              variant={filter === 'completed' ? 'default' : 'outline-solid'}
               onClick={() => setFilter('completed')}
               className="text-xs"
             >
@@ -59,7 +59,7 @@ export default function AttemptHistory({ attempts, quizzes, subjects }) {
             </Button>
             <Button
               size="sm"
-              variant={filter === 'partial' ? 'default' : 'outline'}
+              variant={filter === 'partial' ? 'default' : 'outline-solid'}
               onClick={() => setFilter('partial')}
               className="text-xs"
             >

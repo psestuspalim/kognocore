@@ -26,7 +26,7 @@ export default function FolderCard({ folder, itemCount, isAdmin, onDelete, onEdi
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-3 min-w-0">
             <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+              className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
               style={{ background: p.iconBg }}
             >
               <FolderOpen className="w-5 h-5" style={{ color: p.iconColor }} />

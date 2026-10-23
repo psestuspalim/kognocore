@@ -151,7 +151,7 @@ export default function TournamentLobby() {
 
   if (userLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-purple-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Cargando...</p>
@@ -161,7 +161,7 @@ export default function TournamentLobby() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-linear-to-br from-purple-50 to-indigo-100 p-4">
       <div className="max-w-2xl mx-auto">
         <Link to={createPageUrl('Quizzes')}>
           <Button variant="ghost" className="mb-4">
@@ -170,7 +170,7 @@ export default function TournamentLobby() {
         </Link>
 
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-linear-to-r from-purple-500 to-indigo-600 mb-4">
             <Trophy className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900">Torneos</h1>
@@ -205,7 +205,7 @@ export default function TournamentLobby() {
         {/* Crear torneo */}
         <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
           <DialogTrigger asChild>
-            <Button className="w-full mb-6 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 h-12">
+            <Button className="w-full mb-6 bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 h-12">
               <Plus className="w-5 h-5 mr-2" />
               Crear nuevo torneo
             </Button>

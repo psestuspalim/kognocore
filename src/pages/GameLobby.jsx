@@ -167,7 +167,7 @@ export default function GameLobbyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
+    <div className="min-h-screen bg-linear-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <Link to={createPageUrl('Quizzes')}>
@@ -186,7 +186,7 @@ export default function GameLobbyPage() {
         </div>
 
         {/* Unirse con código */}
-        <Card className="mb-6 bg-white/10 backdrop-blur border-white/20">
+        <Card className="mb-6 bg-white/10 backdrop-blur-sm border-white/20">
           <CardContent className="p-4">
             <div className="flex gap-3">
               <Input
@@ -221,7 +221,7 @@ export default function GameLobbyPage() {
           <TabsContent value="public">
             <div className="grid gap-4">
               {publicRooms.length === 0 ? (
-                <Card className="bg-white/10 backdrop-blur border-white/20">
+                <Card className="bg-white/10 backdrop-blur-sm border-white/20">
                   <CardContent className="p-8 text-center">
                     <Globe className="w-12 h-12 mx-auto mb-4 text-white/50" />
                     <p className="text-white/70">No hay salas públicas disponibles</p>
@@ -235,7 +235,7 @@ export default function GameLobbyPage() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                   >
-                    <Card className="bg-white/10 backdrop-blur border-white/20 hover:bg-white/15 transition-colors">
+                    <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/15 transition-colors">
                       <CardContent className="p-4">
                         <div className="flex items-center justify-between">
                           <div>
@@ -272,7 +272,7 @@ export default function GameLobbyPage() {
           <TabsContent value="my">
             <div className="grid gap-4">
               {myRooms.map((room) => (
-                <Card key={room.id} className="bg-white/10 backdrop-blur border-white/20">
+                <Card key={room.id} className="bg-white/10 backdrop-blur-sm border-white/20">
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between">
                       <div>
@@ -317,7 +317,7 @@ export default function GameLobbyPage() {
         {/* Botón crear sala */}
         <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
           <DialogTrigger asChild>
-            <Button className="fixed bottom-6 right-6 h-14 px-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 shadow-lg">
+            <Button className="fixed bottom-6 right-6 h-14 px-6 bg-linear-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 shadow-lg">
               <Plus className="w-5 h-5 mr-2" />
               Crear Sala
             </Button>

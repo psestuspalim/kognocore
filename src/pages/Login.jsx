@@ -166,11 +166,11 @@ const Login = () => {
     return (
         <div className="relative min-h-screen overflow-x-hidden bg-[linear-gradient(150deg,#f8f6ee_0%,#eef5f7_42%,#f8f0d9_100%)] px-4 py-6 sm:px-6 lg:px-10 lg:py-8">
             <div className="pointer-events-none absolute -left-24 top-20 h-72 w-72 rounded-full bg-amber-300/35 blur-3xl animate-float-slow" />
-            <div className="pointer-events-none absolute right-[-8rem] top-[-4rem] h-96 w-96 rounded-full bg-cyan-300/30 blur-3xl animate-float-slow" />
-            <div className="pointer-events-none absolute bottom-[-6rem] left-1/3 h-96 w-96 rounded-full bg-blue-200/25 blur-3xl" />
+            <div className="pointer-events-none absolute -right-32 -top-16 h-96 w-96 rounded-full bg-cyan-300/30 blur-3xl animate-float-slow" />
+            <div className="pointer-events-none absolute -bottom-24 left-1/3 h-96 w-96 rounded-full bg-blue-200/25 blur-3xl" />
 
             <div className="relative mx-auto grid min-h-[calc(100vh-3rem)] w-full max-w-7xl items-start gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-                <section className="animate-fade-up rounded-[2rem] border border-white/60 bg-white/55 p-6 shadow-[0_25px_80px_rgba(15,23,42,0.12)] backdrop-blur-md sm:p-8 lg:p-9">
+                <section className="animate-fade-up rounded-4xl border border-white/60 bg-white/55 p-6 shadow-[0_25px_80px_rgba(15,23,42,0.12)] backdrop-blur-md sm:p-8 lg:p-9">
                     <div className="mb-6 flex items-center justify-between gap-4">
                         <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700">
                             <Sparkles className="h-3.5 w-3.5 text-cyan-700" />
@@ -212,7 +212,7 @@ const Login = () => {
                     </div>
                 </section>
 
-                <Card className="hero-glow animate-fade-up w-full max-w-xl justify-self-center rounded-[2rem] border border-white/65 bg-white/90 shadow-[0_25px_80px_rgba(15,23,42,0.16)]">
+                <Card className="hero-glow animate-fade-up w-full max-w-xl justify-self-center rounded-4xl border border-white/65 bg-white/90 shadow-[0_25px_80px_rgba(15,23,42,0.16)]">
                     <CardHeader className="space-y-2 pb-3">
                         <CardTitle className="font-display text-3xl text-center text-slate-950">Acceso Kognocore</CardTitle>
                         <CardDescription className="text-center text-base text-slate-600">

@@ -1,5 +1,6 @@
 import test from 'node:test';
 import { questionIdentity } from '../src/lib/question-review.js';
+import { correctAnswerText } from '../src/lib/answer-report.js';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
@@ -166,9 +167,10 @@ test('the answer log preserves open-ended inputs and grading when the parent rer
   const question = normalizeQuizQuestion(fixture.items[0]);
   const result = motorAnatomia.calificar(question, 'azul');
   const selectedOption = { selected_answer: '"azul"', inputs: { text: 'azul' }, result, score: 1, max_score: 1 };
-  const context = vm.createContext({ questionIdentity, question, selectedOption, isCorrect: true, wrongAnswers: [], responseTime: 2 });
+  const context = vm.createContext({ correctAnswerText, questionIdentity, question, selectedOption, currentQuestionIndex: 0, isCorrect: true, wrongAnswers: [], responseTime: 2 });
   const entry = vm.runInContext(`${source.slice(start, end)}\nanswerEntry;`, context);
   assert.deepEqual(entry.inputs, selectedOption.inputs);
   assert.deepEqual(entry.result, result);
   assert.equal(entry.selected_answer, selectedOption.selected_answer);
+  assert.equal(entry.answer_index, 0);
 });

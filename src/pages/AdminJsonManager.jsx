@@ -396,7 +396,7 @@ export default function AdminJsonManager() {
             <CardContent className="space-y-4">
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
                 <div className="flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                  <AlertCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm font-medium text-blue-900">Persistencia y Banco de Quizzes</p>
                     <p className="text-sm text-blue-700 mt-1">
@@ -462,9 +462,9 @@ export default function AdminJsonManager() {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div className="flex items-start gap-3">
                         {validationResult.valid ? (
-                          <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                         ) : (
-                          <XCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+                          <XCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
                         )}
                         <div>
                           <p className="font-semibold text-sm">{validationResult.message}</p>

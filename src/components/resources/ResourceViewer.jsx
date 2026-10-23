@@ -13,7 +13,13 @@ export default function ResourceViewer({ open, onOpenChange, resource }) {
 
     useEffect(() => {
         if (open && resource?.type === 'mermaid') {
-            mermaid.initialize({ startOnLoad: true, securityLevel: 'strict' });
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'strict',
+                layout: 'dagre',
+                theme: 'default',
+                look: 'classic',
+            });
             setTimeout(() => {
                 mermaid.contentLoaded();
             }, 100);

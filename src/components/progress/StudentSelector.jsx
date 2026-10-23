@@ -108,7 +108,7 @@ export default function StudentSelector({
       {/* Botón compacto que muestra el estudiante seleccionado */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-3 bg-white border rounded-xl shadow-sm hover:shadow-md transition-all"
+        className="w-full flex items-center justify-between p-3 bg-white border rounded-xl shadow-xs hover:shadow-md transition-all"
       >
         <div className="flex items-center gap-3">
           <div className={`w-10 h-10 rounded-full flex items-center justify-center ${selectedStudent ? 'bg-indigo-100' : 'bg-green-100'

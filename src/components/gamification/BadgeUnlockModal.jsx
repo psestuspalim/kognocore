@@ -31,7 +31,7 @@ export default function BadgeUnlockModal({ badge, open, onClose }) {
           className="flex justify-center mb-4"
         >
           <div className="relative">
-            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center shadow-2xl">
+            <div className="w-32 h-32 rounded-full bg-linear-to-br from-yellow-400 to-orange-500 flex items-center justify-center shadow-2xl">
               <Icon className="w-16 h-16 text-white" />
             </div>
             <motion.div
@@ -61,7 +61,7 @@ export default function BadgeUnlockModal({ badge, open, onClose }) {
           <p className="text-gray-600 mb-6">
             {badge.description}
           </p>
-          <Button onClick={onClose} className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600">
+          <Button onClick={onClose} className="w-full bg-linear-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600">
             ¡Genial!
           </Button>
         </motion.div>

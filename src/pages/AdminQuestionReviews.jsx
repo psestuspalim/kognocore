@@ -47,7 +47,7 @@ export default function AdminQuestionReviews() {
         <p className="text-slate-600 mt-2">Corrige preguntas reportadas y actualiza las calificaciones, el desempeño y el progreso de los estudiantes.</p></div>
       <div className="flex flex-wrap gap-2">
         {[['pending', 'Pendientes'], ['resolved', 'Corregidas'], ['all', 'Todas']].map(([value, label]) =>
-          <Button key={value} variant={filter === value ? 'default' : 'outline'} onClick={() => setFilter(value)}>{label}</Button>)}
+          <Button key={value} variant={filter === value ? 'default' : 'outline-solid'} onClick={() => setFilter(value)}>{label}</Button>)}
         <Button variant="outline" onClick={() => refetch()}>Actualizar</Button>
       </div>
       {notice && <p role="status" className="rounded-lg bg-green-50 p-4 text-green-800">{notice}</p>}

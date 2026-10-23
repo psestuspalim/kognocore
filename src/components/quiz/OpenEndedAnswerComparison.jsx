@@ -21,7 +21,7 @@ export default function OpenEndedAnswerComparison({ inputs = {}, result, type })
             {answers.map(([key, value], index) => {
               const label = labelFor(key, index);
               return (
-                <li key={key} className="break-words whitespace-pre-wrap text-slate-700">
+                <li key={key} className="wrap-break-word whitespace-pre-wrap text-slate-700">
                   {label && <span className="block font-semibold text-slate-900">{label}</span>}
                   {displayAnswer(value)}
                 </li>
@@ -35,7 +35,7 @@ export default function OpenEndedAnswerComparison({ inputs = {}, result, type })
             {details.map((detail, index) => {
               const label = labelFor(detail.clave ?? detail.blanco, index);
               return (
-                <li key={index} className="break-words whitespace-pre-wrap text-emerald-900">
+                <li key={index} className="wrap-break-word whitespace-pre-wrap text-emerald-900">
                   {label && <span className="block font-semibold">{label}</span>}
                   {detail.esperado ?? 'Sin respuesta de referencia'}
                   <span className={`block mt-1 text-[11px] font-semibold ${detail.ok ? 'text-emerald-700' : 'text-rose-700'}`}>

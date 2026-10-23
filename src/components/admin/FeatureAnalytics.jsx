@@ -188,7 +188,7 @@ export default function FeatureAnalytics({ onClose }) {
           <CardContent className="p-6 space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
             {/* KPIs */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <Card className="bg-gradient-to-br from-indigo-50 to-indigo-100 border-indigo-200">
+              <Card className="bg-linear-to-br from-indigo-50 to-indigo-100 border-indigo-200">
                 <CardContent className="p-4">
                   <div className="flex items-center gap-2 text-indigo-600 mb-1">
                     <MousePointer className="w-4 h-4" />
@@ -198,7 +198,7 @@ export default function FeatureAnalytics({ onClose }) {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+              <Card className="bg-linear-to-br from-green-50 to-green-100 border-green-200">
                 <CardContent className="p-4">
                   <div className="flex items-center gap-2 text-green-600 mb-1">
                     <CheckCircle2 className="w-4 h-4" />
@@ -210,7 +210,7 @@ export default function FeatureAnalytics({ onClose }) {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-amber-50 to-amber-100 border-amber-200">
+              <Card className="bg-linear-to-br from-amber-50 to-amber-100 border-amber-200">
                 <CardContent className="p-4">
                   <div className="flex items-center gap-2 text-amber-600 mb-1">
                     <AlertTriangle className="w-4 h-4" />
@@ -220,7 +220,7 @@ export default function FeatureAnalytics({ onClose }) {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+              <Card className="bg-linear-to-br from-purple-50 to-purple-100 border-purple-200">
                 <CardContent className="p-4">
                   <div className="flex items-center gap-2 text-purple-600 mb-1">
                     <Clock className="w-4 h-4" />

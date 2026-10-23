@@ -187,7 +187,7 @@ export default function GamePlayPage() {
 
   if (!room || !currentUser) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 to-indigo-900">
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-purple-900 to-indigo-900">
         <Loader2 className="w-8 h-8 animate-spin text-white" />
       </div>
     );
@@ -196,7 +196,7 @@ export default function GamePlayPage() {
   // Lobby - Esperando jugadores
   if (gameState === 'lobby') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
+      <div className="min-h-screen bg-linear-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
         <div className="max-w-lg mx-auto">
           <Button
             variant="ghost"
@@ -207,7 +207,7 @@ export default function GamePlayPage() {
             Salir
           </Button>
 
-          <Card className="bg-white/10 backdrop-blur border-white/20">
+          <Card className="bg-white/10 backdrop-blur-sm border-white/20">
             <CardContent className="p-6">
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-white mb-2">{room.name || room.quiz_title}</h2>
@@ -261,7 +261,7 @@ export default function GamePlayPage() {
                 <Button
                   onClick={() => startGameMutation.mutate()}
                   disabled={room.players?.length < 1 || startGameMutation.isPending}
-                  className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 h-12"
+                  className="w-full bg-linear-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 h-12"
                 >
                   <Play className="w-5 h-5 mr-2" />
                   {startGameMutation.isPending ? 'Iniciando...' : 'Iniciar partida'}
@@ -282,7 +282,7 @@ export default function GamePlayPage() {
   // Countdown
   if (gameState === 'countdown') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-purple-900 via-indigo-900 to-blue-900 flex items-center justify-center">
         <motion.div
           key={countdown}
           initial={{ scale: 0.5, opacity: 0 }}
@@ -308,10 +308,10 @@ export default function GamePlayPage() {
     const myRank = rankings.findIndex(p => p.email === currentUser.email);
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
+      <div className="min-h-screen bg-linear-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
         <div className="max-w-lg mx-auto">
-          <Card className="bg-white/10 backdrop-blur border-white/20 overflow-hidden">
-            <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-6 text-center">
+          <Card className="bg-white/10 backdrop-blur-sm border-white/20 overflow-hidden">
+            <div className="bg-linear-to-r from-yellow-500 to-orange-500 p-6 text-center">
               <Trophy className="w-16 h-16 mx-auto mb-2 text-white" />
               <h2 className="text-2xl font-bold text-white">Resultados</h2>
             </div>
@@ -373,9 +373,9 @@ export default function GamePlayPage() {
 
   // Jugando
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
       {/* Header con progreso */}
-      <div className="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm border-b">
+      <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-xs border-b">
         <div className="max-w-4xl mx-auto px-4 py-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">

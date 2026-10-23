@@ -21,7 +21,7 @@ export default function QuizListItem({
 
   return (
     <div
-      className={`group flex flex-wrap items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-white border transition-colors duration-150 hover:shadow-sm cursor-pointer ${
+      className={`group flex flex-wrap items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-white border transition-colors duration-150 hover:shadow-xs cursor-pointer ${
         isSelected ? 'ring-2 ring-primary border-primary/30' : 'border-slate-200 hover:border-slate-300'
       }`}
       onClick={() => onStart(quiz, totalQuestions, 'all', attempts)}
@@ -31,13 +31,13 @@ export default function QuizListItem({
           type="checkbox"
           checked={isSelected}
           onChange={() => onSelect(quiz.id)}
-          className="w-4 h-4 text-primary rounded cursor-pointer flex-shrink-0"
+          className="w-4 h-4 text-primary rounded cursor-pointer shrink-0"
           onClick={(e) => e.stopPropagation()}
         />
       )}
 
       <div className="flex-1 min-w-0">
-        <h4 className="font-semibold text-slate-800 text-sm sm:text-base leading-tight break-words">
+        <h4 className="font-semibold text-slate-800 text-sm sm:text-base leading-tight wrap-break-word">
           {quiz.title}
         </h4>
         <QuizProgressIndicator progress={quizProgress} />

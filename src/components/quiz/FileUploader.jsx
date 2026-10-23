@@ -242,7 +242,7 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
 
   return (
     <div className="w-full max-w-3xl mx-auto">
-      <Card className="p-6 shadow-sm border border-slate-200">
+      <Card className="p-6 shadow-xs border border-slate-200">
         <div className="mb-4">
           <h3 className="text-lg font-semibold text-gray-900 mb-1">
             Importar cuestionario
@@ -310,7 +310,7 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
                 type="button"
                 size="sm"
                 onClick={() => jumpToErrorPosition(errorDetails)}
-                className="bg-rose-600 hover:bg-rose-700 text-white font-medium text-xs px-3.5 h-9 shrink-0 shadow-sm flex items-center gap-1.5"
+                className="bg-rose-600 hover:bg-rose-700 text-white font-medium text-xs px-3.5 h-9 shrink-0 shadow-xs flex items-center gap-1.5"
               >
                 <Search className="w-3.5 h-3.5" />
                 <span>Ir directo al error</span>

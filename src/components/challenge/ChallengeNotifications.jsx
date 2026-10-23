@@ -154,7 +154,7 @@ export default function ChallengeNotifications({ currentUser, onStartChallenge }
                 <CardContent className="p-3">
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2 min-w-0">
-                      <Swords className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                      <Swords className="w-5 h-5 text-orange-600 shrink-0" />
                       <div className="min-w-0">
                         <p className="text-sm font-medium truncate">
                           {challenge.challenger_username} te reta
@@ -164,7 +164,7 @@ export default function ChallengeNotifications({ currentUser, onStartChallenge }
                         </p>
                       </div>
                     </div>
-                    <div className="flex gap-1 flex-shrink-0">
+                    <div className="flex gap-1 shrink-0">
                       <Button
                         size="sm"
                         variant="ghost"
@@ -194,7 +194,7 @@ export default function ChallengeNotifications({ currentUser, onStartChallenge }
             <CardContent className="p-3">
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2 min-w-0">
-                  <Swords className="w-5 h-5 text-indigo-600 flex-shrink-0" />
+                  <Swords className="w-5 h-5 text-indigo-600 shrink-0" />
                   <div className="min-w-0">
                     <p className="text-sm font-medium truncate">
                       vs {getOpponentName(challenge)}

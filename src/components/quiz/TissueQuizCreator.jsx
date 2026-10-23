@@ -167,7 +167,7 @@ export default function TissueQuizCreator({ onSave, onCancel }) {
             {images.map((img, idx) => (
               <div
                 key={idx}
-                className={`relative flex-shrink-0 cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${
+                className={`relative shrink-0 cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${
                   idx === currentIndex ? 'border-indigo-600 ring-2 ring-indigo-200' : 'border-gray-200 hover:border-gray-400'
                 }`}
                 onClick={() => setCurrentIndex(idx)}
@@ -207,7 +207,7 @@ export default function TissueQuizCreator({ onSave, onCancel }) {
                 {TISSUE_TYPES.map((type) => (
                   <Button
                     key={type}
-                    variant={currentImage.tissueType === type ? 'default' : 'outline'}
+                    variant={currentImage.tissueType === type ? 'default' : 'outline-solid'}
                     className={`text-xs h-auto py-2 px-3 ${
                       currentImage.tissueType === type ? 'bg-indigo-600 hover:bg-indigo-700' : ''
                     }`}

@@ -533,7 +533,7 @@ export default function AdminProgress() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-3 sm:p-6">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 p-3 sm:p-6">
       <div className="max-w-7xl mx-auto">
         <div className="mb-6 sm:mb-8">
           <div className="mb-4 flex flex-wrap items-center gap-2">

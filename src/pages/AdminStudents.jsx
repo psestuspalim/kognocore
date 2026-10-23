@@ -235,7 +235,7 @@ export default function AdminStudents() {
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4 flex-1 min-w-0">
-                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-primary-foreground font-semibold text-lg flex-shrink-0">
+                        <div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary to-primary/70 flex items-center justify-center text-primary-foreground font-semibold text-lg shrink-0">
                           {(student.username || student.full_name || student.email)[0].toUpperCase()}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -274,7 +274,7 @@ export default function AdminStudents() {
                           </div>
                         </div>
                       </div>
-                      <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                      <ChevronRight className="w-5 h-5 text-muted-foreground shrink-0" />
                     </div>
                   </CardContent>
                 </Card>

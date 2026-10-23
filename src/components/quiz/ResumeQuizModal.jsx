@@ -59,7 +59,7 @@ export default function ResumeQuizModal({
         <div className="flex flex-col gap-2.5 pt-2">
           <Button
             onClick={onResume}
-            className="w-full h-11 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-sm flex items-center justify-center gap-2 text-sm"
+            className="w-full h-11 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-xs flex items-center justify-center gap-2 text-sm"
           >
             <Play className="w-4 h-4 fill-white" />
             <span>Continuar desde pregunta {currentQuestion}</span>

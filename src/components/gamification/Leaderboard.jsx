@@ -36,9 +36,9 @@ export default function Leaderboard({ users, currentUserEmail, title = "Tabla de
   };
 
   const getPositionStyle = (position) => {
-    if (position === 0) return 'bg-gradient-to-r from-yellow-50 to-yellow-100 border-yellow-300';
-    if (position === 1) return 'bg-gradient-to-r from-gray-50 to-gray-100 border-gray-300';
-    if (position === 2) return 'bg-gradient-to-r from-amber-50 to-amber-100 border-amber-300';
+    if (position === 0) return 'bg-linear-to-r from-yellow-50 to-yellow-100 border-yellow-300';
+    if (position === 1) return 'bg-linear-to-r from-gray-50 to-gray-100 border-gray-300';
+    if (position === 2) return 'bg-linear-to-r from-amber-50 to-amber-100 border-amber-300';
     return 'bg-white border-gray-200';
   };
 

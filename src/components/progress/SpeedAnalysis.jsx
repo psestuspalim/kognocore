@@ -120,7 +120,7 @@ export default function SpeedAnalysis({ attempts = [] }) {
     <div className="space-y-6">
       {/* Resumen principal */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="bg-gradient-to-br from-indigo-50 to-purple-50 border-indigo-200">
+        <Card className="bg-linear-to-br from-indigo-50 to-purple-50 border-indigo-200">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-indigo-100 rounded-lg">
@@ -141,7 +141,7 @@ export default function SpeedAnalysis({ attempts = [] }) {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
+        <Card className="bg-linear-to-br from-green-50 to-emerald-50 border-green-200">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-green-100 rounded-lg">
@@ -157,7 +157,7 @@ export default function SpeedAnalysis({ attempts = [] }) {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-red-50 to-rose-50 border-red-200">
+        <Card className="bg-linear-to-br from-red-50 to-rose-50 border-red-200">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-red-100 rounded-lg">
@@ -277,7 +277,7 @@ export default function SpeedAnalysis({ attempts = [] }) {
       </Card>
 
       {/* Recomendación */}
-      <Card className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+      <Card className="bg-linear-to-r from-indigo-500 to-purple-600 text-white">
         <CardContent className="p-6">
           <div className="flex items-start gap-4">
             <div className="p-3 bg-white/20 rounded-xl">

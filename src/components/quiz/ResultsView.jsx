@@ -151,7 +151,7 @@ export default function ResultsView({
       {/* Expandable correct answers */}
       {showCorrect && correctAnswers.length > 0 && (
         <div className="mb-4 max-h-80 overflow-y-auto rounded-xl border border-emerald-200/60 bg-emerald-50/50">
-          <div className="p-3 border-b border-emerald-200/40 flex items-center justify-between sticky top-0 bg-emerald-50/90 backdrop-blur-sm">
+          <div className="p-3 border-b border-emerald-200/40 flex items-center justify-between sticky top-0 bg-emerald-50/90 backdrop-blur-xs">
             <span className="text-xs font-bold text-emerald-800 flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5" /> Correctas
             </span>
@@ -187,7 +187,7 @@ export default function ResultsView({
       {/* Expandable wrong answers */}
       {showWrong && wrongAnswers.length > 0 && (
         <div className="mb-4 rounded-xl border border-rose-200/60 bg-rose-50/50">
-          <div className="p-3 border-b border-rose-200/40 flex items-center justify-between sticky top-0 bg-rose-50/90 backdrop-blur-sm">
+          <div className="p-3 border-b border-rose-200/40 flex items-center justify-between sticky top-0 bg-rose-50/90 backdrop-blur-xs">
             <span className="text-xs font-bold text-rose-800 flex items-center gap-1.5">
               <XCircle className="w-3.5 h-3.5" /> Incorrectas
             </span>

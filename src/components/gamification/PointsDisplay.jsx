@@ -14,7 +14,7 @@ export default function PointsDisplay({ points, level, showAnimation = false }) 
         animate={{ scale: 1 }}
         className="relative"
       >
-        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center shadow-lg">
+        <div className="w-12 h-12 rounded-full bg-linear-to-br from-yellow-400 to-orange-500 flex items-center justify-center shadow-lg">
           <span className="text-white font-bold text-lg">{level}</span>
         </div>
         <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-indigo-600 flex items-center justify-center">
@@ -34,7 +34,7 @@ export default function PointsDisplay({ points, level, showAnimation = false }) 
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${Math.min(progress, 100)}%` }}
-            className="bg-gradient-to-r from-yellow-400 to-orange-500 h-2 rounded-full"
+            className="bg-linear-to-r from-yellow-400 to-orange-500 h-2 rounded-full"
           />
         </div>
         <p className="text-xs text-gray-500 mt-1">

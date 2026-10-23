@@ -25,7 +25,7 @@ export default function AdminDashboardCard({
       <CardHeader className="pb-4">
         <div className="flex items-start justify-between mb-3">
           {Icon && (
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-accent/20 border border-white/80 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary/15 to-accent/20 border border-white/80 flex items-center justify-center">
               <Icon className={`w-6 h-6 ${iconColor}`} />
             </div>
           )}

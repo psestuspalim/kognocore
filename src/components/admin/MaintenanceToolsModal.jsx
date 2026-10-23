@@ -33,7 +33,7 @@ export default function MaintenanceToolsModal({ open, onOpenChange }) {
                 {/* Warning Banner */}
                 <div className="bg-orange-50 border-l-4 border-orange-500 rounded-lg p-4 mb-6">
                     <div className="flex items-start gap-3">
-                        <AlertTriangle className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
+                        <AlertTriangle className="w-5 h-5 text-orange-600 shrink-0 mt-0.5" />
                         <div>
                             <p className="font-semibold text-orange-900">¡Precaución!</p>
                             <p className="text-sm text-orange-800 mt-1">

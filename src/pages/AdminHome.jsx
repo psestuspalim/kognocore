@@ -165,15 +165,15 @@ export default function AdminHome() {
         </CardHeader>
         <CardContent>
           <div className="grid gap-3 md:grid-cols-3">
-            <Link to={createPageUrl('AdminProgress')} className="rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-4 hover:shadow-md transition-shadow">
+            <Link to={createPageUrl('AdminProgress')} className="rounded-xl border border-emerald-200 bg-linear-to-br from-emerald-50 to-white p-4 hover:shadow-md transition-shadow">
               <p className="text-xs uppercase tracking-[0.12em] text-slate-500">Seguimiento</p>
               <p className="mt-1 text-base font-semibold text-slate-900">Progreso y reportes PDF</p>
             </Link>
-            <Link to={createPageUrl('AdminStudents')} className="rounded-xl border border-sky-200 bg-gradient-to-br from-sky-50 to-white p-4 hover:shadow-md transition-shadow">
+            <Link to={createPageUrl('AdminStudents')} className="rounded-xl border border-sky-200 bg-linear-to-br from-sky-50 to-white p-4 hover:shadow-md transition-shadow">
               <p className="text-xs uppercase tracking-[0.12em] text-slate-500">Usuarios</p>
               <p className="mt-1 text-base font-semibold text-slate-900">Ver estudiantes e intentos</p>
             </Link>
-            <Link to={createPageUrl('AdminContent')} className="rounded-xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-white p-4 hover:shadow-md transition-shadow">
+            <Link to={createPageUrl('AdminContent')} className="rounded-xl border border-indigo-200 bg-linear-to-br from-indigo-50 to-white p-4 hover:shadow-md transition-shadow">
               <p className="text-xs uppercase tracking-[0.12em] text-slate-500">Contenido</p>
               <p className="mt-1 text-base font-semibold text-slate-900">Gestionar cursos y estructura</p>
             </Link>

@@ -122,7 +122,7 @@ export default function AdminShell({ children }) {
                             "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all relative",
                             active
                               ? "bg-primary text-primary-foreground font-semibold shadow-lg shadow-primary/30"
-                              : "text-slate-600 hover:bg-white hover:text-slate-900 hover:shadow-sm"
+                              : "text-slate-600 hover:bg-white hover:text-slate-900 hover:shadow-xs"
                           )}
                         >
                           <Icon className="w-[18px] h-[18px]" />
@@ -178,7 +178,7 @@ export default function AdminShell({ children }) {
                               "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all relative",
                               active
                                 ? "bg-primary text-primary-foreground font-semibold shadow-lg shadow-primary/30"
-                                : "text-slate-600 hover:bg-white hover:text-slate-900 hover:shadow-sm"
+                                : "text-slate-600 hover:bg-white hover:text-slate-900 hover:shadow-xs"
                             )}
                           >
                             <Icon className="w-[18px] h-[18px]" />

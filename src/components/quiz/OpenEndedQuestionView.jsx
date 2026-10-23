@@ -144,7 +144,7 @@ export default function OpenEndedQuestionView({
     const parts = rawText.split(/(\{\{c\d+\}\})/g);
 
     return (
-      <div className="leading-relaxed text-base sm:text-lg text-slate-800 my-4 bg-slate-50 p-4 sm:p-6 rounded-2xl border border-slate-200/80 shadow-inner break-words">
+      <div className="leading-relaxed text-base sm:text-lg text-slate-800 my-4 bg-slate-50 p-4 sm:p-6 rounded-2xl border border-slate-200/80 shadow-inner wrap-break-word">
         {parts.map((part, idx) => {
           const match = part.match(/^\{\{(c\d+)\}\}$/);
           if (!match) {
@@ -165,7 +165,7 @@ export default function OpenEndedQuestionView({
                 value={val}
                 onChange={(e) => setUserInputs(prev => ({ ...prev, [blankKey]: e.target.value }))}
                 aria-label={`Espacio ${blankKey.slice(1)} para completar`}
-                className={`px-3 py-1 text-sm sm:text-base font-medium rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 ${
+                className={`px-3 py-1 text-sm sm:text-base font-medium rounded-lg border transition-all duration-200 focus:outline-hidden focus:ring-2 ${
                   submitted
                     ? isBlankOk
                       ? 'bg-emerald-50 text-emerald-800 border-emerald-400 font-semibold'
@@ -189,7 +189,7 @@ export default function OpenEndedQuestionView({
   const progressPercent = totalQuestions > 0 ? Math.round((questionNumber / totalQuestions) * 100) : 0;
 
   return (
-    <div className="fixed inset-0 z-50 flex h-[100dvh] flex-col overflow-hidden bg-slate-100 font-sans">
+    <div className="fixed inset-0 z-50 flex h-dvh flex-col overflow-hidden bg-slate-100 font-sans">
       {/* Header */}
       <header className="z-20 shrink-0 border-b border-slate-300/80 bg-white px-3 pb-2.5 pt-[max(0.625rem,env(safe-area-inset-top))] sm:px-6">
         <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
@@ -238,7 +238,7 @@ export default function OpenEndedQuestionView({
       </header>
 
       {/* Main Content Area - Fully Scrollable */}
-      <main className="flex-1 min-h-0 overflow-y-auto px-4 py-4 sm:py-6 pb-32 [scrollbar-gutter:stable]">
+      <main className="flex-1 min-h-0 overflow-y-auto px-4 py-4 sm:py-6 pb-32 scrollbar-gutter-stable">
         <div className="w-full max-w-3xl mx-auto space-y-6">
 
           {/* Type Badge & Category */}
@@ -258,7 +258,7 @@ export default function OpenEndedQuestionView({
           {/* Main Question Card */}
           <Card className="p-5 sm:p-7 rounded-3xl border border-slate-200/80 shadow-xl bg-white">
             <div className="mb-4">
-              <h2 className="text-lg sm:text-xl font-bold text-slate-900 leading-snug break-words">
+              <h2 className="text-lg sm:text-xl font-bold text-slate-900 leading-snug wrap-break-word">
                 <MathText text={headingText} />
               </h2>
             </div>
@@ -332,7 +332,7 @@ export default function OpenEndedQuestionView({
                 <div className="space-y-3">
                   {(question?.respuesta?.pares || []).map((par, i) => (
                     <div key={i} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                      <span className="font-semibold text-slate-800 text-sm sm:text-base break-words">
+                      <span className="font-semibold text-slate-800 text-sm sm:text-base wrap-break-word">
                         {par.clave}
                       </span>
                       <div className="w-full sm:w-1/2">
@@ -340,7 +340,7 @@ export default function OpenEndedQuestionView({
                           disabled={submitted}
                           value={userInputs[par.clave] || ''}
                           onChange={(e) => setUserInputs(prev => ({ ...prev, [par.clave]: e.target.value }))}
-                          className="w-full px-3 py-2 text-sm sm:text-base rounded-xl border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 truncate"
+                          className="w-full px-3 py-2 text-sm sm:text-base rounded-xl border border-slate-300 bg-white text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 truncate"
                         >
                           <option value="">-- Selecciona corresponder --</option>
                           {candidateOptions.map((opt, optIdx) => (
@@ -399,7 +399,7 @@ export default function OpenEndedQuestionView({
                         {result.correcto ? '¡Respuesta Correcta!' : result.puntos > 0 ? 'Respuesta Parcial' : 'Respuesta Incorrecta'}
                       </h3>
                     </div>
-                    <span className="font-black text-sm sm:text-base px-3 py-1 rounded-full bg-white/80 border shadow-sm">
+                    <span className="font-black text-sm sm:text-base px-3 py-1 rounded-full bg-white/80 border shadow-xs">
                       {result.puntos} / {result.max} pts
                     </span>
                   </div>
@@ -426,7 +426,7 @@ export default function OpenEndedQuestionView({
                   <div className="flex items-center gap-2 mb-2 font-bold text-slate-800 text-sm sm:text-base">
                     <BookOpen className="w-4 h-4 text-indigo-600 shrink-0" /> Justificación
                   </div>
-                  <p className="text-slate-700 text-sm leading-relaxed mb-3 break-words">
+                  <p className="text-slate-700 text-sm leading-relaxed mb-3 wrap-break-word">
                     {cleanQuizDisplayText(result.feedback || question?.feedback || question?.justificacion) || 'Sin justificación adicional.'}
                   </p>
 

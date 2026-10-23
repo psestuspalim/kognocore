@@ -24,7 +24,7 @@ export default function SubjectCard({ subject, quizCount, stats, onClick, onDele
         <div className="flex items-start justify-between gap-2">
           <div className="flex items-center gap-3 min-w-0">
             <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+              className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
               style={{ backgroundColor: p.iconBg }}
             >
               <BookOpen className="w-5 h-5" style={{ color: p.iconColor }} />

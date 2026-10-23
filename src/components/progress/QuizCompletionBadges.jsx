@@ -76,7 +76,7 @@ export default function QuizCompletionBadges({ quizzes, attempts, subjects }) {
     <div className="space-y-6">
       {/* Resumen general */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="border-0 shadow-lg bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
+        <Card className="border-0 shadow-lg bg-linear-to-br from-indigo-500 to-purple-600 text-white">
           <CardContent className="p-6 text-center">
             <Sparkles className="w-8 h-8 mx-auto mb-2 opacity-80" />
             <p className="text-4xl font-bold">{completedQuizzes}/{quizzes.length}</p>
@@ -85,7 +85,7 @@ export default function QuizCompletionBadges({ quizzes, attempts, subjects }) {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-400 to-orange-500 text-white">
+        <Card className="border-0 shadow-lg bg-linear-to-br from-yellow-400 to-orange-500 text-white">
           <CardContent className="p-6 text-center">
             <Crown className="w-8 h-8 mx-auto mb-2 opacity-80" />
             <p className="text-4xl font-bold">{perfectQuizzes}</p>
@@ -93,7 +93,7 @@ export default function QuizCompletionBadges({ quizzes, attempts, subjects }) {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg bg-gradient-to-br from-green-500 to-teal-600 text-white">
+        <Card className="border-0 shadow-lg bg-linear-to-br from-green-500 to-teal-600 text-white">
           <CardContent className="p-6 text-center">
             <Trophy className="w-8 h-8 mx-auto mb-2 opacity-80" />
             <p className="text-4xl font-bold">{completionPercentage}%</p>

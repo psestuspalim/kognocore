@@ -78,11 +78,11 @@ export default function AudioPlayer({ audio, onUpdate, onDelete, isAdmin }) {
   };
 
   return (
-    <Card className="p-3 sm:p-4 bg-gradient-to-r from-indigo-50 to-purple-50 border-indigo-200">
+    <Card className="p-3 sm:p-4 bg-linear-to-r from-indigo-50 to-purple-50 border-indigo-200">
       <audio ref={audioRef} src={audio.file_url} preload="metadata" />
       
       <div className="flex items-center gap-3 mb-3">
-        <div className="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center flex-shrink-0">
+        <div className="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center shrink-0">
           <Music className="w-5 h-5 text-indigo-600" />
         </div>
         

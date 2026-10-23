@@ -230,7 +230,7 @@ export default function AdivinoPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-cyan-50/40 p-4 md:p-6">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-cyan-50/40 p-4 md:p-6">
       <div className="mx-auto max-w-7xl space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
