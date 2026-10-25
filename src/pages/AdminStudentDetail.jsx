@@ -44,8 +44,8 @@ export default function AdminStudentDetail() {
       if (fromUsers) return fromUsers;
 
       const fromAttempts = attempts.find((a) =>
-        (learnerIdParam && a.learner_id === learnerIdParam) ||
-        (emailParam && a.user_email === emailParam)
+        (emailParam && a.user_email === emailParam) ||
+        (learnerIdParam && a.learner_id === learnerIdParam)
       );
 
       if (fromAttempts) {
@@ -61,8 +61,8 @@ export default function AdminStudentDetail() {
       }
 
       const fromEnrollments = enrollments.find((e) =>
-        (learnerIdParam && e.learner_id === learnerIdParam) ||
-        (emailParam && e.user_email === emailParam)
+        (emailParam && e.user_email === emailParam) ||
+        (learnerIdParam && e.learner_id === learnerIdParam)
       );
 
       if (fromEnrollments) {
