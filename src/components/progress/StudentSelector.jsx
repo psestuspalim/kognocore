@@ -19,8 +19,8 @@ export default function StudentSelector({
   const [isOpen, setIsOpen] = useState(!collapsed);
 
   // Calcular estadísticas por estudiante
-  const getStudentStats = (email) => {
-    const studentAttempts = attempts.filter(a => a.user_email === email);
+  const getStudentStats = (student) => {
+    const studentAttempts = attempts.filter(a => (a.user_email && a.user_email === student.email) || (a.learner_id && a.learner_id === student.learner_id));
     const totalCorrect = studentAttempts.reduce((sum, a) => sum + (a.score || 0), 0);
     const totalQuestions = studentAttempts.reduce((sum, a) => sum + (a.total_questions || 0), 0);
     return {
@@ -63,7 +63,7 @@ export default function StudentSelector({
   };
 
   const StudentItem = ({ user }) => {
-    const stats = getStudentStats(user.email);
+    const stats = getStudentStats(user);
     const isSelected = selectedStudent?.email === user.email;
     const isCurrentUser = user.email === currentUser?.email;
 

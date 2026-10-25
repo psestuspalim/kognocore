@@ -19,7 +19,7 @@ const generatePseudonym = (email) => {
   return `${adjectives[adjIndex]} ${animals[animalIndex]} ${number}`;
 };
 
-export default function Leaderboard({ users, currentUserEmail, title = "Tabla de Clasificación" }) {
+export default function Leaderboard({ users, currentUserEmail, currentUserLearnerId, title = "Tabla de Clasificación" }) {
   const pseudonyms = useMemo(() => {
     const map = new Map();
     users.forEach(user => {
@@ -59,7 +59,7 @@ export default function Leaderboard({ users, currentUserEmail, title = "Tabla de
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: idx * 0.1 }}
               className={`flex items-center justify-between p-3 rounded-lg border ${getPositionStyle(idx)} ${
-                user.user_email === currentUserEmail ? 'ring-2 ring-indigo-500' : ''
+                (user.user_email === currentUserEmail || (user.learner_id && user.learner_id === currentUserLearnerId)) ? 'ring-2 ring-indigo-500' : ''
               }`}
             >
               <div className="flex items-center gap-3">
@@ -68,10 +68,10 @@ export default function Leaderboard({ users, currentUserEmail, title = "Tabla de
                 </div>
                 <div>
                   <p className="font-medium text-gray-900">
-                    {user.user_email === currentUserEmail 
+                    {(user.user_email === currentUserEmail || (user.learner_id && user.learner_id === currentUserLearnerId))
                       ? (user.username || 'Usuario') 
                       : pseudonyms.get(user.user_email)}
-                    {user.user_email === currentUserEmail && (
+                    {(user.user_email === currentUserEmail || (user.learner_id && user.learner_id === currentUserLearnerId)) && (
                       <span className="ml-2 text-xs text-indigo-600">(Tú)</span>
                     )}
                   </p>

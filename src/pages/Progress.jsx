@@ -89,8 +89,8 @@ export default function ProgressPage() {
   // Usar intentos filtrados según el contexto
   const attempts = isAdmin
     ? (selectedStudent
-      ? allAttempts.filter(a => a.user_email === selectedStudent.email)
-      : allAttempts.filter(a => a.user_email === currentUser?.email))
+      ? allAttempts.filter(a => (a.user_email && a.user_email === selectedStudent.email) || (a.learner_id && a.learner_id === selectedStudent.learner_id))
+      : allAttempts.filter(a => (a.user_email && a.user_email === currentUser?.email) || (a.learner_id && a.learner_id === currentUser?.learner_id)))
     : userAttempts;
 
   const analytics = useMemo(() => {

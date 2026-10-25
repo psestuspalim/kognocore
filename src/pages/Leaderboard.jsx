@@ -112,6 +112,7 @@ export default function LeaderboardPage() {
             <Leaderboard
               users={allStats}
               currentUserEmail={currentUser?.email}
+              currentUserLearnerId={currentUser?.learner_id}
               title="Ranking General"
             />
           </TabsContent>
@@ -121,6 +122,7 @@ export default function LeaderboardPage() {
               <Leaderboard
                 users={getSubjectLeaderboard(subject.id)}
                 currentUserEmail={currentUser?.email}
+                currentUserLearnerId={currentUser?.learner_id}
                 title={`Ranking - ${subject.name}`}
               />
             </TabsContent>

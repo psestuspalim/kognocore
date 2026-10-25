@@ -244,10 +244,10 @@ const Login = () => {
                             <TabsContent value="student">
                                 <form onSubmit={handleLogin} className="space-y-4">
                                     <div className="space-y-2">
-                                        <Label htmlFor="student-username">Usuario</Label>
+                                        <Label htmlFor="username">Usuario</Label>
                                         <Input
-                                            id="student-username"
-                                            name="student-username"
+                                            id="username"
+                                            name="username"
                                             type="text"
                                             autoComplete="username"
                                             placeholder="Usuario"
@@ -258,10 +258,10 @@ const Login = () => {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="student-password">Contraseña</Label>
+                                        <Label htmlFor="password">Contraseña</Label>
                                         <Input
-                                            id="student-password"
-                                            name="student-password"
+                                            id="password"
+                                            name="password"
                                             type="password"
                                             autoComplete="current-password"
                                             placeholder="••••••••"
@@ -349,10 +349,10 @@ const Login = () => {
                                 ) : (
                                 <form onSubmit={handleLogin} className="space-y-4">
                                     <div className="space-y-2">
-                                        <Label htmlFor="username">Usuario</Label>
+                                        <Label htmlFor="admin-username">Usuario</Label>
                                         <Input
-                                            id="username"
-                                            name="username"
+                                            id="admin-username"
+                                            name="admin-username"
                                             type="text"
                                             autoComplete="username"
                                             placeholder="Usuario"
@@ -363,10 +363,10 @@ const Login = () => {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="password">Contraseña</Label>
+                                        <Label htmlFor="admin-password">Contraseña</Label>
                                         <Input
-                                            id="password"
-                                            name="password"
+                                            id="admin-password"
+                                            name="admin-password"
                                             type="password"
                                             autoComplete="current-password"
                                             placeholder="••••••••"
