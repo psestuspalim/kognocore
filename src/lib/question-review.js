@@ -24,6 +24,7 @@ export function correctedSnapshot(question, replacement) {
 }
 
 function regradeEntry(entry, correction) {
+  if (entry.admin_review) return entry;
   if (!matchesQuestion(entry, correction.before)) return entry;
   const q = { ...correction.after, answerOptions: correction.after.answerOptions || correction.after.options || [] };
   let isCorrect;
@@ -68,7 +69,7 @@ export function applyQuestionCorrections(attempt, quiz) {
   for (const correction of quiz?.question_corrections || []) {
     if (Number(updated.review_revision || 0) >= correction.revision) continue;
     const source = updated.answer_log?.length ? updated.answer_log
-      : (updated.wrong_questions || []).map(e => ({ ...e, is_correct: false }));
+      : [...(updated.wrong_questions || []).map(e => ({ ...e, is_correct: false })), ...(updated.admin_reviewed_answers || [])];
     const missingAnswers = updated.answer_log_incomplete || !updated.answer_log?.length
       ? Math.max(0, Number(updated.answered_questions || (Number(updated.score || 0) + (updated.wrong_questions || []).length)) - source.length) : 0;
     const log = source.map(e => regradeEntry(e, correction));

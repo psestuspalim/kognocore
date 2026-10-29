@@ -57,6 +57,16 @@ const requestJson = async (input, init = {}) => {
   return data;
 };
 
+export async function approveStudentAnswer(id, review) {
+  const result = await requestJson('/api/attempts', {
+    method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, action: 'approve-answer', review })
+  });
+  const items = getItems('QuizAttempt');
+  saveItems('QuizAttempt', [...items.filter(item => item.id !== id), result.attempt]);
+  return result.attempt;
+}
+
 const remoteWrites = new Map();
 const persistRemoteEntity = (entityName, item, operation = 'create') => {
   const key = `${entityName}:${item.id}`;

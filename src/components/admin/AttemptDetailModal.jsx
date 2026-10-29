@@ -6,6 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { CheckCircle2, XCircle, Clock, Calendar, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
 import MathText from '../quiz/MathText';
+import AnswerOutcome from './AnswerOutcome';
 
 export default function AttemptDetailModal({ attempt, quizTitle, open, onClose, onDelete }) {
   if (!attempt) return null;
@@ -69,18 +70,18 @@ export default function AttemptDetailModal({ attempt, quizTitle, open, onClose, 
           </div>
 
           {/* Wrong Questions */}
-          {(attempt.answer_log || []).some(answer => answer.self_correction) && (
-            <div className="mb-5 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
-              <h3 className="font-semibold text-emerald-800 mb-2">Autocorrecciones del alumno</h3>
-              {(attempt.answer_log || []).filter(answer => answer.self_correction).map((answer, index) => (
-                <div key={index} className="mt-2 text-sm text-slate-700">
-                  <MathText text={answer.question} />
-                  <p className="text-xs mt-1">Respuesta original: <MathText text={answer.selected_answer} /></p>
-                  <p className="text-xs text-emerald-700">Marcada como correcta por el alumno.</p>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="mb-6">
+            <h3 className="font-semibold text-green-700 mb-3">Respuestas correctas registradas</h3>
+            {(attempt.answer_log?.length ? attempt.answer_log : attempt.admin_reviewed_answers || []).filter(answer => answer.is_correct === true).map((answer, index) => (
+              <div key={index} className="mb-3 rounded-xl border border-green-200 bg-green-50 p-4">
+                <p className="font-medium"><MathText text={answer.question} /></p>
+                <p className="text-sm mt-2">Respuesta del alumno: <MathText text={answer.selected_answer || 'No disponible en este registro'} /></p>
+                <p className="text-sm">Respuesta del banco: <MathText text={correctAnswerText(answer) || 'No disponible en este registro'} /></p>
+                <AnswerOutcome answer={answer} />
+              </div>
+            ))}
+            {!attempt.answer_log?.length && <p className="text-sm text-slate-500">Este intento antiguo solo conserva el total de aciertos; no permite identificar cuáles fueron sus respuestas correctas.</p>}
+          </div>
           {attempt.wrong_questions?.length > 0 && (
             <div>
               <h3 className="font-semibold text-red-700 mb-3 flex items-center gap-2">
@@ -147,6 +148,7 @@ export default function AttemptDetailModal({ attempt, quizTitle, open, onClose, 
                     )}
 
                     {/* Response time */}
+                    <AnswerOutcome answer={{ ...wq, is_correct: false }} />
                     {wq.response_time && (
                       <div className="flex items-center gap-1 mt-2 text-xs text-gray-500">
                         <Clock className="w-3 h-3" />

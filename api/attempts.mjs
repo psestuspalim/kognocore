@@ -2,6 +2,7 @@ import { applyQuestionCorrections } from '../src/lib/question-review.js';
 import { createClient } from '@supabase/supabase-js'
 import { requireAdmin, requireDataActor } from './_auth.mjs'
 import { canAccessCourse } from './_students.mjs'
+import { approveAnswer } from './_answer-review.mjs'
 
 function getSupabaseAdmin() {
   const url = process.env.SUPABASE_URL
@@ -51,7 +52,6 @@ export async function GET(req) {
       for (const quiz of result.data || []) corrections.set(quiz.id, quiz.payload);
     }
     const attempts = (data || []).map((row) => ({
-
       id: row.id,
       created_date: row.created_date || row.payload?.created_date,
       updated_date: row.updated_date || row.payload?.updated_date,
@@ -106,12 +106,19 @@ export async function POST(req) {
 
     const { data: existing, error: existingError } = await supabase
       .from('quiz_attempts')
-      .select('payload')
+      .select('payload, updated_date')
       .eq('id', attempt.id)
       .maybeSingle()
 
     if (existingError) {
       return new Response(JSON.stringify({ error: 'No se pudo validar el intento', details: existingError.message }), { status: 500 })
+    }
+    if (existing?.payload?.admin_reviews?.length) {
+      return Response.json({ error: 'Este intento tiene una revisión administrativa. Actualiza los datos antes de continuar.' }, { status: 409 })
+    }
+    if (authorization.actor.kind === 'student' && (attempt.admin_reviews?.length || attempt.admin_reviewed_answers?.length
+      || [...(attempt.answer_log || []), ...(attempt.wrong_questions || [])].some(answer => answer.admin_review))) {
+      return Response.json({ error: 'Solo el administrador puede validar respuestas.' }, { status: 403 })
     }
     if (
       authorization.actor.kind === 'student' &&
@@ -132,10 +139,13 @@ export async function POST(req) {
       updated_date: safeAttempt.updated_date || now
     }
 
-    const { error } = await supabase.from('quiz_attempts').upsert(row, { onConflict: 'id' })
+    let write = existing ? supabase.from('quiz_attempts').update(row).eq('id', attempt.id) : supabase.from('quiz_attempts').insert(row)
+    if (existing) write = existing.updated_date == null ? write.is('updated_date', null) : write.eq('updated_date', existing.updated_date)
+    const { data: saved, error } = await write.select('id')
     if (error) {
       return new Response(JSON.stringify({ error: 'No se pudo guardar intento', details: error.message }), { status: 500 })
     }
+    if (!saved?.length) return Response.json({ error: 'El intento cambió. Actualiza los datos.' }, { status: 409 })
 
     return new Response(JSON.stringify({ ok: true, attempt: safeAttempt }), { status: 200 })
   } catch (_err) {
@@ -162,7 +172,7 @@ export async function PATCH(req) {
 
     const { data: current, error: getErr } = await supabase
       .from('quiz_attempts')
-      .select('id, payload')
+      .select('id, payload, updated_date')
       .eq('id', id)
       .maybeSingle()
 
@@ -173,21 +183,31 @@ export async function PATCH(req) {
       return new Response(JSON.stringify({ error: 'Intento no encontrado' }), { status: 404 })
     }
 
-    const merged = {
+    let merged = {
       ...(current.payload || {}),
       ...data,
       id,
       updated_date: new Date().toISOString()
     }
+    if (body.action === 'approve-answer') {
+      try {
+        merged = { ...approveAnswer(current.payload || {}, body.review || {}, authorization.user), id }
+      } catch (error) {
+        return Response.json({ error: error.message }, { status: 409 })
+      }
+    }
 
-    const { error } = await supabase.from('quiz_attempts').update({
+    let write = supabase.from('quiz_attempts').update({
       payload: merged,
       updated_date: merged.updated_date
     }).eq('id', id)
+    write = current.updated_date == null ? write.is('updated_date', null) : write.eq('updated_date', current.updated_date)
+    const { data: saved, error } = await write.select('id')
 
     if (error) {
       return new Response(JSON.stringify({ error: 'No se pudo actualizar intento', details: error.message }), { status: 500 })
     }
+    if (!saved?.length) return Response.json({ error: 'El intento cambió durante la revisión. Actualiza e inténtalo de nuevo.' }, { status: 409 })
 
     return new Response(JSON.stringify({ ok: true, attempt: merged }), { status: 200 })
   } catch (_err) {

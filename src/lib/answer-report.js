@@ -1,6 +1,26 @@
 const text = value => String(value ?? '').trim();
 const join = values => values.map(text).filter(Boolean).join('; ');
 
+export function answerOutcome(entry = {}) {
+  const correct = entry.is_correct === true;
+  const revisions = Array.isArray(entry.answer_revisions) ? entry.answer_revisions : [];
+  const manual = correct && Boolean(entry.self_correction);
+  return {
+    label: entry.admin_review ? 'Validada por el administrador' : manual ? 'Marcada como correcta por el alumno'
+      : revisions.length ? (correct ? 'Correcta tras editar y reevaluar' : 'Incorrecta tras editar y reevaluar')
+        : correct ? 'Correcta en la evaluación inicial' : 'Incorrecta',
+    originalAnswer: revisions.length ? revisions[0].selected_answer ?? '' : manual ? entry.selected_answer ?? '' : null,
+    revisionCount: revisions.length,
+    changedAt: entry.admin_review?.reviewed_at || revisions.at(-1)?.corrected_at || entry.self_correction?.corrected_at || null
+  };
+}
+
+// Never infer a student's correct answers from questions absent in the error list.
+export function recordedAnswers(attempt = {}) {
+  return attempt.answer_log?.length ? attempt.answer_log
+    : [...(attempt.wrong_questions || []).map(answer => ({ ...answer, is_correct: false })), ...(attempt.admin_reviewed_answers || [])];
+}
+
 // Prefer the saved answer so historical reports keep the original answer key.
 export function correctAnswerText(entry = {}, question = {}) {
   if (text(entry.correct_answer)) return text(entry.correct_answer);

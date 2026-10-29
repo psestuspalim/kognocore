@@ -1,5 +1,6 @@
+import { correctAnswerText, answerOutcome } from '@/lib/answer-report';
 import { useState } from 'react';
-import { client } from '@/api/client';
+import { client, approveStudentAnswer } from '@/api/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -16,6 +17,7 @@ import { fromCompactFormat, isCompactFormat } from '../components/utils/quizForm
 import AttemptDetailModal from '../components/admin/AttemptDetailModal';
 import StudentProgressModal from '../components/admin/StudentProgressModal';
 import QuizMasterDocs from '../components/admin/QuizMasterDocs';
+import AnswerReviewPanel from '../components/admin/AnswerReviewPanel';
 
 export default function AdminProgress() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -26,8 +28,22 @@ export default function AdminProgress() {
   const [showProgressModal, setShowProgressModal] = useState(false);
 
   const queryClient = useQueryClient();
+  const approveAnswerMutation = useMutation({
+    mutationFn: ({ row, reason }) => approveStudentAnswer(row.attempt.id, {
+      source: row.reviewSource, index: row.reviewIndex,
+      question: row.question, selected_answer: row.rawSelectedAnswer, expected_score: Number(row.attempt.score), reason
+    }),
+    onSuccess: (attempt) => {
+      queryClient.setQueryData(['quiz-attempts'], (previous = []) => previous.map(item => item.id === attempt.id ? attempt : item));
+      setSelectedStudent(null);
+      setSelectedAttempt(null);
+      queryClient.invalidateQueries({ queryKey: ['quiz-attempts'] });
+      toast.success(`Respuesta validada. Calificación: ${attempt.score}/${attempt.total_questions}`);
+    },
+    onError: (error) => { toast.error(error.message || 'No se pudo guardar la revisión'); }
+  });
 
-  const { data: attempts = [] } = useQuery({
+  const { data: attempts = [], isLoading: attemptsLoading, isError: attemptsError } = useQuery({
     queryKey: ['quiz-attempts'],
     queryFn: () => client.entities.QuizAttempt.list('-created_date', 2000),
   });
@@ -73,17 +89,17 @@ export default function AdminProgress() {
     }
   };
 
-  const { data: quizzes = [] } = useQuery({
+  const { data: quizzes = [], isLoading: quizzesLoading, isError: quizzesError } = useQuery({
     queryKey: ['quizzes'],
     queryFn: () => client.entities.Quiz.list(),
   });
 
-  const { data: subjects = [] } = useQuery({
+  const { data: subjects = [], isLoading: subjectsLoading, isError: subjectsError } = useQuery({
     queryKey: ['subjects'],
     queryFn: () => client.entities.Subject.list(),
   });
 
-  const { data: users = [] } = useQuery({
+  const { data: users = [], isLoading: usersLoading, isError: usersError } = useQuery({
     queryKey: ['users'],
     queryFn: () => client.entities.User.list('-created_date', 1000),
   });
@@ -107,6 +123,7 @@ export default function AdminProgress() {
         learner_id: user.learner_id || null,
         email: user.email || null,
         username: user.username || user.full_name || 'Sin nombre',
+        hasSignedIn: Boolean(user.last_sign_in_at),
         attempts: [],
         totalQuizzes: 0,
         totalCorrect: 0,
@@ -123,6 +140,7 @@ export default function AdminProgress() {
         learner_id: e.learner_id || null,
         email: e.user_email || null,
         username: e.username || 'Sin nombre',
+        hasSignedIn: false,
         attempts: [],
         totalQuizzes: 0,
         totalCorrect: 0,
@@ -143,6 +161,7 @@ export default function AdminProgress() {
         learner_id: attempt.learner_id || null,
         email: attempt.user_email || null,
         username: attempt.username || 'Sin nombre',
+        hasSignedIn: false,
         attempts: [],
         totalQuizzes: 0,
         totalCorrect: 0,
@@ -272,8 +291,15 @@ export default function AdminProgress() {
     `;
   };
 
+  const buildOutcomeHtml = (row) => {
+    const outcome = answerOutcome(row);
+    return `<div class="qa"><strong>Resultado:</strong> ${escapeHtml(outcome.label)}</div>`
+      + (outcome.originalAnswer !== null ? `<div class="qa"><strong>Respuesta original:</strong> ${escapeHtml(outcome.originalAnswer || 'Sin respuesta')}</div>` : '')
+      + (outcome.revisionCount ? `<div class="muted">Ediciones y reevaluaciones: ${outcome.revisionCount}</div>` : '');
+  };
+
   const getAttemptQuestionRows = (attempt) => {
-    const quizQuestions = getExpandedQuizQuestions(attempt.quiz_id);
+    const quizQuestions = attempt.quiz_snapshot?.questions || getExpandedQuizQuestions(attempt.quiz_id);
     const quizQuestionMap = new Map((quizQuestions || []).map((q) => [q.question, q]));
 
     if (Array.isArray(attempt.answer_log) && attempt.answer_log.length > 0) {
@@ -283,13 +309,18 @@ export default function AdminProgress() {
         const rowOptions = normalizeAnswerOptions(
           entry.answerOptions?.length ? entry.answerOptions : (quizQuestion?.answerOptions || quizQuestion?.options || [])
         );
-        const derivedCorrect = rowOptions.find((o) => o.isCorrect)?.text || '';
+        const derivedCorrect = correctAnswerText(entry, quizQuestion);
 
         return {
+          ...entry,
+          reviewSource: 'answer_log', reviewIndex: idx, rawSelectedAnswer: entry.selected_answer,
           id: `${attempt.id}-${idx}`,
           question: questionText,
           selected_answer: entry.selected_answer || '',
           correct_answer: entry.correct_answer || derivedCorrect,
+          expectedSource: correctAnswerText(entry) ? 'Respuesta guardada en el intento' : attempt.quiz_snapshot?.questions ? 'Respuesta de la versión guardada del cuestionario' : 'Referencia del banco actual; puede haber cambiado desde el intento',
+          imageUrl: entry.imageUrl || quizQuestion?.imageUrl,
+          explanation: entry.explanation || quizQuestion?.explanation || quizQuestion?.rationale,
           answerOptions: rowOptions,
           hint: entry.hint || quizQuestion?.hint || '',
           is_correct: entry.is_correct === true
@@ -297,33 +328,20 @@ export default function AdminProgress() {
       });
     }
 
-    const wrongMap = new Map();
-    (attempt.wrong_questions || []).forEach((wq) => {
-      wrongMap.set(wq.question, {
+    return [...(attempt.wrong_questions || []).map((wq, idx) => ({
+        ...wq,
+        reviewSource: 'wrong_questions', reviewIndex: idx, rawSelectedAnswer: wq.selected_answer,
         question: wq.question || 'Pregunta sin texto',
         selected_answer: wq.selected_answer || '',
-        correct_answer: wq.correct_answer || '',
+        correct_answer: correctAnswerText(wq, quizQuestionMap.get(wq.question)),
+        expectedSource: correctAnswerText(wq) ? 'Respuesta guardada en el intento' : attempt.quiz_snapshot?.questions ? 'Respuesta de la versión guardada del cuestionario' : 'Referencia del banco actual; puede haber cambiado desde el intento',
+        imageUrl: wq.imageUrl || quizQuestionMap.get(wq.question)?.imageUrl,
         answerOptions: normalizeAnswerOptions(
           wq.answerOptions?.length ? wq.answerOptions : (quizQuestionMap.get(wq.question)?.answerOptions || quizQuestionMap.get(wq.question)?.options || [])
         ),
         hint: wq.hint || '',
         is_correct: false
-      });
-    });
-
-    const recoveredCorrect = getExpandedQuizQuestions(attempt.quiz_id)
-      .filter((q) => !wrongMap.has(q.question))
-      .slice(0, attempt.score || 0)
-      .map((q) => ({
-        question: q.question || 'Pregunta sin texto',
-        selected_answer: (q.answerOptions || q.options || []).find((o) => (o.isCorrect ?? o.c))?.text || '',
-        correct_answer: (q.answerOptions || q.options || []).find((o) => (o.isCorrect ?? o.c))?.text || '',
-        answerOptions: normalizeAnswerOptions(q.answerOptions || q.options || []),
-        hint: q.hint || '',
-        is_correct: true
-      }));
-
-    return [...recoveredCorrect, ...Array.from(wrongMap.values())];
+      })), ...(attempt.admin_reviewed_answers || [])];
   };
 
   const openPrintWindow = (title, bodyHtml) => {
@@ -396,11 +414,14 @@ export default function AdminProgress() {
         <div class="kpi"><span>Incorrectas</span><strong>${wrongRows.length}</strong></div>
       </div>
       <h2>Preguntas Correctas</h2>
+      <p class="muted">Marcadas como correctas por el alumno: ${correctRows.filter(row => row.self_correction).length}. Correctas tras editar y reevaluar: ${correctRows.filter(row => row.answer_revisions?.length && !row.self_correction).length}.</p>
+      ${quizStat.attempts.some(attempt => !attempt.answer_log?.length) ? '<p class="muted">Hay intentos antiguos sin detalle de aciertos. Sus respuestas correctas no se pueden identificar y no se incluyen en este listado.</p>' : ''}
       ${correctRows.length === 0 ? '<p class="muted">Sin respuestas correctas registradas.</p>' : correctRows.map((row, idx) => `
         <div class="card ok">
           <strong>${idx + 1}. ${escapeHtml(row.question)}</strong>
-          <div class="qa"><strong>Respondió:</strong> ${escapeHtml(row.selected_answer || row.correct_answer || 'N/A')}</div>
-          <div class="qa"><strong>Correcta:</strong> ${escapeHtml(row.correct_answer || 'N/A')}</div>
+          <div class="qa"><strong>Respondió:</strong> ${escapeHtml(row.selected_answer || row.correct_answer || 'No disponible en este registro')}</div>
+          <div class="qa"><strong>Respuesta correcta:</strong> ${escapeHtml(row.correct_answer || 'No disponible en este registro')}</div>
+          ${buildOutcomeHtml(row)}
           ${buildOptionsHtml(row)}
           <div class="muted">${format(new Date(row.attemptDate), 'dd/MM/yyyy HH:mm')}</div>
         </div>
@@ -410,7 +431,8 @@ export default function AdminProgress() {
         <div class="card ko">
           <strong>${idx + 1}. ${escapeHtml(row.question)}</strong>
           <div class="qa"><strong>Respondió:</strong> ${escapeHtml(row.selected_answer || 'N/A')}</div>
-          <div class="qa"><strong>Correcta:</strong> ${escapeHtml(row.correct_answer || 'N/A')}</div>
+          <div class="qa"><strong>Respuesta correcta:</strong> ${escapeHtml(row.correct_answer || 'No disponible en este registro')}</div>
+          ${buildOutcomeHtml(row)}
           ${buildOptionsHtml(row)}
           <div class="muted">${format(new Date(row.attemptDate), 'dd/MM/yyyy HH:mm')}</div>
         </div>
@@ -448,12 +470,15 @@ export default function AdminProgress() {
         <div class="kpi"><span>Incorrectas</span><strong>${wrongRows.length}</strong></div>
       </div>
       <h2>Preguntas Correctas</h2>
+      <p class="muted">Marcadas como correctas por el alumno: ${correctRows.filter(row => row.self_correction).length}. Correctas tras editar y reevaluar: ${correctRows.filter(row => row.answer_revisions?.length && !row.self_correction).length}.</p>
+      ${student.attempts.some(attempt => !attempt.answer_log?.length) ? '<p class="muted">Hay intentos antiguos sin detalle de aciertos. Sus respuestas correctas no se pueden identificar y no se incluyen en este listado.</p>' : ''}
       ${correctRows.length === 0 ? '<p class="muted">No hay respuestas correctas registradas.</p>' : correctRows.map((row, idx) => `
         <div class="card ok">
           <strong>${idx + 1}. ${escapeHtml(row.question)}</strong>
           <div class="qa"><strong>Quiz:</strong> ${escapeHtml(row.quizTitle)}</div>
-          <div class="qa"><strong>Respondió:</strong> ${escapeHtml(row.selected_answer || row.correct_answer || 'N/A')}</div>
-          <div class="qa"><strong>Correcta:</strong> ${escapeHtml(row.correct_answer || 'N/A')}</div>
+          <div class="qa"><strong>Respondió:</strong> ${escapeHtml(row.selected_answer || row.correct_answer || 'No disponible en este registro')}</div>
+          <div class="qa"><strong>Respuesta correcta:</strong> ${escapeHtml(row.correct_answer || 'No disponible en este registro')}</div>
+          ${buildOutcomeHtml(row)}
           ${buildOptionsHtml(row)}
           <div class="muted">${format(new Date(row.attemptDate), 'dd/MM/yyyy HH:mm')}</div>
         </div>
@@ -464,7 +489,8 @@ export default function AdminProgress() {
           <strong>${idx + 1}. ${escapeHtml(row.question)}</strong>
           <div class="qa"><strong>Quiz:</strong> ${escapeHtml(row.quizTitle)}</div>
           <div class="qa"><strong>Respondió:</strong> ${escapeHtml(row.selected_answer || 'N/A')}</div>
-          <div class="qa"><strong>Correcta:</strong> ${escapeHtml(row.correct_answer || 'N/A')}</div>
+          <div class="qa"><strong>Respuesta correcta:</strong> ${escapeHtml(row.correct_answer || 'No disponible en este registro')}</div>
+          ${buildOutcomeHtml(row)}
           ${buildOptionsHtml(row)}
           <div class="muted">${format(new Date(row.attemptDate), 'dd/MM/yyyy HH:mm')}</div>
         </div>
@@ -583,8 +609,9 @@ export default function AdminProgress() {
         </div>
 
         <Tabs defaultValue="students" className="mb-6">
-          <TabsList>
+          <TabsList className="h-auto flex-wrap">
             <TabsTrigger value="students">Estudiantes</TabsTrigger>
+            <TabsTrigger value="review"><Eye className="w-4 h-4 mr-2" />Revisar respuestas</TabsTrigger>
             <TabsTrigger value="docs">
               <BookOpen className="w-4 h-4 mr-2" />
               Documentación
@@ -618,8 +645,11 @@ export default function AdminProgress() {
                       return (
                         <button
                           key={student.key}
+                          disabled={!student.hasSignedIn}
                           onClick={() => setSelectedStudent(student)}
-                          className={`w-full text-left p-4 rounded-lg border-2 transition-all ${selectedStudent?.key === student.key
+                          className={`w-full text-left p-4 rounded-lg border-2 transition-all disabled:cursor-not-allowed disabled:opacity-60 ${!student.hasSignedIn
+                              ? 'border-gray-200 bg-gray-50'
+                              : selectedStudent?.key === student.key
                               ? 'border-indigo-500 bg-indigo-50'
                               : 'border-gray-200 hover:border-gray-300'
                             }`}
@@ -631,6 +661,10 @@ export default function AdminProgress() {
                             {student.email || student.learner_id || 'Sin email'}
                           </div>
                           <div className="flex items-center justify-between">
+                            {!student.hasSignedIn ? (
+                              <Badge variant="outline">Pendiente de primer ingreso</Badge>
+                            ) : (
+                              <>
                             <span className="text-xs text-gray-600">
                               {student.totalQuizzes} intentos
                             </span>
@@ -643,6 +677,8 @@ export default function AdminProgress() {
                             >
                               {avgScore}%
                             </Badge>
+                              </>
+                            )}
                           </div>
                         </button>
                       );
@@ -947,6 +983,27 @@ export default function AdminProgress() {
               student={selectedStudent}
               subjects={subjects}
               quizzes={quizzes}
+            />
+          </TabsContent>
+
+          <TabsContent value="review">
+            <AnswerReviewPanel
+              students={Object.values(studentStats)}
+              quizzes={quizzes}
+              subjects={subjects}
+              getRows={getAttemptQuestionRows}
+              onOpenAttempt={setSelectedAttempt}
+              onApprove={(row, reason) => approveAnswerMutation.mutateAsync({ row, reason })}
+              saving={approveAnswerMutation.isPending}
+              loading={attemptsLoading || quizzesLoading || subjectsLoading || usersLoading}
+              error={attemptsError || quizzesError || subjectsError || usersError}
+            />
+            <AttemptDetailModal
+              attempt={selectedAttempt?.attempt}
+              quizTitle={selectedAttempt?.quizTitle}
+              open={!!selectedAttempt}
+              onClose={() => setSelectedAttempt(null)}
+              onDelete={(id) => deleteAttemptMutation.mutate(id)}
             />
           </TabsContent>
 
