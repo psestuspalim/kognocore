@@ -2,6 +2,10 @@
     "$schema": "https://openapi.vercel.sh/vercel.json",
     "routes": [
         {
+            "src": "/api/invites-validate",
+            "dest": "/api/redeem?create_session=false"
+        },
+        {
             "handle": "filesystem"
         },
         {
