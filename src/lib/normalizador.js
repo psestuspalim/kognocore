@@ -1,3 +1,6 @@
+import DIC from './sinonimos.json' with { type: 'json' };
+const DEFAULT_DICTIONARY = DIC;
+
 /**
  * normalizador.js
  * Motor de normalizacion y calificacion para banco de preguntas de anatomia.
@@ -15,13 +18,19 @@
  *   motor.calificar(item, respuestaDelAlumno);
  */
 
-import DIC from './sinonimos.json' with { type: 'json' };
-
-export const VERSION = '1.3.1';
-
 // ---------------------------------------------------------------------------
 // 1. Primitivas de texto
 // ---------------------------------------------------------------------------
+
+/**
+ * Version del motor. Subir al cambiar la logica de comparacion, para poder
+ * verificar desde la plataforma que la version desplegada es la esperada.
+ *   1.0.0  normalizacion base, sinonimia, tolerancia ortografica
+ *   1.1.0  tokens protegidos (digitos y terminos de direccion u oposicion)
+ *   1.2.0  nucleos genericos opcionales + maximo acoplamiento bipartito
+ *   1.3.0  reduccion de nucleos por pares + autodiagnostico
+ */
+export const VERSION = '1.3.1';
 
 /** Quita diacriticos: "apófisis" -> "apofisis", "cóccix" -> "coccix". */
 export function sinAcentos(s) {
@@ -73,21 +82,30 @@ export function toleranciaOrtografica(termino) {
 // 2. Motor
 // ---------------------------------------------------------------------------
 
-export function crearMotor(dic = DIC) {
-  const VACIAS = new Set(dic.palabras_vacias || []);
-  const EXC_PLURAL = new Set(dic.excepciones_plural || []);
-  const GENERO = dic.adjetivos_genero || {};
-  const PROTEGIDAS = new Set((dic.palabras_protegidas?.lista || []).map(limpiar));
-  const NUCLEOS = new Set((dic.nucleos_opcionales?.lista || []).map(limpiar));
+export function crearMotor(DIC = DEFAULT_DICTIONARY) {
+  const VACIAS = new Set(DIC.palabras_vacias);
+  const EXC_PLURAL = new Set(DIC.excepciones_plural);
+  const GENERO = DIC.adjetivos_genero || {};
+  const PROTEGIDAS = new Set((DIC.palabras_protegidas?.lista || []).map(limpiar));
+  const NUCLEOS = new Set((DIC.nucleos_opcionales?.lista || []).map(limpiar));
 
+  /**
+   * Quita los sustantivos genericos que encabezan el nombre de una estructura,
+   * para que "plano sagital" y "sagital" califiquen igual. Nunca vacia la
+   * cadena: si todo lo que queda son nucleos, devuelve la forma original.
+   */
   function sinNucleo(norm) {
     const toks = norm.split(' ').filter(t => t && !NUCLEOS.has(t));
     return toks.length ? toks.join(' ') : norm;
   }
 
-  // Elimina un sustantivo genérico sólo del lado donde el otro lo omitió.
-  // Así "escapular" equivale a "región escapular", pero "ligamento" no
-  // equivale a "ligamento nucal".
+  /**
+   * Reduccion por pares: elimina de cada lado solo los nucleos genericos que el
+   * otro lado NO escribio. Asi "sistemas" califica contra "anatomia por
+   * sistemas" (sobra "anatomia") sin que "ligamento" califique contra
+   * "ligamento nucal" (el generico esta en ambos y "nucal" queda sin pareja).
+   * Si algun lado quedara vacio, se devuelven las formas originales.
+   */
   function reducirPar(a, b) {
     const ta = a.split(' ').filter(Boolean);
     const tb = b.split(' ').filter(Boolean);
@@ -109,19 +127,23 @@ export function crearMotor(dic = DIC) {
 
   // Equivalencias ordenadas de frase mas larga a mas corta, para que
   // "apofisis espinosa" gane sobre "apofisis".
-  const EQUIV = [...(dic.equivalencias || [])]
+  const EQUIV = [...DIC.equivalencias]
     .map(([de, a]) => [limpiar(de), limpiar(a)])
     .sort((x, y) => y[0].split(' ').length - x[0].split(' ').length);
 
   // Prefijos de categoria, mas largos primero.
   const PREFIJOS = {};
-  for (const [cat, lista] of Object.entries(dic.prefijos_categoria || {})) {
+  for (const [cat, lista] of Object.entries(DIC.prefijos_categoria || {})) {
     PREFIJOS[cat] = [...lista].map(limpiar)
       .sort((a, b) => b.split(' ').length - a.split(' ').length);
   }
 
   /** Singularizacion conservadora del espanol. */
   function singular(w) {
+    // Invariables en espanol: epifisis, sinfisis, diafisis, analisis, cifosis,
+    // artrosis, torax... Sin esto, "epifisis" se convertia en "epifisi" y dejaba
+    // de reconocerse como nucleo generico o como palabra del diccionario.
+    if (/(sis|xis)$/.test(w)) return w;
     if (EXC_PLURAL.has(w) || w.length <= 4) return w;
     if (w.endsWith('ces')) return w.slice(0, -3) + 'z';       // raices -> raiz
     if (w.endsWith('es') && w.length > 5) return w.slice(0, -2);
@@ -141,9 +163,8 @@ export function crearMotor(dic = DIC) {
 
   /** Quita el prefijo generico de categoria si el item declara una. */
   function quitarPrefijo(s, categoria) {
-    const clave = limpiar(categoria);
-    if (!clave || !PREFIJOS[clave]) return s;
-    for (const p of PREFIJOS[clave]) {
+    if (!categoria || !PREFIJOS[categoria]) return s;
+    for (const p of PREFIJOS[categoria]) {
       if (s === p) return s;                       // no vaciar la respuesta
       if (s.startsWith(p + ' ')) return s.slice(p.length + 1);
     }
@@ -169,10 +190,12 @@ export function crearMotor(dic = DIC) {
       toks = toks.map(singular);
       toks = toks.map(t => GENERO[t] || t);   // segunda pasada tras singularizar
     }
-    // El orden de palabras no debe decidir la calificacion
+    // El orden de palabras no debe decidir la calificacion:
+    // "ligamento longitudinal anterior" == "anterior longitudinal ligamento".
     if (opts.ordenLibre !== false) toks = toks.sort();
 
-    // Una equivalencia puede duplicar un token
+    // Una equivalencia puede duplicar un token: "el atlas (C1)" -> "atlas atlas".
+    // Tras ordenar, los duplicados quedan contiguos.
     if (opts.ordenLibre !== false) toks = toks.filter((t, i) => t !== toks[i - 1]);
 
     return toks.join(' ');
@@ -188,27 +211,29 @@ export function crearMotor(dic = DIC) {
 
     // Paso 1: igualdad literal tras limpieza basica.
     for (const a of aceptadas) {
-      if (!a) continue;
       if (rLimpia === limpiar(a)) return { ok: true, via: 'exacto', distancia: 0 };
     }
 
     // Paso 2: igualdad tras normalizacion completa.
     const rNorm = normalizar(respuesta, opts);
-    const aNorms = aceptadas.filter(Boolean).map(a => normalizar(a, opts));
+    const aNorms = aceptadas.map(a => normalizar(a, opts));
     for (const a of aNorms) {
       if (rNorm === a) return { ok: true, via: 'normalizado', distancia: 0 };
     }
 
-    // Paso 2b: permite omitir sustantivos genéricos como "región" o
-    // "músculo", salvo cuando distinguirían dos respuestas del mismo item.
+    // Paso 2b: igualdad ignorando el sustantivo generico que encabeza la
+    // estructura ("sagital" contra "plano sagital"). Se desactiva por item
+    // cuando quitarlo volveria ambiguos dos elementos (opts.nucleo === false).
     if (opts.nucleo !== false) {
       for (const a of aNorms) {
-        const [rCore, aCore] = reducirPar(rNorm, a);
-        if (rCore === aCore) return { ok: true, via: 'nucleo', distancia: 0 };
+        const [r2, a2] = reducirPar(rNorm, a);
+        if (r2 === a2) return { ok: true, via: 'nucleo', distancia: 0 };
       }
     }
 
-    // Paso 3: tolerancia ortografica sobre la forma normalizada
+    // Paso 3: tolerancia ortografica sobre la forma normalizada, solo si los
+    // tokens protegidos coinciden exactos. Sin esto, "epifisis anular superior"
+    // calificaba contra "...inferior" y "desplazamiento 50%" contra "25%".
     let mejor = Infinity;
     for (const a of aNorms) {
       const [rCore, aCore] = opts.nucleo === false ? [rNorm, a] : reducirPar(rNorm, a);
@@ -227,24 +252,21 @@ export function crearMotor(dic = DIC) {
   // 3. Calificadores por tipo de item
   // -------------------------------------------------------------------------
 
+  function opcionesDe(item) {
+    const opts = { categoria: item.categoria };
+    const grupos = item.respuesta?.elementos || item.respuesta?.pares
+      || (item.blancos ? Object.values(item.blancos) : null);
+    if (grupos && grupos.length > 1) {
+      const nucleos = grupos.map(g => sinNucleo(normalizar(g.canonico, opts)));
+      if (new Set(nucleos).size !== nucleos.length) opts.nucleo = false;
+    }
+    return opts;
+  }
+
   function formasDe(el) {
     if (!el) return [];
     if (typeof el === 'string') return [el];
     return [el.canonico, ...(el.acepta || [])].filter(Boolean);
-  }
-
-  function opcionesDe(item, grupos = null) {
-    const opts = { categoria: limpiar(item.categoria) };
-    const respuestas = grupos || item.respuesta?.elementos || item.respuesta?.pares
-      || (item.blancos ? Object.values(item.blancos) : null);
-    if (respuestas && respuestas.length > 1) {
-      const nucleos = respuestas.map(respuesta => {
-        const canonico = typeof respuesta === 'string' ? respuesta : respuesta.canonico;
-        return sinNucleo(normalizar(canonico, opts));
-      });
-      if (new Set(nucleos).size !== nucleos.length) opts.nucleo = false;
-    }
-    return opts;
   }
 
   /** Divide un textarea en entradas: saltos de linea, comas, punto y coma, numeracion. */
@@ -272,9 +294,8 @@ export function crearMotor(dic = DIC) {
     // Alternatives are distinct valid concepts declared by the question author,
     // not global synonyms of an unrelated reference answer.
     const candidatos = [...elementos, ...(item.respuesta?.alternativas || [])];
-    const opts = opcionesDe(item, candidatos);
     const opciones = candidatos.map(el => dadas.map(dada =>
-      coincide(dada, formasDe(el), { ...opts, categoria: categoria || opts.categoria })));
+      coincide(dada, formasDe(el), { ...opcionesDe(item), categoria })));
     const asignados = new Map();
     function asignar(candidato, visitados = new Set()) {
       for (let i = 0; i < dadas.length; i++) {
@@ -345,7 +366,8 @@ export function crearMotor(dic = DIC) {
   }
 
   function parseNumero(s) {
-    const t = String(s ?? '').normalize('NFKC').replace(/[\u2010-\u2015\u2212]/g, '-').replace(/,/g, '.');
+    const t = String(s ?? '').normalize('NFKC').replace(/[\u2010-\u2015\u2212]/g, '-').replace(/,/g, '.')
+      .replace(/(\d)\s*-\s*(?=\d)/g, '$1 a ');
     const m = t.match(/-?\d+(?:\.\d+)?/g);
     return m ? m.map(Number) : [];
   }
@@ -360,7 +382,7 @@ export function crearMotor(dic = DIC) {
         ok = nums.every(n => n >= lo - (R.tol ?? 0) && n <= hi + (R.tol ?? 0));
       } else if (R.valor !== undefined) {
         const tol = R.tol ?? 0;
-        ok = nums.some(n => Math.abs(n - R.valor) <= tol);
+        ok = nums.length === 1 && Math.abs(nums[0] - R.valor) <= tol;
       }
     }
     const esperado = R.rango ? `${R.rango[0]}-${R.rango[1]} ${R.unidad ?? ''}`.trim()
@@ -379,7 +401,7 @@ export function crearMotor(dic = DIC) {
     let aciertos = 0;
     for (const k of claves) {
       const b = blancos[k];
-      const r = coincide(resp[k], [b.canonico, ...(b.acepta || [])], { categoria: b.categoria });
+      const r = coincide(resp[k], [b.canonico, ...(b.acepta || [])], { ...opcionesDe({ ...item, blancos }), categoria: b.categoria ?? item.categoria });
       if (r.ok) aciertos++;
       detalle.push({ blanco: k, esperado: b.canonico, dado: resp[k] ?? null, ok: r.ok, via: r.via });
     }
@@ -425,11 +447,18 @@ export function crearMotor(dic = DIC) {
 
   function autodiagnostico() {
     const casos = [
-      { desc: 'omite núcleo región', ok: coincide('escapular', ['región escapular']).ok },
-      { desc: 'conserva términos distintivos', ok: !coincide('ligamento', ['ligamento nucal']).ok },
-      { desc: 'protege términos opuestos', ok: !coincide('epífisis anular superior', ['epífisis anular inferior']).ok }
+      { desde: '1.0.0', desc: 'sinonimia TA/clasica: "apofisis espinosa" = "proceso espinoso"',
+        ok: coincide('apófisis espinosa', ['proceso espinoso']).ok },
+      { desde: '1.1.0', desc: 'tokens protegidos: "epifisis anular superior" != "...inferior"',
+        ok: !coincide('epifisis anular superior', ['epífisis anular inferior']).ok },
+      { desde: '1.2.0', desc: 'nucleo generico: "sagital" = "plano sagital"',
+        ok: coincide('sagital', ['plano sagital']).ok },
+      { desde: '1.3.0', desc: 'reduccion por pares: "sistemas" = "anatomia por sistemas"',
+        ok: coincide('sistemas', ['anatomía por sistemas']).ok },
+      { desde: '1.3.0', desc: 'no sobre-permisivo: "ligamento" != "ligamento nucal"',
+        ok: !coincide('ligamento', ['ligamento nucal']).ok }
     ];
-    return { version: VERSION, ok: casos.every(caso => caso.ok), casos };
+    return { version: VERSION, ok: casos.every(c => c.ok), casos };
   }
 
   return { normalizar, coincide, calificar, limpiar, trocear, sinNucleo, opcionesDe, autodiagnostico, VERSION };

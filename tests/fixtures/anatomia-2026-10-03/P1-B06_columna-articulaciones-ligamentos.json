@@ -1,0 +1,727 @@
+{
+  "bloque": {
+    "id": "P1-B06",
+    "titulo": "Columna vertebral · Articulaciones de los cuerpos y los arcos vertebrales · Ligamentos accesorios · Articulaciones craneovertebrales · Movimientos y curvaturas · Vascularización e inervación",
+    "parcial": 1,
+    "sesion": "4 de febrero",
+    "paginas": "89, 97-107"
+  },
+  "items": [
+    {
+      "id": "P1-B06-001",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 5 clases de articulaciones de la columna vertebral:",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones de la columna"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 97
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "articulaciones de los cuerpos vertebrales"
+          },
+          {
+            "canonico": "articulaciones de los arcos vertebrales"
+          },
+          {
+            "canonico": "articulaciones craneovertebrales"
+          },
+          {
+            "canonico": "articulaciones costovertebrales"
+          },
+          {
+            "canonico": "articulaciones sacroilíacas"
+          }
+        ]
+      },
+      "feedback": "Las dos primeras son el objeto de este capítulo; las costovertebrales se estudian con el tórax y las sacroilíacas con la pelvis. La distinción estructural importa: las de los cuerpos vertebrales son sínfisis, es decir articulaciones cartilaginosas secundarias destinadas a soportar peso y dar fortaleza, mientras que las de los arcos vertebrales son las cigapofisiarias, que son sinoviales planas y permiten deslizamiento. Las craneovertebrales son sinoviales y carecen de disco intervertebral."
+    },
+    {
+      "id": "P1-B06-002",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la estructura del disco intervertebral:",
+      "texto": "Cada disco se compone de un {{c1}}, que es una parte fibrosa externa formada por laminillas concéntricas de {{c2}}, y una masa central gelatinosa denominada {{c3}}.",
+      "dificultad": 1,
+      "etiquetas": [
+        "disco intervertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 97,
+        "fig": "2-16"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "anillo fibroso"
+        },
+        "c2": {
+          "canonico": "fibrocartílago"
+        },
+        "c3": {
+          "canonico": "núcleo pulposo"
+        }
+      },
+      "feedback": "Los discos proporcionan una unión potente entre los cuerpos vertebrales, los unen para formar una columna continua semirrígida y forman la mitad inferior del borde anterior del foramen intervertebral. Además de permitir movimientos entre vértebras adyacentes, su deformabilidad elástica les capacita para absorber los choques. El anillo se inserta en los rebordes epifisarios, lisos y redondeados, de las caras articulares de los cuerpos vertebrales, formados por la fusión de las epífisis anulares."
+    },
+    {
+      "id": "P1-B06-003",
+      "tipo": "numerico",
+      "prompt": "¿Qué porcentaje de la longitud total de la columna vertebral componen en conjunto los discos intervertebrales?",
+      "dificultad": 2,
+      "etiquetas": [
+        "disco intervertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 97
+      },
+      "respuesta": {
+        "rango": [
+          20,
+          25
+        ],
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Esa proporción explica la pérdida de talla con la edad: conforme los núcleos se deshidratan y los discos pierden altura, se pierde parte de ese 20-25%. El grosor de los discos no es uniforme: aumenta a medida que se desciende por la columna, pero su grosor relativo al tamaño del cuerpo vertebral depende más de la gama de movimientos, y es mayor en las regiones cervical y lumbar. Son más gruesos anteriormente en las regiones cervical y lumbar, y esa morfología es la que ocasiona las curvaturas secundarias."
+    },
+    {
+      "id": "P1-B06-004",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la disposición de las fibras del anillo fibroso:",
+      "texto": "Las fibras que forman cada laminilla cursan {{c1}} de una vértebra a otra, alrededor de 30° o más desde la vertical. Las fibras de las laminillas adyacentes se entrecruzan en direcciones {{c2}}, lo que permite una rotación {{c3}} entre las vértebras adyacentes al tiempo que proporciona una fuerte unión entre ellas.",
+      "dificultad": 3,
+      "etiquetas": [
+        "disco intervertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 97,
+        "fig": "2-16 B"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "oblicuamente",
+          "acepta": [
+            "oblicua"
+          ]
+        },
+        "c2": {
+          "canonico": "opuestas",
+          "acepta": [
+            "contrarias"
+          ]
+        },
+        "c3": {
+          "canonico": "limitada",
+          "acepta": [
+            "restringida"
+          ]
+        }
+      },
+      "feedback": "El entrecruzamiento oblicuo en ángulos mayores de 60° es lo que convierte al anillo en una estructura que resiste la torsión pero permite algo de rotación. Dos datos de consecuencia clínica: el anillo es más delgado en su parte posterior, donde en el adulto puede estar incompleto en la región cervical, y su vascularización disminuye hacia el centro, con inervación sensitiva solo en su tercio externo. Esa debilidad posterior es la razón de que las hernias sean típicamente posterolaterales."
+    },
+    {
+      "id": "P1-B06-005",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el núcleo pulposo:",
+      "texto": "El núcleo pulposo es {{c1}} y recibe sus nutrientes por difusión desde los vasos situados en la periferia del anillo fibroso y el cuerpo vertebral. Como las laminillas del anillo son más delgadas y menos numerosas por detrás, el núcleo no queda centrado en el disco, sino que se sitúa entre el centro y su parte {{c2}}. Durante los movimientos de flexión y extensión actúa como un {{c3}} semilíquido.",
+      "dificultad": 2,
+      "etiquetas": [
+        "disco intervertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 98,
+        "fig": "2-18"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "avascular"
+        },
+        "c2": {
+          "canonico": "posterior"
+        },
+        "c3": {
+          "canonico": "punto de apoyo",
+          "acepta": [
+            "fulcro",
+            "pivote"
+          ]
+        }
+      },
+      "feedback": "Al nacer el núcleo contiene cerca de un 88% de agua y es más cartilaginoso que fibroso; esa naturaleza semilíquida es en gran medida la causa de la flexibilidad y elasticidad del disco y de la columna entera. Su comportamiento mecánico es el de un amortiguador: se vuelve más ancho al comprimirse y más delgado al tensarse, como cuando uno queda colgado de los miembros superiores. Su posición excéntrica posterior, sumada al anillo más delgado ahí, explica la dirección de las hernias."
+    },
+    {
+      "id": "P1-B06-006",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Entre qué dos vértebras no existe disco intervertebral?",
+      "dificultad": 2,
+      "etiquetas": [
+        "disco intervertebral",
+        "atlas",
+        "axis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 98
+      },
+      "respuesta": {
+        "canonico": "entre C1 y C2",
+        "acepta": [
+          "C1 y C2",
+          "atlas y axis"
+        ]
+      },
+      "feedback": "El disco funcional más inferior es el situado entre L5 y S1. La ausencia de disco entre atlas y axis se entiende desde el desarrollo: el centro que correspondería al cuerpo de C1 se fusiona con el de C2 y forma el diente del axis, de modo que no queda nada que separar con un disco. Esa misma articulación atlantoaxial media es trocoidea y permite la rotación de la cabeza."
+    },
+    {
+      "id": "P1-B06-007",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denominan las hendiduras que se desarrollan después de los 10 años entre los procesos unciformes de los cuerpos vertebrales cervicales y las superficies biseladas de los cuerpos inmediatamente superiores?",
+      "dificultad": 3,
+      "etiquetas": [
+        "articulaciones uncovertebrales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 98,
+        "fig": "2-19"
+      },
+      "respuesta": {
+        "canonico": "articulaciones uncovertebrales",
+        "acepta": [
+          "hendiduras uncovertebrales",
+          "articulaciones de Luschka"
+        ]
+      },
+      "feedback": "Se hallan en los bordes lateral y posterolateral de los discos intervertebrales, de C3 o C4 a C6 o C7. Su naturaleza es discutida: algunos las consideran articulaciones sinoviales y otros creen que son espacios degenerativos en los discos, ocupados por líquido extracelular. Lo clínicamente relevante es que son lugares donde con frecuencia se forman espolones óseos en los últimos años de la vida, que pueden ocasionar dolor cervical."
+    },
+    {
+      "id": "P1-B06-008",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el ligamento longitudinal anterior:",
+      "texto": "El ligamento longitudinal anterior es una potente banda fibrosa {{c1}} que cubre y conecta las caras anterolaterales de los cuerpos y discos intervertebrales. Impide la {{c2}} de la columna vertebral y es el único ligamento que limita ese movimiento; todos los demás ligamentos intervertebrales limitan tipos de {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "ligamentos de la columna"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 98,
+        "fig": "2-20"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "ancha"
+        },
+        "c2": {
+          "canonico": "hiperextensión"
+        },
+        "c3": {
+          "canonico": "flexión"
+        }
+      },
+      "feedback": "Se extiende desde la cara pélvica del sacro hasta el tubérculo anterior de C1 y el hueso occipital por delante del foramen magno, y sus partes más superiores reciben los nombres de ligamentos atlantoaxial anterior y atlantooccipital. Que sea el único freno de la extensión explica una lesión concreta: en la hiperextensión grave del cuello por alcance posterior, este ligamento queda intensamente distendido y puede desgarrarse."
+    },
+    {
+      "id": "P1-B06-009",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el ligamento longitudinal posterior:",
+      "texto": "El ligamento longitudinal posterior es una banda mucho más {{c1}} y algo más débil que el anterior. Cursa por dentro del {{c2}} vertebral, se opone débilmente a la hiperflexión y ayuda a evitar o redirigir la hernia posterior del núcleo pulposo. Posee abundantes terminaciones nerviosas {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "ligamentos de la columna"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 99,
+        "fig": "2-20"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "estrecha",
+          "acepta": [
+            "angosta"
+          ]
+        },
+        "c2": {
+          "canonico": "conducto",
+          "acepta": [
+            "canal"
+          ]
+        },
+        "c3": {
+          "canonico": "nociceptivas",
+          "acepta": [
+            "del dolor",
+            "dolorosas"
+          ]
+        }
+      },
+      "feedback": "Se fija principalmente a los discos intervertebrales y menos a la cara posterior de los cuerpos vertebrales, desde C2 hasta el sacro, y entre el ligamento y el hueso suele haber tejido adiposo y vasos sanguíneos. Las dos características que hay que retener son su estrechez, que deja desprotegidos los bordes posterolaterales del anillo y favorece la hernia ahí, y su rica inervación nociceptiva, que explica el dolor agudo cuando un disco herniado presiona sobre él."
+    },
+    {
+      "id": "P1-B06-010",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las articulaciones cigapofisiarias:",
+      "texto": "Las articulaciones de los arcos vertebrales son las articulaciones cigapofisiarias, que son articulaciones sinoviales {{c1}} formadas entre los procesos {{c2}} superior e inferior de las vértebras adyacentes. Permiten movimientos de {{c3}} entre esos procesos, y están rodeadas por una {{c4}} articular.",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones cigapofisiarias"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 99,
+        "fig": "2-17"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "planas"
+        },
+        "c2": {
+          "canonico": "articulares"
+        },
+        "c3": {
+          "canonico": "deslizamiento"
+        },
+        "c4": {
+          "canonico": "cápsula"
+        }
+      },
+      "feedback": "La forma y la disposición de las superficies articulares determinan qué movimientos son posibles, mientras que la amplitud viene determinada por el tamaño del disco intervertebral en relación con el cuerpo vertebral. Las cápsulas de la región cervical son especialmente delgadas y laxas, lo que refleja su amplia gama de movimientos. En las regiones cervical y lumbar estas articulaciones soportan cierto peso y comparten esa función con los discos, especialmente durante la flexión lateral."
+    },
+    {
+      "id": "P1-B06-011",
+      "tipo": "numerico",
+      "prompt": "¿Por cuántos nervios espinales está inervada cada articulación cigapofisiaria?",
+      "dificultad": 3,
+      "etiquetas": [
+        "inervación articular",
+        "cigapofisiarias"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 100,
+        "fig": "2-22"
+      },
+      "respuesta": {
+        "valor": 2,
+        "unidad": "nervios",
+        "tol": 0
+      },
+      "feedback": "Las articulaciones cigapofisiarias están inervadas por ramas articulares procedentes de los ramos mediales de los ramos posteriores de los nervios espinales. Cada rama articular inerva dos articulaciones adyacentes: la de su nivel y la situada un nivel por debajo de su salida. Por lo tanto cada articulación recibe ramos de dos nervios espinales adyacentes, y esa es exactamente la razón por la que hay que seccionar los ramos mediales de dos ramos posteriores para desnervar una sola articulación."
+    },
+    {
+      "id": "P1-B06-012",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los ligamentos amarillos:",
+      "texto": "Las láminas de los arcos vertebrales adyacentes están unidas por bandas de tejido {{c1}} amarillo claro, los ligamentos amarillos, que forman secciones alternas de la pared {{c2}} del conducto vertebral. Se oponen a la separación de las láminas al limitar la {{c3}} brusca de la columna vertebral, y por lo tanto evitan las lesiones de los discos intervertebrales.",
+      "dificultad": 2,
+      "etiquetas": [
+        "ligamentos accesorios"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 100,
+        "fig": "2-20"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "elástico"
+        },
+        "c2": {
+          "canonico": "posterior"
+        },
+        "c3": {
+          "canonico": "flexión"
+        }
+      },
+      "feedback": "Su grosor varía por regiones: son largos, delgados y anchos en la cervical, más gruesos en la torácica y aún más gruesos en la lumbar. Al ser fuertes y elásticos, ayudan además a preservar las curvaturas normales y a enderezar la columna después de una flexión. Su hipertrofia es una de las causas de estenosis del conducto vertebral lumbar, junto con la hipertrofia de los procesos articulares y la protrusión discal."
+    },
+    {
+      "id": "P1-B06-013",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 4 ligamentos accesorios que unen procesos vertebrales adyacentes entre sí:",
+      "dificultad": 2,
+      "etiquetas": [
+        "ligamentos accesorios"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 100,
+        "fig": "2-21"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "ligamentos amarillos"
+          },
+          {
+            "canonico": "ligamentos interespinosos"
+          },
+          {
+            "canonico": "ligamentos supraespinosos"
+          },
+          {
+            "canonico": "ligamentos intertransversos"
+          }
+        ]
+      },
+      "feedback": "Cada uno conecta un elemento distinto: los amarillos unen las láminas; los interespinosos, delgados y a menudo membranosos, conectan procesos espinosos adyacentes desde la raíz hasta el vértice de cada proceso; los supraespinosos, potentes y semejantes a un cordón, conectan los vértices de los procesos espinosos desde C7 hasta el sacro; y los intertransversos conectan los procesos transversos, con fibras dispersas en la región cervical, cordones fibrosos en la torácica y láminas delgadas y membranosas en la lumbar."
+    },
+    {
+      "id": "P1-B06-014",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el ligamento nucal:",
+      "texto": "El ligamento nucal, fuerte y ancho, está compuesto por un grueso tejido {{c1}} que se extiende en forma de banda media desde la protuberancia occipital {{c2}} y el borde posterior del foramen magno hasta los procesos {{c3}} de las vértebras cervicales.",
+      "dificultad": 2,
+      "etiquetas": [
+        "ligamento nucal"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 101,
+        "fig": "2-21 A"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "fibroelástico"
+        },
+        "c2": {
+          "canonico": "externa"
+        },
+        "c3": {
+          "canonico": "espinosos"
+        }
+      },
+      "feedback": "Es la continuación superior de los ligamentos supraespinoso e interespinoso, pero con una composición distinta. Su razón de ser es mecánica: como los procesos espinosos de C3-C5 son cortos y profundos, el ligamento nucal proporciona la inserción que esos procesos no pueden dar a los músculos que se unen a procesos espinosos de otros niveles. También explica por qué esos procesos cervicales son difíciles de palpar: están separados de la superficie por este ligamento."
+    },
+    {
+      "id": "P1-B06-015",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las articulaciones atlantooccipitales:",
+      "texto": "Las articulaciones atlantooccipitales se hallan entre las caras articulares superiores de las {{c1}} laterales del atlas y los cóndilos {{c2}}. Son articulaciones sinoviales de tipo {{c3}}, y su principal movimiento es la {{c4}}, como en la afirmación gestual.",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones craneovertebrales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 101,
+        "fig": "2-23"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "masas"
+        },
+        "c2": {
+          "canonico": "occipitales"
+        },
+        "c3": {
+          "canonico": "condíleo",
+          "acepta": [
+            "elipsoideo"
+          ]
+        },
+        "c4": {
+          "canonico": "flexión"
+        }
+      },
+      "feedback": "Permiten flexión y extensión de la cabeza, con escasa flexión lateral y rotación, y tienen cápsulas delgadas y laxas. El cráneo y C1 están conectados además por las membranas atlantooccipitales anterior y posterior, que se extienden desde los arcos de C1 hasta los bordes del foramen magno y ayudan a evitar los movimientos excesivos. La anterior continúa con el ligamento longitudinal anterior; la posterior es ancha pero relativamente débil, y es atravesada por las arterias vertebrales."
+    },
+    {
+      "id": "P1-B06-016",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 3 articulaciones atlantoaxiales:",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones craneovertebrales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 101,
+        "fig": "2-23"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "articulación atlantoaxial lateral derecha"
+          },
+          {
+            "canonico": "articulación atlantoaxial lateral izquierda"
+          },
+          {
+            "canonico": "articulación atlantoaxial media"
+          }
+        ]
+      },
+      "feedback": "Las dos laterales se sitúan entre las caras inferiores de las masas laterales de C1 y las caras superiores de C2, y son sinoviales planas de tipo deslizante. La media está entre el diente de C2 y el arco anterior del atlas, y es de tipo trocoide. El movimiento conjunto de las tres permite que la cabeza gire de lado a lado, como en la negación gestual: durante ese movimiento el cráneo y C1 rotan sobre C2 como una unidad, usando el diente como pivote."
+    },
+    {
+      "id": "P1-B06-017",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el ligamento cruciforme del atlas:",
+      "texto": "El ligamento cruciforme del atlas, así denominado por su forma de {{c1}}, se compone del ligamento {{c2}} del atlas y de los fascículos longitudinales superior e inferior. El ligamento transverso se extiende entre los tubérculos de las caras mediales de las {{c3}} laterales de C1.",
+      "dificultad": 3,
+      "etiquetas": [
+        "ligamentos craneovertebrales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 103,
+        "fig": "2-23 A"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "cruz"
+        },
+        "c2": {
+          "canonico": "transverso"
+        },
+        "c3": {
+          "canonico": "masas"
+        }
+      },
+      "feedback": "Los fascículos longitudinales, orientados verticalmente pero mucho más débiles, van del ligamento transverso al hueso occipital por arriba y al cuerpo de C2 por abajo. El componente que importa clínicamente es el transverso: junto con el arco anterior del atlas forma la pinza osteoligamentosa que mantiene el diente en su sitio, y su rotura produce subluxación atlantoaxial, con riesgo de compresión de la médula cervical alta."
+    },
+    {
+      "id": "P1-B06-018",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los ligamentos alares:",
+      "texto": "Los ligamentos alares se extienden desde los lados del {{c1}} del axis hasta los bordes laterales del foramen {{c2}}. Unen el cráneo con la vértebra C1 y actúan como ligamentos restrictivos para impedir la {{c3}} excesiva de las articulaciones.",
+      "dificultad": 2,
+      "etiquetas": [
+        "ligamentos craneovertebrales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 103
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "diente",
+          "acepta": [
+            "proceso odontoides"
+          ]
+        },
+        "c2": {
+          "canonico": "magno"
+        },
+        "c3": {
+          "canonico": "rotación"
+        }
+      },
+      "feedback": "Son cordones cortos y redondeados, de unos 0,3 cm de diámetro. Son más débiles que el ligamento transverso del atlas, de modo que la flexión y la rotación combinadas de la cabeza pueden desgarrar uno o ambos; la rotura de un ligamento alar aumenta en cerca de un 30% la amplitud de movimientos del lado opuesto. La tercera estructura de esta región es la membrana tectoria, la potente continuación superior del ligamento longitudinal posterior."
+    },
+    {
+      "id": "P1-B06-019",
+      "tipo": "respuesta_corta",
+      "prompt": "¿De qué ligamento es la membrana tectoria la continuación superior?",
+      "dificultad": 3,
+      "etiquetas": [
+        "ligamentos craneovertebrales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 103,
+        "fig": "2-24 A"
+      },
+      "respuesta": {
+        "canonico": "del ligamento longitudinal posterior",
+        "acepta": [
+          "ligamento longitudinal posterior"
+        ]
+      },
+      "feedback": "Se ensancha y pasa posteriormente sobre la articulación atlantoaxial media y sus ligamentos; hacia arriba cursa desde el cuerpo de C2, atraviesa el foramen magno y se une a la parte central del piso de la cavidad craneal, en la superficie interna del hueso occipital. Esta continuidad es un buen ejemplo de cómo los ligamentos longitudinales de toda la columna se prolongan en la región craneovertebral: por delante, el ligamento longitudinal anterior se continúa con las membranas atlantoaxial y atlantooccipital anteriores."
+    },
+    {
+      "id": "P1-B06-020",
+      "tipo": "numerico",
+      "prompt": "¿Qué porcentaje disminuye típicamente con el envejecimiento la gama normal de movimientos de la columna vertebral de un adulto joven y sano?",
+      "dificultad": 3,
+      "etiquetas": [
+        "movimientos de la columna"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 103
+      },
+      "respuesta": {
+        "valor": 50,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "La movilidad de la columna es consecuencia principalmente de la compresibilidad y elasticidad de los discos intervertebrales, así que su deterioro con la edad arrastra la movilidad global. Los movimientos entre vértebras adyacentes se producen en los núcleos pulposos, que sirven de eje, y en las articulaciones cigapofisiarias. Salvo quizás en C1-C2, el movimiento nunca se produce en un solo segmento: aunque el desplazamiento entre dos vértebras es pequeño, la suma de todos permite una movilidad considerable."
+    },
+    {
+      "id": "P1-B06-021",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los movimientos por regiones:",
+      "texto": "La flexión de la columna vertebral es máxima en la región {{c1}}. La extensión es más notable en la región {{c2}}, donde el encaje entre los procesos articulares impide la {{c3}}. Esta última ocurre sobre todo en las regiones cervical y {{c4}}.",
+      "dificultad": 3,
+      "etiquetas": [
+        "movimientos de la columna"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 103,
+        "fig": "2-26"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "cervical"
+        },
+        "c2": {
+          "canonico": "lumbar"
+        },
+        "c3": {
+          "canonico": "rotación"
+        },
+        "c4": {
+          "canonico": "torácica"
+        }
+      },
+      "feedback": "La clave está en la orientación de las caras articulares: los planos sagitales de la región lumbar favorecen flexión y extensión pero bloquean la rotación, mientras que en la torácica los planos se sitúan en un arco centrado en el cuerpo vertebral, lo que permite la rotación aunque limita la flexión. El cuello es especialmente libre por cuatro razones: discos gruesos en relación con los cuerpos, superficies articulares grandes y casi horizontales, cápsulas laxas y menos tejidos blandos alrededor."
+    },
+    {
+      "id": "P1-B06-022",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 4 curvaturas de la columna vertebral del adulto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "curvaturas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 104,
+        "fig": "2-27"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "cifosis torácica",
+            "acepta": [
+              "curvatura torácica"
+            ]
+          },
+          {
+            "canonico": "cifosis sacra",
+            "acepta": [
+              "curvatura sacra"
+            ]
+          },
+          {
+            "canonico": "lordosis cervical",
+            "acepta": [
+              "curvatura cervical"
+            ]
+          },
+          {
+            "canonico": "lordosis lumbar",
+            "acepta": [
+              "curvatura lumbar"
+            ]
+          }
+        ]
+      },
+      "feedback": "Las cifosis torácica y sacra son cóncavas anteriormente; las lordosis cervical y lumbar son cóncavas posteriormente. Las curvaturas aportan a la columna una flexibilidad adicional a la que ya dan los discos: cuando la carga es muy grande, como al llevar una mochila voluminosa, se comprimen los discos y las curvaturas tienden a incrementarse. Esa flexibilidad de los discos es pasiva, mientras que la de las curvaturas se resiste activamente con la contracción de los músculos antagonistas al movimiento."
+    },
+    {
+      "id": "P1-B06-023",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el desarrollo de las curvaturas:",
+      "texto": "Las cifosis torácica y sacra son curvaturas {{c1}} que se desarrollan durante el período fetal en relación con la posición del feto en flexión, y se conservan toda la vida por las diferencias de altura entre las porciones anterior y posterior de las {{c2}}. Las lordosis cervical y lumbar son curvaturas {{c3}}, que se mantienen principalmente por las diferencias de grosor entre las partes anterior y posterior de los {{c4}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "curvaturas",
+        "desarrollo"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 104,
+        "fig": "2-27"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "primarias"
+        },
+        "c2": {
+          "canonico": "vértebras"
+        },
+        "c3": {
+          "canonico": "secundarias"
+        },
+        "c4": {
+          "canonico": "discos",
+          "acepta": [
+            "discos intervertebrales"
+          ]
+        }
+      },
+      "feedback": "La distinción no es solo cronológica: las primarias se sostienen en el hueso y las secundarias en el disco, lo que explica que las secundarias se pierdan antes con la degeneración discal. Las secundarias comienzan a aparecer al final del período fetal pero no son evidentes hasta el primer año. La lordosis cervical se hace plenamente evidente cuando el lactante levanta la cabeza en decúbito prono y la mantiene erguida al sentarse; la lumbar, cuando comienza a ponerse de pie y caminar."
+    },
+    {
+      "id": "P1-B06-024",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la irrigación de las vértebras:",
+      "texto": "Las vértebras típicas están irrigadas por arterias {{c1}}, como las intercostales posteriores en la región torácica y las lumbares en la región lumbar, que surgen de la {{c2}}. Las ramas {{c3}} penetran en el conducto vertebral a través de los forámenes intervertebrales e irrigan los huesos, el periostio, los ligamentos y las meninges.",
+      "dificultad": 2,
+      "etiquetas": [
+        "vascularización de la columna"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 106,
+        "fig": "2-29"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "segmentarias"
+        },
+        "c2": {
+          "canonico": "aorta"
+        },
+        "c3": {
+          "canonico": "espinales"
+        }
+      },
+      "feedback": "Cada vértebra queda rodeada en tres lugares por arterias pares, que suministran ramas centrales al cuerpo vertebral y ramas posteriores a las estructuras del arco vertebral y a los músculos del dorso. De las ramas espinales derivan además las arterias radiculares o medulares segmentarias, que irrigan el tejido nervioso, es decir las raíces del nervio espinal y la médula espinal. El drenaje corre a cargo de los plexos venosos vertebrales interno y externo."
+    },
+    {
+      "id": "P1-B06-025",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la inervación de la columna vertebral:",
+      "texto": "A excepción de las articulaciones cigapofisiarias, la columna vertebral recibe su inervación de los ramos {{c1}}, también llamados recurrentes, de los nervios espinales. Son los únicos ramos que surgen de los nervios espinales {{c2}}, y se emiten justo después de su formación. Dentro del conducto vertebral distribuyen fibras al periostio, a los ligamentos {{c3}} y a los anillos fibrosos de la cara posterior y posterolateral de los discos.",
+      "dificultad": 3,
+      "etiquetas": [
+        "inervación de la columna"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 106,
+        "fig": "2-31"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "meníngeos"
+        },
+        "c2": {
+          "canonico": "mixtos"
+        },
+        "c3": {
+          "canonico": "amarillos"
+        }
+      },
+      "feedback": "Emergen de dos a cuatro de estos finos ramos a cada lado en todos los niveles vertebrales, y cerca de su origen reciben ramos comunicantes de los ramos comunicantes grises. La mayoría retrocede a través de los forámenes hacia el conducto vertebral, de ahí el nombre de recurrentes, aunque algunos permanecen fuera e inervan la cara anterolateral de los cuerpos vertebrales, los discos y el ligamento longitudinal anterior. Son los nervios que conducen inicialmente el dolor desde el dorso, sea por hernia discal aguda, esguince, contusión, fractura o tumor."
+    }
+  ]
+}

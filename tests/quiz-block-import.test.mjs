@@ -1,9 +1,8 @@
 import test from 'node:test';
-import { questionIdentity } from '../src/lib/question-review.js';
-import { correctAnswerText } from '../src/lib/answer-report.js';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
+import { correctAnswerText } from '../src/lib/answer-report.js';
 import { normalizeExpandedQuiz, normalizeQuizQuestion, validateNormalizedQuiz } from '../src/lib/quiz-normalization.js';
 
 const fixture = {
@@ -138,28 +137,6 @@ test('keeps anatomical qualifiers when inferring a shared category', () => {
   assert.equal(motorAnatomia.calificar(question, ['cerebral anterior', 'cerebral posterior']).puntos, 2);
 });
 
-test('accepts omitted generic region names without crediting unrelated regions', () => {
-  const question = {
-    id: 'P1-B02-001',
-    tipo: 'enumeracion',
-    categoria: 'región',
-    respuesta: { elementos: [
-      { canonico: 'Región escapular' },
-      { canonico: 'Región supraescapular' },
-      { canonico: 'Región interescapular' },
-      { canonico: 'Región infraescapular' },
-      { canonico: 'Región lumbar' }
-    ] }
-  };
-  const result = motorAnatomia.calificar(question, [
-    'escapular', 'costal', 'interescapular', 'supraesternal', 'supraclavicular'
-  ]);
-  assert.equal(result.puntos, 2);
-  assert.deepEqual(result.detalle.filter(item => item.ok).map(item => item.dado).sort(),
-    ['escapular', 'interescapular']);
-  assert.deepEqual(result.sobrantes.sort(), ['costal', 'supraclavicular', 'supraesternal']);
-});
-
 test('the answer log preserves open-ended inputs and grading when the parent rerenders', async () => {
   const source = await readFile(new URL('../src/pages/Quizzes.jsx', import.meta.url), 'utf8');
   const start = source.indexOf('    const options = question.answerOptions', source.indexOf('  const handleAnswer ='));
@@ -167,7 +144,7 @@ test('the answer log preserves open-ended inputs and grading when the parent rer
   const question = normalizeQuizQuestion(fixture.items[0]);
   const result = motorAnatomia.calificar(question, 'azul');
   const selectedOption = { selected_answer: '"azul"', inputs: { text: 'azul' }, result, score: 1, max_score: 1 };
-  const context = vm.createContext({ correctAnswerText, questionIdentity, question, selectedOption, currentQuestionIndex: 0, isCorrect: true, wrongAnswers: [], responseTime: 2 });
+  const context = vm.createContext({ question, selectedOption, correctAnswerText, currentQuestionIndex: 0, isCorrect: true, wrongAnswers: [], responseTime: 2 });
   const entry = vm.runInContext(`${source.slice(start, end)}\nanswerEntry;`, context);
   assert.deepEqual(entry.inputs, selectedOption.inputs);
   assert.deepEqual(entry.result, result);

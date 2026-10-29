@@ -1,0 +1,705 @@
+{
+  "bloque": {
+    "id": "P1-B05",
+    "titulo": "Anatomía de superficie de las vértebras lumbares, el sacro y el cóccix · Osificación de las vértebras · Variaciones vertebrales · Cuadro clínico: vértebras",
+    "parcial": 1,
+    "sesion": "3 de febrero",
+    "paginas": "86-96"
+  },
+  "items": [
+    {
+      "id": "P1-B05-001",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el plano supracrestal:",
+      "texto": "Una línea horizontal a través de los puntos más elevados de las crestas ilíacas pasa por la punta del proceso espinoso de {{c1}} y el disco intervertebral {{c2}}. Este es un punto de referencia útil al realizar una {{c3}} lumbar para obtener una muestra de líquido cerebroespinal.",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomía de superficie",
+        "punción lumbar"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 86,
+        "fig": "2-13 B y C"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "L4"
+        },
+        "c2": {
+          "canonico": "L4-L5"
+        },
+        "c3": {
+          "canonico": "punción"
+        }
+      },
+      "feedback": "Los procesos espinosos de las vértebras lumbares son grandes y se visualizan fácilmente al flexionar el tronco; también pueden palparse en el surco medio posterior. Conviene no confundir esta referencia con la de L2: el proceso espinoso de L2 sirve para estimar la posición del extremo inferior de la médula espinal, y es justamente por eso que la punción se hace por debajo, en L4-L5, donde ya no hay médula sino cola de caballo."
+    },
+    {
+      "id": "P1-B05-002",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué proceso espinoso sirve para estimar la posición del extremo inferior de la médula espinal?",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 86
+      },
+      "respuesta": {
+        "canonico": "L2"
+      },
+      "feedback": "Es el límite que define hasta dónde puede descender una aguja sin riesgo de lesionar la médula, y por eso la punción lumbar se practica por debajo de ese nivel. Hay que tenerlo junto con las otras dos referencias de la región: el plano supracrestal, que pasa por L4 y el disco L4-L5, y el proceso espinoso de S2, situado en la mitad de la línea que une ambas espinas ilíacas posterosuperiores."
+    },
+    {
+      "id": "P1-B05-003",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las referencias del sacro:",
+      "texto": "El proceso espinoso de {{c1}} está situado en la mitad de la línea que une ambas espinas ilíacas posterosuperiores, indicadas por los {{c2}} cutáneos, y ese nivel indica el límite inferior del espacio {{c3}}, es decir de la cisterna lumbar.",
+      "dificultad": 3,
+      "etiquetas": [
+        "anatomía de superficie",
+        "meninges"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 86,
+        "fig": "2-13 B"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "S2"
+        },
+        "c2": {
+          "canonico": "hoyuelos"
+        },
+        "c3": {
+          "canonico": "subaracnoideo"
+        }
+      },
+      "feedback": "Los hoyuelos cutáneos están formados por la fijación de la piel y la fascia profunda a dichas espinas ilíacas. Esta referencia completa el mapa de la región lumbosacra: por arriba L2 marca el fin de la médula, en el medio L4 marca el nivel de punción, y por abajo S2 marca el fin del saco dural. Conocer los tres evita tanto puncionar demasiado alto como salirse del espacio por abajo."
+    },
+    {
+      "id": "P1-B05-004",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el triángulo sacro:",
+      "texto": "El triángulo sacro que perfila el sacro está formado por las líneas que unen las dos espinas ilíacas {{c1}} y la parte superior de la hendidura {{c2}} entre ambas nalgas. Es una zona frecuente de dolor por {{c3}} en la parte baja del dorso.",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "posterosuperiores"
+        },
+        "c2": {
+          "canonico": "interglútea"
+        },
+        "c3": {
+          "canonico": "esguince"
+        }
+      },
+      "feedback": "La cresta sacra media puede palparse inferior al proceso espinoso de L5, y el hiato del sacro en el extremo inferior del sacro, en la parte superior de la hendidura interglútea. El cóccix puede palparse en la hendidura interglútea, por debajo del vértice del triángulo sacro, y el ápice del cóccix a unos 2,5 cm posterosuperiormente al ano. El examen clínico del cóccix se realiza con un dedo enguantado en el conducto anal."
+    },
+    {
+      "id": "P1-B05-005",
+      "tipo": "numerico",
+      "prompt": "¿A cuántos centímetros posterosuperiores al ano puede palparse el ápice del cóccix?",
+      "dificultad": 3,
+      "etiquetas": [
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87
+      },
+      "respuesta": {
+        "valor": 2.5,
+        "unidad": "cm",
+        "tol": 0.5
+      },
+      "feedback": "Los procesos transversos de las vértebras torácicas y lumbares están cubiertos por músculos gruesos y pueden palparse o no, mientras que el cóccix sí es accesible. Conviene recordar que el cóccix no participa con las otras vértebras en soportar el peso del cuerpo en bipedestación, aunque en sedestación puede flexionarse algo hacia delante, lo que indica que recibe algo de carga, y que proporciona inserciones al glúteo mayor y al ligamento anococcígeo."
+    },
+    {
+      "id": "P1-B05-006",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los centros de osificación primarios:",
+      "texto": "Típicamente, las vértebras comienzan a osificarse hacia el final del período embrionario, en la {{c1}} semana, con el desarrollo de tres centros de osificación primarios en cada vértebra cartilaginosa: un {{c2}} endocondral, que luego constituye la mayor parte del cuerpo vertebral, y dos centros {{c3}}, uno en cada mitad del arco neural.",
+      "dificultad": 2,
+      "etiquetas": [
+        "osificación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87,
+        "fig": "2-14"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "8.ª",
+          "acepta": [
+            "octava",
+            "8"
+          ]
+        },
+        "c2": {
+          "canonico": "centrum",
+          "acepta": [
+            "centro"
+          ]
+        },
+        "c3": {
+          "canonico": "pericondrales"
+        }
+      },
+      "feedback": "Las vértebras comienzan a desarrollarse durante el período embrionario como condensaciones mesenquimatosas en torno a la notocorda, que después se condrifican para formar las vértebras cartilaginosas. La osificación continúa durante todo el período fetal, de modo que al nacer las vértebras típicas y las sacras más superiores constan de tres partes óseas unidas por cartílago hialino, articuladas en las articulaciones neurocentrales."
+    },
+    {
+      "id": "P1-B05-007",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la fusión de los arcos vertebrales:",
+      "texto": "Las mitades del arco neural comienzan a fusionarse entre sí por detrás durante el {{c1}} año, al comienzo en la región lumbar y luego en las regiones torácica y cervical. Los arcos neurales empiezan a fusionarse con los centros en la región cervical superior hacia el final del tercer año, pero el proceso no se completa en la región lumbar inferior hasta después del {{c2}} año.",
+      "dificultad": 3,
+      "etiquetas": [
+        "osificación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "primer"
+        },
+        "c2": {
+          "canonico": "6.º",
+          "acepta": [
+            "sexto",
+            "6"
+          ]
+        }
+      },
+      "feedback": "Ese calendario de fusión importa para interpretar radiografías pediátricas sin confundir una línea de cartílago con una fractura. También es la base de una hipótesis clínica relevante: la opinión mayoritaria es que la espondilólisis de L5, o la propensión a ella, sea probablemente consecuencia de un fallo en la unión adecuada del centrum de L5 con los arcos neurales en la articulación neurocentral durante el desarrollo."
+    },
+    {
+      "id": "P1-B05-008",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 5 centros de osificación secundarios que aparecen en las vértebras típicas durante la pubertad:",
+      "dificultad": 2,
+      "etiquetas": [
+        "osificación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87,
+        "fig": "2-14"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "proceso espinoso",
+            "acepta": [
+              "vértice del proceso espinoso"
+            ]
+          },
+          {
+            "canonico": "proceso transverso derecho",
+            "acepta": [
+              "vértice del proceso transverso derecho"
+            ]
+          },
+          {
+            "canonico": "proceso transverso izquierdo",
+            "acepta": [
+              "vértice del proceso transverso izquierdo"
+            ]
+          },
+          {
+            "canonico": "epífisis anular superior"
+          },
+          {
+            "canonico": "epífisis anular inferior"
+          }
+        ]
+      },
+      "feedback": "Tres se relacionan con los procesos, el espinoso y los dos transversos, y dos son las epífisis anulares en los bordes superior e inferior del cuerpo vertebral. Las epífisis anulares hialinas, a las cuales se unen los discos intervertebrales, se denominan a veces placas de crecimiento epifisario y forman la zona a partir de la cual crece el cuerpo vertebral en altura. Habitualmente todos los centros secundarios se han fusionado con la vértebra a los 25 años, aunque hay amplias variaciones."
+    },
+    {
+      "id": "P1-B05-009",
+      "tipo": "numerico",
+      "prompt": "¿A qué edad se han fusionado habitualmente todos los centros de osificación secundarios con la vértebra?",
+      "dificultad": 2,
+      "etiquetas": [
+        "osificación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87
+      },
+      "respuesta": {
+        "valor": 25,
+        "unidad": "años",
+        "tol": 0
+      },
+      "feedback": "Cuando cesa el crecimiento, a comienzos de la vida adulta, las epífisis anulares se fusionan con el cuerpo vertebral y dan lugar a un característico margen liso elevado, la epífisis anular, en torno a los bordes superior e inferior del cuerpo de la vértebra adulta. Hay amplias variaciones individuales en ese calendario, y conviene tenerlo presente al estimar edad por radiografía."
+    },
+    {
+      "id": "P1-B05-010",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la osificación atípica de C1 y C2:",
+      "texto": "El centro de C1 se fusiona con el de C2 y pierde su conexión periférica con el resto de la vértebra C1, lo que da lugar al {{c1}} del axis. Como esos primeros centros se fusionan y forman parte de C2, no se forma ningún {{c2}} intervertebral entre C1 y C2. La parte del cuerpo vertebral que permanece con C1 queda representada por el {{c3}} anterior y el tubérculo de C1.",
+      "dificultad": 3,
+      "etiquetas": [
+        "osificación",
+        "atlas",
+        "axis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87,
+        "fig": "2-14 C"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "diente",
+          "acepta": [
+            "proceso odontoideo"
+          ]
+        },
+        "c2": {
+          "canonico": "disco"
+        },
+        "c3": {
+          "canonico": "arco"
+        }
+      },
+      "feedback": "Esta es la explicación del desarrollo para dos hechos anatómicos que de otro modo parecen arbitrarios: que el atlas carezca de cuerpo vertebral y que no exista disco entre las dos primeras vértebras cervicales. Las excepciones al patrón típico de osificación tienen lugar en las vértebras C1, C2 y C7, en el sacro y en el cóccix."
+    },
+    {
+      "id": "P1-B05-011",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los elementos costales:",
+      "texto": "A todos los niveles aparecen costillas primordiales, o elementos {{c1}}, en asociación con los centros de osificación secundarios de los procesos transversos. Normalmente solo se desarrollan como costillas en la región {{c2}}; en otras regiones forman parte de los procesos transversos. En la región cervical el elemento costal permanece diminuto y limita lateralmente los forámenes {{c3}}.",
+      "dificultad": 3,
+      "etiquetas": [
+        "osificación",
+        "elementos costales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87,
+        "fig": "2-14"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "costales"
+        },
+        "c2": {
+          "canonico": "torácica"
+        },
+        "c3": {
+          "canonico": "transversos"
+        }
+      },
+      "feedback": "La unión medial entre esos centros laterales se denomina barra costotransversa, y los procesos transversos cervicales finalizan lateralmente en un tubérculo anterior, derivado del elemento costal, y un tubérculo posterior, derivado del elemento transverso. Todas las bases de los procesos transversos, excepto las lumbares, se desarrollan a partir del elemento costal, por lo que esa barra de hueso recibe la denominación de proceso costiforme; en las lumbares, los elementos transversos forman los procesos mamilares."
+    },
+    {
+      "id": "P1-B05-012",
+      "tipo": "numerico",
+      "prompt": "¿Cuál es el número normal de vértebras por encima del sacro?",
+      "dificultad": 1,
+      "etiquetas": [
+        "variaciones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87
+      },
+      "respuesta": {
+        "valor": 24,
+        "unidad": "vértebras",
+        "tol": 0
+      },
+      "feedback": "Las estimaciones sobre la frecuencia de números anormales de vértebras presacras oscilan entre el 5% y el 12%. Las variaciones dependen de la raza, el sexo y factores del desarrollo, tanto genéticos como ambientales: en el hombre se observa con mayor frecuencia un número mayor de vértebras, y en la mujer un número menor. La mayoría se detecta incidentalmente en estudios de imagen hechos por otros motivos."
+    },
+    {
+      "id": "P1-B05-013",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las variaciones numéricas:",
+      "texto": "Al contar las vértebras hay que comenzar por la base del {{c1}}. El número de vértebras {{c2}} es notablemente constante, y no solo en el ser humano: incluso las jirafas y las serpientes tienen siete. Las personas con más de cinco vértebras lumbares presentan a menudo una disminución {{c3}} en el número de vértebras torácicas.",
+      "dificultad": 3,
+      "etiquetas": [
+        "variaciones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 89
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "cuello"
+        },
+        "c2": {
+          "canonico": "cervicales"
+        },
+        "c3": {
+          "canonico": "compensatoria"
+        }
+      },
+      "feedback": "Por eso al estudiar una variación numérica las regiones torácica y lumbar deben considerarse conjuntamente. Las variaciones incluyen también la relación con las costillas: puede haber un desplazamiento craneal o caudal respecto a lo normal. Nótese que una vértebra C7 que se articula con una costilla cervical rudimentaria sigue considerándose vértebra cervical, y que una L5 fusionada al sacro se considera una quinta vértebra lumbar sacralizada."
+    },
+    {
+      "id": "P1-B05-014",
+      "tipo": "numerico",
+      "prompt": "¿En qué porcentaje de las personas L5 está parcial o completamente incorporada al sacro?",
+      "dificultad": 2,
+      "etiquetas": [
+        "variaciones",
+        "cuadro clínico"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 95,
+        "fig": "C2-9 A"
+      },
+      "respuesta": {
+        "valor": 5,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Esas situaciones se conocen como hemisacralización y sacralización de la vértebra L5. En otras personas, S1 está más o menos separada del sacro o parcial o completamente fusionada con L5, lo que se denomina lumbarización de la vértebra S1. Cuando L5 está sacralizada es frecuente que el nivel L5-S1 sea fuerte y que el nivel L4-L5 se degenere, lo cual a menudo provoca síntomas dolorosos."
+    },
+    {
+      "id": "P1-B05-015",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la osteoporosis del cuerpo vertebral:",
+      "texto": "La osteoporosis es consecuencia de una desmineralización neta de los huesos por alteración del equilibrio entre el depósito y la {{c1}} de calcio. En las radiografías precoces se observa desmineralización por la menor radiodensidad del hueso {{c2}}, lo que hace que el hueso {{c3}} aparezca relativamente destacado. Afecta de forma especial a las trabéculas {{c4}} del hueso esponjoso.",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "osteoporosis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 89,
+        "fig": "C2-1"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "resorción",
+          "acepta": [
+            "reabsorción"
+          ]
+        },
+        "c2": {
+          "canonico": "trabecular",
+          "acepta": [
+            "esponjoso"
+          ]
+        },
+        "c3": {
+          "canonico": "cortical",
+          "acepta": [
+            "compacto"
+          ]
+        },
+        "c4": {
+          "canonico": "horizontales"
+        }
+      },
+      "feedback": "La pérdida de las trabéculas horizontales de sostén y el engrosamiento de los puntales verticales producen el patrón de líneas verticales característico. En fases avanzadas pueden apreciarse colapsos vertebrales, es decir fracturas por compresión, y aumento de la cifosis torácica. La osteoporosis del cuerpo vertebral es más frecuente en las vértebras torácicas y es un hallazgo especialmente habitual en la mujer posmenopáusica."
+    },
+    {
+      "id": "P1-B05-016",
+      "tipo": "numerico",
+      "prompt": "¿En qué porcentaje de las personas se presenta una costilla cervical?",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "variaciones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 90,
+        "fig": "C2-2"
+      },
+      "respuesta": {
+        "rango": [
+          1,
+          2
+        ],
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Se produce cuando el elemento costal de C7, que normalmente forma una pequeña parte del proceso transverso, crece anormalmente. Es bilateral en cerca del 60% de las ocasiones y su tamaño varía desde una pequeña protuberancia hasta una costilla completa. Su importancia clínica es que puede elevar y presionar las estructuras que emergen de la apertura torácica superior, sobre todo la arteria subclavia o el tronco inferior del plexo braquial, y producir el síndrome de la apertura superior del tórax."
+    },
+    {
+      "id": "P1-B05-017",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la fractura de Jefferson:",
+      "texto": "El atlas es un anillo óseo con dos masas laterales cuneiformes. Como la parte más gruesa de las masas laterales está orientada hacia fuera, las fuerzas {{c1}} las comprimen entre los cóndilos occipitales y el axis y las separan, fracturando el arco anterior o posterior, o ambos: es la fractura de {{c2}} o por estallido. Por sí misma no da lugar necesariamente a lesión medular, pues las dimensiones del anillo óseo {{c3}} en estas circunstancias.",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "atlas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 91,
+        "fig": "C2-4"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "verticales"
+        },
+        "c2": {
+          "canonico": "Jefferson"
+        },
+        "c3": {
+          "canonico": "aumentan"
+        }
+      },
+      "feedback": "El mecanismo típico es el choque de la cabeza contra el fondo de la piscina en los accidentes de salto de trampolín. La lesión medular es más probable si además se rompió el ligamento transverso del atlas, lo que se evidencia radiográficamente por una amplia separación de las masas laterales. Esa es la clave de lectura de la radiografía transoral en estos pacientes."
+    },
+    {
+      "id": "P1-B05-018",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la fractura del ahorcado:",
+      "texto": "La fractura de la parte {{c1}} del axis, denominada espondilólisis traumática de C2, ocurre habitualmente por {{c2}} de la cabeza sobre el cuello, y se conoce como fractura del {{c3}} porque esa era la posición que producía el nudo en el ahorcamiento. Las fracturas del arco vertebral del axis son una de las lesiones más frecuentes de las vértebras cervicales.",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "axis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 91,
+        "fig": "C2-5"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "interarticular",
+          "acepta": [
+            "pars interarticularis"
+          ]
+        },
+        "c2": {
+          "canonico": "hiperextensión"
+        },
+        "c3": {
+          "canonico": "ahorcado",
+          "acepta": [
+            "verdugo"
+          ]
+        }
+      },
+      "feedback": "Representan hasta un 40% de las lesiones cervicales. En las lesiones más graves el cuerpo de C2 se desplaza hacia delante respecto a C3, y con o sin subluxación es probable que se lesionen la médula espinal o el tronco del encéfalo, lo que puede originar tetraplejía o la muerte. Conviene distinguir este mecanismo del latigazo cervical, que suele producir distensiones de músculos o ligamentos en lugar de fracturas."
+    },
+    {
+      "id": "P1-B05-019",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 4 estadios traumáticos de la luxación de las vértebras cervicales, en orden:",
+      "dificultad": 3,
+      "etiquetas": [
+        "cuadro clínico",
+        "luxación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 93,
+        "fig": "C2-6"
+      },
+      "respuesta": {
+        "elementos": [
+          {
+            "canonico": "esguince por flexión"
+          },
+          {
+            "canonico": "subluxación anterior del 25%",
+            "acepta": [
+              "subluxación anterior",
+              "25%"
+            ]
+          },
+          {
+            "canonico": "desplazamiento del 50%",
+            "acepta": [
+              "50%"
+            ]
+          },
+          {
+            "canonico": "luxación completa"
+          }
+        ]
+      },
+      "feedback": "Las vértebras cervicales están menos adosadas entre sí por la orientación más horizontal de sus caras articulares, y por eso pueden luxarse con una fuerza menor que la necesaria para fracturarlas. Debido al diámetro considerable del conducto vertebral cervical, puede ocurrir una luxación ligera sin que se afecte la médula espinal. Si la luxación no da lugar a un salto de la cara articular, las vértebras pueden autorreducirse, de modo que las radiografías pueden no indicar que se ha lesionado la médula, y ahí la resonancia magnética muestra las lesiones de los tejidos blandos."
+    },
+    {
+      "id": "P1-B05-020",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la estenosis espinal lumbar:",
+      "texto": "La estenosis espinal lumbar es el {{c1}} del foramen vertebral en una o más vértebras lumbares, y puede deberse a una anomalía hereditaria que predisponga a cambios degenerativos. El tamaño de los nervios espinales lumbares va {{c2}} a medida que se desciende, pero paradójicamente el tamaño de los forámenes intervertebrales va {{c3}}.",
+      "dificultad": 3,
+      "etiquetas": [
+        "cuadro clínico",
+        "estenosis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 93,
+        "fig": "C2-7"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "estrechamiento"
+        },
+        "c2": {
+          "canonico": "aumentando"
+        },
+        "c3": {
+          "canonico": "disminuyendo"
+        }
+      },
+      "feedback": "Ese desajuste entre continente y contenido es lo que hace a la región lumbar baja tan vulnerable. El estrechamiento suele ser máximo a nivel de los discos intervertebrales, y la estenosis de un solo foramen lumbar puede comprimir una o más raíces nerviosas que ocupan el conducto vertebral inferior. El tratamiento quirúrgico puede consistir en una laminectomía descompresiva, y la situación empeora cuando se suma una protrusión discal, la proliferación artrósica o la degeneración ligamentosa."
+    },
+    {
+      "id": "P1-B05-021",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la anestesia epidural caudal:",
+      "texto": "En el sujeto vivo, el hiato del sacro queda cerrado por el ligamento {{c1}} membranoso, atravesado por el filum terminal. En la anestesia epidural caudal se inyecta un anestésico local en el tejido {{c2}} del conducto del sacro, y la solución difunde hacia arriba y extraduralmente, donde actúa sobre las raíces de los nervios espinales {{c3}} de la cola de caballo.",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "anestesia"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 94,
+        "fig": "C2-8"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "sacrococcígeo"
+        },
+        "c2": {
+          "canonico": "adiposo"
+        },
+        "c3": {
+          "canonico": "S2-Co1",
+          "acepta": [
+            "sacros y coccígeo"
+          ]
+        }
+      },
+      "feedback": "El hiato del sacro se halla entre los cuernos del sacro e inferior al proceso espinoso de S4 o de la cresta sacra media, y esos puntos de referencia son importantes para localizarlo. La altura hasta la que asciende el anestésico se controla por la cantidad inyectada y la posición del paciente, y se produce una anestesia por debajo del bloqueo epidural. También pueden inyectarse agentes a través de los forámenes sacros posteriores, lo que se denomina anestesia epidural transsacra."
+    },
+    {
+      "id": "P1-B05-022",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina el síndrome doloroso que se produce a menudo después de un traumatismo sobre el cóccix?",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "cóccix"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 95
+      },
+      "respuesta": {
+        "canonico": "coccigodinia"
+      },
+      "feedback": "Una caída brusca sobre las nalgas puede causar una sufusión hemorrágica subperióstica dolorosa, una fractura del cóccix o una fractura-luxación de la articulación sacrococcígea. Es frecuente que haya desplazamiento y puede ser necesaria la extirpación quirúrgica del hueso afectado para aliviar el dolor. En un parto especialmente difícil puede lesionarse el cóccix materno, y la coccigodinia resulta a menudo difícil de aliviar."
+    },
+    {
+      "id": "P1-B05-023",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el efecto del envejecimiento sobre las vértebras:",
+      "texto": "Entre el nacimiento y los 5 años, el cuerpo de una vértebra lumbar típica aumenta {{c1}} veces de altura. Durante la vejez, las superficies articulares se arquean gradualmente hacia dentro, de tal modo que las caras superior e inferior se hacen cada vez más {{c2}} y los discos se hacen {{c3}}. En respuesta a las mayores fuerzas compresivas suelen desarrollarse {{c4}} en torno a los bordes del cuerpo vertebral.",
+      "dificultad": 3,
+      "etiquetas": [
+        "cuadro clínico",
+        "envejecimiento"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 95,
+        "fig": "C2-10"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "3",
+          "acepta": [
+            "tres"
+          ]
+        },
+        "c2": {
+          "canonico": "cóncavas"
+        },
+        "c3": {
+          "canonico": "convexos"
+        },
+        "c4": {
+          "canonico": "osteófitos",
+          "acepta": [
+            "espolones óseos"
+          ]
+        }
+      },
+      "feedback": "El desarrollo de esas concavidades puede producir un aparente estrechamiento del espacio intervertebral radiológico, basado en la distancia entre los bordes de los cuerpos vertebrales, pero no debe interpretarse como una pérdida de grosor del disco. Ese crecimiento óseo de las edades avanzadas se ha considerado tradicionalmente patológico, espondilosis en los cuerpos y artrosis en las cigapofisiarias, pero hay quien sostiene que debe considerarse la anatomía normal del envejecimiento, porque la correlación con el dolor es difícil de establecer."
+    },
+    {
+      "id": "P1-B05-024",
+      "tipo": "numerico",
+      "prompt": "¿En qué porcentaje de la población se presenta la espina bífida oculta?",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "anomalías"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 96
+      },
+      "respuesta": {
+        "valor": 24,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Es una anomalía congénita frecuente en la que los arcos neurales de L5 o S1 no se desarrollan normalmente y no se fusionan por detrás del conducto vertebral. La única evidencia de su presencia puede ser un pequeño hoyuelo con un mechón de pelo que surge en el dorso bajo, porque el defecto queda oculto por la piel suprayacente, y la mayoría de los niños con este tipo no sufre problemas. Conviene distinguirla de la espina bífida quística, en la que uno o más arcos no se desarrollan por completo y se asocia con hernia de las meninges, el meningocele, o de la médula espinal, el mielomeningocele."
+    },
+    {
+      "id": "P1-B05-025",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las anomalías de las epífisis:",
+      "texto": "A veces la epífisis de un proceso {{c1}} no se fusiona, por lo que hay que tener cautela para no interpretar su persistencia como una {{c2}} vertebral en una radiografía o una tomografía. Las formas graves de espina bífida ocurren por defectos del {{c3}} neural, como su cierre defectuoso durante la cuarta semana del desarrollo embrionario.",
+      "dificultad": 3,
+      "etiquetas": [
+        "cuadro clínico",
+        "anomalías"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 96
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "transverso"
+        },
+        "c2": {
+          "canonico": "fractura"
+        },
+        "c3": {
+          "canonico": "tubo"
+        }
+      },
+      "feedback": "Este es un ejemplo del principio general de que el conocimiento del patrón de osificación permite comprender la estructura normal, sus variaciones y sus malformaciones, y evitar diagnósticos falsos. En la exploración neonatal hay que palpar sucesivamente las vértebras adyacentes para comprobar que los arcos vertebrales se hallan intactos y continuos desde la región cervical hasta la sacra. En los casos graves de mielomeningocele suele haber síntomas neurológicos, como parálisis de los miembros y trastornos en el control de los esfínteres."
+    }
+  ]
+}

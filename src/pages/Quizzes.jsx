@@ -1,5 +1,7 @@
-import { selfCorrectAnswer } from '@/lib/answer-correction';
 import { correctAnswerText } from '@/lib/answer-report';
+import { selfCorrectAnswer } from '@/lib/answer-correction';
+import { motorAnatomia } from '@/lib/normalizador';
+import { normalizeQuizQuestion } from '@/lib/quiz-normalization';
 import { quizBelongsToSubject } from '@/lib/quiz-membership';
 import { sessionKey, countDescendantQuizzes, shuffleAnswerOptions, summarizeQuizProgress } from '@/lib/quiz-progress';
 import { useState, useEffect, useRef } from 'react';
@@ -33,8 +35,6 @@ import FileUploader from '../components/quiz/FileUploader';
 
 import QuizEditor from '../components/quiz/QuizEditor';
 import QuestionView from '../components/quiz/QuestionView';
-import ReportQuestionButton from '../components/quiz/ReportQuestionButton';
-import { applyQuestionCorrections, questionIdentity } from '@/lib/question-review';
 import ResultsView from '../components/quiz/ResultsView';
 import SubjectCard from '../components/quiz/SubjectCard';
 import SubjectEditor from '../components/quiz/SubjectEditor';
@@ -94,7 +94,6 @@ function saveActiveQuizSession(data, currentUser = null) {
       userEmail: currentUser?.email || '',
       learnerId: currentUser?.learner_id || '',
       quizId: data.selectedQuiz.id,
-      review_revision: data.selectedQuiz.review_revision || 0,
       quizTitle: data.selectedQuiz.title || data.selectedQuiz.m?.t || 'Cuestionario',
       attemptId: data.currentAttemptId || null,
       sessionId: data.currentSessionId || null,
@@ -131,7 +130,6 @@ function saveActiveQuizSession(data, currentUser = null) {
       deckType: data.deckType || 'all',
       lightweightQuiz: {
         id: data.selectedQuiz.id,
-        review_revision: data.selectedQuiz.review_revision || 0,
         title: data.selectedQuiz.title || 'Cuestionario',
         subject_id: data.selectedQuiz.subject_id,
         questions: lightweightQuestions
@@ -344,7 +342,6 @@ export default function QuizzesPage() {
   const { data: quizzes = [] } = useQuery({
     queryKey: ['quizzes'],
     queryFn: () => client.entities.Quiz.list('-created_date'),
-    refetchInterval: 15000,
   });
 
   const { data: resources = [] } = useQuery({
@@ -368,22 +365,6 @@ export default function QuizzesPage() {
     queryFn: () => client.entities.User.list(),
     enabled: currentUser?.role === 'admin',
   });
-
-  // Apply published corrections to a running attempt without changing its position or answers.
-  useEffect(() => {
-    const latest = quizzes.find(q => q.id === selectedQuiz?.id);
-    if (swipeMode || !latest || Number(latest.review_revision || 0) <= Number(selectedQuiz?.review_revision || 0)) return;
-    const revised = applyQuestionCorrections({
-      score, answer_log: answerLog, wrong_questions: wrongAnswers, quiz_snapshot: selectedQuiz,
-      review_revision: selectedQuiz.review_revision || 0
-    }, latest);
-    setScore(revised.score);
-    setAnswerLog(revised.answer_log || []);
-    setWrongAnswers(revised.wrong_questions);
-    setCorrectAnswers((revised.answer_log || []).filter(a => a.is_correct));
-    setSelectedQuiz({ ...revised.quiz_snapshot, review_revision: latest.review_revision });
-    queryClient.invalidateQueries({ queryKey: ['attempts'] });
-  }, [quizzes, selectedQuiz, score, answerLog, wrongAnswers, queryClient, swipeMode]);
 
   // Quiz settings hook
   const { settings: quizSettings } = useQuizSettings(
@@ -1252,12 +1233,9 @@ export default function QuizzesPage() {
       correctOption?.rationale ||
       "";
 
-    const answerIdentity = { question_id: questionIdentity(question), selected_option_id: selectedOption?.id,
-      ...(selectedOption?.selected_option_ids ? { selected_option_ids: selectedOption.selected_option_ids } : {}) };
     const newWrongAnswers = !isCorrect ? [...wrongAnswers, {
       answer_index: currentQuestionIndex,
       is_correct: false,
-      ...answerIdentity,
       ...(selectedOption?.result ? { inputs: selectedOption.inputs, result: selectedOption.result } : {}),
       question: question.question,
       selected_answer: selectedAnswerText,
@@ -1273,7 +1251,6 @@ export default function QuizzesPage() {
     }] : wrongAnswers;
     const answerEntry = {
       answer_index: currentQuestionIndex,
-      ...answerIdentity,
       ...(selectedOption?.result ? { inputs: selectedOption.inputs, result: selectedOption.result } : {}),
       question: question.question,
       selected_answer: selectedAnswerText,
@@ -1313,7 +1290,6 @@ export default function QuizzesPage() {
         subject_id: selectedQuiz.subject_id,
         total_questions: selectedQuiz.questions.length,
         quiz_snapshot: selectedQuiz,
-        review_revision: selectedQuiz.review_revision || 0,
         score: newScore,
         answered_questions: answeredCount,
         wrong_questions: newWrongAnswers,
@@ -1345,14 +1321,16 @@ export default function QuizzesPage() {
   };
 
   const correctionLock = useRef(false);
-  const handleCorrectAnswer = async (answerOrIndex) => {
+  const handleCorrectAnswer = async (answerOrIndex, inputs) => {
     if (correctionLock.current) return;
     const index = Number.isInteger(answerOrIndex) ? answerOrIndex
       : Number.isInteger(answerOrIndex?.answer_index) ? answerOrIndex.answer_index
       : answerLog.findIndex(entry => !entry.is_correct && entry.question === answerOrIndex?.question
         && entry.selected_answer === answerOrIndex?.selected_answer);
-    const corrected = selfCorrectAnswer(answerLog, index);
-    if (!corrected || !selectedQuiz) return;
+    if (!selectedQuiz?.questions?.[index]) throw new Error('Pregunta no disponible.');
+    const corrected = selfCorrectAnswer(answerLog, index, normalizeQuizQuestion(selectedQuiz.questions[index]), inputs,
+      (question, payload) => motorAnatomia.calificar(question, payload));
+    if (!corrected) throw new Error('Respuesta no disponible para editar.');
     correctionLock.current = true;
     setScore(corrected.score);
     setAnswerLog(corrected.answerLog);
@@ -1374,7 +1352,8 @@ export default function QuizzesPage() {
         : await saveAttemptMutation.mutateAsync(data);
       if (!currentAttemptId && saved?.id) setCurrentAttemptId(saved.id);
       if (saved?._sync_status === 'pending') toast.info('Respuesta corregida en este dispositivo. Se sincronizará cuando haya conexión.');
-      else toast.success('Respuesta marcada como correcta. Resultado actualizado.');
+      else if (corrected.answerLog[index].is_correct) toast.success('Respuesta reevaluada: correcta. Resultado actualizado.');
+      else toast.info('Respuesta reevaluada. Aún no coincide completamente con la respuesta del banco.');
     } catch {
       // Preserve the correction for offline recovery, including completed attempts.
       try {
@@ -1500,7 +1479,6 @@ export default function QuizzesPage() {
       subject_id: quizAtExit.subject_id,
       total_questions: quizAtExit.questions.length,
       quiz_snapshot: quizAtExit,
-      review_revision: quizAtExit.review_revision || 0,
       is_completed: answerLog.length >= quizAtExit.questions.length,
       score,
       answered_questions: Math.max(currentQuestionIndex, answerLog.length),
@@ -1564,7 +1542,7 @@ export default function QuizzesPage() {
     setView('quiz');
   };
 
-  const handleSwipeComplete = async (score, total, wrongAnswers, fullAnswerLog = []) => {
+  const handleSwipeComplete = async (score, total, wrongAnswers) => {
     await saveAttemptMutation.mutateAsync({
       quiz_id: selectedQuiz.id,
       subject_id: selectedQuiz.subject_id,
@@ -1573,9 +1551,17 @@ export default function QuizzesPage() {
       total_questions: total,
       answered_questions: total,
       is_completed: true,
-      wrong_questions: fullAnswerLog.filter(a => !a.is_correct),
-      answer_log: fullAnswerLog,
-      review_revision: selectedQuiz.review_revision || 0,
+      wrong_questions: wrongAnswers.map(w => ({
+        question: w.statement,
+        selected_answer: w.userAnswer,
+        correct_answer: w.correctAnswer
+      })),
+      answer_log: wrongAnswers.map(w => ({
+        question: w.statement,
+        selected_answer: w.userAnswer,
+        correct_answer: w.correctAnswer,
+        is_correct: false
+      })),
       completed_at: new Date().toISOString()
     });
     queryClient.invalidateQueries({ queryKey: ['attempts'] });
@@ -2420,18 +2406,15 @@ export default function QuizzesPage() {
                 {/* Quiz View */}
                 {view === 'quiz' && selectedQuiz && !swipeMode && (
                   <motion.div key="quiz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
-                    <div className="mb-4 flex justify-end">
-                      <ReportQuestionButton key={currentQuestionIndex} quizId={selectedQuiz.id} question={selectedQuiz.questions[currentQuestionIndex]} />
-                    </div>
                     <QuestionView
-                      key={String(currentQuestionIndex) + ':' + (selectedQuiz.review_revision || 0)}
+                      key={currentQuestionIndex}
                       question={selectedQuiz.questions[currentQuestionIndex]}
                       questionNumber={currentQuestionIndex + 1}
                       totalQuestions={selectedQuiz.questions.length}
                       correctAnswers={score}
                       wrongAnswers={wrongAnswers.length}
                       onAnswer={handleAnswer}
-                      onCorrectAnswer={() => handleCorrectAnswer(currentQuestionIndex)}
+                      onCorrectAnswer={inputs => handleCorrectAnswer(currentQuestionIndex, inputs)}
                       onNext={handleNextQuestion}
                       savedAnswer={answerLog[currentQuestionIndex]}
                       onBack={handleExitQuiz}
@@ -2452,7 +2435,6 @@ export default function QuizzesPage() {
                 {view === 'quiz' && selectedQuiz && swipeMode && (
                   <motion.div key="swipe-quiz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
                     <SwipeQuizMode
-                      quizId={selectedQuiz.id}
                       questions={selectedQuiz.questions}
                       onComplete={handleSwipeComplete}
                       onExit={handleExitQuiz}
@@ -2475,12 +2457,6 @@ export default function QuizzesPage() {
                       onRetryWrong={handleRetryWrongQuestions}
                       onHome={() => { setSelectedQuiz(null); setView('list'); }}
                     />
-                    <details className="mt-6 rounded-xl border bg-white p-4">
-                      <summary className="cursor-pointer font-medium">Reportar errores en las preguntas</summary>
-                      {selectedQuiz.questions.map((q, i) => <div key={questionIdentity(q) || i} className="border-t py-4 space-y-2">
-                        <p>{q.question || q.prompt}</p><ReportQuestionButton quizId={selectedQuiz.id} question={q} />
-                      </div>)}
-                    </details>
                   </motion.div>
                 )}
               </AnimatePresence>

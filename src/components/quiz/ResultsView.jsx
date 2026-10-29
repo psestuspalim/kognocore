@@ -169,7 +169,7 @@ export default function ResultsView({
                     <MathText text={q.question} />
                   </p>
                   <p className="text-emerald-700 text-xs">Tu respuesta: <MathText text={q.selected_answer} /></p>
-                  {q.self_correction && <SelfCorrectionButton corrected />}
+                  {q.answer_revisions?.length > 0 && <SelfCorrectionButton corrected />}
                   <p className="text-emerald-700 text-xs mt-0.5">Respuesta correcta: <MathText text={correctAnswerText(q) || 'No disponible en este registro'} /></p>
                   {justText && (
                     <div className="mt-2 p-2.5 bg-blue-50 border border-blue-100 rounded-lg text-xs text-slate-700 leading-relaxed">
@@ -199,13 +199,13 @@ export default function ResultsView({
             {wrongAnswers.map((wq, idx) => {
               const justText = wq.justificacion || wq.explanation || wq.feedback || wq.rationale;
               return (
-                <div key={idx} className="bg-white rounded-lg p-3 text-sm border border-rose-100">
+                <div key={wq.answer_index ?? idx} className="bg-white rounded-lg p-3 text-sm border border-rose-100">
                   <p className="font-medium text-slate-800 mb-1.5 text-[13px] leading-relaxed">
                     <span className="text-slate-400 mr-1">{idx + 1}.</span>
                     <MathText text={wq.question} />
                   </p>
                   <p className="text-rose-600 text-xs">Tu respuesta: <MathText text={wq.selected_answer} /></p>
-                  {onCorrectAnswer && canSelfCorrect(wq) && <SelfCorrectionButton onCorrect={() => onCorrectAnswer(wq)} />}
+                  {onCorrectAnswer && canSelfCorrect(wq) && <SelfCorrectionButton inputs={wq.inputs} onCorrect={inputs => onCorrectAnswer(wq, inputs)} />}
                   <p className="text-emerald-700 text-xs mt-0.5">Respuesta correcta: <MathText text={correctAnswerText(wq) || 'No disponible en este registro'} /></p>
                   {justText && (
                     <div className="mt-2 p-2.5 bg-blue-50 border border-blue-100 rounded-lg text-xs text-slate-700 leading-relaxed">

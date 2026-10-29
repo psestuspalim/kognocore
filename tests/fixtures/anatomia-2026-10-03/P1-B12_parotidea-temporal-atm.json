@@ -1,0 +1,360 @@
+{
+  "bloque": {
+    "id": "P1-B12",
+    "titulo": "Región parotídea y glándula parótida · Región temporal y fosa infratemporal · Articulación temporomandibular y sus movimientos · Músculos de la masticación · Arteria maxilar",
+    "parcial": 1,
+    "sesion": "12 de febrero",
+    "paginas": "932-945"
+  },
+  "items": [
+    {
+      "id": "P1-B12-001",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la glándula parótida:",
+      "texto": "La glándula parótida es la {{c1}} de las tres glándulas salivares pares. Está rodeada por una cápsula fascial fuerte y resistente, la {{c2}} parotídea, que deriva de la lámina superficial de la fascia {{c3}} profunda.",
+      "dificultad": 1,
+      "etiquetas": ["glándula parótida"],
+      "fuente": { "obra": "Moore 9e", "pag": 933 },
+      "blancos": {
+        "c1": { "canonico": "mayor" },
+        "c2": { "canonico": "fascia", "acepta": ["vaina", "cápsula"] },
+        "c3": { "canonico": "cervical" }
+      },
+      "feedback": "Que su cápsula sea fuerte y resistente tiene consecuencia clínica directa: en la parotiditis la glándula se inflama dentro de un continente inextensible, lo que explica el dolor intenso, sobre todo al masticar, cuando el movimiento mandibular comprime la glándula. Aunque funcionalmente pertenece al grupo de las glándulas salivares, en los cursos de disección se estudia con la cara o al exponer el nervio facial, porque el plexo parotídeo del NC VII está inmerso en ella."
+    },
+    {
+      "id": "P1-B12-002",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la inervación de la parótida:",
+      "texto": "Aunque el plexo parotídeo del NC VII se halla inmerso en la glándula, {{c1}} la inerva. El nervio {{c2}}, un ramo del NC V3, está estrechamente relacionado con la glándula y discurre superiormente a ella, junto a los vasos temporales {{c3}}.",
+      "dificultad": 3,
+      "etiquetas": ["glándula parótida", "inervación"],
+      "fuente": { "obra": "Moore 9e", "pag": 934, "fig": "8-68" },
+      "blancos": {
+        "c1": { "canonico": "no" },
+        "c2": { "canonico": "auriculotemporal" },
+        "c3": { "canonico": "superficiales" }
+      },
+      "feedback": "Esa disociación es el punto conceptual del tema: el facial atraviesa la parótida sin inervarla, mientras que las fibras parasimpáticas secretomotoras llegan por una ruta larga que empieza en el glosofaríngeo, pasa por el plexo timpánico y el nervio petroso menor, hace sinapsis en el ganglio ótico y se incorpora al auriculotemporal. Por eso una lesión del facial en la parótida produce parálisis facial sin xerostomía, y por eso el síndrome de Frey, con sudoración facial al comer, se explica por reinervación aberrante de esas fibras tras una parotidectomía."
+    },
+    {
+      "id": "P1-B12-003",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué músculo atraviesa el conducto parotídeo para desembocar en el vestíbulo de la boca?",
+      "dificultad": 2,
+      "etiquetas": ["glándula parótida", "conducto parotídeo"],
+      "fuente": { "obra": "Moore 9e", "pag": 933, "fig": "8-70" },
+      "respuesta": { "canonico": "buccinador" },
+      "feedback": "El conducto discurre sobre la cara externa del masetero, gira medialmente en su borde anterior y perfora el buccinador para abrirse en el vestíbulo, frente al segundo molar superior. Esa anatomía permite localizar el orificio con una simple inspección de la mejilla, lo que importa para valorar la salida de saliva o de pus en una parotiditis supurada, y para canular el conducto en una sialografía."
+    },
+    {
+      "id": "P1-B12-004",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los límites de la fosa temporal:",
+      "texto": "En el piso de la fosa temporal se inserta ampliamente el músculo {{c1}}. La fosa se continúa inferiormente, por debajo del arco cigomático, con la fosa {{c2}}, y en su parte anterior, 3 a 4 cm por encima del punto medio del arco, se localiza el {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": ["región temporal"],
+      "fuente": { "obra": "Moore 9e", "pag": 935, "fig": "8-69" },
+      "blancos": {
+        "c1": { "canonico": "temporal" },
+        "c2": { "canonico": "infratemporal" },
+        "c3": { "canonico": "pterión" }
+      },
+      "feedback": "La continuidad entre la fosa temporal y la infratemporal por debajo del arco cigomático es la clave anatómica de la región: permite que el músculo temporal, que nace arriba, pase por ese espacio para insertarse en el proceso coronoideo de la mandíbula, y explica cómo las infecciones y los tumores se extienden entre ambos compartimentos. El pterión, en la misma pared, marca el trayecto de la división anterior de la arteria meníngea media."
+    },
+    {
+      "id": "P1-B12-005",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 4 músculos de la masticación:",
+      "dificultad": 1,
+      "etiquetas": ["músculos de la masticación"],
+      "fuente": { "obra": "Moore 9e", "pag": 941, "fig": "tabla 8-11" },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          { "canonico": "temporal" },
+          { "canonico": "masetero" },
+          { "canonico": "pterigoideo lateral" },
+          { "canonico": "pterigoideo medial" }
+        ]
+      },
+      "feedback": "Los cuatro derivan del primer arco faríngeo y comparten inervación por el tronco anterior del nervio mandibular, el NC V3. Esa unidad embriológica y de inervación es lo que los agrupa, más allá de su acción: tres de ellos elevan la mandíbula y solo el pterigoideo lateral la desciende. Nótese que otros músculos que participan en los movimientos mandibulares, como los suprahioideos, no pertenecen a este grupo y tienen otra inervación."
+    },
+    {
+      "id": "P1-B12-006",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el músculo temporal:",
+      "texto": "El temporal es un músculo {{c1}} con amplia inserción en el piso de la fosa temporal, y una inserción estrecha en la punta y la cara medial del proceso {{c2}} de la mandíbula. Eleva la mandíbula y la cierra, y sus fibras {{c3}}, más horizontales, son las primeras que tiran hacia atrás de la mandíbula.",
+      "dificultad": 2,
+      "etiquetas": ["músculos de la masticación", "temporal"],
+      "fuente": { "obra": "Moore 9e", "pag": 941, "fig": "tabla 8-11" },
+      "blancos": {
+        "c1": { "canonico": "triangular" },
+        "c2": { "canonico": "coronoideo" },
+        "c3": { "canonico": "posteriores" }
+      },
+      "feedback": "Esa separación funcional entre fibras anteriores y posteriores es lo que convierte al temporal en elevador y retractor a la vez: las verticales cierran, las horizontales retruyen. Su inervación corre a cargo de los nervios temporales profundos. En la atrofia del temporal, por ejemplo tras una lesión del NC V3 o en caquexia, se aprecia un hundimiento característico en la región temporal, por encima del arco cigomático."
+    },
+    {
+      "id": "P1-B12-007",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el masetero:",
+      "texto": "El masetero es un músculo {{c1}} que se inserta en el borde inferior y la cara medial del proceso maxilar del hueso cigomático y del arco cigomático, y termina en el {{c2}} y la cara lateral de la rama de la mandíbula. Está inervado por el nervio {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": ["músculos de la masticación", "masetero"],
+      "fuente": { "obra": "Moore 9e", "pag": 941, "fig": "tabla 8-11" },
+      "blancos": {
+        "c1": { "canonico": "cuadrado" },
+        "c2": { "canonico": "ángulo" },
+        "c3": { "canonico": "masetérico" }
+      },
+      "feedback": "Eleva la mandíbula y la cierra, y sus fibras superficiales contribuyen de forma limitada a la protrusión. Es el músculo que se palpa con facilidad pidiendo al paciente que apriete los dientes, maniobra con la que se explora la función motora del trigémino. Su hipertrofia por bruxismo ensancha el contorno del ángulo mandibular, y es también el blanco de la toxina botulínica en ese contexto."
+    },
+    {
+      "id": "P1-B12-008",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el pterigoideo lateral:",
+      "texto": "El pterigoideo lateral es un músculo triangular con {{c1}} cabezas. Su cabeza superior se inserta principalmente en la cápsula y el {{c2}} articulares de la articulación temporomandibular. Cuando actúa bilateralmente protruye la mandíbula y desciende el {{c3}}; cuando actúa unilateralmente mueve la mandíbula hacia el lado {{c4}}.",
+      "dificultad": 3,
+      "etiquetas": ["músculos de la masticación", "pterigoideo lateral"],
+      "fuente": { "obra": "Moore 9e", "pag": 941, "fig": "tabla 8-11" },
+      "blancos": {
+        "c1": { "canonico": "dos" },
+        "c2": { "canonico": "disco" },
+        "c3": { "canonico": "mentón" },
+        "c4": { "canonico": "contralateral", "acepta": ["opuesto"] }
+      },
+      "feedback": "Es el único de los cuatro que abre la boca, y su inserción en el disco articular lo convierte en el músculo que arrastra el disco hacia delante durante la apertura, de modo que su descoordinación es una causa clásica de chasquido y bloqueo de la ATM. Sus dos cabezas nacen de la cara infratemporal y la cresta del ala mayor del esfenoides, y de la cara lateral de la lámina lateral de la pterigoides. Que mueva la mandíbula hacia el lado contrario explica la desviación del mentón hacia el lado paralizado en una lesión del NC V3."
+    },
+    {
+      "id": "P1-B12-009",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la estructura de la articulación temporomandibular:",
+      "texto": "Las superficies articulares óseas se hallan completamente separadas por un fibrocartílago interpuesto, el {{c1}} articular, unido en su periferia a la cara interna de la cápsula fibrosa. Ello crea {{c2}} compartimentos articulares, superior e inferior, separados y revestidos por las membranas {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": ["ATM"],
+      "fuente": { "obra": "Moore 9e", "pag": 938, "fig": "8-72" },
+      "blancos": {
+        "c1": { "canonico": "disco" },
+        "c2": { "canonico": "dos" },
+        "c3": { "canonico": "sinoviales" }
+      },
+      "feedback": "Esa división en dos cavidades es lo que permite que una sola articulación realice dos tipos de movimiento distintos, y hay que asociarlos: la protrusión y la retrusión, es decir la traslación, ocurren entre el hueso temporal y el disco, en la cavidad superior; mientras que los movimientos de gínglimo, descenso y elevación, y los de rotación o giro, se producen en el compartimento inferior. Es una articulación sinovial modificada y una de las pocas del cuerpo con disco completo."
+    },
+    {
+      "id": "P1-B12-010",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el ligamento lateral de la ATM:",
+      "texto": "Una parte más gruesa de la cápsula articular forma el ligamento {{c1}} intrínseco de esta articulación, que la fortalece lateralmente y, junto con el tubérculo {{c2}}, actúa para evitar la luxación {{c3}} de la articulación.",
+      "dificultad": 3,
+      "etiquetas": ["ATM", "ligamentos"],
+      "fuente": { "obra": "Moore 9e", "pag": 938, "fig": "8-72 A" },
+      "blancos": {
+        "c1": { "canonico": "lateral" },
+        "c2": { "canonico": "posglenoideo" },
+        "c3": { "canonico": "posterior" }
+      },
+      "feedback": "Nótese que la protección estructural está orientada hacia atrás, no hacia delante: por eso la luxación de la ATM es característicamente anterior, con la cabeza mandibular atrapada por delante del tubérculo articular y la boca bloqueada en apertura. Los otros dos ligamentos de la articulación son extrínsecos: el estilomandibular y el esfenomandibular, este último descrito como el punto oscilante de la mandíbula, porque lleva pasivamente el peso de su parte inferior y permite la protrusión, la retrusión, la elevación y el descenso."
+    },
+    {
+      "id": "P1-B12-011",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la posición de reposo de la mandíbula:",
+      "texto": "Con la boca cerrada y en reposo, las cabezas de la mandíbula se mantienen en posición {{c1}} en las fosas mandibulares, y el mentón se eleva por el {{c2}} de los retractores y elevadores. Durante el sueño profundo esa contracción {{c3}} se relaja y la gravedad deprime la mandíbula.",
+      "dificultad": 2,
+      "etiquetas": ["ATM", "movimientos"],
+      "fuente": { "obra": "Moore 9e", "pag": 939 },
+      "blancos": {
+        "c1": { "canonico": "retraída" },
+        "c2": { "canonico": "tono" },
+        "c3": { "canonico": "tónica" }
+      },
+      "feedback": "Es el mismo fenómeno que explica por qué la boca se abre al dormirse sentado, y por qué bajo anestesia general la lengua y la mandíbula caen y obstruyen la vía aérea: desaparece el tono muscular. La maniobra de tracción mandibular que se enseña en reanimación es anatomía aplicada de este párrafo, porque recoloca hacia delante la mandíbula y con ella la base de la lengua."
+    },
+    {
+      "id": "P1-B12-012",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el descenso de la mandíbula:",
+      "texto": "Para abrir la boca más de lo necesario para separar ambas arcadas dentales, la cabeza de la mandíbula y el disco articular se han de mover {{c1}} sobre la superficie articular, hasta que la cabeza se sitúe inferiormente al tubérculo {{c2}}. Ese movimiento se denomina en odontología {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": ["ATM", "movimientos"],
+      "fuente": { "obra": "Moore 9e", "pag": 939, "fig": "8-73" },
+      "blancos": {
+        "c1": { "canonico": "anteriormente" },
+        "c2": { "canonico": "articular" },
+        "c3": { "canonico": "traslación" }
+      },
+      "feedback": "Si la traslación ocurre sin descenso, el mentón protruye; lo habitual es que la mandíbula descienda cuando la cabeza y el disco se deslizan sobre el tubérculo articular, y el descenso completo solo es posible cuando las cabezas y los discos están totalmente protraídos. Si la protracción ocurre solo de un lado, la cabeza contralateral rota sobre su eje, que es el mecanismo de la masticación lateral. Y es también el mecanismo que, llevado al extremo, produce la luxación anterior al bostezar."
+    },
+    {
+      "id": "P1-B12-013",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué ligamento extrínseco de la ATM se describe como el punto oscilante de la mandíbula, al llevar pasivamente el peso de su parte inferior?",
+      "dificultad": 3,
+      "etiquetas": ["ATM", "ligamentos"],
+      "fuente": { "obra": "Moore 9e", "pag": 937, "fig": "8-71 F" },
+      "respuesta": { "canonico": "ligamento esfenomandibular" },
+      "feedback": "Se extiende desde la espina del esfenoides hasta la língula de la mandíbula, y permite la protrusión y la retrusión, así como la elevación y el descenso. Su importancia práctica es anestésica: marca una referencia en el bloqueo del nervio alveolar inferior, que pasa medial a él para entrar en el foramen mandibular. El otro ligamento extrínseco es el estilomandibular, que va del proceso estiloideo al ángulo de la mandíbula."
+    },
+    {
+      "id": "P1-B12-014",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 2 movimientos que ocurren en el compartimento inferior de la articulación temporomandibular:",
+      "dificultad": 3,
+      "etiquetas": ["ATM", "movimientos"],
+      "fuente": { "obra": "Moore 9e", "pag": 938 },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          { "canonico": "descenso y elevación", "acepta": ["movimientos de gínglimo", "gínglimo"] },
+          { "canonico": "rotación", "acepta": ["giro"] }
+        ]
+      },
+      "feedback": "Es decir, el compartimento inferior, entre el disco y la cabeza mandibular, es el de bisagra y giro. El superior, entre el hueso temporal y el disco, es el de traslación: protrusión y retrusión. Esta división de tareas es lo que convierte a la ATM en una articulación de dos pisos y explica por qué una patología del disco altera selectivamente la apertura amplia, que requiere traslación, pero respeta la apertura corta, que solo requiere bisagra."
+    },
+    {
+      "id": "P1-B12-015",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el límite óseo posterior de la fosa mandibular:",
+      "texto": "El tubérculo {{c1}}, situado por detrás de la fosa mandibular, y el ligamento lateral evitan la luxación posterior de la articulación. Por delante, la fosa está limitada por el tubérculo {{c2}}, sobre el cual se desliza la cabeza de la mandíbula durante la apertura.",
+      "dificultad": 3,
+      "etiquetas": ["ATM"],
+      "fuente": { "obra": "Moore 9e", "pag": 935, "fig": "8-71 A" },
+      "blancos": {
+        "c1": { "canonico": "posglenoideo" },
+        "c2": { "canonico": "articular" }
+      },
+      "feedback": "Esos dos relieves delimitan por delante y por detrás el recorrido de la cabeza mandibular, de modo que la fosa no es una cavidad cerrada sino una pista con topes desiguales: fuerte por detrás, por donde pasa el meato acústico externo y que conviene proteger, y abierta por delante, que es la dirección de la luxación. Esa asimetría explica por qué un golpe en el mentón puede empujar la cabeza mandibular contra el conducto auditivo."
+    },
+    {
+      "id": "P1-B12-016",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué nervio inerva a los cuatro músculos de la masticación?",
+      "dificultad": 1,
+      "etiquetas": ["músculos de la masticación", "inervación"],
+      "fuente": { "obra": "Moore 9e", "pag": 941, "fig": "tabla 8-11" },
+      "respuesta": { "canonico": "nervio mandibular", "acepta": ["NC V3", "V3", "tronco anterior del nervio mandibular"] },
+      "feedback": "Concretamente su tronco anterior, a través de los nervios temporales profundos, el masetérico y los nervios pterigoideos. La unidad de inervación refleja su origen común en el primer arco faríngeo, al que también pertenecen el milohioideo, el vientre anterior del digástrico, el tensor del velo del paladar y el tensor del tímpano. Por eso una lesión del V3 produce debilidad masticatoria con desviación del mentón hacia el lado lesionado al abrir la boca."
+    },
+    {
+      "id": "P1-B12-017",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la disposición de los grandes músculos del lado del cráneo:",
+      "texto": "Los músculos temporal y masetero están inervados por el nervio {{c1}} y ambos {{c2}} la mandíbula. En la misma región, la arteria facial discurre en profundidad con respecto a la glándula {{c3}}, mientras que la vena facial pasa superficial a esta.",
+      "dificultad": 2,
+      "etiquetas": ["región temporal", "relaciones"],
+      "fuente": { "obra": "Moore 9e", "pag": 936, "fig": "8-70" },
+      "blancos": {
+        "c1": { "canonico": "trigémino", "acepta": ["NC V", "mandibular"] },
+        "c2": { "canonico": "cierran", "acepta": ["elevan"] },
+        "c3": { "canonico": "submandibular" }
+      },
+      "feedback": "La relación entre la arteria y la vena facial con la glándula submandibular es una de esas reglas de posición que conviene fijar porque se pregunta y porque orienta en cirugía: arteria profunda, vena superficial. Es el mismo principio por el que la incisión submandibular se traza por debajo del borde mandibular, para proteger a la vez la vena y el ramo marginal del nervio facial."
+    },
+    {
+      "id": "P1-B12-018",
+      "tipo": "respuesta_corta",
+      "prompt": "¿En qué ganglio hacen sinapsis las fibras parasimpáticas presinápticas destinadas a la glándula parótida?",
+      "dificultad": 3,
+      "etiquetas": ["glándula parótida", "parasimpático"],
+      "fuente": { "obra": "Moore 9e", "pag": 934, "fig": "8-68" },
+      "respuesta": { "canonico": "ganglio ótico" },
+      "feedback": "La ruta completa conviene memorizarla como una cadena: el nervio glosofaríngeo da el nervio timpánico, que forma el plexo timpánico; de ahí sale el nervio petroso menor, que hace sinapsis en el ganglio ótico; y las fibras postsinápticas se incorporan al nervio auriculotemporal, ramo del V3, que las lleva a la glándula. Es un ejemplo del patrón general de la cabeza: las fibras parasimpáticas viajan con un par craneal, cambian de neurona en un ganglio y terminan montándose en un ramo del trigémino para alcanzar su destino."
+    },
+    {
+      "id": "P1-B12-019",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la pared de la fosa infratemporal:",
+      "texto": "En la pared de la región infratemporal se encuentran el foramen {{c1}}, para la arteria meníngea media, y más adelante la fisura {{c2}}, que comunica con la órbita. Medialmente, la fosa se continúa con la fosa {{c3}}.",
+      "dificultad": 3,
+      "etiquetas": ["fosa infratemporal"],
+      "fuente": { "obra": "Moore 9e", "pag": 935, "fig": "8-69" },
+      "blancos": {
+        "c1": { "canonico": "espinoso" },
+        "c2": { "canonico": "orbitaria", "acepta": ["orbitaria inferior"] },
+        "c3": { "canonico": "pterigopalatina" }
+      },
+      "feedback": "La fosa infratemporal es una encrucijada: por arriba comunica con la fosa temporal bajo el arco cigomático, por delante y medialmente con la pterigopalatina a través de la fisura pterigomaxilar, y desde ahí con la órbita, la nariz y el paladar. Esa continuidad de espacios es la que explica cómo se propagan las infecciones odontogénicas y los tumores de esta región, y por qué un bloqueo anestésico aquí alcanza territorios aparentemente lejanos."
+    },
+    {
+      "id": "P1-B12-020",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué músculo, junto con el masetero y el temporal, eleva la mandíbula?",
+      "dificultad": 2,
+      "etiquetas": ["músculos de la masticación"],
+      "fuente": { "obra": "Moore 9e", "pag": 941, "fig": "tabla 8-11" },
+      "respuesta": { "canonico": "pterigoideo medial" },
+      "feedback": "Forma con el masetero una especie de cabestrillo muscular que abraza el ángulo de la mandíbula, el masetero por fuera y el pterigoideo medial por dentro, y esa disposición es la que da potencia a la oclusión. Actuando unilateralmente, contribuye a mover la mandíbula hacia el lado contrario, y bilateralmente ayuda a la protrusión. De los cuatro músculos de la masticación, es el único cuya acción se palpa mal desde fuera, precisamente por su posición medial a la rama."
+    },
+    {
+      "id": "P1-B12-021",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la relación del nervio auriculotemporal con la parótida:",
+      "texto": "El nervio auriculotemporal y el nervio auricular {{c1}} aportan la inervación {{c2}} de la región parotídea, es decir la sensibilidad de la piel que cubre la glándula y de su cápsula.",
+      "dificultad": 3,
+      "etiquetas": ["glándula parótida", "inervación sensitiva"],
+      "fuente": { "obra": "Moore 9e", "pag": 934 },
+      "blancos": {
+        "c1": { "canonico": "mayor" },
+        "c2": { "canonico": "sensitiva" }
+      },
+      "feedback": "El auriculotemporal procede del NC V3 y el auricular mayor del plexo cervical, de las raíces C2 y C3. Esa doble inervación sensitiva explica la distribución del dolor en la parotiditis, que se irradia hacia el oído y la región preauricular por el auriculotemporal y hacia el ángulo mandibular y el cuello por el auricular mayor. También es la base del síndrome de Frey, donde las fibras secretomotoras regeneradas siguen la ruta del auriculotemporal hasta las glándulas sudoríparas de la piel."
+    },
+    {
+      "id": "P1-B12-022",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 2 ligamentos extrínsecos de la articulación temporomandibular:",
+      "dificultad": 2,
+      "etiquetas": ["ATM", "ligamentos"],
+      "fuente": { "obra": "Moore 9e", "pag": 937, "fig": "8-71 F y G" },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          { "canonico": "ligamento estilomandibular" },
+          { "canonico": "ligamento esfenomandibular" }
+        ]
+      },
+      "feedback": "Se llaman extrínsecos porque no forman parte de la cápsula, a diferencia del ligamento lateral, que es un engrosamiento capsular y por tanto intrínseco. El estilomandibular va del proceso estiloideo al ángulo de la mandíbula y limita la protrusión excesiva; el esfenomandibular, de la espina del esfenoides a la língula, actúa como punto oscilante. Ninguno de los dos es un freno potente, lo que coincide con que la articulación dependa sobre todo del tono muscular para su estabilidad."
+    },
+    {
+      "id": "P1-B12-023",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la rotación durante la masticación lateral:",
+      "texto": "Si la protracción de la cabeza y el disco ocurre {{c1}}, la cabeza {{c2}} rota sobre su eje. Ese es el mecanismo de los movimientos de {{c3}} propios de la masticación.",
+      "dificultad": 3,
+      "etiquetas": ["ATM", "movimientos"],
+      "fuente": { "obra": "Moore 9e", "pag": 939 },
+      "blancos": {
+        "c1": { "canonico": "unilateralmente" },
+        "c2": { "canonico": "contralateral", "acepta": ["opuesta"] },
+        "c3": { "canonico": "lateralidad", "acepta": ["molienda", "lateralización"] }
+      },
+      "feedback": "Es decir, un lado traslada y el otro rota, y el resultado es el desplazamiento lateral del mentón que permite triturar el alimento entre las superficies oclusales. Entender esta asimetría es lo que permite interpretar la exploración de la ATM: se valora apertura, protrusión y lateralidades, porque cada una pone a prueba un componente distinto de la articulación."
+    },
+    {
+      "id": "P1-B12-024",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué arteria entra en el cráneo por el foramen espinoso, en la pared de la región infratemporal?",
+      "dificultad": 2,
+      "etiquetas": ["fosa infratemporal", "arteria maxilar"],
+      "fuente": { "obra": "Moore 9e", "pag": 935 },
+      "respuesta": { "canonico": "arteria meníngea media" },
+      "feedback": "Es rama de la arteria maxilar, que a su vez es una de las dos ramas terminales de la carótida externa y la principal arteria de la fosa infratemporal. La arteria maxilar se divide en tres porciones según su relación con el pterigoideo lateral, y de ellas salen ramas para la duramadre, los dientes, los músculos de la masticación y la cara profunda. La meníngea media es la de mayor relevancia urgente, por su relación con el pterión y el hematoma extradural."
+    },
+    {
+      "id": "P1-B12-025",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la disposición del masetero:",
+      "texto": "El masetero posee una capa {{c1}} y una capa {{c2}}, y se inserta en el lado {{c3}} de la mandíbula el pterigoideo medial, de modo que ambos forman un cabestrillo alrededor del ángulo mandibular.",
+      "dificultad": 3,
+      "etiquetas": ["músculos de la masticación"],
+      "fuente": { "obra": "Moore 9e", "pag": 940, "fig": "8-74 A" },
+      "blancos": {
+        "c1": { "canonico": "superficial" },
+        "c2": { "canonico": "profunda" },
+        "c3": { "canonico": "medial" }
+      },
+      "feedback": "Ese cabestrillo masetero-pterigoideo medial es la razón mecánica de que la oclusión sea tan potente y de que las fracturas del ángulo mandibular tiendan a desplazarse: los dos músculos traccionan del fragmento posterior hacia arriba. También explica el trismo, la limitación dolorosa de la apertura bucal, cuando hay inflamación en ese espacio, por ejemplo en una infección odontogénica del tercer molar."
+    }
+  ]
+}

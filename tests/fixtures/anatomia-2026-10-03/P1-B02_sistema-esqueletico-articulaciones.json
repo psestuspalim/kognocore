@@ -1,0 +1,727 @@
+{
+  "bloque": {
+    "id": "P1-B02",
+    "titulo": "Sistema esquelético: cartílagos y huesos, clasificación, detalles óseos, desarrollo, vascularización e inervación · Articulaciones y su clasificación · Cuadros clínicos",
+    "parcial": 1,
+    "sesion": "28 de enero",
+    "paginas": "17-28"
+  },
+  "items": [
+    {
+      "id": "P1-B02-001",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las dos partes funcionales del esqueleto:",
+      "texto": "El esqueleto {{c1}} está compuesto por los huesos de la cabeza, el cuello y el tronco, es decir costillas, esternón, vértebras y sacro. El esqueleto {{c2}} se compone de los huesos de los miembros, incluidos los que constituyen los cinturones del miembro superior, la cintura {{c3}}, y del miembro inferior, la cintura {{c4}}.",
+      "dificultad": 1,
+      "etiquetas": [
+        "sistema esquelético"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 17,
+        "fig": "1-11"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "axial"
+        },
+        "c2": {
+          "canonico": "apendicular"
+        },
+        "c3": {
+          "canonico": "escapular"
+        },
+        "c4": {
+          "canonico": "pélvica"
+        }
+      },
+      "feedback": "El cráneo, el hueso hioides y las vértebras cervicales pertenecen al axial. La escápula es el caso de prueba que suele preguntarse: está situada en el dorso pero pertenece al esqueleto apendicular, porque forma parte de la cintura escapular. Esa distinción no es solo descriptiva, sino que organiza el estudio: el esqueleto axial soporta y protege, mientras que el apendicular está diseñado para el movimiento."
+    },
+    {
+      "id": "P1-B02-002",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 5 funciones que proporcionan los huesos del adulto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "hueso",
+        "funciones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 17
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "soporte"
+          },
+          {
+            "canonico": "protección"
+          },
+          {
+            "canonico": "movimiento",
+            "acepta": [
+              "base mecánica para el movimiento",
+              "palanca"
+            ]
+          },
+          {
+            "canonico": "almacenamiento de sales",
+            "acepta": [
+              "almacenamiento",
+              "reserva de calcio"
+            ]
+          },
+          {
+            "canonico": "hematopoyesis",
+            "acepta": [
+              "producción de células sanguíneas"
+            ]
+          }
+        ]
+      },
+      "feedback": "El hueso es tejido vivo, un tejido conectivo duro y altamente especializado. La producción de células sanguíneas corre a cargo de la médula ósea roja alojada en la cavidad medular de muchos huesos, mientras que la médula ósea amarilla es grasa. El soporte se refiere al cuerpo y sus cavidades vitales, y la protección a estructuras como el corazón. El almacenamiento de sales, sobre todo calcio, explica la participación del esqueleto en la homeostasis mineral."
+    },
+    {
+      "id": "P1-B02-003",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el cartílago:",
+      "texto": "El cartílago es un tipo de tejido conectivo {{c1}} que forma las partes del esqueleto donde se requiere más flexibilidad, por ejemplo donde los cartílagos {{c2}} unen las costillas al esternón. Los vasos sanguíneos no penetran en él, es decir, es {{c3}}, por lo que sus células obtienen el oxígeno y los nutrientes por {{c4}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "cartílago"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 17
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "semirrígido"
+        },
+        "c2": {
+          "canonico": "costales"
+        },
+        "c3": {
+          "canonico": "avascular"
+        },
+        "c4": {
+          "canonico": "difusión"
+        }
+      },
+      "feedback": "Esa avascularidad es la razón de fondo por la que el cartílago articular cicatriza mal y por la que su degeneración con el envejecimiento es prácticamente irreversible. El cartílago articular recubre las superficies de las articulaciones sinoviales y les aporta superficies lisas, de baja fricción y deslizantes. La proporción de cartílago y hueso cambia con la edad: cuanto más joven es la persona, más cantidad de cartílago posee, y los huesos del recién nacido son blandos y flexibles porque están compuestos principalmente por cartílago."
+    },
+    {
+      "id": "P1-B02-004",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las cubiertas del tejido esquelético:",
+      "texto": "Un tejido conectivo fibroso cubre como una funda todos los elementos del esqueleto, excepto donde hay cartílago articular. El que rodea los huesos es el {{c1}}, mientras que el que existe en torno al cartílago es el {{c2}}. Ambos nutren las caras {{c3}} del tejido esquelético y proporcionan la interfase para la inserción de ligamentos y tendones.",
+      "dificultad": 1,
+      "etiquetas": [
+        "periostio",
+        "pericondrio"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 18
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "periostio"
+        },
+        "c2": {
+          "canonico": "pericondrio"
+        },
+        "c3": {
+          "canonico": "externas"
+        }
+      },
+      "feedback": "Pueden depositar más cartílago o hueso, particularmente durante la consolidación de las fracturas. La importancia clínica del periostio es doble y conviene retenerla: está ricamente inervado por nervios sensitivos portadores de fibras dolorosas, lo que explica el dolor agudo de las fracturas, y su extirpación produce la muerte del hueso, porque la mayor parte del hueso compacto se nutre de ramas periósticas."
+    },
+    {
+      "id": "P1-B02-005",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los dos tipos de hueso:",
+      "texto": "Los dos tipos de hueso son el hueso {{c1}} y el hueso {{c2}}, también llamado trabecular. Se diferencian por la cantidad relativa de materia sólida y por el número y el tamaño de los {{c3}} que contienen. El primero aporta fuerza para soportar el peso.",
+      "dificultad": 1,
+      "etiquetas": [
+        "hueso",
+        "arquitectura"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 18,
+        "fig": "1-12"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "compacto"
+        },
+        "c2": {
+          "canonico": "esponjoso"
+        },
+        "c3": {
+          "canonico": "espacios"
+        }
+      },
+      "feedback": "Todos los huesos poseen una delgada capa superficial de hueso compacto en torno a una masa central de hueso esponjoso, excepto donde este último queda reemplazado por la cavidad medular. En los huesos largos, diseñados para ser rígidos, la cantidad de hueso compacto es mayor cerca de la mitad de la diáfisis, que es donde son más propensos a arquearse. Dentro de la cavidad medular y entre las trabéculas del esponjoso hay médula ósea amarilla, que es grasa, o roja, que forma las células sanguíneas y las plaquetas."
+    },
+    {
+      "id": "P1-B02-006",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 5 clases en que se clasifican los huesos según su forma:",
+      "dificultad": 1,
+      "etiquetas": [
+        "clasificación de los huesos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 19
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "largos"
+          },
+          {
+            "canonico": "cortos"
+          },
+          {
+            "canonico": "planos"
+          },
+          {
+            "canonico": "irregulares"
+          },
+          {
+            "canonico": "sesamoideos"
+          }
+        ]
+      },
+      "feedback": "Los largos son tubulares, como el húmero; los cortos son cuboideos y se hallan solo en el tarso y el carpo; los planos cumplen habitualmente función protectora, como los del cráneo; los irregulares tienen formas distintas a las anteriores, como los de la cara. Los sesamoideos, como la patela, se desarrollan en ciertos tendones donde estos cruzan los extremos de huesos largos: protegen el tendón del desgaste excesivo y a menudo modifican el ángulo de inserción tendinosa, lo que mejora la palanca."
+    },
+    {
+      "id": "P1-B02-007",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el origen de los detalles óseos:",
+      "texto": "Los detalles óseos aparecen donde se insertan los {{c1}}, los ligamentos y las fascias, o donde las {{c2}} se hallan adyacentes a los huesos o penetran en ellos. Otras formaciones están en relación con el paso de un tendón, a menudo para dirigirlo o mejorar su acción de {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "detalles óseos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 19,
+        "fig": "1-13"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "tendones"
+        },
+        "c2": {
+          "canonico": "arterias"
+        },
+        "c3": {
+          "canonico": "palanca"
+        }
+      },
+      "feedback": "Esto convierte el relieve óseo en un registro de las fuerzas que ha soportado el hueso, y es la razón por la que los detalles son más marcados en personas con mayor masa muscular. También pueden servir para controlar el tipo de movimiento que ocurre en una articulación. De ahí que memorizar los detalles sea más fácil si se piensa qué estructura se inserta o pasa por cada uno, en vez de aprenderlos como nombres sueltos."
+    },
+    {
+      "id": "P1-B02-008",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los detalles óseos elevados:",
+      "texto": "El {{c1}} es una gran elevación roma, como la del fémur. El {{c2}} es una pequeña eminencia elevada, como la mayor del húmero. La {{c3}} es una gran elevación redondeada, como la isquiática. La {{c4}} es un reborde óseo, como la ilíaca.",
+      "dificultad": 2,
+      "etiquetas": [
+        "detalles óseos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 20,
+        "fig": "1-13"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "trocánter"
+        },
+        "c2": {
+          "canonico": "tubérculo"
+        },
+        "c3": {
+          "canonico": "tuberosidad"
+        },
+        "c4": {
+          "canonico": "cresta"
+        }
+      },
+      "feedback": "Conviene aprenderlos por tamaño y forma, que es el criterio real que los separa: trocánter grande y romo, tubérculo pequeño, tuberosidad grande y redondeada, cresta alargada como un reborde. A ellos se suman la espina, que es un proceso semejante a una espina como la de la escápula, y la protuberancia, que es un abultamiento como la occipital externa. El epicóndilo, por definición, es la eminencia situada superior a un cóndilo."
+    },
+    {
+      "id": "P1-B02-009",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los detalles óseos deprimidos y los pasos:",
+      "texto": "La {{c1}} es un hueco o área deprimida, como la infraespinosa de la escápula. El {{c2}} es una depresión alargada, como el del nervio radial del húmero. El {{c3}} es un paso a través de un hueso, como el obturado. La {{c4}} es una muesca en el borde de un hueso, como la isquiática mayor.",
+      "dificultad": 2,
+      "etiquetas": [
+        "detalles óseos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 20
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "fosa"
+        },
+        "c2": {
+          "canonico": "surco"
+        },
+        "c3": {
+          "canonico": "foramen"
+        },
+        "c4": {
+          "canonico": "incisura"
+        }
+      },
+      "feedback": "Estos cuatro se confunden con frecuencia en examen precisamente porque todos describen ausencia de hueso, pero cada uno tiene una geometría propia: hueco amplio la fosa, canal alargado el surco, perforación completa el foramen, mella en un borde la incisura. La cara, carilla o fosita es distinta: un área plana y lisa, habitualmente cubierta de cartílago, donde un hueso se articula con otro."
+    },
+    {
+      "id": "P1-B02-010",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina el proceso articular semejante a un carrete que actúa como una polea, presente en el húmero?",
+      "dificultad": 2,
+      "etiquetas": [
+        "detalles óseos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 20
+      },
+      "respuesta": {
+        "canonico": "tróclea"
+      },
+      "feedback": "Su forma de polea es la que obliga al movimiento a ocurrir en un solo plano, y por eso la articulación del codo es un gínglimo, es decir una articulación troclear uniaxial. Conviene distinguirla del cóndilo, que es un área articular redondeada semejante a un nudillo, con frecuencia par, como los cóndilos lateral y medial del fémur, y del capítulo, que es una pequeña cabeza articular redondeada, como el capítulo del húmero."
+    },
+    {
+      "id": "P1-B02-011",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los dos procesos del desarrollo óseo:",
+      "texto": "Todos los huesos derivan del {{c1}}, que es el tejido conectivo embrionario. En la osificación {{c2}} los moldes de los huesos mesenquimatosos se forman durante el período embrionario y la osificación directa se inicia en el período fetal. En la osificación {{c3}} los moldes cartilaginosos se forman durante el período fetal y el hueso reemplaza posteriormente a la mayor parte del cartílago.",
+      "dificultad": 2,
+      "etiquetas": [
+        "desarrollo óseo"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 21
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "mesénquima"
+        },
+        "c2": {
+          "canonico": "intramembranosa"
+        },
+        "c3": {
+          "canonico": "endocondral"
+        }
+      },
+      "feedback": "La histología del hueso resultante es la misma en uno y otro proceso, lo que suele sorprender: lo que cambia es el molde previo, no el producto final. La distinción importa para interpretar radiografías pediátricas y para entender ciertas malformaciones. En el cráneo, por ejemplo, los huesos de la calvaria se desarrollan por osificación intramembranosa, mientras que la mayor parte de la base lo hace por osificación endocondral."
+    },
+    {
+      "id": "P1-B02-012",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la osificación endocondral:",
+      "texto": "Las células mesenquimatosas se condensan y diferencian en {{c1}}, que forman un molde de hueso cartilaginoso. En la zona media de ese molde el cartílago se {{c2}}, y los capilares periósticos crecen hacia su interior junto con células osteógenas, constituyendo la {{c3}} perióstica. Esos capilares inician el centro de osificación {{c4}}.",
+      "dificultad": 3,
+      "etiquetas": [
+        "desarrollo óseo"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 21,
+        "fig": "1-14 A"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "condroblastos"
+        },
+        "c2": {
+          "canonico": "calcifica"
+        },
+        "c3": {
+          "canonico": "yema"
+        },
+        "c4": {
+          "canonico": "primario"
+        }
+      },
+      "feedback": "Se llama primario porque el tejido óseo que forma reemplaza a la mayor parte del cartílago en el cuerpo principal del molde óseo. El cuerpo osificado a partir de ese centro es la diáfisis, que crece a medida que el hueso se desarrolla. Los centros de osificación secundarios aparecen en su mayoría después del nacimiento, en otras partes del hueso, y las partes osificadas desde ellos son las epífisis."
+    },
+    {
+      "id": "P1-B02-013",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el crecimiento en longitud:",
+      "texto": "La parte ensanchada de la diáfisis que se halla junto a la epífisis es la {{c1}}. Durante el crecimiento, el hueso formado en el centro primario no se fusiona con el de los centros secundarios, de modo que quedan separados por las {{c2}} epifisarias cartilaginosas. Cuando el crecimiento cesa, la línea de fusión formada se denomina {{c3}} y se reconoce en las radiografías como línea epifisaria.",
+      "dificultad": 2,
+      "etiquetas": [
+        "desarrollo óseo"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 21,
+        "fig": "1-14 B"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "metáfisis"
+        },
+        "c2": {
+          "canonico": "láminas",
+          "acepta": [
+            "placas"
+          ]
+        },
+        "c3": {
+          "canonico": "sinostosis"
+        }
+      },
+      "feedback": "La metáfisis es zona de alta actividad: ahí se enlentece la proliferación de cartílago durante la inanición o la enfermedad, lo que genera líneas densas de calcificación provisional que después se convierten en líneas de detención del crecimiento visibles en radiografía. La fusión epifisaria ocurre progresivamente desde la pubertad hasta la madurez, y cada epífisis tiene su propio calendario, lo que permite estimar la edad ósea."
+    },
+    {
+      "id": "P1-B02-014",
+      "tipo": "numerico",
+      "prompt": "¿Al final de qué semana del período embrionario comienza a osificarse el húmero?",
+      "dificultad": 2,
+      "etiquetas": [
+        "desarrollo óseo"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 20
+      },
+      "respuesta": {
+        "valor": 8,
+        "unidad": "semanas",
+        "tol": 0
+      },
+      "feedback": "La mayoría de los huesos tarda muchos años en crecer y madurar, y el húmero es el ejemplo que da el texto: comienza a osificarse a las 8 semanas pero no completa su osificación hasta los 20 años de edad. Ese intervalo de dos décadas entre inicio y final del proceso es lo que hace posible la valoración radiológica de la edad ósea durante toda la infancia y la adolescencia."
+    },
+    {
+      "id": "P1-B02-015",
+      "tipo": "numerico",
+      "prompt": "¿A qué edad, en años, se completa la osificación del húmero?",
+      "dificultad": 2,
+      "etiquetas": [
+        "desarrollo óseo"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 21
+      },
+      "respuesta": {
+        "valor": 20,
+        "unidad": "años",
+        "tol": 0
+      },
+      "feedback": "Los dos criterios principales para valorar la edad ósea en una radiografía, normalmente de la mano, son la aparición de material calcificado en los centros de osificación y la desaparición de la línea radiotransparente que representa la lámina epifisaria, cuya ausencia indica que la fusión ya ocurrió. Esa valoración sirve para predecir la talla adulta en adolescentes con maduración precoz o tardía, y para estimar la edad de restos esqueléticos en procesos médico-legales."
+    },
+    {
+      "id": "P1-B02-016",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la irrigación del hueso:",
+      "texto": "Los vasos más evidentes del hueso son las arterias {{c1}}, que surgen como ramas independientes de las arterias adyacentes extraperiósticas y atraviesan oblicuamente el hueso compacto de la diáfisis a través de los {{c2}} nutricios. La sangre llega a los osteocitos del hueso compacto por medio de los sistemas {{c3}}, también llamados osteonas.",
+      "dificultad": 2,
+      "etiquetas": [
+        "vascularización del hueso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 21,
+        "fig": "1-15"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "nutricias"
+        },
+        "c2": {
+          "canonico": "forámenes"
+        },
+        "c3": {
+          "canonico": "haversianos"
+        }
+      },
+      "feedback": "Dentro de la cavidad medular la arteria nutricia se divide en ramas longitudinales que se dirigen hacia ambos extremos e irrigan la médula ósea, el hueso esponjoso y las porciones más profundas del compacto. Aun así, la mayor parte del hueso compacto se nutre de muchas ramas pequeñas de las arterias periósticas, y por eso la extirpación del periostio produce la muerte del hueso. Los extremos óseos reciben su irrigación de arterias metafisarias y epifisarias."
+    },
+    {
+      "id": "P1-B02-017",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la inervación del hueso:",
+      "texto": "El periostio está ricamente inervado por nervios sensitivos, los nervios {{c1}}, portadores de fibras de la sensibilidad {{c2}}. Es especialmente sensible al desgarro y a la tensión, lo que explica el dolor agudo de las fracturas óseas. Dentro del hueso, los nervios {{c3}} causan constricción o dilatación de los vasos y regulan el flujo a través de la médula.",
+      "dificultad": 2,
+      "etiquetas": [
+        "inervación del hueso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 22
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "periósticos"
+        },
+        "c2": {
+          "canonico": "dolorosa",
+          "acepta": [
+            "nociceptiva"
+          ]
+        },
+        "c3": {
+          "canonico": "vasomotores"
+        }
+      },
+      "feedback": "El contraste es didáctico: el hueso en sí recibe un número escaso de terminaciones sensitivas. Es decir, el dolor de la fractura es fundamentalmente perióstico, igual que el del hematoma subperióstico o el de un tumor que expande la cortical. Esa diferencia explica también por qué una lesión puramente medular puede ser silente hasta que afecta la cortical o el periostio."
+    },
+    {
+      "id": "P1-B02-018",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 3 tipos de articulaciones según el modo en que se articulan los huesos o el material que los une:",
+      "dificultad": 1,
+      "etiquetas": [
+        "articulaciones",
+        "clasificación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 22,
+        "fig": "1-16"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "sinoviales"
+          },
+          {
+            "canonico": "fibrosas"
+          },
+          {
+            "canonico": "cartilaginosas"
+          }
+        ]
+      },
+      "feedback": "Una articulación es la unión entre dos o más huesos o partes rígidas del esqueleto, y la movilidad varía enormemente entre ellas. Algunas carecen de movilidad, como las láminas epifisarias entre epífisis y diáfisis de un hueso en crecimiento; otras permiten solo ligeros movimientos, como los dientes en sus alvéolos; y otras se mueven libremente, como la articulación del hombro. Las sinoviales son las más habituales y típicas de los miembros."
+    },
+    {
+      "id": "P1-B02-019",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las articulaciones sinoviales:",
+      "texto": "Los huesos que se articulan mediante articulaciones sinoviales se unen por una {{c1}} articular, compuesta por una membrana {{c2}} externa tapizada por una membrana {{c3}} serosa. La cavidad articular es un espacio potencial que contiene una pequeña cantidad de líquido {{c4}} lubricante.",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones sinoviales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 22,
+        "fig": "1-16 A"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "cápsula"
+        },
+        "c2": {
+          "canonico": "fibrosa"
+        },
+        "c3": {
+          "canonico": "sinovial"
+        },
+        "c4": {
+          "canonico": "sinovial"
+        }
+      },
+      "feedback": "Dentro de la cápsula el cartílago articular cubre las superficies articulares de los huesos, y todas las demás superficies internas están revestidas por la membrana sinovial. Un detalle que suele preguntarse: el periostio que reviste la parte extraarticular de los huesos participantes se une con la membrana fibrosa de la cápsula. Suelen estar reforzadas por ligamentos accesorios, externos a la articulación o extrínsecos, o engrosamientos de la cápsula, es decir intrínsecos."
+    },
+    {
+      "id": "P1-B02-020",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las articulaciones fibrosas:",
+      "texto": "En una articulación fibrosa de tipo {{c1}} los huesos se unen mediante una lámina de tejido fibroso, ya sea un ligamento o una membrana, por lo que son parcialmente móviles; el ejemplo es la membrana interósea entre radio y ulna. La {{c2}} dentoalveolar es la articulación fibrosa en la que la raíz del diente queda encajada como una clavija en el proceso alveolar. Las {{c3}} del cráneo son el tercer ejemplo de articulación fibrosa.",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones fibrosas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 22,
+        "fig": "1-16 B"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "sindesmosis"
+        },
+        "c2": {
+          "canonico": "gonfosis"
+        },
+        "c3": {
+          "canonico": "suturas"
+        }
+      },
+      "feedback": "La amplitud del movimiento en una articulación fibrosa depende, en la mayoría de los casos, de la longitud de las fibras que unen los huesos: por eso las suturas, con fibras muy cortas, son prácticamente inmóviles, y la membrana interósea permite cierta movilidad. La movilidad de la gonfosis, es decir un diente flojo, indica un estado patológico de los tejidos de soporte, aunque sus movimientos microscópicos aportan información propioceptiva sobre la fuerza al morder."
+    },
+    {
+      "id": "P1-B02-021",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las articulaciones cartilaginosas:",
+      "texto": "En las articulaciones cartilaginosas primarias, o {{c1}}, los huesos están unidos por cartílago {{c2}} y suelen ser uniones temporales, como la lámina epifisaria, que permite el crecimiento longitudinal. Las articulaciones cartilaginosas secundarias, o {{c3}}, son fuertes, ligeramente móviles y están unidas por {{c4}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones cartilaginosas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 24,
+        "fig": "1-16 C"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "sincondrosis"
+        },
+        "c2": {
+          "canonico": "hialino"
+        },
+        "c3": {
+          "canonico": "sínfisis"
+        },
+        "c4": {
+          "canonico": "fibrocartílago"
+        }
+      },
+      "feedback": "El ejemplo clave de sínfisis son los discos intervertebrales, formados por tejido conectivo que une los cuerpos vertebrales: en conjunto aportan potencia, absorben los choques y confieren una notable flexibilidad a la columna. La diferencia entre primarias y secundarias no es solo de material sino de destino: las primarias desaparecen cuando el crecimiento termina y las secundarias persisten toda la vida."
+    },
+    {
+      "id": "P1-B02-022",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 6 tipos principales de articulaciones sinoviales:",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones sinoviales",
+        "clasificación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 26,
+        "fig": "1-17"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "planas"
+          },
+          {
+            "canonico": "gínglimos",
+            "acepta": [
+              "trocleares"
+            ]
+          },
+          {
+            "canonico": "en silla de montar"
+          },
+          {
+            "canonico": "elipsoideas"
+          },
+          {
+            "canonico": "esferoideas",
+            "acepta": [
+              "enartrosis"
+            ]
+          },
+          {
+            "canonico": "trocoideas"
+          }
+        ]
+      },
+      "feedback": "Se clasifican según la morfología de las superficies articulares o el tipo de movimientos que permiten, y conviene memorizar los ejes junto al nombre: planas, gínglimos y trocoideas son uniaxiales; en silla de montar y elipsoideas son biaxiales; esferoideas son multiaxiales. Entre las dos biaxiales hay un matiz que se pregunta: en la elipsoidea el movimiento en el plano sagital es mayor que en el otro, y la circunducción está más restringida que en la silla de montar."
+    },
+    {
+      "id": "P1-B02-023",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la inervación articular:",
+      "texto": "La ley de {{c1}} señala que los nervios que inervan una articulación también inervan los músculos que la mueven y la piel que cubre sus fijaciones distales. Los nervios articulares transmiten impulsos sensitivos que contribuyen al sentido de la {{c2}}. La membrana sinovial es relativamente {{c3}}, mientras que las fibras dolorosas son numerosas en la membrana fibrosa de la cápsula y en los ligamentos accesorios.",
+      "dificultad": 2,
+      "etiquetas": [
+        "inervación articular"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 27
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "Hilton"
+        },
+        "c2": {
+          "canonico": "propiocepción"
+        },
+        "c3": {
+          "canonico": "insensible"
+        }
+      },
+      "feedback": "La ley de Hilton es una de las reglas más rentables de la anatomía clínica, porque explica el dolor referido: una patología articular puede percibirse en la piel o en los músculos que comparten inervación. John Hilton fue cirujano del Guy's Hospital de Londres. Hay una excepción parcial en las partes distales de los miembros, donde los nervios articulares son ramos de los nervios cutáneos que inervan la piel suprayacente."
+    },
+    {
+      "id": "P1-B02-024",
+      "tipo": "numerico",
+      "prompt": "¿Cuántos años antes se produce la fusión de las epífisis con la diáfisis en las niñas respecto a los niños?",
+      "dificultad": 3,
+      "etiquetas": [
+        "cuadro clínico",
+        "edad ósea"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 24,
+        "fig": "C1-6"
+      },
+      "respuesta": {
+        "rango": [
+          1,
+          2
+        ],
+        "unidad": "años",
+        "tol": 0
+      },
+      "feedback": "Ese adelanto es parte de la maduración esquelética más temprana del sexo femenino y hay que tenerlo presente al interpretar una radiografía de edad ósea, porque los atlas de referencia están separados por sexo. Conocer la cronología de aparición y fusión de los centros es importante en medicina clínica y forense y en antropología, y permite además distinguir una lámina epifisaria normal de una fractura en un niño."
+    },
+    {
+      "id": "P1-B02-025",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los cambios óseos degenerativos:",
+      "texto": "La enfermedad articular degenerativa, o {{c1}}, se acompaña a menudo de rigidez, malestar y dolor, es frecuente en el anciano y afecta sobre todo a las articulaciones que soportan {{c2}}. No debe confundirse con la {{c3}}, que es la inflamación articular, ni con la septicemia, que es la infección de la sangre.",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "articulaciones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 28
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "artrosis"
+        },
+        "c2": {
+          "canonico": "peso"
+        },
+        "c3": {
+          "canonico": "artritis"
+        }
+      },
+      "feedback": "El envejecimiento normal del cartílago articular se inicia tempranamente en la vida adulta y progresa con lentitud, sobre todo en cadera, rodilla, columna vertebral y manos. Al degenerarse, el cartílago pierde eficacia para absorber choques y como superficie lubricada, y la articulación se vuelve más vulnerable a las fricciones repetidas. Nótese que estos cambios no siempre producen síntomas: algunos individuos con cambios evidentes no tienen dolor y otros con cambios escasos sí lo tienen."
+    }
+  ]
+}

@@ -1,3 +1,6 @@
+import { correctAnswerText, recordedAnswers } from '@/lib/answer-report';
+import AnswerOutcome from './AnswerOutcome';
+import { fromCompactFormat } from '../utils/quizFormats';
 import { useState, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -39,17 +42,19 @@ export default function StudentAttemptsList({ attempts = [], quizzes = [] }) {
   // Para cada intento expandido, filtrar las preguntas según el tipo
   const getFilteredQuestions = (attempt) => {
     const quiz = quizzes.find(q => q.id === attempt.quiz_id);
-    if (!quiz?.questions) return { correct: [], wrong: attempt.wrong_questions || [] };
-
-    const wrongSet = new Set((attempt.wrong_questions || []).map(wq => wq.question));
-    
-    const correct = quiz.questions
-      .filter(q => !wrongSet.has(q.question))
-      .slice(0, attempt.score);
-    
+    const questions = fromCompactFormat(quiz)?.questions || [];
+    const enrich = (entry, isCorrect) => ({
+      ...entry,
+      isCorrect,
+      correct_answer: correctAnswerText(entry, questions.find(q => q.question === entry.question))
+    });
+    if (attempt.answer_log?.length) {
+      const rows = attempt.answer_log.map(entry => enrich(entry, entry.is_correct === true));
+      return { correct: rows.filter(q => q.isCorrect), wrong: rows.filter(q => !q.isCorrect) };
+    }
     return {
-      correct,
-      wrong: attempt.wrong_questions || []
+      correct: [],
+      wrong: recordedAnswers(attempt).map(q => enrich(q, false))
     };
   };
 
@@ -161,6 +166,7 @@ export default function StudentAttemptsList({ attempts = [], quizzes = [] }) {
 
               {isExpanded && (
                 <CardContent className="border-t bg-gray-50 p-3">
+                  {!attempt.answer_log?.length && <p className="text-xs text-slate-600 mb-3">Sin detalle de aciertos en este registro antiguo; solo se conoce el total.</p>}
                   {questionsToShow.length === 0 ? (
                     <p className="text-sm text-gray-500 text-center py-4">
                       No hay preguntas {filterType === 'correct' ? 'correctas' : filterType === 'wrong' ? 'incorrectas' : ''} para mostrar
@@ -198,17 +204,19 @@ export default function StudentAttemptsList({ attempts = [], quizzes = [] }) {
                                     </p>
                                     <p className="text-xs">
                                       <span className="text-green-600 font-medium">Correcta:</span>{' '}
-                                      <span className="text-green-700"><MathText text={q.correct_answer} /></span>
+                                      <span className="text-green-700"><MathText text={q.correct_answer || 'No disponible en este registro'} /></span>
                                     </p>
                                   </div>
                                 )}
 
-                                {isCorrectQuestion && q.answerOptions && (
-                                  <p className="text-xs text-green-700 mt-1">
-                                    <span className="font-medium">Respuesta:</span>{' '}
-                                    <MathText text={q.answerOptions?.find(o => o.isCorrect)?.text || ''} />
-                                  </p>
+                                {isCorrectQuestion && (
+                                  <div className="text-xs text-green-700 mt-1">
+                                    <p>Respuesta del alumno: <MathText text={q.selected_answer || 'No disponible en este registro'} /></p>
+                                    <span className="font-medium">Respuesta correcta:</span>{' '}
+                                    <MathText text={q.correct_answer || 'No disponible en este registro'} />
+                                  </div>
                                 )}
+                                <AnswerOutcome answer={q} />
                               </div>
                             </div>
                           </div>

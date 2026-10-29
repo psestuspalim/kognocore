@@ -1,0 +1,726 @@
+{
+  "bloque": {
+    "id": "P1-B05",
+    "titulo": "Anatomía de superficie lumbar/sacro/cóccix · Osificación de las vértebras · Variaciones · Cuadro clínico: vértebras",
+    "parcial": 1,
+    "sesion": "3 de febrero",
+    "paginas": "86-96",
+    "semana_estudio": 3
+  },
+  "items": [
+    {
+      "id": "P1-B05-001",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 3 centros de osificación primarios de una vértebra cartilaginosa típica:",
+      "categoria": "centro",
+      "dificultad": 1,
+      "etiquetas": [
+        "osificacion",
+        "vertebra-tipica"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87,
+        "fig": "2-14"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "centrum (centro endocondral del cuerpo vertebral)",
+            "acepta": [
+              "centrum",
+              "centro endocondral",
+              "centro del cuerpo vertebral"
+            ]
+          },
+          {
+            "canonico": "centro pericondral derecho del arco neural",
+            "acepta": [
+              "centro pericondral derecho",
+              "mitad derecha del arco neural",
+              "hemiarco neural derecho",
+              "arco neural derecho"
+            ]
+          },
+          {
+            "canonico": "centro pericondral izquierdo del arco neural",
+            "acepta": [
+              "centro pericondral izquierdo",
+              "mitad izquierda del arco neural",
+              "hemiarco neural izquierdo",
+              "arco neural izquierdo"
+            ]
+          }
+        ]
+      },
+      "feedback": "Un centrum endocondral que forma la mayor parte del cuerpo vertebral, más dos centros pericondrales, uno en cada mitad del arco neural. Al nacer, la vértebra típica consta de esas 3 partes óseas unidas por cartílago hialino."
+    },
+    {
+      "id": "P1-B05-002",
+      "tipo": "numerico",
+      "prompt": "¿Hacia qué semana del período embrionario comienzan a osificarse las vértebras?",
+      "dificultad": 1,
+      "etiquetas": [
+        "osificacion",
+        "desarrollo"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87
+      },
+      "respuesta": {
+        "valor": 8,
+        "unidad": "semana",
+        "tol": 0
+      },
+      "feedback": "8.ª semana del período embrionario, con el desarrollo de tres centros de osificación primarios."
+    },
+    {
+      "id": "P1-B05-003",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 5 centros de osificación secundarios que aparecen en las vértebras típicas durante la pubertad:",
+      "categoria": "centro",
+      "dificultad": 2,
+      "etiquetas": [
+        "osificacion",
+        "pubertad"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87,
+        "fig": "2-14 F, I, L"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "vértice del proceso espinoso",
+            "acepta": [
+              "apice del proceso espinoso",
+              "punta de la apofisis espinosa"
+            ]
+          },
+          {
+            "canonico": "vértice del proceso transverso derecho",
+            "acepta": [
+              "apice del proceso transverso derecho",
+              "punta de la apofisis transversa derecha"
+            ]
+          },
+          {
+            "canonico": "vértice del proceso transverso izquierdo",
+            "acepta": [
+              "apice del proceso transverso izquierdo",
+              "punta de la apofisis transversa izquierda"
+            ]
+          },
+          {
+            "canonico": "epífisis anular del borde superior del cuerpo vertebral",
+            "acepta": [
+              "epifisis anular superior",
+              "epifisis en anillo superior",
+              "placa de crecimiento epifisario superior"
+            ]
+          },
+          {
+            "canonico": "epífisis anular del borde inferior del cuerpo vertebral",
+            "acepta": [
+              "epifisis anular inferior",
+              "epifisis en anillo inferior",
+              "placa de crecimiento epifisario inferior"
+            ]
+          }
+        ]
+      },
+      "feedback": "Tres se relacionan con los procesos (espinoso y los dos transversos) y dos son las epífisis anulares en los bordes superior e inferior del cuerpo vertebral."
+    },
+    {
+      "id": "P1-B05-004",
+      "tipo": "numerico",
+      "prompt": "¿A qué edad se han fusionado habitualmente todos los centros de osificación secundarios con la vértebra?",
+      "dificultad": 1,
+      "etiquetas": [
+        "osificacion"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87
+      },
+      "respuesta": {
+        "valor": 25,
+        "unidad": "años",
+        "tol": 0
+      },
+      "feedback": "A los 25 años, aunque hay amplias variaciones."
+    },
+    {
+      "id": "P1-B05-005",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cuál es la única vértebra que carece de centrum?",
+      "categoria": "vertebra",
+      "dificultad": 2,
+      "etiquetas": [
+        "osificacion",
+        "atlas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 88,
+        "fig": "2-14 A"
+      },
+      "respuesta": {
+        "canonico": "el atlas (C1)"
+      },
+      "feedback": "El centro que correspondería a C1 se fusiona con el de C2 y forma el diente del axis. Lo que queda de C1 es el arco anterior y el tubérculo de C1."
+    },
+    {
+      "id": "P1-B05-006",
+      "tipo": "cloze",
+      "prompt": "Completa el siguiente enunciado sobre la osificación de C1 y C2:",
+      "texto": "El centro de C1 se fusiona con el de C2 y pierde su conexión periférica con el resto de la vértebra C1, lo que da lugar al {{c1}}. Como estos primeros centros se fusionan y forman ahora parte de {{c2}}, no se forma ningún {{c3}} entre C1 y C2 para conectarlas.",
+      "dificultad": 3,
+      "etiquetas": [
+        "osificacion",
+        "atlas",
+        "axis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 88,
+        "fig": "2-14 C"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "diente del axis",
+          "acepta": [
+            "diente"
+          ]
+        },
+        "c2": {
+          "canonico": "C2",
+          "acepta": [
+            "la vertebra c2"
+          ]
+        },
+        "c3": {
+          "canonico": "disco intervertebral",
+          "acepta": [
+            "disco"
+          ]
+        }
+      },
+      "feedback": "La parte del cuerpo vertebral que permanece con C1 queda representada por el arco anterior y el tubérculo de C1."
+    },
+    {
+      "id": "P1-B05-007",
+      "tipo": "respuesta_corta",
+      "prompt": "¿A partir de qué elemento se desarrollan las bases de todos los procesos transversos, excepto las lumbares?",
+      "dificultad": 2,
+      "etiquetas": [
+        "osificacion",
+        "elemento-costal"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87,
+        "fig": "2-14 J"
+      },
+      "respuesta": {
+        "canonico": "el elemento costal",
+        "acepta": [
+          "costilla primordial",
+          "costillas primordiales"
+        ]
+      },
+      "feedback": "Por eso esa barra de hueso maduro que se proyecta recibe la denominación de proceso costiforme. En las lumbares, los elementos transversos forman los procesos mamilares."
+    },
+    {
+      "id": "P1-B05-008",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué nombre recibe la barra de unión medial a los centros de osificación laterales que constituye el límite lateral de los forámenes transversos?",
+      "dificultad": 3,
+      "etiquetas": [
+        "osificacion",
+        "cervicales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87,
+        "fig": "2-14 A-F"
+      },
+      "respuesta": {
+        "canonico": "barra costotransversa",
+        "acepta": [
+          "barra costo-transversa",
+          "barra costo transversa"
+        ]
+      },
+      "feedback": "Los forámenes transversos se desarrollan como huecos entre los centros de osificación laterales y esta barra."
+    },
+    {
+      "id": "P1-B05-009",
+      "tipo": "relacion",
+      "prompt": "En los procesos transversos cervicales, indica de qué elemento deriva cada tubérculo:",
+      "dificultad": 2,
+      "etiquetas": [
+        "osificacion",
+        "cervicales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87
+      },
+      "respuesta": {
+        "pares": [
+          {
+            "clave": "Tubérculo anterior",
+            "canonico": "elemento costal",
+            "acepta": [
+              "costal",
+              "elemento costal cervical"
+            ]
+          },
+          {
+            "clave": "Tubérculo posterior",
+            "canonico": "elemento transverso",
+            "acepta": [
+              "transverso",
+              "elemento transverso cervical"
+            ]
+          }
+        ]
+      },
+      "feedback": "En la región cervical el elemento costal permanece diminuto y forma parte del proceso transverso."
+    },
+    {
+      "id": "P1-B05-010",
+      "tipo": "numerico",
+      "prompt": "¿Cuál es el número normal de vértebras presacras?",
+      "dificultad": 1,
+      "etiquetas": [
+        "variaciones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87
+      },
+      "respuesta": {
+        "valor": 24,
+        "unidad": "vértebras",
+        "tol": 0
+      },
+      "feedback": "Las estimaciones sobre la frecuencia de números anormales de vértebras por encima del sacro oscilan entre el 5% y el 12%."
+    },
+    {
+      "id": "P1-B05-011",
+      "tipo": "numerico",
+      "prompt": "¿En qué porcentaje de las personas L5 está parcial o completamente incorporada al sacro (hemisacralización / sacralización)?",
+      "dificultad": 2,
+      "etiquetas": [
+        "variaciones",
+        "cuadro-clinico"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 95,
+        "fig": "C2-9 A"
+      },
+      "respuesta": {
+        "valor": 5,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Cuando L5 está sacralizada, es frecuente que el nivel L5-S1 sea fuerte y que el nivel L4-L5 se degenere, lo cual a menudo provoca síntomas dolorosos."
+    },
+    {
+      "id": "P1-B05-012",
+      "tipo": "numerico",
+      "prompt": "¿En qué porcentaje de la población se presenta la espina bífida oculta?",
+      "dificultad": 2,
+      "etiquetas": [
+        "anomalias",
+        "cuadro-clinico"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 96
+      },
+      "respuesta": {
+        "valor": 24,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Habitualmente en el arco vertebral de L5 y/o S1. La única evidencia puede ser un pequeño hoyuelo con un mechón de pelo en el dorso bajo."
+    },
+    {
+      "id": "P1-B05-013",
+      "tipo": "numerico",
+      "prompt": "¿En qué porcentaje de las personas se presenta una costilla cervical?",
+      "dificultad": 2,
+      "etiquetas": [
+        "variaciones",
+        "cuadro-clinico"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 90,
+        "fig": "C2-2"
+      },
+      "respuesta": {
+        "rango": [
+          1,
+          2
+        ],
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Es bilateral en cerca del 60% de las ocasiones. Puede elevar y presionar las estructuras que emergen de la apertura torácica superior, sobre todo la arteria subclavia o el tronco inferior del plexo braquial, y producir el síndrome de la apertura superior del tórax."
+    },
+    {
+      "id": "P1-B05-014",
+      "tipo": "respuesta_corta",
+      "prompt": "El plano supracrestal (línea que une los puntos más elevados de las crestas ilíacas) pasa por la punta de: ¿qué proceso espinoso y qué disco?",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomia-superficie",
+        "puncion-lumbar"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 86,
+        "fig": "2-13 B, C"
+      },
+      "respuesta": {
+        "canonico": "el proceso espinoso de L4 y el disco intervertebral L4-L5",
+        "acepta": [
+          "proceso espinoso de l4 y disco l4 l5",
+          "l4 y disco l4 l5",
+          "espinosa de l4 y disco l4-l5"
+        ]
+      },
+      "feedback": "Punto de referencia para la punción lumbar."
+    },
+    {
+      "id": "P1-B05-015",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué proceso espinoso sirve para estimar la posición del extremo inferior de la médula espinal?",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomia-superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 86
+      },
+      "respuesta": {
+        "canonico": "el proceso espinoso de L2",
+        "acepta": [
+          "l2",
+          "espinosa de l2"
+        ]
+      },
+      "feedback": "No confundir con el plano supracrestal (L4), que se usa para la punción lumbar."
+    },
+    {
+      "id": "P1-B05-016",
+      "tipo": "respuesta_corta",
+      "prompt": "El proceso espinoso de S2 está situado en la mitad de la línea que une ambas espinas ilíacas posterosuperiores. ¿Qué nivel indica?",
+      "dificultad": 3,
+      "etiquetas": [
+        "anatomia-superficie",
+        "meninges"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 86
+      },
+      "respuesta": {
+        "canonico": "el límite inferior del espacio subaracnoideo (cisterna lumbar)",
+        "acepta": [
+          "limite inferior del espacio subaracnoideo",
+          "fin del espacio subaracnoideo",
+          "extremo inferior de la cisterna lumbar",
+          "cisterna lumbar",
+          "terminacion del saco dural"
+        ]
+      },
+      "feedback": "Las espinas ilíacas posterosuperiores están indicadas por los hoyuelos cutáneos, formados por la fijación de la piel y la fascia profunda a dichas espinas."
+    },
+    {
+      "id": "P1-B05-017",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 3 estructuras que forman el triángulo sacro:",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomia-superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "espina ilíaca posterosuperior derecha"
+          },
+          {
+            "canonico": "espina ilíaca posterosuperior izquierda"
+          },
+          {
+            "canonico": "parte superior de la hendidura interglútea",
+            "acepta": [
+              "hendidura interglutea",
+              "surco interglúteo",
+              "pliegue interglúteo"
+            ]
+          }
+        ]
+      },
+      "feedback": "El triángulo sacro es una zona frecuente de dolor por esguince en la parte baja del dorso."
+    },
+    {
+      "id": "P1-B05-018",
+      "tipo": "numerico",
+      "prompt": "¿A cuántos centímetros posterosuperiores al ano puede palparse el ápice del cóccix?",
+      "dificultad": 3,
+      "etiquetas": [
+        "anatomia-superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 87
+      },
+      "respuesta": {
+        "valor": 2.5,
+        "unidad": "cm",
+        "tol": 0.5
+      },
+      "feedback": "El examen clínico del cóccix se realiza con un dedo enguantado en el conducto anal."
+    },
+    {
+      "id": "P1-B05-019",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué nombre recibe la fractura por estallido del atlas, en la que las fuerzas verticales comprimen las masas laterales entre los cóndilos occipitales y el axis?",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro-clinico",
+        "atlas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 91,
+        "fig": "C2-4"
+      },
+      "respuesta": {
+        "canonico": "fractura de Jefferson",
+        "acepta": [
+          "jefferson",
+          "fractura por estallido de c1"
+        ]
+      },
+      "feedback": "Por sí misma no da lugar necesariamente a lesión medular, pues las dimensiones del anillo óseo aumentan. La lesión medular es más probable si además se rompió el ligamento transverso, lo que se evidencia por una amplia separación de las masas laterales."
+    },
+    {
+      "id": "P1-B05-020",
+      "tipo": "cloze",
+      "prompt": "Completa el siguiente enunciado:",
+      "texto": "La fractura de la parte {{c1}} del axis se denomina {{c2}} de C2 y ocurre habitualmente por {{c3}} de la cabeza sobre el cuello. Se conoce también como fractura del {{c4}}.",
+      "dificultad": 3,
+      "etiquetas": [
+        "cuadro-clinico",
+        "axis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 91,
+        "fig": "C2-5"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "interarticular",
+          "acepta": [
+            "pars interarticularis"
+          ]
+        },
+        "c2": {
+          "canonico": "espondilólisis traumática",
+          "acepta": [
+            "espondilolisis"
+          ]
+        },
+        "c3": {
+          "canonico": "hiperextensión",
+          "acepta": [
+            "extension forzada"
+          ]
+        },
+        "c4": {
+          "canonico": "ahorcado",
+          "acepta": [
+            "verdugo",
+            "hangman"
+          ]
+        }
+      },
+      "feedback": "Las fracturas del arco vertebral del axis son una de las lesiones cervicales más frecuentes (hasta 40%). Las fracturas del diente representan 40-50%."
+    },
+    {
+      "id": "P1-B05-021",
+      "tipo": "secuencia",
+      "prompt": "Ordena los 4 estadios traumáticos de la luxación de las vértebras cervicales, del I al IV:",
+      "dificultad": 3,
+      "etiquetas": [
+        "cuadro-clinico",
+        "luxacion"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 93,
+        "fig": "C2-6"
+      },
+      "respuesta": {
+        "elementos": [
+          {
+            "canonico": "esguince por flexión"
+          },
+          {
+            "canonico": "subluxación anterior con desplazamiento anterior del 25%",
+            "acepta": [
+              "subluxacion anterior 25%",
+              "subluxacion anterior",
+              "desplazamiento del 25%"
+            ]
+          },
+          {
+            "canonico": "desplazamiento del 50%",
+            "acepta": [
+              "desplazamiento anterior del 50%",
+              "50%"
+            ]
+          },
+          {
+            "canonico": "luxación completa",
+            "acepta": [
+              "dislocacion completa"
+            ]
+          }
+        ]
+      },
+      "feedback": "La dislocación bilateral de las caras articulares produce el 'salto de la cara articular', con bloqueo de los procesos articulares desplazados."
+    },
+    {
+      "id": "P1-B05-022",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué estructura cierra el hiato del sacro en el sujeto vivo y es referencia palpable para la anestesia epidural caudal?",
+      "categoria": "ligamento",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro-clinico",
+        "anestesia"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 94,
+        "fig": "C2-8 A"
+      },
+      "respuesta": {
+        "canonico": "el ligamento sacrococcígeo membranoso",
+        "acepta": [
+          "ligamento sacrococcigeo",
+          "sacrococcigeo membranoso",
+          "ligamento sacro coccigeo"
+        ]
+      },
+      "feedback": "Está atravesado por el filum terminal. El hiato del sacro se halla entre los cuernos del sacro e inferior al proceso espinoso de S4 o de la cresta sacra media."
+    },
+    {
+      "id": "P1-B05-023",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 2 referencias óseas que delimitan el hiato del sacro para localizarlo:",
+      "dificultad": 2,
+      "etiquetas": [
+        "anestesia",
+        "anatomia-superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 94
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "los cuernos del sacro",
+            "acepta": [
+              "astas sacras",
+              "cornua sacra"
+            ]
+          },
+          {
+            "canonico": "el proceso espinoso de S4 (o la cresta sacra media)",
+            "acepta": [
+              "proceso espinoso de s4",
+              "apofisis espinosa de s4",
+              "cresta sacra media",
+              "s4"
+            ]
+          }
+        ]
+      },
+      "feedback": "La solución anestésica difunde hacia arriba y extraduralmente, y actúa sobre los nervios espinales S2-Co1 de la cola de caballo."
+    },
+    {
+      "id": "P1-B05-024",
+      "tipo": "numerico",
+      "prompt": "Entre el nacimiento y los 5 años, ¿cuántas veces aumenta de altura el cuerpo de una vértebra lumbar típica?",
+      "dificultad": 3,
+      "etiquetas": [
+        "envejecimiento",
+        "cuadro-clinico"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 95
+      },
+      "respuesta": {
+        "valor": 3,
+        "unidad": "veces",
+        "tol": 0
+      },
+      "feedback": "De 5-6 mm a 15-18 mm. Entre los 5 y 13 años aumenta otro 45-50%. El crecimiento cesa entre los 18 y 25 años."
+    },
+    {
+      "id": "P1-B05-025",
+      "tipo": "relacion",
+      "prompt": "Indica el nombre del cambio óseo degenerativo según su localización:",
+      "dificultad": 2,
+      "etiquetas": [
+        "envejecimiento",
+        "cuadro-clinico"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 96
+      },
+      "respuesta": {
+        "pares": [
+          {
+            "clave": "En los cuerpos vertebrales",
+            "canonico": "espondilosis"
+          },
+          {
+            "clave": "En las articulaciones cigapofisarias",
+            "canonico": "artrosis",
+            "acepta": [
+              "osteoartrosis",
+              "osteoartritis"
+            ]
+          }
+        ]
+      },
+      "feedback": "Algunos clínicos sugieren que estos cambios no deben considerarse patológicos sino como la anatomía normal del envejecimiento."
+    }
+  ]
+}

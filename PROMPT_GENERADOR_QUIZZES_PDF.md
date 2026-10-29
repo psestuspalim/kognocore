@@ -79,6 +79,10 @@ Debes responder ÚNICAMENTE con un objeto JSON válido con la siguiente estructu
 }
 
 #### 3. Enumeración (`enumeracion`)
+Incluye en `acepta` las formas breves y los sinónimos válidos de cada concepto según el enunciado. El motor permite omitir un prefijo de categoría conocido compartido por todas las referencias, por ejemplo «anatomía».
+
+Si se piden N ejemplos y existen más de N respuestas válidas, coloca N referencias en `elementos` y las demás en `respuesta.alternativas`, con el mismo formato `{ "canonico": "...", "acepta": [] }`. Se otorga como máximo un punto por concepto y N puntos en total. Usa alternativas solo cuando el enunciado y la fuente las permitan; no conviertas conceptos distintos en sinónimos. Por ejemplo, «anatomía de superficie» puede ser una alternativa en una pregunta abierta sobre ramas, pero no un sinónimo de «anatomía por sistemas» ni una sustitución automática en una clasificación cerrada.
+
 {
   "id": "q3",
   "tipo": "enumeracion",

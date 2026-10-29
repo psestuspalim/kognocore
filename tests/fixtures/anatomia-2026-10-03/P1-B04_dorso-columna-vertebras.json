@@ -1,0 +1,720 @@
+{
+  "bloque": {
+    "id": "P1-B04",
+    "titulo": "Visión general del dorso y la columna vertebral · Vértebras: estructura, función y características regionales · Cervicales, torácicas y lumbares · Sacro y cóccix",
+    "parcial": 1,
+    "sesion": "30 de enero",
+    "paginas": "72-86"
+  },
+  "items": [
+    {
+      "id": "P1-B04-001",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 5 regiones bilaterales en que se divide anatómicamente el dorso:",
+      "dificultad": 2,
+      "etiquetas": [
+        "regiones del dorso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 72,
+        "fig": "2-1 A"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "lumbar"
+          },
+          {
+            "canonico": "escapular"
+          },
+          {
+            "canonico": "supraescapular"
+          },
+          {
+            "canonico": "interescapular"
+          },
+          {
+            "canonico": "infraescapular"
+          }
+        ]
+      },
+      "feedback": "A estas cinco bilaterales se suman dos regiones medias impares: la vertebral y la sacra. La división importa porque el dorso es una región clave para la evaluación de las funciones toracoabdominales y hay que ser específico al localizar los hallazgos. Nótese que las escápulas, aunque situadas en el dorso, son componentes del esqueleto apendicular superior, y por eso su anatomía se analiza con el miembro superior. Cuidado con no confundir estas regiones con las torácicas y cervicales, como la costal o la supraclavicular, que no pertenecen al dorso."
+    },
+    {
+      "id": "P1-B04-002",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las funciones de la columna vertebral:",
+      "texto": "La columna vertebral {{c1}} la médula espinal y los nervios espinales, soporta el {{c2}} del cuerpo por encima del nivel de la pelvis, proporciona un {{c3}} parcialmente rígido y flexible para el cuerpo y una base sobre la cual se sitúa y gira la cabeza, y desempeña un importante papel en la postura y la {{c4}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "columna vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 72
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "protege"
+        },
+        "c2": {
+          "canonico": "peso"
+        },
+        "c3": {
+          "canonico": "eje"
+        },
+        "c4": {
+          "canonico": "locomoción"
+        }
+      },
+      "feedback": "Estas funciones explican su diseño: es flexible porque está formada por muchos huesos relativamente pequeños unidos por discos, y a la vez resistente porque en la parte posterior cuenta con numerosos y potentes músculos unidos a fuertes palancas, los procesos espinosos y transversos. Esa combinación de palancas posteriores y peso corporal anterior es la clave mecánica de toda la región y la razón de que el dorso sea tan vulnerable al levantamiento inadecuado de cargas."
+    },
+    {
+      "id": "P1-B04-003",
+      "tipo": "numerico",
+      "prompt": "¿Cuál es la longitud de la columna vertebral en el adulto, en centímetros?",
+      "dificultad": 2,
+      "etiquetas": [
+        "columna vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 72
+      },
+      "respuesta": {
+        "rango": [
+          72,
+          75
+        ],
+        "unidad": "cm",
+        "tol": 0
+      },
+      "feedback": "Se extiende desde el cráneo hasta el ápice del cóccix. Aproximadamente una cuarta parte de esa longitud está formada por los discos intervertebrales que separan y unen las vértebras, dato que explica la pérdida de talla con la edad conforme los discos se deshidratan y pierden altura. Es también la razón de que la estatura disminuya unos centímetros a lo largo del día."
+    },
+    {
+      "id": "P1-B04-004",
+      "tipo": "numerico",
+      "prompt": "¿De cuántas vértebras consta la columna vertebral del adulto?",
+      "dificultad": 1,
+      "etiquetas": [
+        "columna vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 74,
+        "fig": "2-2"
+      },
+      "respuesta": {
+        "valor": 33,
+        "unidad": "vértebras",
+        "tol": 0
+      },
+      "feedback": "Se distribuyen en cinco regiones: 7 cervicales, 12 torácicas, 5 lumbares, 5 sacras y 4 coccígeas. Solo se producen movimientos significativos entre las 25 vértebras superiores. De las 9 inferiores, las 5 sacras están fusionadas en el adulto para formar el sacro, y después de los 30 años aproximadamente las 4 coccígeas se fusionan para constituir el cóccix."
+    },
+    {
+      "id": "P1-B04-005",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el tamaño de las vértebras:",
+      "texto": "Las vértebras aumentan de tamaño de forma gradual a medida que la columna desciende hacia el {{c1}}, y luego dicho tamaño disminuye progresivamente hacia la punta del {{c2}}. Estos cambios se relacionan con que las vértebras soportan cantidades {{c3}} de peso corporal a medida que se desciende.",
+      "dificultad": 2,
+      "etiquetas": [
+        "columna vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 74
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "sacro"
+        },
+        "c2": {
+          "canonico": "cóccix"
+        },
+        "c3": {
+          "canonico": "crecientes"
+        }
+      },
+      "feedback": "Las vértebras alcanzan su máximo tamaño justo por encima del sacro, que transmite el peso a la pelvis ósea a nivel de las articulaciones sacroilíacas. El cóccix, en cambio, no participa en soportar el peso del cuerpo en bipedestación, aunque en sedestación puede flexionarse algo hacia delante, lo que indica que recibe algo de carga. Ese gradiente de tamaño es la expresión directa de la carga acumulada."
+    },
+    {
+      "id": "P1-B04-006",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los componentes de una vértebra típica:",
+      "texto": "Una vértebra típica se compone de un {{c1}} vertebral, un {{c2}} vertebral y siete procesos. El primero es la parte anterior, más grande y aproximadamente cilíndrica, que aporta fortaleza y soporta el {{c3}} del cuerpo.",
+      "dificultad": 1,
+      "etiquetas": [
+        "vértebra típica"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 75,
+        "fig": "2-3"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "cuerpo"
+        },
+        "c2": {
+          "canonico": "arco"
+        },
+        "c3": {
+          "canonico": "peso"
+        }
+      },
+      "feedback": "El tamaño de los cuerpos vertebrales va aumentando a medida que se desciende por la columna, sobre todo desde T4 hacia abajo, ya que cada uno soporta una cantidad progresivamente mayor del peso corporal. Conviene distinguir cuerpo vertebral de centrum y arco vertebral de arco neural: los primeros son términos de anatomía macroscópica aplicados a partes de las vértebras adultas, y los segundos son términos embriológicos referidos a partes que se osifican desde los centros primarios."
+    },
+    {
+      "id": "P1-B04-007",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 3 tipos de procesos de una vértebra típica, indicando cuántos hay de cada tipo:",
+      "dificultad": 2,
+      "etiquetas": [
+        "vértebra típica"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 75,
+        "fig": "2-3"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "un espinoso"
+          },
+          {
+            "canonico": "dos transversos",
+            "acepta": [
+              "transversos"
+            ]
+          },
+          {
+            "canonico": "cuatro articulares",
+            "acepta": [
+              "articulares",
+              "cigapófisis"
+            ]
+          }
+        ]
+      },
+      "feedback": "La división funcional es limpia: tres procesos sirven para inserciones musculares y apalancamiento, el espinoso y los dos transversos, y cuatro participan en las articulaciones sinoviales con las vértebras adyacentes, los articulares o cigapófisis. El proceso espinoso se proyecta hacia atrás y habitualmente hacia abajo, solapándose con la vértebra inferior; los transversos se proyectan posterolateralmente desde las uniones de los pedículos y las láminas, que es también donde se originan los articulares."
+    },
+    {
+      "id": "P1-B04-008",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la estructura del cuerpo vertebral:",
+      "texto": "El cuerpo vertebral se compone de hueso vascular {{c1}}, rodeado por una delgada capa externa de hueso {{c2}}. El hueso trabecular es una trama de trabéculas principalmente altas y {{c3}}, entremezcladas con otras cortas y horizontales, y los espacios intertrabeculares están ocupados por médula ósea {{c4}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuerpo vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 75,
+        "fig": "2-4"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "trabecular",
+          "acepta": [
+            "esponjoso"
+          ]
+        },
+        "c2": {
+          "canonico": "compacto"
+        },
+        "c3": {
+          "canonico": "verticales"
+        },
+        "c4": {
+          "canonico": "roja"
+        }
+      },
+      "feedback": "Esa arquitectura direccional explica el aspecto radiológico de la osteoporosis: se pierden primero las trabéculas horizontales y se engruesan los puntales verticales, lo que produce un patrón estriado vertical. Que el cuerpo vertebral sea uno de los tejidos hematopoyéticos más activos del individuo maduro explica además que uno o más forámenes grandes de su superficie posterior estén ocupados por las venas basivertebrales, que drenan la médula ósea."
+    },
+    {
+      "id": "P1-B04-009",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el arco vertebral:",
+      "texto": "El arco vertebral se halla por detrás del cuerpo y está formado por dos {{c1}}, procesos cilíndricos cortos que se proyectan posteriormente, que se reúnen a través de dos {{c2}} óseas planas y delgadas que confluyen en la línea media. El arco y la cara posterior del cuerpo forman las paredes del foramen {{c3}}, y la sucesión de estos forámenes constituye el {{c4}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "arco vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 76,
+        "fig": "2-5 A"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "pedículos"
+        },
+        "c2": {
+          "canonico": "láminas"
+        },
+        "c3": {
+          "canonico": "vertebral"
+        },
+        "c4": {
+          "canonico": "conducto vertebral",
+          "acepta": [
+            "conducto espinal",
+            "conducto raquídeo"
+          ]
+        }
+      },
+      "feedback": "El conducto vertebral contiene la médula espinal y las raíces de los nervios espinales que surgen de ella, junto con las meninges, tejido adiposo y los vasos que las rodean y las sirven. Esta anatomía es la que se interviene en la laminectomía, la escisión quirúrgica de uno o más procesos espinosos y de las láminas adyacentes para acceder al conducto y descomprimir la médula o las raíces."
+    },
+    {
+      "id": "P1-B04-010",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el foramen intervertebral:",
+      "texto": "Las {{c1}} vertebrales son muescas que se aprecian en las vistas laterales, en las partes superior e inferior de cada pedículo. Las de vértebras adyacentes, junto con el {{c2}} que las conecta, forman los forámenes {{c3}}, a través de los cuales surgen los nervios espinales. También los {{c4}} espinales se localizan en estos forámenes.",
+      "dificultad": 2,
+      "etiquetas": [
+        "foramen intervertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 76,
+        "fig": "2-5 C"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "incisuras"
+        },
+        "c2": {
+          "canonico": "disco",
+          "acepta": [
+            "disco intervertebral"
+          ]
+        },
+        "c3": {
+          "canonico": "intervertebrales"
+        },
+        "c4": {
+          "canonico": "ganglios"
+        }
+      },
+      "feedback": "Que los ganglios espinales, es decir la raíz posterior, se alojen en estos forámenes es un dato de alto rendimiento clínico: explica por qué una protrusión discal o una artrosis cigapofisiaria que reduzca el foramen produce dolor radicular con distribución dermatómica. La incisura vertebral inferior es de mayor tamaño que la superior, lo que determina que la mayor parte del foramen quede bajo el pedículo de la vértebra superior."
+    },
+    {
+      "id": "P1-B04-011",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la epífisis anular:",
+      "texto": "En el sujeto vivo, la mayor parte de las caras superior e inferior del cuerpo vertebral están revestidas por discos de cartílago {{c1}}, que son restos del molde cartilaginoso. En la periferia, un reborde {{c2}} de hueso compacto, derivado de la epífisis {{c3}}, se fusiona con el cuerpo vertebral.",
+      "dificultad": 3,
+      "etiquetas": [
+        "cuerpo vertebral",
+        "desarrollo"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 76,
+        "fig": "2-5 A"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "hialino"
+        },
+        "c2": {
+          "canonico": "epifisario"
+        },
+        "c3": {
+          "canonico": "anular"
+        }
+      },
+      "feedback": "En las muestras óseas desecadas de laboratorio y de museo ese cartílago está ausente y el hueso expuesto aparece esponjoso, excepto en la periferia. Las epífisis anulares y sus restos cartilaginosos cumplen dos funciones además de ser zonas de crecimiento: aportan alguna protección a los cuerpos vertebrales y permiten cierta difusión de líquido entre el disco intervertebral y los capilares del cuerpo vertebral."
+    },
+    {
+      "id": "P1-B04-012",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina la parte central del disco intervertebral, rodeada por el anillo fibroso?",
+      "dificultad": 1,
+      "etiquetas": [
+        "disco intervertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 75,
+        "fig": "2-4"
+      },
+      "respuesta": {
+        "canonico": "núcleo pulposo"
+      },
+      "feedback": "Los discos son articulaciones cartilaginosas secundarias, es decir sínfisis, formadas por tejido conectivo que une los cuerpos vertebrales entre sí; aportan potencia, absorben los choques y confieren flexibilidad. La movilidad entre dos vértebras adyacentes es escasa, pero al sumarse la de todas se forma una columna flexible aunque rígida, que protege la médula espinal a la que circunda."
+    },
+    {
+      "id": "P1-B04-013",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los procesos articulares:",
+      "texto": "Los procesos articulares se hallan en aposición con los correspondientes de las vértebras adyacentes, lo que constituye las articulaciones {{c1}}. Mediante su participación en ellas determinan los tipos de movimientos permitidos y {{c2}} entre las vértebras de cada región, y además impiden que una vértebra se {{c3}} hacia delante sobre la inferior.",
+      "dificultad": 2,
+      "etiquetas": [
+        "procesos articulares"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 77,
+        "fig": "2-5 C"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "cigapofisiarias",
+          "acepta": [
+            "interapofisarias",
+            "facetarias"
+          ]
+        },
+        "c2": {
+          "canonico": "restringidos"
+        },
+        "c3": {
+          "canonico": "deslice"
+        }
+      },
+      "feedback": "En general los procesos articulares soportan el peso solo temporalmente, como cuando uno se endereza desde una posición flexionada, y unilateralmente cuando las vértebras cervicales se flexionan de forma lateral hasta su límite. La excepción es L5: sus procesos articulares inferiores soportan peso incluso en posición erecta, lo que guarda relación con que la espondilólisis se produzca con más frecuencia justo ahí."
+    },
+    {
+      "id": "P1-B04-014",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los rasgos regionales de las vértebras:",
+      "texto": "El rasgo más peculiar de las vértebras cervicales es el foramen {{c1}}, de forma oval, en sus procesos transversos. La característica principal de las vértebras torácicas es la presencia de las {{c2}} costales para articularse con las costillas. Las vértebras lumbares se caracterizan por un cuerpo muy voluminoso y {{c3}} en la vista superior.",
+      "dificultad": 2,
+      "etiquetas": [
+        "características regionales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 77,
+        "fig": "2-6"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "transverso"
+        },
+        "c2": {
+          "canonico": "fositas",
+          "acepta": [
+            "carillas"
+          ]
+        },
+        "c3": {
+          "canonico": "reniforme"
+        }
+      },
+      "feedback": "Cada rasgo tiene una explicación de contenido o de carga: el foramen transverso aloja la arteria vertebral y sus venas acompañantes, excepto en C7, que solo transmite pequeñas venas accesorias; las fositas costales existen porque las torácicas articulan las costillas; y el gran cuerpo lumbar responde al peso creciente. El tamaño del foramen vertebral también varía: grande y triangular en las cervicales para acomodar la intumescencia cervical, circular y menor en las torácicas, y triangular intermedio en las lumbares."
+    },
+    {
+      "id": "P1-B04-015",
+      "tipo": "numerico",
+      "prompt": "¿En qué porcentaje de las personas el proceso espinoso de C7 es el más abultado?",
+      "dificultad": 3,
+      "etiquetas": [
+        "vértebras cervicales",
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 79,
+        "fig": "2-10 A"
+      },
+      "respuesta": {
+        "valor": 70,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Por su largo proceso espinoso, C7 recibe la denominación de vértebra prominente, y al deslizar el dedo por la línea media posterior del cuello se percibe su abultamiento. Ese 30% restante es la razón por la que conviene no confiar ciegamente en la palpación de un solo proceso: T1 puede ser en realidad más prominente que C7, y lo prudente es contar desde una referencia y confirmar con otra."
+    },
+    {
+      "id": "P1-B04-016",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los procesos transversos cervicales:",
+      "texto": "Los procesos transversos de las vértebras cervicales finalizan lateralmente en dos proyecciones: un tubérculo {{c1}} y un tubérculo {{c2}}. Entre ambos se sitúan los surcos para los nervios {{c3}}. Los tubérculos anteriores de C6 se denominan tubérculos {{c4}}, porque las arterias carótidas comunes pueden comprimirse a ese nivel.",
+      "dificultad": 3,
+      "etiquetas": [
+        "vértebras cervicales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 79,
+        "fig": "2-7 A"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "anterior"
+        },
+        "c2": {
+          "canonico": "posterior"
+        },
+        "c3": {
+          "canonico": "espinales"
+        },
+        "c4": {
+          "canonico": "carotídeos"
+        }
+      },
+      "feedback": "La compresión se hace en el surco entre el tubérculo y el cuerpo vertebral, para controlar la hemorragia procedente de esos vasos. La maniobra tiene un límite: la hemorragia puede continuar, aunque a un ritmo menor, por las múltiples anastomosis de las ramas carotídeas inferiores con las adyacentes y contralaterales. Estos tubérculos dan además inserción a un grupo lateral de músculos cervicales, el elevador de la escápula y los escalenos."
+    },
+    {
+      "id": "P1-B04-017",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina el margen superolateral elevado del cuerpo de las vértebras cervicales?",
+      "dificultad": 2,
+      "etiquetas": [
+        "vértebras cervicales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 79,
+        "fig": "2-7 A"
+      },
+      "respuesta": {
+        "canonico": "proceso unciforme",
+        "acepta": [
+          "uncus del cuerpo vertebral"
+        ]
+      },
+      "feedback": "Los bordes superiores de los cuerpos cervicales están elevados posterior y sobre todo lateralmente, y deprimidos anteriormente, lo que les da aspecto de asiento esculpido; el borde inferior de la vértebra superior tiene la forma recíproca. Esta geometría permite libremente la flexión y la extensión y cierto grado de flexión lateral, pero restringe la rotación. En la clínica, la hipertrofia de estos procesos es causa frecuente de estenosis foraminal cervical."
+    },
+    {
+      "id": "P1-B04-018",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el atlas:",
+      "texto": "La vértebra C1, denominada atlas, es peculiar porque carece de {{c1}} vertebral y de proceso espinoso. Es un hueso anular con dos {{c2}} laterales que cumplen la función del cuerpo y soportan el peso del cráneo, conectadas entre sí por los arcos anterior y posterior. Como sus procesos transversos surgen de esas masas, el atlas es la vértebra cervical más {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "atlas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 79,
+        "fig": "2-8 B"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "cuerpo"
+        },
+        "c2": {
+          "canonico": "masas"
+        },
+        "c3": {
+          "canonico": "ancha"
+        }
+      },
+      "feedback": "Esa mayor anchura aumenta la acción de palanca de los músculos insertados en ella. Las caras articulares superiores de las masas laterales tienen morfología cóncava reniforme y se articulan con los cóndilos occipitales. El arco posterior, que corresponde a las láminas de una vértebra típica, lleva en su cara superior el amplio surco de la arteria vertebral, por donde el nervio C1 ocupa también ese surco."
+    },
+    {
+      "id": "P1-B04-019",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el axis:",
+      "texto": "La vértebra C2, denominada axis, es la más {{c1}} de las vértebras cervicales. Su característica distintiva es el {{c2}} del axis, un proceso que se proyecta en dirección superior desde el cuerpo vertebral y que sirve como {{c3}} en torno al cual se produce la rotación de la cabeza.",
+      "dificultad": 2,
+      "etiquetas": [
+        "axis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 79,
+        "fig": "2-8 C"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "robusta"
+        },
+        "c2": {
+          "canonico": "diente",
+          "acepta": [
+            "proceso odontoideo"
+          ]
+        },
+        "c3": {
+          "canonico": "pivote",
+          "acepta": [
+            "eje"
+          ]
+        }
+      },
+      "feedback": "C1 soporta el cráneo y rota sobre C2, como cuando una persona gira la cabeza para decir que no. El diente se sitúa inmediatamente anterior a la médula espinal y se mantiene en su posición adosado a la cara posterior del arco anterior del atlas mediante el ligamento transverso del atlas, que se extiende entre ambas masas laterales y pasa entre el diente y la médula. C2 posee además un proceso espinoso grande y bífido, palpable en la profundidad del surco nucal."
+    },
+    {
+      "id": "P1-B04-020",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la transición toracolumbar:",
+      "texto": "Las vértebras T9 a T12 presentan algunas características de las vértebras {{c1}}. La mayor parte de la transición ocurre a lo largo de una sola vértebra, {{c2}}: su mitad superior tiene carácter torácico, con procesos articulares que permiten movimiento {{c3}}, mientras que su mitad inferior es de tipo lumbar, con procesos articulares que solo permiten flexión y extensión. Por eso es la vértebra que se {{c4}} con más frecuencia.",
+      "dificultad": 3,
+      "etiquetas": [
+        "vértebras torácicas",
+        "transición"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 82
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "lumbares"
+        },
+        "c2": {
+          "canonico": "T12"
+        },
+        "c3": {
+          "canonico": "rotatorio"
+        },
+        "c4": {
+          "canonico": "fractura"
+        }
+      },
+      "feedback": "Ese cambio brusco de eje de movimiento concentra fuerzas de cizallamiento en una sola vértebra, que queda sometida a fuerzas de transición. Las vértebras T5 a T8 presentan todas las características típicas de las torácicas, con el mayor grado de rotación de la región, mientras que T1 a T4 comparten rasgos con las cervicales. Los procesos mamilares, propios de las lumbares, aparecen ya en T12."
+    },
+    {
+      "id": "P1-B04-021",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los procesos de las vértebras lumbares:",
+      "texto": "En la superficie posterior de la base de cada proceso transverso lumbar existe un pequeño proceso {{c1}}, que da inserción a los músculos intertransversos. En la superficie posterior de los procesos articulares superiores se encuentran los procesos {{c2}}, donde se insertan los músculos multífido e intertransversos. Los procesos transversos lumbares se denominan también {{c3}}, porque derivan del elemento costal.",
+      "dificultad": 3,
+      "etiquetas": [
+        "vértebras lumbares"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 84,
+        "fig": "2-11"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "accesorio"
+        },
+        "c2": {
+          "canonico": "mamilares"
+        },
+        "c3": {
+          "canonico": "costiformes"
+        }
+      },
+      "feedback": "La orientación de las caras articulares lumbares, con las superiores dirigidas posteromedialmente y las inferiores anterolateralmente, hace que las de la vértebra superior queden sujetadas por las de la inferior: eso facilita la flexión y la extensión, permite la flexión lateral e impide la rotación. Las caras de L5-S1 tienen en cambio una orientación claramente coronal, lo que explica su comportamiento mecánico distinto."
+    },
+    {
+      "id": "P1-B04-022",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre L5 y la base del sacro:",
+      "texto": "La vértebra {{c1}} es la mayor de todas las vértebras móviles y se distingue por el gran tamaño de su cuerpo y de sus procesos transversos. Su cuerpo es notablemente más {{c2}} en la parte anterior, por lo que en gran medida es la causa del ángulo {{c3}}. El peso del cuerpo se transmite desde ella hasta la base del sacro, formada por la cara superior de {{c4}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "vértebras lumbares",
+        "sacro"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 84,
+        "fig": "2-12 A"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "L5"
+        },
+        "c2": {
+          "canonico": "profundo",
+          "acepta": [
+            "alto",
+            "grueso"
+          ]
+        },
+        "c3": {
+          "canonico": "lumbosacro"
+        },
+        "c4": {
+          "canonico": "S1"
+        }
+      },
+      "feedback": "Esa forma de cuña del cuerpo de L5 es la que crea el ángulo entre los ejes largos de la región lumbar y el sacro. Los procesos articulares superiores del sacro se articulan con los procesos articulares inferiores de L5, y el borde anterior sobresaliente del cuerpo de S1 se denomina promontorio sacro, un importante punto de referencia obstétrico."
+    },
+    {
+      "id": "P1-B04-023",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 3 crestas longitudinales de la cara dorsal del sacro:",
+      "dificultad": 3,
+      "etiquetas": [
+        "sacro"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 85,
+        "fig": "2-12 B"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "media"
+          },
+          {
+            "canonico": "intermedias"
+          },
+          {
+            "canonico": "laterales"
+          }
+        ]
+      },
+      "feedback": "Cada cresta corresponde a un elemento vertebral fusionado: la media representa los procesos espinosos rudimentarios de las tres o cuatro vértebras sacras superiores, y por eso S5 carece de proceso espinoso; las intermedias corresponden a los procesos articulares fusionados; y las laterales son las puntas de los procesos transversos fusionados. Reconocerlas permite orientarse en la cara dorsal del sacro durante la palpación y los procedimientos."
+    },
+    {
+      "id": "P1-B04-024",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el hiato del sacro y la cara auricular:",
+      "texto": "El {{c1}} del sacro se produce por la ausencia de las láminas y procesos espinosos de S5 y, a veces, de S4. Los {{c2}} del sacro, que representan los procesos articulares inferiores de S5, se proyectan a cada lado y son una guía útil para localizarlo. La parte superior de la superficie lateral del sacro tiene forma de oreja y recibe el nombre de cara {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "sacro"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 85,
+        "fig": "2-12 B"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "hiato"
+        },
+        "c2": {
+          "canonico": "cuernos",
+          "acepta": [
+            "astas"
+          ]
+        },
+        "c3": {
+          "canonico": "auricular"
+        }
+      },
+      "feedback": "El hiato y los cuernos tienen aplicación directa en la anestesia epidural caudal, porque marcan el punto de entrada al conducto sacro. La cara auricular corresponde a la parte sinovial de la articulación sacroilíaca, entre el sacro y el ilion, y en el sujeto vivo está cubierta por cartílago hialino: es la superficie por la que el sacro transmite el peso del cuerpo a la pelvis ósea."
+    },
+    {
+      "id": "P1-B04-025",
+      "tipo": "numerico",
+      "prompt": "¿Entre qué valores varía el ángulo lumbosacro, en grados?",
+      "dificultad": 2,
+      "etiquetas": [
+        "sacro",
+        "columna vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 85,
+        "fig": "2-2 D"
+      },
+      "respuesta": {
+        "rango": [
+          130,
+          160
+        ],
+        "unidad": "grados",
+        "tol": 0
+      },
+      "feedback": "Se forma en la unión de los ejes largos de la región lumbar y el sacro, es decir en la articulación de L5 con el sacro. Este ángulo determina cuánta fuerza de cizallamiento soporta el nivel L5-S1 y por tanto es relevante en la espondilolistesis y en la biomecánica del dolor lumbar. Otra diferencia regional útil: en la mujer es más frecuente que la anchura del sacro sea mayor que su longitud, mientras que en el hombre el cuerpo de S1 suele ser mayor."
+    }
+  ]
+}

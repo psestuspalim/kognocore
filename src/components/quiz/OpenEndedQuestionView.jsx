@@ -33,6 +33,7 @@ export default function OpenEndedQuestionView({
   const [userInputs, setUserInputs] = useState({});
   const [result, setResult] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+  const [gradingError, setGradingError] = useState('');
   const [isMarked, setIsMarked] = useState(initialIsMarked);
 
   useEffect(() => {
@@ -55,6 +56,7 @@ export default function OpenEndedQuestionView({
   useEffect(() => {
     setSubmitted(false);
     setResult(null);
+    setGradingError('');
 
     if (savedAnswer) {
       setUserInputs(savedAnswer.inputs || {});
@@ -114,6 +116,7 @@ export default function OpenEndedQuestionView({
     }
 
     try {
+      setGradingError('');
       const evalResult = motorAnatomia.calificar(question, payload);
       setResult(evalResult);
       setSubmitted(true);
@@ -130,6 +133,7 @@ export default function OpenEndedQuestionView({
       }
     } catch (err) {
       console.error('Error al calificar pregunta abierta:', err);
+      setGradingError('No se pudo comprobar la respuesta. Tus respuestas se conservan; vuelve a intentarlo.');
     }
   }, [submitted, tipo, userInputs, question, onAnswer]);
 
@@ -158,11 +162,22 @@ export default function OpenEndedQuestionView({
           const isBlankOk = itemDet?.ok;
 
           return (
-            <span key={idx} className="inline-block mx-1 my-1">
+            <span key={idx} className="inline-block max-w-full mx-1 my-1">
+              <span className="mr-1 text-xs font-semibold text-slate-500" aria-hidden="true">{blankKey.slice(1)}.</span>
               <input
                 type="text"
                 disabled={submitted}
                 value={val}
+                data-cloze-input="true"
+                autoComplete="off"
+                onKeyDown={(event) => {
+                  if (event.key !== 'Enter' || event.nativeEvent.isComposing) return;
+                  event.preventDefault();
+                  const fields = [...event.currentTarget.closest('main').querySelectorAll('[data-cloze-input]')];
+                  const next = fields[fields.indexOf(event.currentTarget) + 1];
+                  if (next) next.focus();
+                  else handleSubmit();
+                }}
                 onChange={(e) => setUserInputs(prev => ({ ...prev, [blankKey]: e.target.value }))}
                 aria-label={`Espacio ${blankKey.slice(1)} para completar`}
                 className={`px-3 py-1 text-sm sm:text-base font-medium rounded-lg border transition-all duration-200 focus:outline-hidden focus:ring-2 ${
@@ -357,6 +372,7 @@ export default function OpenEndedQuestionView({
             </div>
 
             {/* Submit Button */}
+            {gradingError && <p role="alert" className="mt-4 text-sm text-rose-700">{gradingError}</p>}
             {!submitted && (
               <div className="mt-6 flex justify-end">
                 <Button
@@ -416,7 +432,8 @@ export default function OpenEndedQuestionView({
 
                   <OpenEndedAnswerComparison inputs={userInputs} result={result} type={tipo} />
                   <SelfCorrectionButton
-                    corrected={Boolean(savedAnswer?.self_correction)}
+                    inputs={savedAnswer?.inputs || userInputs}
+                    corrected={result.correcto && Boolean(savedAnswer?.answer_revisions?.length)}
                     onCorrect={!result.correcto && savedAnswer ? onCorrectAnswer : undefined}
                   />
                 </div>

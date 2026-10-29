@@ -1,0 +1,695 @@
+{
+  "bloque": {
+    "id": "P1-B01",
+    "titulo": "Métodos para el estudio de la anatomía · Terminología anatómica y médica · Variantes · Sistema tegumentario · Fascias, compartimentos, bolsas y espacios potenciales",
+    "parcial": 1,
+    "sesion": "27 de enero",
+    "paginas": "2-18"
+  },
+  "items": [
+    {
+      "id": "P1-B01-001",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 3 métodos principales para el estudio de la anatomía macroscópica humana:",
+      "dificultad": 1,
+      "etiquetas": [
+        "métodos de estudio"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 2
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "anatomía regional",
+            "acepta": [
+              "anatomía topográfica"
+            ]
+          },
+          {
+            "canonico": "anatomía por sistemas",
+            "acepta": [
+              "anatomía sistémica"
+            ]
+          },
+          {
+            "canonico": "anatomía clínica",
+            "acepta": [
+              "anatomía aplicada"
+            ]
+          }
+        ]
+      },
+      "feedback": "Los tres reflejan la organización corporal y las prioridades del estudio. La regional estudia una parte principal del cuerpo con todas las estructuras que contiene, y es la que sigue esta obra porque es la que se adopta en cursos con laboratorio de disección. La sistémica estudia un sistema orgánico a lo largo de todo el cuerpo. La clínica subraya lo que importa para la práctica e invierte el razonamiento: en vez de preguntar qué hace un músculo, pregunta cómo se manifestaría la ausencia de su actividad; en vez de decir qué área de piel inerva un nervio, pregunta qué lesión nerviosa produciría el entumecimiento de esa área."
+    },
+    {
+      "id": "P1-B01-002",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la organización corporal por capas:",
+      "texto": "La anatomía regional reconoce también la organización corporal por capas: la {{c1}}, el tejido {{c2}} y la fascia {{c3}}, que cubren las estructuras más profundas de los músculos, los huesos y las cavidades que contienen vísceras.",
+      "dificultad": 1,
+      "etiquetas": [
+        "anatomía regional",
+        "capas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 2
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "piel"
+        },
+        "c2": {
+          "canonico": "subcutáneo"
+        },
+        "c3": {
+          "canonico": "profunda"
+        }
+      },
+      "feedback": "Este orden de superficial a profundo es el de la disección y el de la anatomía de superficie, y es la base para entender qué estructuras discurren por el tejido subcutáneo, como los nervios cutáneos y los vasos superficiales, frente a las que quedan por debajo de la fascia profunda. Muchas estructuras profundas son parcialmente evidentes bajo estas cubiertas y pueden examinarse en el sujeto vivo, que es justo el objetivo de la anatomía de superficie: visualizar lo que hay debajo de la piel y distinguir en la práctica cualquier hallazgo inusual o anormal."
+    },
+    {
+      "id": "P1-B01-003",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los sistemas que forman el aparato locomotor:",
+      "texto": "El sistema {{c1}} se compone de huesos y cartílago, y proporciona la forma y el soporte básicos del organismo. El sistema {{c2}} se compone de las articulaciones y sus ligamentos asociados, que conectan las partes óseas y son los puntos donde ocurren los movimientos. El sistema {{c3}} se compone de los músculos esqueléticos, que se contraen para movilizar o posicionar las partes del organismo.",
+      "dificultad": 1,
+      "etiquetas": [
+        "anatomía sistémica"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 3
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "esquelético"
+        },
+        "c2": {
+          "canonico": "articular"
+        },
+        "c3": {
+          "canonico": "muscular"
+        }
+      },
+      "feedback": "Sus campos de estudio son, respectivamente, la osteología, la artrología y la miología. Estos tres, los dos primeros pasivos y el tercero activo, constituyen en conjunto un supersistema, el sistema o aparato locomotor, cuyo campo es la ortopedia, porque deben actuar juntos para producir la locomoción. Ningún sistema funciona aislado: el encéfalo y los nervios los estimulan a actuar, las arterias y venas los nutren y retiran sus desechos, y los órganos sensoriales, especialmente la visión y el equilibrio, dirigen sus actividades en un ambiente gravitatorio."
+    },
+    {
+      "id": "P1-B01-004",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina el malestar significativo que puede sufrir un individuo por la falta de correspondencia entre su identidad de género y su sexo genético?",
+      "dificultad": 2,
+      "etiquetas": [
+        "sexo y género"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 4
+      },
+      "respuesta": {
+        "canonico": "disforia de género"
+      },
+      "feedback": "El sexo, masculino o femenino, se asigna genéticamente; la identidad de género es la percepción subjetiva que cada individuo tiene de su propio género y puede o no coincidir con el sexo asignado cromosómicamente. El género no es binario sino un espectro, que puede expresarse a través de la apariencia, la personalidad, los comportamientos y las relaciones, o no expresarse externamente en absoluto. La distinción importa clínicamente para entender al paciente y formar una relación de confianza. Nótese que muchos individuos no expresan sentimientos ni comportamientos relacionados hasta la pubertad o mucho más tarde."
+    },
+    {
+      "id": "P1-B01-005",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los epónimos:",
+      "texto": "Los {{c1}}, o términos que incorporan nombres propios, no se utilizan en la nueva terminología, pues no aportan claves sobre el {{c2}} ni la {{c3}} de las estructuras aludidas. Aun así, los de uso habitual aparecen entre {{c4}} en toda la obra al utilizar estos términos por primera vez.",
+      "dificultad": 2,
+      "etiquetas": [
+        "terminología"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 4
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "epónimos"
+        },
+        "c2": {
+          "canonico": "tipo"
+        },
+        "c3": {
+          "canonico": "localización",
+          "acepta": [
+            "ubicación"
+          ]
+        },
+        "c4": {
+          "canonico": "paréntesis"
+        }
+      },
+      "feedback": "La segunda razón para abandonarlos es que son históricamente imprecisos para identificar a la persona original al describir una estructura o asignar su función. El ejemplo del texto es el ángulo del esternón, o ángulo de Louis. Ese mismo paréntesis es donde el libro coloca los términos no oficiales que se emplean en la práctica médica corriente, como tuba auditiva, llamada trompa auditiva o de Eustaquio, y arteria torácica interna, llamada arteria mamaria interna. Vale la pena leer siempre esos paréntesis: son la traducción entre la terminología oficial y la que se usa en el hospital."
+    },
+    {
+      "id": "P1-B01-006",
+      "tipo": "cloze",
+      "prompt": "Completa la descripción de la posición anatómica:",
+      "texto": "La posición anatómica se refiere a la posición del cuerpo con el individuo {{c1}}, con la cabeza, la mirada y los dedos de los pies dirigidos hacia {{c2}}, los brazos adosados a los lados del cuerpo con las palmas hacia delante, y los miembros inferiores juntos con los pies {{c3}}.",
+      "dificultad": 1,
+      "etiquetas": [
+        "posición anatómica"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 5,
+        "fig": "1-2"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "de pie",
+          "acepta": [
+            "en bipedestación",
+            "erguido"
+          ]
+        },
+        "c2": {
+          "canonico": "delante",
+          "acepta": [
+            "adelante",
+            "anteriormente"
+          ]
+        },
+        "c3": {
+          "canonico": "paralelos"
+        }
+      },
+      "feedback": "Todas las descripciones anatómicas se expresan en relación con esta posición constante, para que no haya ambigüedad aunque el paciente esté tendido de lado, en supino, que es boca arriba, o en prono, que es boca abajo. Hay dos consecuencias prácticas. La primera es que la fuerza de la gravedad desplaza las vísceras hacia abajo al asumir la bipedestación. La segunda es que, como los pacientes se exploran habitualmente en decúbito supino, a menudo hay que describir la posición de los órganos afectados en supino, haciendo mención de esa diferencia con la posición anatómica."
+    },
+    {
+      "id": "P1-B01-007",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 4 planos anatómicos imaginarios que cruzan el organismo en la posición anatómica:",
+      "dificultad": 1,
+      "etiquetas": [
+        "planos anatómicos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 5,
+        "fig": "1-2"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "plano medio"
+          },
+          {
+            "canonico": "plano sagital"
+          },
+          {
+            "canonico": "plano frontal"
+          },
+          {
+            "canonico": "plano transversal"
+          }
+        ]
+      },
+      "feedback": "El plano medio sagital es anteroposterior y vertical, atraviesa longitudinalmente la línea media de la cabeza, el cuello y el tronco, y divide el cuerpo en mitades derecha e izquierda; a menudo se utiliza erróneamente el término línea media como sinónimo de plano mediano. Los sagitales son verticales y paralelos al plano medio, y el término parasagital es innecesario porque todo plano paralelo al medio es sagital por definición; al paralelo y cercano al medio se le llama paramediano. Los frontales o coronales cruzan el medio en ángulo recto y dividen en anterior y posterior. Los transversales son horizontales, dividen en superior e inferior, y los radiólogos los llaman transaxiales o axiales."
+    },
+    {
+      "id": "P1-B01-008",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 3 tipos de secciones o cortes del cuerpo:",
+      "dificultad": 2,
+      "etiquetas": [
+        "secciones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 5,
+        "fig": "1-3"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "secciones longitudinales"
+          },
+          {
+            "canonico": "secciones transversales"
+          },
+          {
+            "canonico": "secciones oblicuas"
+          }
+        ]
+      },
+      "feedback": "Las longitudinales discurren a lo largo o paralelamente al eje largo del cuerpo o de cualquiera de sus partes, con independencia de la posición del cuerpo; las transversales son cortes en ángulo recto con ese eje longitudinal; las oblicuas no siguen ninguno de los planos anatómicos. Dos detalles de alto rendimiento: como el eje largo de los pies cursa horizontalmente, una sección transversal del pie está situada en el plano frontal del cuerpo; y en la práctica muchas imágenes radiográficas y secciones anatómicas son ligeramente oblicuas, porque no es fácil situarlas con precisión en un plano."
+    },
+    {
+      "id": "P1-B01-009",
+      "tipo": "numerico",
+      "prompt": "¿De cuántos grados es la gama de posibles secciones longitudinales?",
+      "dificultad": 3,
+      "etiquetas": [
+        "secciones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 5,
+        "fig": "1-3 A"
+      },
+      "respuesta": {
+        "valor": 180,
+        "unidad": "grados",
+        "tol": 0
+      },
+      "feedback": "Aunque los planos medio, sagital y frontal son las secciones longitudinales estándar y las más utilizadas, cualquier corte paralelo al eje largo es longitudinal, y por eso existe un rango continuo de 180°. Es un buen recordatorio de que el número de planos sagitales, frontales y transversales también es ilimitado: por eso es necesario emplear un punto de referencia, habitualmente uno visible o palpable, o un nivel vertebral, para identificar el nivel del plano, como en «plano transversal a través del ombligo»."
+    },
+    {
+      "id": "P1-B01-010",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los términos de dirección respecto al eje del cuerpo:",
+      "texto": "{{c1}} se refiere a una estructura que está más próxima al vértice craneal, la parte más elevada del cráneo, e {{c2}} a una estructura situada más cerca de la planta de los pies. {{c3}} se refiere al cráneo y es un término útil para indicar la dirección hacia la cabeza, mientras que {{c4}} indica hacia los pies o la región de la cola.",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 5,
+        "fig": "1-4"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "superior"
+        },
+        "c2": {
+          "canonico": "inferior"
+        },
+        "c3": {
+          "canonico": "craneal"
+        },
+        "c4": {
+          "canonico": "caudal"
+        }
+      },
+      "feedback": "Caudal viene del latín cauda, cola, representada en el ser humano por el cóccix, el pequeño hueso situado en el extremo inferior de la columna vertebral. Conviene tener presente que estos términos se definen respecto a la posición anatómica, a diferencia de superficial, intermedio, profundo, proximal y distal, que son independientes de la posición y de los planos. Los ejemplos del libro sirven para verificarse uno mismo: el corazón es superior al estómago y el estómago es inferior al corazón."
+    },
+    {
+      "id": "P1-B01-011",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los términos referidos al plano medio y a las superficies del cuerpo:",
+      "texto": "{{c1}} se emplea para indicar que una estructura está más próxima al plano medio del cuerpo, como el 5.º dedo de la mano. Por el contrario, {{c2}} indica que una estructura está más alejada del plano medio, como el 1.er dedo de la mano. {{c3}} indica la superficie dorsal del cuerpo o más próxima a ella, y {{c4}} indica la superficie frontal del cuerpo.",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 6,
+        "fig": "1-4"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "medial"
+        },
+        "c2": {
+          "canonico": "lateral"
+        },
+        "c3": {
+          "canonico": "posterior",
+          "acepta": [
+            "dorsal"
+          ]
+        },
+        "c4": {
+          "canonico": "anterior",
+          "acepta": [
+            "ventral"
+          ]
+        }
+      },
+      "feedback": "El dedo meñique es medial y el pulgar es lateral, lo que resulta contraintuitivo si uno no tiene presente la posición anatómica con las palmas hacia delante. Un término emparentado que conviene distinguir es rostral, que se utiliza a menudo en vez de anterior al describir partes del cerebro: significa hacia el rostrum, y en el ser humano indica más cercano a la parte anterior de la cabeza, como cuando se dice que el lóbulo frontal es rostral con respecto al cerebelo."
+    },
+    {
+      "id": "P1-B01-012",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 3 términos que describen la posición de una estructura respecto a la superficie corporal:",
+      "dificultad": 2,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 8,
+        "fig": "1-4"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "superficial"
+          },
+          {
+            "canonico": "intermedio"
+          },
+          {
+            "canonico": "profundo"
+          }
+        ]
+      },
+      "feedback": "Se refieren a la posición de las estructuras respecto a la superficie del cuerpo, o a la relación de una estructura con otra subyacente o suprayacente: los músculos del brazo son superficiales al húmero, el húmero es profundo a los músculos del brazo, y el bíceps es intermedio entre la piel y el húmero. Son independientes de la posición anatómica, igual que proximal y distal, que comparan distancias a la raíz de un miembro o a la vista central de una estructura lineal. No deben confundirse con externo e interno, que significan más lejos o más próximo al centro de un órgano o cavidad, independientemente de la dirección."
+    },
+    {
+      "id": "P1-B01-013",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los términos de lateralidad:",
+      "texto": "Las estructuras pares con componentes derecho e izquierdo, como los riñones, son {{c1}}, y las que se encuentran en un solo lado, como el bazo, son {{c2}}. Algo que ocurre en el mismo lado que otra estructura del cuerpo es {{c3}}, mientras que {{c4}} significa que ocurre en el lado opuesto.",
+      "dificultad": 2,
+      "etiquetas": [
+        "términos de lateralidad"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 8
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "bilaterales"
+        },
+        "c2": {
+          "canonico": "unilaterales"
+        },
+        "c3": {
+          "canonico": "ipsilateral",
+          "acepta": [
+            "homolateral"
+          ]
+        },
+        "c4": {
+          "canonico": "contralateral"
+        }
+      },
+      "feedback": "Los ejemplos del texto: el pulgar y el dedo gordo del pie derechos son homolaterales, y la mano derecha es contralateral a la mano izquierda. Especificar si se hace referencia al componente derecho o izquierdo de una estructura bilateral puede tener gran importancia y es un hábito que debe adquirirse al comienzo del adiestramiento en ciencias de la salud, porque el error de lateralidad es una de las fuentes clásicas de daño evitable al paciente."
+    },
+    {
+      "id": "P1-B01-014",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los planos y ejes del movimiento:",
+      "texto": "Los movimientos de flexión y extensión ocurren generalmente en los planos {{c1}} en torno a un eje {{c2}}, mientras que los movimientos de abducción y aducción ocurren generalmente en un plano {{c3}} en torno a un eje {{c4}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "términos de movimiento"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 8,
+        "fig": "1-5"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "sagitales"
+        },
+        "c2": {
+          "canonico": "transversal"
+        },
+        "c3": {
+          "canonico": "frontal"
+        },
+        "c4": {
+          "canonico": "anteroposterior"
+        }
+      },
+      "feedback": "La regla general es que el movimiento ocurre en un plano y en torno a un eje perpendicular a ese plano. Hay dos excepciones que suelen preguntarse. La rodilla está rotada 180° respecto a otras articulaciones, de modo que su flexión se realiza con un movimiento posterior y su extensión con uno anterior. El pulgar está rotado 90° respecto a los demás dedos, así que su flexión y extensión ocurren en el plano frontal y su abducción y aducción en el sagital, justo al revés que en el resto de la mano."
+    },
+    {
+      "id": "P1-B01-015",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la flexión y la extensión:",
+      "texto": "La {{c1}} indica doblamiento o disminución del ángulo entre los huesos o partes del cuerpo, y para las articulaciones por encima de la rodilla indica movimiento en una dirección anterior. La {{c2}} indica enderezamiento o aumento del ángulo, y suele producirse en una dirección posterior. La extensión de un miembro más allá de los límites normales se denomina {{c3}} y puede producir lesiones.",
+      "dificultad": 2,
+      "etiquetas": [
+        "términos de movimiento"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 8,
+        "fig": "1-5"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "flexión"
+        },
+        "c2": {
+          "canonico": "extensión"
+        },
+        "c3": {
+          "canonico": "hiperextensión"
+        }
+      },
+      "feedback": "El ejemplo clínico de la hiperextensión es el «latigazo cervical», la hiperextensión del cuello en una colisión de automóvil por alcance posterior. Dos variedades de flexión que conviene tener claras: la flexión dorsal o dorsiflexión describe la flexión en la articulación talocrural, como al subir una cuesta o levantar del suelo la parte anterior del pie, mientras que la flexión plantar dobla el pie y los dedos hacia el suelo, como al ponerse de puntillas. La flexión lateral o inclinación lateral es una forma especial de abducción que ocurre solo en el cuello y el tronco."
+    },
+    {
+      "id": "P1-B01-016",
+      "tipo": "numerico",
+      "prompt": "¿Cuántos grados está rotado el pulgar respecto a los otros dedos de la mano?",
+      "dificultad": 3,
+      "etiquetas": [
+        "términos de movimiento",
+        "miembro superior"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 9,
+        "fig": "1-5 F"
+      },
+      "respuesta": {
+        "valor": 90,
+        "unidad": "grados",
+        "tol": 0
+      },
+      "feedback": "Esa rotación se aprecia por la situación lateral de la uña, en vez de posterior, en la posición anatómica. Su consecuencia es que invierte los planos de los movimientos del pulgar respecto al resto de la mano. También explica que el pulgar tenga movimientos propios: la oposición pone en contacto su pulpejo con el de otro dedo y sirve para pellizcar, abotonar una camisa o agarrar una taza por el asa, mientras que la reposición es el movimiento de vuelta desde la oposición hasta la posición anatómica."
+    },
+    {
+      "id": "P1-B01-017",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los movimientos del pie:",
+      "texto": "La {{c1}} aleja la planta del pie del plano medio y la gira lateralmente, y cuando es total el pie se halla también en flexión dorsal. La {{c2}} acerca la planta del pie hacia el plano medio, de modo que la planta mira medialmente, y cuando es total el pie se halla también en flexión {{c3}}.",
+      "dificultad": 3,
+      "etiquetas": [
+        "términos de movimiento",
+        "pie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 11,
+        "fig": "1-5 I"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "eversión"
+        },
+        "c2": {
+          "canonico": "inversión"
+        },
+        "c3": {
+          "canonico": "plantar"
+        }
+      },
+      "feedback": "Conviene no confundir estos movimientos simples con los compuestos. La pronación del pie es en realidad una combinación de eversión y abducción, cuyo resultado es un descenso del borde medial: los pies de un individuo con pies planos se hallan en pronación. La supinación del pie es la combinación opuesta, inversión y aducción, y eleva el borde medial. Esa distinción importa en la exploración del pie y en la indicación de plantillas y calzado."
+    },
+    {
+      "id": "P1-B01-018",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las capas de la piel:",
+      "texto": "La epidermis es un epitelio {{c1}}, con una capa superficial córnea y fuerte que cubre y protege la capa basal profunda, regenerativa y pigmentada. La epidermis carece de {{c2}} sanguíneos y linfáticos, y se nutre a través de la {{c3}} vascularizada subyacente, que es una densa capa de {{c4}} entrelazado y fibras elásticas.",
+      "dificultad": 2,
+      "etiquetas": [
+        "sistema tegumentario"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 11,
+        "fig": "1-6"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "queratinizado"
+        },
+        "c2": {
+          "canonico": "vasos"
+        },
+        "c3": {
+          "canonico": "dermis"
+        },
+        "c4": {
+          "canonico": "colágeno"
+        }
+      },
+      "feedback": "Que la epidermis sea avascular explica por qué una quemadura superficial, limitada a ella, se reemplaza rápidamente desde la capa basal sin cicatriz significativa. Las fibras de colágeno y elásticas de la dermis le dan tono, fortaleza y resistencia; con la edad las elásticas se deterioran y no son reemplazadas, y por eso la piel del anciano se arruga y cuelga al perder su elasticidad. La dermis recibe además las terminaciones nerviosas aferentes sensibles al tacto, la irritación y la temperatura: la mayoría se halla en ella, aunque algunas penetran en la epidermis."
+    },
+    {
+      "id": "P1-B01-019",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denominan las líneas cutáneas que reflejan el patrón direccional predominante de las fibras de colágeno de la dermis?",
+      "dificultad": 2,
+      "etiquetas": [
+        "sistema tegumentario",
+        "cirugía"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 12,
+        "fig": "1-7"
+      },
+      "respuesta": {
+        "canonico": "líneas de tensión",
+        "acepta": [
+          "líneas de Langer"
+        ]
+      },
+      "feedback": "Discurren en espirales longitudinales en los miembros y transversalmente en el cuello y el tronco; en codos, rodillas, tobillos y muñecas son paralelas a los pliegues transversales que aparecen al flexionar los miembros. Su consecuencia quirúrgica es directa: las incisiones paralelas a ellas rompen pocas fibras de colágeno, se abren menos y curan con escasa cicatriz, porque las fibras no seccionadas tienden a mantener los bordes en su lugar. Las incisiones que cruzan las líneas rompen más fibras, quedan abiertas y favorecen la cicatriz excesiva o queloide. Por eso el cirujano incide en paralelo a ellas cuando la exposición lo permite."
+    },
+    {
+      "id": "P1-B01-020",
+      "tipo": "numerico",
+      "prompt": "¿Qué porcentaje de los recién nacidos presenta una o más anomalías congénitas significativas?",
+      "dificultad": 2,
+      "etiquetas": [
+        "variantes anatómicas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 12
+      },
+      "respuesta": {
+        "valor": 3,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Una anomalía congénita o defecto de nacimiento es una variante evidente al nacer o poco después, por su forma o función aberrante, y puede ir de leve a letal. Se distingue del cambio anatómico, que no suele tener efecto sobre la función normal y se descubre de forma incidental en estudios de imagen, cirugía, necropsia o disección. Otras malformaciones, como la atresia o bloqueo del intestino, no se detectan hasta que aparecen síntomas. Conviene recordar que la frecuencia de las variantes difiere entre grupos humanos, y que las observadas en una población pueden no ser aplicables a otra."
+    },
+    {
+      "id": "P1-B01-021",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la fascia profunda y los compartimentos:",
+      "texto": "En los miembros, los grupos de músculos con funciones similares, que suelen compartir la misma inervación, se agrupan en {{c1}} fasciales, separados por espesas láminas de fascia profunda denominadas septos {{c2}}, que se extienden centralmente desde el manguito fascial circundante y se insertan en los {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "fascias",
+        "compartimentos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 14,
+        "fig": "1-9"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "compartimentos"
+        },
+        "c2": {
+          "canonico": "intermusculares"
+        },
+        "c3": {
+          "canonico": "huesos"
+        }
+      },
+      "feedback": "Esta organización tiene dos consecuencias que se repiten a lo largo del curso. La primera es clínica: los compartimentos pueden contener o dirigir la propagación de una infección o un tumor, y son la base del síndrome compartimental. La segunda es de estudio: como los músculos de un mismo compartimento comparten inervación, la inervación de los miembros se aprende por grupos funcionales y solo hay que memorizar las excepciones. Además, la fascia profunda casi inextensible limita la expansión de los vientres musculares al contraerse, lo que comprime las venas y, junto con las válvulas venosas, constituye la bomba musculovenosa que devuelve la sangre al corazón."
+    },
+    {
+      "id": "P1-B01-022",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué signo confiere un color amarillo al blanco de los ojos y a la piel por acumulación de bilirrubina en la sangre?",
+      "dificultad": 1,
+      "etiquetas": [
+        "signos cutáneos",
+        "cuadro clínico"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 15
+      },
+      "respuesta": {
+        "canonico": "ictericia"
+      },
+      "feedback": "Los tres signos de color que dependen del flujo por los lechos capilares superficiales de la dermis son la cianosis, la ictericia y el eritema. La cianosis es la coloración azulada por hemoglobina desprovista de oxígeno, especialmente evidente donde la piel es delgada, como labios, párpados y el lecho de las uñas. El eritema es la coloración anormalmente roja por congestión de los lechos capilares debida a exceso de calor, infección, inflamación o reacciones alérgicas. Los cambios de color se aprecian más fácilmente en personas de piel clara, y en las de piel oscura puede ser útil examinar la delicada parte inferior de la lengua."
+    },
+    {
+      "id": "P1-B01-023",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las heridas de la piel:",
+      "texto": "Las heridas {{c1}} rompen la epidermis y quizás la capa superficial de la dermis; aunque sangran, no interrumpen la continuidad de la dermis. Las heridas {{c2}} penetran en la capa profunda de la dermis y llegan al tejido subcutáneo o más allá, quedan {{c3}} y se hace necesario aproximar sus bordes mediante sutura o grapas para minimizar la cicatriz.",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "heridas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 15
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "superficiales"
+        },
+        "c2": {
+          "canonico": "profundas"
+        },
+        "c3": {
+          "canonico": "abiertas"
+        }
+      },
+      "feedback": "El criterio que separa ambas es la continuidad de la dermis, no la cantidad de sangrado: una herida superficial puede sangrar abundantemente y aun así cerrar sola, porque las fibras de colágeno no seccionadas mantienen los bordes aproximados. Ese mismo principio explica el comportamiento de las incisiones según su orientación respecto a las líneas de tensión. Y explica también las estrías cutáneas: cuando la piel se distiende de forma importante y rápida, como en el abdomen de la embarazada, la distensión lesiona las fibras de colágeno de la dermis y aparecen bandas de piel delgada y arrugada."
+    },
+    {
+      "id": "P1-B01-024",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la clasificación de las quemaduras por profundidad:",
+      "texto": "Las quemaduras superficiales limitan la lesión a la {{c1}}. Las quemaduras de grosor {{c2}} lesionan la epidermis y la dermis superficial, con formación de ampollas, y son las más {{c3}} porque las terminaciones nerviosas se lesionan sin destruirse. Las quemaduras de grosor {{c4}} lesionan todo el espesor de la piel y el área quemada se halla insensible, al quedar destruidas las terminaciones nerviosas sensitivas.",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "quemaduras"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 16,
+        "fig": "C1-2"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "epidermis"
+        },
+        "c2": {
+          "canonico": "parcial"
+        },
+        "c3": {
+          "canonico": "dolorosas"
+        },
+        "c4": {
+          "canonico": "total"
+        }
+      },
+      "feedback": "El sistema de clasificación actual no utiliza numeración excepto para las quemaduras de cuarto grado, las más graves, cuyo daño se extiende a través del espesor total de la piel hacia la fascia, el músculo o el hueso, y que ponen en peligro la vida. La profundidad determina la conducta: las de grosor parcial curan lentamente, de 3 semanas a varios meses, porque las glándulas sudoríparas y los folículos pilosos no se lesionan y aportan células de reemplazo para la capa basal; las de grosor total requieren retirar el material muerto, la escara, e injertar piel, sea autoinjerto, de cadáver humano o de cerdo, cultivada o artificial."
+    },
+    {
+      "id": "P1-B01-025",
+      "tipo": "numerico",
+      "prompt": "En la regla de los nueves, ¿qué porcentaje de la superficie corporal corresponde a la cabeza y el cuello considerando sus caras anterior y posterior?",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "quemaduras"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 16,
+        "fig": "C1-3"
+      },
+      "respuesta": {
+        "valor": 9,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "La regla divide el cuerpo en áreas que corresponden a un 9% de la superficie corporal total o a sus múltiplos, y permite estimar rápidamente la extensión en un adulto. Considerando ambas caras: cabeza y cuello 9%, brazos con antebrazos y manos 18%, tronco 36%, muslos con piernas y pies 36%, y periné 1%. Si solo se cuenta la cara anterior, cada valor se reduce a la mitad. El porcentaje importa porque una quemadura se clasifica como grave si cubre el 20% o más del área total, excluyendo las superficiales como las solares, y porque superar el 40% es uno de los tres factores que aumentan el riesgo de muerte, junto con la edad mayor a 60 años y la lesión por inhalación."
+    }
+  ]
+}

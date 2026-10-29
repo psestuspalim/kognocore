@@ -17,6 +17,7 @@ export default function AdminMenu({
   compact = false
 }) {
   const menuItems = [
+    { label: 'Generar usuarios', icon: Users, href: 'AdminUserGenerator', description: 'Usuarios y contraseñas por lote' },
     {
       label: 'Dashboard Admin',
       icon: LayoutDashboard,

@@ -1,0 +1,349 @@
+{
+  "bloque": {
+    "id": "P1-B09",
+    "titulo": "Cabeza: visión general · Cráneo: caras anterior, lateral, posterior y superior · Puntos craneométricos · Cara externa de la base del cráneo",
+    "parcial": 1,
+    "sesion": "9 de febrero",
+    "paginas": "840-851"
+  },
+  "items": [
+    {
+      "id": "P1-B09-001",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las dos partes del cráneo:",
+      "texto": "El cráneo se divide en {{c1}}, que aloja el encéfalo, y {{c2}}, que forma el esqueleto de la cara. En la vista lateral se observa que el volumen del primero duplica aproximadamente el volumen del segundo.",
+      "dificultad": 1,
+      "etiquetas": ["cráneo", "visión general"],
+      "fuente": { "obra": "Moore 9e", "pag": 841, "fig": "8-1 B" },
+      "blancos": {
+        "c1": { "canonico": "neurocráneo" },
+        "c2": { "canonico": "viscerocráneo", "acepta": ["esqueleto facial"] }
+      },
+      "feedback": "La proporción cambia a lo largo de la vida y es un dato de alto rendimiento. En el recién nacido la cara constituye alrededor de una octava parte del cráneo, mientras que en el adulto el esqueleto facial constituye un tercio. El gran tamaño de la calvaria en el lactante es consecuencia del crecimiento y desarrollo precoces del cerebro y los ojos, y el escaso desarrollo de la cara se debe al desarrollo rudimentario de los maxilares, la mandíbula y los senos paranasales, a la ausencia de dientes erupcionados y al pequeño tamaño de las cavidades nasales."
+    },
+    {
+      "id": "P1-B09-002",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina el plano horizontal en el que se encuentran el borde inferior de la órbita y el borde superior del meato acústico externo de ambos lados?",
+      "dificultad": 2,
+      "etiquetas": ["cráneo", "referencias craneométricas"],
+      "fuente": { "obra": "Moore 9e", "pag": 845, "fig": "8-1 A" },
+      "respuesta": { "canonico": "plano orbitomeatal", "acepta": ["plano horizontal de Frankfort", "horizontal de Frankfort"] },
+      "feedback": "Es la referencia craneométrica externa que define la posición anatómica del cráneo. Importa porque todas las descripciones de caras y normas del cráneo, y los puntos craneométricos como el vértice, se definen con el cráneo orientado en este plano. Sin esa convención, decir cuál es el punto más superior del neurocráneo carecería de sentido, porque dependería de cómo se incline la pieza."
+    },
+    {
+      "id": "P1-B09-003",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los huesos de la calvaria:",
+      "texto": "Los huesos que componen la calvaria son principalmente huesos {{c1}}: el frontal, los parietales y el occipital. Se forman por osificación {{c2}} del mesénquima de la cabeza, a partir de la cresta {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": ["cráneo", "desarrollo"],
+      "fuente": { "obra": "Moore 9e", "pag": 843 },
+      "blancos": {
+        "c1": { "canonico": "planos" },
+        "c2": { "canonico": "intramembranosa" },
+        "c3": { "canonico": "neural" }
+      },
+      "feedback": "El contraste es con la base del cráneo, cuya mayor parte se desarrolla por osificación endocondral. Esa diferencia de origen explica el comportamiento clínico: los huesos de la calvaria del recién nacido son lisos y unilaminares, sin díploe, y están separados por suturas y fontanelas que permiten el moldeado de la cabeza durante el parto y el crecimiento posterior del cerebro."
+    },
+    {
+      "id": "P1-B09-004",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina la prominencia lisa del hueso frontal situada superior a la raíz de la nariz, entre los arcos superciliares?",
+      "dificultad": 1,
+      "etiquetas": ["cara anterior del cráneo", "puntos craneométricos"],
+      "fuente": { "obra": "Moore 9e", "pag": 846, "fig": "8-6" },
+      "respuesta": { "canonico": "glabela" },
+      "feedback": "Del latín glabellus, liso o pelado. Es la parte de la frente con proyección más anterior y está más pronunciada en los hombres, igual que los arcos superciliares que la flanquean, cuya prominencia también es generalmente mayor en el varón. En la línea media de la glabela puede verse en algunos adultos un resto de la sutura metópica, es decir la sutura frontal persistente que en el feto divide las dos mitades del hueso frontal."
+    },
+    {
+      "id": "P1-B09-005",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los forámenes de la cara anterior:",
+      "texto": "El foramen {{c1}}, el foramen infraorbitario y el foramen {{c2}} se encuentran aproximadamente en una línea {{c3}}, y por ellos pasan los principales nervios sensitivos de la cara.",
+      "dificultad": 2,
+      "etiquetas": ["cara anterior del cráneo", "forámenes"],
+      "fuente": { "obra": "Moore 9e", "pag": 843, "fig": "8-3" },
+      "blancos": {
+        "c1": { "canonico": "supraorbitario" },
+        "c2": { "canonico": "mentoniano" },
+        "c3": { "canonico": "vertical" }
+      },
+      "feedback": "Esa alineación vertical es una de las referencias más útiles de la exploración de la cara, porque los tres forámenes corresponden a las salidas de las tres divisiones sensitivas del trigémino: supraorbitario para la oftálmica, infraorbitario para la maxilar y mentoniano para la mandibular. Por eso la palpación de esos tres puntos es la maniobra clásica para explorar la sensibilidad facial. Nótese que el supraorbitario a veces es una incisura en lugar de un foramen completo."
+    },
+    {
+      "id": "P1-B09-006",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina el punto craneométrico situado en la intersección de los huesos frontal y nasales?",
+      "dificultad": 2,
+      "etiquetas": ["puntos craneométricos"],
+      "fuente": { "obra": "Moore 9e", "pag": 846, "fig": "8-6" },
+      "respuesta": { "canonico": "nasión" },
+      "feedback": "En la mayoría de las personas se pone de manifiesto por un área netamente deprimida, el puente nasal. Es uno de los múltiples puntos craneométricos que se utilizan radiográficamente en medicina, o en el cráneo en seco en antropología física, para efectuar mediciones craneales, comparar y describir la topografía del cráneo y documentar las variaciones anormales. Formalmente se define como el punto donde se encuentran las suturas frontonasal e internasal."
+    },
+    {
+      "id": "P1-B09-007",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 4 huesos que se unen en el pterión:",
+      "dificultad": 2,
+      "etiquetas": ["puntos craneométricos", "pterión"],
+      "fuente": { "obra": "Moore 9e", "pag": 846, "fig": "8-4 A" },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          { "canonico": "frontal" },
+          { "canonico": "parietal" },
+          { "canonico": "esfenoides", "acepta": ["ala mayor del esfenoides"] },
+          { "canonico": "temporal", "acepta": ["porción escamosa del temporal"] }
+        ]
+      },
+      "feedback": "Suele estar indicado por una formación de suturas con forma de H, y se localiza 3 a 4 cm superiormente al punto medio del arco cigomático, en la parte anterior de la fosa temporal. Su importancia es puramente clínica y hay que retenerla: se encuentra sobre el trayecto de la división anterior de la arteria meníngea media, de modo que un golpe sobre esa zona, donde además el hueso es delgado, puede desgarrarla y producir un hematoma extradural. Es menos frecuente que se articulen frontal y temporal, y a veces los cuatro huesos se reúnen en un punto."
+    },
+    {
+      "id": "P1-B09-008",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los puntos craneométricos de la calvaria:",
+      "texto": "El {{c1}} es el punto situado en la unión de las suturas coronal y sagital. El {{c2}} es el punto situado en la unión de las suturas lambdoidea y sagital. El {{c3}}, o punto más superior del neurocráneo en la línea media, está próximo al punto medio de la sutura sagital.",
+      "dificultad": 2,
+      "etiquetas": ["puntos craneométricos"],
+      "fuente": { "obra": "Moore 9e", "pag": 848, "fig": "8-8 A" },
+      "blancos": {
+        "c1": { "canonico": "bregma" },
+        "c2": { "canonico": "lambda" },
+        "c3": { "canonico": "vértice", "acepta": ["vértex"] }
+      },
+      "feedback": "Los nombres vienen del griego: bregma es la parte anterior de la cabeza y lambda alude a la forma de la letra L mayúscula que dibuja la confluencia de suturas. Ambos puntos tienen correlato en el lactante: el bregma es la futura localización de la fontanela anterior, y el lambda la de la fontanela posterior. Por eso en el recién nacido no se palpan como puntos sino como zonas blandas, y el bregma es el sitio donde comienza la obliteración de las suturas en el adulto."
+    },
+    {
+      "id": "P1-B09-009",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina el punto craneométrico en forma de estrella localizado en la unión de las suturas parietomastoidea, occipitomastoidea y lambdoidea?",
+      "dificultad": 3,
+      "etiquetas": ["puntos craneométricos"],
+      "fuente": { "obra": "Moore 9e", "pag": 846, "fig": "8-6" },
+      "respuesta": { "canonico": "asterión" },
+      "feedback": "Del griego, estrellado, por la figura que forman las tres suturas al converger. Es una referencia quirúrgica usada en los abordajes a la fosa craneal posterior, porque marca aproximadamente la unión del seno transverso con el sigmoideo. Conviene aprenderlo junto con el inión, que es el punto más sobresaliente de la protuberancia occipital externa, y con el lambda, que queda en la línea media y a menudo puede palparse como una depresión."
+    },
+    {
+      "id": "P1-B09-010",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la fosa temporal:",
+      "texto": "La fosa temporal está limitada superior y posteriormente por las líneas {{c1}} superior e inferior, anteriormente por los huesos frontal y {{c2}}, e inferiormente por el arco {{c3}}. El borde superior de ese arco corresponde al límite inferior del hemisferio {{c4}}.",
+      "dificultad": 2,
+      "etiquetas": ["cara lateral del cráneo"],
+      "fuente": { "obra": "Moore 9e", "pag": 846, "fig": "8-4 A" },
+      "blancos": {
+        "c1": { "canonico": "temporales" },
+        "c2": { "canonico": "cigomático" },
+        "c3": { "canonico": "cigomático" },
+        "c4": { "canonico": "cerebral" }
+      },
+      "feedback": "La correspondencia entre el borde superior del arco cigomático y el límite inferior del hemisferio cerebral es un dato de superficie con valor práctico: permite estimar hasta dónde desciende el cerebro al planear un abordaje o al interpretar un traumatismo lateral. El arco cigomático está formado por la unión del proceso temporal del hueso cigomático y el proceso cigomático del hueso temporal, es decir cada hueso aporta un proceso con el nombre del otro."
+    },
+    {
+      "id": "P1-B09-011",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las características del neurocráneo en la cara lateral:",
+      "texto": "Las principales características de la parte del neurocráneo en la cara lateral son la fosa {{c1}}, el poro del meato acústico {{c2}} y el proceso {{c3}} del hueso temporal.",
+      "dificultad": 2,
+      "etiquetas": ["cara lateral del cráneo"],
+      "fuente": { "obra": "Moore 9e", "pag": 846 },
+      "blancos": {
+        "c1": { "canonico": "temporal" },
+        "c2": { "canonico": "externo" },
+        "c3": { "canonico": "mastoideo" }
+      },
+      "feedback": "Las del viscerocráneo, en cambio, son la fosa infratemporal, el arco cigomático y las caras laterales del maxilar y la mandíbula. El poro del meato acústico externo es la entrada al meato que conduce a la membrana timpánica, y el proceso mastoideo queda posteroinferior a él. Anteromedialmente al mastoideo se halla el proceso estiloideo, una delgada proyección ósea puntiaguda, semejante a una aguja."
+    },
+    {
+      "id": "P1-B09-012",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina el espacio irregular situado inferior y profundo con respecto al arco cigomático y a la mandíbula, y posterior al maxilar?",
+      "dificultad": 2,
+      "etiquetas": ["cara lateral del cráneo"],
+      "fuente": { "obra": "Moore 9e", "pag": 847 },
+      "respuesta": { "canonico": "fosa infratemporal" },
+      "feedback": "Es el espacio donde se alojan los músculos pterigoideos, el plexo venoso pterigoideo, la arteria maxilar y el nervio mandibular, y comunica con la fosa pterigopalatina y con la órbita. Su definición por límites negativos, es decir por lo que queda debajo y por dentro de estructuras ya conocidas, es la forma habitual de ubicarla en el cráneo seco antes de estudiar su contenido."
+    },
+    {
+      "id": "P1-B09-013",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la cara posterior del cráneo:",
+      "texto": "La cara posterior del cráneo está compuesta por el {{c1}}, que es la protuberancia posterior convexa de la porción escamosa del hueso occipital, partes de los huesos {{c2}} y las porciones {{c3}} de los huesos temporales.",
+      "dificultad": 2,
+      "etiquetas": ["cara posterior del cráneo"],
+      "fuente": { "obra": "Moore 9e", "pag": 847, "fig": "8-7 A" },
+      "blancos": {
+        "c1": { "canonico": "occipucio" },
+        "c2": { "canonico": "parietales" },
+        "c3": { "canonico": "mastoideas" }
+      },
+      "feedback": "La referencia palpable de esta cara es la protuberancia occipital externa, fácilmente palpable en el plano medio, aunque en algunas ocasiones, sobre todo en la mujer, puede ser poco aparente. Su punto más sobresaliente es el inión. La línea nucal superior se extiende lateralmente desde la protuberancia y la línea nucal inferior es menos aparente. En lambda o cerca del proceso mastoideo pueden localizarse huesos suturales, también llamados accesorios o wormianos."
+    },
+    {
+      "id": "P1-B09-014",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las suturas de la calvaria:",
+      "texto": "La sutura {{c1}} separa los huesos frontal y parietales, la sutura {{c2}} separa los dos huesos parietales entre sí, y la sutura {{c3}} separa los huesos parietales del hueso occipital.",
+      "dificultad": 1,
+      "etiquetas": ["cara superior del cráneo", "suturas"],
+      "fuente": { "obra": "Moore 9e", "pag": 848, "fig": "8-8" },
+      "blancos": {
+        "c1": { "canonico": "coronal" },
+        "c2": { "canonico": "sagital" },
+        "c3": { "canonico": "lambdoidea" }
+      },
+      "feedback": "Las tres son articulaciones fibrosas y marcan los puntos craneométricos de la bóveda: coronal más sagital dan el bregma, sagital más lambdoidea dan el lambda. Su cierre prematuro produce malformaciones específicas: el de la sagital da un cráneo alargado y estrecho, llamado escafocefalia; el de la coronal o la lambdoidea en un solo lado da un cráneo retorcido y asimétrico, la plagiocefalia; y el de la coronal completa da un cráneo alto a modo de torre, la oxicefalia o turricefalia."
+    },
+    {
+      "id": "P1-B09-015",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denominan los forámenes muy irregulares y variables del neurocráneo que son atravesados por las venas que conectan las venas de la piel cabelluda con los senos venosos de la duramadre?",
+      "dificultad": 3,
+      "etiquetas": ["cara superior del cráneo", "forámenes"],
+      "fuente": { "obra": "Moore 9e", "pag": 848 },
+      "respuesta": { "canonico": "forámenes emisarios" },
+      "feedback": "Las venas que los atraviesan son las venas emisarias, y su importancia es clínica: constituyen una vía por la que una infección de la piel cabelluda o de la cara puede propagarse al interior del cráneo, porque esas venas carecen de válvulas. De la misma familia es el foramen parietal, un orificio pequeño e inconstante situado posteriormente en el hueso parietal, cerca de la sutura sagital, que a menudo aparece en pares."
+    },
+    {
+      "id": "P1-B09-016",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el paladar duro:",
+      "texto": "El paladar duro u óseo está formado por los procesos {{c1}} de los maxilares anteriormente y las láminas {{c2}} de los huesos palatinos posteriormente. Su borde posterior libre se proyecta en el plano medio como la espina nasal {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": ["base externa del cráneo", "paladar"],
+      "fuente": { "obra": "Moore 9e", "pag": 848, "fig": "8-9" },
+      "blancos": {
+        "c1": { "canonico": "palatinos" },
+        "c2": { "canonico": "horizontales" },
+        "c3": { "canonico": "posterior" }
+      },
+      "feedback": "Posteriormente a los dientes incisivos centrales se halla el foramen incisivo, una depresión en la línea media del paladar óseo en la cual se abren los conductos incisivos; por ellos pasan los nervios nasopalatinos desde la nariz. Esa anatomía explica por qué la anestesia del bloque anterior del paladar se infiltra ahí. Más posteriormente se encuentran los forámenes palatinos mayor y menor, en las láminas horizontales de los huesos palatinos."
+    },
+    {
+      "id": "P1-B09-017",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 3 pares de procesos que posee el hueso esfenoides además de su cuerpo:",
+      "dificultad": 2,
+      "etiquetas": ["esfenoides"],
+      "fuente": { "obra": "Moore 9e", "pag": 850, "fig": "8-10" },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          { "canonico": "alas mayores" },
+          { "canonico": "alas menores" },
+          { "canonico": "procesos pterigoideos" }
+        ]
+      },
+      "feedback": "El esfenoides es un hueso impar, de forma irregular y neumático, es decir lleno de aire, porque su cuerpo aloja el seno esfenoidal. Las alas mayores poseen caras orbitarias, temporales e infratemporales, visibles desde fuera del cráneo, y caras cerebrales visibles en la base interna; esa multiplicidad de caras es la razón de que el esfenoides aparezca en casi todas las vistas del cráneo. Los procesos pterigoideos constan de las láminas lateral y medial, y se extienden inferiormente desde la unión del cuerpo con las alas mayores."
+    },
+    {
+      "id": "P1-B09-018",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las depresiones de la porción escamosa del temporal:",
+      "texto": "Unas depresiones en cada porción escamosa del hueso temporal, denominadas fosas {{c1}}, acomodan las {{c2}} mandibulares cuando la boca está {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": ["base externa del cráneo", "ATM"],
+      "fuente": { "obra": "Moore 9e", "pag": 851, "fig": "8-9" },
+      "blancos": {
+        "c1": { "canonico": "mandibulares" },
+        "c2": { "canonico": "cabezas", "acepta": ["cóndilos"] },
+        "c3": { "canonico": "cerrada" }
+      },
+      "feedback": "Es la superficie articular temporal de la articulación temporomandibular. El matiz de que las cabezas se alojan ahí con la boca cerrada anticipa la biomecánica de esa articulación: al abrir la boca la cabeza mandibular se traslada anteriormente fuera de la fosa, hacia el tubérculo articular, y esa traslación es la que permite la luxación anterior de la mandíbula cuando el movimiento es excesivo."
+    },
+    {
+      "id": "P1-B09-019",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 4 estructuras principales que atraviesan el foramen magno:",
+      "dificultad": 2,
+      "etiquetas": ["base externa del cráneo", "foramen magno"],
+      "fuente": { "obra": "Moore 9e", "pag": 851 },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          { "canonico": "médula espinal" },
+          { "canonico": "meninges" },
+          { "canonico": "arterias vertebrales" },
+          { "canonico": "nervio accesorio", "acepta": ["NC XI"] }
+        ]
+      },
+      "feedback": "A ellas se suman las arterias espinales anterior y posteriores, ramas de las vertebrales. Es el rasgo más destacado de la base del cráneo y el punto donde la médula espinal se continúa con la médula oblongada del encéfalo. Las cuatro partes del hueso occipital se disponen en torno a él, y en sus porciones laterales se hallan los cóndilos occipitales, mediante los cuales el cráneo se articula con la columna vertebral."
+    },
+    {
+      "id": "P1-B09-020",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el foramen yugular:",
+      "texto": "La gran abertura entre el hueso {{c1}} y la porción petrosa del hueso temporal es el foramen yugular, desde el cual salen del cráneo la vena {{c2}} interna y los nervios craneales {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": ["base externa del cráneo", "forámenes"],
+      "fuente": { "obra": "Moore 9e", "pag": 851, "fig": "8-9" },
+      "blancos": {
+        "c1": { "canonico": "occipital" },
+        "c2": { "canonico": "yugular" },
+        "c3": { "canonico": "IX a XI", "acepta": ["NC IX a XI", "9 a 11", "noveno a undécimo"] }
+      },
+      "feedback": "Es decir, el glosofaríngeo, el vago y el accesorio. Nótese que el accesorio aparece también entre las estructuras del foramen magno: entra por él y sale por el yugular. La entrada al conducto carotídeo para la arteria carótida interna se halla justo anterior al foramen yugular, de modo que en la base del cráneo quedan vecinos el principal aporte arterial anterior del encéfalo y el principal drenaje venoso."
+    },
+    {
+      "id": "P1-B09-021",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué nervio craneal atraviesa el foramen estilomastoideo?",
+      "dificultad": 2,
+      "etiquetas": ["base externa del cráneo", "forámenes"],
+      "fuente": { "obra": "Moore 9e", "pag": 851 },
+      "respuesta": { "canonico": "nervio facial", "acepta": ["NC VII", "facial", "séptimo par"] },
+      "feedback": "Lo acompaña la arteria estilomastoidea, y el foramen se sitúa posteriormente a la base del proceso estiloideo. Este dato tiene una consecuencia pediátrica directa: como al nacer no existe proceso mastoideo, el nervio facial se halla muy próximo a la superficie a su salida por este foramen, de modo que puede lesionarse con el fórceps durante un parto difícil, o más adelante por una incisión retroauricular. El proceso mastoideo se forma durante el primer año de vida, cuando el esternocleidomastoideo completa su desarrollo y tracciona de la porción petromastoidea."
+    },
+    {
+      "id": "P1-B09-022",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina la abertura nasal anterior del cráneo, situada inferiormente a los huesos nasales?",
+      "dificultad": 2,
+      "etiquetas": ["cara anterior del cráneo"],
+      "fuente": { "obra": "Moore 9e", "pag": 846, "fig": "8-2 A" },
+      "respuesta": { "canonico": "abertura piriforme", "acepta": ["abertura nasal anterior"] },
+      "feedback": "Se llama así por su forma de pera. A través de ella se observa el septo nasal óseo, que divide la cavidad nasal en las partes derecha e izquierda y está formado por la lámina perpendicular del etmoides y el vómer. En la pared lateral de cada cavidad nasal se ven las conchas o cornetes nasales, unas láminas óseas curvadas. Su contrapartida posterior son las coanas o aberturas nasales posteriores, visibles en la base externa del cráneo."
+    },
+    {
+      "id": "P1-B09-023",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los huesos cigomáticos:",
+      "texto": "Los huesos cigomáticos forman la prominencia de las {{c1}}, están situados en los lados inferolaterales de las {{c2}} y descansan sobre los {{c3}}. Un pequeño foramen {{c4}} atraviesa la cara lateral de cada uno.",
+      "dificultad": 2,
+      "etiquetas": ["cara anterior del cráneo"],
+      "fuente": { "obra": "Moore 9e", "pag": 846, "fig": "8-3" },
+      "blancos": {
+        "c1": { "canonico": "mejillas" },
+        "c2": { "canonico": "órbitas" },
+        "c3": { "canonico": "maxilares" },
+        "c4": { "canonico": "cigomaticofacial" }
+      },
+      "feedback": "También llamados huesos malares o huesos de la mejilla. Forman los bordes anterolaterales, las paredes y gran parte de los bordes infraorbitarios de las órbitas, y se articulan con los huesos frontal, esfenoides, temporales y maxilares. El nombre antiguo explica un término clínico que todavía se escucha: el enrojecimiento malar, es decir el enrojecimiento de la piel que cubre la prominencia cigomática, que se asocia con la fiebre de ciertas enfermedades y que en el lupus eritematoso sistémico adopta la característica erupción en mariposa."
+    },
+    {
+      "id": "P1-B09-024",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la mandíbula:",
+      "texto": "La protuberancia {{c1}}, que forma la prominencia del mentón, es una elevación ósea triangular inferior a la {{c2}} mandibular, que es la unión ósea donde se fusionan las dos mitades de la mandíbula en el niño.",
+      "dificultad": 2,
+      "etiquetas": ["mandíbula"],
+      "fuente": { "obra": "Moore 9e", "pag": 848, "fig": "8-2" },
+      "blancos": {
+        "c1": { "canonico": "mentoniana" },
+        "c2": { "canonico": "sínfisis" }
+      },
+      "feedback": "En el recién nacido esa unión es una articulación cartilaginosa secundaria, es decir una sínfisis verdadera, y la fusión por fibrocartílago comienza durante el primer año y se completa hacia el final del segundo. La mandíbula es el hueso más dinámico del cráneo, porque su tamaño, su forma y el número de dientes cambian considerablemente con la edad: en el recién nacido su cuerpo es un caparazón simple que carece de procesos alveolares, y tras la pérdida completa de los dientes el hueso alveolar se reabsorbe y el foramen mentoniano queda cerca del borde superior."
+    },
+    {
+      "id": "P1-B09-025",
+      "tipo": "numerico",
+      "prompt": "¿A cuántos centímetros por encima del punto medio del arco cigomático se localiza el pterión?",
+      "dificultad": 3,
+      "etiquetas": ["pterión", "anatomía de superficie"],
+      "fuente": { "obra": "Moore 9e", "pag": 846 },
+      "respuesta": { "rango": [3, 4], "unidad": "cm", "tol": 0 },
+      "feedback": "Es un dato de localización por palpación, no un adorno: permite ubicar en el sujeto vivo una zona donde el hueso es delgado y donde discurre por dentro la división anterior de la arteria meníngea media. Por eso un golpe en esa área puede producir un hematoma extradural sin que haya necesariamente fractura evidente, y por eso es también una referencia de trepanación en la urgencia neuroquirúrgica."
+    }
+  ]
+}

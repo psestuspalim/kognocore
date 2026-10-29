@@ -1,0 +1,699 @@
+{
+  "bloque": {
+    "id": "P1-B11",
+    "titulo": "Cara y piel cabelluda: capas, músculos de la expresión facial, inervación motora del NC VII · Arterias y venas superficiales · Drenaje linfático · Anatomía de superficie de la cara",
+    "parcial": 1,
+    "sesion": "11 de febrero",
+    "paginas": "855, 861-867, 873-878"
+  },
+  "items": [
+    {
+      "id": "P1-B11-001",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la cara:",
+      "texto": "La cara es la superficie {{c1}} de la cabeza, desde la frente hasta el mentón y de una {{c2}} a la otra. Nos proporciona identidad como individuos humanos, por lo que los defectos en esta región tienen importantes consecuencias más allá de sus efectos {{c3}}.",
+      "dificultad": 1,
+      "etiquetas": [
+        "cara"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 855
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "anterior"
+        },
+        "c2": {
+          "canonico": "oreja"
+        },
+        "c3": {
+          "canonico": "físicos"
+        }
+      },
+      "feedback": "La forma básica de la cara está determinada por los huesos subyacentes, y su individualidad se debe a variaciones anatómicas en la forma y prominencia relativa del cráneo, al depósito de tejido adiposo, al color y los efectos del envejecimiento sobre la piel, y a la abundancia, naturaleza y disposición del pelo. El crecimiento de los huesos de la cara requiere más tiempo que el de los huesos de la calvaria: las cavidades orbitarias y las porciones superiores de las cavidades nasales casi completan su crecimiento hacia el séptimo año."
+    },
+    {
+      "id": "P1-B11-002",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué estructura evita en el lactante el colapso de las mejillas durante la succión y confiere el aspecto de mejillas rechonchas?",
+      "dificultad": 2,
+      "etiquetas": [
+        "cara",
+        "lactante"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 855
+      },
+      "respuesta": {
+        "canonico": "almohadillas grasas",
+        "acepta": [
+          "almohadillas grasas de la mejilla",
+          "cuerpo adiposo de la mejilla",
+          "bola adiposa de Bichat"
+        ]
+      },
+      "feedback": "Su tamaño relativamente grande en el lactante tiene una función mecánica concreta: al generar presión negativa durante la succión, las mejillas colapsarían sin ese relleno. Es un buen ejemplo de estructura cuyo tamaño no es anecdótico sino funcional, y que se reduce al crecer, lo que explica parte del cambio de aspecto facial entre el lactante y el niño mayor. En el adulto persiste como cuerpo adiposo de la mejilla, junto al buccinador."
+    },
+    {
+      "id": "P1-B11-003",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las capas de la piel cabelluda:",
+      "texto": "La piel está estrechamente unida a la aponeurosis {{c1}}, que se mueve libremente sobre el {{c2}} y el cráneo gracias al tejido conectivo {{c3}} interpuesto. Esa aponeurosis es el tendón plano intermedio del músculo {{c4}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "piel cabelluda",
+        "capas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 862,
+        "fig": "8-15 A"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "epicraneal",
+          "acepta": [
+            "galea aponeurótica"
+          ]
+        },
+        "c2": {
+          "canonico": "pericráneo"
+        },
+        "c3": {
+          "canonico": "laxo"
+        },
+        "c4": {
+          "canonico": "occipitofrontal"
+        }
+      },
+      "feedback": "La regla mnemotécnica clásica para las cinco capas en inglés, SCALP, funciona también en español si se recuerda el orden: piel, tejido conectivo denso, aponeurosis epicraneal, tejido conectivo laxo y pericráneo. La capa de tejido conectivo laxo es la capa peligrosa, porque permite la separación del cuero cabelludo en los arrancamientos y porque por ella se propagan las infecciones hacia el interior del cráneo a través de las venas emisarias."
+    },
+    {
+      "id": "P1-B11-004",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la inervación de los músculos faciales:",
+      "texto": "Los músculos de la cara están inervados por el nervio {{c1}}, se insertan en la {{c2}} del rostro y la mueven, dando lugar a numerosas expresiones faciales. Funcionalmente son {{c3}} superficiales y dilatadores de los orificios de la cabeza.",
+      "dificultad": 1,
+      "etiquetas": [
+        "músculos faciales",
+        "inervación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 866,
+        "fig": "8-17"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "facial",
+          "acepta": [
+            "NC VII",
+            "séptimo par"
+          ]
+        },
+        "c2": {
+          "canonico": "piel"
+        },
+        "c3": {
+          "canonico": "esfínteres"
+        }
+      },
+      "feedback": "Esa doble naturaleza de esfínteres y dilatadores es la mejor forma de ordenarlos: alrededor de cada orificio, ojo, boca y narinas, hay un músculo circular que lo cierra y varios radiados que lo abren o retraen. Se insertan en la piel y no en hueso, lo que explica que su parálisis produzca no solo pérdida de movimiento sino caída y asimetría del rostro en reposo. Que sean subcutáneos también explica por qué en la cara no hay una fascia profunda neta."
+    },
+    {
+      "id": "P1-B11-005",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina la formación multiplanar, lateral al ángulo de la boca, donde se entrelazan las fibras de hasta nueve músculos faciales?",
+      "dificultad": 3,
+      "etiquetas": [
+        "músculos faciales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 866
+      },
+      "respuesta": {
+        "canonico": "modiolo"
+      },
+      "feedback": "Está lateral a las comisuras de los labios, que son las uniones de los labios superior e inferior, y es causante en gran parte de la existencia de hoyuelos en muchos individuos. Su interés va más allá de la anécdota: es el punto donde convergen las fuerzas de los dilatadores de la boca, de modo que su integridad determina la competencia oral, y en cirugía reconstructiva su reparación es clave para recuperar la sonrisa simétrica."
+    },
+    {
+      "id": "P1-B11-006",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 3 porciones del músculo orbicular del ojo:",
+      "dificultad": 2,
+      "etiquetas": [
+        "orbicular del ojo"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 867,
+        "fig": "8-18"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "porción palpebral"
+          },
+          {
+            "canonico": "porción lagrimal"
+          },
+          {
+            "canonico": "porción orbitaria"
+          }
+        ]
+      },
+      "feedback": "Cada una tiene una acción distinta y conviene aprenderlas con su gesto: la palpebral cierra suavemente los párpados, como al parpadear o dormir, y evita que se desequen las córneas; la lagrimal discurre posterior al saco lagrimal, cierra los párpados medialmente y ayuda al drenaje de las lágrimas; la orbitaria está superpuesta al borde de la cavidad orbitaria y cierra con fuerza los párpados, como al guiñar o entrecerrar los ojos frente al resplandor. Cuando las tres se contraen a la vez, los ojos quedan firmemente cerrados."
+    },
+    {
+      "id": "P1-B11-007",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el orbicular de la boca:",
+      "texto": "El orbicular de la boca es el {{c1}} bucal: cierra la hendidura bucal y, con la contracción fásica, comprime y protruye los {{c2}}, como al besar, o resiste la distensión, como cuando se {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "músculos faciales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 864,
+        "fig": "tabla 8-3"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "esfínter"
+        },
+        "c2": {
+          "canonico": "labios"
+        },
+        "c3": {
+          "canonico": "sopla"
+        }
+      },
+      "feedback": "La prueba clínica de su integridad es justamente pedir al paciente que sople o silbe: en la parálisis facial periférica el aire escapa por la comisura afectada. Nótese el contraste con el buccinador, que no es un esfínter sino el músculo que mantiene la mejilla tensa contra los dientes durante la masticación y que, aunque también lo inerva el facial, pertenece a la pared de la mejilla y no al grupo de los dilatadores de la boca."
+    },
+    {
+      "id": "P1-B11-008",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los músculos de la nariz:",
+      "texto": "El prócer, junto con la porción transversa del músculo nasal, desciende el extremo medial de la {{c1}} y arruga la piel sobre el dorso de la nariz, para expresar desdén o disgusto. La porción {{c2}} del músculo nasal desciende el ala lateralmente, lo que dilata la abertura nasal anterior y produce el ensanchamiento de las {{c3}}.",
+      "dificultad": 3,
+      "etiquetas": [
+        "músculos faciales",
+        "nariz"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 864,
+        "fig": "tabla 8-3"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "ceja"
+        },
+        "c2": {
+          "canonico": "alar"
+        },
+        "c3": {
+          "canonico": "narinas"
+        }
+      },
+      "feedback": "Ese ensanchamiento de las narinas ocurre en el esfuerzo o la ira, y por eso los músculos de la nariz aportan datos clínicos sobre el tipo de respiración: el aleteo nasal es un signo de trabajo respiratorio aumentado, particularmente valioso en pediatría porque aparece antes que otros signos de dificultad respiratoria. Es un buen ejemplo de músculo de la expresión con utilidad semiológica directa."
+    },
+    {
+      "id": "P1-B11-009",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el platisma:",
+      "texto": "El platisma es una lámina muscular ancha y delgada situada en el tejido {{c1}} del cuello. Los bordes anteriores de los dos músculos se {{c2}} sobre el mentón y se mezclan con los músculos faciales. Al actuar desde su inserción superior tensa la piel, provoca crestas cutáneas {{c3}} y libera la presión sobre las venas.",
+      "dificultad": 2,
+      "etiquetas": [
+        "platisma"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 866,
+        "fig": "8-16"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "subcutáneo"
+        },
+        "c2": {
+          "canonico": "decusan",
+          "acepta": [
+            "cruzan",
+            "entrecruzan"
+          ]
+        },
+        "c3": {
+          "canonico": "verticales"
+        }
+      },
+      "feedback": "Expresa un gran estrés, que es la mueca de tensión del cuello. Aunque es un músculo cervical, pertenece funcional y embriológicamente al grupo facial y está inervado por el ramo cervical del nervio facial, no por nervios cervicales. Esa es la razón de que se explore junto con la cara y de que su debilidad acompañe a la parálisis facial periférica."
+    },
+    {
+      "id": "P1-B11-010",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 5 ramos del nervio facial que inervan los músculos de la cara:",
+      "dificultad": 2,
+      "etiquetas": [
+        "nervio facial",
+        "inervación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 873,
+        "fig": "8-23"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "temporal"
+          },
+          {
+            "canonico": "cigomático"
+          },
+          {
+            "canonico": "bucal"
+          },
+          {
+            "canonico": "marginal de la mandíbula"
+          },
+          {
+            "canonico": "cervical"
+          }
+        ]
+      },
+      "feedback": "Salen de la glándula parótida distribuidos en abanico y cada uno tiene su territorio: el cigomático inerva la parte inferior del orbicular del ojo y los músculos inferiores a la órbita; el bucal discurre externamente al buccinador, al que inerva, y a los músculos del labio superior; el marginal de la mandíbula inerva el risorio y los músculos del labio inferior y el mentón; y el cervical desciende para inervar el platisma. El ramo marginal tiene una trampa quirúrgica: en un 20% de los individuos discurre inferior al ángulo de la mandíbula, donde puede seccionarse en abordajes submandibulares."
+    },
+    {
+      "id": "P1-B11-011",
+      "tipo": "numerico",
+      "prompt": "¿En qué porcentaje de los individuos el ramo marginal de la mandíbula discurre inferior al ángulo de la mandíbula?",
+      "dificultad": 3,
+      "etiquetas": [
+        "nervio facial",
+        "variantes"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 873
+      },
+      "respuesta": {
+        "valor": 20,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Normalmente emerge del borde inferior de la glándula parótida y cruza el borde inferior de la mandíbula profundamente al platisma para alcanzar la cara. Esa variante del 20% explica por qué las incisiones cervicales altas se trazan al menos dos traveses de dedo por debajo del ángulo mandibular: seccionarlo produce una asimetría visible del labio inferior al sonreír, que es una de las secuelas más reclamadas en cirugía de cuello."
+    },
+    {
+      "id": "P1-B11-012",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las dos arterias que irrigan la cara desde la carótida interna:",
+      "texto": "La mayoría de las arterias superficiales de la cara y la piel cabelluda proceden de la arteria carótida {{c1}}. Las excepciones son las arterias {{c2}} y supratroclear, que proceden de la arteria carótida {{c3}}.",
+      "dificultad": 3,
+      "etiquetas": [
+        "vascularización de la cara"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 874,
+        "fig": "8-24"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "externa"
+        },
+        "c2": {
+          "canonico": "supraorbitaria"
+        },
+        "c3": {
+          "canonico": "interna"
+        }
+      },
+      "feedback": "Ambas excepciones llegan a la frente a través de la órbita, como ramas de la arteria oftálmica. Esta doble procedencia tiene consecuencia clínica: crea anastomosis entre los territorios carotídeos externo e interno en la región periorbitaria, lo que permite flujo colateral en la oclusión carotídea y, al mismo tiempo, explica el riesgo de embolia retiniana cuando se inyectan rellenos estéticos en la glabela o el dorso nasal."
+    },
+    {
+      "id": "P1-B11-013",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la arteria facial:",
+      "texto": "La arteria facial asciende profunda a la glándula {{c1}}, se enrolla alrededor del borde inferior de la {{c2}} y entra en la cara. Su rama terminal es la arteria {{c3}}, que pasa hacia el ángulo medial del ojo.",
+      "dificultad": 2,
+      "etiquetas": [
+        "vascularización de la cara"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 874,
+        "fig": "tabla 8-5"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "submandibular"
+        },
+        "c2": {
+          "canonico": "mandíbula"
+        },
+        "c3": {
+          "canonico": "angular"
+        }
+      },
+      "feedback": "Ese punto donde se enrolla sobre el borde inferior de la mandíbula, por delante del masetero, es donde se palpa el pulso facial y donde se comprime la arteria para controlar una hemorragia de la cara. A lo largo de su trayecto emite las arterias labiales inferior y superior, que discurren medialmente en cada labio, y la nasal lateral hacia el ala de la nariz. La rica irrigación explica por qué las heridas faciales sangran mucho y a la vez curan bien."
+    },
+    {
+      "id": "P1-B11-014",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la comunicación venosa peligrosa de la cara:",
+      "texto": "La vena supraorbitaria envía una rama que pasa a través de la incisura supraorbitaria y se une con la vena {{c1}} superior, la cual drena en el seno {{c2}}. Esa comunicación convierte a las venas de la cara en una vía de propagación {{c3}} hacia el interior del cráneo.",
+      "dificultad": 3,
+      "etiquetas": [
+        "venas de la cara"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 875,
+        "fig": "8-25"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "oftálmica"
+        },
+        "c2": {
+          "canonico": "cavernoso"
+        },
+        "c3": {
+          "canonico": "intracraneal",
+          "acepta": [
+            "de infecciones",
+            "infecciosa"
+          ]
+        }
+      },
+      "feedback": "Es la base anatómica del llamado triángulo peligroso de la cara: una infección de la región nasolabial puede ascender por la vena angular hacia la oftálmica superior y alcanzar el seno cavernoso, con riesgo de trombosis séptica. Las venas de la cara carecen de válvulas competentes, de modo que el flujo puede invertirse. Conviene retener también el trayecto de drenaje normal: la vena retromandibular se forma en la parótida y su división anterior se une a la facial para formar la vena facial común."
+    },
+    {
+      "id": "P1-B11-015",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 5 grupos de nódulos linfáticos que forman el collar pericervical:",
+      "dificultad": 3,
+      "etiquetas": [
+        "drenaje linfático"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 877,
+        "fig": "8-26 A"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "submentonianos"
+          },
+          {
+            "canonico": "submandibulares"
+          },
+          {
+            "canonico": "parotídeos"
+          },
+          {
+            "canonico": "mastoideos"
+          },
+          {
+            "canonico": "occipitales"
+          }
+        ]
+      },
+      "feedback": "Se forma en la unión de la cabeza y el cuello y recibe inicialmente la mayor parte del drenaje linfático de la cara y la piel cabelluda. La regla general que ordena todo el drenaje cefálico es la siguiente: todos los vasos linfáticos de la cabeza y el cuello drenan finalmente en los nódulos cervicales profundos, ya sea directamente desde los tejidos o indirectamente tras pasar por el grupo de nódulos más próximo. Por eso una adenopatía cervical profunda obliga a buscar el foco en todo el territorio cefálico."
+    },
+    {
+      "id": "P1-B11-016",
+      "tipo": "respuesta_corta",
+      "prompt": "¿En qué grupo de nódulos linfáticos drenan finalmente todos los vasos linfáticos de la cabeza y el cuello?",
+      "dificultad": 1,
+      "etiquetas": [
+        "drenaje linfático"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 877,
+        "fig": "8-26 B"
+      },
+      "respuesta": {
+        "canonico": "nódulos linfáticos cervicales profundos",
+        "acepta": [
+          "cervicales profundos"
+        ]
+      },
+      "feedback": "El drenaje puede ser directo desde los tejidos o indirecto tras pasar por el grupo de nódulos próximo, que suele ser uno de los del collar pericervical. Dentro de los cervicales profundos hay subgrupos con nombre propio y valor localizador, como los yugulodigástricos, que reciben de la tonsila y la lengua, y los yuguloomohioideos. Desde ahí la linfa alcanza el tronco linfático yugular y finalmente la unión venosa en la raíz del cuello."
+    },
+    {
+      "id": "P1-B11-017",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre por qué las heridas faciales se abren ampliamente:",
+      "texto": "Debido a que no existe una neta fascia {{c1}} en la cara, y a que el tejido subcutáneo situado entre las inserciones cutáneas de los músculos faciales es {{c2}}, las heridas de la cara tienden a abrirse ampliamente. Por lo tanto debe suturarse cuidadosamente la {{c3}} para evitar cicatrices.",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "heridas faciales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 878
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "profunda"
+        },
+        "c2": {
+          "canonico": "laxo"
+        },
+        "c3": {
+          "canonico": "piel"
+        }
+      },
+      "feedback": "Esa misma laxitud permite que se acumulen líquidos y sangre tras una sufusión hemorrágica, y que la inflamación de la cara cause una tumefacción considerable: una picadura de avispa en la raíz de la nariz puede ocluir ambos ojos. Al envejecer, la piel pierde elasticidad y se forman crestas y arrugas perpendiculares a la dirección de las fibras de los músculos faciales; las incisiones a lo largo de esas líneas de tensión curan con cicatriz mínima."
+    },
+    {
+      "id": "P1-B11-018",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los traumatismos de la piel cabelluda:",
+      "texto": "Las arterias de la piel cabelluda surgen a los lados de la cabeza, están bien protegidas por el tejido conectivo {{c1}} y se {{c2}} libremente. Por lo tanto, un desprendimiento parcial de la piel cabelluda puede {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "piel cabelluda"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 878
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "denso"
+        },
+        "c2": {
+          "canonico": "anastomosan",
+          "acepta": [
+            "anastomosar"
+          ]
+        },
+        "c3": {
+          "canonico": "reimplantarse"
+        }
+      },
+      "feedback": "Esa riqueza anastomótica tiene la contrapartida de que las heridas del cuero cabelludo sangran profusamente: las arterias están atrapadas en el tejido conectivo denso, que impide su retracción y su colapso espontáneo. Por eso la hemostasia en esas heridas requiere compresión directa o sutura, y por eso un colgajo de cuero cabelludo casi desprendido conserva viabilidad y conviene no recortarlo."
+    },
+    {
+      "id": "P1-B11-019",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina el surco que discurre oblicuamente entre el ala de la nariz y el ángulo de la boca, y que separa la mejilla de los labios?",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomía de superficie de la cara"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 878
+      },
+      "respuesta": {
+        "canonico": "surco nasolabial"
+      },
+      "feedback": "Es más fácil de observar al sonreír, y su borramiento unilateral es uno de los signos más precoces de la parálisis facial, porque depende del tono de los músculos elevadores del labio superior y del ángulo de la boca. En la exploración de la cara conviene mirarlo en reposo y en movimiento, porque su asimetría puede ser el único hallazgo en una paresia leve."
+    },
+    {
+      "id": "P1-B11-020",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los dos vientres del occipitofrontal:",
+      "texto": "El músculo occipitofrontal tiene un vientre {{c1}} y un vientre {{c2}}, unidos por la aponeurosis epicraneal. Ambos están inervados por el nervio {{c3}}: el primero por su ramo temporal y el segundo por su ramo auricular posterior.",
+      "dificultad": 2,
+      "etiquetas": [
+        "piel cabelluda",
+        "músculos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 862,
+        "fig": "8-15 B"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "frontal"
+        },
+        "c2": {
+          "canonico": "occipital"
+        },
+        "c3": {
+          "canonico": "facial",
+          "acepta": [
+            "NC VII"
+          ]
+        }
+      },
+      "feedback": "El vientre frontal eleva las cejas y arruga la frente, de ahí el gesto de sorpresa; el occipital tracciona del cuero cabelludo hacia atrás. Su exploración es clave para distinguir la parálisis facial central de la periférica: en la central se conserva la capacidad de arrugar la frente del lado afectado, porque el vientre frontal recibe inervación cortical bilateral, mientras que en la periférica se pierde."
+    },
+    {
+      "id": "P1-B11-021",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la vena temporal superficial:",
+      "texto": "La vena temporal superficial se forma por la unión de sus tributarias frontal y parietal {{c1}} al pabellón auricular, cruza la raíz temporal del arco {{c2}} y entra en la glándula {{c3}}, donde se une a la vena maxilar para formar la vena retromandibular.",
+      "dificultad": 3,
+      "etiquetas": [
+        "venas de la cara"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 876,
+        "fig": "tabla 8-6"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "anteriormente"
+        },
+        "c2": {
+          "canonico": "cigomático"
+        },
+        "c3": {
+          "canonico": "parótida"
+        }
+      },
+      "feedback": "La arteria temporal superficial acompaña a esta vena y es donde se toma el pulso temporal, por delante del trago; también es la arteria que se biopsia en la sospecha de arteritis de células gigantes. La vena retromandibular discurre posterior y profunda a la rama de la mandíbula a través de la parótida, y después se divide: la división anterior se une a la facial y la posterior contribuye a la yugular externa."
+    },
+    {
+      "id": "P1-B11-022",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 2 estructuras, además de la piel, que contiene la mejilla:",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomía de superficie de la cara"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 878
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "buccinador",
+            "acepta": [
+              "músculo buccinador"
+            ]
+          },
+          {
+            "canonico": "cuerpo adiposo",
+            "acepta": [
+              "cuerpo adiposo de la mejilla",
+              "almohadilla grasa"
+            ]
+          }
+        ]
+      },
+      "feedback": "El buccinador mantiene la mejilla en contacto con los dientes durante la masticación, impidiendo que el alimento se acumule en el vestíbulo bucal, y es atravesado por el conducto parotídeo. El cuerpo adiposo es el resto adulto de la almohadilla grasa del lactante. La mejilla está separada de los labios por el surco nasolabial, y el labio inferior de la protuberancia mentoniana por el surco mentolabial."
+    },
+    {
+      "id": "P1-B11-023",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué ramo del nervio facial inerva el músculo buccinador?",
+      "dificultad": 2,
+      "etiquetas": [
+        "nervio facial",
+        "inervación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 873
+      },
+      "respuesta": {
+        "canonico": "ramo bucal",
+        "acepta": [
+          "bucal"
+        ]
+      },
+      "feedback": "Discurre externamente al buccinador, es decir superficial a él, e inerva además los músculos del labio superior, concretamente las partes superiores del orbicular de la boca y las fibras inferiores del elevador del labio superior. Nótese la diferencia con el nervio bucal, que es rama del nervio mandibular del trigémino y es sensitivo para la mucosa de la mejilla: dos nervios de nombre casi idéntico, uno motor y otro sensitivo, que suelen confundirse en examen."
+    },
+    {
+      "id": "P1-B11-024",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los ramos cutáneos del ganglio geniculado:",
+      "texto": "Los ramos cutáneos del ganglio {{c1}} acompañan al ramo auricular del nervio {{c2}} hacia la piel en ambos lados de la oreja, en la región de la {{c3}}.",
+      "dificultad": 3,
+      "etiquetas": [
+        "nervio facial",
+        "inervación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 873
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "geniculado"
+        },
+        "c2": {
+          "canonico": "vago",
+          "acepta": [
+            "NC X"
+          ]
+        },
+        "c3": {
+          "canonico": "concha"
+        }
+      },
+      "feedback": "El texto señala que esta inervación no es evidente anatómicamente, pero sí por sus manifestaciones clínicas. La más conocida es el síndrome de Ramsay Hunt: la reactivación del virus varicela zóster en el ganglio geniculado produce vesículas dolorosas justamente en la concha auricular y el conducto auditivo externo, acompañadas de parálisis facial periférica. La correlación entre un territorio cutáneo discreto y un cuadro clínico específico es la razón de recordarlo."
+    },
+    {
+      "id": "P1-B11-025",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el crecimiento de la cara:",
+      "texto": "Las cavidades orbitarias y las porciones superiores de las cavidades nasales casi han completado su crecimiento hacia el {{c1}} año. La expansión de las órbitas y el crecimiento del septo nasal desplazan los {{c2}} inferoanteriormente. Durante la infancia se produce un considerable crecimiento de la cara al desarrollarse los {{c3}} paranasales y hacer erupción los dientes permanentes.",
+      "dificultad": 3,
+      "etiquetas": [
+        "crecimiento facial"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 861
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "7",
+          "acepta": [
+            "séptimo"
+          ]
+        },
+        "c2": {
+          "canonico": "maxilares"
+        },
+        "c3": {
+          "canonico": "senos"
+        }
+      },
+      "feedback": "Ese calendario explica por qué la cara del niño pequeño parece pequeña respecto a la bóveda craneal y por qué la proporción cambia tanto en la adolescencia. El crecimiento vertical de la parte alta de la cara se produce principalmente por el desarrollo dentoalveolar del hueso alveolar, y el crecimiento de los senos paranasales es importante para modificar la forma de la cara y añadir resonancia a la voz. La mayoría de los senos son rudimentarios o están ausentes al nacer."
+    }
+  ]
+}

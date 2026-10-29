@@ -1,0 +1,686 @@
+{
+  "bloque": {
+    "id": "P1-B10",
+    "titulo": "Cara interna de la base del cráneo: fosas craneales anterior, media y posterior · Paredes de la cavidad craneal · Contrafuertes · Regiones de la cabeza · Cuadro clínico: cráneo",
+    "parcial": 1,
+    "sesion": "10 de febrero",
+    "paginas": "851-860"
+  },
+  "items": [
+    {
+      "id": "P1-B10-001",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la cara interna de la base del cráneo:",
+      "texto": "La cara interna de la base del cráneo presenta tres grandes depresiones situadas a diferentes niveles: las fosas craneales anterior, media y posterior. La fosa craneal {{c1}} ocupa el nivel más elevado y la fosa craneal {{c2}} el más bajo.",
+      "dificultad": 1,
+      "etiquetas": [
+        "fosas craneales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 851,
+        "fig": "8-12"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "anterior"
+        },
+        "c2": {
+          "canonico": "posterior"
+        }
+      },
+      "feedback": "Las tres configuran el piso en forma de cuenco de la cavidad craneal, que está ocupado por el cerebro. Esa disposición escalonada es la que explica el patrón de las lesiones por contragolpe y el de las fracturas de la base: cada fosa aloja una parte distinta del encéfalo, y cada escalón es un borde óseo contra el que el encéfalo puede impactar. La anterior aloja los lóbulos frontales, la media los temporales, y la posterior el cerebelo, el puente y la médula oblongada."
+    },
+    {
+      "id": "P1-B10-002",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la fosa craneal anterior:",
+      "texto": "La fosa craneal anterior está formada por el hueso {{c1}} anteriormente, el {{c2}} en la parte media, y el cuerpo y las alas {{c3}} del esfenoides posteriormente. La mayor parte de la fosa está constituida por las porciones {{c4}} del hueso frontal.",
+      "dificultad": 2,
+      "etiquetas": [
+        "fosa craneal anterior"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 851,
+        "fig": "8-12 B"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "frontal"
+        },
+        "c2": {
+          "canonico": "etmoides"
+        },
+        "c3": {
+          "canonico": "menores"
+        },
+        "c4": {
+          "canonico": "orbitarias"
+        }
+      },
+      "feedback": "Esas porciones orbitarias cumplen doble función, que es la clave anatómica de la región: sostienen los lóbulos frontales del cerebro por arriba y forman la pared superior de las órbitas por debajo. Su superficie presenta unas impresiones sinuosas, las impresiones cerebrales, que alojan los giros orbitarios de los lóbulos frontales. Esa delgadez compartida explica por qué una fractura de la fosa anterior puede comunicar la cavidad craneal con la órbita o con las cavidades nasales."
+    },
+    {
+      "id": "P1-B10-003",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la lámina cribosa:",
+      "texto": "La {{c1}} galli es una gruesa cresta ósea media posterior al foramen ciego, que se proyecta superiormente desde el etmoides. A cada lado de esta cresta se encuentra la lámina {{c2}} del etmoides, cuyos numerosos y diminutos forámenes dan paso a los nervios {{c3}} desde las áreas olfatorias de las cavidades nasales hasta los {{c4}} olfatorios del cerebro.",
+      "dificultad": 2,
+      "etiquetas": [
+        "fosa craneal anterior",
+        "olfato"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 851,
+        "fig": "8-12 A"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "crista",
+          "acepta": [
+            "cresta"
+          ]
+        },
+        "c2": {
+          "canonico": "cribosa"
+        },
+        "c3": {
+          "canonico": "olfatorios",
+          "acepta": [
+            "NC I"
+          ]
+        },
+        "c4": {
+          "canonico": "bulbos"
+        }
+      },
+      "feedback": "Su aspecto de colador le da el nombre, y por esos forámenes cribosos pasan los axones de las células olfatorias del epitelio olfatorio que forman los nervios olfatorios. La consecuencia clínica es directa y clásica: una fractura de la lámina cribosa desgarra esos filetes y produce anosmia, y puede abrir una vía de salida de líquido cerebroespinal por la nariz, es decir rinorrea de LCE, con riesgo de meningitis. El foramen ciego del hueso frontal, situado en la base de la cresta frontal, aloja un divertículo de duramadre durante el desarrollo fetal y conduce una pequeña vena en algunas personas."
+    },
+    {
+      "id": "P1-B10-004",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 3 partes que componen la silla turca:",
+      "dificultad": 2,
+      "etiquetas": [
+        "fosa craneal media",
+        "silla turca"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 851,
+        "fig": "8-12 A"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "tubérculo de la silla"
+          },
+          {
+            "canonico": "fosa hipofisaria"
+          },
+          {
+            "canonico": "dorso de la silla"
+          }
+        ]
+      },
+      "feedback": "El nombre describe la forma: el tubérculo de la silla es el pomo, la fosa hipofisaria es el asiento y el dorso de la silla es el respaldo. El tubérculo forma el límite posterior del surco prequiasmático y el límite anterior de la fosa hipofisaria; la fosa aloja la hipófisis; y el dorso es una lámina ósea cuadrada que se proyecta superiormente desde el cuerpo del esfenoides y cuyos ángulos superolaterales forman los procesos clinoideos posteriores. La silla queda rodeada por los cuatro procesos clinoideos, dos anteriores y dos posteriores, y clinoides significa pata de la cama."
+    },
+    {
+      "id": "P1-B10-005",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué glándula aloja la fosa hipofisaria?",
+      "dificultad": 1,
+      "etiquetas": [
+        "fosa craneal media",
+        "silla turca"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 851
+      },
+      "respuesta": {
+        "canonico": "hipófisis",
+        "acepta": [
+          "glándula pituitaria"
+        ]
+      },
+      "feedback": "La fosa es una depresión media en el cuerpo del esfenoides, y los cuatro procesos clinoideos la rodean como las cuatro patas de una cama rodean la cama. Esa relación tiene consecuencia clínica directa: un tumor hipofisario que crece hacia arriba comprime el quiasma óptico, que descansa por encima en el surco prequiasmático, y produce hemianopsia bitemporal. Debajo de la fosa está el seno esfenoidal, que es la vía del abordaje transesfenoidal a la hipófisis."
+    },
+    {
+      "id": "P1-B10-006",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los límites de la fosa craneal media:",
+      "texto": "La fosa craneal media está separada de la fosa craneal anterior por las agudas crestas {{c1}} lateralmente y por el limbo esfenoidal centralmente. Su límite con la fosa craneal posterior es el borde {{c2}} de la porción petrosa del hueso temporal lateralmente, y el {{c3}} de la silla turca medialmente.",
+      "dificultad": 3,
+      "etiquetas": [
+        "fosa craneal media"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 851,
+        "fig": "8-12"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "esfenoidales"
+        },
+        "c2": {
+          "canonico": "superior"
+        },
+        "c3": {
+          "canonico": "dorso"
+        }
+      },
+      "feedback": "La fosa craneal media tiene forma de mariposa: una parte central compuesta por la silla turca en el cuerpo del esfenoides, y unas grandes partes laterales deprimidas a cada lado que soportan los lóbulos temporales del cerebro. Las crestas esfenoidales están formadas por los bordes posteriores agudos de las alas menores del esfenoides, que terminan medialmente en dos proyecciones óseas agudas, los procesos clinoideos anteriores. Los huesos que constituyen las partes laterales son las alas mayores del esfenoides y las porciones escamosas y petrosas de los temporales."
+    },
+    {
+      "id": "P1-B10-007",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la semiluna de forámenes:",
+      "texto": "A cada lado del cuerpo del esfenoides, una semiluna de cuatro forámenes perfora las raíces de las caras cerebrales de las alas mayores. De anterior a posterior son: la fisura orbitaria {{c1}}, el foramen {{c2}}, el foramen {{c3}} y el foramen {{c4}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "fosa craneal media",
+        "forámenes"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 851,
+        "fig": "8-12 A"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "superior"
+        },
+        "c2": {
+          "canonico": "redondo"
+        },
+        "c3": {
+          "canonico": "oval"
+        },
+        "c4": {
+          "canonico": "espinoso"
+        }
+      },
+      "feedback": "La secuencia tiene una lógica que ayuda a memorizarla: la fisura orbitaria superior se abre anteriormente dentro de la órbita; el foramen redondo sigue un curso horizontal hacia la fosa pterigopalatina; el oval y el espinoso se abren inferiormente en la fosa infratemporal. Y su contenido sigue el orden del trigémino: por la fisura pasa el nervio oftálmico, por el redondo el maxilar y por el oval el mandibular. El foramen rasgado no forma parte de esta semiluna: se sitúa posterolateralmente a la fosa hipofisaria y es un artefacto del cráneo en seco, pues en vida está cerrado por una lámina cartilaginosa."
+    },
+    {
+      "id": "P1-B10-008",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el contenido de los forámenes de la fosa craneal media:",
+      "texto": "Por el conducto óptico pasan el nervio {{c1}} y la arteria oftálmica. Por el foramen espinoso pasan la arteria y la vena {{c2}} medias y un ramo meníngeo del NC V3. Por el foramen oval pasan el nervio {{c3}} y la arteria meníngea accesoria.",
+      "dificultad": 3,
+      "etiquetas": [
+        "forámenes craneales",
+        "contenido"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 852,
+        "fig": "tabla 8-2"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "óptico",
+          "acepta": [
+            "NC II"
+          ]
+        },
+        "c2": {
+          "canonico": "meníngeas"
+        },
+        "c3": {
+          "canonico": "mandibular",
+          "acepta": [
+            "NC V3",
+            "V3"
+          ]
+        }
+      },
+      "feedback": "El foramen espinoso es el que importa en el traumatismo craneal: por él entra la arteria meníngea media, cuya división anterior corre por dentro del pterión y cuyo desgarro produce el hematoma extradural. Por la fisura orbitaria superior pasan las venas oftálmicas, el nervio oftálmico (NC V1), los nervios oculomotor, troclear y abducens (NC III, IV y VI) y fibras simpáticas, de modo que su lesión produce oftalmoplejía completa. Por el foramen redondo pasa solo el nervio maxilar (NC V2)."
+    },
+    {
+      "id": "P1-B10-009",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la fosa craneal posterior:",
+      "texto": "La fosa craneal posterior es la {{c1}} y más inferior de las tres fosas craneales, aloja el cerebelo, el puente y la médula {{c2}}. Está formada principalmente por el hueso {{c3}}, aunque el dorso de la silla del esfenoides marca su límite anterior centralmente.",
+      "dificultad": 2,
+      "etiquetas": [
+        "fosa craneal posterior"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 854,
+        "fig": "8-12 B"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "mayor"
+        },
+        "c2": {
+          "canonico": "oblongada"
+        },
+        "c3": {
+          "canonico": "occipital"
+        }
+      },
+      "feedback": "Las porciones petrosa y mastoidea de los huesos temporales contribuyen a sus paredes anterolaterales. Desde el dorso de la silla hacia abajo existe una rampa inclinada en el centro de la parte anterior de la fosa, el clivus, que conduce al foramen magno. Posteriormente a esa abertura, la cresta occipital interna divide parcialmente la fosa en las fosas cerebelosas, grandes impresiones cóncavas bilaterales, y termina en la protuberancia occipital interna, relacionada con la confluencia de los senos."
+    },
+    {
+      "id": "P1-B10-010",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina la rampa inclinada situada en el centro de la parte anterior de la fosa craneal posterior, que conduce al foramen magno?",
+      "dificultad": 2,
+      "etiquetas": [
+        "fosa craneal posterior"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 854,
+        "fig": "8-12 A"
+      },
+      "respuesta": {
+        "canonico": "clivus"
+      },
+      "feedback": "Se extiende desde el dorso de la silla hasta el foramen magno y sobre él descansan el puente y la médula oblongada. Es una referencia constante en imagen: las lesiones de esta zona, como los cordomas, se describen por su relación con el clivus, y la línea del clivus se usa para valorar la posición del diente del axis en las luxaciones craneovertebrales. A ambos lados corren los surcos para el seno transverso, horizontal, y el seno sigmoideo, en forma de S."
+    },
+    {
+      "id": "P1-B10-011",
+      "tipo": "respuesta_corta",
+      "prompt": "Además del vestibulococlear, ¿qué nervio craneal entra por el meato acústico interno?",
+      "dificultad": 2,
+      "etiquetas": [
+        "fosa craneal posterior",
+        "forámenes"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 854
+      },
+      "respuesta": {
+        "canonico": "nervio facial",
+        "acepta": [
+          "NC VII",
+          "séptimo par"
+        ]
+      },
+      "feedback": "Por el meato acústico interno entran el facial y el vestibulococlear, acompañados por la arteria laberíntica. El meato se halla anterosuperiormente al foramen yugular, en la cara posterior de la porción petrosa del temporal. Esa vecindad explica la clínica del schwannoma vestibular: al crecer dentro del meato comprime primero el vestibulococlear, con hipoacusia y vértigo, y después el facial. El conducto del nervio hipogloso, para el NC XII, es superior al borde anterolateral del foramen magno."
+    },
+    {
+      "id": "P1-B10-012",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las paredes de la cavidad craneal:",
+      "texto": "La mayoría de los huesos de la calvaria se componen de las tablas {{c1}} y externa de hueso compacto, separadas por el {{c2}}, que es hueso esponjoso que contiene médula ósea roja en vida y conductos formados por las venas {{c3}}. La tabla interna ósea es más {{c4}} que la externa.",
+      "dificultad": 2,
+      "etiquetas": [
+        "paredes de la cavidad craneal"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 854,
+        "fig": "8-11"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "interna"
+        },
+        "c2": {
+          "canonico": "díploe"
+        },
+        "c3": {
+          "canonico": "diploicas"
+        },
+        "c4": {
+          "canonico": "delgada"
+        }
+      },
+      "feedback": "En el cráneo en seco el díploe no es rojo, porque las proteínas se eliminan durante la preparación del cráneo. En algunas áreas solo existe una fina lámina de hueso compacto, sin díploe. Que la tabla interna sea más delgada es relevante en el traumatismo: puede fracturarse con más extensión que la externa, y las esquirlas se dirigen hacia el encéfalo. Las paredes suelen ser más delgadas en la mujer que en el hombre, y también más delgadas en el niño y el anciano, y donde están bien cubiertas por músculos, como la porción escamosa del temporal."
+    },
+    {
+      "id": "P1-B10-013",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 2 contrafuertes principales del cráneo:",
+      "dificultad": 2,
+      "etiquetas": [
+        "contrafuertes"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 854,
+        "fig": "8-13"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "frontonasal",
+            "acepta": [
+              "contrafuerte frontonasal"
+            ]
+          },
+          {
+            "canonico": "cigomático",
+            "acepta": [
+              "arco cigomático-borde orbitario lateral",
+              "contrafuerte arco cigomático"
+            ]
+          }
+        ]
+      },
+      "feedback": "El frontonasal se extiende desde la región de los dientes caninos entre las cavidades nasal y orbitaria hasta la porción central del hueso frontal. El cigomático va desde la región de los molares hasta la parte lateral del hueso frontal y el temporal. Existen además los contrafuertes occipitales, que transmiten las fuerzas recibidas lateralmente al foramen magno desde la columna vertebral. Son partes gruesas de hueso que transmiten las fuerzas alrededor de las regiones más débiles, es decir, evitan su paso por las órbitas y la cavidad nasal."
+    },
+    {
+      "id": "P1-B10-014",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la razón de ser de los contrafuertes:",
+      "texto": "Los huesos del neurocráneo aportan inserción proximal a los potentes músculos de la {{c1}}, que se insertan distalmente en la mandíbula. Por lo tanto se producen intensas fuerzas de {{c2}} a través de la cavidad nasal y las órbitas, que quedan interpuestas. Para compensar esa mayor densidad ósea, algunas áreas del cráneo se {{c3}}, es decir se llenan de aire.",
+      "dificultad": 3,
+      "etiquetas": [
+        "contrafuertes"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 854
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "masticación"
+        },
+        "c2": {
+          "canonico": "tracción"
+        },
+        "c3": {
+          "canonico": "neumatizan"
+        }
+      },
+      "feedback": "Es el argumento mecánico que explica toda la arquitectura de la cara: los relativamente delgados huesos planos, en su mayoría curvos, bastan para mantener las cavidades y proteger su contenido, pero la masticación impone cargas que hay que desviar. Los contrafuertes son esos desvíos, y la neumatización de los senos paranasales es la forma de no pagar ese refuerzo con peso. Las láminas masticatorias completan el sistema en la mandíbula."
+    },
+    {
+      "id": "P1-B10-015",
+      "tipo": "numerico",
+      "prompt": "¿En cuántas regiones se divide la cabeza?",
+      "dificultad": 2,
+      "etiquetas": [
+        "regiones de la cabeza"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 854,
+        "fig": "8-14"
+      },
+      "respuesta": {
+        "valor": 8,
+        "unidad": "regiones",
+        "tol": 0
+      },
+      "feedback": "Son las de la porción neurocraneal: frontal, parietal, occipital, temporal, auricular y mastoidea. Con la excepción de la región auricular, que incluye la oreja, sus nombres corresponden a los huesos o detalles óseos subyacentes. El gran número de regiones del área relativamente pequeña de la cara es reflejo de su complejidad funcional e importancia personal, como indican los gastos anuales en cirugía estética electiva. La división existe para que haya una comunicación clara sobre la localización de estructuras, lesiones o patología."
+    },
+    {
+      "id": "P1-B10-016",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la porción viscerocraneal de la cabeza:",
+      "texto": "La porción viscerocraneal se divide en cinco regiones {{c1}} y tres regiones {{c2}}. Algunas se definen en relación con estructuras superficiales, como las regiones labial y de la mejilla; otras por formaciones de tejidos blandos más profundas, como la región {{c3}}; y otras por estructuras esqueléticas, como las regiones orbitaria, infraorbitaria, nasal, cigomática y mentoniana.",
+      "dificultad": 3,
+      "etiquetas": [
+        "regiones de la cabeza"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 854,
+        "fig": "8-14"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "bilaterales"
+        },
+        "c2": {
+          "canonico": "medias",
+          "acepta": [
+            "impares"
+          ]
+        },
+        "c3": {
+          "canonico": "parotídea"
+        }
+      },
+      "feedback": "A estas se suman regiones profundas no representadas en la superficie, como la región infratemporal y la fosa pterigopalatina, que se exponen al describir cada zona. Clasificar las regiones por el criterio que las define, es decir superficie, tejido blando profundo o esqueleto, ayuda a anticipar qué estructuras se encontrarán al disecar cada una."
+    },
+    {
+      "id": "P1-B10-017",
+      "tipo": "numerico",
+      "prompt": "¿Qué porcentaje de todas las muertes en Estados Unidos se produce por traumatismos craneales?",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "traumatismo craneal"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 855
+      },
+      "respuesta": {
+        "valor": 10,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Y aproximadamente en la mitad de las muertes de causa traumática está implicado el encéfalo. Ocurren sobre todo en individuos jóvenes, entre 15 y 24 años, y la causa principal de las lesiones cerebrales es variable, pero destacan los accidentes de automóvil y motocicleta. La alta energía transmitida en esos accidentes puede provocar el cizallamiento de los tractos de fibras y axones dentro del encéfalo, lo que causa el patrón denominado traumatismo axonal difuso, para el que no existe ningún tratamiento adecuado."
+    },
+    {
+      "id": "P1-B10-018",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las fracturas de Le Fort:",
+      "texto": "La fractura de Le Fort {{c1}} es una amplia variedad de fracturas horizontales de los maxilares que discurren superiormente a los procesos alveolares. La de Le Fort {{c2}} transcurre desde las partes posterolaterales de los senos maxilares superomedialmente a través de los forámenes infraorbitarios hasta el puente nasal. La de Le Fort {{c3}} es horizontal, atraviesa las fisuras orbitarias superiores y las suturas frontocigomáticas, de modo que los maxilares y los huesos cigomáticos se separan del resto del cráneo.",
+      "dificultad": 3,
+      "etiquetas": [
+        "cuadro clínico",
+        "fracturas faciales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 856,
+        "fig": "C8-1"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "I",
+          "acepta": [
+            "1"
+          ]
+        },
+        "c2": {
+          "canonico": "II",
+          "acepta": [
+            "2"
+          ]
+        },
+        "c3": {
+          "canonico": "III",
+          "acepta": [
+            "3"
+          ]
+        }
+      },
+      "feedback": "La lógica de la clasificación es la altura del trazo y cuánta cara se desprende: en la I se separa el proceso alveolar, en la II toda la parte central de la cara incluidos el paladar duro y los procesos alveolares, y en la III el macizo facial completo se separa del cráneo. El Dr. Léon Clement Le Fort fue cirujano y ginecólogo de París, 1829-1893. Nótese el contraste con las fracturas de mandíbula, que suelen ser dobles y en lados opuestos: si se ve una, hay que buscar la otra."
+    },
+    {
+      "id": "P1-B10-019",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las fracturas de la calvaria:",
+      "texto": "Las fracturas {{c1}} de la calvaria son el tipo más frecuente y suelen ocurrir en el punto del impacto, aunque a menudo irradian en dos o más direcciones. En las fracturas {{c2}}, el hueso se rompe en varios fragmentos. En una fractura por {{c3}} no hay fractura en el punto del impacto, pero sí en el lado opuesto del cráneo.",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "fracturas craneales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 857,
+        "fig": "C8-4"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "lineales"
+        },
+        "c2": {
+          "canonico": "conminutas"
+        },
+        "c3": {
+          "canonico": "contragolpe"
+        }
+      },
+      "feedback": "La convexidad de la calvaria distribuye los efectos de un golpe y suele minimizarlos, pero los golpes potentes en una zona delgada originan fracturas con hundimiento, en las que un fragmento óseo queda deprimido hacia dentro y comprime o lesiona el cerebro. Si el impacto se produce sobre una zona de calvaria gruesa, el hueso puede combarse hacia dentro sin fracturarse y producirse una fractura a cierta distancia del trauma directo, donde los huesos son más delgados."
+    },
+    {
+      "id": "P1-B10-020",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina la sección del neurocráneo que se eleva o extrae durante una craneotomía?",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "neurocirugía"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 857,
+        "fig": "C8-5"
+      },
+      "respuesta": {
+        "canonico": "colgajo óseo"
+      },
+      "feedback": "Se vuelve a colocar en su lugar y se une con hilo metálico a otras partes de la calvaria, o se mantiene temporalmente con placas metálicas. La reintegración es más probable si el hueso se refleja con sus músculos y piel suprayacentes, para que conserve su irrigación durante la intervención. Si el colgajo no se recoloca y queda reemplazado por una lámina permanente de plástico o metal, la intervención se denomina craniectomía. El motivo de todo esto es que el pericráneo del adulto posee escasa capacidad osteogénica, de modo que hay poca regeneración ósea tras la pérdida de hueso."
+    },
+    {
+      "id": "P1-B10-021",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre lo que permite valorar la palpación de las fontanelas:",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "desarrollo del cráneo"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 858,
+        "fig": "C8-6"
+      },
+      "feedback": "Las fontanelas son membranas fibrosas que se palpan como zonas suaves y se producen entre los ángulos de los huesos planos: la anterior y la posterior, ambas impares, y las esfenoidales y mastoideas, que son pares. La anterior es la mayor, tiene forma romboidal o de estrella y está situada en la unión de las suturas sagital, coronal y frontal, es decir en la futura localización del bregma. Nótese que el abombamiento también ocurre normalmente durante el llanto, y que la pulsación de la fontanela refleja el pulso de las arterias cerebrales.",
+      "texto": "Mediante la palpación de las fontanelas en el lactante, el médico puede determinar el progreso del {{c1}} de los huesos frontal y parietales, el grado de {{c2}} del lactante, que se manifiesta por la depresión de la fontanela, y el nivel de presión {{c3}}, que se manifiesta por su abombamiento.",
+      "blancos": {
+        "c1": {
+          "canonico": "crecimiento"
+        },
+        "c2": {
+          "canonico": "hidratación"
+        },
+        "c3": {
+          "canonico": "intracraneal"
+        }
+      }
+    },
+    {
+      "id": "P1-B10-022",
+      "tipo": "numerico",
+      "prompt": "¿Hacia qué edad en meses deja de ser clínicamente palpable la fontanela anterior?",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "desarrollo del cráneo"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 858
+      },
+      "respuesta": {
+        "valor": 18,
+        "unidad": "meses",
+        "tol": 0
+      },
+      "feedback": "Para entonces los huesos circundantes se han fusionado. La fontanela posterior, en cambio, es triangular, comienza a cerrarse durante los primeros meses de vida y hacia el final del primer año ya es pequeña y clínicamente no se palpa; está en la futura localización del lambda. Las fontanelas esfenoidal y mastoidea, cubiertas por el músculo temporal, se fusionan en el lactante y son clínicamente menos importantes que las de la línea media."
+    },
+    {
+      "id": "P1-B10-023",
+      "tipo": "numerico",
+      "prompt": "¿En qué porcentaje de los individuos persiste un resto de la sutura frontal, es decir la sutura metópica?",
+      "dificultad": 3,
+      "etiquetas": [
+        "cuadro clínico",
+        "suturas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 859
+      },
+      "respuesta": {
+        "valor": 8,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Al nacer el hueso frontal se compone de dos mitades cuya unión comienza en el segundo año, y en la mayoría de los casos la sutura frontal se oblitera en el octavo año. Con mucha menos frecuencia persiste toda la sutura. El dato tiene valor práctico inmediato en urgencias: la persistencia de la sutura metópica no debe interpretarse como una fractura en las radiografías ni en la tomografía."
+    },
+    {
+      "id": "P1-B10-024",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la obliteración de las suturas craneales:",
+      "texto": "La obliteración de las suturas entre los huesos de la calvaria suele iniciarse entre los {{c1}} y 40 años de edad en la cara interna, y unos {{c2}} años más tarde en la cara externa. Comienza generalmente en el {{c3}} y continúa de modo secuencial en las suturas sagital, coronal y lambdoidea.",
+      "dificultad": 3,
+      "etiquetas": [
+        "cuadro clínico",
+        "suturas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 859,
+        "fig": "C8-10"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "30"
+        },
+        "c2": {
+          "canonico": "10"
+        },
+        "c3": {
+          "canonico": "bregma"
+        }
+      },
+      "feedback": "El tiempo de cierre varía considerablemente, por lo que la obliteración sutural se usa con cautela para estimar la edad en antropología forense. Conviene distinguir este cierre fisiológico tardío del cierre prematuro de las suturas, la craneosinostosis primaria, cuya incidencia es de aproximadamente 1 por cada 2000 nacimientos, es más frecuente en el sexo masculino y produce malformaciones cuyo tipo depende de cuáles suturas se afecten."
+    },
+    {
+      "id": "P1-B10-025",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las malformaciones por craneosinostosis:",
+      "texto": "El cierre prematuro de la sutura sagital da lugar a un cráneo alargado y estrecho, en forma de cuña, denominado {{c1}}. Cuando el cierre prematuro de las suturas coronal o lambdoidea ocurre solo en un lado, el cráneo es retorcido y asimétrico, lo que se conoce como {{c2}}. El cierre prematuro de la sutura coronal da lugar a un cráneo alto a modo de torre, denominado {{c3}}.",
+      "dificultad": 3,
+      "etiquetas": [
+        "cuadro clínico",
+        "craneosinostosis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 860,
+        "fig": "C8-11"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "escafocefalia",
+          "acepta": [
+            "escafoencefalia"
+          ]
+        },
+        "c2": {
+          "canonico": "plagiocefalia"
+        },
+        "c3": {
+          "canonico": "oxicefalia",
+          "acepta": [
+            "turricefalia"
+          ]
+        }
+      },
+      "feedback": "La hipótesis imperante es que el desarrollo anormal de la base del cráneo crea tensiones exageradas sobre la duramadre, lo que altera el desarrollo normal de las suturas. La oxicefalia es más frecuente en el sexo femenino, mientras que las malformaciones craneales en conjunto son más frecuentes en el masculino y se asocian a menudo con otras anomalías esqueléticas. Un dato que tranquiliza y conviene retener: el cierre prematuro de las suturas no afecta habitualmente al desarrollo del cerebro."
+    }
+  ]
+}

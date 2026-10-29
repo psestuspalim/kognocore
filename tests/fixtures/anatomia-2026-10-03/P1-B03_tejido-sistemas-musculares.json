@@ -1,0 +1,361 @@
+{
+  "bloque": {
+    "id": "P1-B03",
+    "titulo": "Tejido y sistemas musculares: tipos de músculo, morfología, contracción, unidad motora, funciones, nervios y arterias · Músculo cardíaco y liso · Cuadros clínicos",
+    "parcial": 1,
+    "sesion": "29 de enero",
+    "paginas": "27-36"
+  },
+  "items": [
+    {
+      "id": "P1-B03-001",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los criterios que distinguen los tipos de músculo:",
+      "texto": "Se distinguen tres tipos de músculos según si están controlados por la {{c1}}, es decir voluntarios frente a involuntarios; si se observan o no {{c2}} en el examen microscópico, es decir estriados frente a lisos; y si están localizados en la pared corporal y los miembros o componen los órganos huecos y los vasos, es decir {{c3}} frente a viscerales.",
+      "dificultad": 2,
+      "etiquetas": ["tipos de músculo"],
+      "fuente": { "obra": "Moore 9e", "pag": 27 },
+      "blancos": {
+        "c1": { "canonico": "voluntad" },
+        "c2": { "canonico": "estrías" },
+        "c3": { "canonico": "somáticos" }
+      },
+      "feedback": "Estos tres ejes bastan para ubicar cualquier músculo del cuerpo: el esquelético es voluntario, estriado y somático; el cardíaco es involuntario, estriado y visceral; el liso es involuntario, no estriado y visceral. Nótese que el criterio de localización distingue la pared corporal y los miembros, es decir el soma, de los órganos huecos, el corazón y los vasos sanguíneos, que son las vísceras."
+    },
+    {
+      "id": "P1-B03-002",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 3 tipos de músculo:",
+      "dificultad": 1,
+      "etiquetas": ["tipos de músculo"],
+      "fuente": { "obra": "Moore 9e", "pag": 27, "fig": "tabla 1-1" },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          { "canonico": "estriado esquelético", "acepta": ["esquelético"] },
+          { "canonico": "estriado cardíaco", "acepta": ["cardíaco"] },
+          { "canonico": "liso", "acepta": ["no estriado"] }
+        ]
+      },
+      "feedback": "Los esqueléticos voluntarios constituyen la gran mayoría del sistema muscular. Pero otros tipos de tejido muscular forman algunos músculos con nombre propio, como el ciliar, el detrusor y los erectores del pelo, y son componentes importantes de los órganos de otros sistemas: cardiovascular, digestivo, genitourinario, tegumentario y visual. Por eso el músculo aparece en casi todos los capítulos del libro, no solo en el aparato locomotor."
+    },
+    {
+      "id": "P1-B03-003",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las células musculares:",
+      "texto": "Las células musculares se denominan a menudo {{c1}} musculares por su forma alargada y estrecha en estado de relajación. El tejido conectivo asociado conduce fibras nerviosas y capilares hasta ellas, y las une en haces o {{c2}}.",
+      "dificultad": 2,
+      "etiquetas": ["tejido muscular"],
+      "fuente": { "obra": "Moore 9e", "pag": 27 },
+      "blancos": {
+        "c1": { "canonico": "fibras" },
+        "c2": { "canonico": "fascículos" }
+      },
+      "feedback": "Dentro del músculo esquelético, cada fibra está cubierta por endomisio, cada fascículo por perimisio y todo el músculo por epimisio, que es lo mismo que la fascia de revestimiento. Esa organización en tres envolturas no es decorativa: es la que transmite la fuerza desde las miofibrillas hasta el tendón y la que conduce los vasos y nervios hasta cada fibra individual."
+    },
+    {
+      "id": "P1-B03-004",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la estimulación de cada tipo de músculo:",
+      "texto": "El músculo estriado esquelético recibe estimulación voluntaria o refleja a través del sistema nervioso {{c1}}. El músculo cardíaco se estimula y propaga intrínsecamente, es decir de forma {{c2}}, y su frecuencia y fuerza son modificadas por el sistema nervioso autónomo. El músculo liso está inervado directamente por el sistema nervioso {{c3}} o el entérico.",
+      "dificultad": 2,
+      "etiquetas": ["tipos de músculo", "estimulación"],
+      "fuente": { "obra": "Moore 9e", "pag": 29, "fig": "tabla 1-1" },
+      "blancos": {
+        "c1": { "canonico": "somático" },
+        "c2": { "canonico": "miogénica" },
+        "c3": { "canonico": "autónomo" }
+      },
+      "feedback": "La clave conceptual está en el cardíaco: su contracción se origina en el propio músculo, en el marcapasos formado por fibras musculares cardíacas especializadas, y el sistema nervioso autónomo solo modifica la frecuencia y la fuerza. Eso explica que un corazón denervado siga latiendo, que es la base del trasplante cardíaco. En el liso, en cambio, la contracción puede iniciarse también por acción hormonal o por estímulos locales como el estiramiento."
+    },
+    {
+      "id": "P1-B03-005",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denominan los tendones que forman láminas planas y fijan los músculos al esqueleto o a la fascia profunda?",
+      "dificultad": 2,
+      "etiquetas": ["morfología muscular"],
+      "fuente": { "obra": "Moore 9e", "pag": 29, "fig": "1-18" },
+      "respuesta": { "canonico": "aponeurosis" },
+      "feedback": "Fijan el músculo habitualmente en una cresta o en una serie de procesos espinosos, como el latísimo del dorso, o a la aponeurosis de otro músculo, como ocurre entre los oblicuos de la pared anterolateral del abdomen. Conviene recordar que al hablar de la longitud de un músculo se incluyen el vientre muscular y los tendones: la longitud es la distancia entre sus inserciones, no el tamaño de la parte carnosa."
+    },
+    {
+      "id": "P1-B03-006",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 6 formas en que se clasifican los músculos según la disposición de sus fibras:",
+      "dificultad": 2,
+      "etiquetas": ["morfología muscular"],
+      "fuente": { "obra": "Moore 9e", "pag": 30, "fig": "1-18" },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          { "canonico": "planos" },
+          { "canonico": "penniformes" },
+          { "canonico": "fusiformes" },
+          { "canonico": "convergentes" },
+          { "canonico": "cuadrados" },
+          { "canonico": "circulares", "acepta": ["esfinterianos"] }
+        ]
+      },
+      "feedback": "Con sus ejemplos canónicos: planos con fibras paralelas y a menudo con aponeurosis, como el oblicuo externo del abdomen; fusiformes con forma de huso y vientre grueso, como el bíceps braquial; convergentes que nacen en un área ancha y forman un solo tendón, como el pectoral mayor; cuadrados con cuatro lados iguales, como el recto del abdomen entre sus intersecciones tendinosas; y circulares que rodean aberturas corporales y las comprimen, como el orbicular del ojo. Aparte quedan los de múltiples cabezas o vientres: bíceps, tríceps, digástrico y gastrocnemio."
+    },
+    {
+      "id": "P1-B03-007",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los músculos penniformes:",
+      "texto": "Los músculos penniformes son semejantes a {{c1}} en cuanto a la disposición de sus fascículos. El extensor largo de los dedos es {{c2}}, el recto femoral es bipenniforme y el {{c3}} es multipenniforme.",
+      "dificultad": 2,
+      "etiquetas": ["morfología muscular"],
+      "fuente": { "obra": "Moore 9e", "pag": 30, "fig": "1-18" },
+      "blancos": {
+        "c1": { "canonico": "plumas" },
+        "c2": { "canonico": "unipenniforme" },
+        "c3": { "canonico": "deltoides" }
+      },
+      "feedback": "La disposición oblicua de las fibras respecto al tendón permite empaquetar más fibras en el mismo volumen, lo que aumenta la fuerza a costa del recorrido de acortamiento. De ahí que los músculos potentes y de recorrido corto tiendan a ser penniformes, mientras que los que necesitan excursión amplia, como los fusiformes, tengan fibras paralelas y largas. Forma y función van siempre juntas en el músculo."
+    },
+    {
+      "id": "P1-B03-008",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué músculo tiene dos vientres dispuestos en tándem?",
+      "dificultad": 3,
+      "etiquetas": ["morfología muscular"],
+      "fuente": { "obra": "Moore 9e", "pag": 30 },
+      "respuesta": { "canonico": "digástrico" },
+      "feedback": "El contraste es con el gastrocnemio, que también tiene dos vientres pero dispuestos en paralelo. Conviene distinguir cabezas de vientres: los músculos bíceps tienen dos cabezas de inserción, como el bíceps braquial, y los tríceps tres, mientras que los vientres son porciones contráctiles sucesivas o paralelas separadas por un tendón intermedio. Esa diferencia tiene consecuencia funcional, porque un tendón intermedio permite que cada vientre tenga su propia inervación y su propio origen embriológico, como ocurre en el digástrico."
+    },
+    {
+      "id": "P1-B03-009",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los tipos de contracción fásica:",
+      "texto": "En la contracción {{c1}} el músculo modifica su longitud en relación con la producción de movimiento. En la contracción {{c2}} no varía la longitud y no hay movimiento, pero la fuerza está aumentada por encima de los niveles {{c3}} para resistir frente a la gravedad u otra fuerza antagónica.",
+      "dificultad": 2,
+      "etiquetas": ["contracción muscular"],
+      "fuente": { "obra": "Moore 9e", "pag": 32, "fig": "1-20" },
+      "blancos": {
+        "c1": { "canonico": "isotónica" },
+        "c2": { "canonico": "isométrica" },
+        "c3": { "canonico": "tónicos" }
+      },
+      "feedback": "La contracción isométrica es importante para mantener la postura erguida y cuando los músculos actúan como fijadores o coaptadores. El ejemplo del texto es el deltoides manteniendo el brazo en abducción sin movimiento. Las isotónicas se subdividen en concéntricas, donde el músculo se acorta y produce movimiento, y excéntricas, donde se alarga mientras se contrae con una relajación controlada y gradual."
+    },
+    {
+      "id": "P1-B03-010",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la contracción excéntrica:",
+      "texto": "En la contracción {{c1}} el músculo se alarga mientras se contrae, es decir experimenta una relajación controlada sin dejar de ejercer fuerza. Al caminar se realizan contracciones {{c2}} para desplazar el centro de gravedad hacia delante, y excéntricas para evitar {{c3}} al trasladar el peso al otro miembro.",
+      "dificultad": 2,
+      "etiquetas": ["contracción muscular"],
+      "fuente": { "obra": "Moore 9e", "pag": 32, "fig": "1-20 C" },
+      "blancos": {
+        "c1": { "canonico": "excéntrica" },
+        "c2": { "canonico": "concéntricas" },
+        "c3": { "canonico": "tambalearse" }
+      },
+      "feedback": "Las excéntricas son tan importantes como las concéntricas para los movimientos funcionales coordinados: caminar, correr, bajar objetos o descender uno mismo. A menudo, mientras el músculo principal se contrae concéntricamente, su antagonista realiza una contracción excéntrica coordinada, y es esa coordinación la que hace el movimiento suave. También explica el dolor muscular de comienzo tardío tras bajar escaleras."
+    },
+    {
+      "id": "P1-B03-011",
+      "tipo": "numerico",
+      "prompt": "¿Qué porcentaje más de tensión puede generar una contracción excéntrica máxima respecto a la concéntrica?",
+      "dificultad": 3,
+      "etiquetas": ["contracción muscular"],
+      "fuente": { "obra": "Moore 9e", "pag": 32 },
+      "respuesta": { "valor": 50, "unidad": "%", "tol": 0 },
+      "feedback": "Además, con la misma carga las contracciones excéntricas requieren menos energía metabólica. Esa combinación de alta tensión y bajo costo energético es justo lo que las hace peligrosas para el tejido: el estiramiento que ocurre durante el alargamiento excéntrico favorece microdesgarros musculares e irritación perióstica, en comparación con la contracción concéntrica. Por eso bajar muchos peldaños de escalera causa más dolor muscular que subir el mismo número."
+    },
+    {
+      "id": "P1-B03-012",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el tono muscular:",
+      "texto": "Incluso cuando están relajados, los músculos de un individuo consciente se hallan ligeramente contraídos. Esa ligera contracción, denominada tono muscular, no produce movimiento ni resistencia activa, pero confiere al músculo una {{c1}} que ayuda a estabilizar las articulaciones y a mantener la {{c2}}. Suele faltar solo cuando el sujeto está inconsciente o después de una lesión nerviosa que ha producido {{c3}}.",
+      "dificultad": 1,
+      "etiquetas": ["contracción muscular", "tono"],
+      "fuente": { "obra": "Moore 9e", "pag": 32 },
+      "blancos": {
+        "c1": { "canonico": "firmeza" },
+        "c2": { "canonico": "postura" },
+        "c3": { "canonico": "parálisis" }
+      },
+      "feedback": "El tono desaparece durante el sueño profundo o bajo anestesia general, y esa pérdida tiene consecuencias prácticas: la ausencia de tono en un paciente anestesiado puede provocar luxaciones al levantarlo o posicionarlo. El tono también mantiene los dientes alineados a través de los labios, de modo que su ausencia por parálisis o cortedad labial produce eversión dentaria, los llamados dientes de conejo."
+    },
+    {
+      "id": "P1-B03-013",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la unidad motora:",
+      "texto": "Mientras que la unidad {{c1}} de un músculo esquelético es la fibra muscular estriada, la unidad funcional es la unidad {{c2}}, formada por una neurona motora y las fibras musculares que esta controla. El número de fibras por unidad varía con el tamaño y la función del músculo: las unidades grandes están en los músculos del tronco y el muslo, mientras que en los pequeños músculos del ojo y de la mano, donde se requiere {{c3}}, cada unidad incluye solo unas pocas fibras.",
+      "dificultad": 2,
+      "etiquetas": ["unidad motora"],
+      "fuente": { "obra": "Moore 9e", "pag": 33, "fig": "1-21" },
+      "blancos": {
+        "c1": { "canonico": "estructural" },
+        "c2": { "canonico": "motora" },
+        "c3": { "canonico": "precisión" }
+      },
+      "feedback": "Cuando la neurona motora recibe un estímulo, contrae simultáneamente todas las fibras que inerva, de modo que la unidad motora es indivisible. El número de fibras oscila entre una y varios cientos. El movimiento, es decir la contracción fásica, se produce por activación de un número creciente de unidades motoras, por encima del nivel requerido para mantener el tono muscular, que es el mecanismo del reclutamiento."
+    },
+    {
+      "id": "P1-B03-014",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 4 funciones que desempeñan los músculos para movilizar y posicionar el cuerpo:",
+      "dificultad": 2,
+      "etiquetas": ["funciones de los músculos"],
+      "fuente": { "obra": "Moore 9e", "pag": 33 },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          { "canonico": "motor principal", "acepta": ["agonista"] },
+          { "canonico": "fijador" },
+          { "canonico": "sinergista" },
+          { "canonico": "antagonista" }
+        ]
+      },
+      "feedback": "El motor principal se contrae concéntricamente para producir el movimiento deseado y gasta la mayor parte de la energía; el fijador estabiliza las partes proximales del miembro mediante contracción isométrica mientras ocurren movimientos distales; el sinergista complementa la acción del motor principal, a veces fijando una articulación participante cuando este cruza más de una; y el antagonista se opone, contrayéndose excéntricamente con relajación progresiva. Lo importante es que estos papeles no son fijos: el mismo músculo puede desempeñar cualquiera de ellos según las circunstancias."
+    },
+    {
+      "id": "P1-B03-015",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la línea de tracción muscular:",
+      "texto": "Cuando la tracción de un músculo se ejerce a lo largo de una línea paralela al eje del hueso, el músculo actúa para mantener el contacto entre las superficies articulares y se denomina músculo {{c1}}. Cuanto más {{c2}} es su línea de tracción respecto al eje largo del hueso, tanto más capaz es de un movimiento rápido y efectivo, y se denomina músculo {{c3}}.",
+      "dificultad": 3,
+      "etiquetas": ["funciones de los músculos"],
+      "fuente": { "obra": "Moore 9e", "pag": 34 },
+      "blancos": {
+        "c1": { "canonico": "coaptador" },
+        "c2": { "canonico": "oblicua" },
+        "c3": { "canonico": "activador" }
+      },
+      "feedback": "El deltoides ilustra los dos papeles en la misma articulación: con los brazos a los lados del cuerpo su tracción es casi paralela al húmero y funciona como coaptador, oponiéndose a las fuerzas de luxación; conforme otros músculos inician la abducción, su línea de tracción se hace más oblicua y se vuelve cada vez más efectivo como activador. El bíceps braquial con el codo flexionado es otro ejemplo de tracción oblicua eficaz."
+    },
+    {
+      "id": "P1-B03-016",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cuál es el motor principal en el descenso de los miembros superiores desde la abducción, estando de pie?",
+      "dificultad": 3,
+      "etiquetas": ["funciones de los músculos"],
+      "fuente": { "obra": "Moore 9e", "pag": 34, "fig": "1-20 C" },
+      "respuesta": { "canonico": "la gravedad" },
+      "feedback": "Es la situación paradójica que conviene tener presente al analizar cualquier movimiento: el motor principal habitual está inactivo y el componente activo, que requiere energía, es la relajación controlada de los antagonistas antigravitatorios. Aquí los músculos descritos como motores principales de la aducción, pectoral mayor y latísimo del dorso, se hallan pasivos, y el músculo inervado activamente, contrayéndose excéntricamente, es el deltoides, que es un abductor y se describe típicamente como antagonista de este movimiento."
+    },
+    {
+      "id": "P1-B03-017",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la inervación de los músculos:",
+      "texto": "Los nervios que inervan los músculos esqueléticos, llamados nervios {{c1}}, casi siempre penetran en la parte {{c2}} del músculo, en vez de en el tendón, y lo hacen desde su cara {{c3}}, de modo que el nervio queda protegido por el músculo al cual inerva.",
+      "dificultad": 2,
+      "etiquetas": ["inervación muscular"],
+      "fuente": { "obra": "Moore 9e", "pag": 34 },
+      "blancos": {
+        "c1": { "canonico": "motores" },
+        "c2": { "canonico": "carnosa" },
+        "c3": { "canonico": "profunda" }
+      },
+      "feedback": "Las variantes en la inervación de los músculos son raras, porque la relación es casi constante; por eso en los miembros la inervación se aprende por grupos funcionales, ya que los músculos de acciones similares comparten compartimento fascial e inervación, y solo hay que memorizar las excepciones. La irrigación, en cambio, no es tan constante y suele ser múltiple: conviene aprender el curso de las arterias y deducir que un músculo recibe irrigación de todas las arterias vecinas."
+    },
+    {
+      "id": "P1-B03-018",
+      "tipo": "numerico",
+      "prompt": "¿Cuántas veces mayor es la irrigación sanguínea del músculo estriado cardíaco respecto a la del esquelético?",
+      "dificultad": 3,
+      "etiquetas": ["músculo cardíaco"],
+      "fuente": { "obra": "Moore 9e", "pag": 34 },
+      "respuesta": { "valor": 2, "unidad": "veces", "tol": 0 },
+      "feedback": "Es el doble, y la razón es funcional: el miocardio sostiene una actividad continua y elevada, con contracción rítmica potente y rápida, que no admite reposo. Esa dependencia crítica del flujo coronario es la base del infarto: cuando las fibras cardíacas se lesionan por pérdida de su irrigación, el tejido se necrosa y lo reemplaza tejido fibroso cicatricial, porque las células musculares cardíacas no se dividen."
+    },
+    {
+      "id": "P1-B03-019",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el músculo liso:",
+      "texto": "El músculo liso forma una gran parte de la capa media, o túnica {{c1}}, de las paredes vasculares por encima del nivel capilar, por lo que aparece en todo el tejido vascularizado. Responde más {{c2}} que el estriado y tiene una capacidad mucho mayor para {{c3}} sin sufrir una lesión paralizante.",
+      "dificultad": 2,
+      "etiquetas": ["músculo liso"],
+      "fuente": { "obra": "Moore 9e", "pag": 34 },
+      "blancos": {
+        "c1": { "canonico": "media" },
+        "c2": { "canonico": "lentamente" },
+        "c3": { "canonico": "alargarse", "acepta": ["estirarse"] }
+      },
+      "feedback": "Ambas propiedades, la contracción parcial sostenida durante largos períodos y la gran capacidad de alargamiento, son importantes para regular el tamaño de los esfínteres y el calibre de la luz de estructuras tubulares como vasos sanguíneos e intestinos. En las paredes del tubo digestivo, las trompas uterinas y los uréteres, las células de músculo liso son las encargadas de las contracciones peristálticas rítmicas que impulsan el contenido."
+    },
+    {
+      "id": "P1-B03-020",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina la disminución del tamaño muscular que puede deberse a un trastorno muscular primario, a una lesión nerviosa o a la inmovilización?",
+      "dificultad": 1,
+      "etiquetas": ["cuadro clínico", "disfunción muscular"],
+      "fuente": { "obra": "Moore 9e", "pag": 35 },
+      "respuesta": { "canonico": "atrofia" },
+      "feedback": "Desde el punto de vista clínico no basta con saber qué movimiento produce un músculo: hay que anticipar las consecuencias de su pérdida de función, es decir cuáles son los signos visibles de la parálisis. Un músculo desnervado queda flácido, con pérdida del tono y de la capacidad de contraerse a demanda o de modo reflejo; además se fibrosa y pierde elasticidad, y el tono del antagonista puede llevar al miembro a una posición anormal en reposo."
+    },
+    {
+      "id": "P1-B03-021",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las pruebas musculares:",
+      "texto": "Las pruebas musculares ayudan en el diagnóstico de las lesiones {{c1}} y se realizan de dos formas: el paciente efectúa movimientos contra la resistencia del examinador, o el examinador se opone a los movimientos del paciente. La {{c2}}, que registra las diferencias en los potenciales de acción eléctricos musculares mediante electrodos, es otro método para investigar la acción muscular. Suelen realizarse por pares {{c3}} a efectos comparativos.",
+      "dificultad": 2,
+      "etiquetas": ["cuadro clínico", "pruebas musculares"],
+      "fuente": { "obra": "Moore 9e", "pag": 34 },
+      "blancos": {
+        "c1": { "canonico": "nerviosas" },
+        "c2": { "canonico": "electromiografía", "acepta": ["EMG"] },
+        "c3": { "canonico": "bilaterales" }
+      },
+      "feedback": "Un músculo normal en reposo solo muestra la actividad basal del tono muscular, que únicamente desaparece con el sueño profundo, la parálisis o la anestesia; al contraerse presenta valores máximos variables de actividad fásica. Además de analizar la actividad de un músculo durante distintos movimientos, la electromiografía puede formar parte de un programa de tratamiento para restaurar la acción muscular."
+    },
+    {
+      "id": "P1-B03-022",
+      "tipo": "numerico",
+      "prompt": "¿Más allá de qué fracción de su longitud en reposo no pueden estirarse los músculos sin sufrir daños? Responde con el denominador.",
+      "dificultad": 3,
+      "etiquetas": ["cuadro clínico", "distensiones"],
+      "fuente": { "obra": "Moore 9e", "pag": 35 },
+      "respuesta": { "valor": 3, "unidad": "(un tercio)", "tol": 0 },
+      "feedback": "Es decir, un tercio de su longitud en reposo, y eso se refleja en sus fijaciones al esqueleto, que no suelen permitir un alargamiento excesivo. La excepción clínicamente relevante son los isquiotibiales: al extender la rodilla alcanzan su longitud máxima antes de que la cadera se flexione por completo, de modo que la flexión de cadera queda limitada por su capacidad de estiramiento. Eso, sumado a las fuerzas de su contracción excéntrica, explica que sufran distensiones con más frecuencia que otros músculos."
+    },
+    {
+      "id": "P1-B03-023",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la regeneración del músculo esquelético:",
+      "texto": "Las fibras musculares estriadas no pueden {{c1}}, pero sí ser reemplazadas individualmente por fibras nuevas derivadas de las células {{c2}} del músculo esquelético, que son una fuente potencial de mioblastos. Como el número de fibras nuevas es insuficiente, el músculo reparado queda formado por una mezcla desorganizada de fibras musculares y tejido {{c3}} cicatricial.",
+      "dificultad": 2,
+      "etiquetas": ["cuadro clínico", "regeneración muscular"],
+      "fuente": { "obra": "Moore 9e", "pag": 35 },
+      "blancos": {
+        "c1": { "canonico": "dividirse" },
+        "c2": { "canonico": "satélite" },
+        "c3": { "canonico": "fibroso" }
+      },
+      "feedback": "Esa reparación imperfecta explica por qué un desgarro muscular importante deja secuela funcional y por qué la rehabilitación busca orientar el tejido cicatricial más que esperar regeneración completa. El crecimiento muscular en respuesta al ejercicio intenso, como en el culturismo, se produce por hipertrofia de las fibras existentes, no por adición de fibras nuevas: la hipertrofia alarga y aumenta las miofibrillas dentro de las fibras."
+    },
+    {
+      "id": "P1-B03-024",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la hipertrofia del miocardio y el infarto:",
+      "texto": "En la hipertrofia {{c1}}, el miocardio responde al aumento de las demandas con un incremento en el tamaño de sus fibras. Cuando las fibras cardíacas se lesionan por pérdida de su irrigación durante un ataque cardíaco, el tejido se {{c2}} y el tejido fibroso cicatricial que se desarrolla constituye un {{c3}} de miocardio.",
+      "dificultad": 2,
+      "etiquetas": ["cuadro clínico", "músculo cardíaco"],
+      "fuente": { "obra": "Moore 9e", "pag": 36 },
+      "blancos": {
+        "c1": { "canonico": "compensadora" },
+        "c2": { "canonico": "necrosa", "acepta": ["muere"] },
+        "c3": { "canonico": "infarto" }
+      },
+      "feedback": "Las células musculares que se degeneran no son reemplazadas, porque las células musculares cardíacas no se dividen. Se han identificado células progenitoras cardíacas en el corazón, pero no se ha establecido que tengan el potencial de generar fibras musculares de manera significativa, como sí hacen las células satélite del músculo esquelético. Esa diferencia entre los dos músculos estriados es la razón de que el daño miocárdico sea definitivo."
+    },
+    {
+      "id": "P1-B03-025",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el músculo liso en el embarazo:",
+      "texto": "Las células musculares lisas de la pared uterina aumentan durante el embarazo no solo en tamaño, es decir por {{c1}}, sino también en número, es decir por {{c2}}, dado que conservan su capacidad de {{c3}}. Además pueden desarrollarse nuevas células musculares lisas a partir de los {{c4}}, células incompletamente diferenciadas situadas a lo largo de los vasos de pequeño calibre.",
+      "dificultad": 3,
+      "etiquetas": ["cuadro clínico", "músculo liso"],
+      "fuente": { "obra": "Moore 9e", "pag": 36 },
+      "blancos": {
+        "c1": { "canonico": "hipertrofia" },
+        "c2": { "canonico": "hiperplasia" },
+        "c3": { "canonico": "dividirse" },
+        "c4": { "canonico": "pericitos" }
+      },
+      "feedback": "Es el contraste limpio con los otros dos tipos de músculo: el esquelético crece solo por hipertrofia y repara mal; el cardíaco crece por hipertrofia y no repara; el liso crece por ambos mecanismos y conserva capacidad proliferativa. Esa diferencia de comportamiento celular es lo que conviene retener, porque explica desde la involución uterina posparto hasta la hiperplasia de la capa media en la hipertensión arterial."
+    }
+  ]
+}

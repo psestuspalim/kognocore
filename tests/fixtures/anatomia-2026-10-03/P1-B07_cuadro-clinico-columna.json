@@ -1,0 +1,624 @@
+{
+  "bloque": {
+    "id": "P1-B07",
+    "titulo": "Cuadro clínico: columna vertebral · Envejecimiento discal · Dorsalgia · Hernia del núcleo pulposo · Fusión espinal · Patología cigapofisiaria · Fracturas y luxaciones · Espondilólisis · Curvaturas anómalas",
+    "parcial": 1,
+    "sesion": "5 de febrero",
+    "paginas": "108-117"
+  },
+  "items": [
+    {
+      "id": "P1-B07-001",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el envejecimiento de los discos intervertebrales:",
+      "texto": "Al avanzar la edad, los núcleos pulposos se {{c1}}, pierden elastina y proteoglucanos, e incrementan su {{c2}}. A consecuencia de ello, los discos pierden su {{c3}} y se hacen más duros y resistentes a la deformación.",
+      "dificultad": 2,
+      "etiquetas": [
+        "envejecimiento discal"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 108
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "deshidratan"
+        },
+        "c2": {
+          "canonico": "colágeno"
+        },
+        "c3": {
+          "canonico": "turgencia"
+        }
+      },
+      "feedback": "Con los años el núcleo se deseca, se hace granuloso y puede desaparecer totalmente como formación diferenciada. A medida que ocurren estos cambios, el anillo fibroso asume un papel creciente en el reparto de la carga vertical, sus laminillas se engrosan y a menudo aparecen fisuras y cavidades. Ese traspaso de carga del núcleo al anillo es la base mecánica de la degeneración discal."
+    },
+    {
+      "id": "P1-B07-002",
+      "tipo": "respuesta_corta",
+      "prompt": "Con el envejecimiento, ¿qué forma adoptan de manera progresiva las caras superior e inferior de los cuerpos vertebrales?",
+      "dificultad": 2,
+      "etiquetas": [
+        "envejecimiento discal"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 108
+      },
+      "respuesta": {
+        "canonico": "cóncava",
+        "acepta": [
+          "cóncavas",
+          "concavidades"
+        ]
+      },
+      "feedback": "Es un hallazgo contraintuitivo y es el motivo más probable de la ligera disminución de estatura con la edad: los bordes de los cuerpos vertebrales adyacentes se acercan porque las caras se ahuecan, no porque los discos se aplanen. De hecho, los discos aumentan de tamaño con los años: entre los 20 y 70 años su diámetro anteroposterior aumenta un 10% en la mujer y un 2% en el hombre, y su grosor central se incrementa cerca de un 10% en ambos sexos. Por eso el estrechamiento manifiesto de un disco, sobre todo si es mayor que el de los discos más superiores, sugiere enfermedad degenerativa del disco y no envejecimiento normal."
+    },
+    {
+      "id": "P1-B07-003",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 5 clases de estructuras inervadas en el dorso que pueden ser origen de dolor:",
+      "dificultad": 2,
+      "etiquetas": [
+        "dorsalgia"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 108
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "estructuras fibroesqueléticas"
+          },
+          {
+            "canonico": "meninges"
+          },
+          {
+            "canonico": "articulaciones sinoviales"
+          },
+          {
+            "canonico": "músculos"
+          },
+          {
+            "canonico": "tejido nervioso"
+          }
+        ]
+      },
+      "feedback": "Con sus contenidos concretos: las fibroesqueléticas son el periostio, los ligamentos y los anillos fibrosos de los discos; las meninges son las cubiertas de la médula espinal; las articulaciones sinoviales son las cápsulas de las cigapofisiarias; los músculos son los intrínsecos del dorso; y el tejido nervioso son los nervios espinales o sus raíces que salen por los forámenes intervertebrales. Las dos primeras están inervadas por los ramos meníngeos y las dos siguientes por los ramos posteriores. Conviene tener presente la magnitud del problema: la dorsalgia es el segundo motivo de consulta tras el resfriado común, y en pérdida de días de trabajo ocupa el segundo lugar después de la cefalea."
+    },
+    {
+      "id": "P1-B07-004",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el dolor de origen nervioso en el dorso:",
+      "texto": "El dolor procedente del tejido nervioso, causado por compresión o irritación de los nervios espinales o de sus raíces, es típicamente un dolor {{c1}}, que se percibe como procedente del área cutánea o subcutánea, el {{c2}}, inervada por ese nervio.",
+      "dificultad": 2,
+      "etiquetas": [
+        "dorsalgia"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 108
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "referido"
+        },
+        "c2": {
+          "canonico": "dermatoma"
+        }
+      },
+      "feedback": "Puede acompañarse de dolor localizado. Conviene contrastarlo con los otros orígenes: el dolor muscular suele asociarse con espasmos reflejos que producen isquemia, a menudo por defensa muscular, que es la contracción en previsión del dolor; el de las articulaciones cigapofisiarias se asocia con artrosis o artritis reumatoide; el agudo tras una fractura es principalmente perióstico, mientras que el de las luxaciones es ligamentoso."
+    },
+    {
+      "id": "P1-B07-005",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la dirección de las hernias del núcleo pulposo:",
+      "texto": "Las hernias del núcleo pulposo suelen extenderse {{c1}}, donde el anillo fibroso es relativamente delgado y no recibe refuerzo de los ligamentos longitudinales. Un disco herniado en esa dirección tiene más probabilidades de ser {{c2}} por la proximidad de las raíces de los nervios espinales.",
+      "dificultad": 2,
+      "etiquetas": [
+        "hernia discal"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 109,
+        "fig": "C2-12"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "posterolateralmente",
+          "acepta": [
+            "posterolateral"
+          ]
+        },
+        "c2": {
+          "canonico": "sintomático"
+        }
+      },
+      "feedback": "Como los discos de las regiones lumbar y lumbosacra son los de mayor tamaño y los que soportan los movimientos más amplios, las hernias posterolaterales suelen producirse ahí. La flexión de la columna provoca compresión anterior y tensión posterior, con desplazamiento del núcleo hacia la parte más delgada del anillo; si este ha degenerado, el núcleo puede herniarse en el conducto vertebral y comprimir la médula o las raíces de la cola de caballo. El término «deslizamiento de disco» es inapropiado."
+    },
+    {
+      "id": "P1-B07-006",
+      "tipo": "numerico",
+      "prompt": "¿Qué porcentaje de agua contiene el núcleo pulposo en las personas jóvenes?",
+      "dificultad": 3,
+      "etiquetas": [
+        "hernia discal",
+        "disco intervertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 109
+      },
+      "respuesta": {
+        "valor": 90,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Ese alto contenido acuoso les otorga más turgencia, y es la razón de que los discos jóvenes sean tan resistentes que en las caídas a menudo se fracturan antes las vértebras que los discos. Aun así, la hiperflexión violenta de la columna puede romper un disco y fracturar los cuerpos vertebrales adyacentes. El dato contrasta con el 88% de agua del núcleo al nacer y con la deshidratación progresiva del envejecimiento."
+    },
+    {
+      "id": "P1-B07-007",
+      "tipo": "numerico",
+      "prompt": "¿Qué porcentaje de las protrusiones de los discos lumbares ocurre a nivel de L4-L5 o L5-S1?",
+      "dificultad": 2,
+      "etiquetas": [
+        "hernia discal"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 110
+      },
+      "respuesta": {
+        "valor": 95,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Esa concentración se explica por la carga y la movilidad máximas de esos niveles. La disminución del espacio intervertebral radiológico que acompaña a la hernia puede estrechar además los forámenes intervertebrales y agravar la compresión radicular, sobre todo si hay hipertrofia del hueso circundante. Un matiz diagnóstico: como el núcleo se vuelve progresivamente deshidratado, fibroso o incluso granuloso o sólido con el envejecimiento, la hernia aguda se contempla con sospecha en el anciano, en quien es más probable que las raíces queden comprimidas por osificación de los forámenes."
+    },
+    {
+      "id": "P1-B07-008",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina el dolor en la parte baja del dorso y la cadera que irradia por la parte posterior del muslo hacia la pierna?",
+      "dificultad": 1,
+      "etiquetas": [
+        "hernia discal",
+        "dorsalgia"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 110
+      },
+      "respuesta": {
+        "canonico": "ciática"
+      },
+      "feedback": "Se produce a menudo por la hernia de un disco intervertebral lumbar que comprime y afecta al componente L5 o S1 del nervio isquiático. Hay una razón anatómica adicional para su frecuencia: los forámenes intervertebrales de la región lumbar se hacen más pequeños a medida que se desciende, mientras que el tamaño de los nervios lumbares aumenta. Los espolones óseos u osteófitos que se desarrollan en las articulaciones cigapofisiarias o en los bordes posterolaterales durante el envejecimiento pueden estrechar aún más esos forámenes."
+    },
+    {
+      "id": "P1-B07-009",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina la prueba en la que el examinador flexiona pasivamente la cadera con la rodilla en extensión completa para determinar si una lumbalgia tiene una hernia discal como causa?",
+      "dificultad": 2,
+      "etiquetas": [
+        "exploración",
+        "hernia discal"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 110,
+        "fig": "C2-13"
+      },
+      "respuesta": {
+        "canonico": "prueba de la elevación de la pierna recta",
+        "acepta": [
+          "signo de Lasègue",
+          "elevación de la pierna recta"
+        ]
+      },
+      "feedback": "La maniobra provoca una tracción sobre las raíces nerviosas que forman el nervio isquiático y, en el caso de una hernia lumbar, reproduce el dolor. Es un ejemplo de exploración basada directamente en la anatomía: estira el nervio a lo largo de su trayecto y, si una raíz está comprimida en su salida foraminal, la tracción la hace sintomática."
+    },
+    {
+      "id": "P1-B07-010",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre qué raíz comprime un disco herniado en la región lumbar:",
+      "texto": "La regla general es que, cuando protruye un disco, habitualmente comprime la raíz nerviosa {{c1}} al disco herniado; por ejemplo, el nervio L5 queda comprimido por una hernia del disco {{c2}}. Esto ocurre porque el nervio que sale por un foramen pasa a través de la mitad {{c3}} del foramen y por ello no se afecta a ese nivel.",
+      "dificultad": 3,
+      "etiquetas": [
+        "hernia discal"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 110,
+        "fig": "C2-12 C"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "inferior"
+        },
+        "c2": {
+          "canonico": "L4-L5"
+        },
+        "c3": {
+          "canonico": "ósea"
+        }
+      },
+      "feedback": "En las regiones torácica y lumbar el disco forma el borde anterior del foramen intervertebral en su mitad inferior, y la mitad superior está compuesta por el cuerpo de la vértebra superior. Por eso las raíces afectadas son las que descienden hacia el foramen inmediatamente inferior y atraviesan directamente el área herniada. La región cervical se comporta distinto, y conviene no mezclar las dos reglas."
+    },
+    {
+      "id": "P1-B07-011",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las hernias discales cervicales:",
+      "texto": "En la región cervical los discos se hallan colocados centralmente en el borde {{c1}} de los forámenes intervertebrales, de modo que un disco herniado comprime el nervio que sale realmente a ese nivel. Como los nervios espinales cervicales emergen por {{c2}} de la vértebra de su mismo número, la relación numérica del disco herniado con el nervio afectado es la {{c3}}.",
+      "dificultad": 3,
+      "etiquetas": [
+        "hernia discal",
+        "región cervical"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 110
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "anterior"
+        },
+        "c2": {
+          "canonico": "encima"
+        },
+        "c3": {
+          "canonico": "misma"
+        }
+      },
+      "feedback": "Los discos cervicales que se rompen con más frecuencia son los de C5-C6 y C6-C7, que comprimen las raíces de los nervios espinales C6 y C7 respectivamente. La protrusión de un disco cervical causa dolor en el cuello, el hombro, el brazo y la mano. El mecanismo típico es la hiperflexión forzada, crónica o súbita, como en una colisión con la cabeza o en un placaje ilegal en el rugby; cualquier deporte que produzca presión hacia abajo o torsión sobre el cuello puede producirla."
+    },
+    {
+      "id": "P1-B07-012",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina la cirugía que elimina el movimiento entre uno o más segmentos móviles del dorso construyendo un puente de hueso entre vértebras adyacentes?",
+      "dificultad": 2,
+      "etiquetas": [
+        "tratamiento quirúrgico"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 111,
+        "fig": "C2-15"
+      },
+      "respuesta": {
+        "canonico": "fusión espinal",
+        "acepta": [
+          "artrodesis"
+        ]
+      },
+      "feedback": "Se usa hueso de la pelvis o de un banco, y el injerto será eventualmente reemplazado por hueso nuevo que une los cuerpos vertebrales adyacentes; generalmente se colocan implantes metálicos o varillas para mantener las vértebras en su sitio mientras crece el hueso. Es más efectiva para aliviar el entumecimiento, el dolor o la debilidad que para aliviar el dolor de espalda en sí. Su costo es mecánico: la pérdida de movilidad puede aumentar la tensión en los segmentos adyacentes y empeorar la patología, sobre todo cuando varios segmentos están fusionados. El reemplazo con discos artificiales se ha desarrollado como alternativa."
+    },
+    {
+      "id": "P1-B07-013",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la desnervación de las articulaciones cigapofisiarias:",
+      "texto": "En esta técnica se seccionan los nervios, lo que se denomina {{c1}}, o se destruyen mediante {{c2}} percutánea por radiofrecuencia. La desnervación va dirigida a las ramas articulares de {{c3}} ramos posteriores adyacentes, pues cada articulación recibe inervación del nervio que sale a ese nivel y del nervio suprayacente.",
+      "dificultad": 3,
+      "etiquetas": [
+        "tratamiento",
+        "cigapofisiarias"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 111,
+        "fig": "C2-16"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "neurotomía"
+        },
+        "c2": {
+          "canonico": "rizólisis"
+        },
+        "c3": {
+          "canonico": "dos"
+        }
+      },
+      "feedback": "Rizólisis viene del griego rhizo, raíz, más lysis, disolución. Este procedimiento es la aplicación terapéutica directa del dato anatómico de que cada articulación cigapofisiaria está inervada por dos nervios: si solo se secciona uno, la articulación sigue doliendo. Estas articulaciones tienen interés clínico por su proximidad a los forámenes intervertebrales: cuando se lesionan y desarrollan osteófitos se afectan los nervios espinales, con dolor en el patrón del dermatoma y espasmo de los músculos del miotoma correspondiente."
+    },
+    {
+      "id": "P1-B07-014",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las lesiones por flexión de la columna cervical:",
+      "texto": "La flexión forzada súbita, como ocurre en los accidentes de automóvil o por un golpe violento en la nuca, suele producir una fractura por {{c1}} del cuerpo de una o más vértebras. Si el movimiento violento se combina con compresión, la vértebra puede desplazarse {{c2}} sobre la vértebra inferior, con fractura de las caras articulares y rotura de los ligamentos {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "fracturas y luxaciones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 112,
+        "fig": "C2-17"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "aplastamiento",
+          "acepta": [
+            "compresión"
+          ]
+        },
+        "c2": {
+          "canonico": "anteriormente"
+        },
+        "c3": {
+          "canonico": "interespinosos"
+        }
+      },
+      "feedback": "El ejemplo clásico es la luxación de C6 o C7. Las lesiones por flexión más graves se acompañan de lesiones irreparables de la médula espinal. Conviene contrastar el mecanismo opuesto: la extensión brusca y forzada, como en los cabezazos o el bloqueo de la cara en el rugby, produce la lesión por hiperextensión del cuello, que es más probable que lesione las partes posteriores de las vértebras, con fractura por aplastamiento de los arcos vertebrales y sus procesos."
+    },
+    {
+      "id": "P1-B07-015",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la lesión por latigazo:",
+      "texto": "La hiperextensión grave del cuello ocurre en las colisiones por alcance por detrás en vehículos a motor, especialmente cuando el {{c1}} está demasiado bajo. En este tipo de lesiones, el ligamento longitudinal {{c2}} queda intensamente distendido y puede {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "fracturas y luxaciones",
+        "latigazo"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 112,
+        "fig": "C2-17 B"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "reposacabezas",
+          "acepta": [
+            "apoyacabezas"
+          ]
+        },
+        "c2": {
+          "canonico": "anterior"
+        },
+        "c3": {
+          "canonico": "desgarrarse",
+          "acepta": [
+            "romperse"
+          ]
+        }
+      },
+      "feedback": "Esto es la consecuencia directa de que el ligamento longitudinal anterior sea el único que limita la extensión. También puede ocurrir una lesión por hiperflexión cuando la cabeza rebota después de la hiperextensión y golpea contra el tórax, lo que puede producir un «salto de las caras articulares». En la hiperextensión grave de la cabeza sobre la parte superior del cuello puede producirse una rotura del ligamento longitudinal anterior y del anillo fibroso del disco C2-C3, de modo que el cráneo, C1 y la porción anterior de C2 se separan del resto del esqueleto axial, habitualmente con sección medular."
+    },
+    {
+      "id": "P1-B07-016",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cuál es la vértebra no cervical que se fractura con más frecuencia?",
+      "dificultad": 2,
+      "etiquetas": [
+        "fracturas y luxaciones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 112
+      },
+      "respuesta": {
+        "canonico": "T12"
+      },
+      "feedback": "La razón es la transición: el paso desde la región torácica, relativamente rígida, a la lumbar, mucho más móvil, ocurre bruscamente, y T11 y especialmente T12 participan superiormente en los movimientos rotatorios pero inferiormente solo en los de flexión y extensión. Esa doble naturaleza concentra fuerzas de cizallamiento en una sola vértebra. Nótese también que la luxación es rara en las regiones torácica y lumbar a causa del encaje de los procesos articulares."
+    },
+    {
+      "id": "P1-B07-017",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la espondilólisis y la espondilolistesis:",
+      "texto": "La {{c1}} es una fractura de la columna ósea que conecta los procesos articulares superior e inferior, es decir de la parte {{c2}}. Cuando esa fractura deja de actuar el mecanismo de encaje, puede producirse una luxación entre las vértebras adyacentes, conocida como {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "espondilólisis",
+        "espondilolistesis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 113,
+        "fig": "C2-18"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "espondilólisis"
+        },
+        "c2": {
+          "canonico": "interarticular",
+          "acepta": [
+            "pars interarticularis"
+          ]
+        },
+        "c3": {
+          "canonico": "espondilolistesis"
+        }
+      },
+      "feedback": "La espondilólisis de L5 puede ocasionar una espondilolistesis del cuerpo de L5 respecto al sacro, por la inclinación descendente de la articulación L5-S1. Su origen es probablemente del desarrollo: un fallo en la unión adecuada del centrum de L5 con los arcos neurales en la articulación neurocentral. En la radiografía oblicua se reconoce por el «signo del terrier escocés»: el proceso articular superior es la oreja, el pedículo el ojo, el proceso transverso el morro y la parte interarticular el cuello, que aparece fracturado. La espondilolistesis L5-S1 puede presionar los nervios de la cola de caballo y producir dorsalgia y lumbalgia."
+    },
+    {
+      "id": "P1-B07-018",
+      "tipo": "numerico",
+      "prompt": "¿Qué porcentaje de las fracturas que ocurren en el axis constituyen las fracturas del diente?",
+      "dificultad": 2,
+      "etiquetas": [
+        "fractura del diente del axis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 114,
+        "fig": "C2-20"
+      },
+      "respuesta": {
+        "valor": 40,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "La fractura más frecuente se produce en la base del diente, en su unión con el cuerpo del axis, y a menudo es inestable, es decir no consolida, por dos razones: el ligamento transverso del atlas queda situado entre los fragmentos, y el fragmento separado deja de recibir aporte vascular, lo que da lugar a necrosis avascular. Casi tan frecuentes son las fracturas del cuerpo vertebral inferiores a la base del diente, que curan con más facilidad porque los fragmentos conservan su irrigación."
+    },
+    {
+      "id": "P1-B07-019",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la regla de los tercios de Steel:",
+      "texto": "Aproximadamente un tercio del anillo del atlas está ocupado por el {{c1}} del axis, un tercio por la {{c2}} espinal y el tercio restante por el espacio lleno de líquido y los tejidos que rodean la médula. Ello explica por qué algunos individuos con desplazamiento {{c3}} del atlas pueden hallarse relativamente asintomáticos.",
+      "dificultad": 3,
+      "etiquetas": [
+        "ligamento transverso",
+        "atlas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 114,
+        "fig": "C2-21"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "diente",
+          "acepta": [
+            "proceso odontoides"
+          ]
+        },
+        "c2": {
+          "canonico": "médula"
+        },
+        "c3": {
+          "canonico": "anterior"
+        }
+      },
+      "feedback": "El margen de seguridad es ese tercio de espacio, de modo que los síntomas aparecen cuando el desplazamiento supera un tercio del diámetro del anillo del atlas. Cuando se rompe el ligamento transverso, el diente queda libre y se produce subluxación atlantoaxial; en ausencia de un ligamento competente, la médula cervical alta puede quedar comprimida entre el arco posterior del atlas y el diente, con tetraplejía, o puede comprimirse la médula oblongada y producirse la muerte. Un 20% de los individuos con síndrome de Down presenta laxitud o agenesia de este ligamento."
+    },
+    {
+      "id": "P1-B07-020",
+      "tipo": "numerico",
+      "prompt": "¿En qué porcentaje aumenta la amplitud de movimientos del lado opuesto la rotura de un ligamento alar?",
+      "dificultad": 3,
+      "etiquetas": [
+        "ligamentos alares"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 115
+      },
+      "respuesta": {
+        "valor": 30,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "Los ligamentos alares son más débiles que el ligamento transverso del atlas, de modo que la flexión y la rotación combinadas de la cabeza pueden desgarrar uno o ambos. Ese aumento de movilidad es justamente lo que hace inestable la articulación. Conviene recordar que la inflamación del área craneovertebral puede ablandar los ligamentos de estas articulaciones y ocasionar una luxación, y que una movilización súbita de un paciente, por ejemplo de la cama a una silla, puede desplazar el diente posteriormente y lesionar la médula."
+    },
+    {
+      "id": "P1-B07-021",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la cifosis torácica excesiva:",
+      "texto": "La cifosis torácica excesiva se caracteriza por un aumento anómalo de la curvatura torácica, de modo que la columna se curva hacia {{c1}}. Puede producirse por erosión de la parte anterior de una o más vértebras a causa de {{c2}}, y coloquialmente se conoce como {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "curvaturas anómalas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 115,
+        "fig": "C2-22"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "atrás"
+        },
+        "c2": {
+          "canonico": "osteoporosis"
+        },
+        "c3": {
+          "canonico": "joroba"
+        }
+      },
+      "feedback": "La joroba de Dowager es el nombre coloquial para la cifosis torácica excesiva por osteoporosis en mujeres ancianas, aunque también ocurre en hombres de edad avanzada. El mecanismo es el mismo que vimos en la estructura del cuerpo vertebral: la osteoporosis afecta especialmente a las trabéculas horizontales del hueso esponjoso, y las verticales restantes, privadas de soporte, son menos capaces de resistir la compresión y sufren fracturas, de modo que las vértebras torácicas se acortan y adoptan forma de cuña. La cifosis excesiva incrementa el diámetro anteroposterior del tórax y reduce la capacidad dinámica pulmonar."
+    },
+    {
+      "id": "P1-B07-022",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué curvatura anómala se caracteriza por una curvatura lateral acompañada de rotación de las vértebras?",
+      "dificultad": 1,
+      "etiquetas": [
+        "curvaturas anómalas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 117,
+        "fig": "C2-22"
+      },
+      "respuesta": {
+        "canonico": "escoliosis"
+      },
+      "feedback": "Los procesos espinosos se orientan hacia la cavidad de la curvatura anormal y, cuando el individuo se dobla hacia delante, las costillas giran hacia atrás y protruyen en el lado de la convexidad aumentada. Ese es el fundamento de la maniobra de exploración: con el sujeto doblado por la cintura se observa si la espalda queda nivelada. Las deformidades como la hemivértebra, es decir la ausencia de desarrollo de la mitad de una vértebra, causan escoliosis estructural, y cuando esta se combina con cifosis torácica excesiva se habla de cifoescoliosis."
+    },
+    {
+      "id": "P1-B07-023",
+      "tipo": "numerico",
+      "prompt": "¿Qué porcentaje de todas las escoliosis estructurales son idiopáticas?",
+      "dificultad": 2,
+      "etiquetas": [
+        "escoliosis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 117
+      },
+      "respuesta": {
+        "valor": 80,
+        "unidad": "%",
+        "tol": 0
+      },
+      "feedback": "La escoliosis idiopática se desarrolla primero en las niñas entre los 10 y 14 años, y en los niños entre los 12 y 15 años; es más frecuente y más grave en las niñas. Ese dato marca la ventana de tamizaje escolar. Hay que distinguirla de la escoliosis funcional, debida a problemas extrínsecos a una columna estructuralmente normal, como la debilidad asimétrica de los músculos intrínsecos del dorso, llamada escoliosis miopática, o una diferencia en la longitud de los miembros inferiores con ladeo compensatorio de la pelvis."
+    },
+    {
+      "id": "P1-B07-024",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la escoliosis postural:",
+      "texto": "La escoliosis por {{c1}} se supone que se produce por permanecer de pie o sentarse en una postura inadecuada. Cuando la escoliosis es totalmente postural, desaparece con la {{c2}} máxima de la columna vertebral, y las escoliosis funcionales no {{c3}} después de haber solucionado el problema que las originó.",
+      "dificultad": 3,
+      "etiquetas": [
+        "escoliosis"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 117
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "hábito"
+        },
+        "c2": {
+          "canonico": "flexión"
+        },
+        "c3": {
+          "canonico": "persisten"
+        }
+      },
+      "feedback": "Ese criterio, la desaparición con la flexión máxima, es lo que separa en la exploración una escoliosis postural de una estructural. Otro dato clínico de la misma sección: en bipedestación, una inclinación evidente hacia un lado puede ser un signo de escoliosis por hernia de un disco intervertebral, es decir, una postura antálgica y no una deformidad estructural."
+    },
+    {
+      "id": "P1-B07-025",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la lordosis lumbar excesiva:",
+      "texto": "La lordosis lumbar excesiva se caracteriza por una inclinación anterior de la {{c1}}, con una mayor extensión de las vértebras lumbares. Se asocia a menudo con debilidad de la musculatura del tronco, en especial de los músculos {{c2}} del abdomen, y para compensar el desplazamiento del centro de gravedad las mujeres desarrollan habitualmente esta curvatura durante las últimas fases del {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "curvaturas anómalas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 115,
+        "fig": "C2-22 C"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "pelvis"
+        },
+        "c2": {
+          "canonico": "anterolaterales"
+        },
+        "c3": {
+          "canonico": "embarazo"
+        }
+      },
+      "feedback": "La parte alta del sacro queda flexionada o rotada anteroinferiormente. Esta curvatura lordótica puede originar dolor de espalda, que desaparece habitualmente poco después del parto. La obesidad en ambos sexos produce el mismo efecto por el mayor peso del contenido del abdomen por delante del centro de gravedad normal. De ahí que la corrección sea doble: pérdida de peso y ejercicio de los músculos anterolaterales del abdomen."
+    }
+  ]
+}

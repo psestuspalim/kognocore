@@ -1,0 +1,705 @@
+{
+  "bloque": {
+    "id": "P1-B08",
+    "titulo": "Músculos del dorso: extrínsecos superficiales e intermedios · Músculos intrínsecos en sus tres capas · Transversoespinosos · Movimientos de las articulaciones intervertebrales · Región suboccipital",
+    "parcial": 1,
+    "sesion": "6 de febrero",
+    "paginas": "107, 117-130"
+  },
+  "items": [
+    {
+      "id": "P1-B08-001",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 4 músculos extrínsecos superficiales del dorso:",
+      "dificultad": 1,
+      "etiquetas": [
+        "músculos extrínsecos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 117,
+        "fig": "2-33 A"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "trapecio"
+          },
+          {
+            "canonico": "latísimo del dorso",
+            "acepta": [
+              "dorsal ancho"
+            ]
+          },
+          {
+            "canonico": "elevador de la escápula"
+          },
+          {
+            "canonico": "romboideos",
+            "acepta": [
+              "romboideo mayor y menor"
+            ]
+          }
+        ]
+      },
+      "feedback": "Son músculos axioapendiculares posteriores: conectan el esqueleto axial con el esqueleto apendicular superior, es decir la cintura escapular y el húmero, y producen y controlan los movimientos del miembro superior. Aunque están localizados en la región del dorso, la mayor parte recibe su inervación de ramos anteriores de los nervios cervicales. El trapecio es la excepción llamativa, porque recibe sus fibras motoras del nervio accesorio, el NC XI."
+    },
+    {
+      "id": "P1-B08-002",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los músculos extrínsecos intermedios:",
+      "texto": "Los músculos extrínsecos intermedios del dorso son los {{c1}} posteriores, músculos delgados designados habitualmente como músculos respiratorios superficiales, pero cuya función es más {{c2}} que motora. Ambos están inervados por los nervios {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "músculos extrínsecos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 117
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "serratos"
+        },
+        "c2": {
+          "canonico": "propioceptiva"
+        },
+        "c3": {
+          "canonico": "intercostales"
+        }
+      },
+      "feedback": "El serrato posterosuperior está situado profundo respecto al romboideo, y el serrato posteroinferior lo está respecto al latísimo del dorso. La inervación también se reparte: el superior por los cuatro primeros nervios intercostales y el inferior por los cuatro últimos. Que su papel sea propioceptivo más que motor es un dato que suele preguntarse, porque contradice la idea intuitiva de que todo músculo de la pared sirve para mover."
+    },
+    {
+      "id": "P1-B08-003",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los músculos intrínsecos del dorso:",
+      "texto": "Los músculos intrínsecos del dorso están inervados por ramos {{c1}} de los nervios espinales y actúan para mantener la {{c2}} y controlar los movimientos de la columna vertebral. Se extienden desde la {{c3}} hasta el cráneo y están encerrados por la fascia profunda.",
+      "dificultad": 1,
+      "etiquetas": [
+        "músculos intrínsecos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 118,
+        "fig": "2-34"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "posteriores"
+        },
+        "c2": {
+          "canonico": "postura"
+        },
+        "c3": {
+          "canonico": "pelvis"
+        }
+      },
+      "feedback": "El criterio de inervación es el que separa limpiamente los dos grupos: extrínsecos por ramos anteriores, con la excepción del trapecio por el NC XI, e intrínsecos por ramos posteriores. También se llaman músculos del dorso propiamente dichos o músculos profundos del dorso. Esa diferencia no es anecdótica: refleja que los extrínsecos son migrantes del miembro superior y los intrínsecos son los auténticos músculos del esqueleto axial."
+    },
+    {
+      "id": "P1-B08-004",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la fascia toracolumbar:",
+      "texto": "La fascia que encierra los músculos intrínsecos se une medialmente al ligamento {{c1}}, a los vértices de los procesos espinosos, al ligamento supraespinoso y a la cresta {{c2}} media. Lateralmente se une a los procesos transversos cervicales y lumbares y a los {{c3}} de las costillas.",
+      "dificultad": 2,
+      "etiquetas": [
+        "fascia toracolumbar"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 118,
+        "fig": "2-35"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "nucal"
+        },
+        "c2": {
+          "canonico": "sacra"
+        },
+        "c3": {
+          "canonico": "ángulos"
+        }
+      },
+      "feedback": "Las porciones torácica y lumbar de esa fascia profunda constituyen la fascia toracolumbar, que se extiende lateralmente desde los procesos espinosos. Su grosor cambia según la región: forma una delgada cubierta sobre los músculos en la región torácica y una gruesa cubierta en la región lumbar, donde además se organiza en láminas anterior, media y posterior que envuelven al cuadrado lumbar y a los músculos intrínsecos."
+    },
+    {
+      "id": "P1-B08-005",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 3 capas en que se distribuyen los músculos intrínsecos del dorso:",
+      "dificultad": 1,
+      "etiquetas": [
+        "músculos intrínsecos",
+        "capas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 118
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "superficial"
+          },
+          {
+            "canonico": "intermedia"
+          },
+          {
+            "canonico": "profunda"
+          }
+        ]
+      },
+      "feedback": "Cada capa tiene su grupo y su dirección de fibras, y esa dirección es la mejor clave para identificarlas en la disección: la superficial son los esplenios, cuyas fibras cursan de medial a lateral conforme ascienden; la intermedia es el erector de la columna, con fibras principalmente verticales; y la profunda son los transversoespinosos, que cursan de lateral a medial. Tres capas, tres direcciones, tres funciones."
+    },
+    {
+      "id": "P1-B08-006",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los músculos esplenios:",
+      "texto": "Los músculos esplenios son gruesos y planos, están situados en las caras lateral y posterior del cuello y cubren los músculos verticales de modo parecido a una {{c1}}, lo que explica su nombre. Se originan en la línea media y se extienden {{c2}} hasta las vértebras cervicales y el cráneo.",
+      "dificultad": 2,
+      "etiquetas": [
+        "capa superficial",
+        "esplenios"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 119,
+        "fig": "2-34"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "venda",
+          "acepta": [
+            "vendaje"
+          ]
+        },
+        "c2": {
+          "canonico": "superolateralmente"
+        }
+      },
+      "feedback": "Del latín splenion, vendaje. Son dos: el esplenio de la cabeza, que llega al cráneo, y el esplenio cervical, que llega a las vértebras cervicales. Su función mecánica deriva de su dirección oblicua: cubren y mantienen en su posición a los músculos profundos del cuello, y al actuar unilateralmente producen flexión lateral y rotación hacia el mismo lado, mientras que bilateralmente extienden la cabeza y el cuello."
+    },
+    {
+      "id": "P1-B08-007",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 3 columnas en que se divide el erector de la columna:",
+      "dificultad": 1,
+      "etiquetas": [
+        "erector de la columna"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 120,
+        "fig": "2-36"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "iliocostal"
+          },
+          {
+            "canonico": "longísimo"
+          },
+          {
+            "canonico": "espinoso"
+          }
+        ]
+      },
+      "feedback": "Su posición mediolateral es constante y conviene memorizarla en ese orden: el iliocostal es la columna lateral, el longísimo la intermedia y el espinoso la medial. Cada columna se divide regionalmente en tres partes según sus inserciones superiores, de donde salen nombres como iliocostal lumbar, iliocostal torácico e iliocostal cervical. El espinoso es el más delgado y medial de los tres componentes."
+    },
+    {
+      "id": "P1-B08-008",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el origen común del erector de la columna:",
+      "texto": "El origen común de las tres columnas se produce a través de un amplio {{c1}} que se inserta inferiormente en la parte posterior de la cresta {{c2}}, en la cara posterior del {{c3}}, en los ligamentos sacroilíacos y en los procesos espinosos lumbares inferiores.",
+      "dificultad": 2,
+      "etiquetas": [
+        "erector de la columna"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 120
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "tendón"
+        },
+        "c2": {
+          "canonico": "ilíaca"
+        },
+        "c3": {
+          "canonico": "sacro"
+        }
+      },
+      "feedback": "Los erectores están situados en un surco a cada lado de la columna, entre los procesos espinosos centralmente y los ángulos de las costillas lateralmente. Se designan a menudo como músculos largos del dorso y son los principales extensores de la columna vertebral. Funcionan como músculos dinámicos: actuando bilateralmente extienden la columna y la cabeza, y cuando el dorso se flexiona controlan ese movimiento mediante contracción excéntrica, es decir frenando la caída del tronco en vez de producirla."
+    },
+    {
+      "id": "P1-B08-009",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 3 músculos del grupo transversoespinoso:",
+      "dificultad": 1,
+      "etiquetas": [
+        "transversoespinosos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 120,
+        "fig": "2-37"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "semiespinoso"
+          },
+          {
+            "canonico": "multífido"
+          },
+          {
+            "canonico": "rotadores"
+          }
+        ]
+      },
+      "feedback": "Se disponen de forma oblicua profundamente al erector de la columna y están ordenados de superficial a profundo en ese mismo orden: semiespinoso, multífido y rotadores. Todos se originan a partir de los procesos transversos y pasan a los procesos espinosos de vértebras más superiores, ocupando el canal entre ambos procesos e insertándose también en las láminas y en los ligamentos que las unen."
+    },
+    {
+      "id": "P1-B08-010",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el semiespinoso:",
+      "texto": "El semiespinoso es el miembro {{c1}} del grupo transversoespinoso y, como su nombre indica, se origina aproximadamente a partir de la {{c2}} de la columna vertebral. Se divide en tres partes según sus inserciones superiores: semiespinoso de la cabeza, torácico y {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "transversoespinosos",
+        "semiespinoso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 120
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "superficial"
+        },
+        "c2": {
+          "canonico": "mitad"
+        },
+        "c3": {
+          "canonico": "cervical"
+        }
+      },
+      "feedback": "El semiespinoso de la cabeza produce el abultamiento longitudinal de la nuca, cerca del plano medio, que es una referencia de superficie fácil de identificar. Se origina en los procesos transversos de C4 a T12 y sus fibras discurren superomedialmente hacia el hueso occipital y los procesos espinosos, abarcando de cuatro a seis segmentos. Al actuar extiende la cabeza y las regiones torácica y cervical, y rota hacia el lado opuesto."
+    },
+    {
+      "id": "P1-B08-011",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el multífido:",
+      "texto": "El músculo multífido es la capa {{c1}} del grupo transversoespinoso, está compuesto por cortos haces musculares triangulares y es más grueso en la región {{c2}}. Sus fibras pasan oblicuamente superomedialmente a lo largo de los procesos espinosos de vértebras localizadas {{c3}} segmentos por encima de su inserción.",
+      "dificultad": 3,
+      "etiquetas": [
+        "transversoespinosos",
+        "multífido"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 120,
+        "fig": "2-38 B"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "media",
+          "acepta": [
+            "intermedia"
+          ]
+        },
+        "c2": {
+          "canonico": "lumbar"
+        },
+        "c3": {
+          "canonico": "2-4",
+          "acepta": [
+            "dos a cuatro"
+          ]
+        }
+      },
+      "feedback": "Su función principal no es producir movimiento sino estabilizar las vértebras durante los movimientos locales de la columna. Esa es la razón de que la rehabilitación de la lumbalgia insista en el multífido: es un estabilizador segmentario profundo, y su atrofia se asocia con dolor lumbar recurrente. Se origina en la cara posterior del sacro, la espina ilíaca posterosuperior, la aponeurosis del erector, los ligamentos sacroilíacos, los procesos mamilares lumbares, los procesos transversos de T1-T3 y los procesos articulares de C4-C7."
+    },
+    {
+      "id": "P1-B08-012",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los rotadores:",
+      "texto": "Los músculos rotadores constituyen la capa más {{c1}} de los transversoespinosos y están más desarrollados en la región {{c2}}. Además de estabilizar las vértebras y ayudar en la extensión local y la rotación, pueden funcionar como órganos de {{c3}}.",
+      "dificultad": 3,
+      "etiquetas": [
+        "transversoespinosos",
+        "rotadores"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 120,
+        "fig": "2-37 B"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "profunda"
+        },
+        "c2": {
+          "canonico": "torácica"
+        },
+        "c3": {
+          "canonico": "propiocepción"
+        }
+      },
+      "feedback": "Esa función propioceptiva es coherente con su arquitectura: son músculos muy cortos, con una relación husos neuromusculares por fibra muy alta, lo que los hace mejores sensores de posición que generadores de fuerza. Se distinguen los rotadores cortos, que se insertan en la vértebra inmediatamente superior, y los largos, que saltan dos segmentos por encima de la vértebra de origen."
+    },
+    {
+      "id": "P1-B08-013",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la capa profunda menor:",
+      "texto": "Los músculos {{c1}} unen las superficies superiores e inferiores de los procesos espinosos de vértebras contiguas y ayudan en la extensión y rotación de la columna. Los músculos {{c2}}, que unen procesos transversos contiguos, y los elevadores de las {{c3}} completan esta capa menor.",
+      "dificultad": 3,
+      "etiquetas": [
+        "capa profunda menor"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 123,
+        "fig": "2-38 C"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "interespinosos"
+        },
+        "c2": {
+          "canonico": "intertransversos"
+        },
+        "c3": {
+          "canonico": "costillas"
+        }
+      },
+      "feedback": "Los interespinosos existen sobre todo en las regiones cervical y lumbar, que son las más móviles en flexión y extensión. Los elevadores de las costillas representan a los músculos intertransversos posteriores en la región torácica, lo que explica por qué no hay intertransversos propiamente dichos ahí. Como los rotadores, estos músculos muy cortos aportan más control fino y propiocepción que fuerza."
+    },
+    {
+      "id": "P1-B08-014",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la dirección de las fibras según la capa:",
+      "texto": "A medida que ascienden las fibras, su dirección varía en los tres grupos principales: los músculos superficiales cursan en sentido {{c1}} a lateral, los intermedios se dirigen en su mayoría {{c2}}, y los profundos cursan principalmente en sentido {{c3}} a medial.",
+      "dificultad": 2,
+      "etiquetas": [
+        "músculos intrínsecos",
+        "capas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 119,
+        "fig": "2-34"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "medial"
+        },
+        "c2": {
+          "canonico": "verticalmente",
+          "acepta": [
+            "vertical"
+          ]
+        },
+        "c3": {
+          "canonico": "lateral"
+        }
+      },
+      "feedback": "Es la regla que permite identificar la capa en una disección o en un corte transversal sin leer etiquetas. Y tiene lógica funcional: las fibras verticales del erector extienden, las oblicuas de los transversoespinosos rotan y estabilizan, y las oblicuas en sentido contrario de los esplenios rotan hacia el mismo lado. Dirección de fibra y acción van siempre juntas."
+    },
+    {
+      "id": "P1-B08-015",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la participación de los músculos abdominales:",
+      "texto": "En todos los movimientos de las articulaciones intervertebrales, excepto la {{c1}} pura, interviene total o parcialmente la contracción {{c2}} de los músculos abdominales. Es la interacción de los músculos anteriores y posteriores, y de los pares {{c3}} de cada uno, lo que proporciona estabilidad y produce los movimientos del esqueleto axial.",
+      "dificultad": 3,
+      "etiquetas": [
+        "movimientos intervertebrales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 122,
+        "fig": "tabla 2-9"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "extensión"
+        },
+        "c2": {
+          "canonico": "concéntrica"
+        },
+        "c3": {
+          "canonico": "contralaterales"
+        }
+      },
+      "feedback": "La contracción excéntrica de los antagonistas, es decir su relajación controlada, tiene una importancia crucial para que el movimiento sea suave y controlado. Este punto conecta directamente con lo visto en el capítulo de tejido muscular y es la base de cualquier programa de estabilización del tronco: el dorso no se entrena solo por detrás, porque los flexores abdominales participan incluso en movimientos que parecen puramente dorsales."
+    },
+    {
+      "id": "P1-B08-016",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué músculo produce el abultamiento longitudinal de la nuca cerca del plano medio?",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomía de superficie",
+        "semiespinoso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 120,
+        "fig": "2-38 A"
+      },
+      "respuesta": {
+        "canonico": "semiespinoso de la cabeza"
+      },
+      "feedback": "Es una de las referencias de superficie del dorso que conviene reconocer con el modelo vivo. Las otras dos son los abultamientos verticales que producen los erectores de la columna a cada lado del surco medio posterior, fácilmente palpables en la región lumbar y cuyo borde lateral coincide con los ángulos costales, y el propio surco medio posterior, que corresponde al surco nucal en el cuello y es más profundo en las regiones torácica baja y lumbar alta."
+    },
+    {
+      "id": "P1-B08-017",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre el surco medio posterior:",
+      "texto": "El surco medio posterior se corresponde con el surco {{c1}} en el cuello y es más profundo en las regiones torácica baja y lumbar alta. Finaliza en el área triangular aplanada que cubre el {{c2}} y queda reemplazado inferiormente por la hendidura {{c3}}.",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 126
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "nucal"
+        },
+        "c2": {
+          "canonico": "sacro"
+        },
+        "c3": {
+          "canonico": "interglútea"
+        }
+      },
+      "feedback": "Con el individuo en bipedestación, los procesos espinosos lumbares pueden quedar señalados por depresiones en la piel, y suelen hacerse visibles al flexionar la columna vertebral. El borde lateral de los erectores viene indicado por unos surcos superficiales en la piel que coinciden con los ángulos costales. Estas referencias son las que permiten localizar niveles vertebrales sin radiografía, por ejemplo antes de una punción lumbar."
+    },
+    {
+      "id": "P1-B08-018",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 4 músculos suboccipitales:",
+      "dificultad": 2,
+      "etiquetas": [
+        "región suboccipital"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 127,
+        "fig": "2-42"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "recto posterior mayor",
+            "acepta": [
+              "recto posterior mayor de la cabeza"
+            ]
+          },
+          {
+            "canonico": "recto posterior menor",
+            "acepta": [
+              "recto posterior menor de la cabeza"
+            ]
+          },
+          {
+            "canonico": "oblicuo superior",
+            "acepta": [
+              "oblicuo superior de la cabeza"
+            ]
+          },
+          {
+            "canonico": "oblicuo inferior",
+            "acepta": [
+              "oblicuo inferior de la cabeza"
+            ]
+          }
+        ]
+      },
+      "feedback": "Son dos rectos posteriores de la cabeza, mayor y menor, y dos oblicuos. Están situados profundamente, es decir anteriores, respecto a los músculos semiespinosos de la cabeza, en un espacio piramidal inferior a la protuberancia occipital externa que incluye las caras posteriores de C1 y C2. Los cuatro comparten inervación, lo que facilita recordarlos como un bloque funcional dedicado a los movimientos finos de la cabeza sobre el atlas y el axis."
+    },
+    {
+      "id": "P1-B08-019",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué nervio inerva los cuatro músculos suboccipitales?",
+      "dificultad": 2,
+      "etiquetas": [
+        "región suboccipital",
+        "inervación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 128,
+        "fig": "2-43"
+      },
+      "respuesta": {
+        "canonico": "nervio suboccipital",
+        "acepta": [
+          "ramo posterior de C1",
+          "C1"
+        ]
+      },
+      "feedback": "Es el ramo posterior del nervio espinal C1, y surge en el punto donde la arteria vertebral cursa profundamente entre el hueso occipital y el atlas, dentro del triángulo suboccipital. Conviene aprenderlo junto con sus vecinos de la región cervical posterior: el nervio occipital mayor es el ramo posterior de C2, surge inferior al oblicuo inferior de la cabeza e inerva la piel sobre el cuello y el hueso occipital, y el occipital menor procede de los ramos anteriores de C2-C3."
+    },
+    {
+      "id": "P1-B08-020",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre las inserciones del recto posterior mayor:",
+      "texto": "El recto posterior mayor de la cabeza se origina en el proceso espinoso de la vértebra {{c1}} y se inserta en la parte {{c2}} de la línea nucal inferior del hueso occipital. El recto posterior menor, en cambio, se origina en el tubérculo posterior del arco posterior de {{c3}}.",
+      "dificultad": 3,
+      "etiquetas": [
+        "región suboccipital"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 127,
+        "fig": "tabla 2-10"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "C2"
+        },
+        "c2": {
+          "canonico": "lateral"
+        },
+        "c3": {
+          "canonico": "C1"
+        }
+      },
+      "feedback": "La diferencia de origen refleja la anatomía de las dos primeras vértebras: C1 carece de proceso espinoso y solo ofrece un tubérculo posterior, de modo que el músculo que nace de ella es necesariamente el menor y el más medial. El recto posterior menor se inserta en la parte medial de la línea nucal inferior, y el mayor en la lateral, de forma que entre ambos cubren esa línea de medial a lateral."
+    },
+    {
+      "id": "P1-B08-021",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué arteria cursa profundamente entre el hueso occipital y el atlas, dentro del triángulo suboccipital?",
+      "dificultad": 2,
+      "etiquetas": [
+        "región suboccipital",
+        "vascularización"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 128
+      },
+      "respuesta": {
+        "canonico": "arteria vertebral"
+      },
+      "feedback": "Ese es el contenido que da importancia clínica al triángulo suboccipital: la arteria vertebral discurre ahí en el surco de la arteria vertebral del arco posterior del atlas antes de atravesar la membrana atlantooccipital posterior y entrar al cráneo. Las manipulaciones cervicales bruscas en esa zona pueden lesionarla y producir disección vertebral, y el nervio suboccipital emerge justo en ese punto."
+    },
+    {
+      "id": "P1-B08-022",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Cómo se denomina el nervio que es ramo posterior del nervio espinal C2, surge inferior al oblicuo inferior de la cabeza e inerva la piel del hueso occipital?",
+      "dificultad": 2,
+      "etiquetas": [
+        "región cervical posterior",
+        "inervación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 129,
+        "fig": "tabla 2-13"
+      },
+      "respuesta": {
+        "canonico": "nervio occipital mayor",
+        "acepta": [
+          "occipital mayor"
+        ]
+      },
+      "feedback": "Es el nervio implicado en la neuralgia occipital, un dolor punzante en el territorio que inerva y que a menudo se confunde con cefalea de otro origen; el bloqueo de ese nervio es tanto diagnóstico como terapéutico. Conviene no confundirlo con el occipital menor, que procede de los ramos anteriores de C2-C3 y recoge la piel de la parte posterolateral superior del cuello, ni con el suboccipital, que es puramente motor para el triángulo."
+    },
+    {
+      "id": "P1-B08-023",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre los músculos que producen la extensión de la cabeza:",
+      "texto": "Entre los músculos que producen la extensión de la cabeza se encuentran el trapecio, el {{c1}} de la cabeza, el semiespinoso de la cabeza, el longísimo de la cabeza y los rectos {{c2}} de la cabeza, mayor y menor. La flexión de la cabeza la producen los músculos {{c3}} e infrahioideos junto con el recto anterior de la cabeza.",
+      "dificultad": 3,
+      "etiquetas": [
+        "movimientos de la cabeza"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 128,
+        "fig": "tabla 2-11"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "esplenio"
+        },
+        "c2": {
+          "canonico": "posteriores"
+        },
+        "c3": {
+          "canonico": "suprahioideos"
+        }
+      },
+      "feedback": "Nótese que los movimientos de la cabeza se producen en las articulaciones craneovertebrales y se analizan aparte de los de la columna, porque los músculos implicados son distintos. El esternocleidomastoideo aparece en ambas listas: sus fibras anteriores flexionan, pero el músculo en conjunto participa también en la extensión del cuello, según la posición de partida."
+    },
+    {
+      "id": "P1-B08-024",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado sobre la ergonomía del levantamiento de pesos:",
+      "texto": "La carga sobre los discos depende del peso del objeto, del peso de la parte superior del cuerpo, de la fuerza de los músculos del dorso y de sus respectivos brazos de {{c1}} en relación con el centro del disco. Las fuerzas musculares y las cargas discales son {{c2}} cuando el objeto se lleva {{c3}} del cuerpo.",
+      "dificultad": 2,
+      "etiquetas": [
+        "cuadro clínico",
+        "ergonomía"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 130,
+        "fig": "C2-23"
+      },
+      "blancos": {
+        "c1": {
+          "canonico": "palanca"
+        },
+        "c2": {
+          "canonico": "menores"
+        },
+        "c3": {
+          "canonico": "cerca",
+          "acepta": [
+            "cerca del cuerpo",
+            "próximo"
+          ]
+        }
+      },
+      "feedback": "El punto de apoyo de esa palanca es el centro del disco intervertebral. Por eso la técnica adecuada consiste en ponerse en cuclillas, mantener el dorso lo más recto posible y llevar la carga pegada al cuerpo: no se trata solo del peso del objeto, sino de la distancia a la que ese peso actúa respecto al disco. Al utilizar el dorso como palanca se impone una enorme tensión sobre la columna, sus músculos y sus ligamentos."
+    },
+    {
+      "id": "P1-B08-025",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué nervio craneal inerva el trapecio, a diferencia del resto de los músculos extrínsecos del dorso?",
+      "dificultad": 1,
+      "etiquetas": [
+        "inervación",
+        "músculos extrínsecos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": 130
+      },
+      "respuesta": {
+        "canonico": "nervio accesorio",
+        "acepta": [
+          "NC XI",
+          "accesorio",
+          "espinal"
+        ]
+      },
+      "feedback": "Es la excepción que hay que retener dentro de una regla por lo demás limpia: los músculos extrínsecos del dorso están inervados por los ramos anteriores de los nervios espinales, y los intrínsecos por los ramos posteriores. El trapecio escapa a ambas porque, como el esternocleidomastoideo, deriva embriológicamente del arco branquial y migra con su nervio. Por eso una lesión del NC XI en el triángulo cervical posterior produce caída del hombro y dificultad para elevar el brazo por encima de la horizontal."
+    }
+  ]
+}
