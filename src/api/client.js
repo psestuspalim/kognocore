@@ -119,7 +119,7 @@ import { mockCourses, mockFolders, mockSubjects, mockQuizzes, mockQuizSettings, 
 // Helper to initialize storage
 // Courses, subjects, and folders are ALWAYS seeded from mock-data to keep the
 // medicine curriculum up to date. Other entities only initialize if absent.
-const SEED_VERSION = 'v16_bundle_capitulos_cortados_P1-B02'; // bump this to force a re-seed
+const SEED_VERSION = 'v17_bundle_diagnosticos_P1-B23'; // bump this to force a re-seed
 
 const initializeStorage = () => {
   if (typeof window === 'undefined') return;

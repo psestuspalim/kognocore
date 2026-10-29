@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { client } from '@/api/client';
 import { useQuery } from '@tanstack/react-query';
-import { BookOpen, Users, FileJson, Wrench, FileDown, Settings, LayoutDashboard, Activity } from 'lucide-react';
+import { BookOpen, Users, FileJson, Wrench, FileDown, Settings, LayoutDashboard, Activity, Eye } from 'lucide-react';
 import AdminShell from '../components/admin/AdminShell';
 import AdminPageHeader from '../components/admin/AdminPageHeader';
 import AdminKpiCard from '../components/admin/AdminKpiCard';
@@ -251,7 +251,17 @@ export default function AdminHome() {
           Herramientas de Mantenimiento y Gestión
         </h2>
         <div className="surface-panel p-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Link to={`${createPageUrl('AdminProgress')}?tab=review`} className="contents">
+              <Button
+                variant="outline"
+                className="h-24 flex flex-col items-center justify-center gap-2 border-white/80 bg-white/75 hover:bg-amber-50 hover:border-amber-200 hover:text-amber-700 transition-all text-slate-800"
+              >
+                <Eye className="w-6 h-6 text-amber-600" />
+                <span className="font-semibold">Revisar Respuestas</span>
+                <span className="text-xs text-slate-500 font-normal">Corregir incorrectas manualmente</span>
+              </Button>
+            </Link>
             <Button
               variant="outline"
               className="h-24 flex flex-col items-center justify-center gap-2 border-white/80 bg-white/75 hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-700 transition-all"

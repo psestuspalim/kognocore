@@ -1,0 +1,213 @@
+import fs from 'node:fs';
+import { crearMotor } from './normalizador.js';
+
+const DIC = JSON.parse(fs.readFileSync(new URL('../assets/sinonimos.json', import.meta.url)));
+const BANCO = JSON.parse(fs.readFileSync(new URL('../assets/fixtures-prueba.json', import.meta.url)));
+const motor = crearMotor(DIC);
+const item = id => BANCO.items.find(i => i.id === id);
+
+let pasa = 0, falla = 0;
+function t(desc, cond) {
+  if (cond) { pasa++; console.log(`  ok   ${desc}`); }
+  else { falla++; console.log(`  FALLA ${desc}`); }
+}
+
+console.log('\n== Equivalencia TA <-> clasica ==');
+t('"apófisis espinosa" == "proceso espinoso"',
+  motor.coincide('apófisis espinosa', ['proceso espinoso']).ok);
+t('"agujero transverso" == "foramen transverso"',
+  motor.coincide('agujero transverso', ['foramen transverso']).ok);
+t('"canal vertebral" == "conducto vertebral"',
+  motor.coincide('canal vertebral', ['conducto vertebral']).ok);
+t('"ganglio linfático" == "nódulo linfático"',
+  motor.coincide('ganglio linfatico', ['nódulo linfático']).ok);
+t('"apófisis odontoides" == "diente del axis"',
+  motor.coincide('apófisis odontoides', ['diente del axis']).ok);
+t('"articulación interapofisaria" == "articulación cigapofisaria"',
+  motor.coincide('articulacion interapofisaria', ['articulación cigapofisaria']).ok);
+
+console.log('\n== Acentos, mayusculas, articulos, orden ==');
+t('"CENTRUM" == "centrum"', motor.coincide('CENTRUM', ['centrum']).ok);
+t('"el hiato del sacro" == "hiato sacro"',
+  motor.coincide('el hiato del sacro', ['hiato sacro']).ok);
+t('"anterior ligamento longitudinal" == "ligamento longitudinal anterior"',
+  motor.coincide('anterior ligamento longitudinal', ['ligamento longitudinal anterior']).ok);
+t('"coxis" == "cóccix"', motor.coincide('coxis', ['cóccix']).ok);
+t('"epifisis anulares" == "epífisis anular"',
+  motor.coincide('epifisis anulares', ['epífisis anular']).ok);
+
+console.log('\n== Prefijo de categoria ==');
+t('"C1" == "atlas" (categoria vertebra)',
+  motor.coincide('C1', ['el atlas (C1)'], { categoria: 'vertebra' }).ok);
+t('"sacrococcígeo" == "ligamento sacrococcígeo membranoso" NO debe pasar entero, pero "ligamento sacrococcigeo" si',
+  motor.coincide('ligamento sacrococcigeo', ['ligamento sacrococcígeo'], { categoria: 'ligamento' }).ok);
+
+console.log('\n== Tolerancia ortografica ==');
+t('"esternocleidomastoideo" mal escrito pasa',
+  motor.coincide('esternocleidomastoide', ['esternocleidomastoideo']).ok);
+t('"cigapofisaria" con un typo pasa',
+  motor.coincide('cigapofisiaria', ['cigapofisaria']).ok);
+t('"atlas" != "axis" (palabra corta, sin tolerancia)',
+  !motor.coincide('atlas', ['axis']).ok);
+t('"L4" != "L5" (no confundir niveles)',
+  !motor.coincide('L4', ['L5']).ok);
+
+console.log('\n== Nucleo "anatomia" y familias genericas (regresion) ==');
+const metodos = { id:'X-020', tipo:'enumeracion', prompt:'Menciona los 3 metodos', dificultad:1,
+  fuente:{pag:2}, feedback:'f', respuesta:{ credito_parcial:true, elementos:[
+    {canonico:'anatomía regional', acepta:['anatomía topográfica']},
+    {canonico:'anatomía por sistemas', acepta:['anatomía sistémica']},
+    {canonico:'anatomía clínica', acepta:['anatomía aplicada']}]}};
+const rm = motor.calificar(metodos, ['regional','superficie','clínica']);
+t('2/3 con "regional" y "clinica" sin el generico', rm.puntos === 2);
+t('"superficie" no cuenta como "anatomia por sistemas"', rm.detalle[1].ok === false);
+t('3/3 con "regional, sistemas, clinica"',
+  motor.calificar(metodos, ['regional','sistemas','clínica']).puntos === 3);
+t('3/3 con los canonicos completos',
+  motor.calificar(metodos, ['anatomía regional','anatomía por sistemas','anatomía clínica']).puntos === 3);
+t('3/3 con sinonimos sin generico: topografica, sistemica, aplicada',
+  motor.calificar(metodos, ['topográfica','sistémica','aplicada']).puntos === 3);
+t('"regional" no se cuela dos veces', motor.calificar(metodos, ['regional','regional','regional']).puntos === 1);
+
+t('"isotonica" NO califica contra "contraccion isometrica"',
+  !motor.coincide('isotónica', ['contracción isométrica']).ok);
+t('"concentrica" NO califica contra "contraccion excentrica"',
+  !motor.coincide('concéntrica', ['contracción excéntrica']).ok);
+t('"hueso compacto" NO califica contra "hueso esponjoso"',
+  !motor.coincide('compacto', ['hueso esponjoso']).ok);
+t('"osificacion intramembranosa" NO califica contra "endocondral"',
+  !motor.coincide('intramembranosa', ['osificación endocondral']).ok);
+t('"celulas satelite" sigue calificando sin el generico',
+  motor.coincide('satélite', ['células satélite']).ok);
+
+console.log('\n== Sinonimia de planos y asignacion optima ==');
+const planos2 = { id:'X-010', tipo:'enumeracion', prompt:'Menciona los 4 planos', dificultad:1,
+  fuente:{pag:5}, feedback:'f', respuesta:{ credito_parcial:true, elementos:[
+    {canonico:'plano medio'},{canonico:'plano sagital'},{canonico:'plano frontal'},{canonico:'plano transversal'}]}};
+const rr1 = motor.calificar(planos2, ['coronal','sagital','medio sagital','axial']);
+t('4/4 con coronal, sagital, medio sagital, axial', rr1.puntos === 4);
+t('"medio sagital" se asigna a plano medio, no a plano sagital',
+  rr1.detalle[0].dado === 'medio sagital' && rr1.detalle[1].dado === 'sagital');
+t('4/4 con mediano, sagital, frontal, transaxial',
+  motor.calificar(planos2, ['mediano','sagital','frontal','transaxial']).puntos === 4);
+t('3/4 si omite el frontal', motor.calificar(planos2, ['medio','sagital','axial']).puntos === 3);
+t('repetir "coronal" no suma mas de un punto',
+  motor.calificar(planos2, ['coronal','coronal','coronal','coronal']).puntos === 1);
+
+console.log('\n== Nucleo generico opcional ==');
+const planos = { id:'X-001', tipo:'enumeracion', prompt:'Menciona los 4 planos', dificultad:1,
+  fuente:{pag:5}, feedback:'f', respuesta:{ credito_parcial:true, elementos:[
+    {canonico:'plano medio'},{canonico:'plano sagital'},{canonico:'plano frontal'},{canonico:'plano transversal'}]}};
+const rp = motor.calificar(planos, 'medio\nsagital\nfrontal\ntransversal');
+t('4/4 escribiendo solo "medio, sagital, frontal, transversal"', rp.puntos === 4);
+t('4/4 tambien con el generico completo',
+  motor.calificar(planos, ['plano medio','plano sagital','plano frontal','plano transversal']).puntos === 4);
+t('4/4 mezclando ambas formas',
+  motor.calificar(planos, ['medio','plano sagital','frontal','transversal']).puntos === 4);
+t('sigue distinguiendo: "medio" no cuenta dos veces',
+  motor.calificar(planos, ['medio','medio','frontal','transversal']).puntos === 3);
+
+const facial = { id:'X-002', tipo:'enumeracion', prompt:'Menciona 2', dificultad:1, fuente:{pag:5}, feedback:'f',
+  respuesta:{ elementos:[{canonico:'arteria facial'},{canonico:'vena facial'}]}};
+t('no se quita el generico cuando distingue (arteria/vena facial)',
+  motor.calificar(facial, ['facial','facial']).puntos === 0);
+t('con el generico, arteria y vena facial siguen calificando',
+  motor.calificar(facial, ['arteria facial','vena facial']).puntos === 2);
+
+t('respuesta corta: "sacrococcigeo" vale por "ligamento sacrococcigeo"',
+  motor.calificar({id:'X-003',tipo:'respuesta_corta',prompt:'p',dificultad:1,fuente:{pag:1},feedback:'f',
+    respuesta:{canonico:'ligamento sacrococcígeo membranoso'}}, 'sacrococcigeo membranoso').correcto);
+t('el nucleo solo no vacia la respuesta: "ligamento" no vale por "ligamento nucal"',
+  !motor.coincide('ligamento', ['ligamento nucal']).ok);
+t('nucleo + proteccion: "proceso espinoso de L4" sigue sin valer por L5',
+  !motor.coincide('espinoso de L4', ['proceso espinoso de L5']).ok);
+
+console.log('\n== Tokens protegidos (regresion) ==');
+t('"epifisis anular superior" NO califica contra "...inferior"',
+  !motor.coincide('epifisis anular superior', ['epífisis anular del borde inferior del cuerpo vertebral']).ok);
+t('"desplazamiento del 50%" NO califica contra "25%"',
+  !motor.coincide('desplazamiento del 50%', ['subluxación anterior con desplazamiento anterior del 25%']).ok);
+t('"aductor largo" NO califica contra "abductor largo"',
+  !motor.coincide('aductor largo', ['abductor largo']).ok);
+t('"proceso espinoso de L4" NO califica contra "L5"',
+  !motor.coincide('proceso espinoso de L4', ['proceso espinoso de L5']).ok);
+t('"arteria circunfleja humeral medial" NO contra "lateral"',
+  !motor.coincide('arteria circunfleja humeral medial', ['arteria circunfleja humeral lateral']).ok);
+t('"hemiarco neural izquierda" (genero) SI contra "izquierdo"',
+  motor.coincide('hemiarco neural izquierda', ['hemiarco neural izquierdo']).ok);
+t('typo fuera de protegidas sigue tolerado: "epifisis anlar superior"',
+  motor.coincide('epifisis anlar superior', ['epifisis anular superior']).ok);
+
+const r5 = motor.calificar(item('P1-B05-003'),
+  ['vertice del proceso espinoso', 'vertice proceso transverso derecho', 'vertice proceso transverso izquierdo',
+   'epifisis anular superior', 'epifisis anular superior']);
+t('repetir "superior" dos veces NO da 5/5', r5.puntos === 4);
+
+console.log('\n== Enumeracion con credito parcial ==');
+const r1 = motor.calificar(item('P1-B05-001'),
+  'el centrum\napofisis... perdon, hemiarco neural derecho\nhemiarco neural izquierdo');
+t('3/3 con terminologia mixta y ruido', r1.puntos === 3 && r1.correcto);
+
+const r2 = motor.calificar(item('P1-B05-001'), 'centro endocondral, arco neural derecho');
+t('2/3 con credito parcial', r2.puntos === 2 && !r2.correcto);
+
+const r3 = motor.calificar(item('P1-B05-003'),
+  ['punta de la apofisis espinosa',
+   'punta de la apofisis transversa derecha',
+   'punta de la apofisis transversa izquierda',
+   'epifisis anular superior',
+   'epifisis anular inferior']);
+t('5/5 centros secundarios en terminologia clasica', r3.puntos === 5);
+
+console.log('\n== Numerico ==');
+t('"8va semana" -> 8', motor.calificar(item('P1-B05-002'), '8va semana').correcto);
+t('"octava" (texto) NO califica', !motor.calificar(item('P1-B05-002'), 'octava semana').correcto);
+t('"2.5 cm" con tolerancia 0.5', motor.calificar(item('P1-B05-018'), '2.5 cm').correcto);
+t('"2,5" (coma decimal)', motor.calificar(item('P1-B05-018'), '2,5').correcto);
+t('"3 cm" dentro de tolerancia', motor.calificar(item('P1-B05-018'), '3 cm').correcto);
+t('"5 cm" fuera de tolerancia', !motor.calificar(item('P1-B05-018'), '5 cm').correcto);
+t('rango 1-2%: "1" pasa', motor.calificar(item('P1-B05-013'), '1%').correcto);
+t('rango 1-2%: "1 a 2" pasa', motor.calificar(item('P1-B05-013'), '1 a 2 %').correcto);
+t('rango 1-2%: "5" no pasa', !motor.calificar(item('P1-B05-013'), '5%').correcto);
+
+console.log('\n== Cloze ==');
+const rc = motor.calificar(item('P1-B05-020'),
+  { c1: 'interarticular', c2: 'espondilolisis traumatica', c3: 'hiperextension', c4: 'verdugo' });
+t('4/4 sin acentos y con sinonimo "verdugo"', rc.puntos === 4);
+
+const rc2 = motor.calificar(item('P1-B05-006'),
+  { c1: 'apofisis odontoides', c2: 'C2', c3: 'disco IV' });
+t('3/3 con odontoides, C2 y disco IV', rc2.puntos === 3);
+
+console.log('\n== Relacion y secuencia ==');
+const rr = motor.calificar(item('P1-B05-025'),
+  { 'En los cuerpos vertebrales': 'espondilosis', 'En las articulaciones cigapofisarias': 'osteoartritis' });
+t('2/2 relacion con sinonimo', rr.puntos === 2);
+
+const rs = motor.calificar(item('P1-B05-021'),
+  'esguince en flexion\nsubluxacion anterior\ndesplazamiento del 50%\nluxacion completa');
+t('4/4 secuencia en orden', rs.puntos === 4);
+
+const rs2 = motor.calificar(item('P1-B05-021'),
+  'luxacion completa\nesguince en flexion\nsubluxacion anterior\ndesplazamiento del 50%');
+t('secuencia desordenada NO da 4/4', rs2.puntos < 4);
+
+console.log('\n== Aviso ortografico ==');
+const ro = motor.calificar(item('P1-B05-019'), 'fractura de Jeferson');
+t('acierta con aviso de ortografia', ro.correcto && ro.avisoOrtografia);
+
+console.log('\n== v1.4.0: porcentaje, ordinales, definicion ==');
+t('"9%" == "9"', motor.coincide('9%', ['9']).ok);
+t('"4,5 %" == "4.5"', motor.coincide('4,5 %', ['4.5']).ok);
+t('"4" != "4,5"', !motor.coincide('4', ['4,5']).ok);
+t('"4.ª" == "4"', motor.coincide('4.ª', ['4']).ok);
+t('"unipenniforme" != "bipenniforme" (protegido)', !motor.coincide('unipenniforme', ['bipenniforme']).ok);
+const def = { id:'X-DEF', tipo:'definicion', calificacion:'manual', respuesta:{ modelo:'m',
+  palabras_clave:['mesénquima', 'período fetal', 'cartílago'] } };
+const rd = motor.calificar(def, 'se forma a partir del mesenquima en el periodo fetal');
+t('definicion: puntos null (manual)', rd.puntos === null && rd.manual === true);
+t('definicion: detecta palabras clave presentes y ausentes',
+  rd.detalle[0].ok && rd.detalle[1].ok && !rd.detalle[2].ok);
+
+console.log(`\n---\n${pasa} pasan, ${falla} fallan\n`);
+process.exit(falla ? 1 : 0);

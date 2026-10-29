@@ -39,7 +39,8 @@ export const mockSubjects = [
 ];
 
 export const mockFolders = [
-    { id: 'folder_capitulos_cortados', name: 'Capítulos cortados', order: 1, course_id: 'course_enarm2026', subject_id: 'subj_anatomia', color: '#6366f1', description: 'Bloques de examen de respuesta abierta (Moore 9.ª ed.)' }
+    { id: 'folder_capitulos_cortados', name: 'Capítulos cortados', order: 1, course_id: 'course_enarm2026', subject_id: 'subj_anatomia', color: '#6366f1', description: 'Bloques de examen de respuesta abierta (Moore 9.ª ed.)' },
+    { id: 'folder_diagnosticos', name: 'Diagnósticos', order: 2, course_id: 'course_enarm2026', subject_id: 'subj_anatomia', color: '#6366f1', description: 'Evaluaciones diagnósticas y de progreso' }
 ];
 
 export const mockResources = [];

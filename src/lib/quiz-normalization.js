@@ -1,4 +1,4 @@
-const OPEN_ENDED_TYPES = new Set(['enumeracion', 'numerico', 'respuesta_corta', 'cloze', 'relacion', 'secuencia']);
+const OPEN_ENDED_TYPES = new Set(['definicion', 'enumeracion', 'numerico', 'respuesta_corta', 'cloze', 'relacion', 'secuencia']);
 
 const optionText = (option) => {
   if (typeof option === 'string' || typeof option === 'number') return String(option).trim();
@@ -125,6 +125,7 @@ export function validateNormalizedQuiz(quiz = {}) {
       const hasElements = (value) => Array.isArray(value) && value.length > 0 && value.every(hasCanonical);
       let valid = true;
       if (type === 'respuesta_corta') valid = hasCanonical(answer);
+      if (type === 'definicion') valid = hasText(answer.modelo) && Array.isArray(answer.palabras_clave) && answer.palabras_clave.length > 0;
       if (type === 'numerico') valid = Number.isFinite(answer.valor) ||
         (Array.isArray(answer.rango) && answer.rango.length === 2 && answer.rango.every(Number.isFinite) && answer.rango[0] <= answer.rango[1]);
       if (type === 'enumeracion' || type === 'secuencia') valid = hasElements(answer.elementos ?? answer.pasos);
@@ -165,7 +166,7 @@ export function normalizeExpandedQuiz(quiz = {}, fallbackTitle = 'Cuestionario')
     id: quiz.id || quiz.bloque?.id || `quiz_${Date.now()}`,
     title,
     description,
-    folder_id: quiz.folder_id || (quiz.bloque ? 'folder_capitulos_cortados' : null),
+    folder_id: quiz.folder_id || (quiz.bloque?.id === 'P1-B23' || /diagn[oó]stic|evaluaci[oó]n.*progreso/i.test(title) ? 'folder_diagnosticos' : (quiz.bloque ? 'folder_capitulos_cortados' : null)),
     subject_id: quiz.subject_id || (quiz.bloque ? 'subj_anatomia' : null),
     questions,
     total_questions: questions.length

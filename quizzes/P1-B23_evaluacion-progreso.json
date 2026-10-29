@@ -1,0 +1,2768 @@
+{
+  "bloque": {
+    "id": "P1-B23",
+    "titulo": "Evaluación de progreso · Generalidades (sistemas, terminología, piel, huesos, articulaciones, músculo) y dorso (regiones, columna, vértebras, músculos, puntos de referencia)",
+    "parcial": 1,
+    "sesion": "Evaluación de progreso",
+    "paginas": "1-89"
+  },
+  "items": [
+    {
+      "id": "P1-B23-001",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 11 sistemas orgánicos básicos que describe la anatomía sistémica:",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomía sistémica"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "tegumentario"
+          },
+          {
+            "canonico": "esquelético"
+          },
+          {
+            "canonico": "articular"
+          },
+          {
+            "canonico": "muscular"
+          },
+          {
+            "canonico": "nervioso"
+          },
+          {
+            "canonico": "circulatorio"
+          },
+          {
+            "canonico": "alimentario",
+            "acepta": [
+              "digestivo"
+            ]
+          },
+          {
+            "canonico": "respiratorio"
+          },
+          {
+            "canonico": "urinario"
+          },
+          {
+            "canonico": "genital",
+            "acepta": [
+              "reproductor"
+            ]
+          },
+          {
+            "canonico": "endocrino"
+          }
+        ]
+      },
+      "feedback": "La anatomía sistémica estudia los distintos sistemas orgánicos que funcionan conjuntamente para llevar a cabo funciones complejas. El circulatorio se subdivide en cardiovascular y linfático, que funcionan paralelamente para transportar los líquidos del organismo. Los órganos de los sentidos (olfatorio, visual, auditivo y gustativo) no forman un sistema aparte: se estudian a menudo junto con el sistema nervioso."
+    },
+    {
+      "id": "P1-B23-002",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 1,
+      "etiquetas": [
+        "anatomía sistémica",
+        "tegumentario"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El sistema tegumentario ({{c1}}) se compone de la piel y sus apéndices, por ejemplo el pelo, las uñas y las glándulas {{c2}}, y el tejido {{c3}} subyacente.",
+      "blancos": {
+        "c1": {
+          "canonico": "dermatología"
+        },
+        "c2": {
+          "canonico": "sudoríparas"
+        },
+        "c3": {
+          "canonico": "subcutáneo"
+        }
+      },
+      "feedback": "La piel es un órgano sensitivo extenso y constituye la cobertura protectora externa y contenedora del organismo. Recuerda la regla de nombre: cada sistema tiene su campo de estudio entre paréntesis en Moore, y es dato preguntable. El tejido subcutáneo es la capa que queda bajo la piel, por encima de la fascia profunda."
+    },
+    {
+      "id": "P1-B23-003",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 1,
+      "etiquetas": [
+        "anatomía sistémica",
+        "esquelético"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El sistema esquelético ({{c1}}) se compone de huesos y {{c2}}; proporciona la forma y el soporte básicos del organismo y es el elemento sobre el que actúa el sistema {{c3}} para producir los movimientos.",
+      "blancos": {
+        "c1": {
+          "canonico": "osteología"
+        },
+        "c2": {
+          "canonico": "cartílago"
+        },
+        "c3": {
+          "canonico": "muscular"
+        }
+      },
+      "feedback": "Además de soporte, el esqueleto protege órganos vitales como el corazón, los pulmones y los órganos pélvicos. El sistema esquelético es pasivo: el movimiento lo produce el muscular, que es el sistema activo del aparato locomotor. No confundas osteología (huesos) con artrología (articulaciones)."
+    },
+    {
+      "id": "P1-B23-004",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 1,
+      "etiquetas": [
+        "anatomía sistémica",
+        "articular"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El sistema articular ({{c1}}) se compone de las articulaciones y sus {{c2}} asociados, que conectan las partes óseas del sistema esquelético y son los puntos donde ocurren los {{c3}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "artrología"
+        },
+        "c2": {
+          "canonico": "ligamentos"
+        },
+        "c3": {
+          "canonico": "movimientos"
+        }
+      },
+      "feedback": "El sistema articular, junto con el esquelético, forma la parte pasiva del aparato locomotor. Las articulaciones son los puntos donde ocurren los movimientos que produce el sistema muscular."
+    },
+    {
+      "id": "P1-B23-005",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 1,
+      "etiquetas": [
+        "anatomía sistémica",
+        "muscular"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El sistema muscular ({{c1}}) se compone de los músculos {{c2}}, que actúan (se contraen) para movilizar o posicionar las partes del organismo, y los músculos lisos y cardíaco, que impulsan, expelen o controlan el flujo de {{c3}} y sustancias contenidas.",
+      "blancos": {
+        "c1": {
+          "canonico": "miología"
+        },
+        "c2": {
+          "canonico": "esqueléticos"
+        },
+        "c3": {
+          "canonico": "líquidos"
+        }
+      },
+      "feedback": "Los músculos esqueléticos movilizan sobre todo los huesos que se articulan entre sí. El liso y el cardíaco no movilizan segmentos corporales: impulsan, expelen o controlan el flujo de líquidos y sustancias."
+    },
+    {
+      "id": "P1-B23-006",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 1,
+      "etiquetas": [
+        "anatomía sistémica",
+        "nervioso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El sistema nervioso ({{c1}}) se compone del sistema nervioso central (encéfalo y {{c2}}) y el sistema nervioso periférico (nervios y {{c3}}, con sus terminaciones motoras y sensitivas).",
+      "blancos": {
+        "c1": {
+          "canonico": "neurología"
+        },
+        "c2": {
+          "canonico": "médula espinal"
+        },
+        "c3": {
+          "canonico": "ganglios"
+        }
+      },
+      "feedback": "El sistema nervioso controla y coordina las funciones de los sistemas orgánicos y capacita las respuestas del organismo frente al ambiente. Los órganos de los sentidos se estudian con él: el ojo o sistema visual (oftalmología) y el oído (otología), además del órgano olfatorio y el gustativo."
+    },
+    {
+      "id": "P1-B23-007",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomía sistémica",
+        "circulatorio"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El sistema circulatorio ({{c1}}) se compone de los sistemas cardiovascular y linfático. El sistema cardiovascular ({{c2}}) consta del corazón y los vasos sanguíneos. El sistema linfático retira el exceso de líquido hístico ({{c3}}) del compartimento líquido intersticial, lo filtra en los {{c4}} linfáticos y lo devuelve al torrente sanguíneo.",
+      "blancos": {
+        "c1": {
+          "canonico": "angiología"
+        },
+        "c2": {
+          "canonico": "cardiología"
+        },
+        "c3": {
+          "canonico": "linfa"
+        },
+        "c4": {
+          "canonico": "nódulos"
+        }
+      },
+      "feedback": "Ambos subsistemas funcionan paralelamente para transportar los líquidos del organismo. El cardiovascular aporta oxígeno, nutrientes y hormonas a las células y elimina sustancias de desecho. El intersticial también se llama intercelular. Angiología es el campo del sistema circulatorio completo; cardiología, solo del cardiovascular."
+    },
+    {
+      "id": "P1-B23-008",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 1,
+      "etiquetas": [
+        "anatomía sistémica",
+        "respiratorio",
+        "urinario"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El sistema respiratorio ({{c1}}) se compone de las vías aéreas y los pulmones. El {{c2}} y la laringe controlan el flujo de aire a través del sistema. El sistema urinario ({{c3}}) filtra la sangre y produce, transporta, almacena y excreta intermitentemente la orina.",
+      "blancos": {
+        "c1": {
+          "canonico": "neumología"
+        },
+        "c2": {
+          "canonico": "diafragma"
+        },
+        "c3": {
+          "canonico": "urología"
+        }
+      },
+      "feedback": "En la laringe también se producen sonidos, modificados después por la lengua, los dientes y los labios para formar el habla. El respiratorio aporta oxígeno a la sangre para la respiración celular y elimina de ella el dióxido de carbono."
+    },
+    {
+      "id": "P1-B23-009",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomía sistémica",
+        "genital",
+        "endocrino"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El sistema genital (reproductor) (ginecología en la mujer; {{c1}} en el hombre) se compone de las {{c2}} (ovarios y testículos), que producen ovocitos y espermatozoides, los conductos que los transportan y los genitales que posibilitan su unión. El sistema endocrino ({{c3}}) incluye glándulas endocrinas sin {{c4}}, como la glándula tiroides.",
+      "blancos": {
+        "c1": {
+          "canonico": "andrología"
+        },
+        "c2": {
+          "canonico": "gónadas"
+        },
+        "c3": {
+          "canonico": "endocrinología"
+        },
+        "c4": {
+          "canonico": "conductos"
+        }
+      },
+      "feedback": "Las hormonas son moléculas orgánicas que el sistema circulatorio transporta a células efectoras distantes; por eso la influencia del sistema endocrino es tan amplia como la del nervioso. Además de las glándulas, el endocrino incluye células aisladas en el intestino y en las paredes de los vasos, y terminaciones nerviosas especializadas. Después de la concepción, el tracto reproductor femenino nutre al feto y realiza el trabajo del parto."
+    },
+    {
+      "id": "P1-B23-010",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 4 órganos que componen el sistema urinario:",
+      "dificultad": 1,
+      "etiquetas": [
+        "anatomía sistémica",
+        "urinario"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "riñones"
+          },
+          {
+            "canonico": "uréteres"
+          },
+          {
+            "canonico": "vejiga urinaria",
+            "acepta": [
+              "vejiga"
+            ]
+          },
+          {
+            "canonico": "uretra"
+          }
+        ]
+      },
+      "feedback": "Juntos filtran la sangre y producen, transportan, almacenan y excretan intermitentemente la orina, que es el desecho de líquidos. No confundas uréter (riñón → vejiga) con uretra (vejiga → exterior)."
+    },
+    {
+      "id": "P1-B23-011",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 5 acciones sobre los alimentos en las que actúan los órganos y glándulas del sistema alimentario:",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomía sistémica",
+        "alimentario"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "ingestión"
+          },
+          {
+            "canonico": "masticación"
+          },
+          {
+            "canonico": "deglución"
+          },
+          {
+            "canonico": "digestión"
+          },
+          {
+            "canonico": "absorción"
+          }
+        ]
+      },
+      "feedback": "El sistema alimentario o digestivo (gastroenterología) se compone del tracto digestivo desde la boca hasta el ano, con todos sus órganos y glándulas asociados. Además de esas cinco acciones, elimina los desechos sólidos (heces) que quedan tras la absorción de los nutrientes."
+    },
+    {
+      "id": "P1-B23-012",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "anatomía sistémica",
+        "aparato locomotor"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "Los sistemas {{c1}} esquelético y articular, y el sistema {{c2}} muscular constituyen en conjunto un supersistema, el sistema o aparato {{c3}} ({{c4}}), ya que deben actuar juntos para producir la locomoción del cuerpo.",
+      "blancos": {
+        "c1": {
+          "canonico": "pasivos"
+        },
+        "c2": {
+          "canonico": "activo"
+        },
+        "c3": {
+          "canonico": "locomotor"
+        },
+        "c4": {
+          "canonico": "ortopedia"
+        }
+      },
+      "feedback": "Ningún sistema funciona de forma aislada; el aparato locomotor es el ejemplo clásico. Esqueleto y articulaciones son pasivos porque no generan fuerza: el músculo, al contraerse, es el componente activo."
+    },
+    {
+      "id": "P1-B23-013",
+      "tipo": "cloze",
+      "prompt": "Completa con el término de relación correcto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "Los músculos del brazo son {{c1}} al hueso (húmero).",
+      "blancos": {
+        "c1": {
+          "canonico": "superficiales"
+        }
+      },
+      "feedback": "Superficial significa más próximo a la superficie. Forma una tríada con intermedio y profundo, los tres independientes de la posición anatómica. En el corte del brazo: piel y músculos son superficiales, el bíceps es intermedio entre la piel y el húmero, y el húmero es profundo."
+    },
+    {
+      "id": "P1-B23-014",
+      "tipo": "cloze",
+      "prompt": "Completa con el término de relación correcto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El músculo bíceps es {{c1}} entre la piel y el húmero.",
+      "blancos": {
+        "c1": {
+          "canonico": "intermedio"
+        }
+      },
+      "feedback": "Intermedio designa una estructura entre una superficial y una profunda. Superficial, intermedio y profundo no dependen de la posición anatómica: valen igual con el cuerpo en cualquier postura."
+    },
+    {
+      "id": "P1-B23-015",
+      "tipo": "cloze",
+      "prompt": "Completa con el término de relación correcto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El húmero es {{c1}} a los músculos del brazo.",
+      "blancos": {
+        "c1": {
+          "canonico": "profundo"
+        }
+      },
+      "feedback": "Profundo significa más alejado de la superficie. Es lo opuesto a superficial. Es uno de los cinco términos independientes de la posición anatómica, junto con superficial, intermedio, proximal y distal."
+    },
+    {
+      "id": "P1-B23-016",
+      "tipo": "cloze",
+      "prompt": "Completa con el término de relación correcto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El corazón es {{c1}} al estómago.",
+      "blancos": {
+        "c1": {
+          "canonico": "superior",
+          "acepta": [
+            "craneal"
+          ]
+        }
+      },
+      "feedback": "Superior (craneal) significa más próximo a la cabeza; su opuesto es inferior (caudal): el estómago es inferior al corazón. Superior e inferior se aplican a todo el cuerpo y dependen de la posición anatómica."
+    },
+    {
+      "id": "P1-B23-017",
+      "tipo": "cloze",
+      "prompt": "Completa con el término de relación correcto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El estómago es {{c1}} al corazón.",
+      "blancos": {
+        "c1": {
+          "canonico": "inferior",
+          "acepta": [
+            "caudal"
+          ]
+        }
+      },
+      "feedback": "Inferior (caudal) significa más próximo a los pies. Es el espejo del ejemplo de superior: el corazón es superior al estómago."
+    },
+    {
+      "id": "P1-B23-018",
+      "tipo": "cloze",
+      "prompt": "Completa con el término de relación correcto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El 5.º dedo (dedo meñique) está en el lado {{c1}} de la mano.",
+      "blancos": {
+        "c1": {
+          "canonico": "medial"
+        }
+      },
+      "feedback": "Medial significa más próximo al plano medio. En posición anatómica la palma mira hacia delante, por eso el meñique queda medial y el pulgar lateral. Si la mano estuviera en pronación esta relación se vería invertida, de ahí la importancia de referir todo a la posición anatómica."
+    },
+    {
+      "id": "P1-B23-019",
+      "tipo": "cloze",
+      "prompt": "Completa con el término de relación correcto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El 1.er dedo (pulgar) está en el lado {{c1}} de la mano.",
+      "blancos": {
+        "c1": {
+          "canonico": "lateral"
+        }
+      },
+      "feedback": "Lateral significa más alejado del plano medio. Medial y lateral dependen de la posición anatómica, a diferencia de proximal y distal."
+    },
+    {
+      "id": "P1-B23-020",
+      "tipo": "cloze",
+      "prompt": "Completa con el término de relación correcto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El codo es {{c1}} al carpo, y la parte {{c2}} de una arteria es su origen.",
+      "blancos": {
+        "c1": {
+          "canonico": "proximal"
+        },
+        "c2": {
+          "canonico": "proximal"
+        }
+      },
+      "feedback": "Proximal significa más próximo al tronco o al punto de origen (p. ej., de un miembro). Por eso sirve tanto en miembros como en estructuras que tienen un origen, como arterias o nervios. Su opuesto es distal."
+    },
+    {
+      "id": "P1-B23-021",
+      "tipo": "cloze",
+      "prompt": "Completa con el término de relación correcto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El carpo es {{c1}} al codo, y la parte {{c2}} del miembro superior es la mano.",
+      "blancos": {
+        "c1": {
+          "canonico": "distal"
+        },
+        "c2": {
+          "canonico": "distal"
+        }
+      },
+      "feedback": "Distal significa más alejado del tronco o del punto de origen. Proximal y distal son independientes de la posición anatómica: el carpo es distal al codo aunque el brazo esté elevado."
+    },
+    {
+      "id": "P1-B23-022",
+      "tipo": "cloze",
+      "prompt": "Completa con el término de relación correcto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "El talón es {{c1}} a los dedos del pie.",
+      "blancos": {
+        "c1": {
+          "canonico": "posterior",
+          "acepta": [
+            "dorsal"
+          ]
+        }
+      },
+      "feedback": "Posterior (dorsal) significa más próximo al dorso. Su opuesto es anterior (ventral): los dedos son anteriores al tobillo. Atención: en la mano y el pie, dorsal designa también la cara posterior de la mano y la cara superior del pie."
+    },
+    {
+      "id": "P1-B23-023",
+      "tipo": "cloze",
+      "prompt": "Completa con el término de relación correcto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "Los dedos son {{c1}} al tobillo.",
+      "blancos": {
+        "c1": {
+          "canonico": "anteriores",
+          "acepta": [
+            "ventrales"
+          ]
+        }
+      },
+      "feedback": "Anterior (ventral) significa más próximo al frente. Es el opuesto de posterior (dorsal): el talón es posterior a los dedos del pie."
+    },
+    {
+      "id": "P1-B23-024",
+      "tipo": "cloze",
+      "prompt": "Completa con el término de relación correcto:",
+      "dificultad": 1,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "En la mano, la cara anterior se denomina cara {{c1}} y la cara posterior se denomina cara {{c2}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "palmar"
+        },
+        "c2": {
+          "canonico": "dorsal"
+        }
+      },
+      "feedback": "Palmar frente a dorsal son términos específicos para la mano. La cara palmar corresponde a la palma; la dorsal, al dorso. Comparten la palabra dorsal con el pie, pero en el pie dorsal es la cara superior."
+    },
+    {
+      "id": "P1-B23-025",
+      "tipo": "cloze",
+      "prompt": "Completa con el término de relación correcto:",
+      "dificultad": 2,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "texto": "En el pie, la cara inferior se denomina cara {{c1}} y la cara superior se denomina cara {{c2}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "plantar"
+        },
+        "c2": {
+          "canonico": "dorsal"
+        }
+      },
+      "feedback": "Plantar frente a dorsal son términos específicos del pie: plantar es la planta (cara inferior) y dorsal es el dorso (cara superior). Error típico: llamar posterior a la cara dorsal del pie; en posición anatómica el dorso del pie mira hacia arriba."
+    },
+    {
+      "id": "P1-B23-026",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 5 términos de relación que son independientes de la posición anatómica:",
+      "dificultad": 2,
+      "etiquetas": [
+        "términos de relación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "superficial"
+          },
+          {
+            "canonico": "intermedio"
+          },
+          {
+            "canonico": "profundo"
+          },
+          {
+            "canonico": "proximal"
+          },
+          {
+            "canonico": "distal"
+          }
+        ]
+      },
+      "feedback": "En la figura de términos de relación se marcan con asterisco. Su significado no cambia aunque el cuerpo o el miembro cambien de postura. Superior, inferior, anterior, posterior, medial y lateral, en cambio, se aplican a todo el cuerpo pero solo tienen sentido referidos a la posición anatómica. Palmar, plantar y dorsal son específicos de manos y pies."
+    },
+    {
+      "id": "P1-B23-027",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 5 funciones que proporciona la piel:",
+      "dificultad": 1,
+      "etiquetas": [
+        "piel",
+        "funciones"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "protección"
+          },
+          {
+            "canonico": "contención"
+          },
+          {
+            "canonico": "regulación térmica",
+            "acepta": [
+              "termorregulación"
+            ]
+          },
+          {
+            "canonico": "sensibilidad"
+          },
+          {
+            "canonico": "síntesis de vitamina D",
+            "acepta": [
+              "vitamina D",
+              "síntesis y almacenamiento de vitamina D"
+            ]
+          }
+        ]
+      },
+      "feedback": "Protección frente a erosiones, pérdida de líquidos, sustancias nocivas, radiación ultravioleta y microorganismos. Contención de estructuras y líquidos vitales, sobre todo extracelulares, lo que previene la deshidratación, grave en lesiones cutáneas extensas como las quemaduras. Regulación térmica por evaporación del sudor y por dilatación o constricción de los vasos superficiales; sensibilidad (p. ej., al dolor) por los nervios superficiales; y síntesis y almacenamiento de vitamina D."
+    },
+    {
+      "id": "P1-B23-028",
+      "tipo": "cloze",
+      "prompt": "Escribe el porcentaje que corresponde a cada sección:",
+      "dificultad": 2,
+      "etiquetas": [
+        "superficie corporal",
+        "quemaduras"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18",
+        "fig": "C1-3"
+      },
+      "texto": "Estimación de la superficie corporal, superficies anterior + posterior: cabeza y cuello {{c1}} %; brazos, antebrazos y manos {{c2}} %; tronco {{c3}} %; periné {{c4}} %; muslos, piernas y pies {{c5}} %.",
+      "blancos": {
+        "c1": {
+          "canonico": "9"
+        },
+        "c2": {
+          "canonico": "18"
+        },
+        "c3": {
+          "canonico": "36"
+        },
+        "c4": {
+          "canonico": "1"
+        },
+        "c5": {
+          "canonico": "36"
+        }
+      },
+      "feedback": "La suma da el 100% de la superficie corporal. Todo es múltiplo de 9 salvo el periné (1%). Brazos y muslos se cuentan como pares: 18% los dos miembros superiores completos y 36% los dos inferiores completos. Es la base para calcular la extensión de una quemadura."
+    },
+    {
+      "id": "P1-B23-029",
+      "tipo": "cloze",
+      "prompt": "Escribe el porcentaje que corresponde a cada sección:",
+      "dificultad": 3,
+      "etiquetas": [
+        "superficie corporal",
+        "quemaduras"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "2-18",
+        "fig": "C1-3"
+      },
+      "texto": "Estimación de la superficie corporal, solo superficies anteriores: cabeza y cuello anterior {{c1}} %; hombros, brazos, antebrazos y manos bilaterales anteriores {{c2}} %; tronco anterior {{c3}} %; periné {{c4}} %; muslos, piernas y pies bilaterales anteriores {{c5}} %.",
+      "blancos": {
+        "c1": {
+          "canonico": "4.5"
+        },
+        "c2": {
+          "canonico": "9"
+        },
+        "c3": {
+          "canonico": "18"
+        },
+        "c4": {
+          "canonico": "1"
+        },
+        "c5": {
+          "canonico": "18"
+        }
+      },
+      "feedback": "Cada cifra es la mitad de la de anterior + posterior, salvo el periné, que se cuenta entero (1%) en ambas vistas. Un solo miembro superior anterior vale 4,5% y un solo miembro inferior anterior, 9%. Cuidado: el 9% de cabeza y cuello (anterior + posterior) es el mismo número que el de ambos miembros superiores solo anteriores."
+    },
+    {
+      "id": "P1-B23-030",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 5 tipos de huesos según su forma:",
+      "dificultad": 1,
+      "etiquetas": [
+        "clasificación de huesos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "largos"
+          },
+          {
+            "canonico": "cortos"
+          },
+          {
+            "canonico": "planos"
+          },
+          {
+            "canonico": "irregulares"
+          },
+          {
+            "canonico": "sesamoideos"
+          }
+        ]
+      },
+      "feedback": "Los largos son tubulares (húmero); los cortos son cuboideos y solo están en el tarso y el carpo. Los planos cumplen habitualmente una función protectora (huesos del cráneo); los irregulares tienen formas distintas a las demás (huesos de la cara). Los sesamoideos (p. ej., la patela) se desarrollan dentro de ciertos tendones."
+    },
+    {
+      "id": "P1-B23-031",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "clasificación de huesos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28"
+      },
+      "texto": "Los huesos cortos son cuboideos y se hallan solo en el {{c1}} (tobillo) y el {{c2}} (muñeca). Los huesos sesamoideos (p. ej., la {{c3}}) se desarrollan en ciertos tendones; protegen los tendones frente a un desgaste excesivo, y a menudo modifican el {{c4}} de inserción tendinosa.",
+      "blancos": {
+        "c1": {
+          "canonico": "tarso"
+        },
+        "c2": {
+          "canonico": "carpo"
+        },
+        "c3": {
+          "canonico": "patela"
+        },
+        "c4": {
+          "canonico": "ángulo"
+        }
+      },
+      "feedback": "La palabra solo es la trampa: los huesos cortos no existen fuera de tarso y carpo. Los sesamoideos se hallan donde los tendones cruzan los extremos de los huesos largos de los miembros."
+    },
+    {
+      "id": "P1-B23-032",
+      "tipo": "cloze",
+      "prompt": "Escribe el nombre del detalle óseo que corresponde a cada definición:",
+      "dificultad": 2,
+      "etiquetas": [
+        "detalles óseos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-13"
+      },
+      "texto": "Masa principal de un hueso; en los huesos largos, la diáfisis: {{c1}}. Pequeña cabeza articular redondeada (p. ej., la del húmero): {{c2}}. Área articular redondeada, semejante a un nudillo, con frecuencia par (p. ej., las del fémur): {{c3}}. Eminencia superior a un cóndilo: {{c4}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "cuerpo"
+        },
+        "c2": {
+          "canonico": "capítulo"
+        },
+        "c3": {
+          "canonico": "cóndilo"
+        },
+        "c4": {
+          "canonico": "epicóndilo"
+        }
+      },
+      "feedback": "Los detalles óseos aparecen donde se insertan tendones, ligamentos y fascias, o donde las arterias se hallan adyacentes a los huesos o penetran en ellos. Otras formaciones se relacionan con el paso de un tendón o con el control del tipo de movimiento de una articulación. No confundas capítulo (pequeña cabeza articular) con cabeza (extremo articular grande); ni cóndilo (articular) con epicóndilo (no articular, encima del cóndilo)."
+    },
+    {
+      "id": "P1-B23-033",
+      "tipo": "cloze",
+      "prompt": "Escribe el nombre del detalle óseo que corresponde a cada definición:",
+      "dificultad": 2,
+      "etiquetas": [
+        "detalles óseos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-13"
+      },
+      "texto": "Reborde óseo (p. ej., la ilíaca): {{c1}}. Área plana y lisa, habitualmente cubierta de cartílago, donde un hueso se articula con otro: {{c2}}. Paso a través de un hueso (p. ej., el obturado): {{c3}}. Hueco o área deprimida (p. ej., la infraespinosa de la escápula): {{c4}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "cresta"
+        },
+        "c2": {
+          "canonico": "cara",
+          "acepta": [
+            "carilla",
+            "fosita"
+          ]
+        },
+        "c3": {
+          "canonico": "foramen"
+        },
+        "c4": {
+          "canonico": "fosa"
+        }
+      },
+      "feedback": "Los detalles óseos aparecen donde se insertan tendones, ligamentos y fascias, o donde las arterias se hallan adyacentes a los huesos o penetran en ellos. Otras formaciones se relacionan con el paso de un tendón o con el control del tipo de movimiento de una articulación. Cara, carilla o fosita son sinónimos (p. ej., la fosita costal superior de una vértebra para la costilla). Fosa es una depresión no articular; fosita es una superficie articular: suenan parecido y no son lo mismo."
+    },
+    {
+      "id": "P1-B23-034",
+      "tipo": "cloze",
+      "prompt": "Escribe el nombre del detalle óseo que corresponde a cada definición:",
+      "dificultad": 2,
+      "etiquetas": [
+        "detalles óseos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-13"
+      },
+      "texto": "Depresión alargada (p. ej., la del nervio radial del húmero): {{c1}}. Extremo articular grande y redondeado (p. ej., la del húmero): {{c2}}. Elevación lineal (p. ej., la del músculo sóleo de la tibia): {{c3}}. Proceso redondeado (p. ej., el lateral de la fíbula): {{c4}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "surco"
+        },
+        "c2": {
+          "canonico": "cabeza"
+        },
+        "c3": {
+          "canonico": "línea"
+        },
+        "c4": {
+          "canonico": "maléolo"
+        }
+      },
+      "feedback": "Los detalles óseos aparecen donde se insertan tendones, ligamentos y fascias, o donde las arterias se hallan adyacentes a los huesos o penetran en ellos. Otras formaciones se relacionan con el paso de un tendón o con el control del tipo de movimiento de una articulación. El maléolo es un proceso (apófisis) redondeado; el lateral pertenece a la fíbula (peroné) y el medial a la tibia. Surco es depresión alargada; línea es elevación lineal: son opuestos en relieve."
+    },
+    {
+      "id": "P1-B23-035",
+      "tipo": "cloze",
+      "prompt": "Escribe el nombre del detalle óseo que corresponde a cada definición:",
+      "dificultad": 2,
+      "etiquetas": [
+        "detalles óseos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-13"
+      },
+      "texto": "Porción relativamente estrecha proximal a la cabeza: {{c1}}. Muesca en el borde de un hueso (p. ej., la isquiática mayor): {{c2}}. Extensión o proyección con un propósito principal, forma característica o que se extiende hacia una dirección particular (p. ej., articular, espinoso o transverso de la vértebra): {{c3}}. Abultamiento o proyección ósea (p. ej., la occipital externa): {{c4}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "cuello"
+        },
+        "c2": {
+          "canonico": "incisura",
+          "acepta": [
+            "escotadura"
+          ]
+        },
+        "c3": {
+          "canonico": "proceso"
+        },
+        "c4": {
+          "canonico": "protuberancia"
+        }
+      },
+      "feedback": "Los detalles óseos aparecen donde se insertan tendones, ligamentos y fascias, o donde las arterias se hallan adyacentes a los huesos o penetran en ellos. Otras formaciones se relacionan con el paso de un tendón o con el control del tipo de movimiento de una articulación. Proceso es el término TA que reemplaza a apófisis. Incisura (muesca en un borde) no es lo mismo que fosa (hueco en una cara) ni que foramen (paso a través del hueso)."
+    },
+    {
+      "id": "P1-B23-036",
+      "tipo": "cloze",
+      "prompt": "Escribe el nombre del detalle óseo que corresponde a cada definición:",
+      "dificultad": 2,
+      "etiquetas": [
+        "detalles óseos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-13"
+      },
+      "texto": "Cuerpo o tallo de un hueso largo: {{c1}}. Proceso semejante a una espina (p. ej., la de la escápula): {{c2}}. Gran elevación roma (p. ej., el mayor del fémur): {{c3}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "diáfisis"
+        },
+        "c2": {
+          "canonico": "espina"
+        },
+        "c3": {
+          "canonico": "trocánter"
+        }
+      },
+      "feedback": "Los detalles óseos aparecen donde se insertan tendones, ligamentos y fascias, o donde las arterias se hallan adyacentes a los huesos o penetran en ellos. Otras formaciones se relacionan con el paso de un tendón o con el control del tipo de movimiento de una articulación. El trocánter es exclusivo del fémur en los ejemplos de Moore; no confundir con tróclea, que es articular."
+    },
+    {
+      "id": "P1-B23-037",
+      "tipo": "cloze",
+      "prompt": "Escribe el nombre del detalle óseo que corresponde a cada definición:",
+      "dificultad": 2,
+      "etiquetas": [
+        "detalles óseos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-13"
+      },
+      "texto": "Proceso articular semejante a un carrete que actúa como una polea (p. ej., la del húmero): {{c1}}. Pequeña eminencia elevada (p. ej., el mayor del húmero): {{c2}}. Gran elevación redondeada (p. ej., la isquiática): {{c3}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "tróclea"
+        },
+        "c2": {
+          "canonico": "tubérculo"
+        },
+        "c3": {
+          "canonico": "tuberosidad"
+        }
+      },
+      "feedback": "Los detalles óseos aparecen donde se insertan tendones, ligamentos y fascias, o donde las arterias se hallan adyacentes a los huesos o penetran en ellos. Otras formaciones se relacionan con el paso de un tendón o con el control del tipo de movimiento de una articulación. Tubérculo, tuberosidad y trocánter forman una serie por tamaño: tubérculo pequeño, tuberosidad grande y redondeada, trocánter gran elevación roma."
+    },
+    {
+      "id": "P1-B23-038",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 22 detalles óseos (formaciones y características de los huesos) que describe Moore:",
+      "dificultad": 3,
+      "etiquetas": [
+        "detalles óseos"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-13"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "cuerpo"
+          },
+          {
+            "canonico": "capítulo"
+          },
+          {
+            "canonico": "cóndilo"
+          },
+          {
+            "canonico": "cresta"
+          },
+          {
+            "canonico": "epicóndilo"
+          },
+          {
+            "canonico": "cara",
+            "acepta": [
+              "carilla",
+              "fosita"
+            ]
+          },
+          {
+            "canonico": "foramen"
+          },
+          {
+            "canonico": "fosa"
+          },
+          {
+            "canonico": "surco"
+          },
+          {
+            "canonico": "cabeza"
+          },
+          {
+            "canonico": "línea"
+          },
+          {
+            "canonico": "maléolo"
+          },
+          {
+            "canonico": "cuello"
+          },
+          {
+            "canonico": "incisura",
+            "acepta": [
+              "escotadura"
+            ]
+          },
+          {
+            "canonico": "proceso"
+          },
+          {
+            "canonico": "protuberancia"
+          },
+          {
+            "canonico": "diáfisis"
+          },
+          {
+            "canonico": "espina"
+          },
+          {
+            "canonico": "trocánter"
+          },
+          {
+            "canonico": "tróclea"
+          },
+          {
+            "canonico": "tubérculo"
+          },
+          {
+            "canonico": "tuberosidad"
+          }
+        ]
+      },
+      "feedback": "Agrúpalos para recordarlos: articulares (capítulo, cóndilo, cara/carilla/fosita, cabeza, tróclea); elevaciones (cresta, epicóndilo, línea, maléolo, proceso, protuberancia, espina, trocánter, tubérculo, tuberosidad); depresiones y pasos (foramen, fosa, surco, incisura); y partes del hueso (cuerpo, diáfisis, cuello)."
+    },
+    {
+      "id": "P1-B23-039",
+      "tipo": "definicion",
+      "prompt": "Define brevemente: osificación intramembranosa. Tu definición debe incluir: hueso membranoso, mesénquima, período embrionario, osificación directa, período fetal.",
+      "dificultad": 2,
+      "etiquetas": [
+        "osificación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28"
+      },
+      "calificacion": "manual",
+      "respuesta": {
+        "modelo": "Formación de hueso membranoso: los moldes de los huesos mesenquimatosos se forman durante el período embrionario, y la osificación directa del mesénquima se inicia en el período fetal.",
+        "palabras_clave": [
+          "hueso membranoso",
+          "mesénquima",
+          "período embrionario",
+          "osificación directa",
+          "período fetal"
+        ],
+        "puntos": 1
+      },
+      "feedback": "La clave diferencial es que no hay cartílago intermedio: el mesénquima se osifica directamente. Contrasta con la endocondral, donde el molde es cartilaginoso y el hueso reemplaza después a la mayor parte del cartílago."
+    },
+    {
+      "id": "P1-B23-040",
+      "tipo": "definicion",
+      "prompt": "Define brevemente: osificación endocondral. Tu definición debe incluir: hueso cartilaginoso, mesénquima, período fetal, molde cartilaginoso, reemplaza.",
+      "dificultad": 2,
+      "etiquetas": [
+        "osificación"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28"
+      },
+      "calificacion": "manual",
+      "respuesta": {
+        "modelo": "Formación de hueso cartilaginoso: los moldes de los huesos cartilaginosos se forman a partir del mesénquima durante el período fetal, y el hueso reemplaza posteriormente a la mayor parte del cartílago.",
+        "palabras_clave": [
+          "hueso cartilaginoso",
+          "mesénquima",
+          "período fetal",
+          "molde cartilaginoso",
+          "reemplaza"
+        ],
+        "puntos": 1
+      },
+      "feedback": "Aquí el mesénquima forma primero un molde de cartílago, y el hueso lo sustituye después. Diferencia de tiempos: en la intramembranosa el molde se forma en el período embrionario; en la endocondral, en el período fetal."
+    },
+    {
+      "id": "P1-B23-041",
+      "tipo": "cloze",
+      "prompt": "Completa con un ejemplo de cada articulación sinovial:",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones sinoviales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-17"
+      },
+      "texto": "Escribe la articulación que Moore usa como ejemplo de cada tipo. Plana: articulación {{c1}}. Gínglimo o tróclea: articulación del {{c2}}. Silla de montar: articulación {{c3}} del pulgar.",
+      "blancos": {
+        "c1": {
+          "canonico": "acromioclavicular"
+        },
+        "c2": {
+          "canonico": "codo"
+        },
+        "c3": {
+          "canonico": "carpometacarpiana"
+        }
+      },
+      "feedback": "La acromioclavicular une acromion y clavícula; el codo une húmero con radio y ulna; la carpometacarpiana del pulgar une trapecio y 1.er metacarpiano. Las articulaciones sinoviales se clasifican según la forma de sus superficies articulares, el tipo de movimiento que permiten o ambas cosas."
+    },
+    {
+      "id": "P1-B23-042",
+      "tipo": "cloze",
+      "prompt": "Completa con un ejemplo de cada articulación sinovial:",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones sinoviales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-17"
+      },
+      "texto": "Escribe la articulación que Moore usa como ejemplo de cada tipo. Elipsoidea: articulación {{c1}}. Esferoidea o enartrosis: articulación {{c2}}. Trocoide: articulación {{c3}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "metacarpofalángica"
+        },
+        "c2": {
+          "canonico": "coxofemoral",
+          "acepta": [
+            "cadera"
+          ]
+        },
+        "c3": {
+          "canonico": "atlantoaxial",
+          "acepta": [
+            "atlantoaxoidea"
+          ]
+        }
+      },
+      "feedback": "La metacarpofalángica une metacarpo y falange proximal; la coxofemoral, la cabeza del fémur con el acetábulo del coxal; la atlantoaxial, el diente del axis (C2) con el atlas (C1). Es la única de las tres que permite solo un movimiento: la rotación."
+    },
+    {
+      "id": "P1-B23-043",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 1,
+      "etiquetas": [
+        "articulaciones sinoviales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-17"
+      },
+      "texto": "Las articulaciones planas (normalmente {{c1}}) permiten movimientos de {{c2}} o de rozamiento.",
+      "blancos": {
+        "c1": {
+          "canonico": "uniaxiales"
+        },
+        "c2": {
+          "canonico": "deslizamiento"
+        }
+      },
+      "feedback": "Ejemplo: la articulación acromioclavicular. Son las de movimiento más limitado entre las sinoviales."
+    },
+    {
+      "id": "P1-B23-044",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 1,
+      "etiquetas": [
+        "articulaciones sinoviales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-17"
+      },
+      "texto": "Los gínglimos o trócleas ({{c1}}) solo permiten la {{c2}} y la extensión.",
+      "blancos": {
+        "c1": {
+          "canonico": "uniaxiales"
+        },
+        "c2": {
+          "canonico": "flexión"
+        }
+      },
+      "feedback": "Ejemplo: el codo. Uniaxial significa movimiento en un solo eje, como una bisagra. Comparten el eje único con planas y trocoides; lo que cambia es el movimiento permitido."
+    },
+    {
+      "id": "P1-B23-045",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones sinoviales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-17"
+      },
+      "texto": "En las articulaciones en silla de montar ({{c1}}), las superficies articulares en silla de montar permiten el movimiento en dos {{c2}} distintos.",
+      "blancos": {
+        "c1": {
+          "canonico": "biaxiales"
+        },
+        "c2": {
+          "canonico": "planos"
+        }
+      },
+      "feedback": "Ejemplo: la carpometacarpiana del pulgar. Silla de montar y elipsoidea son las dos biaxiales."
+    },
+    {
+      "id": "P1-B23-046",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones sinoviales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-17"
+      },
+      "texto": "Las articulaciones elipsoideas ({{c1}}) permiten la flexión y la extensión, la abducción y la aducción, y la {{c2}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "biaxiales"
+        },
+        "c2": {
+          "canonico": "circunducción"
+        }
+      },
+      "feedback": "Ejemplo: la metacarpofalángica. La circunducción combina los movimientos de los dos ejes de forma secuencial."
+    },
+    {
+      "id": "P1-B23-047",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones sinoviales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-17"
+      },
+      "texto": "En las articulaciones esferoideas o enartrosis ({{c1}}), una cabeza redondeada encaja en una {{c2}}, permitiendo el movimiento en {{c3}} ejes.",
+      "blancos": {
+        "c1": {
+          "canonico": "multiaxiales"
+        },
+        "c2": {
+          "canonico": "concavidad"
+        },
+        "c3": {
+          "canonico": "3",
+          "acepta": [
+            "tres"
+          ]
+        }
+      },
+      "feedback": "Ejemplo: la coxofemoral, donde la cabeza del fémur encaja en el acetábulo del coxal. Es el único tipo multiaxial: el de mayor libertad de movimiento."
+    },
+    {
+      "id": "P1-B23-048",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "articulaciones sinoviales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "17-28",
+        "fig": "1-17"
+      },
+      "texto": "En las articulaciones trocoideas ({{c1}}), un proceso óseo redondeado se introduce en un encaje {{c2}}, permitiendo la {{c3}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "uniaxiales"
+        },
+        "c2": {
+          "canonico": "osteoligamentoso"
+        },
+        "c3": {
+          "canonico": "rotación"
+        }
+      },
+      "feedback": "Ejemplo: la atlantoaxial, donde el diente del axis gira dentro del anillo que forman el atlas y su ligamento. Resumen de ejes: uniaxiales (plana, gínglimo, trocoide), biaxiales (silla de montar, elipsoidea), multiaxial (esferoidea)."
+    },
+    {
+      "id": "P1-B23-049",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 7 tipos de músculos según su forma:",
+      "dificultad": 2,
+      "etiquetas": [
+        "músculos según su forma"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "27-36"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "planos"
+          },
+          {
+            "canonico": "penniformes",
+            "acepta": [
+              "peniformes"
+            ]
+          },
+          {
+            "canonico": "fusiformes"
+          },
+          {
+            "canonico": "convergentes"
+          },
+          {
+            "canonico": "cuadrados"
+          },
+          {
+            "canonico": "circulares",
+            "acepta": [
+              "esfinterianos"
+            ]
+          },
+          {
+            "canonico": "con múltiples cabezas o vientres",
+            "acepta": [
+              "múltiples cabezas",
+              "múltiples vientres"
+            ]
+          }
+        ]
+      },
+      "feedback": "Ejemplos de Moore: planos, el oblicuo externo del abdomen y el sartorio; penniformes, el deltoides; fusiformes, el bíceps braquial; convergentes, el pectoral mayor; cuadrados, el recto del abdomen entre sus intersecciones tendinosas; circulares o esfinterianos, el orbicular del ojo; con múltiples cabezas, el bíceps y el tríceps braquiales, y con múltiples vientres, el digástrico y el gastrocnemio."
+    },
+    {
+      "id": "P1-B23-050",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "músculos según su forma"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "27-36"
+      },
+      "texto": "Los músculos penniformes son semejantes a plumas en cuanto a la disposición de sus fascículos; por ejemplo, el músculo extensor largo de los dedos ({{c1}}), el recto femoral ({{c2}}) y el deltoides ({{c3}}).",
+      "blancos": {
+        "c1": {
+          "canonico": "unipenniforme"
+        },
+        "c2": {
+          "canonico": "bipenniforme"
+        },
+        "c3": {
+          "canonico": "multipenniforme"
+        }
+      },
+      "feedback": "Los subtipos se nombran por cuántos lados de plumas tiene el tendón: uni, bi o multi. No confundir con los fusiformes (forma de huso, como el bíceps braquial)."
+    },
+    {
+      "id": "P1-B23-051",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "músculos según su forma"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "27-36"
+      },
+      "texto": "Los músculos {{c1}} tienen forma de huso, con un vientre grueso y redondeado y extremos adelgazados; por ejemplo, el bíceps braquial. Los músculos {{c2}} se originan en un área ancha y convergen para formar un solo tendón; por ejemplo, el pectoral mayor. Los músculos circulares o {{c3}} rodean las aberturas u orificios corporales y los comprimen cuando se contraen.",
+      "blancos": {
+        "c1": {
+          "canonico": "fusiformes"
+        },
+        "c2": {
+          "canonico": "convergentes"
+        },
+        "c3": {
+          "canonico": "esfinterianos"
+        }
+      },
+      "feedback": "El ejemplo de músculo circular es el orbicular del ojo, que cierra los párpados. El bíceps braquial aparece dos veces en la clasificación: es fusiforme por su forma y bíceps por sus dos cabezas."
+    },
+    {
+      "id": "P1-B23-052",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 3,
+      "etiquetas": [
+        "músculos según su forma"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "27-36"
+      },
+      "texto": "Los músculos bíceps tienen {{c1}} cabezas de inserción; los músculos tríceps tienen {{c2}} cabezas, y los músculos digástrico y gastrocnemio tienen dos vientres. Los del primero se disponen en {{c3}}; los del segundo, en {{c4}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "2",
+          "acepta": [
+            "dos"
+          ]
+        },
+        "c2": {
+          "canonico": "3",
+          "acepta": [
+            "tres"
+          ]
+        },
+        "c3": {
+          "canonico": "tándem"
+        },
+        "c4": {
+          "canonico": "paralelo"
+        }
+      },
+      "feedback": "Bíceps braquial y tríceps braquial son los ejemplos de múltiples cabezas. En el digástrico un vientre sigue al otro (tándem); en el gastrocnemio los dos vientres están lado a lado (paralelo)."
+    },
+    {
+      "id": "P1-B23-053",
+      "tipo": "definicion",
+      "prompt": "Define brevemente: contracción isométrica. Tu definición debe incluir: longitud, posición, articulación, sin movimiento.",
+      "dificultad": 1,
+      "etiquetas": [
+        "contracción muscular"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "27-36",
+        "fig": "1-20"
+      },
+      "calificacion": "manual",
+      "respuesta": {
+        "modelo": "La longitud del músculo no cambia y la posición de la articulación se mantiene, sin movimiento. Ej.: el deltoides mantiene una contracción constante para sostener el brazo en abducción; la resistencia equivale a la gravedad.",
+        "palabras_clave": [
+          "longitud",
+          "posición",
+          "articulación",
+          "sin movimiento"
+        ],
+        "puntos": 1
+      },
+      "feedback": "Es la contracción del fijador: estabiliza las partes proximales de un miembro mientras se mueven las distales. En las isotónicas, en cambio, el músculo cambia de longitud y hay movimiento."
+    },
+    {
+      "id": "P1-B23-054",
+      "tipo": "definicion",
+      "prompt": "Define brevemente: contracción isotónica. Tu definición debe incluir: cambia, longitud, movimiento, concéntrica, excéntrica.",
+      "dificultad": 2,
+      "etiquetas": [
+        "contracción muscular"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "27-36",
+        "fig": "1-20"
+      },
+      "calificacion": "manual",
+      "respuesta": {
+        "modelo": "El músculo cambia de longitud, lo que provoca el movimiento. Comprende la contracción concéntrica (acorta el músculo) y la excéntrica (lo alarga activamente).",
+        "palabras_clave": [
+          "cambia",
+          "longitud",
+          "movimiento",
+          "concéntrica",
+          "excéntrica"
+        ],
+        "puntos": 1
+      },
+      "feedback": "Isotónica es la categoría; concéntrica y excéntrica son sus dos variantes. Lo opuesto es la isométrica: longitud constante, sin movimiento."
+    },
+    {
+      "id": "P1-B23-055",
+      "tipo": "definicion",
+      "prompt": "Define brevemente: contracción concéntrica. Tu definición debe incluir: isotónica, acorta, fuerza, supera, gravedad.",
+      "dificultad": 1,
+      "etiquetas": [
+        "contracción muscular"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "27-36",
+        "fig": "1-20"
+      },
+      "calificacion": "manual",
+      "respuesta": {
+        "modelo": "Contracción isotónica en la que el músculo acorta su longitud porque la fuerza que genera supera la fuerza de gravedad. Ej.: el deltoides se acorta para levantar el brazo en abducción.",
+        "palabras_clave": [
+          "isotónica",
+          "acorta",
+          "fuerza",
+          "supera",
+          "gravedad"
+        ],
+        "puntos": 1
+      },
+      "feedback": "Es la contracción del motor principal: realiza el movimiento deseado y gasta la mayor parte de la energía. Su espejo es la excéntrica, en la que el mismo músculo se alarga controlando el descenso."
+    },
+    {
+      "id": "P1-B23-056",
+      "tipo": "definicion",
+      "prompt": "Define brevemente: contracción excéntrica. Tu definición debe incluir: isotónica, alarga, fuerza, inferior, gravedad.",
+      "dificultad": 2,
+      "etiquetas": [
+        "contracción muscular"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "27-36",
+        "fig": "1-20"
+      },
+      "calificacion": "manual",
+      "respuesta": {
+        "modelo": "Contracción isotónica en la que el músculo aumenta activamente su longitud porque la fuerza que genera pasa a ser inferior a la de la gravedad, que tira del miembro hacia abajo al disminuir la resistencia del músculo. Ej.: el deltoides se alarga para descender el brazo en aducción.",
+        "palabras_clave": [
+          "isotónica",
+          "alarga",
+          "fuerza",
+          "inferior",
+          "gravedad"
+        ],
+        "puntos": 1
+      },
+      "feedback": "La clave es que el músculo trabaja mientras se alarga: no es relajación pasiva. Los antagonistas se contraen excéntricamente, con relajación progresiva, para producir un movimiento suave."
+    },
+    {
+      "id": "P1-B23-057",
+      "tipo": "definicion",
+      "prompt": "Define brevemente: motor principal (agonista). Tu definición debe incluir: agonista, principal, movimiento, concéntricamente, mayor parte del trabajo.",
+      "dificultad": 1,
+      "etiquetas": [
+        "funciones musculares"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "27-36"
+      },
+      "calificacion": "manual",
+      "respuesta": {
+        "modelo": "Agonista: músculo principal encargado de producir un determinado movimiento del cuerpo. Se contrae concéntricamente para producir el movimiento deseado, realiza la mayor parte del trabajo y gasta la mayor parte de la energía. Para la mayoría de los movimientos hay uno solo, pero en algunos intervienen dos que se reparten el trabajo por igual.",
+        "palabras_clave": [
+          "agonista",
+          "principal",
+          "movimiento",
+          "concéntricamente",
+          "mayor parte del trabajo"
+        ],
+        "puntos": 1
+      },
+      "feedback": "Si el texto de la alumna dice solo que mueve, falta el tipo de contracción (concéntrica) y el reparto del trabajo. El sinergista complementa su acción; el antagonista se opone a ella."
+    },
+    {
+      "id": "P1-B23-058",
+      "tipo": "definicion",
+      "prompt": "Define brevemente: fijador. Tu definición debe incluir: estabiliza, proximales, contracción isométrica, distales.",
+      "dificultad": 1,
+      "etiquetas": [
+        "funciones musculares"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "27-36"
+      },
+      "calificacion": "manual",
+      "respuesta": {
+        "modelo": "Músculo que estabiliza las partes proximales de un miembro mediante una contracción isométrica, mientras ocurren movimientos en las partes distales.",
+        "palabras_clave": [
+          "estabiliza",
+          "proximales",
+          "contracción isométrica",
+          "distales"
+        ],
+        "puntos": 1
+      },
+      "feedback": "El fijador conecta con la contracción isométrica: no hay cambio de longitud ni movimiento en la parte que fija. Un sinergista puede actuar indirectamente como fijador de una articulación participante."
+    },
+    {
+      "id": "P1-B23-059",
+      "tipo": "definicion",
+      "prompt": "Define brevemente: sinergista. Tu definición debe incluir: complementa, motor principal, directamente, indirectamente, fijador.",
+      "dificultad": 2,
+      "etiquetas": [
+        "funciones musculares"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "27-36"
+      },
+      "calificacion": "manual",
+      "respuesta": {
+        "modelo": "Músculo que complementa la acción del motor principal. Puede ayudar directamente aportando un componente más débil o con más desventaja mecánica para el mismo movimiento, o indirectamente, sirviendo de fijador de una articulación participante cuando el motor principal actúa sobre más de una articulación.",
+        "palabras_clave": [
+          "complementa",
+          "motor principal",
+          "directamente",
+          "indirectamente",
+          "fijador"
+        ],
+        "puntos": 1
+      },
+      "feedback": "No es raro que intervengan varios sinergistas en un mismo movimiento. Los sinergistas también pueden actuar como antagonistas secundarios."
+    },
+    {
+      "id": "P1-B23-060",
+      "tipo": "definicion",
+      "prompt": "Define brevemente: antagonista. Tu definición debe incluir: se opone, motor principal, excéntricamente, relajación progresiva, movimiento suave.",
+      "dificultad": 2,
+      "etiquetas": [
+        "funciones musculares"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "27-36"
+      },
+      "calificacion": "manual",
+      "respuesta": {
+        "modelo": "Músculo que se opone a la acción de otro. El antagonista primario se opone directamente al motor principal. Mientras los movilizadores activos se contraen concéntricamente, los antagonistas se contraen excéntricamente, con relajación progresiva, para producir un movimiento suave.",
+        "palabras_clave": [
+          "se opone",
+          "motor principal",
+          "excéntricamente",
+          "relajación progresiva",
+          "movimiento suave"
+        ],
+        "puntos": 1
+      },
+      "feedback": "El antagonista no está apagado: se contrae excéntricamente para frenar y suavizar el movimiento. Los sinergistas también pueden oponerse como antagonistas secundarios."
+    },
+    {
+      "id": "P1-B23-061",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 1,
+      "etiquetas": [
+        "regiones del dorso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "2-1"
+      },
+      "texto": "En función de la presencia de los huesos subyacentes, el dorso se divide anatómicamente en {{c1}} regiones bilaterales y {{c2}} regiones medias impares.",
+      "blancos": {
+        "c1": {
+          "canonico": "5",
+          "acepta": [
+            "cinco"
+          ]
+        },
+        "c2": {
+          "canonico": "2",
+          "acepta": [
+            "dos"
+          ]
+        }
+      },
+      "feedback": "Las bilaterales existen a cada lado (derecha e izquierda); las impares están en la línea media sobre la columna. Bilaterales: lumbar, escapular, supraescapular, interescapular e infraescapular. Impares: vertebral y sacra."
+    },
+    {
+      "id": "P1-B23-062",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 5 regiones bilaterales del dorso:",
+      "dificultad": 2,
+      "etiquetas": [
+        "regiones del dorso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "2-1"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "lumbar"
+          },
+          {
+            "canonico": "escapular"
+          },
+          {
+            "canonico": "supraescapular"
+          },
+          {
+            "canonico": "interescapular"
+          },
+          {
+            "canonico": "infraescapular"
+          }
+        ]
+      },
+      "feedback": "Cuatro de las cinco se nombran respecto a la escápula: sobre ella, encima, entre ambas y debajo. La quinta, la lumbar, se describe en Moore con sus lados derecho e izquierdo."
+    },
+    {
+      "id": "P1-B23-063",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 2 regiones medias impares del dorso:",
+      "dificultad": 1,
+      "etiquetas": [
+        "regiones del dorso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "2-1"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "vertebral"
+          },
+          {
+            "canonico": "sacra"
+          }
+        ]
+      },
+      "feedback": "Son impares porque están sobre la línea media: la vertebral sobre los procesos espinosos y la sacra sobre el sacro. Las escápulas, aunque están en el dorso, dan nombre a regiones bilaterales."
+    },
+    {
+      "id": "P1-B23-064",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 1,
+      "etiquetas": [
+        "columna vertebral"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "2-2"
+      },
+      "texto": "La columna vertebral del adulto consta de {{c1}} vértebras, distribuidas en 5 regiones: {{c2}} cervicales, {{c3}} torácicas, {{c4}} lumbares, {{c5}} sacras y {{c6}} coccígeas.",
+      "blancos": {
+        "c1": {
+          "canonico": "33"
+        },
+        "c2": {
+          "canonico": "7",
+          "acepta": [
+            "siete"
+          ]
+        },
+        "c3": {
+          "canonico": "12",
+          "acepta": [
+            "doce"
+          ]
+        },
+        "c4": {
+          "canonico": "5",
+          "acepta": [
+            "cinco"
+          ]
+        },
+        "c5": {
+          "canonico": "5",
+          "acepta": [
+            "cinco"
+          ]
+        },
+        "c6": {
+          "canonico": "4",
+          "acepta": [
+            "cuatro"
+          ]
+        }
+      },
+      "feedback": "7 + 12 + 5 + 5 + 4 = 33. Las 5 sacras se fusionan en el sacro y las coccígeas en el cóccix. Solo se producen movimientos significativos entre las 25 vértebras superiores."
+    },
+    {
+      "id": "P1-B23-065",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 2 músculos extrínsecos superficiales del dorso que aparecen en el corte transversal torácico:",
+      "dificultad": 1,
+      "etiquetas": [
+        "músculos del dorso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "trapecio"
+          },
+          {
+            "canonico": "dorsal ancho"
+          }
+        ]
+      },
+      "feedback": "Son los más superficiales del corte, inmediatamente bajo la piel, por encima de los extrínsecos intermedios. Extrínseco significa que no pertenece propiamente a la columna: actúan sobre el miembro superior."
+    },
+    {
+      "id": "P1-B23-066",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué músculo extrínseco intermedio del dorso aparece en el corte transversal torácico, por encima del ángulo costal?",
+      "dificultad": 2,
+      "etiquetas": [
+        "músculos del dorso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86"
+      },
+      "respuesta": {
+        "canonico": "serrato posteroinferior"
+      },
+      "feedback": "Los extrínsecos intermedios quedan entre los superficiales (trapecio y dorsal ancho) y los intrínsecos. En el esquema se ve sobre la costilla, cerca del ángulo costal."
+    },
+    {
+      "id": "P1-B23-067",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué grupo muscular constituye la capa intrínseca intermedia del dorso?",
+      "dificultad": 1,
+      "etiquetas": [
+        "músculos del dorso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86"
+      },
+      "respuesta": {
+        "canonico": "erector de la columna"
+      },
+      "feedback": "En el corte ocupa el canal entre los procesos espinosos y el ángulo costal, por fuera de los transversoespinales. Intrínseco significa que es propio de la columna y actúa sobre ella."
+    },
+    {
+      "id": "P1-B23-068",
+      "tipo": "respuesta_corta",
+      "prompt": "¿Qué grupo muscular constituye la capa intrínseca profunda del dorso?",
+      "dificultad": 1,
+      "etiquetas": [
+        "músculos del dorso"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86"
+      },
+      "respuesta": {
+        "canonico": "transversoespinales"
+      },
+      "feedback": "Es la capa más profunda, pegada a la lámina y a los procesos transversos y espinosos. Orden de superficial a profundo: extrínsecos superficiales, extrínsecos intermedios, erector de la columna, transversoespinales."
+    },
+    {
+      "id": "P1-B23-069",
+      "tipo": "cloze",
+      "prompt": "Completa el nivel vertebral y la estructura profunda de cada punto de referencia:",
+      "dificultad": 1,
+      "etiquetas": [
+        "puntos de referencia",
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86"
+      },
+      "texto": "Vértebra prominente: proceso espinoso de {{c1}}. Estructuras profundas: {{c2}} de los pulmones e istmo de la {{c3}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "C7"
+        },
+        "c2": {
+          "canonico": "ápices",
+          "acepta": [
+            "vértices"
+          ]
+        },
+        "c3": {
+          "canonico": "tiroides"
+        }
+      },
+      "feedback": "La correspondencia entre puntos palpables, procesos espinosos y estructuras profundas es aproximada. C7 es la vértebra prominente porque su proceso espinoso es el más largo de las cervicales."
+    },
+    {
+      "id": "P1-B23-070",
+      "tipo": "cloze",
+      "prompt": "Completa el nivel vertebral y la estructura profunda de cada punto de referencia:",
+      "dificultad": 2,
+      "etiquetas": [
+        "puntos de referencia",
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86"
+      },
+      "texto": "Espina de la escápula: procesos espinosos de {{c1}} y {{c2}}. El primero marca la formación de la vena {{c3}}; el segundo, el disco intervertebral subyacente y el plano torácico {{c4}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "T3"
+        },
+        "c2": {
+          "canonico": "T4"
+        },
+        "c3": {
+          "canonico": "cava superior"
+        },
+        "c4": {
+          "canonico": "transversal"
+        }
+      },
+      "feedback": "La correspondencia entre puntos palpables, procesos espinosos y estructuras profundas es aproximada. El plano torácico transversal pasa por el disco T4-T5 y cruza el ángulo esternal, el arco de la aorta, la bifurcación de la tráquea y el arco de la vena ácigos."
+    },
+    {
+      "id": "P1-B23-071",
+      "tipo": "cloze",
+      "prompt": "Completa el nivel vertebral y la estructura profunda de cada punto de referencia:",
+      "dificultad": 1,
+      "etiquetas": [
+        "puntos de referencia",
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86"
+      },
+      "texto": "Ángulo inferior de la escápula: proceso espinoso de {{c1}}. Corresponde al nivel del {{c2}} en la pared torácica anterior.",
+      "blancos": {
+        "c1": {
+          "canonico": "T7"
+        },
+        "c2": {
+          "canonico": "pezón"
+        }
+      },
+      "feedback": "La correspondencia entre puntos palpables, procesos espinosos y estructuras profundas es aproximada. Por debajo, a nivel de T9-T10, se proyectan el centro tendinoso del diafragma y la base de los pulmones."
+    },
+    {
+      "id": "P1-B23-072",
+      "tipo": "cloze",
+      "prompt": "Completa el nivel vertebral y la estructura profunda de cada punto de referencia:",
+      "dificultad": 3,
+      "etiquetas": [
+        "puntos de referencia",
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86"
+      },
+      "texto": "Procesos espinosos de {{c1}}: centro tendinoso del {{c2}} y base de los {{c3}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "T9-T10",
+          "acepta": [
+            "T9-10"
+          ]
+        },
+        "c2": {
+          "canonico": "diafragma"
+        },
+        "c3": {
+          "canonico": "pulmones"
+        }
+      },
+      "feedback": "La correspondencia entre puntos palpables, procesos espinosos y estructuras profundas es aproximada. Es la única fila de la tabla sin punto palpable asociado. Queda entre el ángulo inferior de la escápula (T7) y las puntas de la 12.ª costilla (L2)."
+    },
+    {
+      "id": "P1-B23-073",
+      "tipo": "cloze",
+      "prompt": "Completa el nivel vertebral y la estructura profunda de cada punto de referencia:",
+      "dificultad": 2,
+      "etiquetas": [
+        "puntos de referencia",
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86"
+      },
+      "texto": "Puntas de la 12.ª costilla: proceso espinoso de {{c1}}. Marca el extremo inferior de la {{c2}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "L2"
+        },
+        "c2": {
+          "canonico": "médula espinal"
+        }
+      },
+      "feedback": "La correspondencia entre puntos palpables, procesos espinosos y estructuras profundas es aproximada. La médula termina en L2, pero el saco dural llega más abajo, hasta S2. Por eso la punción lumbar se hace por debajo de L2."
+    },
+    {
+      "id": "P1-B23-074",
+      "tipo": "cloze",
+      "prompt": "Completa el nivel vertebral y la estructura profunda de cada punto de referencia:",
+      "dificultad": 2,
+      "etiquetas": [
+        "puntos de referencia",
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86"
+      },
+      "texto": "Cresta ilíaca: proceso espinoso de {{c1}}. Marca la bifurcación de la {{c2}}; normalmente la punción lumbar se realiza entre las láminas de las vértebras lumbares {{c3}}.ª y {{c4}}.ª.",
+      "blancos": {
+        "c1": {
+          "canonico": "L4"
+        },
+        "c2": {
+          "canonico": "aorta",
+          "acepta": [
+            "aorta abdominal"
+          ]
+        },
+        "c3": {
+          "canonico": "4",
+          "acepta": [
+            "L4"
+          ]
+        },
+        "c4": {
+          "canonico": "5",
+          "acepta": [
+            "L5"
+          ]
+        }
+      },
+      "feedback": "La correspondencia entre puntos palpables, procesos espinosos y estructuras profundas es aproximada. La línea que une las crestas ilíacas es la referencia práctica para localizar el espacio L4-L5. A ese nivel ya no hay médula (termina en L2), pero sí saco dural (llega a S2)."
+    },
+    {
+      "id": "P1-B23-075",
+      "tipo": "cloze",
+      "prompt": "Completa el nivel vertebral y la estructura profunda de cada punto de referencia:",
+      "dificultad": 2,
+      "etiquetas": [
+        "puntos de referencia",
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86"
+      },
+      "texto": "Hoyuelo que recubre la espina ilíaca posterosuperior (EIPS): proceso espinoso de {{c1}}. Marca la extensión inferior del saco {{c2}} / espacio subaracnoideo.",
+      "blancos": {
+        "c1": {
+          "canonico": "S2"
+        },
+        "c2": {
+          "canonico": "dural"
+        }
+      },
+      "feedback": "La correspondencia entre puntos palpables, procesos espinosos y estructuras profundas es aproximada. Es el límite inferior del espacio subaracnoideo. Entre L2 (fin de la médula) y S2 (fin del saco dural) hay líquido cerebroespinal sin médula."
+    },
+    {
+      "id": "P1-B23-076",
+      "tipo": "enumeracion",
+      "prompt": "Menciona los 6 puntos de referencia palpables del dorso que se correlacionan con procesos espinosos y estructuras profundas:",
+      "dificultad": 3,
+      "etiquetas": [
+        "puntos de referencia",
+        "anatomía de superficie"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "vértebra prominente",
+            "acepta": [
+              "C7"
+            ]
+          },
+          {
+            "canonico": "espina de la escápula"
+          },
+          {
+            "canonico": "ángulo inferior de la escápula"
+          },
+          {
+            "canonico": "puntas de la 12.ª costilla",
+            "acepta": [
+              "12.ª costilla",
+              "12a costilla",
+              "duodécima costilla"
+            ]
+          },
+          {
+            "canonico": "cresta ilíaca"
+          },
+          {
+            "canonico": "hoyuelo de la EIPS",
+            "acepta": [
+              "espina ilíaca posterosuperior"
+            ]
+          }
+        ]
+      },
+      "feedback": "De superior a inferior: vértebra prominente (C7), espina de la escápula (T3-T4), ángulo inferior de la escápula (T7), puntas de la 12.ª costilla (L2), cresta ilíaca (L4) y hoyuelo de la EIPS (S2). T9-T10 aparece en la tabla sin punto palpable."
+    },
+    {
+      "id": "P1-B23-077",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "vértebra típica"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "2-3"
+      },
+      "texto": "Los componentes funcionales de una vértebra típica son el {{c1}} vertebral, un {{c2}} vertebral y {{c3}} procesos: {{c4}} para inserciones musculares y apalancamiento y {{c5}} que participan en las articulaciones sinoviales con las vértebras adyacentes.",
+      "blancos": {
+        "c1": {
+          "canonico": "cuerpo"
+        },
+        "c2": {
+          "canonico": "arco"
+        },
+        "c3": {
+          "canonico": "7",
+          "acepta": [
+            "siete"
+          ]
+        },
+        "c4": {
+          "canonico": "3",
+          "acepta": [
+            "tres"
+          ]
+        },
+        "c5": {
+          "canonico": "4",
+          "acepta": [
+            "cuatro"
+          ]
+        }
+      },
+      "feedback": "La figura 2-3 usa la 2.ª vértebra lumbar como vértebra típica. Los 3 de palanca son el espinoso y los 2 transversos; los 4 articulares son 2 superiores y 2 inferiores."
+    },
+    {
+      "id": "P1-B23-078",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 1,
+      "etiquetas": [
+        "vértebra típica"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "2-3"
+      },
+      "texto": "Una vértebra típica tiene {{c1}} proceso espinoso, {{c2}} procesos transversos y {{c3}} procesos articulares.",
+      "blancos": {
+        "c1": {
+          "canonico": "1",
+          "acepta": [
+            "uno"
+          ]
+        },
+        "c2": {
+          "canonico": "2",
+          "acepta": [
+            "dos"
+          ]
+        },
+        "c3": {
+          "canonico": "4",
+          "acepta": [
+            "cuatro"
+          ]
+        }
+      },
+      "feedback": "1 + 2 + 4 = 7 procesos. Espinoso y transversos sirven de palanca para los músculos; los articulares forman las articulaciones sinoviales con las vértebras vecinas."
+    },
+    {
+      "id": "P1-B23-079",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "vértebra típica"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "2-3"
+      },
+      "texto": "Función de cada parte de la vértebra. Cuerpo vertebral: {{c1}} del peso corporal. Arco vertebral: protección de la {{c2}}. Procesos espinoso y transversos: inserción muscular y {{c3}}. Procesos articulares: {{c4}} de los movimientos.",
+      "blancos": {
+        "c1": {
+          "canonico": "soporte"
+        },
+        "c2": {
+          "canonico": "médula espinal"
+        },
+        "c3": {
+          "canonico": "movilidad"
+        },
+        "c4": {
+          "canonico": "restricción"
+        }
+      },
+      "feedback": "Cuerpo = carga; arco = protección; procesos espinoso y transversos = palanca muscular; procesos articulares = guían y limitan el movimiento. La orientación de las caras articulares en cada región explica qué movimientos permite cada segmento de la columna."
+    },
+    {
+      "id": "P1-B23-080",
+      "tipo": "enumeracion",
+      "prompt": "Menciona las 3 vértebras cervicales atípicas:",
+      "dificultad": 1,
+      "etiquetas": [
+        "vértebras cervicales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tabla 2-2"
+      },
+      "respuesta": {
+        "credito_parcial": true,
+        "elementos": [
+          {
+            "canonico": "C1"
+          },
+          {
+            "canonico": "C2"
+          },
+          {
+            "canonico": "C7"
+          }
+        ]
+      },
+      "feedback": "C1 (atlas) y C2 (axis) son atípicas por su forma y su articulación especializada (atlantoaxial, trocoide). C7 es atípica porque tiene el proceso espinoso más largo (vértebra prominente) y su foramen transverso solo deja pasar pequeñas venas vertebrales accesorias."
+    },
+    {
+      "id": "P1-B23-081",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "vértebras cervicales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tabla 2-2"
+      },
+      "texto": "Vértebras cervicales. Cuerpo vertebral: pequeño y más ancho {{c1}} que en sentido anteroposterior; cara superior {{c2}}, con proceso {{c3}} del cuerpo; cara inferior convexa.",
+      "blancos": {
+        "c1": {
+          "canonico": "lateralmente",
+          "acepta": [
+            "lateral"
+          ]
+        },
+        "c2": {
+          "canonico": "cóncava"
+        },
+        "c3": {
+          "canonico": "unciforme",
+          "acepta": [
+            "uncinado"
+          ]
+        }
+      },
+      "feedback": "El cuerpo cervical es el más pequeño de la columna porque soporta menos peso. El proceso unciforme se levanta en los bordes laterales de la cara superior."
+    },
+    {
+      "id": "P1-B23-082",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "vértebras cervicales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tabla 2-2"
+      },
+      "texto": "Vértebras cervicales. Foramen vertebral: grande y {{c1}}. Procesos transversos: forámenes {{c2}} y tubérculos anterior y posterior; las arterias {{c3}} pasan a través de los forámenes transversos de todas las vértebras cervicales, a excepción de {{c4}}, que transmite solo pequeñas venas vertebrales accesorias.",
+      "blancos": {
+        "c1": {
+          "canonico": "triangular"
+        },
+        "c2": {
+          "canonico": "transversos"
+        },
+        "c3": {
+          "canonico": "vertebrales"
+        },
+        "c4": {
+          "canonico": "C7"
+        }
+      },
+      "feedback": "Con las arterias vertebrales viajan los plexos venoso y simpático acompañantes. El foramen transverso es el rasgo que identifica a una vértebra cervical."
+    },
+    {
+      "id": "P1-B23-083",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 3,
+      "etiquetas": [
+        "vértebras cervicales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tabla 2-2"
+      },
+      "texto": "Vértebras cervicales. Procesos articulares: caras superiores dirigidas {{c1}}; caras inferiores dirigidas {{c2}}; las caras dispuestas oblicuamente son en su mayoría casi {{c3}} en esta región.",
+      "blancos": {
+        "c1": {
+          "canonico": "posterosuperiormente",
+          "acepta": [
+            "posterosuperior"
+          ]
+        },
+        "c2": {
+          "canonico": "anteroinferiormente",
+          "acepta": [
+            "anteroinferior"
+          ]
+        },
+        "c3": {
+          "canonico": "horizontales",
+          "acepta": [
+            "horizontal"
+          ]
+        }
+      },
+      "feedback": "La disposición casi horizontal de las caras articulares cervicales favorece la amplitud de movimiento del cuello. Compáralas con las torácicas (superiores hacia posterior) y las lumbares (casi verticales)."
+    },
+    {
+      "id": "P1-B23-084",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 3,
+      "etiquetas": [
+        "vértebras cervicales"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tabla 2-2"
+      },
+      "texto": "Vértebras cervicales. Procesos espinosos: cortos ({{c1}}) y bífidos ({{c2}}); el proceso de C6 es largo; el de {{c3}} es el más largo y recibe la denominación de «vértebra {{c4}}».",
+      "blancos": {
+        "c1": {
+          "canonico": "C3-C5"
+        },
+        "c2": {
+          "canonico": "C3-C6"
+        },
+        "c3": {
+          "canonico": "C7"
+        },
+        "c4": {
+          "canonico": "prominente"
+        }
+      },
+      "feedback": "La bifidez llega hasta C6, especialmente en hombres caucásicos según la nota de la tabla. C7 es el punto de referencia palpable más alto del dorso, a nivel de los ápices pulmonares y el istmo de la tiroides."
+    },
+    {
+      "id": "P1-B23-085",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 1,
+      "etiquetas": [
+        "vértebras torácicas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tabla 2-3"
+      },
+      "texto": "Vértebras torácicas. Cuerpo vertebral: en forma de {{c1}}; una o dos {{c2}} costales para articularse con la {{c3}} de la costilla.",
+      "blancos": {
+        "c1": {
+          "canonico": "corazón"
+        },
+        "c2": {
+          "canonico": "fositas",
+          "acepta": [
+            "carillas"
+          ]
+        },
+        "c3": {
+          "canonico": "cabeza"
+        }
+      },
+      "feedback": "Las fositas costales del cuerpo son el rasgo distintivo de las torácicas: articulan con la cabeza de la costilla. Las de los procesos transversos articulan con otra parte de la costilla: el tubérculo costal."
+    },
+    {
+      "id": "P1-B23-086",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 3,
+      "etiquetas": [
+        "vértebras torácicas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tabla 2-3"
+      },
+      "texto": "Vértebras torácicas. Foramen vertebral: {{c1}} y de menor tamaño que los de las vértebras cervicales y lumbares. Procesos transversos: largos y potentes; se extienden {{c2}}; su longitud va disminuyendo desde T1 a T12 ({{c3}} poseen fositas para articularse con el {{c4}} costal).",
+      "blancos": {
+        "c1": {
+          "canonico": "circular"
+        },
+        "c2": {
+          "canonico": "posterolateralmente",
+          "acepta": [
+            "posterolateral"
+          ]
+        },
+        "c3": {
+          "canonico": "T1-T10"
+        },
+        "c4": {
+          "canonico": "tubérculo"
+        }
+      },
+      "feedback": "El foramen torácico es el más pequeño de la columna: admite la parte distal de un dedo índice de tamaño medio. T11 y T12 no tienen fositas en el proceso transverso."
+    },
+    {
+      "id": "P1-B23-087",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 3,
+      "etiquetas": [
+        "vértebras torácicas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tabla 2-3"
+      },
+      "texto": "Vértebras torácicas. Procesos articulares: caras superiores dirigidas {{c1}} y ligeramente en sentido lateral; caras inferiores orientadas {{c2}} y ligeramente en sentido medial; el plano de las caras articulares se sitúa sobre el arco, centrado en torno al {{c3}} vertebral.",
+      "blancos": {
+        "c1": {
+          "canonico": "posteriormente",
+          "acepta": [
+            "posterior"
+          ]
+        },
+        "c2": {
+          "canonico": "anteriormente",
+          "acepta": [
+            "anterior"
+          ]
+        },
+        "c3": {
+          "canonico": "cuerpo"
+        }
+      },
+      "feedback": "Que el plano esté centrado en el cuerpo vertebral favorece la rotación del segmento torácico. En las cervicales las caras son casi horizontales; en las lumbares, casi verticales."
+    },
+    {
+      "id": "P1-B23-088",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "vértebras torácicas"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tabla 2-3"
+      },
+      "texto": "Vértebras torácicas. Procesos espinosos: largos; pendiente {{c1}}; el vértice se extiende hasta el nivel del {{c2}} vertebral inferior.",
+      "blancos": {
+        "c1": {
+          "canonico": "posteroinferior"
+        },
+        "c2": {
+          "canonico": "cuerpo"
+        }
+      },
+      "feedback": "Por esa pendiente, el proceso espinoso torácico palpable queda a la altura de la vértebra de abajo. Contrasta con los procesos lumbares: cortos, robustos y en forma de hacha."
+    },
+    {
+      "id": "P1-B23-089",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "vértebras lumbares"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tabla 2-4"
+      },
+      "texto": "Vértebras lumbares. Cuerpo vertebral: muy grande, {{c1}} en la vista superior. Foramen vertebral: {{c2}}, mayor que en las vértebras {{c3}} y menor que en las vértebras {{c4}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "reniforme"
+        },
+        "c2": {
+          "canonico": "triangular"
+        },
+        "c3": {
+          "canonico": "torácicas"
+        },
+        "c4": {
+          "canonico": "cervicales"
+        }
+      },
+      "feedback": "El cuerpo lumbar es el más grande porque soporta el mayor peso. Tamaño del foramen: cervical > lumbar > torácico."
+    },
+    {
+      "id": "P1-B23-090",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "vértebras lumbares"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tabla 2-4"
+      },
+      "texto": "Vértebras lumbares. Procesos transversos: largos y {{c1}}; proceso {{c2}} en la cara posterior de la base de cada proceso. Procesos espinosos: cortos y {{c3}}; gruesos, anchos y en forma de {{c4}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "delgados"
+        },
+        "c2": {
+          "canonico": "accesorio"
+        },
+        "c3": {
+          "canonico": "robustos"
+        },
+        "c4": {
+          "canonico": "hacha"
+        }
+      },
+      "feedback": "El proceso accesorio está en el transverso; el mamilar, en el articular superior. Son exclusivos de las lumbares. Los procesos espinosos lumbares son horizontales y en forma de hacha, a diferencia de los torácicos, largos y en pendiente."
+    },
+    {
+      "id": "P1-B23-091",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 3,
+      "etiquetas": [
+        "vértebras lumbares"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tabla 2-4"
+      },
+      "texto": "Vértebras lumbares. Procesos articulares: caras articulares casi {{c1}}; caras superiores dirigidas {{c2}} (o medialmente); caras inferiores dirigidas anterolateralmente (o lateralmente); proceso {{c3}} en la cara posterior de cada proceso articular superior.",
+      "blancos": {
+        "c1": {
+          "canonico": "verticales"
+        },
+        "c2": {
+          "canonico": "posteromedialmente",
+          "acepta": [
+            "posteromedial",
+            "medialmente"
+          ]
+        },
+        "c3": {
+          "canonico": "mamilar"
+        }
+      },
+      "feedback": "Las caras casi verticales, enfrentadas medial y lateralmente, limitan la rotación lumbar. No confundas mamilar (proceso articular superior) con accesorio (base del transverso)."
+    },
+    {
+      "id": "P1-B23-092",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 2,
+      "etiquetas": [
+        "columna vertebral",
+        "comparativa regional"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tablas 2-2 a 2-4"
+      },
+      "texto": "Comparativa del foramen vertebral: en las vértebras cervicales es grande y {{c1}}; en las torácicas es {{c2}} y el de menor tamaño; en las lumbares es {{c3}}, de tamaño intermedio.",
+      "blancos": {
+        "c1": {
+          "canonico": "triangular"
+        },
+        "c2": {
+          "canonico": "circular"
+        },
+        "c3": {
+          "canonico": "triangular"
+        }
+      },
+      "feedback": "Cervical y lumbar comparten la forma triangular; la torácica es la única circular. Orden de tamaño: cervical > lumbar > torácica. Es un dato que se pregunta comparando regiones."
+    },
+    {
+      "id": "P1-B23-093",
+      "tipo": "cloze",
+      "prompt": "Completa el enunciado:",
+      "dificultad": 1,
+      "etiquetas": [
+        "columna vertebral",
+        "comparativa regional"
+      ],
+      "fuente": {
+        "obra": "Moore 9e",
+        "pag": "72-86",
+        "fig": "Tablas 2-2 a 2-4"
+      },
+      "texto": "Comparativa del cuerpo vertebral: en las cervicales es pequeño y más ancho lateralmente; en las torácicas tiene forma de {{c1}}; en las lumbares es muy grande y {{c2}}.",
+      "blancos": {
+        "c1": {
+          "canonico": "corazón"
+        },
+        "c2": {
+          "canonico": "reniforme"
+        }
+      },
+      "feedback": "El tamaño del cuerpo aumenta de cervical a lumbar porque aumenta el peso que soporta. Tres formas para fijar: pequeño y ancho lateralmente, en forma de corazón, y reniforme."
+    }
+  ]
+}

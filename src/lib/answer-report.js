@@ -42,6 +42,7 @@ export function correctAnswerText(entry = {}, question = {}) {
     }
     const answer = source.respuesta;
     if (answer) {
+      if (text(answer.modelo)) return text(answer.modelo);
       if (text(answer.canonico)) return text(answer.canonico);
       if (answer.valor != null || answer.rango) {
         return `${answer.rango ? answer.rango.join('–') : answer.valor} ${answer.unidad ?? ''}`.trim();

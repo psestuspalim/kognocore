@@ -30,7 +30,7 @@ const DEFAULT_DICTIONARY = DIC;
  *   1.2.0  nucleos genericos opcionales + maximo acoplamiento bipartito
  *   1.3.0  reduccion de nucleos por pares + autodiagnostico
  */
-export const VERSION = '1.3.1';
+export const VERSION = '1.4.0';
 
 /** Quita diacriticos: "apófisis" -> "apofisis", "cóccix" -> "coccix". */
 export function sinAcentos(s) {
@@ -42,6 +42,7 @@ export function limpiar(s) {
   return sinAcentos(String(s ?? ''))
     .toLowerCase()
     .replace(/[\u2010-\u2015]/g, '-')       // guiones tipograficos -> guion simple
+    .replace(/[%ªº°]/g, ' ')                // "%" y ordinales ignorados
     .replace(/[^\p{L}\p{N}\s\-\/%.,]/gu, ' ')
     .replace(/[\-\/_.,]+/g, ' ')
     .replace(/\s+/g, ' ')
@@ -423,7 +424,28 @@ export function crearMotor(DIC = DEFAULT_DICTIONARY) {
     return { tipo: 'relacion', puntos: aciertos, max, correcto: aciertos === max, detalle };
   }
 
+  function calificarDefinicion(item, entrada) {
+    const R = item.respuesta || {};
+    const texto = String(entrada ?? '');
+    const tokens = limpiar(texto).split(' ').filter(Boolean);
+    const detalle = (R.palabras_clave || []).map(kw => {
+      const n = limpiar(kw).split(' ').filter(Boolean).length || 1;
+      let hit = { ok: false, via: null };
+      for (let k = 1; k <= n + 2 && !hit.ok; k++)
+        for (let i = 0; i + k <= tokens.length && !hit.ok; i++) {
+          const r = coincide(tokens.slice(i, i + k).join(' '), [kw], { nucleo: false });
+          if (r.ok) hit = r;
+        }
+      return { esperado: kw, ok: hit.ok, via: hit.via };
+    });
+    return {
+      tipo: 'definicion', manual: true, puntos: null, max: R.puntos ?? 1, correcto: null,
+      modelo: R.modelo ?? null, dado: texto.trim(), detalle
+    };
+  }
+
   const DESPACHO = {
+    definicion: calificarDefinicion,
     enumeracion: calificarEnumeracion,
     secuencia: calificarSecuencia,
     respuesta_corta: calificarCorta,
@@ -456,7 +478,11 @@ export function crearMotor(DIC = DEFAULT_DICTIONARY) {
       { desde: '1.3.0', desc: 'reduccion por pares: "sistemas" = "anatomia por sistemas"',
         ok: coincide('sistemas', ['anatomía por sistemas']).ok },
       { desde: '1.3.0', desc: 'no sobre-permisivo: "ligamento" != "ligamento nucal"',
-        ok: !coincide('ligamento', ['ligamento nucal']).ok }
+        ok: !coincide('ligamento', ['ligamento nucal']).ok },
+      { desde: '1.4.0', desc: 'porcentaje y ordinal: "9%" = "9", "4.ª" = "4"',
+        ok: coincide('9%', ['9']).ok && coincide('4.ª', ['4']).ok },
+      { desde: '1.4.0', desc: 'definicion: calificacion manual (puntos = null)',
+        ok: calificar({ tipo: 'definicion', respuesta: { modelo: 'x', palabras_clave: ['hueso'] } }, 'hueso').puntos === null }
     ];
     return { version: VERSION, ok: casos.every(c => c.ok), casos };
   }

@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Search, TrendingUp, AlertCircle, Calendar, Trash2, Eye, Loader2, ChevronDown, ChevronUp, FileDown, BookOpen, ArrowLeft, LayoutDashboard } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import MathText from '../components/quiz/MathText';
 import { fromCompactFormat, isCompactFormat } from '../components/utils/quizFormats';
@@ -26,6 +26,8 @@ export default function AdminProgress() {
   const [isPurging, setIsPurging] = useState(false);
   const [expandedAttempts, setExpandedAttempts] = useState({});
   const [showProgressModal, setShowProgressModal] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentTab = searchParams.get('tab') === 'review' ? 'review' : searchParams.get('tab') === 'docs' ? 'docs' : 'students';
 
   const queryClient = useQueryClient();
   const approveAnswerMutation = useMutation({
@@ -608,7 +610,7 @@ export default function AdminProgress() {
           </div>
         </div>
 
-        <Tabs defaultValue="students" className="mb-6">
+        <Tabs value={currentTab} onValueChange={(val) => setSearchParams(prev => { const n = new URLSearchParams(prev); n.set('tab', val); return n; }, { replace: true })} className="mb-6">
           <TabsList className="h-auto flex-wrap">
             <TabsTrigger value="students">Estudiantes</TabsTrigger>
             <TabsTrigger value="review"><Eye className="w-4 h-4 mr-2" />Revisar respuestas</TabsTrigger>
