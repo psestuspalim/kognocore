@@ -66,3 +66,31 @@ test('identifies definicion and respuesta_corta as open-ended with empty answerO
   assert.equal(qInferred.type, 'definicion');
   assert.ok(OPEN_ENDED_TYPES.has(qInferred.type));
 });
+
+test('normalizing a question with explicit correct answers remains idempotent and valid', () => {
+  const compactQ = {
+    x: 'Pregunta de prueba',
+    dif: 2,
+    o: [
+      { l: 'A', t: 'Opción A', c: false },
+      { l: 'B', t: 'Opción B', c: false },
+      { l: 'C', t: 'Opción C', c: false },
+      { l: 'D', t: 'Opción D', c: false },
+      { l: 'E', t: 'Opción E', c: true, r: 'Justificación E' }
+    ]
+  };
+
+  const pass1 = normalizeQuizQuestion(compactQ, 0);
+  assert.equal(pass1.correctAnswer, 4);
+  assert.equal(pass1.answerOptions.filter(o => o.isCorrect).length, 1);
+
+  // Re-normalizing should not match correctAnswer=4 against index+1=4 (Option D)
+  const pass2 = normalizeQuizQuestion(pass1, 0);
+  assert.equal(pass2.correctAnswer, 4);
+  assert.equal(pass2.answerOptions.filter(o => o.isCorrect).length, 1);
+  assert.equal(pass2.answerOptions[3].isCorrect, false);
+  assert.equal(pass2.answerOptions[4].isCorrect, true);
+
+  const errors = validateNormalizedQuiz({ title: 'Test Quiz', questions: [pass2] });
+  assert.equal(errors.length, 0);
+});

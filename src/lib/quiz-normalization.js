@@ -98,12 +98,17 @@ export function normalizeQuizQuestion(question = {}, index = 0) {
       ? Object.entries(input).map(([label, value]) => typeof value === 'object' && value !== null ? { label, ...value } : { label, text: value })
       : [];
 
+  const hasExplicitCorrect = rawOptions.some((raw) => {
+    if (!raw || typeof raw !== 'object') return false;
+    return raw.isCorrect === true || raw.correct === true || raw.c === true || raw.c === 1;
+  });
+
   const answerOptions = rawOptions.map((raw, optionIndex) => {
     const option = typeof raw === 'object' && raw !== null ? raw : {};
     const text = optionText(raw);
     const label = String(option.label ?? option.letra ?? option.l ?? String.fromCharCode(65 + optionIndex)).trim();
     const explicitlyCorrect = option.isCorrect === true || option.correct === true || option.c === true || option.c === 1;
-    const isCorrect = explicitlyCorrect || matchesCorrectKey(key, text, optionIndex, label);
+    const isCorrect = hasExplicitCorrect ? explicitlyCorrect : matchesCorrectKey(key, text, optionIndex, label);
     return {
       ...option,
       id: String(option.id ?? optionIndex),

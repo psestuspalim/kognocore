@@ -78,7 +78,7 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
       throw new Error('Formato JSON no reconocido');
     }
 
-    const normalized = normalizeExpandedQuiz({ title, description, questions }, title);
+    const normalized = normalizeExpandedQuiz({ ...data, title, description, questions }, title);
     if (data.bloque) normalized.bloque = data.bloque;
     const validationErrors = validateNormalizedQuiz(normalized);
     if (validationErrors.length > 0) {
