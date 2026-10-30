@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { motorAnatomia } from '@/lib/normalizador';
-import { normalizeQuizQuestion } from '@/lib/quiz-normalization';
+import { normalizeQuizQuestion, OPEN_ENDED_TYPES, normalizeQuestionType } from '@/lib/quiz-normalization';
 import { cleanQuizDisplayText } from '@/lib/quiz-display-text';
 import MathText from './MathText';
 import OpenEndedAnswerComparison from './OpenEndedAnswerComparison';
@@ -49,7 +49,15 @@ export default function OpenEndedQuestionView({
   };
 
   const tipo = useMemo(() => {
-    return String(question?.tipo || question?.type || 'respuesta_corta').toLowerCase();
+    const raw = question?.tipo || question?.type;
+    const norm = normalizeQuestionType(raw);
+    if (OPEN_ENDED_TYPES.has(norm)) return norm;
+    if (question?.respuesta?.modelo) return 'definicion';
+    if (question?.respuesta?.blancos || question?.blancos) return 'cloze';
+    if (question?.respuesta?.pares) return 'relacion';
+    if (question?.respuesta?.elementos || question?.respuesta?.pasos) return 'enumeracion';
+    if (question?.respuesta?.valor !== undefined || question?.respuesta?.rango) return 'numerico';
+    return 'respuesta_corta';
   }, [question]);
 
   // Restore or reset inputs when question changes
@@ -281,7 +289,7 @@ export default function OpenEndedQuestionView({
             {/* Input Fields depending on Question Type */}
             <div className="mt-4 space-y-4">
               {/* 1. SHORT ANSWER */}
-              {tipo === 'respuesta_corta' && (
+              {(tipo === 'respuesta_corta' || !['numerico', 'enumeracion', 'secuencia', 'cloze', 'relacion', 'definicion'].includes(tipo)) && (
                 <div>
                   <Input
                     type="text"
@@ -291,7 +299,34 @@ export default function OpenEndedQuestionView({
                     onKeyDown={(e) => { if (e.key === 'Enter' && !submitted) handleSubmit(); }}
                     placeholder="Escribe el nombre o término canónico..."
                     className="text-base sm:text-lg py-3 px-4 rounded-xl border-slate-300 focus:border-indigo-500 focus:ring-indigo-200"
+                    aria-label="Escribe tu respuesta"
+                    autoFocus
                   />
+                </div>
+              )}
+
+              {/* DEFINICION */}
+              {tipo === 'definicion' && (
+                <div className="space-y-2">
+                  <textarea
+                    rows={4}
+                    disabled={submitted}
+                    value={userInputs.text || ''}
+                    onChange={(e) => setUserInputs({ text: e.target.value })}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && !submitted) {
+                        e.preventDefault();
+                        handleSubmit();
+                      }
+                    }}
+                    placeholder="Escribe tu definición aquí..."
+                    className="w-full text-base sm:text-lg p-4 rounded-xl border border-slate-300 bg-white text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-y disabled:bg-slate-50 disabled:text-slate-500"
+                    aria-label="Escribe tu definición"
+                    autoFocus
+                  />
+                  <p className="text-xs text-slate-500 font-medium">
+                    Escribe los conceptos clave de la definición con tus propias palabras (Ctrl+Enter o pulsa el botón para comprobar).
+                  </p>
                 </div>
               )}
 
@@ -396,7 +431,7 @@ export default function OpenEndedQuestionView({
               >
                 {/* Score & Evaluation Header */}
                 <div className={`p-5 rounded-3xl border shadow-lg ${
-                  result.correcto
+                  result.manual ? 'bg-sky-50/90 border-sky-300 text-sky-950' : result.correcto
                     ? 'bg-emerald-50/90 border-emerald-300 text-emerald-950'
                     : result.puntos > 0
                       ? 'bg-amber-50/90 border-amber-300 text-amber-950'
@@ -404,7 +439,9 @@ export default function OpenEndedQuestionView({
                 }`}>
                   <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
                     <div className="flex items-center gap-2.5">
-                      {result.correcto ? (
+                      {result.manual ? (
+                        <BookOpen className="w-6 h-6 text-sky-600 shrink-0" />
+                      ) : result.correcto ? (
                         <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0" />
                       ) : result.puntos > 0 ? (
                         <AlertCircle className="w-6 h-6 text-amber-600 shrink-0" />
@@ -412,11 +449,11 @@ export default function OpenEndedQuestionView({
                         <XCircle className="w-6 h-6 text-rose-600 shrink-0" />
                       )}
                       <h3 className="font-extrabold text-base sm:text-lg">
-                        {result.correcto ? '¡Respuesta Correcta!' : result.puntos > 0 ? 'Respuesta Parcial' : 'Respuesta Incorrecta'}
+                        {result.manual ? 'Definición registrada · Autoevaluación' : result.correcto ? '¡Respuesta Correcta!' : result.puntos > 0 ? 'Respuesta Parcial' : 'Respuesta Incorrecta'}
                       </h3>
                     </div>
                     <span className="font-black text-sm sm:text-base px-3 py-1 rounded-full bg-white/80 border shadow-xs">
-                      {result.puntos} / {result.max} pts
+                      {result.manual ? `${(result.detalle || []).filter(d => d.ok).length} / ${(result.detalle || []).length} conceptos detectados` : `${result.puntos} / ${result.max} pts`}
                     </span>
                   </div>
 
@@ -434,7 +471,7 @@ export default function OpenEndedQuestionView({
                   <SelfCorrectionButton
                     inputs={savedAnswer?.inputs || userInputs}
                     corrected={result.correcto && Boolean(savedAnswer?.answer_revisions?.length)}
-                    onCorrect={!result.correcto && savedAnswer ? onCorrectAnswer : undefined}
+                    onCorrect={!result.manual && !result.correcto && savedAnswer ? onCorrectAnswer : undefined}
                   />
                 </div>
 

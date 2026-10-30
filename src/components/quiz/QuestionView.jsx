@@ -5,8 +5,9 @@ import { client } from '@/api/client';
 import MathText from './MathText';
 import ImageQuestionView from './ImageQuestionView';
 import OpenEndedQuestionView from './OpenEndedQuestionView';
+import { OPEN_ENDED_TYPES, normalizeQuestionType } from '@/lib/quiz-normalization';
 
-const OPEN_ENDED_TYPES = new Set(['enumeracion', 'numerico', 'respuesta_corta', 'cloze', 'relacion', 'secuencia']);
+
 
 export default function QuestionView({
   question,
@@ -141,8 +142,9 @@ export default function QuestionView({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showFeedback, handleSelectAnswer, handleNext]);
 
-  const qType = String(question?.tipo || question?.type || '').toLowerCase();
-  if (OPEN_ENDED_TYPES.has(qType)) {
+  const qType = normalizeQuestionType(question?.tipo || question?.type || '');
+  const isOpenEnded = OPEN_ENDED_TYPES.has(qType) || (options.length === 0 && Boolean(question?.respuesta || question?.blancos));
+  if (isOpenEnded) {
     return (
       <OpenEndedQuestionView
         question={question}

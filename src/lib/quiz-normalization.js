@@ -1,4 +1,17 @@
-const OPEN_ENDED_TYPES = new Set(['definicion', 'enumeracion', 'numerico', 'respuesta_corta', 'cloze', 'relacion', 'secuencia']);
+export const OPEN_ENDED_TYPES = new Set(['definicion', 'enumeracion', 'numerico', 'respuesta_corta', 'cloze', 'relacion', 'secuencia']);
+
+export function normalizeQuestionType(type = '') {
+  const t = String(type || '')
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[-\s]/g, '_');
+  if (t === 'short_answer' || t === 'texto' || t === 'abierta') return 'respuesta_corta';
+  if (t === 'numeric') return 'numerico';
+  if (t === 'matching') return 'relacion';
+  return t;
+}
 
 const optionText = (option) => {
   if (typeof option === 'string' || typeof option === 'number') return String(option).trim();
@@ -23,7 +36,23 @@ const matchesCorrectKey = (key, text, index, label) => {
 };
 
 export function normalizeQuizQuestion(question = {}, index = 0) {
-  const type = String(question.tipo || question.type || question.qt || 'multiple-choice').toLowerCase();
+  const rawType = question.tipo || question.type || question.qt;
+  let type = normalizeQuestionType(rawType) || 'multiple-choice';
+
+  const hasOptions = (Array.isArray(question.answerOptions) && question.answerOptions.length > 0)
+    || (Array.isArray(question.options) && question.options.length > 0)
+    || (question.options && typeof question.options === 'object' && Object.keys(question.options).length > 0)
+    || Boolean(question.opciones);
+
+  if (!OPEN_ENDED_TYPES.has(type) && !hasOptions && question.respuesta) {
+    if (question.respuesta.modelo) type = 'definicion';
+    else if (question.respuesta.blancos || question.blancos) type = 'cloze';
+    else if (question.respuesta.pares) type = 'relacion';
+    else if (question.respuesta.elementos || question.respuesta.pasos) type = 'enumeracion';
+    else if (question.respuesta.valor !== undefined || question.respuesta.rango) type = 'numerico';
+    else if (question.respuesta.canonico) type = 'respuesta_corta';
+  }
+
   const isOpenEnded = OPEN_ENDED_TYPES.has(type);
   const explanation = question.feedback ?? question.justificacion ?? question.justificación ?? question.explanation ?? question.rationale ?? '';
 

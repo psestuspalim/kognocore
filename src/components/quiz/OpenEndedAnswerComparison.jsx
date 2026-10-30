@@ -30,7 +30,16 @@ export default function OpenEndedAnswerComparison({ inputs = {}, result, type })
           </ul>
         </div>
         <div className="min-w-0 rounded-xl border border-emerald-200 bg-emerald-50 p-3 sm:p-4">
-          <h5 className="font-bold text-emerald-950 mb-3">Respuestas correctas</h5>
+          <h5 className="font-bold text-emerald-950 mb-3">{result.modelo ? 'Modelo de definición canónica' : 'Respuestas correctas'}</h5>
+          {result.modelo && (
+            <div className="mb-3 p-2.5 rounded-lg bg-white/80 border border-emerald-300 text-slate-800 text-xs sm:text-sm leading-relaxed">
+              <span className="block font-semibold text-emerald-900 mb-1">Definición de referencia (Moore 9e):</span>
+              {result.modelo}
+            </div>
+          )}
+          {result.modelo && details.length > 0 && (
+            <span className="block text-xs font-bold text-emerald-900 mb-2">Conceptos clave esperados:</span>
+          )}
           <ul className="space-y-3">
             {details.map((detail, index) => {
               const label = labelFor(detail.clave ?? detail.blanco, index);
@@ -39,7 +48,7 @@ export default function OpenEndedAnswerComparison({ inputs = {}, result, type })
                   {label && <span className="block font-semibold">{label}</span>}
                   {detail.esperado ?? 'Sin respuesta de referencia'}
                   <span className={`block mt-1 text-[11px] font-semibold ${detail.ok ? 'text-emerald-700' : 'text-rose-700'}`}>
-                    {detail.ok ? '✓ Acertaste' : '✗ Por repasar'}
+                    {detail.ok ? (result.manual ? '✓ Detectado' : '✓ Acertaste') : (result.manual ? '✗ No detectado' : '✗ Por repasar')}
                   </span>
                 </li>
               );

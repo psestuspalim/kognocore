@@ -30,7 +30,7 @@ function regradeEntry(entry, correction) {
   let isCorrect;
   let result = entry.result;
   const type = q.tipo || q.type;
-  if (q.respuesta && ['respuesta_corta', 'numerico', 'enumeracion', 'secuencia', 'cloze', 'relacion'].includes(type)) {
+  if (q.respuesta && ['respuesta_corta', 'definicion', 'numerico', 'enumeracion', 'secuencia', 'cloze', 'relacion'].includes(type)) {
     if (!entry.inputs) return { ...entry, review_ungradable: true };
     const payload = ['enumeracion', 'secuencia'].includes(type) ? Object.values(entry.inputs)
       : ['cloze', 'relacion'].includes(type) ? entry.inputs : entry.inputs.text || '';
