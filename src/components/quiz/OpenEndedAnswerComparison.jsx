@@ -13,7 +13,7 @@ export default function OpenEndedAnswerComparison({ inputs = {}, result, type })
   return (
     <section aria-label="Comparación de respuestas" className="mt-4 border-t border-black/10 pt-4">
       <h4 className="font-bold text-slate-900 mb-3">Compara tus respuestas</h4>
-      <div className="grid grid-cols-2 gap-2 sm:gap-4 text-xs sm:text-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
         <div className="min-w-0 rounded-xl border border-slate-200 bg-white p-3 sm:p-4">
           <h5 className="font-bold text-slate-900 mb-3">Tu respuesta</h5>
           <ul className="space-y-3">

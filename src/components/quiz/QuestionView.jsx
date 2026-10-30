@@ -39,6 +39,17 @@ export default function QuestionView({
   const answerLock = useRef(false);
   const scrollContainerRef = useRef(null);
   const feedbackContainerRef = useRef(null);
+  const feedbackContainerMobileRef = useRef(null);
+
+  // Auto-scroll gently to feedback on mobile
+  useEffect(() => {
+    if (showFeedback && typeof window !== 'undefined' && window.innerWidth < 1024) {
+      const timer = setTimeout(() => {
+        feedbackContainerMobileRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [showFeedback]);
 
   // Restoring an answer must not move the question or collapse its hint.
   useEffect(() => {
@@ -190,7 +201,7 @@ export default function QuestionView({
     const isIncorrectlySelected = isRevealed && isSelected && !isCorrect;
     const isMissedCorrect = isRevealed && !isSelected && isCorrect;
 
-    const baseStyle = "group relative p-2 sm:p-3 rounded-xl border text-left transition-colors duration-150 motion-reduce:transition-none cursor-pointer select-none flex items-start gap-3 w-full";
+    const baseStyle = "group relative p-3 sm:p-3.5 rounded-xl border text-left transition-colors duration-150 motion-reduce:transition-none cursor-pointer select-none flex items-start gap-3 w-full min-h-[48px] touch-manipulation active:scale-[0.99]";
 
     if (isCorrectlySelected) {
       return `${baseStyle} border-emerald-400 bg-emerald-50 text-emerald-950 ring-2 ring-emerald-400`;
@@ -292,9 +303,9 @@ export default function QuestionView({
 
       {/* Content */}
       <main
-        className="min-h-0 flex-1 w-full max-w-6xl mx-auto grid overflow-hidden grid-rows-[minmax(0,1fr)_minmax(0,0.7fr)] lg:grid-rows-1 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]"
+        className="min-h-0 flex-1 w-full max-w-6xl mx-auto flex flex-col lg:grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] overflow-hidden"
       >
-        <div ref={scrollContainerRef} className="mx-auto w-full max-w-3xl min-h-0 overflow-y-auto scrollbar-gutter-stable px-3 py-3 sm:px-5">
+        <div ref={scrollContainerRef} className="mx-auto w-full max-w-3xl min-h-0 flex-1 overflow-y-auto scrollbar-gutter-stable px-3 py-3 sm:px-5 pb-6">
 
           {/* Question card */}
           <div className="space-y-2">
@@ -387,9 +398,35 @@ export default function QuestionView({
               ))}
             </div>
 
+            {/* Mobile Feedback Section: visible directly below options on mobile screens */}
+            {showFeedback && (
+              <div ref={feedbackContainerMobileRef} className="block lg:hidden mt-4 pt-3 border-t border-slate-200">
+                <div className="rounded-2xl bg-white border border-slate-200/80 p-4 shadow-xs space-y-3 text-sm leading-snug">
+                  <h2 className={`font-bold text-base ${selectedOption?.isCorrect ? 'text-emerald-700' : 'text-rose-700'}`}>
+                    {selectedOption?.isCorrect ? '¡Respuesta correcta!' : 'Por qué tu respuesta es incorrecta'}
+                  </h2>
+                  {!selectedOption?.isCorrect && (
+                    <div className="text-slate-700 text-sm">
+                      <MathText text={selectedOption?.rationale || selectedOption?.r || 'El archivo no incluye una explicación específica para esta opción.'} />
+                    </div>
+                  )}
+                  <div className="rounded-xl bg-emerald-50 border border-emerald-200/70 p-3.5 text-emerald-950">
+                    <p className="font-semibold text-xs text-emerald-800 uppercase tracking-wider mb-1">Respuesta correcta</p>
+                    <div className="font-medium text-sm">
+                      <MathText text={correctOption?.text || ''} />
+                    </div>
+                  </div>
+                  <div className="pt-2 border-t border-slate-100 text-slate-700 text-sm leading-relaxed">
+                    <p className="font-semibold text-slate-900 mb-1">Fundamento / Justificación:</p>
+                    <MathText text={getJustificationText()} />
+                  </div>
+                </div>
+              </div>
+            )}
+
           </div>
         </div>
-          <section ref={feedbackContainerRef} aria-label="Explicación de la respuesta" aria-live="polite" className="min-h-0 overflow-y-auto scrollbar-gutter-stable border-t lg:border-t-0 lg:border-l border-slate-200 bg-white p-3 sm:p-5">
+          <section ref={feedbackContainerRef} aria-label="Explicación de la respuesta" aria-live="polite" className="hidden lg:flex lg:flex-col min-h-0 overflow-y-auto scrollbar-gutter-stable border-l border-slate-200 bg-white p-5">
             {showFeedback ? (
             <div className="mx-auto max-w-3xl space-y-3 text-sm leading-snug">
               <h2 className={`font-bold ${selectedOption?.isCorrect ? 'text-emerald-700' : 'text-rose-700'}`}>

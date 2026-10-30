@@ -188,7 +188,7 @@ export default function OpenEndedQuestionView({
                 }}
                 onChange={(e) => setUserInputs(prev => ({ ...prev, [blankKey]: e.target.value }))}
                 aria-label={`Espacio ${blankKey.slice(1)} para completar`}
-                className={`px-3 py-1 text-sm sm:text-base font-medium rounded-lg border transition-all duration-200 focus:outline-hidden focus:ring-2 ${
+                className={`px-3 py-1.5 text-base font-medium rounded-lg border transition-all duration-200 focus:outline-hidden focus:ring-2 ${
                   submitted
                     ? isBlankOk
                       ? 'bg-emerald-50 text-emerald-800 border-emerald-400 font-semibold'
@@ -340,6 +340,7 @@ export default function OpenEndedQuestionView({
                     onChange={(e) => setUserInputs({ text: e.target.value })}
                     onKeyDown={(e) => { if (e.key === 'Enter' && !submitted) handleSubmit(); }}
                     placeholder="Ej. 25"
+                    inputMode="decimal"
                     className="text-base sm:text-lg py-3 px-4 rounded-xl border-slate-300 focus:border-indigo-500 focus:ring-indigo-200 max-w-[200px]"
                   />
                   {question?.respuesta?.unidad && (
@@ -367,7 +368,7 @@ export default function OpenEndedQuestionView({
                         value={userInputs[idx] || ''}
                         onChange={(e) => setUserInputs(prev => ({ ...prev, [idx]: e.target.value }))}
                         placeholder={`Elemento ${parseInt(idx, 10) + 1}...`}
-                        className="text-sm sm:text-base py-2.5 px-3.5 rounded-xl border-slate-300 focus:border-indigo-500"
+                        className="text-base py-2.5 px-3.5 rounded-xl border-slate-300 focus:border-indigo-500"
                       />
                     </div>
                   ))}
@@ -390,7 +391,7 @@ export default function OpenEndedQuestionView({
                           disabled={submitted}
                           value={userInputs[par.clave] || ''}
                           onChange={(e) => setUserInputs(prev => ({ ...prev, [par.clave]: e.target.value }))}
-                          className="w-full px-3 py-2 text-sm sm:text-base rounded-xl border border-slate-300 bg-white text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 truncate"
+                          className="w-full px-3 py-2.5 text-base rounded-xl border border-slate-300 bg-white text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 truncate"
                         >
                           <option value="">-- Selecciona corresponder --</option>
                           {candidateOptions.map((opt, optIdx) => (
@@ -510,6 +511,33 @@ export default function OpenEndedQuestionView({
 
         </div>
       </main>
+
+      {/* Sticky Bottom Action Bar for Mobile & Desktop */}
+      <footer className="z-20 shrink-0 border-t border-slate-300/80 bg-white px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 sm:px-6">
+        <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
+          <div className="text-xs text-slate-400 hidden sm:block">
+            {submitted ? <span>Pulsa siguiente para continuar</span> : <span>Escribe tu respuesta y comprueba</span>}
+          </div>
+
+          {!submitted ? (
+            <Button
+              onClick={handleSubmit}
+              className="ml-auto h-11 w-full sm:w-auto rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-7 shadow-sm transition-all active:scale-95 cursor-pointer"
+            >
+              <span>Comprobar respuesta</span>
+              <CornerDownLeft className="w-4 h-4 ml-1.5" />
+            </Button>
+          ) : (
+            <Button
+              onClick={onNext}
+              className="ml-auto h-11 w-full sm:w-auto rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold px-8 shadow-sm transition-all active:scale-95 cursor-pointer"
+            >
+              <span>{questionNumber === totalQuestions ? 'Ver resultados' : 'Siguiente pregunta'}</span>
+              <ArrowRight className="w-4 h-4 ml-1.5" />
+            </Button>
+          )}
+        </div>
+      </footer>
     </div>
   );
 }
