@@ -1,4 +1,4 @@
-import { normalizeExpandedQuiz } from './quiz-normalization';
+import { normalizeExpandedQuiz } from './quiz-normalization.js';
 
 export const mockUser = {
     id: 'admin_jesus',
@@ -35,12 +35,14 @@ export const mockSubjects = [
     { id: 'subj_pediatria', name: 'Pediatría', order: 3, course_id: 'course_enarm2026', code: 'PED', color: '#f59e0b' },
     { id: 'subj_ginecologia_obs', name: 'Ginecología y Obstetricia', order: 4, course_id: 'course_enarm2026', code: 'GYO', color: '#ec4899' },
     { id: 'subj_simuladores', name: 'Simuladores', order: 5, course_id: 'course_enarm2026', code: 'SIM', color: '#7c3aed' },
-    { id: 'subj_anatomia', name: 'Anatomía Humana', order: 6, course_id: 'course_enarm2026', code: 'ANA', color: '#6366f1' }
+    { id: 'subj_anatomia', name: 'Anatomía Humana', order: 6, course_id: 'course_enarm2026', code: 'ANA', color: '#6366f1' },
+    { id: 'subj_fisiologia', name: 'Fisiología', order: 7, course_id: 'course_enarm2026', code: 'FIS', color: '#0ea5e9' }
 ];
 
 export const mockFolders = [
     { id: 'folder_capitulos_cortados', name: 'Capítulos cortados', order: 1, course_id: 'course_enarm2026', subject_id: 'subj_anatomia', color: '#6366f1', description: 'Bloques de examen de respuesta abierta (Moore 9.ª ed.)' },
-    { id: 'folder_diagnosticos', name: 'Diagnósticos', order: 2, course_id: 'course_enarm2026', subject_id: 'subj_anatomia', color: '#6366f1', description: 'Evaluaciones diagnósticas y de progreso' }
+    { id: 'folder_diagnosticos', name: 'Diagnósticos', order: 2, course_id: 'course_enarm2026', subject_id: 'subj_anatomia', color: '#6366f1', description: 'Evaluaciones diagnósticas y de progreso' },
+    { id: 'folder_fisiologia', name: 'Fisiología', order: 3, course_id: 'course_enarm2026', subject_id: 'subj_fisiologia', color: '#0ea5e9', description: 'Simulacros y cuestionarios de Fisiología Médica (Guyton)' }
 ];
 
 export const mockResources = [];

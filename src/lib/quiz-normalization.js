@@ -91,7 +91,7 @@ export function normalizeQuizQuestion(question = {}, index = 0) {
   }
 
   const key = correctKey(question);
-  const input = question.answerOptions ?? question.options ?? question.opciones ?? [];
+  const input = question.answerOptions ?? question.options ?? question.opciones ?? question.o ?? [];
   const rawOptions = Array.isArray(input)
     ? input
     : input && typeof input === 'object'
@@ -101,7 +101,7 @@ export function normalizeQuizQuestion(question = {}, index = 0) {
   const answerOptions = rawOptions.map((raw, optionIndex) => {
     const option = typeof raw === 'object' && raw !== null ? raw : {};
     const text = optionText(raw);
-    const label = String(option.label ?? option.letra ?? String.fromCharCode(65 + optionIndex)).trim();
+    const label = String(option.label ?? option.letra ?? option.l ?? String.fromCharCode(65 + optionIndex)).trim();
     const explicitlyCorrect = option.isCorrect === true || option.correct === true || option.c === true || option.c === 1;
     const isCorrect = explicitlyCorrect || matchesCorrectKey(key, text, optionIndex, label);
     return {
@@ -115,16 +115,19 @@ export function normalizeQuizQuestion(question = {}, index = 0) {
     };
   }).filter((option) => option.text);
 
+  const correctOption = answerOptions.find((option) => option.isCorrect);
+  const finalExplanation = explanation || correctOption?.rationale || '';
+
   return {
     ...question,
     type,
     question: question.question ?? question.prompt ?? question.pregunta ?? question.enunciado ?? question.text ?? question.x ?? `Pregunta ${index + 1}`,
     questionId: question.questionId ?? question.id ?? `Q${index + 1}`,
-    difficulty: question.difficulty ?? 'moderado',
+    difficulty: question.difficulty ?? (question.dif === 1 || question.dificultad === 1 ? 'fácil' : question.dif === 3 || question.dificultad === 3 ? 'difícil' : 'moderado'),
     bloomLevel: question.bloomLevel ?? 'Comprender',
     hint: question.hint ?? question.pista ?? '',
-    feedback: explanation,
-    justificacion: explanation,
+    feedback: finalExplanation,
+    justificacion: finalExplanation,
     answerOptions,
     correctAnswer: answerOptions.findIndex((option) => option.isCorrect)
   };
@@ -185,18 +188,20 @@ export function normalizeExpandedQuiz(quiz = {}, fallbackTitle = 'Cuestionario')
     ? quiz.questions
     : Array.isArray(quiz.items)
       ? quiz.items
-      : Array.isArray(quiz.preguntas) ? quiz.preguntas : [];
+      : Array.isArray(quiz.preguntas)
+        ? quiz.preguntas
+        : Array.isArray(quiz.q) ? quiz.q : [];
   const questions = rawQuestions.map(normalizeQuizQuestion);
-  const title = String(quiz.title || quiz.titulo || quiz.bloque?.titulo || fallbackTitle).trim();
-  const description = quiz.description || (quiz.bloque ? `Sesión: ${quiz.bloque.sesion || ''} | Páginas: ${quiz.bloque.paginas || ''}` : '');
+  const title = String(quiz.title || quiz.titulo || quiz.bloque?.titulo || quiz.metadata?.title || quiz.metadata?.titulo || fallbackTitle).trim();
+  const description = quiz.description || (quiz.metadata?.source ? `Fuente: ${quiz.metadata.source}` : '') || (quiz.bloque ? `Sesión: ${quiz.bloque.sesion || ''} | Páginas: ${quiz.bloque.paginas || ''}` : '');
 
   return {
     ...quiz,
     id: quiz.id || quiz.bloque?.id || `quiz_${Date.now()}`,
     title,
     description,
-    folder_id: quiz.folder_id || (quiz.bloque?.id === 'P1-B23' || /diagn[oó]stic|evaluaci[oó]n.*progreso/i.test(title) ? 'folder_diagnosticos' : (quiz.bloque ? 'folder_capitulos_cortados' : null)),
-    subject_id: quiz.subject_id || (quiz.bloque ? 'subj_anatomia' : null),
+    folder_id: quiz.folder_id || (quiz.bloque?.id === 'P1-B23' || /diagn[oó]stic|evaluaci[oó]n.*progreso/i.test(title) ? 'folder_diagnosticos' : (quiz.bloque ? 'folder_capitulos_cortados' : (/fisio/i.test(quiz.metadata?.sj || '') || /respiratorio|fisiolog/i.test(title)) ? 'folder_fisiologia' : null)),
+    subject_id: quiz.subject_id || (quiz.bloque ? 'subj_anatomia' : (/fisio/i.test(quiz.metadata?.sj || '') || /respiratorio|fisiolog/i.test(title)) ? 'subj_fisiologia' : null),
     questions,
     total_questions: questions.length
   };
