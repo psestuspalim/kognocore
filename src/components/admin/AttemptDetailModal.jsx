@@ -3,12 +3,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { CheckCircle2, XCircle, Clock, Calendar, Trash2 } from 'lucide-react';
+import { CheckCircle2, XCircle, Clock, Calendar, Trash2, PlayCircle } from 'lucide-react';
 import { format } from 'date-fns';
 import MathText from '../quiz/MathText';
 import AnswerOutcome from './AnswerOutcome';
 
-export default function AttemptDetailModal({ attempt, quizTitle, open, onClose, onDelete }) {
+export default function AttemptDetailModal({ attempt, quizTitle, open, onClose, onDelete, onOpenQuizReview }) {
   if (!attempt) return null;
 
   const percentage = Math.round((attempt.score / attempt.total_questions) * 100);
@@ -20,7 +20,7 @@ export default function AttemptDetailModal({ attempt, quizTitle, open, onClose, 
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl max-h-[90vh] p-0">
         <DialogHeader className="p-6 pb-4 border-b">
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
               <DialogTitle className="text-xl">{quizTitle}</DialogTitle>
               <div className="flex items-center gap-2 mt-2 text-sm text-gray-500">
@@ -28,7 +28,7 @@ export default function AttemptDetailModal({ attempt, quizTitle, open, onClose, 
                 {format(new Date(attempt.completed_at || attempt.created_date), 'dd/MM/yyyy HH:mm')}
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <Badge className={`text-sm ${
                 percentage >= 70 ? 'bg-green-100 text-green-800' :
                 percentage >= 50 ? 'bg-yellow-100 text-yellow-800' :
@@ -36,6 +36,19 @@ export default function AttemptDetailModal({ attempt, quizTitle, open, onClose, 
               }`}>
                 {attempt.score}/{attempt.total_questions} ({percentage}%)
               </Badge>
+              {onOpenQuizReview && (
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    onClose();
+                    onOpenQuizReview({ attempt, quizTitle, initialIndex: 0 });
+                  }}
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer"
+                >
+                  <PlayCircle className="w-4 h-4 mr-1.5" />
+                  Ver en examen
+                </Button>
+              )}
               <Button
                 variant="outline"
                 size="sm"

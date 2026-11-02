@@ -8,6 +8,7 @@ import { cleanQuizDisplayText } from '@/lib/quiz-display-text';
 import MathText from './MathText';
 import OpenEndedAnswerComparison from './OpenEndedAnswerComparison';
 import SelfCorrectionButton from './SelfCorrectionButton';
+import QuizReviewBar from './QuizReviewBar';
 import {
   CheckCircle2, XCircle, AlertCircle, Sparkles,
   BookOpen, ArrowRight, CornerDownLeft, ChevronLeft, Bookmark
@@ -23,11 +24,14 @@ export default function OpenEndedQuestionView({
   onAnswer,
   onCorrectAnswer,
   onNext,
+  onPrev = null,
   showFeedback: externalShowFeedback = false,
   savedAnswer = null,
   onBack,
   onMarkForReview,
-  initialIsMarked = false
+  initialIsMarked = false,
+  isReviewMode = false,
+  reviewDetails = null
 }) {
   const question = useMemo(() => normalizeQuizQuestion(rawQuestion), [rawQuestion]);
   const [userInputs, setUserInputs] = useState({});
@@ -67,11 +71,55 @@ export default function OpenEndedQuestionView({
     setGradingError('');
 
     if (savedAnswer) {
-      setUserInputs(savedAnswer.inputs || {});
-      if (savedAnswer.result) {
-        setResult(savedAnswer.result);
-        setSubmitted(true);
+      let parsedInputs = savedAnswer.inputs;
+      if (!parsedInputs && savedAnswer.selected_answer) {
+        if (typeof savedAnswer.selected_answer === 'object') {
+          parsedInputs = savedAnswer.selected_answer;
+        } else if (typeof savedAnswer.selected_answer === 'string') {
+          try {
+            parsedInputs = JSON.parse(savedAnswer.selected_answer);
+          } catch {
+            if (tipo === 'cloze' || tipo === 'relacion') {
+              parsedInputs = {};
+              savedAnswer.selected_answer.split(';').forEach(p => {
+                const [k, ...rest] = p.split(':');
+                if (k && rest.length > 0) parsedInputs[k.trim()] = rest.join(':').trim();
+              });
+            } else if (tipo === 'enumeracion' || tipo === 'secuencia') {
+              parsedInputs = {};
+              const parts = savedAnswer.selected_answer.split(/[;,]/).map(s => s.trim()).filter(Boolean);
+              parts.forEach((p, i) => { parsedInputs[i] = p; });
+            } else {
+              parsedInputs = { text: savedAnswer.selected_answer };
+            }
+          }
+        }
       }
+      if (!parsedInputs) {
+        parsedInputs = {};
+      }
+      setUserInputs(parsedInputs);
+
+      let evalResult = savedAnswer.result;
+      if (!evalResult) {
+        try {
+          let payload;
+          if (tipo === 'cloze' || tipo === 'relacion') payload = parsedInputs;
+          else if (tipo === 'enumeracion' || tipo === 'secuencia') payload = Object.values(parsedInputs);
+          else payload = parsedInputs.text || '';
+          evalResult = motorAnatomia.calificar(question, payload);
+        } catch (e) {
+          console.error("Error evaluating saved answer:", e);
+        }
+      }
+
+      if (evalResult) {
+        if (reviewDetails?.isApproved || savedAnswer.admin_review) {
+          evalResult = { ...evalResult, correcto: true, puntos: evalResult.max || 1 };
+        }
+        setResult(evalResult);
+      }
+      setSubmitted(true);
     } else {
       if (tipo === 'cloze') {
         const blancos = question?.blancos || question?.respuesta?.blancos || {};
@@ -209,56 +257,84 @@ export default function OpenEndedQuestionView({
     );
   };
 
+  // Keyboard navigation for review mode and after submit
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+      const key = e.key.toLowerCase();
+      if (key === 'arrowleft' && onPrev) {
+        e.preventDefault();
+        onPrev();
+      } else if ((key === 'arrowright' || key === 'enter') && onNext && (submitted || isReviewMode)) {
+        e.preventDefault();
+        onNext();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onPrev, onNext, submitted, isReviewMode]);
+
   const progressPercent = totalQuestions > 0 ? Math.round((questionNumber / totalQuestions) * 100) : 0;
 
   return (
     <div className="fixed inset-0 z-50 flex h-dvh flex-col overflow-hidden bg-slate-100 font-sans">
       {/* Header */}
-      <header className="z-20 shrink-0 border-b border-slate-300/80 bg-white px-3 pb-2.5 pt-[max(0.625rem,env(safe-area-inset-top))] sm:px-6">
-        <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
-          {onBack ? (
-            <button
-              onClick={onBack}
-              className="flex items-center gap-1.5 px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
-              title="Salir del cuestionario"
-            >
-              <ChevronLeft className="w-4 h-4" />
-              <span>Salir</span>
-            </button>
-          ) : <div className="w-16" />}
+      {isReviewMode && reviewDetails ? (
+        <QuizReviewBar
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
+          correctAnswers={correctAnswers}
+          wrongAnswers={wrongAnswers}
+          onBack={onBack}
+          reviewDetails={reviewDetails}
+        />
+      ) : (
+        <header className="z-20 shrink-0 border-b border-slate-300/80 bg-white px-3 pb-2.5 pt-[max(0.625rem,env(safe-area-inset-top))] sm:px-6">
+          <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
+            {onBack ? (
+              <button
+                onClick={onBack}
+                className="flex items-center gap-1.5 px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
+                title="Salir del cuestionario"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span>Salir</span>
+              </button>
+            ) : <div className="w-16" />}
 
-          <div className="flex-1 max-w-sm">
-            <div className="flex items-center justify-center gap-2 mb-1">
-              <span className="text-xs font-semibold text-slate-600 truncate">
-                {questionNumber} de {totalQuestions}
-              </span>
-              <div className="flex items-center gap-1 text-xs">
-                <span className="text-emerald-600 font-semibold">{correctAnswers}</span>
-                <span className="text-slate-300">/</span>
-                <span className="text-rose-500 font-semibold">{wrongAnswers}</span>
+            <div className="flex-1 max-w-sm">
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <span className="text-xs font-semibold text-slate-600 truncate">
+                  {questionNumber} de {totalQuestions}
+                </span>
+                <div className="flex items-center gap-1 text-xs">
+                  <span className="text-emerald-600 font-semibold">{correctAnswers}</span>
+                  <span className="text-slate-300">/</span>
+                  <span className="text-rose-500 font-semibold">{wrongAnswers}</span>
+                </div>
+              </div>
+              <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-indigo-600 rounded-full transition-all duration-300"
+                  style={{ width: `${progressPercent}%` }}
+                />
               </div>
             </div>
-            <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-indigo-600 rounded-full transition-all duration-300"
-                style={{ width: `${progressPercent}%` }}
-              />
-            </div>
-          </div>
 
-          {onMarkForReview ? (
-            <button
-              onClick={handleToggleMark}
-              title={isMarked ? 'Marcada para revisión' : 'Marcar para revisión'}
-              className={`p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors shrink-0 ${
-                isMarked ? 'text-amber-500' : 'text-slate-300 hover:text-slate-500'
-              }`}
-            >
-              <Bookmark className={`w-4 h-4 ${isMarked ? 'fill-amber-400' : ''}`} />
-            </button>
-          ) : <div className="w-10" />}
-        </div>
-      </header>
+            {onMarkForReview ? (
+              <button
+                onClick={handleToggleMark}
+                title={isMarked ? 'Marcada para revisión' : 'Marcar para revisión'}
+                className={`p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors shrink-0 ${
+                  isMarked ? 'text-amber-500' : 'text-slate-300 hover:text-slate-500'
+                }`}
+              >
+                <Bookmark className={`w-4 h-4 ${isMarked ? 'fill-amber-400' : ''}`} />
+              </button>
+            ) : <div className="w-10" />}
+          </div>
+        </header>
+      )}
 
       {/* Main Content Area - Fully Scrollable */}
       <main className="flex-1 min-h-0 overflow-y-auto px-4 py-4 sm:py-6 pb-32 scrollbar-gutter-stable">
@@ -515,11 +591,22 @@ export default function OpenEndedQuestionView({
       {/* Sticky Bottom Action Bar for Mobile & Desktop */}
       <footer className="z-20 shrink-0 border-t border-slate-300/80 bg-white px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 sm:px-6">
         <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
-          <div className="text-xs text-slate-400 hidden sm:block">
-            {submitted ? <span>Pulsa siguiente para continuar</span> : <span>Escribe tu respuesta y comprueba</span>}
-          </div>
+          {onPrev ? (
+            <Button
+              variant="outline"
+              onClick={onPrev}
+              className="h-11 px-5 rounded-xl border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold cursor-pointer"
+            >
+              <ChevronLeft className="w-4 h-4 mr-1.5" />
+              <span>Anterior</span>
+            </Button>
+          ) : (
+            <div className="text-xs text-slate-400 hidden sm:block">
+              {submitted ? <span>Pulsa siguiente para continuar</span> : <span>Escribe tu respuesta y comprueba</span>}
+            </div>
+          )}
 
-          {!submitted ? (
+          {!submitted && !isReviewMode ? (
             <Button
               onClick={handleSubmit}
               className="ml-auto h-11 w-full sm:w-auto rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-7 shadow-sm transition-all active:scale-95 cursor-pointer"
@@ -530,9 +617,10 @@ export default function OpenEndedQuestionView({
           ) : (
             <Button
               onClick={onNext}
+              disabled={!onNext && !isReviewMode}
               className="ml-auto h-11 w-full sm:w-auto rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold px-8 shadow-sm transition-all active:scale-95 cursor-pointer"
             >
-              <span>{questionNumber === totalQuestions ? 'Ver resultados' : 'Siguiente pregunta'}</span>
+              <span>{questionNumber === totalQuestions ? (isReviewMode ? 'Volver' : 'Ver resultados') : 'Siguiente pregunta'}</span>
               <ArrowRight className="w-4 h-4 ml-1.5" />
             </Button>
           )}

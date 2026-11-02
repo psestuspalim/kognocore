@@ -5,12 +5,12 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
   History, CheckCircle2, XCircle, Clock, Trophy, 
-  ChevronDown, ChevronUp, Calendar, Target
+  ChevronDown, ChevronUp, Calendar, Target, Eye, PlayCircle
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 
-export default function AttemptHistory({ attempts, quizzes, subjects }) {
+export default function AttemptHistory({ attempts, quizzes, subjects, onOpenQuizReview }) {
   const [expandedAttempt, setExpandedAttempt] = useState(null);
   const [filter, setFilter] = useState('all'); // all, completed, partial
 
@@ -163,6 +163,26 @@ export default function AttemptHistory({ attempts, quizzes, subjects }) {
                           <p className="text-xs text-gray-500">Precisión</p>
                         </div>
                       </div>
+
+                      {onOpenQuizReview && (
+                        <div className="mb-4">
+                          <Button
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onOpenQuizReview({
+                                attempt,
+                                quizTitle: attempt.quiz_snapshot?.title || quiz?.title || 'Cuestionario',
+                                initialIndex: 0
+                              });
+                            }}
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs flex items-center gap-1.5 cursor-pointer shadow-xs"
+                          >
+                            <PlayCircle className="w-4 h-4" />
+                            Ver intento completo en vista de examen
+                          </Button>
+                        </div>
+                      )}
 
                       {attempt.wrong_questions?.length > 0 && (
                         <div>

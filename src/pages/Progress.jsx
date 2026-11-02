@@ -20,10 +20,12 @@ import StudentDashboard from '../components/progress/StudentDashboard';
 import PerformanceRadarChart from '../components/progress/PerformanceRadarChart';
 import QuizTimeStats from '../components/progress/QuizTimeStats';
 import DifficultQuestionsAnalysis from '../components/progress/DifficultQuestionsAnalysis';
+import AttemptQuizReviewer from '../components/quiz/AttemptQuizReviewer';
 
 export default function ProgressPage() {
   const [currentUser, setCurrentUser] = useState(null);
   const [selectedStudent, setSelectedStudent] = useState(null);
+  const [reviewQuizAttempt, setReviewQuizAttempt] = useState(null);
 
   React.useEffect(() => {
     const loadUser = async () => {
@@ -363,6 +365,7 @@ export default function ProgressPage() {
               attempts={attempts}
               quizzes={quizzes}
               subjects={subjects}
+              onOpenQuizReview={setReviewQuizAttempt}
             />
           </TabsContent>
 
@@ -399,6 +402,18 @@ export default function ProgressPage() {
             <TimeVsPerformance attempts={attempts} />
           </TabsContent>
         </Tabs>
+
+        {/* Interactive Attempt Quiz Reviewer */}
+        {reviewQuizAttempt && (
+          <AttemptQuizReviewer
+            attempt={reviewQuizAttempt.attempt}
+            quizTitle={reviewQuizAttempt.quizTitle}
+            initialIndex={reviewQuizAttempt.initialIndex ?? 0}
+            quizzes={quizzes}
+            isAdmin={false}
+            onClose={() => setReviewQuizAttempt(null)}
+          />
+        )}
       </div>
     </div>
   );

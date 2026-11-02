@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, AlertCircle, Eye } from 'lucide-react';
+import { Search, AlertCircle, Eye, PlayCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -8,7 +8,7 @@ import { readableAnswer, possibleVerificationMismatch } from '@/lib/answer-revie
 import MathText from '../quiz/MathText';
 import AnswerOutcome from './AnswerOutcome';
 
-export default function AnswerReviewPanel({ students, quizzes, subjects, getRows, onOpenAttempt, onApprove, saving, loading, error }) {
+export default function AnswerReviewPanel({ students, quizzes, subjects, getRows, onOpenAttempt, onOpenQuizReview, onApprove, saving, loading, error }) {
   const [reviewing, setReviewing] = useState(null);
   const [reason, setReason] = useState('');
   const [includeReviewed, setIncludeReviewed] = useState(false);
@@ -77,9 +77,36 @@ export default function AnswerReviewPanel({ students, quizzes, subjects, getRows
       {[...groups].map(([key, group]) => <section key={key} className="space-y-3">
         <div className="rounded-lg bg-slate-900 text-white p-4"><h3 className="font-semibold">{group.student.username} · {group.subjectName}</h3><p className="text-xs text-slate-300 mt-1">{group.student.email || group.student.learner_id}</p></div>
         {group.rows.map(row => <Card key={row.id} className={row.mismatch ? 'border-amber-400' : ''}><CardContent className="p-5 space-y-4">
-          <div className="flex flex-wrap items-center justify-between gap-2"><div className="text-xs text-slate-500">{row.quizTitle} · {Number.isFinite(Date.parse(row.attempt.completed_at || row.attempt.created_date)) ? new Date(row.attempt.completed_at || row.attempt.created_date).toLocaleString('es-MX') : 'Fecha no disponible'}</div><Button variant="outline" size="sm" onClick={() => onOpenAttempt({ attempt: row.attempt, quizTitle: row.quizTitle })}><Eye className="w-4 h-4 mr-2" />Ver intento</Button></div>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="text-xs text-slate-500">
+              {row.quizTitle} · {Number.isFinite(Date.parse(row.attempt.completed_at || row.attempt.created_date)) ? new Date(row.attempt.completed_at || row.attempt.created_date).toLocaleString('es-MX') : 'Fecha no disponible'}
+            </div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <Button variant="outline" size="sm" onClick={() => onOpenAttempt({ attempt: row.attempt, quizTitle: row.quizTitle })}>
+                <Eye className="w-4 h-4 mr-1.5" />Ver intento
+              </Button>
+              {onOpenQuizReview && (
+                <Button
+                  variant="default"
+                  size="sm"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer shadow-xs"
+                  onClick={() => onOpenQuizReview({ attempt: row.attempt, quizTitle: row.quizTitle, initialIndex: row.questionIndex ?? 0 })}
+                >
+                  <PlayCircle className="w-4 h-4 mr-1.5" />Ver en vista de examen
+                </Button>
+              )}
+            </div>
+          </div>
           {row.mismatch && <div className="flex gap-2 items-center rounded-lg bg-amber-50 p-3 text-sm text-amber-900"><AlertCircle className="w-5 h-5 shrink-0" />Posible error de verificación: los textos coinciden al normalizar el formato.</div>}
-          <h4 className="font-semibold text-slate-900"><MathText text={row.question} /></h4>
+          <div className="space-y-2">
+            <h4 className="font-semibold text-slate-900"><MathText text={row.question} /></h4>
+            {row.texto && (
+              <div className="rounded-xl border border-indigo-200/80 bg-indigo-50/70 p-3.5 text-sm sm:text-base font-medium text-slate-800 leading-relaxed shadow-xs">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-indigo-700 mb-1">Texto del enunciado:</p>
+                <MathText text={row.texto} />
+              </div>
+            )}
+          </div>
           {row.imageUrl && <img src={row.imageUrl} alt="Imagen de la pregunta" className="max-h-72 max-w-full rounded-lg object-contain" loading="lazy" />}
           <div className="grid md:grid-cols-2 gap-3">
             <div className={`rounded-xl border p-4 ${row.admin_review ? 'border-emerald-200 bg-emerald-50' : 'border-red-200 bg-red-50'}`}><p className="text-xs font-semibold mb-2">RESPUESTA DEL ALUMNO · {row.admin_review ? 'VALIDADA' : 'MARCADA INCORRECTA'}</p><MathText text={readableAnswer(row.selected_answer) || 'Sin respuesta registrada'} /></div>

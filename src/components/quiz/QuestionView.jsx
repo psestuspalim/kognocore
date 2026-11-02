@@ -5,6 +5,7 @@ import { client } from '@/api/client';
 import MathText from './MathText';
 import ImageQuestionView from './ImageQuestionView';
 import OpenEndedQuestionView from './OpenEndedQuestionView';
+import QuizReviewBar from './QuizReviewBar';
 import { OPEN_ENDED_TYPES, normalizeQuestionType } from '@/lib/quiz-normalization';
 
 
@@ -18,6 +19,7 @@ export default function QuestionView({
   onAnswer,
   onCorrectAnswer,
   onNext,
+  onPrev = null,
   savedAnswer,
   onBack,
   onMarkForReview,
@@ -28,7 +30,9 @@ export default function QuestionView({
   quizTitle = '',
   subjectId = null,
   sessionId = null,
-  initialIsMarked = false
+  initialIsMarked = false,
+  isReviewMode = false,
+  reviewDetails = null
 }) {
   const showHintSetting = settings.show_hint !== false;
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -53,11 +57,22 @@ export default function QuestionView({
 
   // Restoring an answer must not move the question or collapse its hint.
   useEffect(() => {
-    const savedIndex = (question?.answerOptions || question?.options || []).findIndex(o => o.text === savedAnswer?.selected_answer);
+    const opts = question?.answerOptions || question?.options || [];
+    const targetText = String(savedAnswer?.selected_answer || savedAnswer?.rawSelectedAnswer || '').trim().toLowerCase();
+    const targetLabel = String(savedAnswer?.selected_label || savedAnswer?.label || '').trim().toLowerCase();
+
+    let savedIndex = opts.findIndex(o => {
+      const oText = String(o.text || '').trim().toLowerCase();
+      const oLabel = String(o.label || '').trim().toLowerCase();
+      if (targetText && oText === targetText) return true;
+      if (targetLabel && (oLabel === targetLabel || oText.startsWith(targetLabel + ')'))) return true;
+      return false;
+    });
+
     setSelectedAnswer(savedIndex >= 0 ? savedIndex : null);
-    setShowFeedback(savedIndex >= 0);
-    answerLock.current = savedIndex >= 0;
-  }, [questionNumber, question, savedAnswer]);
+    setShowFeedback(isReviewMode || savedIndex >= 0);
+    answerLock.current = isReviewMode || savedIndex >= 0;
+  }, [questionNumber, question, savedAnswer, isReviewMode]);
 
   useEffect(() => {
     setIsMarked(initialIsMarked);
@@ -135,7 +150,13 @@ export default function QuestionView({
 
       const key = e.key.toLowerCase();
 
-      if (!showFeedback) {
+      if (key === 'arrowleft' && onPrev) {
+        e.preventDefault();
+        onPrev();
+        return;
+      }
+
+      if (!showFeedback && !isReviewMode) {
         if (key === 'a' || key === '1') handleSelectAnswer(0);
         else if (key === 'b' || key === '2') handleSelectAnswer(1);
         else if (key === 'c' || key === '3') handleSelectAnswer(2);
@@ -144,14 +165,15 @@ export default function QuestionView({
       } else {
         if (key === 'enter' || key === ' ' || key === 'arrowright') {
           e.preventDefault();
-          handleNext();
+          if (onNext) onNext();
+          else handleNext();
         }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [showFeedback, handleSelectAnswer, handleNext]);
+  }, [showFeedback, isReviewMode, handleSelectAnswer, handleNext, onNext, onPrev]);
 
   const qType = normalizeQuestionType(question?.tipo || question?.type || '');
   const isOpenEnded = OPEN_ENDED_TYPES.has(qType) || (options.length === 0 && Boolean(question?.respuesta || question?.blancos));
@@ -164,12 +186,15 @@ export default function QuestionView({
         correctAnswers={correctAnswers}
         wrongAnswers={wrongAnswers}
         onNext={onNext}
+        onPrev={onPrev}
         onAnswer={onAnswer}
         savedAnswer={savedAnswer}
         onCorrectAnswer={onCorrectAnswer}
         onBack={onBack}
         onMarkForReview={onMarkForReview}
         initialIsMarked={initialIsMarked}
+        isReviewMode={isReviewMode}
+        reviewDetails={reviewDetails}
       />
     );
   }
@@ -257,49 +282,60 @@ export default function QuestionView({
     <div className="fixed inset-0 z-50 flex h-dvh flex-col overflow-hidden bg-slate-100 font-sans">
 
       {/* Header */}
-      <header className="z-20 shrink-0 border-b border-slate-300/80 bg-white px-3 pb-2.5 pt-[max(0.625rem,env(safe-area-inset-top))] sm:px-6">
-        <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
-          <button
-            onClick={onBack}
-            className="flex items-center gap-1.5 px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
-            title="Salir del cuestionario"
-          >
-            <ChevronLeft className="w-4 h-4" />
-            <span>Salir</span>
-          </button>
+      {isReviewMode && reviewDetails ? (
+        <QuizReviewBar
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
+          correctAnswers={correctAnswers}
+          wrongAnswers={wrongAnswers}
+          onBack={onBack}
+          reviewDetails={reviewDetails}
+        />
+      ) : (
+        <header className="z-20 shrink-0 border-b border-slate-300/80 bg-white px-3 pb-2.5 pt-[max(0.625rem,env(safe-area-inset-top))] sm:px-6">
+          <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
+            <button
+              onClick={onBack}
+              className="flex items-center gap-1.5 px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
+              title="Salir del cuestionario"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              <span>Salir</span>
+            </button>
 
-          <div className="flex-1 max-w-sm">
-            <div className="flex items-center justify-center gap-2 mb-1">
-              <span className="text-xs font-semibold text-slate-600 truncate">
-                {questionNumber} de {totalQuestions}
-              </span>
-              <div className="flex items-center gap-1 text-xs">
-                <span className="text-emerald-600 font-semibold">{correctAnswers}</span>
-                <span className="text-slate-300">/</span>
-                <span className="text-rose-500 font-semibold">{wrongAnswers}</span>
+            <div className="flex-1 max-w-sm">
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <span className="text-xs font-semibold text-slate-600 truncate">
+                  {questionNumber} de {totalQuestions}
+                </span>
+                <div className="flex items-center gap-1 text-xs">
+                  <span className="text-emerald-600 font-semibold">{correctAnswers}</span>
+                  <span className="text-slate-300">/</span>
+                  <span className="text-rose-500 font-semibold">{wrongAnswers}</span>
+                </div>
+              </div>
+              <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-primary rounded-full"
+                  style={{ width: `${progressPercent}%` }}
+                />
               </div>
             </div>
-            <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-primary rounded-full"
-                style={{ width: `${progressPercent}%` }}
-              />
-            </div>
-          </div>
 
-          <button
-            onClick={handleToggleMark}
-            title={isMarked ? 'Marcada para revisión' : 'Marcar para revisión'}
-            className={`p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors shrink-0 ${
-              isMarked
-                ? 'text-amber-500'
-                : 'text-slate-300 hover:text-slate-500'
-            }`}
-          >
-            <Bookmark className={`w-4 h-4 ${isMarked ? 'fill-amber-400' : ''}`} />
-          </button>
-        </div>
-      </header>
+            <button
+              onClick={handleToggleMark}
+              title={isMarked ? 'Marcada para revisión' : 'Marcar para revisión'}
+              className={`p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors shrink-0 ${
+                isMarked
+                  ? 'text-amber-500'
+                  : 'text-slate-300 hover:text-slate-500'
+              }`}
+            >
+              <Bookmark className={`w-4 h-4 ${isMarked ? 'fill-amber-400' : ''}`} />
+            </button>
+          </div>
+        </header>
+      )}
 
       {/* Content */}
       <main
@@ -451,21 +487,32 @@ export default function QuestionView({
 
       {/* Footer - single source of truth for navigation */}
       <footer className="z-20 shrink-0 border-t border-slate-300/80 bg-white px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 sm:px-6">
-        <div className="max-w-3xl mx-auto flex items-center justify-between">
-          <div className="text-xs text-slate-400 hidden md:block">
-            {showFeedback ? (
-              <span>[Enter] siguiente</span>
-            ) : (
-              <span>[A-D] seleccionar</span>
-            )}
-          </div>
+        <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
+          {onPrev ? (
+            <Button
+              variant="outline"
+              onClick={onPrev}
+              className="h-11 px-5 rounded-xl border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold cursor-pointer"
+            >
+              <ChevronLeft className="w-4 h-4 mr-1.5" />
+              <span>Anterior</span>
+            </Button>
+          ) : (
+            <div className="text-xs text-slate-400 hidden md:block">
+              {showFeedback ? (
+                <span>[Enter] siguiente</span>
+              ) : (
+                <span>[A-D] seleccionar</span>
+              )}
+            </div>
+          )}
 
           <Button
-            onClick={handleNext}
-            disabled={!showFeedback}
-            className="ml-auto h-11 w-full rounded-xl bg-slate-900 px-8 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-slate-800 disabled:pointer-events-none disabled:opacity-30 sm:w-auto"
+            onClick={onNext || handleNext}
+            disabled={!showFeedback && !isReviewMode}
+            className="ml-auto h-11 w-full rounded-xl bg-slate-900 px-8 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-slate-800 disabled:pointer-events-none disabled:opacity-30 sm:w-auto cursor-pointer"
           >
-            <span>{isLastQuestion ? 'Ver resultados' : 'Siguiente'}</span>
+            <span>{isLastQuestion ? (isReviewMode ? 'Volver' : 'Ver resultados') : 'Siguiente'}</span>
             <ChevronRight className="w-4 h-4 ml-1.5" />
           </Button>
         </div>

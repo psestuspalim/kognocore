@@ -18,11 +18,14 @@ import AttemptDetailModal from '../components/admin/AttemptDetailModal';
 import StudentProgressModal from '../components/admin/StudentProgressModal';
 import QuizMasterDocs from '../components/admin/QuizMasterDocs';
 import AnswerReviewPanel from '../components/admin/AnswerReviewPanel';
+import AttemptQuizReviewer from '../components/quiz/AttemptQuizReviewer';
+import { normalizeQuizQuestion } from '@/lib/quiz-normalization';
 
 export default function AdminProgress() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [selectedAttempt, setSelectedAttempt] = useState(null);
+  const [reviewQuizAttempt, setReviewQuizAttempt] = useState(null);
   const [isPurging, setIsPurging] = useState(false);
   const [expandedAttempts, setExpandedAttempts] = useState({});
   const [showProgressModal, setShowProgressModal] = useState(false);
@@ -213,6 +216,7 @@ export default function AdminProgress() {
     const quiz = quizzes.find((q) => q.id === quizId);
     if (!quiz) return [];
     if (Array.isArray(quiz.questions) && quiz.questions.length > 0) return quiz.questions;
+    if (Array.isArray(quiz.items) && quiz.items.length > 0) return quiz.items;
     if (isCompactFormat(quiz)) {
       const expanded = fromCompactFormat(quiz);
       return expanded?.questions || [];
@@ -301,13 +305,15 @@ export default function AdminProgress() {
   };
 
   const getAttemptQuestionRows = (attempt) => {
-    const quizQuestions = attempt.quiz_snapshot?.questions || getExpandedQuizQuestions(attempt.quiz_id);
-    const quizQuestionMap = new Map((quizQuestions || []).map((q) => [q.question, q]));
+    const rawQuizQuestions = attempt.quiz_snapshot?.questions || attempt.quiz_snapshot?.items || getExpandedQuizQuestions(attempt.quiz_id);
+    const quizQuestions = (rawQuizQuestions || []).map((q, idx) => normalizeQuizQuestion(q, idx));
+    const quizQuestionMap = new Map(quizQuestions.map((q) => [q.question, q]));
 
     if (Array.isArray(attempt.answer_log) && attempt.answer_log.length > 0) {
       return attempt.answer_log.map((entry, idx) => {
-        const questionText = entry.question || 'Pregunta sin texto';
-        const quizQuestion = quizQuestionMap.get(questionText);
+        const qIndex = Number.isInteger(entry.answer_index) ? entry.answer_index : idx;
+        const quizQuestion = (quizQuestions && quizQuestions[qIndex]) || quizQuestionMap.get(entry.question);
+        const questionText = entry.question || quizQuestion?.question || 'Pregunta sin texto';
         const rowOptions = normalizeAnswerOptions(
           entry.answerOptions?.length ? entry.answerOptions : (quizQuestion?.answerOptions || quizQuestion?.options || [])
         );
@@ -315,14 +321,22 @@ export default function AdminProgress() {
 
         return {
           ...entry,
-          reviewSource: 'answer_log', reviewIndex: idx, rawSelectedAnswer: entry.selected_answer,
+          reviewSource: 'answer_log',
+          reviewIndex: qIndex,
+          rawSelectedAnswer: entry.selected_answer,
           id: `${attempt.id}-${idx}`,
           question: questionText,
+          texto: quizQuestion?.texto || entry.texto || null,
+          prompt: quizQuestion?.prompt || entry.prompt || null,
+          tipo: quizQuestion?.tipo || quizQuestion?.type || entry.tipo || null,
+          blancos: quizQuestion?.blancos || entry.blancos || null,
+          questionIndex: qIndex,
+          quizQuestion,
           selected_answer: entry.selected_answer || '',
           correct_answer: entry.correct_answer || derivedCorrect,
           expectedSource: correctAnswerText(entry) ? 'Respuesta guardada en el intento' : attempt.quiz_snapshot?.questions ? 'Respuesta de la versión guardada del cuestionario' : 'Referencia del banco actual; puede haber cambiado desde el intento',
           imageUrl: entry.imageUrl || quizQuestion?.imageUrl,
-          explanation: entry.explanation || quizQuestion?.explanation || quizQuestion?.rationale,
+          explanation: entry.explanation || quizQuestion?.explanation || quizQuestion?.feedback || quizQuestion?.justificacion || quizQuestion?.rationale,
           answerOptions: rowOptions,
           hint: entry.hint || quizQuestion?.hint || '',
           is_correct: entry.is_correct === true
@@ -330,20 +344,34 @@ export default function AdminProgress() {
       });
     }
 
-    return [...(attempt.wrong_questions || []).map((wq, idx) => ({
+    return [...(attempt.wrong_questions || []).map((wq, idx) => {
+      const qIndex = Number.isInteger(wq.answer_index) ? wq.answer_index : idx;
+      const quizQuestion = (quizQuestions && quizQuestions[qIndex]) || quizQuestionMap.get(wq.question);
+      const questionText = wq.question || quizQuestion?.question || 'Pregunta sin texto';
+      return {
         ...wq,
-        reviewSource: 'wrong_questions', reviewIndex: idx, rawSelectedAnswer: wq.selected_answer,
-        question: wq.question || 'Pregunta sin texto',
+        reviewSource: 'wrong_questions',
+        reviewIndex: qIndex,
+        rawSelectedAnswer: wq.selected_answer,
+        question: questionText,
+        texto: quizQuestion?.texto || wq.texto || null,
+        prompt: quizQuestion?.prompt || wq.prompt || null,
+        tipo: quizQuestion?.tipo || quizQuestion?.type || wq.tipo || null,
+        blancos: quizQuestion?.blancos || wq.blancos || null,
+        questionIndex: qIndex,
+        quizQuestion,
         selected_answer: wq.selected_answer || '',
-        correct_answer: correctAnswerText(wq, quizQuestionMap.get(wq.question)),
+        correct_answer: correctAnswerText(wq, quizQuestion),
         expectedSource: correctAnswerText(wq) ? 'Respuesta guardada en el intento' : attempt.quiz_snapshot?.questions ? 'Respuesta de la versión guardada del cuestionario' : 'Referencia del banco actual; puede haber cambiado desde el intento',
-        imageUrl: wq.imageUrl || quizQuestionMap.get(wq.question)?.imageUrl,
+        imageUrl: wq.imageUrl || quizQuestion?.imageUrl,
         answerOptions: normalizeAnswerOptions(
-          wq.answerOptions?.length ? wq.answerOptions : (quizQuestionMap.get(wq.question)?.answerOptions || quizQuestionMap.get(wq.question)?.options || [])
+          wq.answerOptions?.length ? wq.answerOptions : (quizQuestion?.answerOptions || quizQuestion?.options || [])
         ),
-        hint: wq.hint || '',
+        explanation: wq.explanation || quizQuestion?.explanation || quizQuestion?.feedback || quizQuestion?.justificacion || quizQuestion?.rationale,
+        hint: wq.hint || quizQuestion?.hint || '',
         is_correct: false
-      })), ...(attempt.admin_reviewed_answers || [])];
+      };
+    }), ...(attempt.admin_reviewed_answers || [])];
   };
 
   const openPrintWindow = (title, bodyHtml) => {
@@ -976,6 +1004,7 @@ export default function AdminProgress() {
               open={!!selectedAttempt}
               onClose={() => setSelectedAttempt(null)}
               onDelete={(id) => deleteAttemptMutation.mutate(id)}
+              onOpenQuizReview={setReviewQuizAttempt}
             />
 
             {/* Student Progress Modal */}
@@ -995,6 +1024,7 @@ export default function AdminProgress() {
               subjects={subjects}
               getRows={getAttemptQuestionRows}
               onOpenAttempt={setSelectedAttempt}
+              onOpenQuizReview={setReviewQuizAttempt}
               onApprove={(row, reason) => approveAnswerMutation.mutateAsync({ row, reason })}
               saving={approveAnswerMutation.isPending}
               loading={attemptsLoading || quizzesLoading || subjectsLoading || usersLoading}
@@ -1006,6 +1036,7 @@ export default function AdminProgress() {
               open={!!selectedAttempt}
               onClose={() => setSelectedAttempt(null)}
               onDelete={(id) => deleteAttemptMutation.mutate(id)}
+              onOpenQuizReview={setReviewQuizAttempt}
             />
           </TabsContent>
 
@@ -1013,6 +1044,19 @@ export default function AdminProgress() {
             <QuizMasterDocs />
           </TabsContent>
         </Tabs>
+
+        {/* Full-screen Interactive Attempt Quiz Reviewer */}
+        {reviewQuizAttempt && (
+          <AttemptQuizReviewer
+            attempt={reviewQuizAttempt.attempt}
+            quizTitle={reviewQuizAttempt.quizTitle}
+            initialIndex={reviewQuizAttempt.initialIndex ?? 0}
+            quizzes={quizzes}
+            isAdmin={true}
+            onClose={() => setReviewQuizAttempt(null)}
+            onApprove={(row, reason) => approveAnswerMutation.mutateAsync({ row, reason })}
+          />
+        )}
       </div>
     </div>
   );
