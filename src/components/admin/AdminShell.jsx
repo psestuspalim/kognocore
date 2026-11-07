@@ -1,8 +1,9 @@
+import { adminNavigation as sidebarItems } from "./adminNavigation";
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import {
-  LayoutDashboard, BookOpen, Users, FileJson, Menu, X, ArrowLeft, Shield, FolderTree, Trash2, TrendingUp, UserPlus
+  Menu, X, ArrowLeft, Shield, UserPlus
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -11,31 +12,19 @@ import { client } from '@/api/client';
 import { toast } from 'sonner';
 import LogoutButton from '@/components/auth/LogoutButton';
 
-const sidebarItems = [
-  {
-    section: 'Admin',
-    items: [
-      { label: 'Dashboard', icon: LayoutDashboard, href: 'AdminHome' },
-      { label: 'Contenido', icon: FolderTree, href: 'AdminContent' },
-      { label: 'Progreso', icon: TrendingUp, href: 'AdminProgress' },
-      { label: 'Papelera', icon: Trash2, href: 'AdminTrash' },
-      { label: 'Estudiantes', icon: Users, href: 'AdminStudents' },
-      { label: 'Generar usuarios', icon: UserPlus, href: 'AdminUserGenerator' },
-      { label: 'JSON Manager', icon: FileJson, href: 'AdminJsonManager' }
-    ]
-  },
-  {
-    section: 'Operaciones',
-    items: [
-      { label: 'Cursos y códigos', icon: BookOpen, href: 'CourseManagement' },
-
-    ]
-  }
-];
 
 export default function AdminShell({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
+  useEffect(() => { setSidebarOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    if (!sidebarOpen) return;
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setSidebarOpen(false);
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [sidebarOpen]);
   const knownEnrollmentIds = useRef(null);
 
   const { data: enrollments } = useQuery({
@@ -67,8 +56,8 @@ export default function AdminShell({ children }) {
   }, [enrollments]);
 
   const isActive = (href) => {
-    const currentPath = location.pathname.split('/').pop();
-    return currentPath === href;
+    const currentPath = location.pathname.replace(/\/+$/, '').split('/').pop();
+    return currentPath.toLowerCase() === href.toLowerCase();
   };
 
   return (
@@ -84,7 +73,7 @@ export default function AdminShell({ children }) {
         </div>
         <div className="flex items-center gap-2">
         <LogoutButton />
-        <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(!sidebarOpen)}>
+        <Button aria-label={sidebarOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={sidebarOpen} aria-controls="admin-mobile-navigation" variant="ghost" size="icon" onClick={() => setSidebarOpen(!sidebarOpen)}>
           {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </Button>
         </div>
@@ -116,7 +105,7 @@ export default function AdminShell({ children }) {
                     const Icon = item.icon;
                     const active = isActive(item.href);
                     return (
-                      <Link key={item.href} to={createPageUrl(item.href)}>
+                      <Link key={item.href} to={createPageUrl(item.href)} aria-current={active ? "page" : undefined}>
                         <div
                           className={cn(
                             "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all relative",
@@ -139,12 +128,12 @@ export default function AdminShell({ children }) {
           {/* Bottom Actions */}
           <div className="border-t border-white/70 p-4">
             <div className="mb-2"><LogoutButton className="w-full justify-start" /></div>
-            <Link to={createPageUrl('Quizzes')}>
-              <Button variant="outline" size="sm" className="w-full justify-start bg-white/70">
+            <Button asChild variant="outline" size="sm" className="w-full justify-start bg-white/70">
+              <Link to={createPageUrl('Quizzes')}>
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Volver a la app
-              </Button>
-            </Link>
+                Volver a los quizzes
+              </Link>
+            </Button>
           </div>
         </div>
       </aside>
@@ -156,7 +145,7 @@ export default function AdminShell({ children }) {
             className="lg:hidden fixed inset-0 bg-black/50 z-40"
             onClick={() => setSidebarOpen(false)}
           />
-          <aside className="lg:hidden fixed left-0 top-16 bottom-0 w-[min(20rem,calc(100vw-2rem))] border-r border-slate-200/80 bg-white/95 backdrop-blur-md z-40 overflow-y-auto">
+          <aside id="admin-mobile-navigation" className="lg:hidden fixed left-0 top-16 bottom-0 w-[min(20rem,calc(100vw-2rem))] border-r border-slate-200/80 bg-white/95 backdrop-blur-md z-40 overflow-y-auto">
             <nav className="py-4">
               {sidebarItems.map((section, idx) => (
                 <div key={idx} className="mb-6">
@@ -172,6 +161,7 @@ export default function AdminShell({ children }) {
                           key={item.href}
                           to={createPageUrl(item.href)}
                           onClick={() => setSidebarOpen(false)}
+                          aria-current={active ? "page" : undefined}
                         >
                           <div
                             className={cn(
@@ -191,6 +181,13 @@ export default function AdminShell({ children }) {
                 </div>
               ))}
             </nav>
+            <div className="border-t p-4">
+              <Button asChild variant="outline" className="w-full justify-start">
+                <Link to="/Quizzes" onClick={() => setSidebarOpen(false)}>
+                  <ArrowLeft className="w-4 h-4 mr-2" />Volver a los quizzes
+                </Link>
+              </Button>
+            </div>
           </aside>
         </>
       )}
