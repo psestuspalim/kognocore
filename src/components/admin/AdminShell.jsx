@@ -65,12 +65,9 @@ export default function AdminShell({ children }) {
       <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_12%_8%,rgba(255,176,99,0.18)_0%,transparent_34%),radial-gradient(circle_at_88%_2%,rgba(54,158,168,0.16)_0%,transparent_35%),linear-gradient(180deg,rgba(255,253,248,0.92)_0%,rgba(248,245,238,0.92)_100%)]" />
       {/* Mobile Header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 border-b border-white/70 bg-white/85 backdrop-blur-md z-50 flex items-center justify-between px-4">
-        <div className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10">
-            <Shield className="w-5 h-5 text-primary" />
-          </div>
-          <span className="font-display text-sm font-semibold tracking-tight text-slate-800">Admin</span>
-        </div>
+        <Button asChild variant="outline" className="min-h-11">
+          <Link to="/Quizzes"><ArrowLeft className="w-4 h-4 mr-2" />Quizzes</Link>
+        </Button>
         <div className="flex items-center gap-2">
         <LogoutButton />
         <Button aria-label={sidebarOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={sidebarOpen} aria-controls="admin-mobile-navigation" variant="ghost" size="icon" onClick={() => setSidebarOpen(!sidebarOpen)}>
@@ -91,6 +88,15 @@ export default function AdminShell({ children }) {
               <p className="font-display text-lg font-semibold text-slate-900">Admin Panel</p>
               <p className="text-xs text-slate-500">Control y operaciones</p>
             </div>
+          </div>
+
+          <div className="px-4 pt-4">
+            <Button asChild variant="outline"  className="w-full min-h-11 justify-start bg-white/70">
+              <Link to={createPageUrl('Quizzes')}>
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Volver a los quizzes
+              </Link>
+            </Button>
           </div>
 
           {/* Navigation */}
@@ -128,12 +134,7 @@ export default function AdminShell({ children }) {
           {/* Bottom Actions */}
           <div className="border-t border-white/70 p-4">
             <div className="mb-2"><LogoutButton className="w-full justify-start" /></div>
-            <Button asChild variant="outline" size="sm" className="w-full justify-start bg-white/70">
-              <Link to={createPageUrl('Quizzes')}>
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Volver a los quizzes
-              </Link>
-            </Button>
+
           </div>
         </div>
       </aside>
@@ -181,13 +182,7 @@ export default function AdminShell({ children }) {
                 </div>
               ))}
             </nav>
-            <div className="border-t p-4">
-              <Button asChild variant="outline" className="w-full justify-start">
-                <Link to="/Quizzes" onClick={() => setSidebarOpen(false)}>
-                  <ArrowLeft className="w-4 h-4 mr-2" />Volver a los quizzes
-                </Link>
-              </Button>
-            </div>
+
           </aside>
         </>
       )}

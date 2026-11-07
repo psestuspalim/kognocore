@@ -891,8 +891,9 @@ export default function QuizzesPage() {
 
   const TopBar = () => (
     <header className="sticky top-0 z-30 bg-white border-b border-slate-200">
-      <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-        <div className="flex items-center gap-3 min-w-0">
+      <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 min-h-14 py-2 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-1 items-center gap-2 min-w-0">
+          <BackNav />
           <button onClick={handleHome} className="font-bold text-lg tracking-tight text-slate-900 hover:text-primary transition-colors shrink-0">
             Kognocore
           </button>
@@ -921,11 +922,6 @@ export default function QuizzesPage() {
           )}
         </div>
         <div className="flex items-center gap-2 shrink-0">
-          {isAdmin && !explorerMode && (currentFolderId || selectedSubject) && (view === 'subjects' || view === 'list') && (
-            <Button variant="outline" size="sm" onClick={() => openQuizImporter()}>
-              <Upload className="w-4 h-4 mr-2" /> Importar JSON
-            </Button>
-          )}
           {currentUser?.username && currentUser?.role !== 'admin' && (
             <span className="hidden max-w-36 truncate items-center gap-1 rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-800 min-[390px]:inline-flex">
               {currentUser.username}
@@ -1713,6 +1709,13 @@ export default function QuizzesPage() {
   // Back button for navigation
   const BackNav = () => {
     const getBackAction = () => {
+      if (editingCourse) return { label: "contenido", action: () => setEditingCourse(null) };
+      if (editingSubject) return { label: "contenido", action: () => setEditingSubject(null) };
+      if (editingFolder) return { label: "contenido", action: () => setEditingFolder(null) };
+      if (editingQuiz) return { label: "contenido", action: () => setEditingQuiz(null) };
+      if (explorerMode) return { label: "catálogo", action: () => setExplorerMode(false) };
+      if (showUploader || showBulkUploader || showAIGenerator) return null;
+
       if (view === 'list' && currentFolderId) {
         const parentFolder = folders.find(f => sameId(f.id, currentFolderId));
         if (parentFolder?.parent_id) return { label: folders.find(f => sameId(f.id, parentFolder.parent_id))?.name || 'Atrás', action: () => setCurrentFolderId(parentFolder.parent_id) };
@@ -1730,9 +1733,9 @@ export default function QuizzesPage() {
     const back = getBackAction();
     if (!back) return null;
     return (
-      <button onClick={back.action} className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-800 transition-colors mb-4 group">
+      <button onClick={back.action} type="button" aria-label={'Volver a ' + back.label} title={'Volver a ' + back.label} className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary group">
         <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
-        <span>{back.label}</span>
+        <span>Volver</span>
       </button>
     );
   };
@@ -1743,15 +1746,12 @@ export default function QuizzesPage() {
 
       <div>
         <DragDropContext onDragEnd={handleDragEnd}>
-          <div className={view === 'quiz' ? "h-screen overflow-hidden" : "min-h-screen"}>
+          <div className={view === 'quiz' ? "h-dvh overflow-y-auto overscroll-contain" : "min-h-screen"}>
             <div className={view === 'quiz' ? "" : "max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 pt-5 pb-8"}>
               <AnimatePresence mode="wait">
                 {/* Course Editor */}
                 {editingCourse && (
                   <motion.div key="course-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
-                    <Button onClick={() => setEditingCourse(null)} variant="ghost" className="mb-6">
-                      <ArrowLeft className="w-4 h-4 mr-2" /> Volver
-                    </Button>
                     <CourseEditor
                       course={editingCourse}
                       users={allUsers}
@@ -1764,9 +1764,6 @@ export default function QuizzesPage() {
                 {/* Subject Editor */}
                 {editingSubject && !editingCourse && (
                   <motion.div key="subject-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
-                    <Button onClick={() => setEditingSubject(null)} variant="ghost" className="mb-6">
-                      <ArrowLeft className="w-4 h-4 mr-2" /> Volver
-                    </Button>
                     <SubjectEditor
                       subject={editingSubject}
                       users={allUsers}
@@ -1779,9 +1776,6 @@ export default function QuizzesPage() {
                 {/* Folder Editor */}
                 {editingFolder && !editingSubject && !editingCourse && (
                   <motion.div key="folder-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
-                    <Button onClick={() => setEditingFolder(null)} variant="ghost" className="mb-6">
-                      <ArrowLeft className="w-4 h-4 mr-2" /> Volver
-                    </Button>
                     <FolderEditor
                       folder={editingFolder}
                       users={allUsers}
@@ -1794,9 +1788,6 @@ export default function QuizzesPage() {
                 {/* Quiz Editor */}
                 {editingQuiz && !editingFolder && !editingSubject && !editingCourse && (
                   <motion.div key="quiz-editor" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
-                    <Button onClick={() => setEditingQuiz(null)} variant="ghost" className="mb-6">
-                      <ArrowLeft className="w-4 h-4 mr-2" /> Volver
-                    </Button>
                     <QuizEditor
                       quiz={editingQuiz}
                       subjects={subjects}
@@ -1840,7 +1831,7 @@ export default function QuizzesPage() {
                           <Dialog open={showCourseDialog} onOpenChange={setShowCourseDialog}>
                             <DialogTrigger asChild>
                               <Button className="bg-primary hover:bg-primary/90 text-xs sm:text-sm h-9">
-                                <Plus className="w-4 h-4 sm:mr-2" /><span className="hidden sm:inline">Nuevo curso</span>
+                                <Plus className="w-4 h-4 mr-2" /><span>Nuevo curso</span>
                               </Button>
                             </DialogTrigger>
                             <DialogContent>
@@ -1943,7 +1934,7 @@ export default function QuizzesPage() {
                 {/* Explorer Mode - Unified */}
                 {explorerMode && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && (
                   <motion.div key="explorer-unified" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
                       <div>
                         <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Explorador</h1>
                         <p className="text-sm text-slate-500 mt-1">Arrastra elementos para organizarlos</p>
@@ -2029,7 +2020,6 @@ export default function QuizzesPage() {
                 {/* Subjects View (inside a course or folder) */}
                 {view === 'subjects' && (selectedCourse || currentFolderId) && !editingCourse && !editingSubject && !editingFolder && !editingQuiz && !showBulkUploader && !showAIGenerator && !showUploader && !explorerMode && (
                   <motion.div key="subjects" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
-                    <BackNav />
 
                     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-5">
                       <div>
@@ -2102,7 +2092,7 @@ export default function QuizzesPage() {
                     </div>
 
                     {/* Tabs for Quizzes/Resources - Folder Level */}
-                    <div className="flex gap-1 mb-6 bg-slate-100 rounded-lg p-1 w-fit">
+                    <div className="flex flex-wrap gap-1 mb-6 bg-slate-100 rounded-lg p-1 w-fit max-w-full">
                       <button
                         className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${activeTab === 'quizzes' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-700'}`}
                         onClick={() => setActiveTab('quizzes')}
@@ -2276,7 +2266,6 @@ export default function QuizzesPage() {
                 {view === 'list' && selectedSubject && !showUploader && !editingQuiz && !showAIGenerator && !explorerMode && (
                   <div>
                     <motion.div key="list" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, transition: { duration: 0 } }}>
-                      <BackNav />
 
                       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-5">
                         <div>
@@ -2336,7 +2325,7 @@ export default function QuizzesPage() {
                       )}
 
                       {selectedQuizzes.length > 0 && isAdmin && (
-                        <div className="mb-4 p-3 bg-indigo-50 border border-indigo-200 rounded-lg flex items-center justify-between">
+                        <div className="mb-4 p-3 bg-indigo-50 border border-indigo-200 rounded-lg flex flex-wrap items-center justify-between gap-3">
                           <span className="text-sm font-medium text-indigo-900">
                             {selectedQuizzes.length} cuestionario{selectedQuizzes.length > 1 ? 's' : ''} seleccionado{selectedQuizzes.length > 1 ? 's' : ''}
                           </span>

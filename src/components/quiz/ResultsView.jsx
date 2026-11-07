@@ -1,7 +1,7 @@
 import { correctAnswerText } from '@/lib/answer-report';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Home, RotateCcw, TrendingUp, CheckCircle2, XCircle, AlertCircle, ChevronUp } from 'lucide-react';
+import { ArrowLeft, RotateCcw, TrendingUp, CheckCircle2, XCircle, AlertCircle, ChevronUp } from 'lucide-react';
 import MathText from './MathText';
 import SelfCorrectionButton from './SelfCorrectionButton';
 import { canSelfCorrect } from '@/lib/answer-correction';
@@ -63,7 +63,11 @@ export default function ResultsView({
   const strokeDasharray = `${(percentage / 100) * circumference} ${circumference}`;
 
   return (
-    <div className="max-w-lg mx-auto px-4 py-8 sm:py-12">
+    <div className="max-w-lg mx-auto min-w-0 [overflow-wrap:anywhere] px-4 py-8 sm:py-12">
+
+      <Button onClick={onHome} variant="outline" className="min-h-11 mb-6">
+        <ArrowLeft className="w-4 h-4 mr-2" />Volver a los quizzes
+      </Button>
 
       {/* Score section */}
       <div className="text-center mb-8">
@@ -148,6 +152,30 @@ export default function ResultsView({
         </div>
       )}
 
+      {/* Actions */}
+      <div className="space-y-2.5 my-6">
+        <Button
+          onClick={onRetry}
+          className="w-full h-11 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl"
+        >
+          <RotateCcw className="w-4 h-4 mr-2" />
+          Intentar de nuevo
+        </Button>
+
+        {wrongAnswers.length > 0 && (
+          <Button
+            onClick={onRetryWrong}
+            variant="outline"
+            className="w-full h-11 rounded-xl font-semibold border-slate-200 hover:bg-slate-50"
+          >
+            <TrendingUp className="w-4 h-4 mr-2" />
+            Repasar incorrectas ({wrongAnswers.length})
+          </Button>
+        )}
+
+
+      </div>
+
       {/* Expandable correct answers */}
       {showCorrect && correctAnswers.length > 0 && (
         <div className="mb-4 max-h-80 overflow-y-auto rounded-xl border border-emerald-200/60 bg-emerald-50/50">
@@ -220,36 +248,7 @@ export default function ResultsView({
         </div>
       )}
 
-      {/* Actions */}
-      <div className="space-y-2.5 mt-8">
-        <Button
-          onClick={onRetry}
-          className="w-full h-11 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl"
-        >
-          <RotateCcw className="w-4 h-4 mr-2" />
-          Intentar de nuevo
-        </Button>
 
-        {wrongAnswers.length > 0 && (
-          <Button
-            onClick={onRetryWrong}
-            variant="outline"
-            className="w-full h-11 rounded-xl font-semibold border-slate-200 hover:bg-slate-50"
-          >
-            <TrendingUp className="w-4 h-4 mr-2" />
-            Repasar incorrectas ({wrongAnswers.length})
-          </Button>
-        )}
-
-        <Button
-          onClick={onHome}
-          variant="ghost"
-          className="w-full h-11 rounded-xl text-slate-500 hover:text-slate-700"
-        >
-          <Home className="w-4 h-4 mr-2" />
-          Volver
-        </Button>
-      </div>
     </div>
   );
 }
