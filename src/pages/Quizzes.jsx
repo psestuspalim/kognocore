@@ -1,3 +1,4 @@
+import { folderBelongsToContainer } from '@/lib/folder-membership';
 import { correctAnswerText } from '@/lib/answer-report';
 import { selfCorrectAnswer } from '@/lib/answer-correction';
 import { motorAnatomia } from '@/lib/normalizador';
@@ -844,21 +845,14 @@ export default function QuizzesPage() {
   // Filtered data
   // visibleCourses already defined above for debugging
   const unassignedSubjects = subjects.filter(s => s && s.id && !s.course_id && canUserAccess(s));
-  const unassignedFolders = folders.filter(f => f && f.id && !f.course_id && !f.parent_id && canUserAccess(f));
+  const unassignedFolders = folders.filter(f => folderBelongsToContainer(f, 'root') && canUserAccess(f));
   const currentCourseSubjects = selectedCourse
     ? subjects.filter(s => s && s.id && sameId(s.course_id, selectedCourse.id) && canUserAccess(s, selectedCourse))
     : [];
-  const currentCourseFolders = selectedCourse
-    ? folders.filter(f =>
-      f &&
-      f.id &&
-      sameId(f.course_id, selectedCourse.id) &&
-      (currentFolderId ? sameId(f.parent_id, currentFolderId) : !f.parent_id) &&
-      canUserAccess(f, selectedCourse)
-    )
-    : currentFolderId
-      ? folders.filter(f => f && f.id && sameId(f.parent_id, currentFolderId) && canUserAccess(f))
-      : [];
+  const currentCourseFolders = folders.filter(f =>
+    folderBelongsToContainer(f, currentFolderId ? 'folder' : 'course', currentFolderId || selectedCourse?.id) &&
+    canUserAccess(f, selectedCourse)
+  );
 
   const currentFolderQuizzes = currentFolderId
     ? quizzes.filter(q => q && q.id && sameId(q.folder_id, currentFolderId) && (isAdmin || !q.is_hidden))
@@ -2307,9 +2301,9 @@ export default function QuizzesPage() {
 
 
                       {/* Carpetas dentro de la materia con droppable */}
-                      {folders.filter(f => sameId(f.subject_id, selectedSubject.id) && !f.parent_id).length > 0 && (
+                      {folders.filter(f => folderBelongsToContainer(f, 'subject', selectedSubject.id)).length > 0 && (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-                          {folders.filter(f => sameId(f.subject_id, selectedSubject.id) && !f.parent_id).map((folder) => (
+                          {folders.filter(f => folderBelongsToContainer(f, 'subject', selectedSubject.id)).map((folder) => (
                             <DroppableArea key={folder.id} droppableId={`folder-${folder.id}`} type="QUIZ" className="h-full">
                               <FolderCard
                                 folder={folder}
