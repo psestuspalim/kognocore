@@ -18,6 +18,11 @@ const jsonError = (message, status) => new Response(
 
 const sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex');
 const hmac = (value) => crypto.createHmac('sha256', process.env.TOKEN_SIGNING_SECRET).update(value).digest('hex');
+const validSignature = (value, signature) => {
+  const expected = Buffer.from(hmac(value));
+  const received = Buffer.from(String(signature || ''));
+  return expected.length === received.length && crypto.timingSafeEqual(expected, received);
+};
 
 function fromBase64Url(input) {
   const normalized = input.replace(/-/g, '+').replace(/_/g, '/');
@@ -28,7 +33,7 @@ function fromBase64Url(input) {
 function validateAdminToken(token) {
   if (!token.startsWith('adm.') || !process.env.TOKEN_SIGNING_SECRET) return null;
   const parts = token.split('.');
-  if (parts.length !== 3 || hmac(parts[1]) !== parts[2]) return null;
+  if (parts.length !== 3 || !validSignature(parts[1], parts[2])) return null;
   try {
     const payload = JSON.parse(fromBase64Url(parts[1]));
     if (payload?.sub !== 'admin' || !payload?.exp || payload.exp <= new Date().toISOString()) return null;
@@ -43,7 +48,7 @@ async function validateCodeSession(supabase, token) {
 
   if (token.startsWith('v2.')) {
     const parts = token.split('.');
-    if (parts.length !== 3 || hmac(parts[1]) !== parts[2]) return null;
+    if (parts.length !== 3 || !validSignature(parts[1], parts[2])) return null;
     try {
       const payload = JSON.parse(fromBase64Url(parts[1]));
       if (!payload?.courseId || !payload?.exp || payload.exp <= new Date().toISOString()) return null;
@@ -54,7 +59,7 @@ async function validateCodeSession(supabase, token) {
   }
 
   const [raw, signature] = token.split('.');
-  if (!raw || !signature || hmac(raw) !== signature) return null;
+  if (!raw || !signature || !validSignature(raw, signature)) return null;
 
   const tokenHash = sha256(`${token}|${process.env.CODE_PEPPER}`);
   const { data, error } = await supabase

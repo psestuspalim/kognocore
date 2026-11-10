@@ -46,7 +46,7 @@ export async function GET(req) {
 
     const { data, error } = await query
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo listar inscripciones', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo listar inscripciones' }), { status: 500 })
     }
 
     const enrollments = (data || []).map((row) => ({
@@ -102,7 +102,7 @@ export async function POST(req) {
       .maybeSingle()
 
     if (existingError) {
-      return new Response(JSON.stringify({ error: 'No se pudo validar la inscripción', details: existingError.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo validar la inscripción' }), { status: 500 })
     }
     if (
       authorization.actor.kind === 'student' &&
@@ -122,7 +122,7 @@ export async function POST(req) {
 
     const { error } = await supabase.from('enrollments').upsert(row, { onConflict: 'id' })
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo guardar inscripción', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo guardar inscripción' }), { status: 500 })
     }
 
     return new Response(JSON.stringify({ ok: true, enrollment: safeEnrollment }), { status: 200 })
@@ -155,7 +155,7 @@ export async function PATCH(req) {
       .maybeSingle()
 
     if (getErr) {
-      return new Response(JSON.stringify({ error: 'No se pudo leer inscripción', details: getErr.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo leer inscripción' }), { status: 500 })
     }
     if (!current) {
       return new Response(JSON.stringify({ error: 'Inscripción no encontrada' }), { status: 404 })
@@ -174,7 +174,7 @@ export async function PATCH(req) {
     }).eq('id', id)
 
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo actualizar inscripción', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo actualizar inscripción' }), { status: 500 })
     }
 
     return new Response(JSON.stringify({ ok: true, enrollment: merged }), { status: 200 })
@@ -200,7 +200,7 @@ export async function DELETE(req) {
     if (purgeAll === 'true') {
       const { error } = await supabase.from('enrollments').delete().neq('id', '')
       if (error) {
-        return new Response(JSON.stringify({ error: 'No se pudo purgar inscripciones', details: error.message }), { status: 500 })
+        return new Response(JSON.stringify({ error: 'No se pudo purgar inscripciones' }), { status: 500 })
       }
       return new Response(JSON.stringify({ ok: true, purged: true }), { status: 200 })
     }
@@ -211,7 +211,7 @@ export async function DELETE(req) {
 
     const { error } = await supabase.from('enrollments').delete().eq('id', id)
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo eliminar inscripción', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo eliminar inscripción' }), { status: 500 })
     }
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 })

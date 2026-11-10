@@ -1,3 +1,4 @@
+import { applyQuestionCorrections } from '../src/lib/question-review.js'
 import { createClient } from '@supabase/supabase-js'
 import { requireAdmin, requireDataActor } from './_auth.mjs'
 import { canAccessCourse } from './_students.mjs'
@@ -40,14 +41,22 @@ export async function GET(req) {
 
     const { data, error } = await query
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo listar intentos', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo listar intentos' }), { status: 500 })
     }
 
+    // Published question corrections are applied on read so every client sees the regraded attempt.
+    const ids = [...new Set((data || []).map(row => row.payload?.quiz_id).filter(Boolean))]
+    const corrections = new Map()
+    for (let offset = 0; offset < ids.length; offset += 100) {
+      const result = await supabase.from('quizzes').select('id, payload').in('id', ids.slice(offset, offset + 100))
+      if (result.error) return new Response(JSON.stringify({ error: 'No se pudo listar intentos' }), { status: 500 })
+      for (const quiz of result.data || []) corrections.set(quiz.id, quiz.payload)
+    }
     const attempts = (data || []).map((row) => ({
       id: row.id,
       created_date: row.created_date || row.payload?.created_date,
       updated_date: row.updated_date || row.payload?.updated_date,
-      ...(row.payload || {})
+      ...applyQuestionCorrections(row.payload || {}, corrections.get(row.payload?.quiz_id))
     }))
 
     return new Response(JSON.stringify({ attempts }), { status: 200 })
@@ -87,7 +96,7 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'learner_id requerido' }), { status: 400 })
     }
 
-    const safeAttempt = authorization.actor.kind === 'student'
+    let safeAttempt = authorization.actor.kind === 'student'
       ? {
           ...attempt,
           learner_id: String(effectiveLearnerId),
@@ -103,7 +112,7 @@ export async function POST(req) {
       .maybeSingle()
 
     if (existingError) {
-      return new Response(JSON.stringify({ error: 'No se pudo validar el intento', details: existingError.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo validar el intento' }), { status: 500 })
     }
     if (existing?.payload?.admin_reviews?.length) {
       return Response.json({ error: 'Este intento tiene una revisión administrativa. Actualiza los datos antes de continuar.' }, { status: 409 })
@@ -120,6 +129,9 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'No puedes modificar este intento' }), { status: 403 })
     }
 
+    const { data: gradingQuiz, error: gradingError } = await supabase.from('quizzes').select('payload').eq('id', attempt.quiz_id).maybeSingle()
+    if (gradingError) return new Response(JSON.stringify({ error: 'No se pudo validar el intento' }), { status: 500 })
+    safeAttempt = applyQuestionCorrections(safeAttempt, gradingQuiz?.payload)
     const now = new Date().toISOString()
     const row = {
       id: attempt.id,
@@ -132,7 +144,7 @@ export async function POST(req) {
     if (existing) write = existing.updated_date == null ? write.is('updated_date', null) : write.eq('updated_date', existing.updated_date)
     const { data: saved, error } = await write.select('id')
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo guardar intento', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo guardar intento' }), { status: 500 })
     }
     if (!saved?.length) return Response.json({ error: 'El intento cambió. Actualiza los datos.' }, { status: 409 })
 
@@ -166,7 +178,7 @@ export async function PATCH(req) {
       .maybeSingle()
 
     if (getErr) {
-      return new Response(JSON.stringify({ error: 'No se pudo leer intento', details: getErr.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo leer intento' }), { status: 500 })
     }
     if (!current) {
       return new Response(JSON.stringify({ error: 'Intento no encontrado' }), { status: 404 })
@@ -194,7 +206,7 @@ export async function PATCH(req) {
     const { data: saved, error } = await write.select('id')
 
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo actualizar intento', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo actualizar intento' }), { status: 500 })
     }
     if (!saved?.length) return Response.json({ error: 'El intento cambió durante la revisión. Actualiza e inténtalo de nuevo.' }, { status: 409 })
 
@@ -222,7 +234,7 @@ export async function DELETE(req) {
 
     const { error } = await supabase.from('quiz_attempts').delete().eq('id', id)
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo eliminar intento', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo eliminar intento' }), { status: 500 })
     }
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 })

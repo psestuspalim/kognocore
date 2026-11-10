@@ -44,7 +44,7 @@ export async function POST(req) {
       .in('code_hash', hashes)
 
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo consultar invites', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo consultar invites' }), { status: 500 })
     }
 
     const usage = {}
@@ -53,7 +53,7 @@ export async function POST(req) {
       if (!code) continue
       usage[code] = {
         uses: row.uses ?? 0,
-        max_uses: row.max_uses ?? null,
+        max_uses: row.max_uses > 0 ? row.max_uses : null,
         expires_at: row.expires_at ?? null
       }
     }

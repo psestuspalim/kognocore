@@ -37,6 +37,8 @@ import FileUploader from '../components/quiz/FileUploader';
 import QuizEditor from '../components/quiz/QuizEditor';
 import QuestionView from '../components/quiz/QuestionView';
 import ResultsView from '../components/quiz/ResultsView';
+import ReportQuestionButton from '../components/quiz/ReportQuestionButton';
+import { questionIdentity } from '@/lib/question-review';
 import SubjectCard from '../components/quiz/SubjectCard';
 import SubjectEditor from '../components/quiz/SubjectEditor';
 import UsernamePrompt from '../components/quiz/UsernamePrompt';
@@ -2440,6 +2442,15 @@ export default function QuizzesPage() {
                       onRetryWrong={handleRetryWrongQuestions}
                       onHome={() => { setSelectedQuiz(null); setView('list'); }}
                     />
+                    <details className="mx-auto mb-8 max-w-lg rounded-xl border bg-white p-4 [overflow-wrap:anywhere]">
+                      <summary className="cursor-pointer font-medium">Reportar errores en las preguntas</summary>
+                      {selectedQuiz.questions.map((q, i) => (
+                        <div key={questionIdentity(q) || i} className="space-y-2 border-t py-4">
+                          <p className="text-sm">{q.question || q.prompt}</p>
+                          <ReportQuestionButton quizId={selectedQuiz.id} question={q} />
+                        </div>
+                      ))}
+                    </details>
                   </motion.div>
                 )}
               </AnimatePresence>

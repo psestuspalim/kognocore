@@ -1,3 +1,6 @@
+import * as questionReviews from './_question-reviews.mjs'
+import { withQuestionIdentities } from '../src/lib/question-review.js'
+import { changeQuiz } from './_question-review.mjs'
 import { createClient } from '@supabase/supabase-js'
 import { requireAdmin, requireDataActor } from './_auth.mjs'
 
@@ -9,6 +12,7 @@ function getSupabaseAdmin() {
 }
 
 export async function GET(req) {
+  if (new URL(req.url).searchParams.get('resource') === 'question-reviews') return questionReviews.GET(req)
   try {
     const authorization = await requireDataActor(req)
     if (authorization.response) return authorization.response
@@ -31,7 +35,7 @@ export async function GET(req) {
     const { data, error } = await query
 
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo listar quizzes', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo listar quizzes' }), { status: 500 })
     }
 
     const quizzes = (data || []).map((row) => ({
@@ -41,6 +45,13 @@ export async function GET(req) {
       ...(row.payload || {})
     }))
 
+    quizzes.forEach(quiz => { if (quiz.questions) quiz.questions = quiz.questions.map(withQuestionIdentities) })
+    if (authorization.actor.kind !== 'admin') {
+      quizzes.forEach(quiz => {
+        delete quiz.question_reviews
+        quiz.question_corrections = (quiz.question_corrections || []).map(({ admin, ...correction }) => correction)
+      })
+    }
     return new Response(JSON.stringify({ quizzes }), { status: 200 })
   } catch (_err) {
     return new Response(JSON.stringify({ error: 'Bad request' }), { status: 400 })
@@ -48,6 +59,7 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
+  if (new URL(req.url).searchParams.get('resource') === 'question-reviews') return questionReviews.POST(req)
   try {
     const authorization = await requireAdmin(req)
     if (authorization.response) return authorization.response
@@ -63,6 +75,23 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'Quiz inválido' }), { status: 400 })
     }
 
+    const { data: existing, error: readError } = await supabase.from('quizzes').select('id').eq('id', quiz.id).maybeSingle()
+    if (readError) throw readError
+    if (existing) {
+      try {
+        const updated = await changeQuiz(supabase, quiz.id, current => {
+          if (Number(current.review_revision || 0) > Number(quiz.review_revision || 0)) throw Object.assign(new Error('El cuestionario tiene correcciones recientes. Actualiza antes de editar.'), { status: 409 })
+          return { ...current, ...quiz, question_reviews: current.question_reviews || [], question_corrections: current.question_corrections || [], review_revision: current.review_revision || 0 }
+        })
+        return Response.json({ ok: true, quiz: updated })
+      } catch (error) {
+        if (error.status === 409) return Response.json({ error: error.message }, { status: 409 })
+        throw error
+      }
+    }
+    delete quiz.question_reviews
+    delete quiz.question_corrections
+    delete quiz.review_revision
     const now = new Date().toISOString()
     const row = {
       id: quiz.id,
@@ -73,7 +102,7 @@ export async function POST(req) {
 
     const { error } = await supabase.from('quizzes').upsert(row, { onConflict: 'id' })
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo guardar quiz', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo guardar quiz' }), { status: 500 })
     }
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 })
@@ -83,6 +112,7 @@ export async function POST(req) {
 }
 
 export async function PATCH(req) {
+  if (new URL(req.url).searchParams.get('resource') === 'question-reviews') return questionReviews.PATCH(req)
   try {
     const authorization = await requireAdmin(req)
     if (authorization.response) return authorization.response
@@ -106,26 +136,21 @@ export async function PATCH(req) {
       .maybeSingle()
 
     if (getErr) {
-      return new Response(JSON.stringify({ error: 'No se pudo leer quiz', details: getErr.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo leer quiz' }), { status: 500 })
     }
     if (!current) {
       return new Response(JSON.stringify({ error: 'Quiz no encontrado' }), { status: 404 })
     }
 
-    const merged = {
-      ...(current.payload || {}),
-      ...data,
-      id,
-      updated_date: new Date().toISOString()
-    }
-
-    const { error } = await supabase.from('quizzes').update({
-      payload: merged,
-      updated_date: merged.updated_date
-    }).eq('id', id)
-
-    if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo actualizar quiz', details: error.message }), { status: 500 })
+    let merged
+    try {
+      merged = await changeQuiz(supabase, id, latest => {
+        if (data.questions && Number(latest.review_revision || 0) > Number(data.review_revision || 0)) throw Object.assign(new Error('Actualiza el cuestionario antes de editarlo.'), { status: 409 })
+        return { ...latest, ...data, id, question_reviews: latest.question_reviews || [], question_corrections: latest.question_corrections || [], review_revision: latest.review_revision || 0 }
+      })
+    } catch (error) {
+      if (error.status === 409 || error.status === 404) return Response.json({ error: error.message }, { status: error.status })
+      return new Response(JSON.stringify({ error: 'No se pudo actualizar quiz' }), { status: 500 })
     }
 
     return new Response(JSON.stringify({ ok: true, quiz: merged }), { status: 200 })
@@ -152,7 +177,7 @@ export async function DELETE(req) {
 
     const { error } = await supabase.from('quizzes').delete().eq('id', id)
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo eliminar quiz', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo eliminar quiz' }), { status: 500 })
     }
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 })

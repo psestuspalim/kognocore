@@ -13,6 +13,12 @@ function sha256(value) {
   return crypto.createHash('sha256').update(value).digest('hex')
 }
 
+// invites.max_uses is NOT NULL; consume_invite treats 0 as "no limit".
+const inviteMaxUses = (value) => {
+  const parsed = Number.parseInt(value, 10)
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 0
+}
+
 export async function GET(req) {
   try {
     const authorization = await requireAdmin(req)
@@ -29,7 +35,7 @@ export async function GET(req) {
       .order('created_date', { ascending: false })
 
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo listar códigos', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo listar códigos' }), { status: 500 })
     }
 
     return new Response(JSON.stringify({ codes: data || [] }), { status: 200 })
@@ -88,7 +94,7 @@ export async function POST(req) {
       .maybeSingle()
 
     if (inviteLookupError) {
-      return new Response(JSON.stringify({ error: 'No se pudo validar el código', details: inviteLookupError.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo validar el código' }), { status: 500 })
     }
 
     let createdInviteId = null
@@ -98,22 +104,31 @@ export async function POST(req) {
         .insert({
           code_hash: codeHash,
           course_id: code.course_id,
-          max_uses: code.max_uses || 1,
+          max_uses: inviteMaxUses(code.max_uses),
           expires_at: code.expires_at || null
         })
         .select('id')
         .single()
 
       if (inviteError) {
-        return new Response(JSON.stringify({ error: 'No se pudo activar el código', details: inviteError.message }), { status: 500 })
+        return new Response(JSON.stringify({ error: 'No se pudo activar el código' }), { status: 500 })
       }
       createdInviteId = createdInvite.id
+    } else {
+      // Re-saving a code must update the limits that redemption actually enforces.
+      const { error: inviteUpdateError } = await supabase
+        .from('invites')
+        .update({ max_uses: inviteMaxUses(code.max_uses), expires_at: code.expires_at || null })
+        .eq('id', existingInvite.id)
+      if (inviteUpdateError) {
+        return new Response(JSON.stringify({ error: 'No se pudo actualizar el código' }), { status: 500 })
+      }
     }
 
     const { error: metadataError } = await supabase.from('access_codes').upsert(row, { onConflict: 'id' })
     if (metadataError) {
       if (createdInviteId) await supabase.from('invites').delete().eq('id', createdInviteId)
-      return new Response(JSON.stringify({ error: 'No se pudo guardar código', details: metadataError.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo guardar código' }), { status: 500 })
     }
 
     return new Response(JSON.stringify({ ok: true, code: row }), { status: 200 })
@@ -146,9 +161,24 @@ export async function PATCH(req) {
     if (data.expires_at !== undefined) updates.expires_at = data.expires_at
     if (data.course_name !== undefined) updates.course_name = data.course_name
 
+    if (data.max_uses !== undefined || data.expires_at !== undefined) {
+      if (!process.env.CODE_PEPPER) {
+        return new Response(JSON.stringify({ error: 'Server auth not configured' }), { status: 503 })
+      }
+      const { data: stored, error: lookupError } = await supabase.from('access_codes').select('code').eq('id', id).maybeSingle()
+      if (lookupError) return new Response(JSON.stringify({ error: 'No se pudo consultar el código' }), { status: 500 })
+      if (!stored) return new Response(JSON.stringify({ error: 'Código no encontrado' }), { status: 404 })
+      const inviteUpdates = {}
+      if (data.max_uses !== undefined) inviteUpdates.max_uses = inviteMaxUses(data.max_uses)
+      if (data.expires_at !== undefined) inviteUpdates.expires_at = data.expires_at || null
+      const codeHash = sha256(`${String(stored.code).trim().toUpperCase()}|${process.env.CODE_PEPPER}`)
+      const { error: inviteError } = await supabase.from('invites').update(inviteUpdates).eq('code_hash', codeHash)
+      if (inviteError) return new Response(JSON.stringify({ error: 'No se pudo actualizar el código' }), { status: 500 })
+    }
+
     const { error } = await supabase.from('access_codes').update(updates).eq('id', id)
     if (error) {
-      return new Response(JSON.stringify({ error: 'No se pudo actualizar código', details: error.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo actualizar código' }), { status: 500 })
     }
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 })
@@ -180,7 +210,7 @@ export async function DELETE(req) {
       .maybeSingle()
 
     if (lookupError) {
-      return new Response(JSON.stringify({ error: 'No se pudo consultar el código', details: lookupError.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo consultar el código' }), { status: 500 })
     }
     if (!code) {
       return new Response(JSON.stringify({ error: 'Código no encontrado' }), { status: 404 })
@@ -193,12 +223,12 @@ export async function DELETE(req) {
     const codeHash = sha256(`${String(code.code).trim().toUpperCase()}|${process.env.CODE_PEPPER}`)
     const { error: inviteError } = await supabase.from('invites').delete().eq('code_hash', codeHash)
     if (inviteError) {
-      return new Response(JSON.stringify({ error: 'No se pudo desactivar el código', details: inviteError.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo desactivar el código' }), { status: 500 })
     }
 
     const { error: metadataError } = await supabase.from('access_codes').delete().eq('id', id)
     if (metadataError) {
-      return new Response(JSON.stringify({ error: 'No se pudo eliminar código', details: metadataError.message }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'No se pudo eliminar código' }), { status: 500 })
     }
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 })

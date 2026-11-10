@@ -11,6 +11,7 @@ import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import Login from '@/pages/Login';
 import AdminUserGenerator from '@/pages/AdminUserGenerator';
+import AdminQuestionReviews from '@/pages/AdminQuestionReviews';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -50,6 +51,7 @@ const AuthenticatedApp = () => {
   return (
     <Routes>
       <Route path="/AdminUserGenerator" element={<ProtectedRoute allowedRoles={['admin']}><AdminUserGenerator /></ProtectedRoute>} />
+      <Route path="/AdminQuestionReviews" element={<ProtectedRoute allowedRoles={['admin']}><AdminQuestionReviews /></ProtectedRoute>} />
       <Route
         path="/login"
         element={isAuthenticated ? <Navigate to={user?.role === 'admin' ? '/AdminHome' : '/'} replace /> : <Login />}
