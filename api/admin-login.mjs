@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import { recordFailure, tooManyFailures } from './_rate-limit.mjs';
 
 function hmac(value) {
   return crypto.createHmac('sha256', process.env.TOKEN_SIGNING_SECRET).update(value).digest('hex');
@@ -25,6 +26,9 @@ export async function POST(req) {
       return Response.json({ error: 'El acceso administrativo no está configurado en el servidor.' }, { status: 503 });
     }
 
+    const blocked = await tooManyFailures(req, 'admin-login', 10);
+    if (blocked) return blocked;
+
     const uHash = crypto.createHash('sha256').update(username.trim().toLowerCase()).digest();
     const uExpected = crypto.createHash('sha256').update(expectedUser.trim().toLowerCase()).digest();
     const pHash = crypto.createHash('sha256').update(password).digest();
@@ -33,6 +37,7 @@ export async function POST(req) {
     const passMatch = crypto.timingSafeEqual(pHash, pExpected);
 
     if (!userMatch || !passMatch) {
+      await recordFailure(req, 'admin-login');
       return Response.json({ error: 'Usuario o contraseña incorrectos' }, { status: 401 });
     }
 

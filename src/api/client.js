@@ -1,10 +1,8 @@
 import { readAdminSession } from '@/lib/admin-session';
 
-import { appParams } from '@/lib/app-params';
 import { getAuthorizationHeaders, supabase } from '@/lib/supabase';
 import { getOrCreateLearnerId, getOrCreateStudentAlias, saveStudentAlias } from '@/lib/learner-id';
 
-const { appId, serverUrl, token, functionsVersion } = appParams;
 
 //Create a client with authentication required
 //const realClient = createClient({
