@@ -279,7 +279,7 @@ export default function QuestionView({
   const isLastQuestion = questionNumber === totalQuestions;
 
   return (
-    <div className="fixed inset-0 z-50 flex h-dvh flex-col overflow-hidden bg-slate-100 font-sans">
+    <div className="quiz-screen fixed inset-0 z-50 flex h-dvh flex-col overflow-hidden bg-slate-100 font-sans">
 
       {/* Header */}
       {isReviewMode && reviewDetails ? (
@@ -303,7 +303,7 @@ export default function QuestionView({
               <span>Salir</span>
             </button>
 
-            <div className="flex-1 max-w-sm">
+            <div className="min-w-0 flex-1 max-w-sm">
               <div className="flex items-center justify-center gap-2 mb-1">
                 <span className="text-xs font-semibold text-slate-600 truncate">
                   {questionNumber} de {totalQuestions}
@@ -427,7 +427,7 @@ export default function QuestionView({
                   className={getOptionStyle(index)}
                 >
                   {getLetterBadge(index)}
-                  <div className="pt-0.5 flex-1 text-sm sm:text-[15px] font-normal leading-snug text-slate-800">
+                  <div className="pt-0.5 min-w-0 flex-1 text-sm sm:text-[15px] font-normal leading-snug text-slate-800">
                     <MathText text={option.text} />
                   </div>
                 </button>
@@ -486,7 +486,7 @@ export default function QuestionView({
       </main>
 
       {/* Footer - single source of truth for navigation */}
-      <footer className="z-20 shrink-0 border-t border-slate-300/80 bg-white px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 sm:px-6">
+      <footer className="quiz-actions z-20 shrink-0 border-t border-slate-300/80 bg-white px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 sm:px-6">
         <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
           {onPrev ? (
             <Button

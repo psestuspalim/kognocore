@@ -1,0 +1,60 @@
+
+/* Keep long clinical terms inside the question and answer columns. */
+.quiz-screen main {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.quiz-screen main button {
+  min-width: 0;
+}
+.quiz-screen main input,
+.quiz-screen main textarea {
+  scroll-margin-block: 1rem;
+}
+@media (max-width: 639px) {
+  .quiz-actions > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .quiz-actions button {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    min-height: 44px;
+    height: auto;
+    padding: 0.625rem 0.75rem;
+    white-space: normal;
+  }
+}
+
+/* Horizontal tab scrolling keeps every section reachable on narrow screens. */
+@media (max-width: 639px) {
+  .app-tabs {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 44px;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+  .app-tabs > [role="tab"] {
+    flex: 1 0 auto;
+    min-height: 44px;
+  }
+}
+@media (pointer: coarse) {
+  .app-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  input:not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  select {
+    font-size: max(1rem, 1em);
+  }
+  body {
+    background-attachment: scroll;
+  }
+}

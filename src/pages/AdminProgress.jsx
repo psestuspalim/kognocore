@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Search, TrendingUp, AlertCircle, Calendar, Trash2, Eye, Loader2, ChevronDown, ChevronUp, FileDown, BookOpen, ArrowLeft, LayoutDashboard } from 'lucide-react';
+import { Search, TrendingUp, AlertCircle, Calendar, Trash2, Eye, ChevronDown, ChevronUp, FileDown, BookOpen, ArrowLeft, LayoutDashboard } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -26,7 +26,6 @@ export default function AdminProgress() {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [selectedAttempt, setSelectedAttempt] = useState(null);
   const [reviewQuizAttempt, setReviewQuizAttempt] = useState(null);
-  const [isPurging, setIsPurging] = useState(false);
   const [expandedAttempts, setExpandedAttempts] = useState({});
   const [showProgressModal, setShowProgressModal] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -53,11 +52,6 @@ export default function AdminProgress() {
     queryFn: () => client.entities.QuizAttempt.list('-created_date', 2000),
   });
 
-  // Filter out incomplete attempts (0 score with 0 answered)
-  const validAttempts = attempts.filter(a =>
-    a.answered_questions > 0 || a.score > 0 || a.is_completed
-  );
-
   const deleteAttemptMutation = useMutation({
     mutationFn: (id) => client.entities.QuizAttempt.delete(id),
     onSuccess: () => {
@@ -67,32 +61,6 @@ export default function AdminProgress() {
     },
     onError: () => toast.error('Error al eliminar')
   });
-
-  const purgeFailedAttempts = async () => {
-    const failedAttempts = attempts.filter(a =>
-      (a.answered_questions === 0 || !a.answered_questions) &&
-      a.score === 0 &&
-      !a.is_completed
-    );
-
-    if (failedAttempts.length === 0) {
-      toast.info('No hay intentos fallidos para eliminar');
-      return;
-    }
-
-    setIsPurging(true);
-    try {
-      for (const attempt of failedAttempts) {
-        await client.entities.QuizAttempt.delete(attempt.id);
-      }
-      queryClient.invalidateQueries(['quiz-attempts']);
-      toast.success(`${failedAttempts.length} intentos fallidos eliminados`);
-    } catch (error) {
-      toast.error('Error al purgar intentos');
-    } finally {
-      setIsPurging(false);
-    }
-  };
 
   const { data: quizzes = [], isLoading: quizzesLoading, isError: quizzesError } = useQuery({
     queryKey: ['quizzes'],
@@ -156,7 +124,7 @@ export default function AdminProgress() {
     }
   });
 
-  validAttempts.forEach((attempt) => {
+  attempts.forEach((attempt) => {
     const key = buildStudentKey({ learner_id: attempt.learner_id, user_email: attempt.user_email });
     if (!key) return;
 
@@ -184,7 +152,6 @@ export default function AdminProgress() {
     }
   });
 
-  const failedAttemptsCount = attempts.length - validAttempts.length;
 
   const toggleAttemptExpand = (attemptId) => {
     setExpandedAttempts(prev => ({
@@ -615,24 +582,12 @@ export default function AdminProgress() {
                 Panel administrativo para seguimiento de rendimiento
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              {failedAttemptsCount > 0 && (
-                <Button
-                  variant="outline"
-                  onClick={purgeFailedAttempts}
-                  disabled={isPurging}
-                  className="text-red-600 border-red-200 hover:bg-red-50"
-                >
-                  {isPurging ? (
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  ) : (
-                    <Trash2 className="w-4 h-4 mr-2" />
-                  )}
-                  Purgar {failedAttemptsCount} fallidos
-                </Button>
-              )}
+            <div className="flex flex-wrap items-center gap-3">
               <Badge variant="outline" className="text-sm py-1 px-3">
-                {validAttempts.length} intentos válidos
+                {attempts.filter(attempt => attempt.is_completed).length} completados
+              </Badge>
+              <Badge variant="outline" className="text-sm py-1 px-3">
+                {attempts.filter(attempt => !attempt.is_completed).length} incompletos
               </Badge>
             </div>
           </div>
@@ -862,9 +817,17 @@ export default function AdminProgress() {
                         <CardTitle className="text-lg">Historial de Intentos ({selectedStudent.attempts.length})</CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-3 max-h-[500px] sm:max-h-[600px] overflow-y-auto p-3 sm:p-6">
-                        {(selectedStudent.attempts && Array.isArray(selectedStudent.attempts) ? [...selectedStudent.attempts].sort((a, b) =>
-                          new Date(b.completed_at || b.created_date) - new Date(a.completed_at || a.created_date)
-                        ) : []).map((attempt) => {
+                        {[true, false].map((completed) => {
+                          const groupedAttempts = selectedStudent.attempts
+                            .filter(attempt => Boolean(attempt.is_completed) === completed)
+                            .sort((a, b) => new Date(b.completed_at || b.created_date) - new Date(a.completed_at || a.created_date));
+                          return (
+                            <section key={String(completed)} className="space-y-3">
+                              <h3 className="font-semibold text-slate-800">
+                                {completed ? 'Completados' : 'Incompletos'} ({groupedAttempts.length})
+                              </h3>
+                              {groupedAttempts.length === 0 && <p className="text-sm text-slate-500">Sin intentos en este grupo.</p>}
+                              {groupedAttempts.map((attempt) => {
                           const percentage = Math.round(attempt.total_questions > 0 ? (attempt.score / attempt.total_questions) * 100 : 0);
                           const isPartial = !attempt.is_completed;
                           const isExpanded = expandedAttempts[attempt.id];
@@ -882,7 +845,7 @@ export default function AdminProgress() {
                                       </h4>
                                       {isPartial && (
                                         <Badge variant="outline" className="text-xs text-orange-600 border-orange-300">
-                                          Parcial
+                                          Incompleto
                                         </Badge>
                                       )}
                                     </div>
@@ -973,6 +936,9 @@ export default function AdminProgress() {
                                 </div>
                               )}
                             </div>
+                          );
+                              })}
+                            </section>
                           );
                         })}
 

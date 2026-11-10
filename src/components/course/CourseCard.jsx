@@ -54,13 +54,13 @@ export default function CourseCard({ course, subjectCount, quizCount = 0, isAdmi
 
           <div className="flex items-center gap-1 shrink-0">
             {isAdmin && (
-              <div className="flex gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity" onClick={(e) => e.stopPropagation()}>
+              <div className="flex gap-0.5 opacity-100 [@media(hover:hover)]:opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity" onClick={(e) => e.stopPropagation()}>
                 <Button variant="ghost" size="icon" onClick={() => onEdit(course)}
-                  className="h-7 w-7 text-slate-400 hover:text-slate-700 rounded-lg">
+                  className="h-11 w-11 sm:h-7 sm:w-7 text-slate-400 hover:text-slate-700 rounded-lg">
                   <Pencil className="w-3.5 h-3.5" />
                 </Button>
                 <Button variant="ghost" size="icon" onClick={() => onDelete(course.id)}
-                  className="h-7 w-7 text-slate-400 hover:text-red-500 rounded-lg">
+                  className="h-11 w-11 sm:h-7 sm:w-7 text-slate-400 hover:text-red-500 rounded-lg">
                   <Trash2 className="w-3.5 h-3.5" />
                 </Button>
               </div>

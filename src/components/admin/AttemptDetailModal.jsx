@@ -63,7 +63,7 @@ export default function AttemptDetailModal({ attempt, quizTitle, open, onClose, 
 
         <ScrollArea className="max-h-[60vh] p-6">
           {/* Stats */}
-          <div className="grid grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
             <div className="bg-green-50 rounded-lg p-3 text-center">
               <div className="text-2xl font-bold text-green-600">{attempt.score}</div>
               <div className="text-xs text-green-700">Correctas</div>

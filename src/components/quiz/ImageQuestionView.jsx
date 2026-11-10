@@ -99,7 +99,7 @@ export default function ImageQuestionView({
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto p-3 sm:p-6 [overflow-wrap:anywhere]">
       {/* Progress */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-2">
@@ -192,7 +192,7 @@ export default function ImageQuestionView({
           )}
 
           {/* Opciones como botones */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {question.options.map((option) => {
               const status = getOptionStatus(option);
               return (

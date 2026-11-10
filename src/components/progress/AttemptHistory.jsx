@@ -12,7 +12,7 @@ import { es } from 'date-fns/locale';
 
 export default function AttemptHistory({ attempts, quizzes, subjects, onOpenQuizReview }) {
   const [expandedAttempt, setExpandedAttempt] = useState(null);
-  const [filter, setFilter] = useState('all'); // all, completed, partial
+  const [filter, setFilter] = useState('completed');
 
   const getQuiz = (quizId) => quizzes.find(q => q.id === quizId);
   const getSubject = (subjectId) => subjects.find(s => s.id === subjectId);
@@ -43,14 +43,6 @@ export default function AttemptHistory({ attempts, quizzes, subjects, onOpenQuiz
           <div className="flex gap-2">
             <Button
               size="sm"
-              variant={filter === 'all' ? 'default' : 'outline-solid'}
-              onClick={() => setFilter('all')}
-              className="text-xs"
-            >
-              Todos
-            </Button>
-            <Button
-              size="sm"
               variant={filter === 'completed' ? 'default' : 'outline-solid'}
               onClick={() => setFilter('completed')}
               className="text-xs"
@@ -63,7 +55,7 @@ export default function AttemptHistory({ attempts, quizzes, subjects, onOpenQuiz
               onClick={() => setFilter('partial')}
               className="text-xs"
             >
-              Parciales
+              Incompletos
             </Button>
           </div>
         </div>
@@ -98,7 +90,7 @@ export default function AttemptHistory({ attempts, quizzes, subjects, onOpenQuiz
                           </h4>
                           {!attempt.is_completed && (
                             <Badge variant="outline" className="text-xs text-orange-600 border-orange-300">
-                              Parcial
+                              Incompleto
                             </Badge>
                           )}
                         </div>

@@ -277,7 +277,7 @@ export default function OpenEndedQuestionView({
   const progressPercent = totalQuestions > 0 ? Math.round((questionNumber / totalQuestions) * 100) : 0;
 
   return (
-    <div className="fixed inset-0 z-50 flex h-dvh flex-col overflow-hidden bg-slate-100 font-sans">
+    <div className="quiz-screen fixed inset-0 z-50 flex h-dvh flex-col overflow-hidden bg-slate-100 font-sans">
       {/* Header */}
       {isReviewMode && reviewDetails ? (
         <QuizReviewBar
@@ -302,7 +302,7 @@ export default function OpenEndedQuestionView({
               </button>
             ) : <div className="w-16" />}
 
-            <div className="flex-1 max-w-sm">
+            <div className="min-w-0 flex-1 max-w-sm">
               <div className="flex items-center justify-center gap-2 mb-1">
                 <span className="text-xs font-semibold text-slate-600 truncate">
                   {questionNumber} de {totalQuestions}
@@ -337,7 +337,7 @@ export default function OpenEndedQuestionView({
       )}
 
       {/* Main Content Area - Fully Scrollable */}
-      <main className="flex-1 min-h-0 overflow-y-auto px-4 py-4 sm:py-6 pb-32 scrollbar-gutter-stable">
+      <main className="flex-1 min-h-0 overflow-y-auto px-4 py-4 sm:py-6 pb-6 scrollbar-gutter-stable">
         <div className="w-full max-w-3xl mx-auto space-y-6">
 
           {/* Type Badge & Category */}
@@ -589,7 +589,7 @@ export default function OpenEndedQuestionView({
       </main>
 
       {/* Sticky Bottom Action Bar for Mobile & Desktop */}
-      <footer className="z-20 shrink-0 border-t border-slate-300/80 bg-white px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 sm:px-6">
+      <footer className="quiz-actions z-20 shrink-0 border-t border-slate-300/80 bg-white px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 sm:px-6">
         <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
           {onPrev ? (
             <Button

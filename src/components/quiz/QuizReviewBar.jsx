@@ -81,8 +81,8 @@ export default function QuizReviewBar({
                 title="Aceptar esta respuesta como correcta"
               >
                 <CheckCircle2 className="w-3.5 h-3.5 mr-1" />
-                <span className="hidden xs:inline">Aceptar como correcta</span>
-                <span className="xs:hidden">Validar</span>
+                <span className="hidden sm:inline">Aceptar como correcta</span>
+                <span className="sm:hidden">Validar</span>
               </Button>
             )}
 
@@ -100,7 +100,7 @@ export default function QuizReviewBar({
       <div className="px-3 py-2 sm:px-6 bg-slate-50 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 max-w-6xl mx-auto">
         {/* Filter buttons */}
         {onFilterChange && (
-          <div className="flex items-center gap-1 shrink-0 text-xs">
+          <div className="flex flex-wrap items-center gap-1 shrink-0 text-xs">
             <button
               onClick={() => onFilterChange('all')}
               className={`px-2.5 py-1 rounded-md font-medium transition-colors cursor-pointer ${
@@ -159,7 +159,7 @@ export default function QuizReviewBar({
                   key={status.index}
                   ref={isActive ? activePillRef : null}
                   onClick={() => onJumpToQuestion && onJumpToQuestion(status.index)}
-                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-xs font-bold border transition-all cursor-pointer flex items-center justify-center shrink-0 ${colorClasses} ${
+                  className={`w-11 h-11 sm:w-8 sm:h-8 rounded-lg text-xs font-bold border transition-all cursor-pointer flex items-center justify-center shrink-0 ${colorClasses} ${
                     isActive ? 'ring-2 ring-indigo-600 ring-offset-1 font-extrabold scale-110 shadow-sm' : ''
                   }`}
                   title={`Pregunta ${status.index + 1} (${status.isApproved ? 'Validada' : status.isCorrect ? 'Correcta' : 'Incorrecta'})`}
