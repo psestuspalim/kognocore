@@ -1,8 +1,9 @@
 /**
  * pages.config.js - Page routing configuration
  * 
- * This file is AUTO-GENERATED. Do not add imports or modify PAGES manually.
- * Pages are auto-registered when you create files in the ./pages/ folder.
+ * Maintained by hand. Every page is loaded on demand with React.lazy; App.jsx
+ * wraps the routes in Suspense. Add a page here and, if it is admin-only, to
+ * ADMIN_PAGES in App.jsx.
  * 
  * THE ONLY EDITABLE VALUE: mainPage
  * This controls which page is the landing page (shown when users visit the app).
@@ -47,29 +48,31 @@
  *
  * The mainPage value must match a key in the PAGES object exactly.
  */
-import AdminContent from './pages/AdminContent';
-import AdminHome from './pages/AdminHome';
-import AdminJsonManager from './pages/AdminJsonManager';
-import AdminProgress from './pages/AdminProgress';
-import AdminStudentDetail from './pages/AdminStudentDetail';
-import AdminStudents from './pages/AdminStudents';
-import AdminTasks from './pages/AdminTasks';
-import AdminTrash from './pages/AdminTrash';
-import Adivino from './pages/Adivino';
-import Badges from './pages/Badges';
-import ChallengePlay from './pages/ChallengePlay';
-import CourseManagement from './pages/CourseManagement';
-import GameLobby from './pages/GameLobby';
-import GamePlay from './pages/GamePlay';
-import Home from './pages/Home';
-import Leaderboard from './pages/Leaderboard';
-import LiveSessions from './pages/LiveSessions';
-import MyTasks from './pages/MyTasks';
-import Progress from './pages/Progress';
-import Quizzes from './pages/Quizzes';
-import TournamentLobby from './pages/TournamentLobby';
-import TournamentPlay from './pages/TournamentPlay';
-import index from './pages/index';
+import { lazy } from 'react';
+
+const AdminContent = lazy(() => import('./pages/AdminContent'));
+const AdminHome = lazy(() => import('./pages/AdminHome'));
+const AdminJsonManager = lazy(() => import('./pages/AdminJsonManager'));
+const AdminProgress = lazy(() => import('./pages/AdminProgress'));
+const AdminStudentDetail = lazy(() => import('./pages/AdminStudentDetail'));
+const AdminStudents = lazy(() => import('./pages/AdminStudents'));
+const AdminTasks = lazy(() => import('./pages/AdminTasks'));
+const AdminTrash = lazy(() => import('./pages/AdminTrash'));
+const Adivino = lazy(() => import('./pages/Adivino'));
+const Badges = lazy(() => import('./pages/Badges'));
+const ChallengePlay = lazy(() => import('./pages/ChallengePlay'));
+const CourseManagement = lazy(() => import('./pages/CourseManagement'));
+const GameLobby = lazy(() => import('./pages/GameLobby'));
+const GamePlay = lazy(() => import('./pages/GamePlay'));
+const Home = lazy(() => import('./pages/Home'));
+const Leaderboard = lazy(() => import('./pages/Leaderboard'));
+const LiveSessions = lazy(() => import('./pages/LiveSessions'));
+const MyTasks = lazy(() => import('./pages/MyTasks'));
+const Progress = lazy(() => import('./pages/Progress'));
+const Quizzes = lazy(() => import('./pages/Quizzes'));
+const TournamentLobby = lazy(() => import('./pages/TournamentLobby'));
+const TournamentPlay = lazy(() => import('./pages/TournamentPlay'));
+const index = lazy(() => import('./pages/index'));
 
 
 export const PAGES = {

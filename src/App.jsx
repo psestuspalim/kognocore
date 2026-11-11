@@ -1,4 +1,5 @@
 import './App.css'
+import { lazy, Suspense } from 'react'
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
@@ -8,8 +9,9 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import Login from '@/pages/Login';
-import AdminUserGenerator from '@/pages/AdminUserGenerator';
-import AdminQuestionReviews from '@/pages/AdminQuestionReviews';
+
+const AdminUserGenerator = lazy(() => import('@/pages/AdminUserGenerator'));
+const AdminQuestionReviews = lazy(() => import('@/pages/AdminQuestionReviews'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -31,22 +33,22 @@ const ADMIN_PAGES = new Set([
   'CourseManagement'
 ]);
 
+const PageLoader = () => (
+  <div className="fixed inset-0 flex items-center justify-center bg-background">
+    <div className="flex flex-col items-center gap-3">
+      <div className="h-8 w-8 rounded-full border-2 border-slate-200 border-t-slate-900 animate-spin" />
+      <span className="text-sm text-slate-500">Cargando...</span>
+    </div>
+  </div>
+);
+
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, isAuthenticated, user } = useAuth();
 
-  // Show loading spinner while checking app public settings or auth
-  if (isLoadingPublicSettings || isLoadingAuth) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-background">
-        <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 rounded-full border-2 border-slate-200 border-t-slate-900 animate-spin" />
-          <span className="text-sm text-slate-500">Cargando...</span>
-        </div>
-      </div>
-    );
-  }
+  if (isLoadingPublicSettings || isLoadingAuth) return <PageLoader />;
 
   return (
+    <Suspense fallback={<PageLoader />}>
     <Routes>
       <Route path="/AdminUserGenerator" element={<ProtectedRoute allowedRoles={['admin']}><AdminUserGenerator /></ProtectedRoute>} />
       <Route path="/AdminQuestionReviews" element={<ProtectedRoute allowedRoles={['admin']}><AdminQuestionReviews /></ProtectedRoute>} />
@@ -77,6 +79,7 @@ const AuthenticatedApp = () => {
         ))}
       <Route path="*" element={<PageNotFound />} />
     </Routes>
+    </Suspense>
   );
 };
 

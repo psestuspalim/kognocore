@@ -32,6 +32,7 @@ const Login = () => {
                 body: JSON.stringify({ code: normalized })
             });
 
+            if (response.status === 429) return { rateLimited: true };
             if (response.ok) {
                 const data = await response.json();
                 if (data?.courseId && data?.token) {
@@ -56,6 +57,7 @@ const Login = () => {
         const studentAlias = getOrCreateStudentAlias();
 
         const resolved = await resolveCourseByCode(normalized);
+        if (resolved?.rateLimited) throw new Error('RATE_LIMITED');
         if (!resolved) {
             throw new Error('INVALID_CODE');
         }
@@ -153,6 +155,8 @@ const Login = () => {
         } catch (err) {
             if (String(err?.message || '') === 'INVALID_CODE') {
                 setError('Código de acceso inválido. Verifica que el código sea correcto.');
+            } else if (String(err?.message || '') === 'RATE_LIMITED') {
+                setError('Demasiados intentos fallidos. Espera 15 minutos e inténtalo de nuevo.');
             } else if (String(err?.message || '').startsWith('SERVER_CONFIG:')) {
                 setError('Servidor de códigos no configurado en Vercel');
             } else {
