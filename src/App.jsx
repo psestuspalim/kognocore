@@ -1,9 +1,9 @@
 import './App.css'
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
-import { pagesConfig } from './pages.config'
+import { pagesConfig, preloadPages } from './pages.config'
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
@@ -44,6 +44,20 @@ const PageLoader = () => (
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, isAuthenticated, user } = useAuth();
+
+  // Fetch the other sections in the background once the first screen is up.
+  const isAdmin = user?.role === 'admin';
+  useEffect(() => {
+    if (!isAuthenticated) return undefined;
+    const names = Object.keys(Pages).filter((name) => isAdmin || !ADMIN_PAGES.has(name));
+    const run = () => preloadPages(names);
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(run, { timeout: 4000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = window.setTimeout(run, 1500);
+    return () => window.clearTimeout(id);
+  }, [isAuthenticated, isAdmin]);
 
   if (isLoadingPublicSettings || isLoadingAuth) return <PageLoader />;
 

@@ -304,17 +304,17 @@ export default function QuestionView({
             </button>
 
             <div className="min-w-0 flex-1 max-w-sm">
-              <div className="flex items-center justify-center gap-2 mb-1">
-                <span className="text-xs font-semibold text-slate-600 truncate">
+              <div className="flex items-center justify-center gap-3 mb-1.5">
+                <span className="text-base sm:text-lg font-bold text-slate-800 truncate">
                   {questionNumber} de {totalQuestions}
                 </span>
-                <div className="flex items-center gap-1 text-xs">
+                <div className="flex items-center gap-1 text-sm sm:text-base">
                   <span className="text-emerald-600 font-semibold">{correctAnswers}</span>
                   <span className="text-slate-300">/</span>
                   <span className="text-rose-500 font-semibold">{wrongAnswers}</span>
                 </div>
               </div>
-              <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
+              <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-primary rounded-full"
                   style={{ width: `${progressPercent}%` }}
@@ -325,13 +325,13 @@ export default function QuestionView({
             <button
               onClick={handleToggleMark}
               title={isMarked ? 'Marcada para revisión' : 'Marcar para revisión'}
-              className={`p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors shrink-0 ${
+              className={`p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg border transition-colors shrink-0 ${
                 isMarked
-                  ? 'text-amber-500'
-                  : 'text-slate-300 hover:text-slate-500'
+                  ? 'border-amber-300 bg-amber-50 text-amber-600'
+                  : 'border-slate-200 bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
-              <Bookmark className={`w-4 h-4 ${isMarked ? 'fill-amber-400' : ''}`} />
+              <Bookmark className={`w-6 h-6 ${isMarked ? 'fill-amber-400' : ''}`} />
             </button>
           </div>
         </header>

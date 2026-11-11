@@ -50,44 +50,36 @@
  */
 import { lazy } from 'react';
 
-const AdminContent = lazy(() => import('./pages/AdminContent'));
-const AdminHome = lazy(() => import('./pages/AdminHome'));
-const AdminJsonManager = lazy(() => import('./pages/AdminJsonManager'));
-const AdminProgress = lazy(() => import('./pages/AdminProgress'));
-const AdminStudentDetail = lazy(() => import('./pages/AdminStudentDetail'));
-const AdminStudents = lazy(() => import('./pages/AdminStudents'));
-const AdminTasks = lazy(() => import('./pages/AdminTasks'));
-const AdminTrash = lazy(() => import('./pages/AdminTrash'));
-const Adivino = lazy(() => import('./pages/Adivino'));
-const Badges = lazy(() => import('./pages/Badges'));
-const CourseManagement = lazy(() => import('./pages/CourseManagement'));
-const Home = lazy(() => import('./pages/Home'));
-const Leaderboard = lazy(() => import('./pages/Leaderboard'));
-const MyTasks = lazy(() => import('./pages/MyTasks'));
-const Progress = lazy(() => import('./pages/Progress'));
-const Quizzes = lazy(() => import('./pages/Quizzes'));
-const index = lazy(() => import('./pages/index'));
+// One loader per page. React.lazy keeps each page in its own chunk, and
+// preloadPages lets the app fetch those chunks in the background after sign-in
+// so moving between sections does not wait on the network.
+const loaders = {
+    AdminContent: () => import('./pages/AdminContent'),
+    AdminHome: () => import('./pages/AdminHome'),
+    AdminJsonManager: () => import('./pages/AdminJsonManager'),
+    AdminProgress: () => import('./pages/AdminProgress'),
+    AdminStudentDetail: () => import('./pages/AdminStudentDetail'),
+    AdminStudents: () => import('./pages/AdminStudents'),
+    AdminTasks: () => import('./pages/AdminTasks'),
+    AdminTrash: () => import('./pages/AdminTrash'),
+    Adivino: () => import('./pages/Adivino'),
+    Badges: () => import('./pages/Badges'),
+    CourseManagement: () => import('./pages/CourseManagement'),
+    Home: () => import('./pages/Home'),
+    Leaderboard: () => import('./pages/Leaderboard'),
+    MyTasks: () => import('./pages/MyTasks'),
+    Progress: () => import('./pages/Progress'),
+    Quizzes: () => import('./pages/Quizzes'),
+    index: () => import('./pages/index'),
+};
 
+export const PAGES = Object.fromEntries(
+    Object.entries(loaders).map(([name, load]) => [name, lazy(load)])
+);
 
-export const PAGES = {
-    "AdminContent": AdminContent,
-    "AdminHome": AdminHome,
-    "AdminJsonManager": AdminJsonManager,
-    "AdminProgress": AdminProgress,
-    "AdminStudentDetail": AdminStudentDetail,
-    "AdminStudents": AdminStudents,
-    "AdminTasks": AdminTasks,
-    "AdminTrash": AdminTrash,
-    "Adivino": Adivino,
-    "Badges": Badges,
-    "CourseManagement": CourseManagement,
-    "Home": Home,
-    "Leaderboard": Leaderboard,
-    "MyTasks": MyTasks,
-    "Progress": Progress,
-    "Quizzes": Quizzes,
-    "index": index,
-}
+export const preloadPages = (names) => {
+    names.forEach((name) => { loaders[name]?.().catch(() => {}); });
+};
 
 export const pagesConfig = {
     mainPage: "Quizzes",

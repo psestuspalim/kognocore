@@ -38,6 +38,8 @@ import QuizEditor from '../components/quiz/QuizEditor';
 import QuestionView from '../components/quiz/QuestionView';
 import ResultsView from '../components/quiz/ResultsView';
 import ReportQuestionButton from '../components/quiz/ReportQuestionButton';
+import QuizTemplatePanel from '../components/quiz/QuizTemplatePanel';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { questionIdentity } from '@/lib/question-review';
 import SubjectCard from '../components/quiz/SubjectCard';
 import SubjectEditor from '../components/quiz/SubjectEditor';
@@ -865,8 +867,12 @@ export default function QuizzesPage() {
 
   const matchesSubject = quizBelongsToSubject;
 
+  // A quiz filed in a folder is listed inside that folder only. If its folder no
+  // longer exists it falls back to the subject, so it never becomes unreachable.
+  const existingFolderIds = new Set(folders.filter(f => f?.id).map(f => String(f.id)));
+  const isFiledInFolder = (quiz) => quiz.folder_id != null && existingFolderIds.has(String(quiz.folder_id));
   const subjectQuizzes = selectedSubject
-    ? quizzes.filter(q => q && q.id && matchesSubject(q, selectedSubject) && (isAdmin || !q.is_hidden))
+    ? quizzes.filter(q => q && q.id && matchesSubject(q, selectedSubject) && !isFiledInFolder(q) && (isAdmin || !q.is_hidden))
     : [];
 
   const currentLevelQuizzes = currentFolderId ? currentFolderQuizzes : subjectQuizzes;
@@ -923,7 +929,7 @@ export default function QuizzesPage() {
               {currentUser.username}
             </span>
           )}
-          {isAdmin && <AdminMenu compact />}
+          {isAdmin && <AdminMenu />}
           <LogoutButton />
         </div>
       </div>
@@ -2521,7 +2527,15 @@ export default function QuizzesPage() {
               </DialogTitle>
             </DialogHeader>
             <p className="text-sm text-slate-600">Destino: {importDestination?.name || 'Directorio general'}</p>
-            <div className="mt-2">
+            <Tabs defaultValue="import" className="mt-2">
+              <TabsList>
+                <TabsTrigger value="import">Importar</TabsTrigger>
+                <TabsTrigger value="template">Estructura base</TabsTrigger>
+              </TabsList>
+              <TabsContent value="template" className="mt-4">
+                <QuizTemplatePanel />
+              </TabsContent>
+              <TabsContent value="import" forceMount className="mt-4 data-[state=inactive]:hidden">
               <FileUploader
                 onUploadSuccess={async (data) => {
                   if (!isAdmin || !importDestination) return;
@@ -2536,7 +2550,8 @@ export default function QuizzesPage() {
                 }}
                 jsonOnly={true}
               />
-            </div>
+              </TabsContent>
+            </Tabs>
           </DialogContent>
         </Dialog>
       </div >
