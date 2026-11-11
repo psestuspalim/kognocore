@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Search, TrendingUp, AlertCircle, Calendar, Trash2, Eye, ChevronDown, ChevronUp, FileDown, BookOpen, ArrowLeft, LayoutDashboard } from 'lucide-react';
+import { Search, TrendingUp, AlertCircle, Calendar, Trash2, Eye, ChevronDown, ChevronUp, FileDown, ArrowLeft, LayoutDashboard } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -16,20 +16,20 @@ import MathText from '../components/quiz/MathText';
 import { fromCompactFormat, isCompactFormat } from '../components/utils/quizFormats';
 import AttemptDetailModal from '../components/admin/AttemptDetailModal';
 import StudentProgressModal from '../components/admin/StudentProgressModal';
-import QuizMasterDocs from '../components/admin/QuizMasterDocs';
 import AnswerReviewPanel from '../components/admin/AnswerReviewPanel';
 import AttemptQuizReviewer from '../components/quiz/AttemptQuizReviewer';
 import { normalizeQuizQuestion } from '@/lib/quiz-normalization';
 
 export default function AdminProgress() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [showPendingStudents, setShowPendingStudents] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [selectedAttempt, setSelectedAttempt] = useState(null);
   const [reviewQuizAttempt, setReviewQuizAttempt] = useState(null);
   const [expandedAttempts, setExpandedAttempts] = useState({});
   const [showProgressModal, setShowProgressModal] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentTab = searchParams.get('tab') === 'review' ? 'review' : searchParams.get('tab') === 'docs' ? 'docs' : 'students';
+  const currentTab = searchParams.get('tab') === 'review' ? 'review' : 'students';
 
   const queryClient = useQueryClient();
   const approveAnswerMutation = useMutation({
@@ -160,14 +160,30 @@ export default function AdminProgress() {
     }));
   };
 
-  const students = Object.values(studentStats).filter((student) => {
-    const search = searchTerm.toLowerCase();
-    return (
-      (student.username || '').toLowerCase().includes(search) ||
-      (student.email || '').toLowerCase().includes(search) ||
-      (student.learner_id || '').toLowerCase().includes(search)
-    );
-  });
+  // A student counts as active once they have signed in or left at least one attempt.
+  const lastActivity = (student) => student.attempts.reduce((latest, attempt) => {
+    const time = new Date(attempt.completed_at || attempt.updated_date || attempt.created_date || 0).getTime();
+    return Number.isFinite(time) && time > latest ? time : latest;
+  }, 0);
+  const allStudents = Object.values(studentStats).map((student) => ({
+    ...student,
+    isActive: student.hasSignedIn || student.attempts.length > 0,
+    lastActivity: lastActivity(student)
+  }));
+  const pendingStudentsCount = allStudents.filter((student) => !student.isActive).length;
+  const students = allStudents
+    .filter((student) => showPendingStudents || student.isActive)
+    .filter((student) => {
+      const search = searchTerm.toLowerCase();
+      return (
+        (student.username || '').toLowerCase().includes(search) ||
+        (student.email || '').toLowerCase().includes(search) ||
+        (student.learner_id || '').toLowerCase().includes(search)
+      );
+    })
+    .sort((a, b) => Number(b.isActive) - Number(a.isActive)
+      || b.lastActivity - a.lastActivity
+      || (a.username || '').localeCompare(b.username || '', 'es'));
 
   const getQuizTitle = (quizId) => {
     const quiz = quizzes.find(q => q.id === quizId);
@@ -597,10 +613,6 @@ export default function AdminProgress() {
           <TabsList className="h-auto flex-wrap">
             <TabsTrigger value="students">Estudiantes</TabsTrigger>
             <TabsTrigger value="review"><Eye className="w-4 h-4 mr-2" />Revisar respuestas</TabsTrigger>
-            <TabsTrigger value="docs">
-              <BookOpen className="w-4 h-4 mr-2" />
-              Documentación
-            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="students">{/* Contenido de estudiantes */}
@@ -610,7 +622,7 @@ export default function AdminProgress() {
               <div className="lg:col-span-1">
                 <Card>
                   <CardHeader className="p-4 sm:p-6">
-                    <CardTitle className="text-base sm:text-lg">Estudiantes</CardTitle>
+                    <CardTitle className="text-base sm:text-lg">Estudiantes ({students.filter((student) => student.isActive).length})</CardTitle>
                     <div className="relative mt-4">
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <Input
@@ -620,6 +632,18 @@ export default function AdminProgress() {
                         className="pl-10"
                       />
                     </div>
+                    {pendingStudentsCount > 0 && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setShowPendingStudents((value) => !value)}
+                        className="mt-2 h-auto justify-start whitespace-normal px-2 py-1.5 text-left text-xs text-gray-600"
+                      >
+                        {showPendingStudents
+                          ? `Ocultar ${pendingStudentsCount} sin primer ingreso`
+                          : `Mostrar ${pendingStudentsCount} sin primer ingreso`}
+                      </Button>
+                    )}
                   </CardHeader>
                   <CardContent className="max-h-[400px] sm:max-h-[600px] overflow-y-auto space-y-2 p-3 sm:p-6">
                     {students.map((student) => {
@@ -630,9 +654,9 @@ export default function AdminProgress() {
                       return (
                         <button
                           key={student.key}
-                          disabled={!student.hasSignedIn}
+                          disabled={!student.isActive}
                           onClick={() => setSelectedStudent(student)}
-                          className={`w-full text-left p-4 rounded-lg border-2 transition-all disabled:cursor-not-allowed disabled:opacity-60 ${!student.hasSignedIn
+                          className={`w-full text-left p-4 rounded-lg border-2 transition-all disabled:cursor-not-allowed disabled:opacity-60 ${!student.isActive
                               ? 'border-gray-200 bg-gray-50'
                               : selectedStudent?.key === student.key
                               ? 'border-indigo-500 bg-indigo-50'
@@ -646,7 +670,7 @@ export default function AdminProgress() {
                             {student.email || student.learner_id || 'Sin email'}
                           </div>
                           <div className="flex items-center justify-between">
-                            {!student.hasSignedIn ? (
+                            {!student.isActive ? (
                               <Badge variant="outline">Pendiente de primer ingreso</Badge>
                             ) : (
                               <>
@@ -1006,9 +1030,6 @@ export default function AdminProgress() {
             />
           </TabsContent>
 
-          <TabsContent value="docs">
-            <QuizMasterDocs />
-          </TabsContent>
         </Tabs>
 
         {/* Full-screen Interactive Attempt Quiz Reviewer */}
