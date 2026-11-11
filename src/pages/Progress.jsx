@@ -228,7 +228,7 @@ export default function ProgressPage() {
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+      <div className="min-h-dvh bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Cargando...</p>
@@ -239,7 +239,7 @@ export default function ProgressPage() {
 
   if (!attempts.length) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
+      <div className="min-h-dvh bg-linear-to-br from-gray-50 to-gray-100">
         <div className="container mx-auto px-4 py-8">
           <Link to={createPageUrl('Quizzes')}>
             <Button variant="ghost" className="mb-6">
@@ -273,7 +273,7 @@ export default function ProgressPage() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
+    <div className="min-h-dvh bg-linear-to-br from-gray-50 to-gray-100">
       <div className="container mx-auto px-4 py-8">
         <Link to={createPageUrl('Quizzes')}>
           <Button variant="ghost" className="mb-6">

@@ -187,7 +187,7 @@ export default function GamePlayPage() {
 
   if (!room || !currentUser) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-purple-900 to-indigo-900">
+      <div className="min-h-dvh flex items-center justify-center bg-linear-to-br from-purple-900 to-indigo-900">
         <Loader2 className="w-8 h-8 animate-spin text-white" />
       </div>
     );
@@ -196,7 +196,7 @@ export default function GamePlayPage() {
   // Lobby - Esperando jugadores
   if (gameState === 'lobby') {
     return (
-      <div className="min-h-screen bg-linear-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
+      <div className="min-h-dvh bg-linear-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
         <div className="max-w-lg mx-auto">
           <Button
             variant="ghost"
@@ -282,7 +282,7 @@ export default function GamePlayPage() {
   // Countdown
   if (gameState === 'countdown') {
     return (
-      <div className="min-h-screen bg-linear-to-br from-purple-900 via-indigo-900 to-blue-900 flex items-center justify-center">
+      <div className="min-h-dvh bg-linear-to-br from-purple-900 via-indigo-900 to-blue-900 flex items-center justify-center">
         <motion.div
           key={countdown}
           initial={{ scale: 0.5, opacity: 0 }}
@@ -308,7 +308,7 @@ export default function GamePlayPage() {
     const myRank = rankings.findIndex(p => p.email === currentUser.email);
 
     return (
-      <div className="min-h-screen bg-linear-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
+      <div className="min-h-dvh bg-linear-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
         <div className="max-w-lg mx-auto">
           <Card className="bg-white/10 backdrop-blur-sm border-white/20 overflow-hidden">
             <div className="bg-linear-to-r from-yellow-500 to-orange-500 p-6 text-center">
@@ -373,7 +373,7 @@ export default function GamePlayPage() {
 
   // Jugando
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
+    <div className="min-h-dvh bg-linear-to-br from-gray-50 to-gray-100">
       {/* Header con progreso */}
       <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-xs border-b">
         <div className="max-w-4xl mx-auto px-4 py-2">

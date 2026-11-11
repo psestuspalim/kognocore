@@ -345,7 +345,7 @@ export default function FileUploader({ onUploadSuccess, jsonOnly = false }) {
                       <button
                         type="button"
                         onClick={() => jumpToErrorPosition({ qIndex: item.qIndex })}
-                        className="px-2 py-0.5 text-[11px] font-semibold rounded bg-white/80 hover:bg-white text-slate-700 border border-slate-300 flex items-center gap-1 shadow-2xs hover:text-indigo-600 transition-colors"
+                        className="px-2 py-0.5 text-xs font-semibold rounded bg-white/80 hover:bg-white text-slate-700 border border-slate-300 flex items-center gap-1 shadow-2xs hover:text-indigo-600 transition-colors"
                       >
                         <CornerDownRight className="w-3 h-3" />
                         <span>Ir a P{item.qIndex}</span>

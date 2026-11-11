@@ -102,7 +102,7 @@ export default function AnswerReviewPanel({ students, quizzes, subjects, getRows
             <h4 className="font-semibold text-slate-900"><MathText text={row.question} /></h4>
             {row.texto && (
               <div className="rounded-xl border border-indigo-200/80 bg-indigo-50/70 p-3.5 text-sm sm:text-base font-medium text-slate-800 leading-relaxed shadow-xs">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-indigo-700 mb-1">Texto del enunciado:</p>
+                <p className="text-xs font-bold uppercase tracking-wider text-indigo-700 mb-1">Texto del enunciado:</p>
                 <MathText text={row.texto} />
               </div>
             )}

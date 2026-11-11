@@ -47,7 +47,7 @@ export default function OpenEndedAnswerComparison({ inputs = {}, result, type })
                 <li key={index} className="wrap-break-word whitespace-pre-wrap text-emerald-900">
                   {label && <span className="block font-semibold">{label}</span>}
                   {detail.esperado ?? 'Sin respuesta de referencia'}
-                  <span className={`block mt-1 text-[11px] font-semibold ${detail.ok ? 'text-emerald-700' : 'text-rose-700'}`}>
+                  <span className={`block mt-1 text-xs font-semibold ${detail.ok ? 'text-emerald-700' : 'text-rose-700'}`}>
                     {detail.ok ? (result.manual ? '✓ Detectado' : '✓ Acertaste') : (result.manual ? '✗ No detectado' : '✗ Por repasar')}
                   </span>
                 </li>

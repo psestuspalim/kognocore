@@ -343,7 +343,7 @@ export default function OpenEndedQuestionView({
           {/* Type Badge & Category */}
           <div className="flex items-center justify-between text-xs sm:text-sm text-slate-500">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 font-semibold border border-indigo-200/60 uppercase tracking-wider text-[11px]">
+              <span className="px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 font-semibold border border-indigo-200/60 uppercase tracking-wider text-xs">
                 {tipo.replace('_', ' ')}
               </span>
               {question?.categoria && (

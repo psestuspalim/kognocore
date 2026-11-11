@@ -62,7 +62,7 @@ export default function QuizReviewBar({
             <h1 className="text-xs sm:text-sm font-bold text-slate-900 truncate">
               {quizTitle}
             </h1>
-            <p className="text-[11px] sm:text-xs text-slate-500 truncate">
+            <p className="text-xs sm:text-xs text-slate-500 truncate">
               Intento de: <strong className="text-slate-700 font-semibold">{studentName}</strong>
             </p>
           </div>

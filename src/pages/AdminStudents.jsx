@@ -51,7 +51,7 @@ export default function AdminStudents() {
 
   if (!currentUser || currentUser.role !== 'admin') {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-dvh flex items-center justify-center">
         <p className="text-gray-500">Acceso denegado</p>
       </div>
     );

@@ -59,7 +59,7 @@ export default function MyTasksPage() {
   };
 
   if (!currentUser) {
-    return <div className="min-h-screen flex items-center justify-center">Cargando...</div>;
+    return <div className="min-h-dvh flex items-center justify-center">Cargando...</div>;
   }
 
   const overallProgress = tasks.length > 0
@@ -67,7 +67,7 @@ export default function MyTasksPage() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
+    <div className="min-h-dvh bg-linear-to-br from-gray-50 to-gray-100">
       <div className="container mx-auto px-4 py-8">
         <Link to={createPageUrl('Quizzes')}>
           <Button variant="ghost" className="mb-6">

@@ -241,7 +241,7 @@ export default function ChallengePlayPage() {
 
   if (!challenge || !currentUser) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-indigo-900 to-purple-900">
+      <div className="min-h-dvh flex items-center justify-center bg-linear-to-br from-indigo-900 to-purple-900">
         <Loader2 className="w-8 h-8 animate-spin text-white" />
       </div>
     );
@@ -250,7 +250,7 @@ export default function ChallengePlayPage() {
   // Countdown inicial
   if (showCountdown) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-indigo-900 to-purple-900 flex items-center justify-center">
+      <div className="min-h-dvh bg-linear-to-br from-indigo-900 to-purple-900 flex items-center justify-center">
         <motion.div
           key={countdown}
           initial={{ scale: 0.5, opacity: 0 }}
@@ -272,7 +272,7 @@ export default function ChallengePlayPage() {
   // Pantalla de espera
   if (waitingForOpponent) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-indigo-900 to-purple-900 flex items-center justify-center p-4">
+      <div className="min-h-dvh bg-linear-to-br from-indigo-900 to-purple-900 flex items-center justify-center p-4">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -319,7 +319,7 @@ export default function ChallengePlayPage() {
   // Pantalla de resultado
   if (isCompleted && finalResult) {
     return (
-      <div className={`min-h-screen flex items-center justify-center p-4 ${finalResult.isWinner
+      <div className={`min-h-dvh flex items-center justify-center p-4 ${finalResult.isWinner
         ? 'bg-linear-to-br from-green-600 to-emerald-700'
         : finalResult.isTie
           ? 'bg-linear-to-br from-gray-600 to-gray-700'
@@ -405,7 +405,7 @@ export default function ChallengePlayPage() {
 
   // Juego en progreso
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
+    <div className="min-h-dvh bg-linear-to-br from-gray-50 to-gray-100">
       {/* Header fijo con info del duelo */}
       <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-xs border-b">
         <div className="max-w-4xl mx-auto px-4 py-2">
@@ -418,7 +418,7 @@ export default function ChallengePlayPage() {
             <div className="flex items-center gap-4">
               <div className="text-center">
                 <div className="text-lg font-bold text-indigo-600">{score}</div>
-                <div className="text-[10px] text-gray-500">Tú</div>
+                <div className="text-xs text-gray-500">Tú</div>
               </div>
 
               <div className="flex items-center gap-2 px-3 py-1 bg-indigo-50 rounded-full">
@@ -428,7 +428,7 @@ export default function ChallengePlayPage() {
 
               <div className="text-center">
                 <div className="text-lg font-bold text-gray-600">{opponentProgress.score}</div>
-                <div className="text-[10px] text-gray-500 truncate max-w-[60px]">{getOpponentName()}</div>
+                <div className="text-xs text-gray-500 truncate max-w-[60px]">{getOpponentName()}</div>
               </div>
             </div>
 
@@ -443,11 +443,11 @@ export default function ChallengePlayPage() {
           <div className="grid grid-cols-2 gap-2 mt-2">
             <div>
               <Progress value={((currentQuestionIndex + 1) / challenge.questions.length) * 100} className="h-1.5" />
-              <div className="text-[10px] text-gray-400 mt-0.5">{currentQuestionIndex + 1}/{challenge.questions.length}</div>
+              <div className="text-xs text-gray-400 mt-0.5">{currentQuestionIndex + 1}/{challenge.questions.length}</div>
             </div>
             <div>
               <Progress value={(opponentProgress.answered / challenge.questions.length) * 100} className="h-1.5 [&>div]:bg-gray-400" />
-              <div className="text-[10px] text-gray-400 mt-0.5 text-right">
+              <div className="text-xs text-gray-400 mt-0.5 text-right">
                 {opponentProgress.finished ? '✓ Terminó' : `${opponentProgress.answered}/${challenge.questions.length}`}
               </div>
             </div>

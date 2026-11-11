@@ -85,7 +85,7 @@ export default function AdminContent() {
 
   if (!currentUser || currentUser?.role !== 'admin') {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-dvh flex items-center justify-center">
         <p className="text-muted-foreground">Acceso denegado</p>
       </div>
     );

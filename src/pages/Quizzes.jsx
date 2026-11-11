@@ -1737,12 +1737,12 @@ export default function QuizzesPage() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-dvh">
       {view !== 'quiz' && <TopBar />}
 
       <div>
         <DragDropContext onDragEnd={handleDragEnd}>
-          <div className={view === 'quiz' ? "h-dvh overflow-y-auto overscroll-contain" : "min-h-screen"}>
+          <div className={view === 'quiz' ? "h-dvh overflow-y-auto overscroll-contain" : "min-h-dvh"}>
             <div className={view === 'quiz' ? "" : "max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 pt-5 pb-8"}>
               <AnimatePresence mode="wait">
                 {/* Course Editor */}

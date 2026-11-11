@@ -160,14 +160,14 @@ export default function GameLobbyPage() {
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-dvh flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
+    <div className="min-h-dvh bg-linear-to-br from-purple-900 via-indigo-900 to-blue-900 p-4">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <Link to={createPageUrl('Quizzes')}>

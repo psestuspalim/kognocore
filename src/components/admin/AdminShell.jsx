@@ -61,7 +61,7 @@ export default function AdminShell({ children }) {
   };
 
   return (
-    <div className="min-h-screen bg-transparent">
+    <div className="min-h-dvh bg-transparent">
       <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_12%_8%,rgba(255,176,99,0.18)_0%,transparent_34%),radial-gradient(circle_at_88%_2%,rgba(54,158,168,0.16)_0%,transparent_35%),linear-gradient(180deg,rgba(255,253,248,0.92)_0%,rgba(248,245,238,0.92)_100%)]" />
       {/* Mobile Header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 border-b border-white/70 bg-white/85 backdrop-blur-md z-50 flex items-center justify-between px-4">
@@ -77,7 +77,7 @@ export default function AdminShell({ children }) {
       </div>
 
       {/* Sidebar - Desktop */}
-      <aside className="hidden lg:block fixed left-0 top-0 h-screen w-64 border-r border-slate-200/80 bg-white/90 backdrop-blur-md">
+      <aside className="hidden lg:block fixed left-0 top-0 h-dvh w-64 border-r border-slate-200/80 bg-white/90 backdrop-blur-md">
         <div className="flex flex-col h-full">
           {/* Logo/Brand */}
           <div className="h-20 flex items-center px-6 border-b border-white/70">
@@ -103,7 +103,7 @@ export default function AdminShell({ children }) {
           <nav className="flex-1 overflow-y-auto py-5">
             {sidebarItems.map((section, idx) => (
               <div key={idx} className="mb-6">
-                <h3 className="px-6 mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">
+                <h3 className="px-6 mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
                   {section.section}
                 </h3>
                 <div className="space-y-1.5 px-3">
@@ -150,7 +150,7 @@ export default function AdminShell({ children }) {
             <nav className="py-4">
               {sidebarItems.map((section, idx) => (
                 <div key={idx} className="mb-6">
-                  <h3 className="px-6 mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">
+                  <h3 className="px-6 mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
                     {section.section}
                   </h3>
                   <div className="space-y-1.5 px-3">

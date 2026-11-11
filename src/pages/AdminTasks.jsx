@@ -113,7 +113,7 @@ export default function AdminTasksPage() {
 
   if (!currentUser || currentUser.role !== 'admin') {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-dvh flex items-center justify-center">
         <p className="text-gray-500">Solo administradores pueden acceder a esta página</p>
       </div>
     );
@@ -155,7 +155,7 @@ export default function AdminTasksPage() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
+    <div className="min-h-dvh bg-linear-to-br from-gray-50 to-gray-100">
       <div className="container mx-auto px-4 py-8">
         <Link to={createPageUrl('Quizzes')}>
           <Button variant="ghost" className="mb-6">

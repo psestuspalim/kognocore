@@ -47,7 +47,7 @@ export default function AdminDashboardCard({
             {stats.map((stat, idx) => (
               <div key={idx} className="rounded-xl border border-white/70 bg-white/70 p-3 text-center">
                 <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
-                <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-slate-500 mt-1">{stat.label}</p>
+                <p className="text-xs font-medium uppercase tracking-[0.08em] text-slate-500 mt-1">{stat.label}</p>
               </div>
             ))}
           </div>

@@ -180,7 +180,7 @@ const Login = () => {
                             <Sparkles className="h-3.5 w-3.5 text-cyan-700" />
                             Kognocore
                         </div>
-                        <div className="hidden rounded-full bg-slate-900 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white sm:block">
+                        <div className="hidden rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-white sm:block">
                             Plataforma Académica
                         </div>
                     </div>
@@ -198,15 +198,15 @@ const Login = () => {
 
                     <div className="mt-7 grid gap-3 sm:grid-cols-3">
                         <div className="rounded-2xl border border-white/70 bg-white p-4 shadow-[0_10px_35px_rgba(15,23,42,0.08)]">
-                            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">Marca</p>
+                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Marca</p>
                             <p className="mt-1 text-2xl font-bold text-slate-900">Kognocore</p>
                         </div>
                         <div className="rounded-2xl border border-white/70 bg-white p-4 shadow-[0_10px_35px_rgba(15,23,42,0.08)]">
-                            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">Cursos</p>
+                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Cursos</p>
                             <p className="mt-1 text-2xl font-bold text-slate-900">Modulares</p>
                         </div>
                         <div className="rounded-2xl border border-white/70 bg-white p-4 shadow-[0_10px_35px_rgba(15,23,42,0.08)]">
-                            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">Seguimiento</p>
+                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Seguimiento</p>
                             <p className="mt-1 text-2xl font-bold text-slate-900">En vivo</p>
                         </div>
                     </div>

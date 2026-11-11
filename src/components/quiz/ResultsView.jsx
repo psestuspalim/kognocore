@@ -108,7 +108,7 @@ export default function ResultsView({
           className="rounded-xl bg-white border border-slate-200/60 p-3 text-center hover:border-emerald-300 transition-colors"
         >
           <div className="text-xl font-bold text-emerald-600">{score}</div>
-          <div className="text-[11px] text-slate-500 mt-0.5">Correctas</div>
+          <div className="text-xs text-slate-500 mt-0.5">Correctas</div>
         </button>
 
         <button
@@ -116,12 +116,12 @@ export default function ResultsView({
           className="rounded-xl bg-white border border-slate-200/60 p-3 text-center hover:border-rose-300 transition-colors"
         >
           <div className="text-xl font-bold text-rose-500">{wrongAnswers.length}</div>
-          <div className="text-[11px] text-slate-500 mt-0.5">Incorrectas</div>
+          <div className="text-xs text-slate-500 mt-0.5">Incorrectas</div>
         </button>
 
         <div className="rounded-xl bg-white border border-slate-200/60 p-3 text-center">
           <div className="text-xl font-bold text-slate-700">{totalQuestions}</div>
-          <div className="text-[11px] text-slate-500 mt-0.5">Total</div>
+          <div className="text-xs text-slate-500 mt-0.5">Total</div>
         </div>
       </div>
 
