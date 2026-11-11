@@ -36,3 +36,9 @@ supabase/.temp/
 *.pdf
 
 
+
+# Material de trabajo local, fuera del repositorio
+Capítulos cortados/
+README_local.md
+start_project.sh
+Claude outputs/
