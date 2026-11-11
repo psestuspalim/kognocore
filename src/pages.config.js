@@ -60,18 +60,12 @@ const AdminTasks = lazy(() => import('./pages/AdminTasks'));
 const AdminTrash = lazy(() => import('./pages/AdminTrash'));
 const Adivino = lazy(() => import('./pages/Adivino'));
 const Badges = lazy(() => import('./pages/Badges'));
-const ChallengePlay = lazy(() => import('./pages/ChallengePlay'));
 const CourseManagement = lazy(() => import('./pages/CourseManagement'));
-const GameLobby = lazy(() => import('./pages/GameLobby'));
-const GamePlay = lazy(() => import('./pages/GamePlay'));
 const Home = lazy(() => import('./pages/Home'));
 const Leaderboard = lazy(() => import('./pages/Leaderboard'));
-const LiveSessions = lazy(() => import('./pages/LiveSessions'));
 const MyTasks = lazy(() => import('./pages/MyTasks'));
 const Progress = lazy(() => import('./pages/Progress'));
 const Quizzes = lazy(() => import('./pages/Quizzes'));
-const TournamentLobby = lazy(() => import('./pages/TournamentLobby'));
-const TournamentPlay = lazy(() => import('./pages/TournamentPlay'));
 const index = lazy(() => import('./pages/index'));
 
 
@@ -86,18 +80,12 @@ export const PAGES = {
     "AdminTrash": AdminTrash,
     "Adivino": Adivino,
     "Badges": Badges,
-    "ChallengePlay": ChallengePlay,
     "CourseManagement": CourseManagement,
-    "GameLobby": GameLobby,
-    "GamePlay": GamePlay,
     "Home": Home,
     "Leaderboard": Leaderboard,
-    "LiveSessions": LiveSessions,
     "MyTasks": MyTasks,
     "Progress": Progress,
     "Quizzes": Quizzes,
-    "TournamentLobby": TournamentLobby,
-    "TournamentPlay": TournamentPlay,
     "index": index,
 }
 
